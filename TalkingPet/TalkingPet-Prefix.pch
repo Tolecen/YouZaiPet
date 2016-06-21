@@ -1,0 +1,67 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <SystemConfiguration/SystemConfiguration.h>
+    #import <MobileCoreServices/MobileCoreServices.h>
+    #import "AFNetworking.h"
+    #import "CoreData+MagicalRecord.h"
+    #import "NetServer.h"
+    #import "UserServe.h"
+    #import "SystemServer.h"
+    #import "DatabaseServe.h"
+    #import "NSString+CutSpacing.h"
+    #import "UINavigationController+Autorotate.h"
+
+    #define DevelopModeUU  @"0"           
+    #define Channel  @"1001"
+    #define CurrentVersion [[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey] substringToIndex:([[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey] length]-5)]
+    #define DeviceModel  [UIDevice currentDevice].model
+    #define SystemVersion [UIDevice currentDevice].systemVersion
+    #define ScreenWidth [UIScreen mainScreen].bounds.size.width
+    #define ScreenHeight [UIScreen mainScreen].bounds.size.height
+
+    #define CHONGWUSHUONETPASSWORD @"<>hj12@#$$%^~~ff"
+
+    #define CHONGWUSHUOTOKENSTORESERVICE  @"chongwushuotokenstoreservice6782wsdfgh"
+
+    #ifndef DevelopModeUU
+    #define BaseURL @"http://www.chongwushuo.com/cws-api/servlet?isEncrypt=0&isCompress=0"
+    #define BaseUrlO @"http://www.chongwushuo.com/cws-api/servlet?isEncrypt=0&isCompress=0&v=2&sToken="
+    #define BaseEncryptURL @"http://www.chongwushuo.com/cws-api/servlet?isEncrypt=1&isCompress=0"
+    #define BaseEncryptURLO @"http://www.chongwushuo.com/cws-api/servlet?isEncrypt=1&isCompress=0&v=2&sToken="
+    #define BaseQiNiuDownloadURL @"http://qnfile.chongwushuo.com/"
+    #define QINIUDomain @"petalk"
+    #define DomainName @"chongwushuo"
+    #else
+    #define BaseURL @"http://182.92.163.115/cws-api/servlet?isEncrypt=0&isCompress=0"
+    #define BaseUrlO @"http://182.92.163.115/cws-api/servlet?isEncrypt=0&isCompress=0&v=2&sToken="
+    #define BaseEncryptURL @"http://182.92.163.115/cws-api/servlet?isEncrypt=1&isCompress=0"
+    #define BaseEncryptURLO @"http://182.92.163.115/cws-api/servlet?isEncrypt=1&isCompress=0&v=2&sToken="
+    #define BaseQiNiuDownloadURL @"http://qiniufile.chongwushuo.com/"
+    #define QINIUDomain @"testpetalk"
+    #define DomainName @"chongwushuotest"
+
+    #endif
+
+    #define kUrlScheme     @"wxb62f795f2bc6b770"
+
+    #define ContentImageWidthType1  ScreenWidth-45-10
+#endif
+
+#ifndef __OPTIMIZE__
+#define NSLog(...) NSLog(__VA_ARGS__)
+#else
+#define NSLog(...) {}
+#endif

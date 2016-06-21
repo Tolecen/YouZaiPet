@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B1775F68-A4B4-439F-81FC-8CA2D499559E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TalkingPet</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B8CBC3AB2942B435E67FB4C917313CFC241C9088</key>
+		<string>ssh://github.com/52pet/TalkingPet.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TalkingPet.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B8CBC3AB2942B435E67FB4C917313CFC241C9088</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/52pet/TalkingPet.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B8CBC3AB2942B435E67FB4C917313CFC241C9088</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B8CBC3AB2942B435E67FB4C917313CFC241C9088</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TalkingPet</string>
+		</dict>
+	</array>
+</dict>
+</plist>

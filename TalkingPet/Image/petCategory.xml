@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<petCategory>
+    <node type="Dog" name = "狗狗" index='0' >
+        <name id = "1001">金毛</name>
+        <name id = "1002">萨摩耶</name>
+        <name id = "1003">贵宾/泰迪</name>
+        <name id = "1004">约克夏</name>
+        <name id = "1005">拉布拉多</name>
+        <name id = "1006">哈士奇</name>
+        <name id = "1007">喜乐蒂</name>
+        <name id = "1008">雪纳瑞</name>
+        <name id = "1009">比熊</name>
+        <name id = "1010">博美</name>
+        <name id = "1011">边境牧羊犬</name>
+        <name id = "1012">苏格兰牧羊犬</name>
+        <name id = "1013">德国牧羊犬</name>
+        <name id = "1014">吉娃娃</name>
+        <name id = "1015">比格</name>
+        <name id = "1016">松狮</name>
+        <name id = "1017">巴哥犬</name>
+        <name id = "1018">柴犬</name>
+        <name id = "1019">阿拉斯加</name>
+        <name id = "1020">贝灵顿梗</name>
+        <name id = "1021">柯基</name>
+        <name id = "1022">可卡</name>
+        <name id = "1023">串串</name>
+        <name id = "1999">其他</name>
+    </node>
+    <node type="Cat" name = "猫咪" index='1'>
+        <name id = "2001">美国短毛猫</name>
+        <name id = "2002">异国短毛猫</name>
+        <name id = "2003">英国短毛猫</name>
+        <name id = "2004">苏格兰折耳猫</name>
+        <name id = "2005">暹罗猫</name>
+        <name id = "2999">其他</name>
+    </node>
+    <node type="Other" name = "其他" index='2'>
+        <name id = "3001">水族</name>
+        <name id = "3002">兔子</name>
+        <name id = "3003">仓鼠</name>
+        <name id = "3004">宠物鸟</name>
+        <name id = "3005">两栖及爬行类</name>
+        <name id = "3999">其他</name>
+    </node>
+</petCategory>
