@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		066B84941D1BBBFA003AAD64 /* ShangchengMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 066B84931D1BBBFA003AAD64 /* ShangchengMainViewController.m */; };
 		150EFAAA1B8414CB003729A8 /* quan_without@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150EFAA91B8414CB003729A8 /* quan_without@2x.png */; };
 		150EFAAD1B841834003729A8 /* myPetalk_toPublish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150EFAAB1B841834003729A8 /* myPetalk_toPublish@2x.png */; };
 		150EFAAE1B841834003729A8 /* myPetalk_without@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150EFAAC1B841834003729A8 /* myPetalk_without@2x.png */; };
@@ -1190,10 +1191,11 @@
 		97F930B519790B850026BCFA /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F930B419790B850026BCFA /* SearchViewController.m */; };
 		D8B781811D1B776C005555DD /* myp-nom.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B7817F1D1B776C005555DD /* myp-nom.png */; };
 		D8B781821D1B776C005555DD /* myp-sel.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B781801D1B776C005555DD /* myp-sel.png */; };
-		D8B781861D1B7ABC005555DD /* ShangchengMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B781851D1B7ABC005555DD /* ShangchengMainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		066B84921D1BBBFA003AAD64 /* ShangchengMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShangchengMainViewController.h; sourceTree = "<group>"; };
+		066B84931D1BBBFA003AAD64 /* ShangchengMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShangchengMainViewController.m; sourceTree = "<group>"; };
 		150EFAA91B8414CB003729A8 /* quan_without@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quan_without@2x.png"; sourceTree = "<group>"; };
 		150EFAAB1B841834003729A8 /* myPetalk_toPublish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myPetalk_toPublish@2x.png"; sourceTree = "<group>"; };
 		150EFAAC1B841834003729A8 /* myPetalk_without@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myPetalk_without@2x.png"; sourceTree = "<group>"; };
@@ -2877,8 +2879,6 @@
 		97F930B419790B850026BCFA /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		D8B7817F1D1B776C005555DD /* myp-nom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myp-nom.png"; sourceTree = "<group>"; };
 		D8B781801D1B776C005555DD /* myp-sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myp-sel.png"; sourceTree = "<group>"; };
-		D8B781841D1B7ABC005555DD /* ShangchengMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShangchengMainViewController.h; sourceTree = "<group>"; };
-		D8B781851D1B7ABC005555DD /* ShangchengMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShangchengMainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2934,6 +2934,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		066B848B1D1BBBD2003AAD64 /* ShangCheng */ = {
+			isa = PBXGroup;
+			children = (
+				066B848F1D1BBBFA003AAD64 /* Model */,
+				066B84901D1BBBFA003AAD64 /* View */,
+				066B84911D1BBBFA003AAD64 /* ViewController */,
+			);
+			path = ShangCheng;
+			sourceTree = "<group>";
+		};
+		066B848F1D1BBBFA003AAD64 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		066B84901D1BBBFA003AAD64 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		066B84911D1BBBFA003AAD64 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				066B84921D1BBBFA003AAD64 /* ShangchengMainViewController.h */,
+				066B84931D1BBBFA003AAD64 /* ShangchengMainViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		155082CE1B6B530C009E0339 /* ShareSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -4017,7 +4050,7 @@
 		72831CFA196A4D8600B9CA4C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D8B781831D1B7A44005555DD /* Shancheng */,
+				066B848B1D1BBBD2003AAD64 /* ShangCheng */,
 				972F388019762F9F00952DC9 /* TypingTextView */,
 				727A33191A3E8D820066882A /* UserCenter */,
 				7271F3DB1B2C15540029E53A /* Address */,
@@ -5638,15 +5671,6 @@
 			path = DeviceUtils;
 			sourceTree = "<group>";
 		};
-		D8B781831D1B7A44005555DD /* Shancheng */ = {
-			isa = PBXGroup;
-			children = (
-				D8B781841D1B7ABC005555DD /* ShangchengMainViewController.h */,
-				D8B781851D1B7ABC005555DD /* ShangchengMainViewController.m */,
-			);
-			name = Shancheng;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -6512,7 +6536,6 @@
 				7228BCAD196B87ED005502CE /* mmx_optimized.cpp in Sources */,
 				726F2FAD1B4E19EF007A7668 /* AddStoryViewController.m in Sources */,
 				7271F3E51B2C1C120029E53A /* AddressDetailViewController.m in Sources */,
-				D8B781861D1B7ABC005555DD /* ShangchengMainViewController.m in Sources */,
 				977E87F91A7B84BF00D00486 /* TimeLineTalkingTableViewCell.m in Sources */,
 				726AA43B1973DD9600BC81C9 /* UserCenterViewController.m in Sources */,
 				9796E0AE197CB3CF0082A75D /* RNCryptorEngine.m in Sources */,
@@ -6521,6 +6544,7 @@
 				97EFB1571AAED4A3000F8B61 /* PrizeDetailViewController.m in Sources */,
 				729EEDC819761E9C000AFF58 /* NewUserViewController.m in Sources */,
 				727E7FD81B54ADD900A91886 /* StoryRecorderView.mm in Sources */,
+				066B84941D1BBBFA003AAD64 /* ShangchengMainViewController.m in Sources */,
 				72D2DB9519A1A73E00459CA9 /* SystemServer.m in Sources */,
 				72831CD3196A3FE200B9CA4C /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				729CB6761A5A60E500BD2303 /* cpu_detect_x86_gcc.cpp in Sources */,
