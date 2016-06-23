@@ -7,32 +7,57 @@
 //
 
 #import "ShangchengMainViewController.h"
+#import "YZShangChengListVC.h"
 
-@interface ShangchengMainViewController ()
+@interface ShangchengMainViewController ()<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, weak) UITableView *tableView;
 
 @end
 
 @implementation ShangchengMainViewController
 
+#pragma mark -- Life Cycle
+
+- (NSString *)title {
+    return @"友仔商城";
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"商城";
-    // Do any additional setup after loading the view.
+    
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass(self.class)];
+    tableView.tableFooterView = [[UIView alloc] init];
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
+    
+    [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.view).insets(UIEdgeInsetsZero);
+    }];
+}
+
+#pragma mark -- UITableView
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(self.class)];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 4;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    YZShangChengListVC *listVC = [[YZShangChengListVC alloc] init];
+    [self.navigationController pushViewController:listVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
