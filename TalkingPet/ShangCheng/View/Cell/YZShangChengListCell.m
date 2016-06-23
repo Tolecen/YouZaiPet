@@ -37,8 +37,7 @@
             make.edges.mas_equalTo(self.contentView).insets(UIEdgeInsetsZero);
         }];
         
-        UIImageView *thumbImageV = [[UIImageView alloc] init];
-        thumbImageV.backgroundColor = [UIColor magentaColor];
+        UIImageView *thumbImageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dog_placeholder"]];
         [cardView addSubview:thumbImageV];
         self.thumbImageV = thumbImageV;
         

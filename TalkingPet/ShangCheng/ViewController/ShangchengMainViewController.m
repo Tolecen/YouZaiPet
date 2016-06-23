@@ -8,6 +8,7 @@
 
 #import "ShangchengMainViewController.h"
 #import "YZShangChengListVC.h"
+#import "YZShangChengBannerCell.h"
 
 @interface ShangchengMainViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -29,7 +30,9 @@
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero];
     tableView.delegate = self;
     tableView.dataSource = self;
-    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass(self.class)];
+    tableView.rowHeight = 160.f;
+    [tableView registerClass:[YZShangChengBannerCell class] forCellReuseIdentifier:NSStringFromClass(self.class)];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:tableView];
     self.tableView = tableView;
@@ -42,12 +45,30 @@
 #pragma mark -- UITableView
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(self.class)];
+    YZShangChengBannerCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(self.class)];
+    if (indexPath.section == 0) {
+        cell.banner = @"gougou";
+    } else if (indexPath.section == 1) {
+        cell.banner = @"tuangou";
+    } else {
+        cell.banner = @"jingpin";
+    }
     return cell;
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 3;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 2) {
+        return 0;
+    }
+    return 10;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 1;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
