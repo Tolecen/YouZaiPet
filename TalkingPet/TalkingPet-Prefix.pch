@@ -32,6 +32,8 @@
     #define ScreenWidth [UIScreen mainScreen].bounds.size.width
     #define ScreenHeight [UIScreen mainScreen].bounds.size.height
 
+    #define CommonGreenColor [UIColor colorWithRed:99/255.0f green:203/255.0f blue:175/255.f alpha:1]
+
     #define CHONGWUSHUONETPASSWORD @"<>hj12@#$$%^~~ff"
 
     #define CHONGWUSHUOTOKENSTORESERVICE  @"chongwushuotokenstoreservice6782wsdfgh"

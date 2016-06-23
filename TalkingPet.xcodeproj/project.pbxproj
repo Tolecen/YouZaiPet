@@ -1188,6 +1188,9 @@
 		97F930AE1978F0290026BCFA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F930AD1978F0290026BCFA /* QuartzCore.framework */; };
 		97F930B11978F11C0026BCFA /* shanchushuruwenzi.png in Resources */ = {isa = PBXBuildFile; fileRef = 97F930AF1978F11C0026BCFA /* shanchushuruwenzi.png */; };
 		97F930B519790B850026BCFA /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F930B419790B850026BCFA /* SearchViewController.m */; };
+		D8B781811D1B776C005555DD /* myp-nom.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B7817F1D1B776C005555DD /* myp-nom.png */; };
+		D8B781821D1B776C005555DD /* myp-sel.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B781801D1B776C005555DD /* myp-sel.png */; };
+		D8B781861D1B7ABC005555DD /* ShangchengMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B781851D1B7ABC005555DD /* ShangchengMainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2872,6 +2875,10 @@
 		97F930AF1978F11C0026BCFA /* shanchushuruwenzi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shanchushuruwenzi.png; sourceTree = "<group>"; };
 		97F930B319790B850026BCFA /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		97F930B419790B850026BCFA /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		D8B7817F1D1B776C005555DD /* myp-nom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myp-nom.png"; sourceTree = "<group>"; };
+		D8B781801D1B776C005555DD /* myp-sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myp-sel.png"; sourceTree = "<group>"; };
+		D8B781841D1B7ABC005555DD /* ShangchengMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShangchengMainViewController.h; sourceTree = "<group>"; };
+		D8B781851D1B7ABC005555DD /* ShangchengMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShangchengMainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -4010,6 +4017,7 @@
 		72831CFA196A4D8600B9CA4C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D8B781831D1B7A44005555DD /* Shancheng */,
 				972F388019762F9F00952DC9 /* TypingTextView */,
 				727A33191A3E8D820066882A /* UserCenter */,
 				7271F3DB1B2C15540029E53A /* Address */,
@@ -4370,6 +4378,8 @@
 				72DDF35E1B034FA700A59A66 /* search.png */,
 				72DDF35F1B034FA700A59A66 /* setting.png */,
 				7260E1511B4BF90F0067FAA0 /* camera.png */,
+				D8B7817F1D1B776C005555DD /* myp-nom.png */,
+				D8B781801D1B776C005555DD /* myp-sel.png */,
 				72BF717C1A778C1100BF4AE1 /* menuBar.png */,
 				976D998B1B68D11E0091E497 /* market-nom.png */,
 				976D998C1B68D11E0091E497 /* market-sel.png */,
@@ -5628,6 +5638,15 @@
 			path = DeviceUtils;
 			sourceTree = "<group>";
 		};
+		D8B781831D1B7A44005555DD /* Shancheng */ = {
+			isa = PBXGroup;
+			children = (
+				D8B781841D1B7ABC005555DD /* ShangchengMainViewController.h */,
+				D8B781851D1B7ABC005555DD /* ShangchengMainViewController.m */,
+			);
+			name = Shancheng;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -6017,6 +6036,7 @@
 				728985BA19ADDFBA008027EC /* rangd.png in Resources */,
 				72015A741A393BE000453ACF /* myPublis.png in Resources */,
 				72555F721A7F730500D8D5E2 /* filter.png in Resources */,
+				D8B781811D1B776C005555DD /* myp-nom.png in Resources */,
 				721B62EA196FDDA8008EA2EE /* pushBack_click.png in Resources */,
 				72A9E2051A8EF42600DEFB25 /* 90173.png in Resources */,
 				72E81F491AA83E2E00E19184 /* EmptyDrafts@2x.png in Resources */,
@@ -6316,6 +6336,7 @@
 				720699A11983A85A00BE8C2A /* pub_microphone_volume_12.png in Resources */,
 				155082EF1B6B530C009E0339 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				7229EE3B1A8C43C400EFB444 /* 91110.png in Resources */,
+				D8B781821D1B776C005555DD /* myp-sel.png in Resources */,
 				9755A1C31A5D07CA0089A034 /* audioplay003.png in Resources */,
 				725A95841A63C34A00E8C8ED /* Pay_free.png in Resources */,
 				97972A171B258FC700BA05BD /* tongyizhifutiaokuan.png in Resources */,
@@ -6491,6 +6512,7 @@
 				7228BCAD196B87ED005502CE /* mmx_optimized.cpp in Sources */,
 				726F2FAD1B4E19EF007A7668 /* AddStoryViewController.m in Sources */,
 				7271F3E51B2C1C120029E53A /* AddressDetailViewController.m in Sources */,
+				D8B781861D1B7ABC005555DD /* ShangchengMainViewController.m in Sources */,
 				977E87F91A7B84BF00D00486 /* TimeLineTalkingTableViewCell.m in Sources */,
 				726AA43B1973DD9600BC81C9 /* UserCenterViewController.m in Sources */,
 				9796E0AE197CB3CF0082A75D /* RNCryptorEngine.m in Sources */,

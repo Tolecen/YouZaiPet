@@ -73,8 +73,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setBackButtonWithTarget:@selector(backBtnDo:)];
+    self.title = @"我的";
+//    [self setBackButtonWithTarget:@selector(backBtnDo:)];
     // Do any additional setup after loading the view.
+    
+    
+    
+    /**
     listType = 1;
     self.tableView = [[UITableView alloc] init];
     _tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -228,6 +233,8 @@
     [self getUserInfoById];
     
     [self buildViewWithSkintype];
+     
+     **/
 }
 -(void)chatBtnAction:(UIButton *)sender
 {

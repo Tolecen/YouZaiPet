@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "47F8EA9ED59E7954533E450E3C9A1CBF33EF240E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B8CBC3AB2942B435E67FB4C917313CFC241C9088" : 0,
+    "47F8EA9ED59E7954533E450E3C9A1CBF33EF240E" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B1775F68-A4B4-439F-81FC-8CA2D499559E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B8CBC3AB2942B435E67FB4C917313CFC241C9088" : "TalkingPet",
+    "47F8EA9ED59E7954533E450E3C9A1CBF33EF240E" : "YouZaiPet\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "TalkingPet",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "TalkingPet.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Tolecen\/YouZaiPet.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "47F8EA9ED59E7954533E450E3C9A1CBF33EF240E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/github.com\/52pet\/TalkingPet.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B8CBC3AB2942B435E67FB4C917313CFC241C9088"
+    }
+  ]
+}

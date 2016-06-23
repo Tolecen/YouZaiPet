@@ -81,7 +81,7 @@
 
 /*使用颜色*/
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0 ,self.view.frame.size.width,navigationBarHeight)];
-    view.backgroundColor = [UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:1];
+    view.backgroundColor = CommonGreenColor;
     UIGraphicsBeginImageContext(view.bounds.size);
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();

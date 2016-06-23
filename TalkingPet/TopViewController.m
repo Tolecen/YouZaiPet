@@ -12,6 +12,8 @@
 
 #import "MainViewController.h"
 #import "CustomizeViewController.h"
+#import "ShangchengMainViewController.h"
+#import "PersonProfileViewController.h"
 
 @interface TopViewController ()<UINavigationControllerDelegate>
 {
@@ -21,6 +23,7 @@
 }
 @property (nonatomic,retain)UINavigationController * petalkNav;
 @property (nonatomic,retain)UINavigationController * marketNav;
+@property (nonatomic,retain)UINavigationController * personNav;
 @end
 
 @implementation TopViewController
@@ -68,41 +71,94 @@
     [_petalkNav didMoveToParentViewController:self];
     _currentC = _petalkNav;
     
-    CustomizeViewController * marketVC = [[CustomizeViewController alloc]init];
+    ShangchengMainViewController * marketVC = [[ShangchengMainViewController alloc]init];
     self.marketNav = [[UINavigationController alloc] initWithRootViewController:marketVC];
     _marketNav.delegate = self;
     [self addChildViewController:_marketNav];
     [_marketNav.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-49)];
+    
+    PersonProfileViewController * personVC = [[PersonProfileViewController alloc]init];
+    self.personNav = [[UINavigationController alloc] initWithRootViewController:personVC];
+    _personNav.delegate = self;
+    [self addChildViewController:_personNav];
+    [_personNav.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-49)];
     
     tabBar = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"menuBar"]];
     tabBar.userInteractionEnabled = YES;
     tabBar.frame = CGRectMake(0, self.view.frame.size.height - 49, self.view.frame.size.width, 49);
     [self.view addSubview:tabBar];
     
-    photoB = [UIButton buttonWithType:UIButtonTypeCustom];
-    [photoB addTarget:self action:@selector(showPhotograph) forControlEvents:UIControlEventTouchUpInside];
-    photoB.frame = CGRectMake(0, 0, 46, 46);
-    photoB.center = CGPointMake(CGRectGetMidX(tabBar.bounds), 25);
-    [photoB setBackgroundImage:[UIImage imageNamed:@"camera"] forState:UIControlStateNormal];
-    photoB.showsTouchWhenHighlighted = YES;
-    [tabBar addSubview:photoB];
+    float sep = ((ScreenWidth-40*4)-60)/3.0f;
+    
+
     
     
     UIButton * petalkB = [UIButton buttonWithType:UIButtonTypeCustom];
     petalkB.tag = 1;
     [petalkB addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchUpInside];
-    petalkB.frame = CGRectMake(0, 0, 40, 40);
-    petalkB.center = CGPointMake(CGRectGetMaxX(tabBar.bounds)/5, 25);
+    petalkB.frame = CGRectMake(30, 0, 40, 40);
+//    petalkB.center = CGPointMake(CGRectGetMaxX(tabBar.bounds)/5, 25);
     [petalkB setBackgroundImage:[UIImage imageNamed:@"petalk-sel"] forState:UIControlStateNormal];
     [tabBar addSubview:petalkB];
+    
+    UILabel * petalkBL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(petalkB.frame), CGRectGetMaxY(petalkB.frame)-10, 40, 20)];
+    petalkBL.font = [UIFont systemFontOfSize:10];
+    petalkBL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
+    petalkBL.textAlignment = NSTextAlignmentCenter;
+    petalkBL.text = @"首页";
+    petalkBL.tag = 100;
+    petalkBL.textColor = CommonGreenColor;
+    [tabBar addSubview:petalkBL];
+    
+    photoB = [UIButton buttonWithType:UIButtonTypeCustom];
+    [photoB addTarget:self action:@selector(showPhotograph) forControlEvents:UIControlEventTouchUpInside];
+    photoB.frame = CGRectMake(CGRectGetMaxX(petalkB.frame)+sep, 0, 40, 40);
+//    photoB.center = CGPointMake(CGRectGetMidX(tabBar.bounds), 25);
+    [photoB setBackgroundImage:[UIImage imageNamed:@"camera"] forState:UIControlStateNormal];
+    photoB.showsTouchWhenHighlighted = YES;
+    [tabBar addSubview:photoB];
+    
+    UILabel * photoBL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(photoB.frame), CGRectGetMaxY(photoB.frame)-10, 40, 20)];
+    photoBL.font = [UIFont systemFontOfSize:10];
+    photoBL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
+    photoBL.textAlignment = NSTextAlignmentCenter;
+    photoBL.text = @"发布";
+    photoBL.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+    [tabBar addSubview:photoBL];
     
     UIButton * marketB = [UIButton buttonWithType:UIButtonTypeCustom];
     marketB.tag = 2;
     [marketB addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchUpInside];
-    marketB.frame = CGRectMake(0, 0, 40, 40);
-    marketB.center = CGPointMake(CGRectGetMaxX(tabBar.bounds)*4/5, 25);
+    marketB.frame = CGRectMake(CGRectGetMaxX(photoB.frame)+sep, 0, 40, 40);
+//    marketB.center = CGPointMake(CGRectGetMaxX(tabBar.bounds)*4/5, 25);
     [marketB setBackgroundImage:[UIImage imageNamed:@"market-nom"] forState:UIControlStateNormal];
     [tabBar addSubview:marketB];
+    
+    UILabel * marketBL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(marketB.frame), CGRectGetMaxY(marketB.frame)-10, 40, 20)];
+    marketBL.font = [UIFont systemFontOfSize:10];
+    marketBL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
+    marketBL.textAlignment = NSTextAlignmentCenter;
+    marketBL.text = @"商城";
+    marketBL.tag = 200;
+    marketBL.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+    [tabBar addSubview:marketBL];
+    
+    UIButton * myBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    myBtn.tag = 3;
+    [myBtn addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchUpInside];
+    myBtn.frame = CGRectMake(CGRectGetMaxX(marketB.frame)+sep, 0, 40, 40);
+    //    marketB.center = CGPointMake(CGRectGetMaxX(tabBar.bounds)*4/5, 25);
+    [myBtn setBackgroundImage:[UIImage imageNamed:@"myp-nom"] forState:UIControlStateNormal];
+    [tabBar addSubview:myBtn];
+    
+    UILabel * myBtnL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(myBtn.frame), CGRectGetMaxY(myBtn.frame)-10, 40, 20)];
+    myBtnL.font = [UIFont systemFontOfSize:10];
+    myBtnL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
+    myBtnL.textAlignment = NSTextAlignmentCenter;
+    myBtnL.text = @"我的";
+    myBtnL.tag = 300;
+    myBtnL.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+    [tabBar addSubview:myBtnL];
     
 //    self.menuBarNotiImg = [[UIImageView alloc] initWithFrame:CGRectMake(32, 5, 10, 10)];
 //    [self.menuBarNotiImg setImage:[UIImage imageNamed:@"dotunread"]];
@@ -127,15 +183,21 @@
             if ([_currentC isEqual:_petalkNav]) {
                 return;
             }
-            [self transitionFromViewController:_marketNav toViewController:_petalkNav duration:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
+            [self transitionFromViewController:_currentC toViewController:_petalkNav duration:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
                 
             } completion:^(BOOL finished) {
                 if (finished) {
-                    [_marketNav willMoveToParentViewController:nil];
-                    [_marketNav.view removeFromSuperview];
+                    [_currentC willMoveToParentViewController:nil];
+                    [_currentC.view removeFromSuperview];
                     [btn setBackgroundImage:[UIImage imageNamed:@"petalk-sel"] forState:UIControlStateNormal];
                     UIButton * button = (UIButton*)[btn.superview viewWithTag:2];
                     [button setBackgroundImage:[UIImage imageNamed:@"market-nom"] forState:UIControlStateNormal];
+                    UIButton * button2 = (UIButton*)[btn.superview viewWithTag:3];
+                    [button2 setBackgroundImage:[UIImage imageNamed:@"myp-nom"] forState:UIControlStateNormal];
+                    UILabel * l1 = (UILabel*)[btn.superview viewWithTag:200];
+                    l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+                    UILabel * l2 = (UILabel*)[btn.superview viewWithTag:300];
+                    l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
                      _currentC = _petalkNav;
                 }
             }];
@@ -144,16 +206,45 @@
             if ([_currentC isEqual:_marketNav]) {
                 return;
             }
-            [self transitionFromViewController:_petalkNav toViewController:_marketNav duration:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
+            [self transitionFromViewController:_currentC toViewController:_marketNav duration:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
                 
             } completion:^(BOOL finished) {
                 if (finished) {
-                    [_petalkNav willMoveToParentViewController:nil];
-                    [_petalkNav.view removeFromSuperview];
+                    [_currentC willMoveToParentViewController:nil];
+                    [_currentC.view removeFromSuperview];
                     [btn setBackgroundImage:[UIImage imageNamed:@"market-sel"] forState:UIControlStateNormal];
                     UIButton * button = (UIButton*)[btn.superview viewWithTag:1];
                     [button setBackgroundImage:[UIImage imageNamed:@"petalk-nom"] forState:UIControlStateNormal];
+                    UIButton * button2 = (UIButton*)[btn.superview viewWithTag:3];
+                    [button2 setBackgroundImage:[UIImage imageNamed:@"myp-nom"] forState:UIControlStateNormal];
+                    UILabel * l1 = (UILabel*)[btn.superview viewWithTag:100];
+                    l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+                    UILabel * l2 = (UILabel*)[btn.superview viewWithTag:300];
+                    l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
                      _currentC = _marketNav;
+                }
+            }];
+        }break;
+        case 3:{
+            if ([_currentC isEqual:_personNav]) {
+                return;
+            }
+            [self transitionFromViewController:_currentC toViewController:_personNav duration:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
+                
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    [_currentC willMoveToParentViewController:nil];
+                    [_currentC.view removeFromSuperview];
+                    [btn setBackgroundImage:[UIImage imageNamed:@"myp-sel"] forState:UIControlStateNormal];
+                    UIButton * button = (UIButton*)[btn.superview viewWithTag:1];
+                    [button setBackgroundImage:[UIImage imageNamed:@"petalk-nom"] forState:UIControlStateNormal];
+                    UIButton * button2 = (UIButton*)[btn.superview viewWithTag:2];
+                    [button2 setBackgroundImage:[UIImage imageNamed:@"market-nom"] forState:UIControlStateNormal];
+                    UILabel * l1 = (UILabel*)[btn.superview viewWithTag:100];
+                    l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+                    UILabel * l2 = (UILabel*)[btn.superview viewWithTag:200];
+                    l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+                    _currentC = _personNav;
                 }
             }];
         }break;
