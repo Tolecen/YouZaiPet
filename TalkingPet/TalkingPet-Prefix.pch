@@ -61,6 +61,10 @@
     #define kUrlScheme     @"wxb62f795f2bc6b770"
 
     #define ContentImageWidthType1  ScreenWidth-45-10
+    #define RandomColor [UIColor colorWithRed:((arc4random() % 255) / 255.f) \
+                                        green:((arc4random() % 255) / 255.f) \
+                                         blue:((arc4random() % 255) / 255.f) \
+                                        alpha:1.f];
 #endif
 
 #ifndef __OPTIMIZE__

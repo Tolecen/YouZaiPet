@@ -7,6 +7,8 @@
 //
 
 #import "YZShangChengListVC.h"
+#import "YZShangChengDetailVC.h"
+#import "YZShangChengDropMenu.h"
 #import "YZShangChengListCell.h"
 
 @interface YZShangChengListVC()<UICollectionViewDataSource, UICollectionViewDelegate>
@@ -17,8 +19,13 @@
 
 @implementation YZShangChengListVC
 
+- (void)inner_Pop:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setAnotherBackButtonWithTarget:@selector(inner_Pop:)];
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 10.f;
     flowLayout.minimumLineSpacing = 10.f;
@@ -59,6 +66,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    YZShangChengDetailVC *detailVC = [[YZShangChengDetailVC alloc] init];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 @end

@@ -21,6 +21,9 @@
 		066B84BE1D1BBF52003AAD64 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 066B84B21D1BBF52003AAD64 /* View+MASAdditions.m */; };
 		066B84BF1D1BBF52003AAD64 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 066B84B51D1BBF52003AAD64 /* ViewController+MASAdditions.m */; };
 		066B84C21D1BD0E0003AAD64 /* YZShangChengBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 066B84C11D1BD0E0003AAD64 /* YZShangChengBannerCell.m */; };
+		0688A2E01D1BF60D002AA960 /* YZShangChengDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0688A2DF1D1BF60D002AA960 /* YZShangChengDetailVC.m */; };
+		0688A2E71D1C2797002AA960 /* YZShangChengDetailImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0688A2E61D1C2797002AA960 /* YZShangChengDetailImageCell.m */; };
+		0688A2ED1D1C32D4002AA960 /* YZShangChengDropMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0688A2EC1D1C32D4002AA960 /* YZShangChengDropMenu.m */; };
 		150EFAAA1B8414CB003729A8 /* quan_without@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150EFAA91B8414CB003729A8 /* quan_without@2x.png */; };
 		150EFAAD1B841834003729A8 /* myPetalk_toPublish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150EFAAB1B841834003729A8 /* myPetalk_toPublish@2x.png */; };
 		150EFAAE1B841834003729A8 /* myPetalk_without@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150EFAAC1B841834003729A8 /* myPetalk_without@2x.png */; };
@@ -1240,6 +1243,12 @@
 		066B84B51D1BBF52003AAD64 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
 		066B84C01D1BD0E0003AAD64 /* YZShangChengBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShangChengBannerCell.h; sourceTree = "<group>"; };
 		066B84C11D1BD0E0003AAD64 /* YZShangChengBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengBannerCell.m; sourceTree = "<group>"; };
+		0688A2DE1D1BF60D002AA960 /* YZShangChengDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShangChengDetailVC.h; sourceTree = "<group>"; };
+		0688A2DF1D1BF60D002AA960 /* YZShangChengDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengDetailVC.m; sourceTree = "<group>"; };
+		0688A2E51D1C2797002AA960 /* YZShangChengDetailImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShangChengDetailImageCell.h; sourceTree = "<group>"; };
+		0688A2E61D1C2797002AA960 /* YZShangChengDetailImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengDetailImageCell.m; sourceTree = "<group>"; };
+		0688A2EB1D1C32D4002AA960 /* YZShangChengDropMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShangChengDropMenu.h; sourceTree = "<group>"; };
+		0688A2EC1D1C32D4002AA960 /* YZShangChengDropMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengDropMenu.m; sourceTree = "<group>"; };
 		150EFAA91B8414CB003729A8 /* quan_without@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quan_without@2x.png"; sourceTree = "<group>"; };
 		150EFAAB1B841834003729A8 /* myPetalk_toPublish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myPetalk_toPublish@2x.png"; sourceTree = "<group>"; };
 		150EFAAC1B841834003729A8 /* myPetalk_without@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myPetalk_without@2x.png"; sourceTree = "<group>"; };
@@ -2998,6 +3007,7 @@
 		066B84901D1BBBFA003AAD64 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0688A2E11D1BFAC9002AA960 /* View */,
 				066B84981D1BBDE3003AAD64 /* Cell */,
 			);
 			path = View;
@@ -3010,6 +3020,8 @@
 				066B84931D1BBBFA003AAD64 /* ShangchengMainViewController.m */,
 				066B84951D1BBD56003AAD64 /* YZShangChengListVC.h */,
 				066B84961D1BBD56003AAD64 /* YZShangChengListVC.m */,
+				0688A2DE1D1BF60D002AA960 /* YZShangChengDetailVC.h */,
+				0688A2DF1D1BF60D002AA960 /* YZShangChengDetailVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -3021,6 +3033,8 @@
 				066B849A1D1BBDFE003AAD64 /* YZShangChengListCell.m */,
 				066B84C01D1BD0E0003AAD64 /* YZShangChengBannerCell.h */,
 				066B84C11D1BD0E0003AAD64 /* YZShangChengBannerCell.m */,
+				0688A2E51D1C2797002AA960 /* YZShangChengDetailImageCell.h */,
+				0688A2E61D1C2797002AA960 /* YZShangChengDetailImageCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -3055,6 +3069,15 @@
 				066B84B51D1BBF52003AAD64 /* ViewController+MASAdditions.m */,
 			);
 			path = Masonry;
+			sourceTree = "<group>";
+		};
+		0688A2E11D1BFAC9002AA960 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0688A2EB1D1C32D4002AA960 /* YZShangChengDropMenu.h */,
+				0688A2EC1D1C32D4002AA960 /* YZShangChengDropMenu.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		155082CE1B6B530C009E0339 /* ShareSDK */ = {
@@ -6828,6 +6851,8 @@
 				977D99FE19B5996F00C0B8C9 /* HeightCalculate.m in Sources */,
 				9729E51119A3590900A19575 /* Tag.m in Sources */,
 				9716D1B91988EFBD00C725D8 /* SBJsonWriter.m in Sources */,
+				0688A2ED1D1C32D4002AA960 /* YZShangChengDropMenu.m in Sources */,
+				0688A2E01D1BF60D002AA960 /* YZShangChengDetailVC.m in Sources */,
 				97A6856719F8A36A006BA3F9 /* ITTableViewCell.m in Sources */,
 				9750473E1A369F92005C07ED /* PackageInfoTableViewCell.m in Sources */,
 				97877A5E19D10E1000951389 /* NJKWebViewProgress.m in Sources */,
@@ -6855,6 +6880,7 @@
 				7228BD17196B8D5B005502CE /* UIImage+Resize.m in Sources */,
 				972F388519764D8F00952DC9 /* HPGrowingTextView.m in Sources */,
 				9716D19F1988ED5300C725D8 /* AFImageRequestOperation.m in Sources */,
+				0688A2E71D1C2797002AA960 /* YZShangChengDetailImageCell.m in Sources */,
 				9714717B19B48FA600FEDD38 /* JPSThumbnailAnnotationView.m in Sources */,
 				72831CCE196A3FE200B9CA4C /* NSManagedObject+MagicalFinders.m in Sources */,
 				72831CDD196A3FE200B9CA4C /* MagicalRecord+ShorthandSupport.m in Sources */,
