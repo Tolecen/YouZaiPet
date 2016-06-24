@@ -229,14 +229,15 @@
     [SVProgressHUD showWithStatus:@"设置个人资料..."];
     NSMutableDictionary * regDict = [NetServer commonDict];
     [regDict setObject:@"register" forKey:@"command"];
-    [regDict setObject:self.username forKey:@"loginName"];
+    [regDict setObject:@"register" forKey:@"options"];
+    [regDict setObject:self.username forKey:@"username"];
     [regDict setObject:self.password forKey:@"password"];
     if (!self.userPlatform) {
-        [regDict setObject:self.username forKey:@"phoneNum"];
+        [regDict setObject:self.username forKey:@"mobile"];
     }
     [regDict setObject:self.userPlatform?self.userPlatform:@"0" forKey:@"source"];
-    [regDict setObject:[self.nameTF.text CutSpacing] forKey:@"nickName"];
-    [regDict setObject:self.avatarUrl forKey:@"headPortrait"];
+    [regDict setObject:[self.nameTF.text CutSpacing] forKey:@"nickname"];
+    [regDict setObject:self.avatarUrl forKey:@"head"];
     [regDict setObject:self.genderCode forKey:@"gender"];
     [regDict setObject:self.breedCode forKey:@"type"];
     [regDict setObject:[NSString stringWithFormat:@"%.0f",_selectedBirthday*1000] forKey:@"birthday"];

@@ -227,7 +227,7 @@
                 range:NSMakeRange(0, str.length)];
     [loginB setBackgroundImage:[UIImage imageNamed:@"login_normal"] forState:UIControlStateNormal];
     [str addAttribute:NSForegroundColorAttributeName
-                value:(id)[UIColor colorWithRed:6/255.0 green:198/255.0 blue:255/255.0 alpha:1].CGColor
+                value:(id)CommonGreenColor.CGColor
                 range:NSMakeRange(3, 7)];
     [agreeB setImage:[UIImage imageNamed:@"login_state_select"] forState:UIControlStateNormal];
     label.text = str;

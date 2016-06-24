@@ -269,8 +269,8 @@
 {
     NSMutableDictionary * regDict = [NetServer commonDict];
     [regDict setObject:@"account" forKey:@"command"];
-    [regDict setObject:self.usernameTF.text forKey:@"loginName"];
-    [regDict setObject:@"checkLoginName"forKey:@"options"];
+    [regDict setObject:self.usernameTF.text forKey:@"username"];
+    [regDict setObject:@"checkUsername"forKey:@"options"];
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"register success info:%@",responseObject);
         if([[responseObject objectForKey:@"value"] isEqualToString:@"false"])
