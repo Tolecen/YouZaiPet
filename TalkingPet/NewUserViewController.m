@@ -239,7 +239,7 @@
     [regDict setObject:[self.nameTF.text CutSpacing] forKey:@"nickname"];
     [regDict setObject:self.avatarUrl forKey:@"head"];
     [regDict setObject:self.genderCode forKey:@"gender"];
-    [regDict setObject:self.breedCode forKey:@"type"];
+    [regDict setObject:@"0" forKey:@"type"];
     [regDict setObject:[NSString stringWithFormat:@"%.0f",_selectedBirthday*1000] forKey:@"birthday"];
     [regDict setObject:self.regionTL.text forKey:@"address"];
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
