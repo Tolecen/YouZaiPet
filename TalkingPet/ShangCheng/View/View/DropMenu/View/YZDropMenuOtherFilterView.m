@@ -21,7 +21,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
-        self.alpha = 0.f;
+        self.layer.masksToBounds = YES;
         
         UILabel *sexLb = [[UILabel alloc] initWithFrame:CGRectZero];
         sexLb.font = [UIFont systemFontOfSize:12.f];

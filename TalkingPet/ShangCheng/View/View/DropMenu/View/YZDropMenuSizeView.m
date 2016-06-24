@@ -21,7 +21,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
-        self.alpha = 0.f;
+        self.layer.masksToBounds = YES;
         
         UIImageView *smallDogV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"small_dog_icon"]];
         smallDogV.userInteractionEnabled = YES;

@@ -333,14 +333,12 @@ static NSInteger clickCount;
         } else {
             [self.superview bringSubviewToFront:currentView];
         }
-//        currentView.hidden = NO;
         self.coverLayerView.hidden = NO;
         [UIView animateWithDuration:.5f
                          animations:^{
                              [currentView mas_updateConstraints:^(MASConstraintMaker *make) {
                                  make.height.mas_equalTo(weakSelf.currentDropViewHeight);
                              }];
-                             currentView.alpha = 1.f;
                              [currentView.superview layoutIfNeeded];
                          } completion:^(BOOL finished) {
                              weakSelf.coverLayerView.hidden = YES;
@@ -351,12 +349,10 @@ static NSInteger clickCount;
                              [currentView mas_updateConstraints:^(MASConstraintMaker *make) {
                                  make.height.mas_equalTo(0);
                              }];
-                             currentView.alpha = 0.f;
                              [currentView.superview layoutIfNeeded];
                          }
                          completion:^(BOOL finished) {
                              weakSelf.coverLayerView.hidden = YES;
-//                             currentView.hidden = YES;
                              clickCount = 0;
                          }];
     }
