@@ -19,9 +19,13 @@
 
 @implementation YZShangChengDetailVC
 
+- (void)inner_Pop:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setAnotherBackButtonWithTarget:@selector(inner_Pop:)];
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero];
     tableView.delegate = self;
     tableView.dataSource = self;
@@ -53,6 +57,11 @@
     collectionView.backgroundColor = [UIColor whiteColor];
     [collectionView registerClass:[YZShangChengDetailImageCell class] forCellWithReuseIdentifier:NSStringFromClass(self.class)];
     self.tableView.tableHeaderView = collectionView;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self showNaviBg];
 }
 
 #pragma mark -- UICollectionView

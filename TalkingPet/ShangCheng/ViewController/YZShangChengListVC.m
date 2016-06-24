@@ -11,9 +11,11 @@
 #import "YZShangChengDropMenu.h"
 #import "YZShangChengListCell.h"
 
-@interface YZShangChengListVC()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface YZShangChengListVC()<UICollectionViewDataSource, UICollectionViewDelegate, YZDropMenuDataSource, YZDropMenuDelegate>
 
 @property (nonatomic, weak) UICollectionView *collectionView;
+
+@property (nonatomic, weak) YZShangChengDropMenu *dropMenu;
 
 @end
 
@@ -25,7 +27,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setAnotherBackButtonWithTarget:@selector(inner_Pop:)];
+    [self setBackButtonWithTarget:@selector(inner_Pop:)];
+    YZShangChengDropMenu *dropMenu = [[YZShangChengDropMenu alloc] initWithFrame:CGRectZero];
+    dropMenu.delegate = self;
+    dropMenu.dataSource = self;
+    [self.view addSubview:dropMenu];
+    self.dropMenu = dropMenu;
+    [dropMenu mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).mas_offset(0);
+        make.top.mas_equalTo(self.view).mas_offset(0);
+        make.right.mas_equalTo(self.view).mas_offset(0);
+        make.height.mas_equalTo(44);
+    }];
+    
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 10.f;
     flowLayout.minimumLineSpacing = 10.f;
@@ -48,8 +62,28 @@
     self.collectionView = collectionView;
     
     [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self.view).insets(UIEdgeInsetsZero);
+        make.left.mas_equalTo(self.view).mas_offset(0);
+        make.top.mas_equalTo(dropMenu.mas_bottom).mas_offset(0);
+        make.right.mas_equalTo(self.view).mas_offset(0);
+        make.bottom.mas_equalTo(self.view).mas_offset(0);
     }];
+}
+
+#pragma mark -- DropMenu
+
+- (NSInteger)numberOfColumnsInMenu:(YZShangChengDropMenu *)menu {
+    return 3;
+}
+
+- (NSString *)menu:(YZShangChengDropMenu *)menu titleForColumn:(NSInteger)column {
+    if (column == 0) {
+        return @"犬种";
+    } else if (column == 1) {
+        return @"犬龄";
+    } else if (column == 2) {
+        return @"体型";
+    }
+    return nil;
 }
 
 #pragma mark -- UICollectionView
@@ -67,6 +101,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     YZShangChengDetailVC *detailVC = [[YZShangChengDetailVC alloc] init];
+    detailVC.hideNaviBg = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

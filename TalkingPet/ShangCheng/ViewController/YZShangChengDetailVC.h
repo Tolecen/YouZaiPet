@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface YZShangChengDetailVC : UIViewController
+@interface YZShangChengDetailVC : BaseViewController
 
 @end
