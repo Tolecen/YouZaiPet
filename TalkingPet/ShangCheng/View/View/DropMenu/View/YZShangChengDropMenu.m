@@ -16,6 +16,9 @@ static CGFloat RightFilterBtnWidth  = 44;
 static NSInteger buttonDefaultTag   = 100;
 typedef void(^YZDropDownMenuAnimateCompleteHandler)(void);
 
+static CGFloat YZDropMenuSizeViewHeight         = 90.f;
+static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
+
 @interface YZShangChengDropMenu()
 
 @property (nonatomic, strong) NSMutableArray *titleButtons;
@@ -30,6 +33,7 @@ typedef void(^YZDropDownMenuAnimateCompleteHandler)(void);
 @property (nonatomic, assign, getter=isShow) BOOL show;
 
 @property (nonatomic, strong) UIView *currentDropView;
+@property (nonatomic, assign) CGFloat currentDropViewHeight;
 
 @property (nonatomic, strong) YZDropMenuKindView *kindView;
 @property (nonatomic, strong) YZDropMenuAgeView *ageView;
@@ -62,7 +66,6 @@ typedef void(^YZDropDownMenuAnimateCompleteHandler)(void);
 - (YZDropMenuSizeView *)sizeView {
     if (!_sizeView) {
         _sizeView = [[YZDropMenuSizeView alloc] init];
-        _sizeView.backgroundColor = [UIColor yellowColor];
     }
     return _sizeView;
 }
@@ -70,7 +73,6 @@ typedef void(^YZDropDownMenuAnimateCompleteHandler)(void);
 - (YZDropMenuOtherFilterView *)otherFilterView {
     if (!_otherFilterView) {
         _otherFilterView = [[YZDropMenuOtherFilterView alloc] init];
-        _otherFilterView.backgroundColor = [UIColor blueColor];
     }
     return _otherFilterView;
 }
@@ -107,13 +109,10 @@ typedef void(^YZDropDownMenuAnimateCompleteHandler)(void);
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
-        self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-        self.layer.shadowOffset = CGSizeMake(0,4);
-        self.layer.shadowOpacity = 0.8;
-        self.layer.shadowRadius = 8;
         
         _currentSelectedMenuIndex = -1;
         _show = NO;
+        _currentDropViewHeight = 0.f;
         
         _backgroundView = [[UIView alloc] init];
         _backgroundView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.f];
@@ -135,6 +134,17 @@ typedef void(^YZDropDownMenuAnimateCompleteHandler)(void);
             make.centerY.mas_equalTo(self).mas_equalTo(0);
             make.width.mas_equalTo(40);
             make.height.mas_equalTo(self.mas_height);
+        }];
+        
+        UIView *bottomLine = [[UIView alloc] init];
+        bottomLine.backgroundColor = [UIColor colorWithRed:(239 / 255.f)
+                                                     green:(239 / 255.f)
+                                                      blue:(239 / 255.f)
+                                                     alpha:1.f];
+        [self addSubview:bottomLine];
+        [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(self);
+            make.height.mas_equalTo(.5);
         }];
     }
     return self;
@@ -175,6 +185,22 @@ typedef void(^YZDropDownMenuAnimateCompleteHandler)(void);
 
 #pragma mark -- Action
 
+- (CGFloat)inner_CurrentDropViewHeight:(NSInteger)index {
+    switch (index) {
+        case 0:
+            return 200;
+        case 1:
+            return 200;
+        case 2:
+            return YZDropMenuSizeViewHeight;
+        case 3:
+            return YZDropMenuOtherFilterViewHeight;
+        default:
+            break;
+    }
+    return 0;
+}
+
 - (UIView *)inner_SelectCurrentDropView:(NSInteger)index {
     switch (index) {
         case 0:
@@ -198,6 +224,7 @@ typedef void(^YZDropDownMenuAnimateCompleteHandler)(void);
     self.currentDropView = [self inner_SelectCurrentDropView:index];
     
     if (index == self.currentSelectedMenuIndex && self.isShow) {
+        self.currentDropViewHeight = [self inner_CurrentDropViewHeight:self.currentSelectedMenuIndex];
         [self inner_AnimationWithTitleButton:sender
                               backgroundView:self.backgroundView
                                  currentView:self.currentDropView
@@ -209,6 +236,7 @@ typedef void(^YZDropDownMenuAnimateCompleteHandler)(void);
     } else {
         if (index != self.currentSelectedMenuIndex) {
             UIView *previousDropView = [self inner_SelectCurrentDropView:self.currentSelectedMenuIndex];
+            self.currentDropViewHeight = [self inner_CurrentDropViewHeight:self.currentSelectedMenuIndex];
             [self inner_AnimationWithTitleButton:sender
                                   backgroundView:self.backgroundView
                                      currentView:previousDropView
@@ -218,6 +246,7 @@ typedef void(^YZDropDownMenuAnimateCompleteHandler)(void);
                                         }];
         }
         self.currentSelectedMenuIndex = index;
+        self.currentDropViewHeight = [self inner_CurrentDropViewHeight:self.currentSelectedMenuIndex];
         [self inner_AnimationWithTitleButton:sender
                               backgroundView:self.backgroundView
                                  currentView:self.currentDropView
@@ -291,6 +320,7 @@ static NSInteger clickCount;
 - (void)inner_AnimationWithCurrentView:(UIView *)currentView
                                   show:(BOOL)isShow
                               complete:(YZDropDownMenuAnimateCompleteHandler)complete {
+    WS(weakSelf);
     if (isShow) {
         if (!currentView.superview) {
             [self.superview addSubview:currentView];
@@ -303,16 +333,17 @@ static NSInteger clickCount;
         } else {
             [self.superview bringSubviewToFront:currentView];
         }
-        currentView.hidden = NO;
+//        currentView.hidden = NO;
         self.coverLayerView.hidden = NO;
         [UIView animateWithDuration:.5f
                          animations:^{
                              [currentView mas_updateConstraints:^(MASConstraintMaker *make) {
-                                 make.height.mas_equalTo(200);
+                                 make.height.mas_equalTo(weakSelf.currentDropViewHeight);
                              }];
+                             currentView.alpha = 1.f;
                              [currentView.superview layoutIfNeeded];
                          } completion:^(BOOL finished) {
-                             self.coverLayerView.hidden = YES;
+                             weakSelf.coverLayerView.hidden = YES;
                          }];
     } else {
         [UIView animateWithDuration:.5f
@@ -320,11 +351,12 @@ static NSInteger clickCount;
                              [currentView mas_updateConstraints:^(MASConstraintMaker *make) {
                                  make.height.mas_equalTo(0);
                              }];
+                             currentView.alpha = 0.f;
                              [currentView.superview layoutIfNeeded];
                          }
                          completion:^(BOOL finished) {
-                             self.coverLayerView.hidden = YES;
-                             currentView.hidden = YES;
+                             weakSelf.coverLayerView.hidden = YES;
+//                             currentView.hidden = YES;
                              clickCount = 0;
                          }];
     }
