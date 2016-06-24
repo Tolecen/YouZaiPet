@@ -7,6 +7,10 @@
 //
 
 #import "YZDropMenuKindView.h"
+#import "YZShangChengKindScrollCell.h"
+
+static NSArray *titles;
+static NSArray *dogTitles;
 
 @interface YZDropMenuKindView()<UITableViewDelegate, UITableViewDataSource>
 
@@ -20,8 +24,119 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
         self.layer.masksToBounds = YES;
+        
+        titles = @[@"A",@"B",@"C",@"D",@"E"];
+        dogTitles = @[@"阿拉斯加", @"阿富汗猎犬", @"澳大利亚牧羊犬", @"柴犬", @"拉布拉多犬"];
+        
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        tableView.delegate = self;
+        tableView.dataSource = self;
+        [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass(self.class)];
+        [tableView registerClass:[YZShangChengKindScrollCell class] forCellReuseIdentifier:NSStringFromClass(YZShangChengKindScrollCell.class)];
+        [tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:NSStringFromClass(UITableViewHeaderFooterView.class)];
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableView.sectionIndexColor = CommonGreenColor;
+        if ([tableView respondsToSelector:@selector(sectionIndexBackgroundColor)]) {
+            tableView.sectionIndexBackgroundColor = [UIColor clearColor];
+        }
+        if ([tableView respondsToSelector:@selector(sectionIndexTrackingBackgroundColor)]) {
+            tableView.sectionIndexTrackingBackgroundColor = [UIColor clearColor];
+        }
+        [self addSubview:tableView];
+        self.tableView = tableView;
+        
+        [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(self).insets(UIEdgeInsetsZero);
+        }];
     }
     return self;
+}
+
+- (void)reloadKindMenu {
+    [self.tableView reloadData];
+}
+
+#pragma mark -- UITableView
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(self.class)];
+    YZShangChengKindScrollCell *scrollCell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(YZShangChengKindScrollCell.class)];
+    if (indexPath.section == 0) {
+        return scrollCell;
+    }
+    cell.textLabel.text = dogTitles[indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:12.f];
+    cell.textLabel.textColor = [UIColor colorWithRed:(83 / 255.f)
+                                               green:(83 / 255.f)
+                                                blue:(83 / 255.f)
+                                               alpha:1.f];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return 90;
+    }
+    return 44;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2 + titles.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return 1;
+    } else if (section == 1) {
+        return 0;
+    }
+    return dogTitles.count;
+}
+
+- (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return titles;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 30.f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return .001f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(UITableViewHeaderFooterView.class)];
+    if (section == 0) {
+        headerView.textLabel.text = @"热门";
+        headerView.textLabel.textColor = [UIColor colorWithRed:(198 / 255.f)
+                                                         green:(198 / 255.f)
+                                                          blue:(198 / 255.f)
+                                                         alpha:1.f];
+        headerView.contentView.backgroundColor = [UIColor colorWithRed:(228 / 255.f)
+                                                                 green:(228 / 255.f)
+                                                                  blue:(228 / 255.f)
+                                                                 alpha:1.f];
+    } else if (section == 1) {
+        headerView.textLabel.text = @"全部";
+        headerView.textLabel.textColor = [UIColor colorWithRed:(198 / 255.f)
+                                                         green:(198 / 255.f)
+                                                          blue:(198 / 255.f)
+                                                         alpha:1.f];
+        headerView.contentView.backgroundColor = [UIColor colorWithRed:(228 / 255.f)
+                                                                 green:(228 / 255.f)
+                                                                  blue:(228 / 255.f)
+                                                                 alpha:1.f];
+    } else if (section > 1) {
+        headerView.textLabel.text = titles[section - 2];
+        headerView.contentView.backgroundColor = [UIColor whiteColor];
+        headerView.textLabel.textColor = CommonGreenColor;
+    }
+    return headerView;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

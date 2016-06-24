@@ -21,6 +21,10 @@
 
 @implementation YZShangChengListVC
 
+- (void)dealloc {
+    NSLog(@"dealloc:[%@]", self);
+}
+
 - (void)inner_Pop:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }

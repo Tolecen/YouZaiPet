@@ -188,7 +188,7 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
 - (CGFloat)inner_CurrentDropViewHeight:(NSInteger)index {
     switch (index) {
         case 0:
-            return 200;
+            return (ScreenHeight - 44 - 64);
         case 1:
             return 200;
         case 2:
@@ -222,7 +222,7 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
     WS(weakSelf);
     NSInteger index = sender.tag - buttonDefaultTag;
     self.currentDropView = [self inner_SelectCurrentDropView:index];
-    
+
     if (index == self.currentSelectedMenuIndex && self.isShow) {
         self.currentDropViewHeight = [self inner_CurrentDropViewHeight:self.currentSelectedMenuIndex];
         [self inner_AnimationWithTitleButton:sender
@@ -234,19 +234,16 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
                                         weakSelf.show = NO;
                                     }];
     } else {
-        if (index != self.currentSelectedMenuIndex) {
+        if (index != self.currentSelectedMenuIndex && self.isShow) {
             UIView *previousDropView = [self inner_SelectCurrentDropView:self.currentSelectedMenuIndex];
             self.currentDropViewHeight = [self inner_CurrentDropViewHeight:self.currentSelectedMenuIndex];
-            [self inner_AnimationWithTitleButton:sender
-                                  backgroundView:self.backgroundView
-                                     currentView:previousDropView
+            [self inner_AnimationWithCurrentView:previousDropView
                                             show:NO
-                                        complete:^{
-                                            weakSelf.show = NO;
-                                        }];
+                                        complete:nil];
         }
         self.currentSelectedMenuIndex = index;
         self.currentDropViewHeight = [self inner_CurrentDropViewHeight:self.currentSelectedMenuIndex];
+
         [self inner_AnimationWithTitleButton:sender
                               backgroundView:self.backgroundView
                                  currentView:self.currentDropView
@@ -301,7 +298,7 @@ static NSInteger clickCount;
             [backgroundView layoutIfNeeded];
         }
         [UIView animateWithDuration:.5f animations:^{
-            backgroundView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3];
+            backgroundView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:.3];
         } completion:^(BOOL finished) {
         }];
     } else {
@@ -340,6 +337,10 @@ static NSInteger clickCount;
                                  make.height.mas_equalTo(weakSelf.currentDropViewHeight);
                              }];
                              [currentView.superview layoutIfNeeded];
+                             
+                             if ([currentView isEqual:weakSelf.kindView]) {
+                                 [weakSelf.kindView reloadKindMenu];
+                             }
                          } completion:^(BOOL finished) {
                              weakSelf.coverLayerView.hidden = YES;
                          }];
@@ -362,7 +363,15 @@ static NSInteger clickCount;
 }
 
 - (void)backgroundViewDidTap:(UITapGestureRecognizer *)tapGesture {
-    
+    WS(weakSelf);
+    [self inner_AnimationWithTitleButton:self.selectedButton
+                          backgroundView:self.backgroundView
+                             currentView:self.currentDropView
+                                    show:NO
+                                complete:^{
+                                    weakSelf.currentSelectedMenuIndex = -1;
+                                    weakSelf.show = NO;
+                                }];
 }
 
 @end

@@ -10,4 +10,6 @@
 
 @interface YZDropMenuKindView : UIView
 
+- (void)reloadKindMenu;
+
 @end

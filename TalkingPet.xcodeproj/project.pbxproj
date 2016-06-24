@@ -23,6 +23,8 @@
 		066B84C21D1BD0E0003AAD64 /* YZShangChengBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 066B84C11D1BD0E0003AAD64 /* YZShangChengBannerCell.m */; };
 		0688A2E01D1BF60D002AA960 /* YZShangChengDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0688A2DF1D1BF60D002AA960 /* YZShangChengDetailVC.m */; };
 		0688A2E71D1C2797002AA960 /* YZShangChengDetailImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0688A2E61D1C2797002AA960 /* YZShangChengDetailImageCell.m */; };
+		0696313E1D1D995E00AF6B6D /* YZShangChengKindScrollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0696313D1D1D995E00AF6B6D /* YZShangChengKindScrollCell.m */; };
+		069631411D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 069631401D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.m */; };
 		06E4A9661D1CD1FA00BBC617 /* YZDropMenuAgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E4A95D1D1CD1FA00BBC617 /* YZDropMenuAgeView.m */; };
 		06E4A9671D1CD1FA00BBC617 /* YZDropMenuKindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E4A95F1D1CD1FA00BBC617 /* YZDropMenuKindView.m */; };
 		06E4A9681D1CD1FA00BBC617 /* YZDropMenuOtherFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E4A9611D1CD1FA00BBC617 /* YZDropMenuOtherFilterView.m */; };
@@ -1251,6 +1253,10 @@
 		0688A2DF1D1BF60D002AA960 /* YZShangChengDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengDetailVC.m; sourceTree = "<group>"; };
 		0688A2E51D1C2797002AA960 /* YZShangChengDetailImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShangChengDetailImageCell.h; sourceTree = "<group>"; };
 		0688A2E61D1C2797002AA960 /* YZShangChengDetailImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengDetailImageCell.m; sourceTree = "<group>"; };
+		0696313C1D1D995E00AF6B6D /* YZShangChengKindScrollCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShangChengKindScrollCell.h; sourceTree = "<group>"; };
+		0696313D1D1D995E00AF6B6D /* YZShangChengKindScrollCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengKindScrollCell.m; sourceTree = "<group>"; };
+		0696313F1D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDogKindCollectionViewCell.h; sourceTree = "<group>"; };
+		069631401D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZDogKindCollectionViewCell.m; sourceTree = "<group>"; };
 		06E4A95C1D1CD1FA00BBC617 /* YZDropMenuAgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDropMenuAgeView.h; sourceTree = "<group>"; };
 		06E4A95D1D1CD1FA00BBC617 /* YZDropMenuAgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZDropMenuAgeView.m; sourceTree = "<group>"; };
 		06E4A95E1D1CD1FA00BBC617 /* YZDropMenuKindView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDropMenuKindView.h; sourceTree = "<group>"; };
@@ -3041,12 +3047,16 @@
 		066B84981D1BBDE3003AAD64 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				0696313C1D1D995E00AF6B6D /* YZShangChengKindScrollCell.h */,
+				0696313D1D1D995E00AF6B6D /* YZShangChengKindScrollCell.m */,
 				066B84991D1BBDFE003AAD64 /* YZShangChengListCell.h */,
 				066B849A1D1BBDFE003AAD64 /* YZShangChengListCell.m */,
 				066B84C01D1BD0E0003AAD64 /* YZShangChengBannerCell.h */,
 				066B84C11D1BD0E0003AAD64 /* YZShangChengBannerCell.m */,
 				0688A2E51D1C2797002AA960 /* YZShangChengDetailImageCell.h */,
 				0688A2E61D1C2797002AA960 /* YZShangChengDetailImageCell.m */,
+				0696313F1D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.h */,
+				069631401D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -6676,6 +6686,7 @@
 				972F388619764D8F00952DC9 /* HPTextViewInternal.m in Sources */,
 				7251B97E19AC1DCE0046E9BC /* UserEntity.m in Sources */,
 				7200CA081AB2837200B6E219 /* RankingViewController.m in Sources */,
+				069631411D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.m in Sources */,
 				9716D1A31988ED5300C725D8 /* AFURLConnectionOperation.m in Sources */,
 				975047461A36A7EA005C07ED /* PackageInfo.m in Sources */,
 				724765F21A6CAA2E0038525A /* PagedFlowView.m in Sources */,
@@ -6749,6 +6760,7 @@
 				723DA50D19F6119D002E162C /* InitializeData.m in Sources */,
 				726F2FC61B4E715B007A7668 /* T&AEditViewController.m in Sources */,
 				971D8CD71975086C00C4C580 /* FavorListTableViewCell.m in Sources */,
+				0696313E1D1D995E00AF6B6D /* YZShangChengKindScrollCell.m in Sources */,
 				9793DA911B18536E0030CBB5 /* CustomizeClothViewController.m in Sources */,
 				9729E84E19B842670047A697 /* VideoPlayViewController.m in Sources */,
 				971D8CEB1975117000C4C580 /* MJRefreshConst.m in Sources */,
