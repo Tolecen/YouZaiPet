@@ -17,6 +17,7 @@ static NSInteger buttonDefaultTag   = 100;
 typedef void(^YZDropDownMenuAnimateCompleteHandler)(void);
 
 static CGFloat YZDropMenuSizeViewHeight         = 90.f;
+static CGFloat YZDropMenuAgeViewHeight          = 100.f;
 static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
 
 @interface YZShangChengDropMenu()
@@ -58,7 +59,6 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
 - (YZDropMenuAgeView *)ageView {
     if (!_ageView) {
         _ageView = [[YZDropMenuAgeView alloc] init];
-        _ageView.backgroundColor = [UIColor redColor];
     }
     return _ageView;
 }
@@ -190,7 +190,7 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
         case 0:
             return (ScreenHeight - 44 - 64);
         case 1:
-            return 200;
+            return YZDropMenuAgeViewHeight;
         case 2:
             return YZDropMenuSizeViewHeight;
         case 3:

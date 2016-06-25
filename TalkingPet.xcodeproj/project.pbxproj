@@ -25,6 +25,7 @@
 		0688A2E71D1C2797002AA960 /* YZShangChengDetailImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0688A2E61D1C2797002AA960 /* YZShangChengDetailImageCell.m */; };
 		0696313E1D1D995E00AF6B6D /* YZShangChengKindScrollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0696313D1D1D995E00AF6B6D /* YZShangChengKindScrollCell.m */; };
 		069631411D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 069631401D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.m */; };
+		06BC28CD1D1E09A6003AC9A3 /* YZAgeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BC28CC1D1E09A6003AC9A3 /* YZAgeSlider.m */; };
 		06E4A9661D1CD1FA00BBC617 /* YZDropMenuAgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E4A95D1D1CD1FA00BBC617 /* YZDropMenuAgeView.m */; };
 		06E4A9671D1CD1FA00BBC617 /* YZDropMenuKindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E4A95F1D1CD1FA00BBC617 /* YZDropMenuKindView.m */; };
 		06E4A9681D1CD1FA00BBC617 /* YZDropMenuOtherFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E4A9611D1CD1FA00BBC617 /* YZDropMenuOtherFilterView.m */; };
@@ -1257,6 +1258,8 @@
 		0696313D1D1D995E00AF6B6D /* YZShangChengKindScrollCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengKindScrollCell.m; sourceTree = "<group>"; };
 		0696313F1D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDogKindCollectionViewCell.h; sourceTree = "<group>"; };
 		069631401D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZDogKindCollectionViewCell.m; sourceTree = "<group>"; };
+		06BC28CB1D1E09A6003AC9A3 /* YZAgeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZAgeSlider.h; sourceTree = "<group>"; };
+		06BC28CC1D1E09A6003AC9A3 /* YZAgeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZAgeSlider.m; sourceTree = "<group>"; };
 		06E4A95C1D1CD1FA00BBC617 /* YZDropMenuAgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDropMenuAgeView.h; sourceTree = "<group>"; };
 		06E4A95D1D1CD1FA00BBC617 /* YZDropMenuAgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZDropMenuAgeView.m; sourceTree = "<group>"; };
 		06E4A95E1D1CD1FA00BBC617 /* YZDropMenuKindView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDropMenuKindView.h; sourceTree = "<group>"; };
@@ -3104,17 +3107,9 @@
 		06E4A9591D1CD1FA00BBC617 /* DropMenu */ = {
 			isa = PBXGroup;
 			children = (
-				06E4A95A1D1CD1FA00BBC617 /* Button */,
 				06E4A95B1D1CD1FA00BBC617 /* View */,
 			);
 			path = DropMenu;
-			sourceTree = "<group>";
-		};
-		06E4A95A1D1CD1FA00BBC617 /* Button */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Button;
 			sourceTree = "<group>";
 		};
 		06E4A95B1D1CD1FA00BBC617 /* View */ = {
@@ -3130,6 +3125,8 @@
 				06E4A9631D1CD1FA00BBC617 /* YZDropMenuSizeView.m */,
 				06E4A9641D1CD1FA00BBC617 /* YZShangChengDropMenu.h */,
 				06E4A9651D1CD1FA00BBC617 /* YZShangChengDropMenu.m */,
+				06BC28CB1D1E09A6003AC9A3 /* YZAgeSlider.h */,
+				06BC28CC1D1E09A6003AC9A3 /* YZAgeSlider.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -6877,6 +6874,7 @@
 				066B849B1D1BBDFE003AAD64 /* YZShangChengListCell.m in Sources */,
 				729EEDD119766C7D000AFF58 /* DatabaseServe.m in Sources */,
 				72831CF9196A455800B9CA4C /* MainViewController.m in Sources */,
+				06BC28CD1D1E09A6003AC9A3 /* YZAgeSlider.m in Sources */,
 				977D99FD19B5996F00C0B8C9 /* CoreTextUtils.m in Sources */,
 				971D8CD41975001700C4C580 /* TalkingCommentTableViewCell.m in Sources */,
 				9797F908198733D100ABF28B /* NetServer.m in Sources */,
