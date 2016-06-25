@@ -72,6 +72,8 @@ static UIImageView *lastNodeImageV = nil;
 
 - (void)dealloc {
     _nodes = nil;
+    firstNodeImageV = nil;
+    lastNodeImageV = nil;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -148,7 +150,7 @@ static UIImageView *lastNodeImageV = nil;
         
         [sliderNode mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(firstNodeImageV.mas_centerX).mas_offset(0);
-            make.bottom.mas_equalTo(slider.mas_top).mas_offset(10);
+            make.bottom.mas_equalTo(slider.mas_top).mas_offset(-5);
         }];
     }
     return self;
