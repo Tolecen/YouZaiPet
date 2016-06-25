@@ -1,25 +1,22 @@
 //
-//  YZShangChengListVC.m
+//  YZShangChengGoodsListVC.m
 //  TalkingPet
 //
-//  Created by LiuXiaoyu on 16/6/23.
+//  Created by LiuXiaoyu on 16/6/25.
 //  Copyright © 2016年 wangxr. All rights reserved.
 //
 
-#import "YZShangChengListVC.h"
+#import "YZShangChengGoodsListVC.h"
+#import "YZShangChengGoodsListCell.h"
 #import "YZShangChengDetailVC.h"
-#import "YZShangChengDropMenu.h"
-#import "YZShangChengListCell.h"
 
-@interface YZShangChengListVC()<UICollectionViewDataSource, UICollectionViewDelegate, YZDropMenuDataSource, YZDropMenuDelegate>
+@interface YZShangChengGoodsListVC()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, weak) UICollectionView *collectionView;
 
-@property (nonatomic, weak) YZShangChengDropMenu *dropMenu;
-
 @end
 
-@implementation YZShangChengListVC
+@implementation YZShangChengGoodsListVC
 
 - (void)dealloc {
     NSLog(@"dealloc:[%@]", self);
@@ -29,21 +26,18 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)inner_MoreAction:(id)sender {
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackButtonWithTarget:@selector(inner_Pop:)];
-    YZShangChengDropMenu *dropMenu = [[YZShangChengDropMenu alloc] initWithFrame:CGRectZero];
-    dropMenu.delegate = self;
-    dropMenu.dataSource = self;
-    [self.view addSubview:dropMenu];
-    self.dropMenu = dropMenu;
-    
-    [dropMenu mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view).mas_offset(0);
-        make.top.mas_equalTo(self.view).mas_offset(0);
-        make.right.mas_equalTo(self.view).mas_offset(0);
-        make.height.mas_equalTo(44);
-    }];
+    UIImage *image = [UIImage imageNamed:@"navigation_more_icon"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+
+    UIBarButtonItem *rightMoreItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(inner_MoreAction:)];
+    self.navigationItem.rightBarButtonItem = rightMoreItem;
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 10.f;
@@ -62,40 +56,19 @@
                                                      green:.9
                                                       blue:.9
                                                      alpha:1.f];
-    [collectionView registerClass:[YZShangChengListCell class] forCellWithReuseIdentifier:NSStringFromClass(self.class)];
+    [collectionView registerClass:[YZShangChengGoodsListCell class] forCellWithReuseIdentifier:NSStringFromClass(self.class)];
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
     
     [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view).mas_offset(0);
-        make.top.mas_equalTo(dropMenu.mas_bottom).mas_offset(0);
-        make.right.mas_equalTo(self.view).mas_offset(0);
-        make.bottom.mas_equalTo(self.view).mas_offset(0);
+        make.left.right.top.bottom.mas_equalTo(self.view).mas_offset(0);
     }];
-}
-
-#pragma mark -- DropMenu
-
-- (NSInteger)numberOfColumnsInMenu:(YZShangChengDropMenu *)menu {
-    return 3;
-}
-
-- (NSString *)menu:(YZShangChengDropMenu *)menu titleForColumn:(NSInteger)column {
-    if (column == 0) {
-        return @"犬种";
-    } else if (column == 1) {
-        return @"犬龄";
-    } else if (column == 2) {
-        return @"体型";
-    }
-    return nil;
 }
 
 #pragma mark -- UICollectionView
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    YZShangChengListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.class) forIndexPath:indexPath];
-    
+    YZShangChengGoodsListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.class) forIndexPath:indexPath];
     return cell;
 }
 

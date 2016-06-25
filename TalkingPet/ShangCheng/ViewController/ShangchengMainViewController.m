@@ -7,7 +7,8 @@
 //
 
 #import "ShangchengMainViewController.h"
-#import "YZShangChengListVC.h"
+#import "YZShangChengDogListVC.h"
+#import "YZShangChengGoodsListVC.h"
 #import "YZShangChengBannerCell.h"
 
 @interface ShangchengMainViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -73,8 +74,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    YZShangChengListVC *listVC = [[YZShangChengListVC alloc] init];
-    [self.navigationController pushViewController:listVC animated:YES];
+    if (indexPath.section == 0) {
+        YZShangChengDogListVC *listVC = [[YZShangChengDogListVC alloc] init];
+        [self.navigationController pushViewController:listVC animated:YES];
+    } else {
+        YZShangChengGoodsListVC *listVC = [[YZShangChengGoodsListVC alloc] init];
+        [self.navigationController pushViewController:listVC animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

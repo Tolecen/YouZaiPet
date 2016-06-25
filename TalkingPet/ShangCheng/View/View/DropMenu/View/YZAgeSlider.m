@@ -216,6 +216,11 @@ static UIImageView *lastNodeImageV = nil;
         [self.sliderNode setTitle:@"1年以上" forState:UIControlStateDisabled];
     }
     self.progressView.progress = sender.value;
+    UIImageView *selectImageV = self.nodes[selectIndex];
+    CGFloat offset = CGRectGetMidX(selectImageV.frame) - CGRectGetMidX(firstNodeImageV.frame);
+    [self.sliderNode mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(firstNodeImageV.mas_centerX).mas_offset(offset);
+    }];
 }
 
 - (void)inner_ConfigureNodesBackgroundWithMaxIndex:(NSInteger)index {
@@ -239,9 +244,15 @@ static UIImageView *lastNodeImageV = nil;
     CGPoint location = [touch locationInView:self];
     NSLog(@"continue_location_self:[%@_%@]", NSStringFromCGPoint(location), NSStringFromCGRect(self.frame));
     if (location.x <CGRectGetMidX(firstNodeImageV.frame)) {
+        [self.sliderNode mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(firstNodeImageV.mas_centerX).mas_offset(0);
+        }];
         return;
     }
     if (location.x > CGRectGetMidX(lastNodeImageV.frame)) {
+        [self.sliderNode mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(firstNodeImageV.mas_centerX).mas_offset(CGRectGetMidX(lastNodeImageV.frame) - CGRectGetMidX(firstNodeImageV.frame));
+        }];
         return;
     }
     CGFloat offsetX = location.x - CGRectGetMidX(firstNodeImageV.frame);

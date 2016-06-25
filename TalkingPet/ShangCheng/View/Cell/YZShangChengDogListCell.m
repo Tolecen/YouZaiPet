@@ -6,9 +6,9 @@
 //  Copyright © 2016年 wangxr. All rights reserved.
 //
 
-#import "YZShangChengListCell.h"
+#import "YZShangChengDogListCell.h"
 
-@interface YZShangChengListCell()
+@interface YZShangChengDogListCell()
 
 @property (nonatomic, weak) UIImageView *thumbImageV;
 @property (nonatomic, weak) UILabel *nameLb;
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation YZShangChengListCell
+@implementation YZShangChengDogListCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {

@@ -1,13 +1,13 @@
 //
-//  YZShangChengListVC.h
+//  YZShangChengListCell.h
 //  TalkingPet
 //
 //  Created by LiuXiaoyu on 16/6/23.
 //  Copyright © 2016年 wangxr. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface YZShangChengListVC : BaseViewController
+@interface YZShangChengDogListCell : UICollectionViewCell
 
 @end
