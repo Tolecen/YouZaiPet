@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		063E29A81D20BB5600C3FD3F /* YZDetailBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 063E29A71D20BB5600C3FD3F /* YZDetailBottomBar.m */; };
+		063E29AB1D20BBDB00C3FD3F /* YZShangChengConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 063E29AA1D20BBDB00C3FD3F /* YZShangChengConst.m */; };
+		063E29AE1D20C1DC00C3FD3F /* UIButton+VerticalTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 063E29AD1D20C1DC00C3FD3F /* UIButton+VerticalTitle.m */; };
 		066B84941D1BBBFA003AAD64 /* ShangchengMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 066B84931D1BBBFA003AAD64 /* ShangchengMainViewController.m */; };
 		066B84971D1BBD56003AAD64 /* YZShangChengDogListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 066B84961D1BBD56003AAD64 /* YZShangChengDogListVC.m */; };
 		066B849B1D1BBDFE003AAD64 /* YZShangChengDogListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 066B849A1D1BBDFE003AAD64 /* YZShangChengDogListCell.m */; };
@@ -1219,6 +1222,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		063E29A61D20BB5600C3FD3F /* YZDetailBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDetailBottomBar.h; sourceTree = "<group>"; };
+		063E29A71D20BB5600C3FD3F /* YZDetailBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZDetailBottomBar.m; sourceTree = "<group>"; };
+		063E29A91D20BBDB00C3FD3F /* YZShangChengConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShangChengConst.h; sourceTree = "<group>"; };
+		063E29AA1D20BBDB00C3FD3F /* YZShangChengConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengConst.m; sourceTree = "<group>"; };
+		063E29AC1D20C1DC00C3FD3F /* UIButton+VerticalTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+VerticalTitle.h"; sourceTree = "<group>"; };
+		063E29AD1D20C1DC00C3FD3F /* UIButton+VerticalTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+VerticalTitle.m"; sourceTree = "<group>"; };
 		066B84921D1BBBFA003AAD64 /* ShangchengMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShangchengMainViewController.h; sourceTree = "<group>"; };
 		066B84931D1BBBFA003AAD64 /* ShangchengMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShangchengMainViewController.m; sourceTree = "<group>"; };
 		066B84951D1BBD56003AAD64 /* YZShangChengDogListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShangChengDogListVC.h; sourceTree = "<group>"; };
@@ -3017,6 +3026,8 @@
 		066B848B1D1BBBD2003AAD64 /* ShangCheng */ = {
 			isa = PBXGroup;
 			children = (
+				063E29A91D20BBDB00C3FD3F /* YZShangChengConst.h */,
+				063E29AA1D20BBDB00C3FD3F /* YZShangChengConst.m */,
 				066B848F1D1BBBFA003AAD64 /* Model */,
 				066B84901D1BBBFA003AAD64 /* View */,
 				066B84911D1BBBFA003AAD64 /* ViewController */,
@@ -3110,6 +3121,10 @@
 			isa = PBXGroup;
 			children = (
 				06E4A9591D1CD1FA00BBC617 /* DropMenu */,
+				063E29A61D20BB5600C3FD3F /* YZDetailBottomBar.h */,
+				063E29A71D20BB5600C3FD3F /* YZDetailBottomBar.m */,
+				063E29AC1D20C1DC00C3FD3F /* UIButton+VerticalTitle.h */,
+				063E29AD1D20C1DC00C3FD3F /* UIButton+VerticalTitle.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -6805,6 +6820,7 @@
 				7228BD20196B8D5B005502CE /* SVProgressHUD.m in Sources */,
 				724653E71AFAFD3D00DA6A83 /* RESideMenu.m in Sources */,
 				066B84BE1D1BBF52003AAD64 /* View+MASAdditions.m in Sources */,
+				063E29A81D20BB5600C3FD3F /* YZDetailBottomBar.m in Sources */,
 				9797F91D19877CA100ABF28B /* PetCategoryParser.m in Sources */,
 				066B84C21D1BD0E0003AAD64 /* YZShangChengBannerCell.m in Sources */,
 				727A33181A3E8C1C0066882A /* MyGradeViewController.m in Sources */,
@@ -6968,6 +6984,7 @@
 				9748ABCF1A70997B0004F1CE /* ChatBlackList.m in Sources */,
 				72831CD2196A3FE200B9CA4C /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				9714717A19B48FA600FEDD38 /* JPSThumbnailAnnotation.m in Sources */,
+				063E29AB1D20BBDB00C3FD3F /* YZShangChengConst.m in Sources */,
 				72E0D3B91AA58FE5009B5408 /* SystemSetEntity.m in Sources */,
 				727A33151A3E7E440066882A /* PetEntity.m in Sources */,
 				974203B71A5B81540064BB4F /* ChatMsg.m in Sources */,
@@ -7054,6 +7071,7 @@
 				72831CCC196A3FE200B9CA4C /* NSManagedObject+MagicalAggregation.m in Sources */,
 				06BC28D31D1E6CE2003AC9A3 /* YZShangChengGoodsListCell.m in Sources */,
 				06E4A9691D1CD1FA00BBC617 /* YZDropMenuSizeView.m in Sources */,
+				063E29AE1D20C1DC00C3FD3F /* UIButton+VerticalTitle.m in Sources */,
 				979C5AF71AF9AB52000DF115 /* rijndael.c in Sources */,
 				9749DE211A675ADB00766A99 /* NormalMsgEntity.m in Sources */,
 				9776D58B1A83509D00A3F191 /* TOWebViewController.m in Sources */,

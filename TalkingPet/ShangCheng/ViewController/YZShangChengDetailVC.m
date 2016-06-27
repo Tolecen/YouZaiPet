@@ -8,6 +8,7 @@
 
 #import "YZShangChengDetailVC.h"
 #import "YZShangChengDetailImageCell.h"
+#import "YZDetailBottomBar.h"
 
 @interface YZShangChengDetailVC()<UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -57,6 +58,13 @@
     collectionView.backgroundColor = [UIColor whiteColor];
     [collectionView registerClass:[YZShangChengDetailImageCell class] forCellWithReuseIdentifier:NSStringFromClass(self.class)];
     self.tableView.tableHeaderView = collectionView;
+    
+    YZDetailBottomBar *bottomBar = [[YZDetailBottomBar alloc] initWithFrame:CGRectZero type:YZShangChengType_Goods];
+    [self.view addSubview:bottomBar];
+    [bottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.mas_equalTo(self.view).mas_offset(0);
+        make.height.mas_offset(50);
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

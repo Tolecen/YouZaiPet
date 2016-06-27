@@ -22,6 +22,10 @@
     NSLog(@"dealloc:[%@]", self);
 }
 
+- (NSString *)title {
+    return @"宠物粮";
+}
+
 - (void)inner_Pop:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
