@@ -59,6 +59,11 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
 - (YZDropMenuAgeView *)ageView {
     if (!_ageView) {
         _ageView = [[YZDropMenuAgeView alloc] init];
+        WS(weakSelf);
+        [_ageView setAgeViewSelectedAgeBlock:^(YZDogAgeRange dogAge) {
+            [weakSelf backgroundViewDidTap:nil];
+            NSLog(@"dogAge:[%@]", @(dogAge));
+        }];
     }
     return _ageView;
 }
@@ -66,6 +71,11 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
 - (YZDropMenuSizeView *)sizeView {
     if (!_sizeView) {
         _sizeView = [[YZDropMenuSizeView alloc] init];
+        WS(weakSelf);
+        [_sizeView setSizeViewSelectSizeBlock:^(YZShangChengDogSize size) {
+            [weakSelf backgroundViewDidTap:nil];
+            NSLog(@"dogSize:[%@]", @(size));
+        }];
     }
     return _sizeView;
 }
@@ -73,6 +83,12 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
 - (YZDropMenuOtherFilterView *)otherFilterView {
     if (!_otherFilterView) {
         _otherFilterView = [[YZDropMenuOtherFilterView alloc] init];
+        WS(weakSelf);
+        [_otherFilterView setFilterViewSelectedFilterBlock:^(YZDogSex dogSex, YZDogValueRange dogValue) {
+            [weakSelf backgroundViewDidTap:nil];
+            NSLog(@"dogSex:[%@]", @(dogSex));
+            NSLog(@"dogValue:[%@]", @(dogValue));
+        }];
     }
     return _otherFilterView;
 }
@@ -80,7 +96,6 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
 - (YZDropMenuKindView *)kindView {
     if (!_kindView) {
         _kindView = [[YZDropMenuKindView alloc] init];
-        _kindView.backgroundColor = [UIColor greenColor];
     }
     return _kindView;
 }

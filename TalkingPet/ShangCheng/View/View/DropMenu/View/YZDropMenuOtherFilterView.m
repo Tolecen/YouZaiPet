@@ -14,9 +14,23 @@
 @property (nonatomic, weak) UIButton *femaleBtn;
 @property (nonatomic, weak) UIButton *confimBtn;
 
+@property (nonatomic, weak) UIButton *firstBtn;
+@property (nonatomic, weak) UIButton *secondBtn;
+@property (nonatomic, weak) UIButton *thirdBtn;
+@property (nonatomic, weak) UIButton *fourBtn;
+
+@property (nonatomic, strong) NSMutableArray *values;
+
+@property (nonatomic, assign) YZDogSex dogSex;
+@property (nonatomic, assign) YZDogValueRange dogValueRange;
+
 @end
 
 @implementation YZDropMenuOtherFilterView
+
+- (void)dealloc {
+    _values = nil;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -85,9 +99,13 @@
         }];
     
         UIButton *firstBtn = [self inner_CreateBtnWithTitle:@"3k以下"];
+        self.firstBtn = firstBtn;
         UIButton *secondBtn = [self inner_CreateBtnWithTitle:@"3k-5k"];
+        self.secondBtn = secondBtn;
         UIButton *thirdBtn = [self inner_CreateBtnWithTitle:@"5k-10k"];
+        self.thirdBtn = thirdBtn;
         UIButton *fourBtn = [self inner_CreateBtnWithTitle:@"10k以上"];
+        self.fourBtn = fourBtn;
         
         CGFloat height = 20.f;
         CGFloat width = (ScreenWidth - 35 * 2 - 15 * 3) / 4;
@@ -143,7 +161,6 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [button setTitleColor:CommonGreenColor forState:UIControlStateSelected];
     [button addTarget:self action:@selector(inner_PriceSelected:) forControlEvents:UIControlEventTouchUpInside];
     [button setBackgroundColor:[UIColor colorWithRed:(197 / 255.f)
                                                green:(197 / 255.f)
@@ -157,15 +174,52 @@
 }
 
 - (void)inner_SexSelected:(UIButton *)sender {
-    
+    if (sender == self.femaleBtn) {
+        self.maleBtn.selected = NO;
+        self.dogSex = YZDogSex_Female;
+    } else {
+        self.femaleBtn.selected = NO;
+        self.dogSex = YZDogSex_Male;
+    }
+    sender.selected = YES;
+}
+
+- (void)inner_SetButton:(UIButton *)button {
+    [button setBackgroundColor:[UIColor colorWithRed:(197 / 255.f)
+                                               green:(197 / 255.f)
+                                                blue:(197 / 255.f)
+                                               alpha:1.f]];
+    button.selected = NO;
 }
 
 - (void)inner_PriceSelected:(UIButton *)sender {
-    
+    if (sender == self.firstBtn) {
+        [self inner_SetButton:self.secondBtn];
+        [self inner_SetButton:self.thirdBtn];
+        [self inner_SetButton:self.fourBtn];
+        self.dogValueRange = YZDogValueRange_3k;
+    } else if (sender == self.secondBtn) {
+        [self inner_SetButton:self.firstBtn];
+        [self inner_SetButton:self.thirdBtn];
+        [self inner_SetButton:self.fourBtn];
+        self.dogValueRange = YZDogValueRange_3_5k;
+    } else if (sender == self.thirdBtn) {
+        [self inner_SetButton:self.secondBtn];
+        [self inner_SetButton:self.firstBtn];
+        [self inner_SetButton:self.fourBtn];
+        self.dogValueRange = YZDogValueRange_5_10k;
+    } else {
+        [self inner_SetButton:self.secondBtn];
+        [self inner_SetButton:self.thirdBtn];
+        [self inner_SetButton:self.firstBtn];
+        self.dogValueRange = YZDogValueRange_10k;
+    }
+    sender.selected = YES;
+    sender.backgroundColor = CommonGreenColor;
 }
 
 - (void)inner_ConfimSelected:(UIButton *)sender {
-    
+    self.filterViewSelectedFilterBlock(self.dogSex, self.dogValueRange);
 }
 
 @end

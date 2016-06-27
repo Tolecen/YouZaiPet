@@ -62,6 +62,7 @@
 @property (nonatomic, weak) CustomSlider *slider;
 @property (nonatomic, weak) UIProgressView *progressView;
 @property (nonatomic, strong) NSMutableArray *nodes;
+@property (nonatomic, assign) YZDogAgeRange dogAgeValue;
 
 @end
 
@@ -81,11 +82,11 @@ static UIImageView *lastNodeImageV = nil;
         self.nodes = [[NSMutableArray alloc] initWithCapacity:5];
         
         UIButton *sliderNode = [UIButton buttonWithType:UIButtonTypeCustom];
-        [sliderNode setTitleColor:CommonGreenColor forState:UIControlStateDisabled];
+        [sliderNode setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
         sliderNode.enabled = NO;
         sliderNode.titleLabel.font = [UIFont systemFontOfSize:12.f];
-        [sliderNode setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateDisabled];
-        sliderNode.backgroundColor = [UIColor redColor];
+        [sliderNode setBackgroundImage:[UIImage imageNamed:@"arrow_background"] forState:UIControlStateDisabled];
+        sliderNode.titleEdgeInsets = UIEdgeInsetsMake(-5, 0, 0, 0);
         [self addSubview:sliderNode];
         self.sliderNode = sliderNode;
         
@@ -198,22 +199,27 @@ static UIImageView *lastNodeImageV = nil;
     if (sender.value < 0.125) {
         sender.value = 0;
         [self.sliderNode setTitle:@"未出生" forState:UIControlStateDisabled];
+        self.dogAgeValue = YZDogAgeRange_OM;
     } else if ((sender.value >= 0.125) && (sender.value < 0.375)) {
         sender.value = 0.25;
         selectIndex = 1;
         [self.sliderNode setTitle:@"0~3个月" forState:UIControlStateDisabled];
+        self.dogAgeValue = YZDogAgeRange_0_3M;
     } else if ((sender.value >= 0.375) && (sender.value < 0.625)) {
         sender.value = 0.5;
         selectIndex = 2;
         [self.sliderNode setTitle:@"3~6个月" forState:UIControlStateDisabled];
+        self.dogAgeValue = YZDogAgeRange_3_6M;
     } else if ((sender.value >= 0.625) && (sender.value < 0.875)) {
         sender.value = 0.75;
         selectIndex = 3;
         [self.sliderNode setTitle:@"6~12个月" forState:UIControlStateDisabled];
+        self.dogAgeValue = YZDogAgeRange_6_12M;
     } else {
         sender.value = 1.f;
         selectIndex = 4;
         [self.sliderNode setTitle:@"1年以上" forState:UIControlStateDisabled];
+        self.dogAgeValue = YZDogAgeRange_1Y;
     }
     self.progressView.progress = sender.value;
     UIImageView *selectImageV = self.nodes[selectIndex];
@@ -221,6 +227,8 @@ static UIImageView *lastNodeImageV = nil;
     [self.sliderNode mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(firstNodeImageV.mas_centerX).mas_offset(offset);
     }];
+    
+    [self.sliderDelegate sliderDidSelectAge:self.dogAgeValue];
 }
 
 - (void)inner_ConfigureNodesBackgroundWithMaxIndex:(NSInteger)index {

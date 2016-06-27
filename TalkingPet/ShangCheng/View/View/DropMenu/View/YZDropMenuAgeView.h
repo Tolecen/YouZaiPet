@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YZShangChengConst.h"
 
 @interface YZDropMenuAgeView : UIView
+
+@property (nonatomic, copy) void(^ageViewSelectedAgeBlock)(YZDogAgeRange dogAgeValue);
 
 @end

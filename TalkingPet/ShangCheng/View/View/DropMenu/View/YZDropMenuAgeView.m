@@ -9,6 +9,10 @@
 #import "YZDropMenuAgeView.h"
 #import "YZAgeSlider.h"
 
+@interface YZDropMenuAgeView()<YZAgeSliderDelegate>
+
+@end
+
 @implementation YZDropMenuAgeView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -19,6 +23,7 @@
         CGFloat radio = ScreenWidth / 320.f;
 
         YZAgeSlider *slider = [[YZAgeSlider alloc] init];
+        slider.sliderDelegate = self;
         [self addSubview:slider];
         [slider mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self).mas_offset(20);
@@ -28,6 +33,10 @@
         }];
     }
     return self;
+}
+
+- (void)sliderDidSelectAge:(YZDogAgeRange)age {
+    self.ageViewSelectedAgeBlock(age);
 }
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YZShangChengConst.h"
 
 @interface YZDropMenuOtherFilterView : UIView
+
+@property (nonatomic, copy) void(^filterViewSelectedFilterBlock)(YZDogSex dogSex,YZDogValueRange dogValueRange);
 
 @end

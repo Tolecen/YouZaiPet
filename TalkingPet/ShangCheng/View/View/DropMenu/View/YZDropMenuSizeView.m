@@ -92,7 +92,9 @@
         
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inner_SelectSize:)];
         [smallDogV addGestureRecognizer:tapGesture];
+        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inner_SelectSize:)];
         [middleDogV addGestureRecognizer:tapGesture];
+        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inner_SelectSize:)];
         [bigDogV addGestureRecognizer:tapGesture];
     }
     return self;
@@ -102,10 +104,13 @@
     CGPoint touchPoint = [tapGesture locationInView:self];
     if (CGRectContainsPoint(self.smallDogV.frame, touchPoint)) {
         NSLog(@"小");
+        self.sizeViewSelectSizeBlock(YZShangChengDogSize_Small);
     } else if (CGRectContainsPoint(self.middleDogV.frame, touchPoint)) {
         NSLog(@"中");
+        self.sizeViewSelectSizeBlock(YZShangChengDogSize_Middle);
     } else if (CGRectContainsPoint(self.bigDogV.frame, touchPoint)) {
         NSLog(@"大");
+        self.sizeViewSelectSizeBlock(YZShangChengDogSize_Big);
     }
 }
 

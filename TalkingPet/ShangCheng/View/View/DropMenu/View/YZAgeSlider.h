@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YZShangChengConst.h"
+
+@class YZAgeSlider;
+@protocol YZAgeSliderDelegate <NSObject>
+
+- (void)sliderDidSelectAge:(YZDogAgeRange)age;
+
+@end
 
 @interface YZAgeSlider : UIControl
+
+@property (nonatomic, weak) id<YZAgeSliderDelegate> sliderDelegate;
 
 @end

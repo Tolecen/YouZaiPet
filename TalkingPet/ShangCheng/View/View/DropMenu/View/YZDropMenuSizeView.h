@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YZShangChengConst.h"
 
 @interface YZDropMenuSizeView : UIView
+
+@property (nonatomic, copy) void(^sizeViewSelectSizeBlock)(YZShangChengDogSize size);
 
 @end
