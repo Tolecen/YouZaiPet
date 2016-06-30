@@ -57,7 +57,7 @@
         
         [nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(cardView).mas_offset(5);
-            make.top.mas_equalTo(thumbImageV.mas_bottom).mas_offset(10);
+            make.top.mas_equalTo(thumbImageV.mas_bottom).mas_offset(5);
             make.width.mas_lessThanOrEqualTo(cardView.mas_width).mas_offset(-27);
         }];
         
@@ -72,8 +72,15 @@
         }];
         
         UILabel *daysNumberLb = [[UILabel alloc] initWithFrame:CGRectZero];
+        daysNumberLb.font = [UIFont systemFontOfSize:10.f];
+        daysNumberLb.text = @"降临地球111天";
         [cardView addSubview:daysNumberLb];
         self.daysNumberLb = daysNumberLb;
+        
+        [daysNumberLb mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(cardView).mas_offset(5);
+            make.top.mas_equalTo(nameLb.mas_bottom).mas_offset(0);
+        }];
         
         UILabel *priceLb = [[UILabel alloc] initWithFrame:CGRectZero];
         priceLb.font = [UIFont systemFontOfSize:12.f];
