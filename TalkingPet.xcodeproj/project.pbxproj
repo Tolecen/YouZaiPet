@@ -43,6 +43,18 @@
 		0694A9851D22181000BEC263 /* YZQuansheHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0694A9841D22181000BEC263 /* YZQuansheHeaderView.m */; };
 		0696313E1D1D995E00AF6B6D /* YZShangChengKindScrollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0696313D1D1D995E00AF6B6D /* YZShangChengKindScrollCell.m */; };
 		069631411D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 069631401D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.m */; };
+		06A5DB981D2CA5BD002A5159 /* shangcheng_back_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A5DB971D2CA5BD002A5159 /* shangcheng_back_icon@2x.png */; };
+		06A5DB9B1D2CAA4D002A5159 /* NetServer+ShangCheng.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A5DB9A1D2CAA4D002A5159 /* NetServer+ShangCheng.m */; };
+		06A5DBB21D2CD196002A5159 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06A5DB9D1D2CD196002A5159 /* Info.plist */; };
+		06A5DBB31D2CD196002A5159 /* JSONModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A5DBA01D2CD196002A5159 /* JSONModel.m */; };
+		06A5DBB41D2CD196002A5159 /* JSONModelClassProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A5DBA21D2CD196002A5159 /* JSONModelClassProperty.m */; };
+		06A5DBB51D2CD196002A5159 /* JSONModelError.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A5DBA41D2CD196002A5159 /* JSONModelError.m */; };
+		06A5DBB61D2CD196002A5159 /* JSONAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A5DBA81D2CD196002A5159 /* JSONAPI.m */; };
+		06A5DBB71D2CD196002A5159 /* JSONHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A5DBAA1D2CD196002A5159 /* JSONHTTPClient.m */; };
+		06A5DBB81D2CD196002A5159 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A5DBAC1D2CD196002A5159 /* JSONModel+networking.m */; };
+		06A5DBB91D2CD196002A5159 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A5DBAF1D2CD196002A5159 /* JSONKeyMapper.m */; };
+		06A5DBBA1D2CD196002A5159 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A5DBB11D2CD196002A5159 /* JSONValueTransformer.m */; };
+		06A5DBC01D2CD1D7002A5159 /* YZShangChengModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A5DBBF1D2CD1D7002A5159 /* YZShangChengModel.m */; };
 		06BC28CD1D1E09A6003AC9A3 /* YZAgeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BC28CC1D1E09A6003AC9A3 /* YZAgeSlider.m */; };
 		06BC28D01D1E6BE3003AC9A3 /* YZShangChengGoodsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BC28CF1D1E6BE3003AC9A3 /* YZShangChengGoodsListVC.m */; };
 		06BC28D31D1E6CE2003AC9A3 /* YZShangChengGoodsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BC28D21D1E6CE2003AC9A3 /* YZShangChengGoodsListCell.m */; };
@@ -1315,6 +1327,29 @@
 		0696313D1D1D995E00AF6B6D /* YZShangChengKindScrollCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengKindScrollCell.m; sourceTree = "<group>"; };
 		0696313F1D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDogKindCollectionViewCell.h; sourceTree = "<group>"; };
 		069631401D1D9AB600AF6B6D /* YZDogKindCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZDogKindCollectionViewCell.m; sourceTree = "<group>"; };
+		06A5DB971D2CA5BD002A5159 /* shangcheng_back_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shangcheng_back_icon@2x.png"; sourceTree = "<group>"; };
+		06A5DB991D2CAA4D002A5159 /* NetServer+ShangCheng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NetServer+ShangCheng.h"; sourceTree = "<group>"; };
+		06A5DB9A1D2CAA4D002A5159 /* NetServer+ShangCheng.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NetServer+ShangCheng.m"; sourceTree = "<group>"; };
+		06A5DB9D1D2CD196002A5159 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		06A5DB9F1D2CD196002A5159 /* JSONModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModel.h; sourceTree = "<group>"; };
+		06A5DBA01D2CD196002A5159 /* JSONModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModel.m; sourceTree = "<group>"; };
+		06A5DBA11D2CD196002A5159 /* JSONModelClassProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelClassProperty.h; sourceTree = "<group>"; };
+		06A5DBA21D2CD196002A5159 /* JSONModelClassProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModelClassProperty.m; sourceTree = "<group>"; };
+		06A5DBA31D2CD196002A5159 /* JSONModelError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelError.h; sourceTree = "<group>"; };
+		06A5DBA41D2CD196002A5159 /* JSONModelError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModelError.m; sourceTree = "<group>"; };
+		06A5DBA51D2CD196002A5159 /* JSONModelLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelLib.h; sourceTree = "<group>"; };
+		06A5DBA71D2CD196002A5159 /* JSONAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPI.h; sourceTree = "<group>"; };
+		06A5DBA81D2CD196002A5159 /* JSONAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONAPI.m; sourceTree = "<group>"; };
+		06A5DBA91D2CD196002A5159 /* JSONHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONHTTPClient.h; sourceTree = "<group>"; };
+		06A5DBAA1D2CD196002A5159 /* JSONHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONHTTPClient.m; sourceTree = "<group>"; };
+		06A5DBAB1D2CD196002A5159 /* JSONModel+networking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JSONModel+networking.h"; sourceTree = "<group>"; };
+		06A5DBAC1D2CD196002A5159 /* JSONModel+networking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JSONModel+networking.m"; sourceTree = "<group>"; };
+		06A5DBAE1D2CD196002A5159 /* JSONKeyMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKeyMapper.h; sourceTree = "<group>"; };
+		06A5DBAF1D2CD196002A5159 /* JSONKeyMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKeyMapper.m; sourceTree = "<group>"; };
+		06A5DBB01D2CD196002A5159 /* JSONValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValueTransformer.h; sourceTree = "<group>"; };
+		06A5DBB11D2CD196002A5159 /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
+		06A5DBBE1D2CD1D7002A5159 /* YZShangChengModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShangChengModel.h; sourceTree = "<group>"; };
+		06A5DBBF1D2CD1D7002A5159 /* YZShangChengModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengModel.m; sourceTree = "<group>"; };
 		06BC28CB1D1E09A6003AC9A3 /* YZAgeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZAgeSlider.h; sourceTree = "<group>"; };
 		06BC28CC1D1E09A6003AC9A3 /* YZAgeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZAgeSlider.m; sourceTree = "<group>"; };
 		06BC28CE1D1E6BE3003AC9A3 /* YZShangChengGoodsListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShangChengGoodsListVC.h; sourceTree = "<group>"; };
@@ -3117,6 +3152,8 @@
 			children = (
 				063E29A91D20BBDB00C3FD3F /* YZShangChengConst.h */,
 				063E29AA1D20BBDB00C3FD3F /* YZShangChengConst.m */,
+				06A5DB991D2CAA4D002A5159 /* NetServer+ShangCheng.h */,
+				06A5DB9A1D2CAA4D002A5159 /* NetServer+ShangCheng.m */,
 				066B848F1D1BBBFA003AAD64 /* Model */,
 				066B84901D1BBBFA003AAD64 /* View */,
 				066B84911D1BBBFA003AAD64 /* ViewController */,
@@ -3127,6 +3164,8 @@
 		066B848F1D1BBBFA003AAD64 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				06A5DBBE1D2CD1D7002A5159 /* YZShangChengModel.h */,
+				06A5DBBF1D2CD1D7002A5159 /* YZShangChengModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3227,6 +3266,55 @@
 				0694A9841D22181000BEC263 /* YZQuansheHeaderView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		06A5DB9C1D2CD196002A5159 /* JSONModel */ = {
+			isa = PBXGroup;
+			children = (
+				06A5DB9D1D2CD196002A5159 /* Info.plist */,
+				06A5DB9E1D2CD196002A5159 /* JSONModel */,
+				06A5DBA51D2CD196002A5159 /* JSONModelLib.h */,
+				06A5DBA61D2CD196002A5159 /* JSONModelNetworking */,
+				06A5DBAD1D2CD196002A5159 /* JSONModelTransformations */,
+			);
+			path = JSONModel;
+			sourceTree = "<group>";
+		};
+		06A5DB9E1D2CD196002A5159 /* JSONModel */ = {
+			isa = PBXGroup;
+			children = (
+				06A5DB9F1D2CD196002A5159 /* JSONModel.h */,
+				06A5DBA01D2CD196002A5159 /* JSONModel.m */,
+				06A5DBA11D2CD196002A5159 /* JSONModelClassProperty.h */,
+				06A5DBA21D2CD196002A5159 /* JSONModelClassProperty.m */,
+				06A5DBA31D2CD196002A5159 /* JSONModelError.h */,
+				06A5DBA41D2CD196002A5159 /* JSONModelError.m */,
+			);
+			path = JSONModel;
+			sourceTree = "<group>";
+		};
+		06A5DBA61D2CD196002A5159 /* JSONModelNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				06A5DBA71D2CD196002A5159 /* JSONAPI.h */,
+				06A5DBA81D2CD196002A5159 /* JSONAPI.m */,
+				06A5DBA91D2CD196002A5159 /* JSONHTTPClient.h */,
+				06A5DBAA1D2CD196002A5159 /* JSONHTTPClient.m */,
+				06A5DBAB1D2CD196002A5159 /* JSONModel+networking.h */,
+				06A5DBAC1D2CD196002A5159 /* JSONModel+networking.m */,
+			);
+			path = JSONModelNetworking;
+			sourceTree = "<group>";
+		};
+		06A5DBAD1D2CD196002A5159 /* JSONModelTransformations */ = {
+			isa = PBXGroup;
+			children = (
+				06A5DBAE1D2CD196002A5159 /* JSONKeyMapper.h */,
+				06A5DBAF1D2CD196002A5159 /* JSONKeyMapper.m */,
+				06A5DBB01D2CD196002A5159 /* JSONValueTransformer.h */,
+				06A5DBB11D2CD196002A5159 /* JSONValueTransformer.m */,
+			);
+			path = JSONModelTransformations;
 			sourceTree = "<group>";
 		};
 		06E4A9591D1CD1FA00BBC617 /* DropMenu */ = {
@@ -4192,6 +4280,7 @@
 		72831C6B196A3FB300B9CA4C /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				06A5DB9C1D2CD196002A5159 /* JSONModel */,
 				063E29CD1D21229F00C3FD3F /* WMPageController */,
 				066B849C1D1BBF52003AAD64 /* Masonry */,
 				155082CE1B6B530C009E0339 /* ShareSDK */,
@@ -4670,6 +4759,7 @@
 		72831D47196AACBE00B9CA4C /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				06A5DB971D2CA5BD002A5159 /* shangcheng_back_icon@2x.png */,
 				72DDF3501B0340FB00A59A66 /* message.png */,
 				72DDF3511B0340FB00A59A66 /* user.png */,
 				72F743BB1B0190DB00E8EFE6 /* mover.png */,
@@ -6348,6 +6438,7 @@
 				7229EE481A8C43C400EFB444 /* 91124.png in Resources */,
 				97D0DF311B6B1C9600DB4321 /* icon-72.png in Resources */,
 				72536E4C1AB1A32B00523B65 /* rangd_normal.png in Resources */,
+				06A5DB981D2CA5BD002A5159 /* shangcheng_back_icon@2x.png in Resources */,
 				728985BA19ADDFBA008027EC /* rangd.png in Resources */,
 				72015A741A393BE000453ACF /* myPublis.png in Resources */,
 				72555F721A7F730500D8D5E2 /* filter.png in Resources */,
@@ -6384,6 +6475,7 @@
 				7269D1AE1A8C552200CDA305 /* filter11.png in Resources */,
 				723D0CC71A12077900B0C2EB /* hot_backg.png in Resources */,
 				976D99901B68D11E0091E497 /* market-sel.png in Resources */,
+				06A5DBB21D2CD196002A5159 /* Info.plist in Resources */,
 				97501C871AD67A2F00532818 /* otherActionBtn.png in Resources */,
 				976FDD481B1E90FF00CDAC81 /* jiagekuang2.png in Resources */,
 				97721C56199B167800EC3A4A /* shengyin3.png in Resources */,
@@ -6817,6 +6909,7 @@
 				72831CDA196A3FE200B9CA4C /* MagicalRecord+iCloud.m in Sources */,
 				725C1901196D832400B2F150 /* Recorder.m in Sources */,
 				724FD3501B26E4D000D215A3 /* MyOrderViewConyroller.m in Sources */,
+				06A5DBB91D2CD196002A5159 /* JSONKeyMapper.m in Sources */,
 				9793DA881B17FDDF0030CBB5 /* ClothingListViewController.m in Sources */,
 				9799CB601AAD712900374F17 /* PrizeTableViewCell.m in Sources */,
 				72831CCA196A3FE200B9CA4C /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
@@ -6852,6 +6945,7 @@
 				97112D5A1A52A6A2007392F3 /* ChatDetailViewController.m in Sources */,
 				063E29DB1D2122A000C3FD3F /* WMMenuItem.m in Sources */,
 				9775BCE11A37E63600572BF9 /* UIViewController+MJPopupViewController.m in Sources */,
+				06A5DB9B1D2CAA4D002A5159 /* NetServer+ShangCheng.m in Sources */,
 				7256D2621A85E69200FCD43A /* TagViewController.m in Sources */,
 				97E242CA1B02F1960066881E /* AllAroundPullView.m in Sources */,
 				7271BACE1A88995200942209 /* MoreTagViewController.m in Sources */,
@@ -6865,6 +6959,7 @@
 				977E87F61A7B849100D00486 /* TimelineBrowserHelper.m in Sources */,
 				7228BCB0196B87ED005502CE /* SoundTouch.cpp in Sources */,
 				9721538F1977625000FB34F2 /* XHVoiceRecordHUD.m in Sources */,
+				06A5DBBA1D2CD196002A5159 /* JSONValueTransformer.m in Sources */,
 				97472E60196FC1FD00592FB7 /* TalkingBrowse.m in Sources */,
 				972F3877197620DC00952DC9 /* EGOImageLoadConnection.m in Sources */,
 				72831CD4196A3FE200B9CA4C /* NSManagedObjectContext+MagicalThreading.m in Sources */,
@@ -6874,6 +6969,7 @@
 				974203E91A5B8E7C0064BB4F /* ChatManager.m in Sources */,
 				975C17A71B2A7DC2009A4280 /* GoodsDetailTableViewHelper.m in Sources */,
 				72FADA481A2C6A2B003670D0 /* SelectedHotViewVontroller.m in Sources */,
+				06A5DBB81D2CD196002A5159 /* JSONModel+networking.m in Sources */,
 				7228BCAE196B87ED005502CE /* PeakFinder.cpp in Sources */,
 				9791E9B71B3942A900140BB4 /* PostCardView.m in Sources */,
 				9716D1A21988ED5300C725D8 /* AFPropertyListRequestOperation.m in Sources */,
@@ -6910,6 +7006,7 @@
 				06E4A9671D1CD1FA00BBC617 /* YZDropMenuKindView.m in Sources */,
 				970D473019947AB000E502BF /* TTImageHelper.m in Sources */,
 				72831D06196A70C300B9CA4C /* TalkingPublish.m in Sources */,
+				06A5DBB61D2CD196002A5159 /* JSONAPI.m in Sources */,
 				974203B31A5B80590064BB4F /* JSONKit.m in Sources */,
 				723418011B156FFD00CC5E6B /* DiaryPageViewController.m in Sources */,
 				722F4CC11A80786B00740EF6 /* MoreAccessoryViewController.m in Sources */,
@@ -6951,11 +7048,13 @@
 				97E1CA181B1FE70300058073 /* MCardViewController.m in Sources */,
 				72831CC9196A3FE200B9CA4C /* NSObject+MagicalDataImport.m in Sources */,
 				972F3875197620DC00952DC9 /* EGOCache.m in Sources */,
+				06A5DBB41D2CD196002A5159 /* JSONModelClassProperty.m in Sources */,
 				9709D97B198B43B70066421C /* UploadTaskTableViewCell.m in Sources */,
 				063E29E81D21283600C3FD3F /* YZShoppingCarGoodsCell.m in Sources */,
 				9763560B1B5B42F2006C3B3D /* CustomizeGoodsViewController.m in Sources */,
 				97F6AAD41982028C00F11F69 /* LocationManager.m in Sources */,
 				9714717C19B48FA600FEDD38 /* JPSThumnail.m in Sources */,
+				06A5DBB71D2CD196002A5159 /* JSONHTTPClient.m in Sources */,
 				97DF535D1A514C93002E4EDB /* ChatListTableViewCell.m in Sources */,
 				72BD3A9919AF391600A07F7A /* ShareSheet.m in Sources */,
 				97D93D5F1AB4310100241F86 /* PaiHangShuoShuoTableHelper.m in Sources */,
@@ -7085,6 +7184,7 @@
 				9791E9B21B3901CB00140BB4 /* CWSSliderView.m in Sources */,
 				0694A9851D22181000BEC263 /* YZQuansheHeaderView.m in Sources */,
 				9797F91819877B8C00ABF28B /* GDataXMLNode.m in Sources */,
+				06A5DBB51D2CD196002A5159 /* JSONModelError.m in Sources */,
 				977D9A0619B5996F00C0B8C9 /* OHAttributedLabel.m in Sources */,
 				971F4C36196B95EC00C7913A /* FinalPublishPageViewController.m in Sources */,
 				97A6856419F8A1C9006BA3F9 /* SectionMSgViewController.m in Sources */,
@@ -7107,12 +7207,14 @@
 				9796E0AF197CB3CF0082A75D /* RNDecryptor.m in Sources */,
 				97712C731B2FC3760034FB72 /* PaySuccessViewController.m in Sources */,
 				72831CC6196A3FE200B9CA4C /* NSAttributeDescription+MagicalDataImport.m in Sources */,
+				06A5DBC01D2CD1D7002A5159 /* YZShangChengModel.m in Sources */,
 				973F650D1A80957D0026C95C /* CustomBarItem.m in Sources */,
 				7228BD15196B8D5B005502CE /* SCNavigationController.m in Sources */,
 				72792FA51A7CD2810069F460 /* Model2.xcdatamodeld in Sources */,
 				72831CD6196A3FE200B9CA4C /* NSPersistentStore+MagicalRecord.m in Sources */,
 				97B59DDD1AA9478600C29328 /* PrizeListViewController.m in Sources */,
 				9776D58C1A83509D00A3F191 /* UIImage+TOWebViewControllerIcons.m in Sources */,
+				06A5DBB31D2CD196002A5159 /* JSONModel.m in Sources */,
 				066B84BF1D1BBF52003AAD64 /* ViewController+MASAdditions.m in Sources */,
 				72831CDE196A3FE200B9CA4C /* MagicalRecord.m in Sources */,
 				97F052731A6C99DC0002B75A /* ThumbNormalMsgEntity.m in Sources */,

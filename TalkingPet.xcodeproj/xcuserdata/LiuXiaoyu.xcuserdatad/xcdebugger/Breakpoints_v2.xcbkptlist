@@ -13,5 +13,227 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+            timestampString = "489475911.316969"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "+getDogDetailInfoWithDogId:success:failure:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[NetServer(ShangCheng) getDogDetailInfoWithDogId:success:failure:]"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/LiuXiaoyu/Documents/Endless%E5%B0%8F%E7%99%BD/%E4%B8%AA%E4%BA%BA%E5%B7%A5%E4%BD%9C/Git_WorkSpace/YouZaiPet/TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+                  timestampString = "489476944.227028"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "350">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__67+[NetServer(ShangCheng) getDogDetailInfoWithDogId:success:failure:]_block_invoke_2"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/LiuXiaoyu/Documents/Endless%E5%B0%8F%E7%99%BD/%E4%B8%AA%E4%BA%BA%E5%B7%A5%E4%BD%9C/Git_WorkSpace/YouZaiPet/TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+                  timestampString = "489476944.227439"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+            timestampString = "489475911.316969"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "+getDogDetailInfoWithDogId:success:failure:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+            timestampString = "489476903.276005"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "+searchQuanSheListWithShopName:pageIndex:success:failure:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[NetServer(ShangCheng) searchQuanSheListWithShopName:pageIndex:success:failure:]"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/LiuXiaoyu/Documents/Endless%E5%B0%8F%E7%99%BD/%E4%B8%AA%E4%BA%BA%E5%B7%A5%E4%BD%9C/Git_WorkSpace/YouZaiPet/TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+                  timestampString = "489476944.229025"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "157"
+                  endingLineNumber = "157"
+                  offsetFromSymbolStart = "595">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__81+[NetServer(ShangCheng) searchQuanSheListWithShopName:pageIndex:success:failure:]_block_invoke"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/LiuXiaoyu/Documents/Endless%E5%B0%8F%E7%99%BD/%E4%B8%AA%E4%BA%BA%E5%B7%A5%E4%BD%9C/Git_WorkSpace/YouZaiPet/TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+                  timestampString = "489476944.229145"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "157"
+                  endingLineNumber = "157"
+                  offsetFromSymbolStart = "77">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__81+[NetServer(ShangCheng) searchQuanSheListWithShopName:pageIndex:success:failure:]_block_invoke_2"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/LiuXiaoyu/Documents/Endless%E5%B0%8F%E7%99%BD/%E4%B8%AA%E4%BA%BA%E5%B7%A5%E4%BD%9C/Git_WorkSpace/YouZaiPet/TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+                  timestampString = "489476944.229264"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "157"
+                  endingLineNumber = "157"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+            timestampString = "489476903.276005"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "+searchQuanSheListWithShopName:pageIndex:success:failure:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+            timestampString = "489476756.34982"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "+searchDogListWithType:size:sex:sellPrice:area:age:shopId:pageIndex:success:failure:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[NetServer(ShangCheng) searchDogListWithType:size:sex:sellPrice:area:age:shopId:pageIndex:success:failure:]"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/LiuXiaoyu/Documents/Endless%E5%B0%8F%E7%99%BD/%E4%B8%AA%E4%BA%BA%E5%B7%A5%E4%BD%9C/Git_WorkSpace/YouZaiPet/TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+                  timestampString = "489476944.231378"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "1880">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__108+[NetServer(ShangCheng) searchDogListWithType:size:sex:sellPrice:area:age:shopId:pageIndex:success:failure:]_block_invoke"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/LiuXiaoyu/Documents/Endless%E5%B0%8F%E7%99%BD/%E4%B8%AA%E4%BA%BA%E5%B7%A5%E4%BD%9C/Git_WorkSpace/YouZaiPet/TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+                  timestampString = "489476944.231563"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "77">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__108+[NetServer(ShangCheng) searchDogListWithType:size:sex:sellPrice:area:age:shopId:pageIndex:success:failure:]_block_invoke_2"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/LiuXiaoyu/Documents/Endless%E5%B0%8F%E7%99%BD/%E4%B8%AA%E4%BA%BA%E5%B7%A5%E4%BD%9C/Git_WorkSpace/YouZaiPet/TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+                  timestampString = "489476944.23166"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TalkingPet/ShangCheng/NetServer+ShangCheng.m"
+            timestampString = "489476757.181649"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "+searchDogListWithType:size:sex:sellPrice:area:age:shopId:pageIndex:success:failure:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

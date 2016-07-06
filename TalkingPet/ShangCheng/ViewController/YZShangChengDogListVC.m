@@ -11,7 +11,7 @@
 #import "YZShangChengDropMenu.h"
 #import "YZShangChengDogListCell.h"
 
-@interface YZShangChengDogListVC()<UICollectionViewDataSource, UICollectionViewDelegate, YZDropMenuDataSource, YZDropMenuDelegate>
+@interface YZShangChengDogListVC()<UICollectionViewDataSource, UICollectionViewDelegate, YZDropMenuDataSource, YZDropMenuDelegate, UISearchBarDelegate>
 
 @property (nonatomic, weak) UICollectionView *collectionView;
 
@@ -35,17 +35,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setBackButtonWithTarget:@selector(inner_Pop:)];
+
+    UIImage *backImage = [UIImage imageNamed:@"shangcheng_back_icon"];
+    backImage = [backImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStyleDone target:self action:@selector(inner_Pop:)];
+    self.navigationItem.leftBarButtonItem = backButtonItem;
+
+    
+    UISearchBar *searchBar = [[UISearchBar alloc] init];
+    searchBar.delegate = self;
+    searchBar.placeholder = @"test";
+    [self.navigationItem setTitleView:searchBar];
+    
     YZShangChengDropMenu *dropMenu = [[YZShangChengDropMenu alloc] initWithFrame:CGRectZero];
     dropMenu.delegate = self;
     dropMenu.dataSource = self;
     [self.view addSubview:dropMenu];
     self.dropMenu = dropMenu;
     
-    UIImage *image = [UIImage imageNamed:@"navigation_more_icon"];
-    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *rightMoreItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(inner_MoreAction:)];
-    self.navigationItem.rightBarButtonItem = rightMoreItem;
+//    UIImage *image = [UIImage imageNamed:@"navigation_more_icon"];
+//    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    UIBarButtonItem *rightMoreItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(inner_MoreAction:)];
+//    self.navigationItem.rightBarButtonItem = rightMoreItem;
     
     [dropMenu mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view).mas_offset(0);
@@ -117,6 +128,21 @@
     YZShangChengDetailVC *detailVC = [[YZShangChengDetailVC alloc] init];
     detailVC.hideNaviBg = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+#pragma mark -- UISearchBarDelegate
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+    return YES;
 }
 
 @end

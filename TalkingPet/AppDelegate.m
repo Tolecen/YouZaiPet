@@ -21,6 +21,9 @@
 #define QINIUDomain @"testpetalk"
 
 #endif
+
+#import "NetServer+ShangCheng.h"
+
 @interface AppDelegate ()<UIAlertViewDelegate>
 @property (nonatomic,retain)NSString * devicePushToken;
 @end
@@ -30,8 +33,6 @@
     canUseActive = NO;
     [MobClick startWithAppkey:@"540570e8fd98c59af905e7ad" reportPolicy:SEND_ON_EXIT channelId:@""];
     [ShareServe buildShareSDK];
-    
-    
     
     
 //#warning This should be removed in next version
@@ -83,6 +84,26 @@
     }
     
     [self checkNetwork];
+    
+//    [NetServer getDogDetailInfoWithDogId:@"1090"
+//                                      success:^(id data) {
+//                                          
+//                                      } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+//                                          
+//                                      }];
+//    [NetServer searchQuanSheListWithShopName:@"犬舍"
+//                                   pageIndex:1 success:^(id data, NSInteger nextPageIndex) {
+//                                       
+//                                   } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+//                                       
+//                                   }];
+    [NetServer searchDogListWithType:@"6"
+                                size:1 sex:1 sellPrice:YZDogValueRange_3_5k area:410225 age:YZDogAgeRange_0_3M shopId:@"829" pageIndex:1 success:^(id data, NSInteger nextPageIndex) {
+    
+                                } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+                                    
+                                }];
+
 //    [self performSelector:@selector(saaaaa) withObject:nil afterDelay:2];
     return YES;
 }
