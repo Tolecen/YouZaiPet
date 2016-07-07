@@ -22,6 +22,7 @@
     #import "SystemServer.h"
     #import "DatabaseServe.h"
     #import "NSString+CutSpacing.h"
+    #import "UIColor+HexString.h"
     #import "UINavigationController+Autorotate.h"
     #import "Masonry.h"
 

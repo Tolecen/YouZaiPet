@@ -8,6 +8,7 @@
 
 #import "YZShangChengDetailVC.h"
 #import "YZShoppingCarVC.h"
+#import "YZQuanSheDetailViewController.h"
 #import "YZShangChengDetailImageCell.h"
 #import "YZDetailBottomBar.h"
 
@@ -98,7 +99,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    YZShoppingCarVC *shoppingCarVC = [[YZShoppingCarVC alloc] init];
+    YZQuanSheDetailViewController *shoppingCarVC = [[YZQuanSheDetailViewController alloc] init];
     [self.navigationController pushViewController:shoppingCarVC animated:YES];
 }
 

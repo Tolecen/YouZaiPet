@@ -95,6 +95,10 @@
 		1595E5611B905E7300C1A770 /* story_audio_play3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1595E55E1B905E7300C1A770 /* story_audio_play3.png */; };
 		1595E5621B905E7300C1A770 /* story_audio_play2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1595E55F1B905E7300C1A770 /* story_audio_play2.png */; };
 		1595E5631B905E7300C1A770 /* story_audio_play1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1595E5601B905E7300C1A770 /* story_audio_play1.png */; };
+		2E2D733B1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D733A1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m */; };
+		2E2D733E1D2E2D07000B7F00 /* YZQuanSheDetailCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D733D1D2E2D07000B7F00 /* YZQuanSheDetailCollectionHeaderView.m */; };
+		2E2D73411D2E2FBC000B7F00 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D73401D2E2FBC000B7F00 /* UIColor+HexString.m */; };
+		2E2D73441D2E4F34000B7F00 /* YZQuanSheDetailIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D73431D2E4F34000B7F00 /* YZQuanSheDetailIntroView.m */; };
 		7200B9EB1A8300F0008630D9 /* Sound9.png in Resources */ = {isa = PBXBuildFile; fileRef = 7200B9E01A8300F0008630D9 /* Sound9.png */; };
 		7200B9EC1A8300F0008630D9 /* Sound10.png in Resources */ = {isa = PBXBuildFile; fileRef = 7200B9E11A8300F0008630D9 /* Sound10.png */; };
 		7200B9ED1A8300F0008630D9 /* Sound11.png in Resources */ = {isa = PBXBuildFile; fileRef = 7200B9E21A8300F0008630D9 /* Sound11.png */; };
@@ -1404,6 +1408,14 @@
 		1595E55E1B905E7300C1A770 /* story_audio_play3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = story_audio_play3.png; sourceTree = "<group>"; };
 		1595E55F1B905E7300C1A770 /* story_audio_play2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = story_audio_play2.png; sourceTree = "<group>"; };
 		1595E5601B905E7300C1A770 /* story_audio_play1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = story_audio_play1.png; sourceTree = "<group>"; };
+		2E2D73391D2E23F9000B7F00 /* YZQuanSheDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZQuanSheDetailViewController.h; sourceTree = "<group>"; };
+		2E2D733A1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZQuanSheDetailViewController.m; sourceTree = "<group>"; };
+		2E2D733C1D2E2D07000B7F00 /* YZQuanSheDetailCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZQuanSheDetailCollectionHeaderView.h; sourceTree = "<group>"; };
+		2E2D733D1D2E2D07000B7F00 /* YZQuanSheDetailCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZQuanSheDetailCollectionHeaderView.m; sourceTree = "<group>"; };
+		2E2D733F1D2E2FBC000B7F00 /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexString.h"; sourceTree = "<group>"; };
+		2E2D73401D2E2FBC000B7F00 /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
+		2E2D73421D2E4F34000B7F00 /* YZQuanSheDetailIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZQuanSheDetailIntroView.h; sourceTree = "<group>"; };
+		2E2D73431D2E4F34000B7F00 /* YZQuanSheDetailIntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZQuanSheDetailIntroView.m; sourceTree = "<group>"; };
 		7200B9E01A8300F0008630D9 /* Sound9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sound9.png; sourceTree = "<group>"; };
 		7200B9E11A8300F0008630D9 /* Sound10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sound10.png; sourceTree = "<group>"; };
 		7200B9E21A8300F0008630D9 /* Sound11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sound11.png; sourceTree = "<group>"; };
@@ -3175,6 +3187,8 @@
 			children = (
 				0688A2E11D1BFAC9002AA960 /* View */,
 				066B84981D1BBDE3003AAD64 /* Cell */,
+				2E2D733F1D2E2FBC000B7F00 /* UIColor+HexString.h */,
+				2E2D73401D2E2FBC000B7F00 /* UIColor+HexString.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3191,6 +3205,8 @@
 				06BC28CF1D1E6BE3003AC9A3 /* YZShangChengGoodsListVC.m */,
 				0688A2DE1D1BF60D002AA960 /* YZShangChengDetailVC.h */,
 				0688A2DF1D1BF60D002AA960 /* YZShangChengDetailVC.m */,
+				2E2D73391D2E23F9000B7F00 /* YZQuanSheDetailViewController.h */,
+				2E2D733A1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -3264,6 +3280,10 @@
 				063E29AD1D20C1DC00C3FD3F /* UIButton+VerticalTitle.m */,
 				0694A9831D22181000BEC263 /* YZQuansheHeaderView.h */,
 				0694A9841D22181000BEC263 /* YZQuansheHeaderView.m */,
+				2E2D733C1D2E2D07000B7F00 /* YZQuanSheDetailCollectionHeaderView.h */,
+				2E2D733D1D2E2D07000B7F00 /* YZQuanSheDetailCollectionHeaderView.m */,
+				2E2D73421D2E4F34000B7F00 /* YZQuanSheDetailIntroView.h */,
+				2E2D73431D2E4F34000B7F00 /* YZQuanSheDetailIntroView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7020,6 +7040,7 @@
 				1573B1581B83608200D768D0 /* BlankPageView.m in Sources */,
 				7228BD20196B8D5B005502CE /* SVProgressHUD.m in Sources */,
 				724653E71AFAFD3D00DA6A83 /* RESideMenu.m in Sources */,
+				2E2D73411D2E2FBC000B7F00 /* UIColor+HexString.m in Sources */,
 				066B84BE1D1BBF52003AAD64 /* View+MASAdditions.m in Sources */,
 				063E29A81D20BB5600C3FD3F /* YZDetailBottomBar.m in Sources */,
 				9797F91D19877CA100ABF28B /* PetCategoryParser.m in Sources */,
@@ -7056,6 +7077,8 @@
 				9714717C19B48FA600FEDD38 /* JPSThumnail.m in Sources */,
 				06A5DBB71D2CD196002A5159 /* JSONHTTPClient.m in Sources */,
 				97DF535D1A514C93002E4EDB /* ChatListTableViewCell.m in Sources */,
+				2E2D733B1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m in Sources */,
+				2E2D73441D2E4F34000B7F00 /* YZQuanSheDetailIntroView.m in Sources */,
 				72BD3A9919AF391600A07F7A /* ShareSheet.m in Sources */,
 				97D93D5F1AB4310100241F86 /* PaiHangShuoShuoTableHelper.m in Sources */,
 				97F363051980E29A0023D008 /* unzip.c in Sources */,
@@ -7073,6 +7096,7 @@
 				974203B11A5B80590064BB4F /* EmsgClient.m in Sources */,
 				97F363041980E29A0023D008 /* mztools.c in Sources */,
 				729EEDF21977C9EC000AFF58 /* EGOImageView.m in Sources */,
+				2E2D733E1D2E2D07000B7F00 /* YZQuanSheDetailCollectionHeaderView.m in Sources */,
 				7228BCA8196B87ED005502CE /* AAFilter.cpp in Sources */,
 				72DF307A196E409C00606B95 /* SoundTouchViewController.mm in Sources */,
 				97877A5F19D10E1000951389 /* NJKWebViewProgressView.m in Sources */,
