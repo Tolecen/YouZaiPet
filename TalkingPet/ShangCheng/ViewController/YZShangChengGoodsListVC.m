@@ -50,7 +50,7 @@
     flowLayout.sectionInset = sectionInset;
     CGFloat width = ([UIScreen mainScreen].bounds.size.width - sectionInset.left - sectionInset.right - 10) / 2;
     flowLayout.itemSize = CGSizeMake(width,
-                                     width * 4 / 3);
+                                     width / 5 * 6);
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                                           collectionViewLayout:flowLayout];

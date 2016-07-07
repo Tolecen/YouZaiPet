@@ -203,7 +203,7 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
 - (CGFloat)inner_CurrentDropViewHeight:(NSInteger)index {
     switch (index) {
         case 0:
-            return (ScreenHeight - 44 - 64);
+            return (ScreenHeight - 33 - 64);
         case 1:
             return YZDropMenuAgeViewHeight;
         case 2:

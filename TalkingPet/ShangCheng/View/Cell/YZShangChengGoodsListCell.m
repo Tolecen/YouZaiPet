@@ -42,25 +42,33 @@
             make.left.mas_equalTo(cardView).mas_offset(0);
             make.right.mas_equalTo(cardView).mas_offset(0);
             make.top.mas_equalTo(cardView).mas_offset(0);
-            make.height.mas_equalTo(cardView.mas_width).mas_offset(-10);
+            make.height.mas_equalTo(cardView.mas_width).multipliedBy(0.8);
         }];
         
         UILabel *titleLb = [[UILabel alloc] initWithFrame:CGRectZero];
         titleLb.font = [UIFont systemFontOfSize:12.f];
-        titleLb.textColor = [UIColor blackColor];
+        titleLb.textColor = [UIColor colorWithRed:(102 / 255.f)
+                                            green:(102 / 255.f)
+                                             blue:(102 / 255.f)
+                                            alpha:1.f];
         titleLb.text = @"WDJ推荐 六星级 Origen渴望";
         [cardView addSubview:titleLb];
         self.titleLb = titleLb;
         
+        CGFloat radio = ScreenWidth / 320;
+        
         [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(cardView).mas_offset(5);
-            make.top.mas_equalTo(thumbImageV.mas_bottom).mas_offset(10);
+            make.top.mas_equalTo(thumbImageV.mas_bottom).mas_offset(7 * radio);
             make.right.mas_equalTo(cardView).mas_offset(-5);
         }];
         
         UILabel *sourceLb = [[UILabel alloc] initWithFrame:CGRectZero];
         sourceLb.font = [UIFont systemFontOfSize:10.f];
-        sourceLb.textColor = [UIColor grayColor];
+        sourceLb.textColor = [UIColor colorWithRed:(181 / 255.f)
+                                             green:(181 / 255.f)
+                                              blue:(181 / 255.f)
+                                             alpha:1.f];
         sourceLb.text = @"Origen渴望";
         [cardView addSubview:sourceLb];
         self.sourceLb = sourceLb;
@@ -73,14 +81,17 @@
 
         UILabel *priceLb = [[UILabel alloc] initWithFrame:CGRectZero];
         priceLb.font = [UIFont systemFontOfSize:12.f];
-        priceLb.textColor = [UIColor redColor];
+        priceLb.textColor = [UIColor colorWithRed:(252 / 255.f)
+                                            green:(88 / 255.f)
+                                             blue:(67 / 255.f)
+                                            alpha:1.f];
         priceLb.text = @"¥ 180,000.00";
         [cardView addSubview:priceLb];
         self.priceLb = priceLb;
         
         [priceLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(cardView).mas_offset(5);
-            make.bottom.mas_equalTo(cardView).mas_offset(-10);
+            make.bottom.mas_equalTo(cardView).mas_offset(-7 * radio);
         }];
         
         UIButton *moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];

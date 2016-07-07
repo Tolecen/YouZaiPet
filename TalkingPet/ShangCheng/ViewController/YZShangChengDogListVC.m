@@ -62,7 +62,7 @@
         make.left.mas_equalTo(self.view).mas_offset(0);
         make.top.mas_equalTo(self.view).mas_offset(0);
         make.right.mas_equalTo(self.view).mas_offset(0);
-        make.height.mas_equalTo(44);
+        make.height.mas_equalTo(33);
     }];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -72,7 +72,7 @@
     flowLayout.sectionInset = sectionInset;
     CGFloat width = ([UIScreen mainScreen].bounds.size.width - sectionInset.left - sectionInset.right - 10) / 2;
     flowLayout.itemSize = CGSizeMake(width,
-                                     width * 4 / 3);
+                                     width / 5 * 6);//card w / h = 5 / 6;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                                           collectionViewLayout:flowLayout];

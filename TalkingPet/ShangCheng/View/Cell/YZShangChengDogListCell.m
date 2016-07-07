@@ -45,19 +45,23 @@
             make.left.mas_equalTo(cardView).mas_offset(0);
             make.right.mas_equalTo(cardView).mas_offset(0);
             make.top.mas_equalTo(cardView).mas_offset(0);
-            make.height.mas_equalTo(cardView.mas_width);
+            make.height.mas_equalTo(cardView.mas_width).multipliedBy(0.8);//图片 w / h = 5 / 4;
         }];
         
         UILabel *nameLb = [[UILabel alloc] initWithFrame:CGRectZero];
         nameLb.font = [UIFont systemFontOfSize:12.f];
-        nameLb.textColor = [UIColor blackColor];
+        nameLb.textColor = [UIColor colorWithRed:(102 / 255.f)
+                                           green:(102 / 255.f)
+                                            blue:(102 / 255.f)
+                                           alpha:1.f];
         nameLb.text = @"迷你牛头梗迷你牛头梗迷你牛头梗";
         [cardView addSubview:nameLb];
         self.nameLb = nameLb;
         
+        CGFloat radio = ScreenWidth / 320;
         [nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(cardView).mas_offset(5);
-            make.top.mas_equalTo(thumbImageV.mas_bottom).mas_offset(5);
+            make.top.mas_equalTo(thumbImageV.mas_bottom).mas_offset(7 * radio);
             make.width.mas_lessThanOrEqualTo(cardView.mas_width).mas_offset(-27);
         }];
         
@@ -73,6 +77,10 @@
         
         UILabel *daysNumberLb = [[UILabel alloc] initWithFrame:CGRectZero];
         daysNumberLb.font = [UIFont systemFontOfSize:10.f];
+        daysNumberLb.textColor = [UIColor colorWithRed:(181 / 255.f)
+                                                 green:(181 / 255.f)
+                                                  blue:(181 / 255.f)
+                                                 alpha:1.f];
         daysNumberLb.text = @"降临地球111天";
         [cardView addSubview:daysNumberLb];
         self.daysNumberLb = daysNumberLb;
@@ -84,14 +92,19 @@
         
         UILabel *priceLb = [[UILabel alloc] initWithFrame:CGRectZero];
         priceLb.font = [UIFont systemFontOfSize:12.f];
-        priceLb.textColor = [UIColor redColor];
-        priceLb.text = @"¥ 180,000.00";
+        priceLb.adjustsFontSizeToFitWidth = YES;
+        priceLb.textColor = [UIColor colorWithRed:(252 / 255.f)
+                                            green:(88 / 255.f)
+                                             blue:(67 / 255.f)
+                                            alpha:1.f];
+        priceLb.text = @"¥ 180,000";
         [cardView addSubview:priceLb];
         self.priceLb = priceLb;
         
         [priceLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(cardView).mas_offset(5);
-            make.bottom.mas_equalTo(cardView).mas_offset(-10);
+            make.bottom.mas_equalTo(cardView).mas_offset(-7 * radio);
+            make.width.mas_equalTo(cardView).multipliedBy(0.5);
         }];
         
         UIImageView *birthdayImageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"birthday_icon"]];
@@ -101,25 +114,35 @@
         
         UILabel *birthdayLb = [[UILabel alloc] initWithFrame:CGRectZero];
         birthdayLb.font = [UIFont systemFontOfSize:10.f];
-        birthdayLb.textColor = [UIColor grayColor];
+        birthdayLb.textColor = [UIColor colorWithRed:(188 / 255.f)
+                                               green:(188 / 255.f)
+                                                blue:(188 / 255.f)
+                                               alpha:1.f];
+        birthdayLb.adjustsFontSizeToFitWidth = YES;
         birthdayLb.text = @"2016.01.11";
         [cardView addSubview:birthdayLb];
         self.birthdayLb = birthdayLb;
         
         UILabel *areaLb = [[UILabel alloc] initWithFrame:CGRectZero];
         areaLb.font = [UIFont systemFontOfSize:10.f];
-        areaLb.textColor = [UIColor grayColor];
+        areaLb.textColor = [UIColor colorWithRed:(188 / 255.f)
+                                           green:(188 / 255.f)
+                                            blue:(188 / 255.f)
+                                           alpha:1.f];
+        areaLb.textAlignment = NSTextAlignmentRight;
         areaLb.text = @"华威西里6号楼1011";
         [cardView addSubview:areaLb];
         self.areaLb = areaLb;
         
         [birthdayLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(cardView).mas_offset(-5);
-            make.centerY.mas_equalTo(priceLb).mas_offset(5);
+            make.bottom.mas_equalTo(priceLb.mas_bottom).mas_offset(1);
+            make.right.mas_equalTo(cardView.mas_right).mas_offset(-5);
+            make.width.mas_lessThanOrEqualTo(cardView).multipliedBy(0.5);
         }];
         
         [areaLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(cardView).mas_offset(-5);
+            make.right.mas_equalTo(cardView.mas_right).mas_offset(-5);
+            make.width.mas_lessThanOrEqualTo(cardView).multipliedBy(0.5);
             make.bottom.mas_equalTo(birthdayLb.mas_top).mas_offset(0);
         }];
         
