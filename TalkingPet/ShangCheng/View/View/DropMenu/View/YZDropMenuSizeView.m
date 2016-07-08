@@ -104,13 +104,13 @@
     CGPoint touchPoint = [tapGesture locationInView:self];
     if (CGRectContainsPoint(self.smallDogV.frame, touchPoint)) {
         NSLog(@"小");
-        self.sizeViewSelectSizeBlock(YZShangChengDogSize_Small);
+        self.sizeViewSelectSizeBlock(YZDogSize_Small);
     } else if (CGRectContainsPoint(self.middleDogV.frame, touchPoint)) {
         NSLog(@"中");
-        self.sizeViewSelectSizeBlock(YZShangChengDogSize_Middle);
+        self.sizeViewSelectSizeBlock(YZDogSize_Middle);
     } else if (CGRectContainsPoint(self.bigDogV.frame, touchPoint)) {
         NSLog(@"大");
-        self.sizeViewSelectSizeBlock(YZShangChengDogSize_Big);
+        self.sizeViewSelectSizeBlock(YZDogSize_Big);
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "YZShangChengDogListCell.h"
+#import "UIColor+HexString.h"
 
 @interface YZShangChengDogListCell()
 
@@ -23,6 +24,10 @@
 
 @implementation YZShangChengDogListCell
 
+- (void)dealloc {
+    _dogModel = nil;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
@@ -37,7 +42,7 @@
             make.edges.mas_equalTo(self.contentView).insets(UIEdgeInsetsZero);
         }];
         
-        UIImageView *thumbImageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dog_placeholder"]];
+        UIImageView *thumbImageV = [[UIImageView alloc] init];
         [cardView addSubview:thumbImageV];
         self.thumbImageV = thumbImageV;
         
@@ -54,7 +59,7 @@
                                            green:(102 / 255.f)
                                             blue:(102 / 255.f)
                                            alpha:1.f];
-        nameLb.text = @"迷你牛头梗迷你牛头梗迷你牛头梗";
+//        nameLb.text = @"迷你牛头梗迷你牛头梗迷你牛头梗";
         [cardView addSubview:nameLb];
         self.nameLb = nameLb;
         
@@ -81,7 +86,7 @@
                                                  green:(181 / 255.f)
                                                   blue:(181 / 255.f)
                                                  alpha:1.f];
-        daysNumberLb.text = @"降临地球111天";
+//        daysNumberLb.text = @"降临地球111天";
         [cardView addSubview:daysNumberLb];
         self.daysNumberLb = daysNumberLb;
         
@@ -93,11 +98,8 @@
         UILabel *priceLb = [[UILabel alloc] initWithFrame:CGRectZero];
         priceLb.font = [UIFont systemFontOfSize:12.f];
         priceLb.adjustsFontSizeToFitWidth = YES;
-        priceLb.textColor = [UIColor colorWithRed:(252 / 255.f)
-                                            green:(88 / 255.f)
-                                             blue:(67 / 255.f)
-                                            alpha:1.f];
-        priceLb.text = @"¥ 180,000";
+        priceLb.textColor = [UIColor commonPriceColor];
+//        priceLb.text = @"¥ 180,000";
         [cardView addSubview:priceLb];
         self.priceLb = priceLb;
         
@@ -119,7 +121,7 @@
                                                 blue:(188 / 255.f)
                                                alpha:1.f];
         birthdayLb.adjustsFontSizeToFitWidth = YES;
-        birthdayLb.text = @"2016.01.11";
+//        birthdayLb.text = @"2016.01.11";
         [cardView addSubview:birthdayLb];
         self.birthdayLb = birthdayLb;
         
@@ -130,7 +132,7 @@
                                             blue:(188 / 255.f)
                                            alpha:1.f];
         areaLb.textAlignment = NSTextAlignmentRight;
-        areaLb.text = @"华威西里6号楼1011";
+//        areaLb.text = @"华威西里6号楼1011";
         [cardView addSubview:areaLb];
         self.areaLb = areaLb;
         
@@ -152,6 +154,28 @@
         }];
     }
     return self;
+}
+
+- (void)setDogModel:(YZDogModel *)dogModel {
+    if (!dogModel) {
+        return;
+    }
+    _dogModel = dogModel;
+    [self.thumbImageV setImageWithURL:[NSURL URLWithString:dogModel.thumb]
+                     placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
+    
+    self.nameLb.text = dogModel.name;
+    self.sexImageV.image = (dogModel.sex == YZDogSex_Female) ? [UIImage imageNamed:@"female_icon"] : [UIImage imageNamed:@"male_icon"];
+    self.birthdayLb.text = dogModel.birthdayString;
+    self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:dogModel.sellPrice]];
+    self.areaLb.text = dogModel.shop.shopName;
+    NSString *daysNumberString = [NSString stringWithFormat:@"降临地球 %ld 天", (unsigned long)dogModel.birtydayDays];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:daysNumberString];
+    [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.f], NSForegroundColorAttributeName: self.daysNumberLb.textColor} range:NSMakeRange(0, 4)];
+    [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.f], NSForegroundColorAttributeName: CommonGreenColor} range:NSMakeRange(4, daysNumberString.length - 5)];
+    [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.f], NSForegroundColorAttributeName: self.daysNumberLb.textColor} range:NSMakeRange(daysNumberString.length - 1, 1)];
+    self.daysNumberLb.attributedText = attr;
+    [self setNeedsUpdateConstraints];
 }
 
 @end

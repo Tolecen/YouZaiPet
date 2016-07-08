@@ -13,11 +13,11 @@ typedef NS_ENUM(NSUInteger, YZShangChengType) {
     YZShangChengType_Goods  = (1)
 };
 
-typedef NS_ENUM(NSUInteger, YZShangChengDogSize) {
-    YZShangChengDogSize_All     = (100),
-    YZShangChengDogSize_Small   = (0),
-    YZShangChengDogSize_Middle  = (1),
-    YZShangChengDogSize_Big     = (2)
+typedef NS_ENUM(NSUInteger, YZDogSize) {
+    YZDogSize_All     = (100),
+    YZDogSize_Small   = (1),
+    YZDogSize_Middle  = (2),
+    YZDogSize_Big     = (3)
 };
 
 typedef NS_ENUM(NSUInteger, YZDogSex) {
@@ -44,5 +44,10 @@ typedef NS_ENUM(NSUInteger, YZDogAgeRange) {
 };
 
 @interface YZShangChengConst : NSObject
+
+@property (nonatomic, strong) NSNumberFormatter *priceNumberFormatter;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
+
++ (instancetype)sharedInstance;
 
 @end

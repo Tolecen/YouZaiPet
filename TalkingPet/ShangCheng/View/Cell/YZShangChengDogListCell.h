@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YZShangChengModel.h"
 
 @interface YZShangChengDogListCell : UICollectionViewCell
+
+@property (nonatomic, strong) YZDogModel *dogModel;
 
 @end

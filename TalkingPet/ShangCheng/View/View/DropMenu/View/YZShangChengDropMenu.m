@@ -72,7 +72,7 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
     if (!_sizeView) {
         _sizeView = [[YZDropMenuSizeView alloc] init];
         WS(weakSelf);
-        [_sizeView setSizeViewSelectSizeBlock:^(YZShangChengDogSize size) {
+        [_sizeView setSizeViewSelectSizeBlock:^(YZDogSize size) {
             [weakSelf backgroundViewDidTap:nil];
             NSLog(@"dogSize:[%@]", @(size));
         }];

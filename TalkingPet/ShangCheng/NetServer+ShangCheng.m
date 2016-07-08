@@ -7,6 +7,7 @@
 //
 
 #import "NetServer+ShangCheng.h"
+#import "JSONModelError.h"
 
 @implementation NetServer (ShangCheng)
 
@@ -26,24 +27,28 @@
 }
 
 + (void)searchDogListWithType:(NSString *)type
-                         size:(YZShangChengDogSize)size
+                         size:(YZDogSize)size
                           sex:(YZDogSex)sex
                     sellPrice:(YZDogValueRange)sellPrice
-                         area:(NSInteger)areaCode
+                         area:(NSString *)areaCode
                           age:(YZDogAgeRange)age
                        shopId:(NSString *)shopId
                     pageIndex:(NSInteger)pageIndex
-                      success:(void(^)(id data, NSInteger nextPageIndex))success
+                      success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
                       failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:[NetServer commonDict]];
     parameters[@"command"] = @"mall";
     parameters[@"options"] = @"dogSearch";
-    parameters[@"area"] = @(areaCode);
-    parameters[@"shopId"] = shopId;
+    if (areaCode) {
+        parameters[@"area"] = areaCode;
+    }
+    if (shopId) {
+        parameters[@"shopId"] = shopId;
+    }
     parameters[@"pageIndex"] = @(pageIndex);
     parameters[@"pageSize"] = @(20);
     parameters[@"type"] = type;
-    if (size == YZShangChengDogSize_All) {
+    if (size == YZDogSize_All) {
         [parameters removeObjectForKey:@"size"];
     } else {
         parameters[@"size"] = @(size);
@@ -105,7 +110,16 @@
     }
     [NetServer requestWithParameters:parameters
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                 
+                                 NSArray *value = responseObject[@"value"];
+                                 JSONModelError *error = nil;
+                                 NSArray *responseItems = [YZDogModel arrayOfModelsFromDictionaries:value
+                                                                                              error:&error];
+                                 if (responseItems && responseItems.count > 0) {
+                                     NSInteger newPageIndex = pageIndex + 1;
+                                     success(responseItems, newPageIndex);
+                                 } else {
+                                     success(nil, pageIndex);
+                                 }
                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  failure(error, operation);
                              }];

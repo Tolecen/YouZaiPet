@@ -7,24 +7,53 @@
 //
 
 #import "JSONModel.h"
+#import "YZShangChengConst.h"
 
 @interface YZShangChengModel : JSONModel
 
 @end
 
-@interface YZDogModel : YZShangChengModel
-
-@end
-
-@interface YZDogDetailModel : YZDogModel
-
+@protocol YZQuanSheModel <NSObject>
 @end
 
 @interface YZQuanSheModel : YZShangChengModel
 
+@property (nonatomic, copy) NSString *shopName;
+
 @end
 
 @interface YZQuanSheDetailModel : YZQuanSheModel
+
+@end
+
+
+@interface YZDogModel : YZShangChengModel
+
+@property (nonatomic, strong) NSNumber *birthday;
+
+@property (nonatomic, strong) NSNumber *createTime;
+
+@property (nonatomic, copy) NSString *dogId;
+
+@property (nonatomic, copy) NSString *name;
+
+@property (nonatomic, assign) long long sellPrice;
+
+@property (nonatomic, copy) NSString *thumb;
+
+@property (nonatomic, assign, readonly) YZDogSex sex;
+
+@property (nonatomic, copy, readonly) NSString *birthdayString;
+
+@property (nonatomic, copy, readonly) NSString *createString;
+
+@property (nonatomic, assign, readonly) NSInteger birtydayDays;
+
+@property (nonatomic, strong) YZQuanSheModel<YZQuanSheModel> *shop;
+
+@end
+
+@interface YZDogDetailModel : YZDogModel
 
 @end
 

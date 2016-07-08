@@ -7,7 +7,7 @@
 //
 
 #import "NetServer.h"
-#import "YZShangChengConst.h"
+#import "YZShangChengModel.h"
 
 @interface NetServer (ShangCheng)
 
@@ -18,14 +18,14 @@
 
 //1004_狗狗搜索（不带任何查询条件即为所有的列表）
 + (void)searchDogListWithType:(NSString *)type
-                         size:(YZShangChengDogSize)size
+                         size:(YZDogSize)size
                           sex:(YZDogSex)sex
                     sellPrice:(YZDogValueRange)sellPrice
-                         area:(NSInteger)areaCode
+                         area:(NSString *)areaCode
                           age:(YZDogAgeRange)age
                        shopId:(NSString *)shopId
                     pageIndex:(NSInteger)pageIndex
-                      success:(void(^)(id data, NSInteger nextPageIndex))success
+                      success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
                       failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 //1005_狗狗用品详情

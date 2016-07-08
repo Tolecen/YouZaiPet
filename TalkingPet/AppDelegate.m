@@ -97,13 +97,6 @@
 //                                   } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
 //                                       
 //                                   }];
-    [NetServer searchDogListWithType:@"6"
-                                size:1 sex:1 sellPrice:YZDogValueRange_3_5k area:410225 age:YZDogAgeRange_0_3M shopId:@"829" pageIndex:1 success:^(id data, NSInteger nextPageIndex) {
-    
-                                } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-                                    
-                                }];
-
 //    [self performSelector:@selector(saaaaa) withObject:nil afterDelay:2];
     return YES;
 }

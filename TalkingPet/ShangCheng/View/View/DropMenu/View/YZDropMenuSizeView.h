@@ -11,6 +11,6 @@
 
 @interface YZDropMenuSizeView : UIView
 
-@property (nonatomic, copy) void(^sizeViewSelectSizeBlock)(YZShangChengDogSize size);
+@property (nonatomic, copy) void(^sizeViewSelectSizeBlock)(YZDogSize size);
 
 @end
