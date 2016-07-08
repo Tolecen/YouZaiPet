@@ -13,6 +13,16 @@
 
 @end
 
+@interface YZDogTypeAlphabetModel : YZShangChengModel
+
+@property (nonatomic, copy) NSString *alias;
+@property (nonatomic, copy) NSString *fullName;
+@property (nonatomic, copy) NSString *icon;
+@property (nonatomic, copy) NSString *dogId;
+@property (nonatomic, copy) NSString *typeName;
+
+@end
+
 @protocol YZQuanSheModel <NSObject>
 @end
 

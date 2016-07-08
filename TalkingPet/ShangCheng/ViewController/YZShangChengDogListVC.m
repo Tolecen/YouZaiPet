@@ -16,19 +16,27 @@
 #import "UIActionSheet+block.h"
 #import "SVProgressHUD.h"
 
+NSString *const SexFilterKey        = @"SexFilterKey";
+NSString *const AgeFilterKey        = @"AgeFilterKey";
+NSString *const PriceFilterKey      = @"PriceFilterKey";
+NSString *const SizeFilterKey       = @"SizeFilterKey";
+NSString *const TypeFilterKey       = @"TypeFilterKey";
+
 @interface YZShangChengDogListVC()<UICollectionViewDataSource, UICollectionViewDelegate, YZDropMenuDataSource, YZDropMenuDelegate, UISearchBarDelegate>
 
 @property (nonatomic, weak) UICollectionView *collectionView;
 @property (nonatomic, copy) NSArray *items;
 
 @property (nonatomic, weak) YZShangChengDropMenu *dropMenu;
-
+//最新的filter
 @property (nonatomic, assign) YZDogSex sexFilter;
 @property (nonatomic, assign) YZDogSize sizeFilter;
 @property (nonatomic, assign) YZDogAgeRange ageRangeFilter;
 @property (nonatomic, assign) YZDogValueRange valueRangeFilter;
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, copy) NSString *typeFilter;
+//保存旧的filter
+@property (nonatomic, strong) NSMutableDictionary *restoreFilters;
 
 @end
 
@@ -36,6 +44,7 @@
 
 - (void)dealloc {
     NSLog(@"dealloc:[%@]", self);
+    _restoreFilters = nil;
 }
 
 #pragma mark -- NavigationAction
@@ -64,7 +73,12 @@
 #pragma mark -- Life Cycle
 
 - (void)inner_ConfigureDefault {
-    self.pageIndex = 1;
+    self.restoreFilters[SizeFilterKey] = @(self.sizeFilter);
+    self.restoreFilters[AgeFilterKey] = @(self.ageRangeFilter);
+    self.restoreFilters[SexFilterKey] = @(self.sexFilter);
+    self.restoreFilters[PriceFilterKey] = @(self.valueRangeFilter);
+    self.restoreFilters[TypeFilterKey] = self.typeFilter;
+    
     self.typeFilter = @"6";
     self.sexFilter = YZDogSex_All;
     self.sizeFilter = YZDogSize_All;
@@ -75,6 +89,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self inner_ConfigureDefault];
+    self.restoreFilters = [@{SexFilterKey: @(self.sexFilter),
+                             SizeFilterKey: @(self.sizeFilter),
+                             AgeFilterKey: @(self.ageRangeFilter),
+                             PriceFilterKey: @(self.valueRangeFilter),
+                             TypeFilterKey: self.typeFilter} mutableCopy];
     
     UIImage *backImage = [UIImage imageNamed:@"shangcheng_back_icon"];
     backImage = [backImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -140,47 +159,67 @@
 #pragma mark -- Refresh
 
 - (void)inner_Refresh:(id)sender {
-    [self.collectionView footerEndRefreshing];
-    __weak __typeof(self) weakSelf = self;
-    [NetServer searchDogListWithType:self.typeFilter
-                                size:self.sizeFilter
-                                 sex:self.sexFilter
-                           sellPrice:self.valueRangeFilter
-                                area:nil
-                                 age:self.ageRangeFilter
-                              shopId:nil
-                           pageIndex:self.pageIndex
-                             success:^(NSArray *items, NSInteger nextPageIndex) {
-                                 weakSelf.items = [NSArray arrayWithArray:items];
-                                 weakSelf.pageIndex = nextPageIndex;
-                                 [weakSelf.collectionView headerEndRefreshing];
-                                 [weakSelf.collectionView reloadData];
-                                }
-                             failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-                                 
-                                }];
+    [self inner_PostWithType:self.typeFilter
+                        size:self.sizeFilter
+                         sex:self.sexFilter
+                         age:self.ageRangeFilter
+                       price:self.valueRangeFilter
+                   pageIndex:1
+                     refresh:YES];
 }
 
 - (void)inner_LoadMore:(id)sender {
-    [self.collectionView headerEndRefreshing];
+    [self inner_PostWithType:self.typeFilter
+                        size:self.sizeFilter
+                         sex:self.sexFilter
+                         age:self.ageRangeFilter
+                       price:self.valueRangeFilter
+                   pageIndex:self.pageIndex
+                     refresh:NO];
+}
+
+- (void)inner_PostWithType:(NSString *)type
+                      size:(YZDogSize)size
+                       sex:(YZDogSex)sex
+                       age:(YZDogAgeRange)age
+                     price:(YZDogValueRange)price
+                 pageIndex:(NSInteger)pageIndex
+                   refresh:(BOOL)refresh {
+    if (refresh) {
+        [self.collectionView footerEndRefreshing];
+    } else {
+        [self.collectionView headerEndRefreshing];
+    }
     __weak __typeof(self) weakSelf = self;
-    [NetServer searchDogListWithType:self.typeFilter
-                                size:self.sizeFilter
-                                 sex:self.sexFilter
-                           sellPrice:self.valueRangeFilter
+    [NetServer searchDogListWithType:type
+                                size:size
+                                 sex:sex
+                           sellPrice:price
                                 area:nil
-                                 age:self.ageRangeFilter
+                                 age:age
                               shopId:nil
-                           pageIndex:self.pageIndex
+                           pageIndex:pageIndex
                              success:^(NSArray *items, NSInteger nextPageIndex) {
-                                 weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
+                                 if (refresh) {
+                                     weakSelf.items = [NSArray arrayWithArray:items];
+                                 } else {
+                                     weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
+                                 }
                                  weakSelf.pageIndex = nextPageIndex;
-                                 [weakSelf.collectionView footerEndRefreshing];
+                                 [weakSelf.collectionView headerEndRefreshing];
                                  [weakSelf.collectionView reloadData];
                              }
                              failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-                                 
+                                 [weakSelf inner_RestoreFiltersWhenError];
                              }];
+}
+
+- (void)inner_RestoreFiltersWhenError {
+    self.sexFilter = [self.restoreFilters[SexFilterKey] integerValue];
+    self.sizeFilter = [self.restoreFilters[SizeFilterKey] integerValue];
+    self.ageRangeFilter = [self.restoreFilters[AgeFilterKey] integerValue];
+    self.valueRangeFilter = [self.restoreFilters[PriceFilterKey] integerValue];
+    self.typeFilter = self.restoreFilters[TypeFilterKey];
 }
 
 #pragma mark -- DropMenu
@@ -198,6 +237,30 @@
         return @"体型";
     }
     return nil;
+}
+
+- (void)menuFilterSelectSize:(YZDogSize)size {
+    self.restoreFilters[SizeFilterKey] = @(self.sizeFilter);
+    self.sizeFilter = size;
+    
+    [self.collectionView headerBeginRefreshing];
+}
+
+- (void)menuFilterSelectValue:(YZDogValueRange)value sex:(YZDogSex)sex {
+    self.restoreFilters[SexFilterKey] = @(self.sexFilter);
+    self.sexFilter = sex;
+    
+    self.restoreFilters[PriceFilterKey] = @(self.valueRangeFilter);
+    self.valueRangeFilter = value;
+
+    [self.collectionView headerBeginRefreshing];
+}
+
+- (void)menuFilterSelectAge:(YZDogAgeRange)age {
+    self.restoreFilters[AgeFilterKey] = @(self.ageRangeFilter);
+    self.ageRangeFilter = age;
+    
+    [self.collectionView headerBeginRefreshing];
 }
 
 #pragma mark -- UICollectionView

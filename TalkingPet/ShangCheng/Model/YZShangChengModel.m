@@ -17,6 +17,14 @@
 
 @end
 
+@implementation YZDogTypeAlphabetModel
+
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id": @"dogId"}];
+}
+
+@end
+
 @implementation YZQuanSheModel
 
 @end

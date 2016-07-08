@@ -11,13 +11,14 @@
 #import "YZDropMenuAgeView.h"
 #import "YZDropMenuSizeView.h"
 #import "YZDropMenuOtherFilterView.h"
+#import "NetServer+ShangCheng.h"
 
 static CGFloat RightFilterBtnWidth  = 44;
 static NSInteger buttonDefaultTag   = 100;
 typedef void(^YZDropDownMenuAnimateCompleteHandler)(void);
 
 static CGFloat YZDropMenuSizeViewHeight         = 90.f;
-static CGFloat YZDropMenuAgeViewHeight          = 100.f;
+static CGFloat YZDropMenuAgeViewHeight          = 130.f;
 static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
 
 @interface YZShangChengDropMenu()
@@ -61,8 +62,10 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
         _ageView = [[YZDropMenuAgeView alloc] init];
         WS(weakSelf);
         [_ageView setAgeViewSelectedAgeBlock:^(YZDogAgeRange dogAge) {
-            [weakSelf backgroundViewDidTap:nil];
-            NSLog(@"dogAge:[%@]", @(dogAge));
+            [weakSelf hideCurrentFilterViewWithCompletionBlock:^{
+                NSLog(@"dogAge:[%@]", @(dogAge));
+                [weakSelf.delegate menuFilterSelectAge:dogAge];
+            }];
         }];
     }
     return _ageView;
@@ -73,8 +76,10 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
         _sizeView = [[YZDropMenuSizeView alloc] init];
         WS(weakSelf);
         [_sizeView setSizeViewSelectSizeBlock:^(YZDogSize size) {
-            [weakSelf backgroundViewDidTap:nil];
-            NSLog(@"dogSize:[%@]", @(size));
+            [weakSelf hideCurrentFilterViewWithCompletionBlock:^{
+                NSLog(@"dogSize:[%@]", @(size));
+                [weakSelf.delegate menuFilterSelectSize:size];
+            }];
         }];
     }
     return _sizeView;
@@ -85,9 +90,11 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
         _otherFilterView = [[YZDropMenuOtherFilterView alloc] init];
         WS(weakSelf);
         [_otherFilterView setFilterViewSelectedFilterBlock:^(YZDogSex dogSex, YZDogValueRange dogValue) {
-            [weakSelf backgroundViewDidTap:nil];
             NSLog(@"dogSex:[%@]", @(dogSex));
             NSLog(@"dogValue:[%@]", @(dogValue));
+            [weakSelf hideCurrentFilterViewWithCompletionBlock:^{
+                [weakSelf.delegate menuFilterSelectValue:dogValue sex:dogSex];
+            }];
         }];
     }
     return _otherFilterView;
@@ -96,6 +103,15 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
 - (YZDropMenuKindView *)kindView {
     if (!_kindView) {
         _kindView = [[YZDropMenuKindView alloc] init];
+        __weak __typeof(_kindView) weakKindView = _kindView;
+        [NetServer getDogTypeAlphabetSuccess:^(NSArray *indexKeys, NSArray *alphabet, NSArray *hots) {
+            weakKindView.indexKeys = indexKeys;
+            weakKindView.alphabet = alphabet;
+            weakKindView.hots = hots;
+            [weakKindView reloadKindMenu];
+        } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+            
+        }];
     }
     return _kindView;
 }
@@ -386,6 +402,21 @@ static NSInteger clickCount;
                                 complete:^{
                                     weakSelf.currentSelectedMenuIndex = -1;
                                     weakSelf.show = NO;
+                                }];
+}
+
+- (void)hideCurrentFilterViewWithCompletionBlock:(void(^)(void))completion {
+    WS(weakSelf);
+    [self inner_AnimationWithTitleButton:self.selectedButton
+                          backgroundView:self.backgroundView
+                             currentView:self.currentDropView
+                                    show:NO
+                                complete:^{
+                                    weakSelf.currentSelectedMenuIndex = -1;
+                                    weakSelf.show = NO;
+                                    if (completion) {
+                                        completion();
+                                    }
                                 }];
 }
 

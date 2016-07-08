@@ -85,6 +85,7 @@ static UIImageView *lastNodeImageV = nil;
         [sliderNode setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
         sliderNode.enabled = NO;
         sliderNode.titleLabel.font = [UIFont systemFontOfSize:12.f];
+        [sliderNode setTitle:@"未出生" forState:UIControlStateNormal];
         [sliderNode setBackgroundImage:[UIImage imageNamed:@"quanlingkuang"] forState:UIControlStateDisabled];
         sliderNode.titleEdgeInsets = UIEdgeInsetsMake(-5, 0, 0, 0);
         [self addSubview:sliderNode];

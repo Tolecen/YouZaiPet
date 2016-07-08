@@ -11,6 +11,38 @@
 
 @implementation NetServer (ShangCheng)
 
++ (void)getDogTypeAlphabetSuccess:(void(^)(NSArray *indexKeys, NSArray *alphabet, NSArray *hots))success
+                          failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure {
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:[NetServer commonDict]];
+    parameters[@"command"] = @"mall";
+    parameters[@"options"] = @"dogTypeAlphabet";
+    [NetServer requestWithParameters:parameters
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 NSMutableArray *alphabetOutput = [[NSMutableArray alloc] init];
+                                 NSDictionary *alphabetDict = responseObject[@"value"];
+                                 
+                                 NSMutableArray *allKeys = [[NSMutableArray alloc] initWithArray:alphabetDict.allKeys];
+                                 [allKeys removeObject:@"00"];
+                                 NSArray *sortedKeys =
+                                 [allKeys sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+                                     return [obj1 compare:obj2 options:NSNumericSearch];
+                                 }];
+                                 
+                                 JSONModelError *error = nil;
+                                 NSArray *hotAlphabetOutput = [YZDogTypeAlphabetModel arrayOfModelsFromDictionaries:alphabetDict[@"00"] error:&error];
+                                 
+                                 [sortedKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL * _Nonnull stop) {
+                                     JSONModelError *error = nil;
+                                     NSArray *singleAlphabetOutput = [YZDogTypeAlphabetModel arrayOfModelsFromDictionaries:alphabetDict[key] error:&error];
+                                     [alphabetOutput addObject:singleAlphabetOutput];
+                                 }];
+                                 
+                                 success(sortedKeys, alphabetOutput.copy, hotAlphabetOutput);
+                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 failure(error, operation);
+                             }];
+}
+
 + (void)getDogDetailInfoWithDogId:(NSString *)dogId
                           success:(void(^)(id data))success
                           failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure {

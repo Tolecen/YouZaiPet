@@ -11,6 +11,10 @@
 
 @interface YZDropMenuAgeView()<YZAgeSliderDelegate>
 
+@property (nonatomic, weak) UIButton *confimBtn;
+
+@property (nonatomic, assign) YZDogAgeRange age;
+
 @end
 
 @implementation YZDropMenuAgeView
@@ -29,14 +33,35 @@
             make.top.mas_equalTo(self).mas_offset(20);
             make.left.mas_equalTo(self).mas_offset(30 * radio);
             make.right.mas_equalTo(self).mas_offset(-30 * radio);
-            make.height.mas_equalTo(100);
+            make.height.mas_equalTo(70);
+        }];
+        
+        UIButton *confimBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [confimBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [confimBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [confimBtn addTarget:self action:@selector(inner_ConfimSelected:) forControlEvents:UIControlEventTouchUpInside];
+        [confimBtn setBackgroundColor:CommonGreenColor];
+        confimBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
+        confimBtn.layer.cornerRadius = 15.f;
+        confimBtn.layer.masksToBounds = YES;
+        [self addSubview:confimBtn];
+        
+        [confimBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(self).mas_offset(0);
+            make.top.mas_equalTo(slider.mas_bottom).mas_offset(0);
+            make.width.mas_equalTo(85);
+            make.height.mas_equalTo(30);
         }];
     }
     return self;
 }
 
 - (void)sliderDidSelectAge:(YZDogAgeRange)age {
-    self.ageViewSelectedAgeBlock(age);
+    self.age = age;
+}
+
+- (void)inner_ConfimSelected:(UIButton *)sender {
+    self.ageViewSelectedAgeBlock(self.age);
 }
 
 @end

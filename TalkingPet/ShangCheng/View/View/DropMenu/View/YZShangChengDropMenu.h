@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YZShangChengConst.h"
 
 @class YZShangChengDropMenu;
 @protocol YZDropMenuDataSource <NSObject>
@@ -17,6 +18,14 @@
 @end
 
 @protocol YZDropMenuDelegate <NSObject>
+@required
+- (void)menuFilterSelectSize:(YZDogSize)size;
+
+- (void)menuFilterSelectAge:(YZDogAgeRange)age;
+
+- (void)menuFilterSelectValue:(YZDogValueRange)value sex:(YZDogSex)sex;
+
+- (void)menuFilterSelectDogType:(id)type;
 
 @end
 

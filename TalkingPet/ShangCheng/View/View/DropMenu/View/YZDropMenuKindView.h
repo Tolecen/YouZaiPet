@@ -10,6 +10,10 @@
 
 @interface YZDropMenuKindView : UIView
 
+@property (nonatomic, copy) NSArray *indexKeys;
+@property (nonatomic, copy) NSArray *alphabet;
+@property (nonatomic, copy) NSArray *hots;
+
 - (void)reloadKindMenu;
 
 @end

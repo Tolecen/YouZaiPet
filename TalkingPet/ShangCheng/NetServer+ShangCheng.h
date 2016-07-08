@@ -11,6 +11,10 @@
 
 @interface NetServer (ShangCheng)
 
+//1001_犬种字母表
++ (void)getDogTypeAlphabetSuccess:(void(^)(NSArray *indexKeys, NSArray *alphabet, NSArray *hots))success
+                          failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
 //1003_狗狗详情
 + (void)getDogDetailInfoWithDogId:(NSString *)dogId
                           success:(void(^)(id data))success

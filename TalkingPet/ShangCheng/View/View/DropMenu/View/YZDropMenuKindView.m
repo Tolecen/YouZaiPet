@@ -7,10 +7,8 @@
 //
 
 #import "YZDropMenuKindView.h"
+#import "YZShangChengModel.h"
 #import "YZShangChengKindScrollCell.h"
-
-static NSArray *titles;
-static NSArray *dogTitles;
 
 @interface YZDropMenuKindView()<UITableViewDelegate, UITableViewDataSource>
 
@@ -20,13 +18,16 @@ static NSArray *dogTitles;
 
 @implementation YZDropMenuKindView
 
+- (void)dealloc {
+    _hots = nil;
+    _alphabet = nil;
+    _indexKeys = nil;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
         self.layer.masksToBounds = YES;
-        
-        titles = @[@"A",@"B",@"C",@"D",@"E"];
-        dogTitles = @[@"阿拉斯加", @"阿富汗猎犬", @"澳大利亚牧羊犬", @"柴犬", @"拉布拉多犬"];
         
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         tableView.delegate = self;
@@ -62,9 +63,11 @@ static NSArray *dogTitles;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(self.class)];
     YZShangChengKindScrollCell *scrollCell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(YZShangChengKindScrollCell.class)];
     if (indexPath.section == 0) {
+        scrollCell.hots = self.hots;
         return scrollCell;
     }
-    cell.textLabel.text = dogTitles[indexPath.row];
+    YZDogTypeAlphabetModel *dogModel = self.alphabet[indexPath.section - 2][indexPath.row];
+    cell.textLabel.text = dogModel.fullName;
     cell.textLabel.font = [UIFont systemFontOfSize:12.f];
     cell.textLabel.textColor = [UIColor colorWithRed:(83 / 255.f)
                                                green:(83 / 255.f)
@@ -81,7 +84,7 @@ static NSArray *dogTitles;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2 + titles.count;
+    return 2 + self.alphabet.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -90,11 +93,11 @@ static NSArray *dogTitles;
     } else if (section == 1) {
         return 0;
     }
-    return dogTitles.count;
+    return self.alphabet.count;
 }
 
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return titles;
+    return self.indexKeys;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -128,7 +131,7 @@ static NSArray *dogTitles;
                                                                   blue:(228 / 255.f)
                                                                  alpha:1.f];
     } else if (section > 1) {
-        headerView.textLabel.text = titles[section - 2];
+        headerView.textLabel.text = self.indexKeys[section - 2];
         headerView.contentView.backgroundColor = [UIColor whiteColor];
         headerView.textLabel.textColor = CommonGreenColor;
     }

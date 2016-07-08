@@ -10,4 +10,6 @@
 
 @interface YZShangChengKindScrollCell : UITableViewCell
 
+@property (nonatomic, copy) NSArray *hots;
+
 @end

@@ -12,9 +12,15 @@
 
 @property (nonatomic, weak) UIImageView *imageV;
 
+@property (nonatomic, weak) UILabel *nameLb;
+
 @end
 
 @implementation YZDogKindCollectionViewCell
+
+- (void)dealloc {
+    _dogModel = nil;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -29,11 +35,12 @@
         UILabel *nameLb = [[UILabel alloc] initWithFrame:CGRectZero];
         nameLb.textColor = [UIColor lightGrayColor];
         nameLb.font = [UIFont systemFontOfSize:10.f];
-        nameLb.text = @"拉布拉多";
+//        nameLb.text = @"拉布拉多";
         nameLb.adjustsFontSizeToFitWidth = YES;
         nameLb.textAlignment = NSTextAlignmentCenter;
         nameLb.numberOfLines = 2;
         [self.contentView addSubview:nameLb];
+        self.nameLb = nameLb;
         
         [nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.mas_equalTo(self.contentView).mas_offset(0);
@@ -41,6 +48,16 @@
         }];
     }
     return self;
+}
+
+- (void)setDogModel:(YZDogTypeAlphabetModel *)dogModel {
+    if (!dogModel) {
+        return;
+    }
+    _dogModel = dogModel;
+    [self.imageV setImageWithURL:[NSURL URLWithString:dogModel.icon] placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
+    self.nameLb.text = dogModel.fullName;
+    [self setNeedsUpdateConstraints];
 }
 
 @end
