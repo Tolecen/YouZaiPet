@@ -84,19 +84,7 @@
     }
     
     [self checkNetwork];
-    
-//    [NetServer getDogDetailInfoWithDogId:@"1090"
-//                                      success:^(id data) {
-//                                          
-//                                      } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-//                                          
-//                                      }];
-//    [NetServer searchQuanSheListWithShopName:@"犬舍"
-//                                   pageIndex:1 success:^(id data, NSInteger nextPageIndex) {
-//                                       
-//                                   } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-//                                       
-//                                   }];
+
 //    [self performSelector:@selector(saaaaa) withObject:nil afterDelay:2];
     return YES;
 }

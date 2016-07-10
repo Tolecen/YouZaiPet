@@ -51,15 +51,15 @@
 
 @property (nonatomic, copy) NSString *thumb;
 
+@property (nonatomic, strong) YZQuanSheModel<YZQuanSheModel> *shop;
+
 @property (nonatomic, assign, readonly) YZDogSex sex;
+
+@property (nonatomic, assign, readonly) NSInteger birtydayDays;
 
 @property (nonatomic, copy, readonly) NSString *birthdayString;
 
 @property (nonatomic, copy, readonly) NSString *createString;
-
-@property (nonatomic, assign, readonly) NSInteger birtydayDays;
-
-@property (nonatomic, strong) YZQuanSheModel<YZQuanSheModel> *shop;
 
 @end
 

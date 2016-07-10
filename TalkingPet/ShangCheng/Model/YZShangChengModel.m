@@ -35,13 +35,13 @@
 
 @interface YZDogModel()
 
-@property (nonatomic, copy, readwrite) NSString *birthdayString;
-
-@property (nonatomic, copy, readwrite) NSString *createString;
-
 @property (nonatomic, assign, readwrite) YZDogSex sex;
 
 @property (nonatomic, assign, readwrite) NSInteger birtydayDays;
+
+@property (nonatomic, copy, readwrite) NSString *birthdayString;
+
+@property (nonatomic, copy, readwrite) NSString *createString;
 
 @end
 
@@ -70,5 +70,13 @@
 - (NSInteger)birtydayDays {
     return ceilf(([[NSDate date] timeIntervalSince1970] - [self.birthday floatValue]) / (24 * 60 * 60));
 }
+
+@end
+
+@interface YZGoodsModel()
+
+@end
+
+@implementation YZGoodsModel
 
 @end

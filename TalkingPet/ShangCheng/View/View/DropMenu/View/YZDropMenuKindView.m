@@ -37,12 +37,12 @@
         [tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:NSStringFromClass(UITableViewHeaderFooterView.class)];
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         tableView.sectionIndexColor = CommonGreenColor;
-        if ([tableView respondsToSelector:@selector(sectionIndexBackgroundColor)]) {
-            tableView.sectionIndexBackgroundColor = [UIColor clearColor];
-        }
-        if ([tableView respondsToSelector:@selector(sectionIndexTrackingBackgroundColor)]) {
-            tableView.sectionIndexTrackingBackgroundColor = [UIColor clearColor];
-        }
+//        if ([tableView respondsToSelector:@selector(sectionIndexBackgroundColor)]) {
+//            tableView.sectionIndexBackgroundColor = [UIColor clearColor];
+//        }
+//        if ([tableView respondsToSelector:@selector(sectionIndexTrackingBackgroundColor)]) {
+//            tableView.sectionIndexTrackingBackgroundColor = [UIColor clearColor];
+//        }
         [self addSubview:tableView];
         self.tableView = tableView;
         

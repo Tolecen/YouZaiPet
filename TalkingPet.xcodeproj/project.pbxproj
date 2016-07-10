@@ -58,6 +58,7 @@
 		06BC28CD1D1E09A6003AC9A3 /* YZAgeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BC28CC1D1E09A6003AC9A3 /* YZAgeSlider.m */; };
 		06BC28D01D1E6BE3003AC9A3 /* YZShangChengGoodsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BC28CF1D1E6BE3003AC9A3 /* YZShangChengGoodsListVC.m */; };
 		06BC28D31D1E6CE2003AC9A3 /* YZShangChengGoodsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BC28D21D1E6CE2003AC9A3 /* YZShangChengGoodsListCell.m */; };
+		06C1D6721D31E0DC00AD5DA4 /* NSString+UnsignedLongLongValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C1D6711D31E0DC00AD5DA4 /* NSString+UnsignedLongLongValue.m */; };
 		06E4A9661D1CD1FA00BBC617 /* YZDropMenuAgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E4A95D1D1CD1FA00BBC617 /* YZDropMenuAgeView.m */; };
 		06E4A9671D1CD1FA00BBC617 /* YZDropMenuKindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E4A95F1D1CD1FA00BBC617 /* YZDropMenuKindView.m */; };
 		06E4A9681D1CD1FA00BBC617 /* YZDropMenuOtherFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E4A9611D1CD1FA00BBC617 /* YZDropMenuOtherFilterView.m */; };
@@ -1360,6 +1361,8 @@
 		06BC28CF1D1E6BE3003AC9A3 /* YZShangChengGoodsListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengGoodsListVC.m; sourceTree = "<group>"; };
 		06BC28D11D1E6CE2003AC9A3 /* YZShangChengGoodsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShangChengGoodsListCell.h; sourceTree = "<group>"; };
 		06BC28D21D1E6CE2003AC9A3 /* YZShangChengGoodsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengGoodsListCell.m; sourceTree = "<group>"; };
+		06C1D6701D31E0DC00AD5DA4 /* NSString+UnsignedLongLongValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UnsignedLongLongValue.h"; sourceTree = "<group>"; };
+		06C1D6711D31E0DC00AD5DA4 /* NSString+UnsignedLongLongValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UnsignedLongLongValue.m"; sourceTree = "<group>"; };
 		06E4A95C1D1CD1FA00BBC617 /* YZDropMenuAgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDropMenuAgeView.h; sourceTree = "<group>"; };
 		06E4A95D1D1CD1FA00BBC617 /* YZDropMenuAgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZDropMenuAgeView.m; sourceTree = "<group>"; };
 		06E4A95E1D1CD1FA00BBC617 /* YZDropMenuKindView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDropMenuKindView.h; sourceTree = "<group>"; };
@@ -3178,6 +3181,8 @@
 			children = (
 				06A5DBBE1D2CD1D7002A5159 /* YZShangChengModel.h */,
 				06A5DBBF1D2CD1D7002A5159 /* YZShangChengModel.m */,
+				06C1D6701D31E0DC00AD5DA4 /* NSString+UnsignedLongLongValue.h */,
+				06C1D6711D31E0DC00AD5DA4 /* NSString+UnsignedLongLongValue.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -6987,6 +6992,7 @@
 				97472E57196FBB5500592FB7 /* AnimationImg.m in Sources */,
 				72D5D5091B02018C007195B0 /* CustomizeViewController.m in Sources */,
 				974203E91A5B8E7C0064BB4F /* ChatManager.m in Sources */,
+				06C1D6721D31E0DC00AD5DA4 /* NSString+UnsignedLongLongValue.m in Sources */,
 				975C17A71B2A7DC2009A4280 /* GoodsDetailTableViewHelper.m in Sources */,
 				72FADA481A2C6A2B003670D0 /* SelectedHotViewVontroller.m in Sources */,
 				06A5DBB81D2CD196002A5159 /* JSONModel+networking.m in Sources */,
