@@ -73,10 +73,46 @@
 
 @end
 
+@interface YZBrandModel()
+
+@property (nonatomic, copy, readwrite) NSString *createString;
+
+@end
+
+@implementation YZBrandModel
+
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id": @"brandId"}];
+}
+
+- (NSString *)createString {
+    if (!_createString) {
+        NSDate *createDate = [[JSONValueTransformer alloc] NSDateFromNSNumber:self.createTime];
+        _createString = [[YZShangChengConst sharedInstance].dateFormatter stringFromDate:createDate];
+    }
+    return _createString;
+}
+
+@end
+
 @interface YZGoodsModel()
+
+@property (nonatomic, copy, readwrite) NSString *createString;
 
 @end
 
 @implementation YZGoodsModel
+
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id": @"goodsId"}];
+}
+
+- (NSString *)createString {
+    if (!_createString) {
+        NSDate *createDate = [[JSONValueTransformer alloc] NSDateFromNSNumber:self.createTime];
+        _createString = [[YZShangChengConst sharedInstance].dateFormatter stringFromDate:createDate];
+    }
+    return _createString;
+}
 
 @end

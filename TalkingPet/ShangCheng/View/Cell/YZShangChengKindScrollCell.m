@@ -19,6 +19,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.minimumInteritemSpacing = 0.f;
         flowLayout.minimumLineSpacing = 15.f;
@@ -48,6 +49,14 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.contentView.frame = self.bounds;
+}
+
+- (void)setHots:(NSArray *)hots {
+    if (!hots || _hots == hots) {
+        return;
+    }
+    _hots = hots;
+    [self.collectionView reloadData];
 }
 
 #pragma mark -- UICollectionView

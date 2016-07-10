@@ -9,10 +9,14 @@
 #import "YZShangChengGoodsListVC.h"
 #import "YZShangChengGoodsListCell.h"
 #import "YZShangChengDetailVC.h"
+#import "MJRefresh.h"
+#import "NetServer+ShangCheng.h"
 
 @interface YZShangChengGoodsListVC()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, weak) UICollectionView *collectionView;
+@property (nonatomic, copy) NSArray *items;
+@property (nonatomic, assign) NSInteger pageIndex;
 
 @end
 
@@ -20,6 +24,7 @@
 
 - (void)dealloc {
     NSLog(@"dealloc:[%@]", self);
+    _items = nil;
 }
 
 - (NSString *)title {
@@ -37,11 +42,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackButtonWithTarget:@selector(inner_Pop:)];
-    UIImage *image = [UIImage imageNamed:@"navigation_more_icon"];
-    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-
-    UIBarButtonItem *rightMoreItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(inner_MoreAction:)];
-    self.navigationItem.rightBarButtonItem = rightMoreItem;
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 10.f;
@@ -67,17 +67,60 @@
     [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.mas_equalTo(self.view).mas_offset(0);
     }];
+    
+    [collectionView addHeaderWithTarget:self action:@selector(inner_Refresh:)];
+    [collectionView addFooterWithTarget:self action:@selector(inner_LoadMore:)];
+    [collectionView headerBeginRefreshing];
+}
+
+#pragma mark -- Refresh
+
+- (void)inner_Refresh:(id)sender {
+    [self inner_PostWithPageIndex:1 refresh:YES];
+}
+
+- (void)inner_LoadMore:(id)sender {
+    [self inner_PostWithPageIndex:self.pageIndex refresh:NO];
+}
+
+- (void)inner_PostWithPageIndex:(NSInteger)pageIndex
+                        refresh:(BOOL)refresh {
+    if (refresh) {
+        [self.collectionView footerEndRefreshing];
+    } else {
+        [self.collectionView headerEndRefreshing];
+    }
+    __weak __typeof(self) weakSelf = self;
+    [NetServer searchGoodsListWithPageIndex:pageIndex
+                                    success:^(NSArray *items, NSInteger nextPageIndex) {
+                                        weakSelf.pageIndex = nextPageIndex;
+                                        if (refresh) {
+                                            weakSelf.items = [NSArray arrayWithArray:items];
+                                            [weakSelf.collectionView headerEndRefreshing];
+                                        } else {
+                                            weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
+                                            [weakSelf.collectionView footerEndRefreshing];
+                                        }
+                                        [weakSelf.collectionView reloadData];
+                                    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+                                        if (refresh) {
+                                            [weakSelf.collectionView headerEndRefreshing];
+                                        } else {
+                                            [weakSelf.collectionView footerEndRefreshing];
+                                        }
+                                    }];
 }
 
 #pragma mark -- UICollectionView
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     YZShangChengGoodsListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.class) forIndexPath:indexPath];
+    cell.goods = self.items[indexPath.row];
     return cell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 25;
+    return self.items.count;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

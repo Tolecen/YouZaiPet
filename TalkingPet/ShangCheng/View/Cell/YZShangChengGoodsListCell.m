@@ -12,7 +12,7 @@
 
 @property (nonatomic, weak) UIImageView *thumbImageV;
 @property (nonatomic, weak) UILabel *titleLb;
-@property (nonatomic, weak) UILabel *sourceLb;
+@property (nonatomic, weak) UILabel *brandLb;
 @property (nonatomic, weak) UILabel *priceLb;
 @property (nonatomic, weak) UIButton *moreBtn;
 
@@ -51,29 +51,32 @@
                                             green:(102 / 255.f)
                                              blue:(102 / 255.f)
                                             alpha:1.f];
-        titleLb.text = @"WDJ推荐 六星级 Origen渴望";
+//        titleLb.numberOfLines = 2;
+//        titleLb.text = @"WDJ推荐 六星级 Origen渴望";
         [cardView addSubview:titleLb];
         self.titleLb = titleLb;
         
         CGFloat radio = ScreenWidth / 320;
         
+//        CGFloat height = ceil(titleLb.font.lineHeight * 2) + 1;
         [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(cardView).mas_offset(5);
             make.top.mas_equalTo(thumbImageV.mas_bottom).mas_offset(7 * radio);
             make.right.mas_equalTo(cardView).mas_offset(-5);
+//            make.height.mas_lessThanOrEqualTo(height);
         }];
         
-        UILabel *sourceLb = [[UILabel alloc] initWithFrame:CGRectZero];
-        sourceLb.font = [UIFont systemFontOfSize:10.f];
-        sourceLb.textColor = [UIColor colorWithRed:(181 / 255.f)
+        UILabel *brandLb = [[UILabel alloc] initWithFrame:CGRectZero];
+        brandLb.font = [UIFont systemFontOfSize:10.f];
+        brandLb.textColor = [UIColor colorWithRed:(181 / 255.f)
                                              green:(181 / 255.f)
                                               blue:(181 / 255.f)
                                              alpha:1.f];
-        sourceLb.text = @"Origen渴望";
-        [cardView addSubview:sourceLb];
-        self.sourceLb = sourceLb;
+//        brandLb.text = @"Origen渴望";
+        [cardView addSubview:brandLb];
+        self.brandLb = brandLb;
         
-        [sourceLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        [brandLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(cardView).mas_offset(5);
             make.top.mas_equalTo(titleLb.mas_bottom).mas_offset(0);
             make.right.mas_equalTo(cardView).mas_offset(-5);
@@ -85,7 +88,7 @@
                                             green:(88 / 255.f)
                                              blue:(67 / 255.f)
                                             alpha:1.f];
-        priceLb.text = @"¥ 180,000.00";
+//        priceLb.text = @"¥ 180,000.00";
         [cardView addSubview:priceLb];
         self.priceLb = priceLb;
         
@@ -111,6 +114,20 @@
 
 - (void)inner_MoreAction:(UIButton *)sender {
     
+}
+
+- (void)setGoods:(YZGoodsModel *)goods {
+    if (!goods) {
+        return;
+    }
+    _goods = goods;
+    [self.thumbImageV setImageWithURL:[NSURL URLWithString:goods.brand.logo]
+                     placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
+    
+    self.titleLb.text = goods.name;
+    self.brandLb.text = goods.brand.brand;
+    self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:goods.sellPrice]];
+    [self setNeedsUpdateConstraints];
 }
 
 @end

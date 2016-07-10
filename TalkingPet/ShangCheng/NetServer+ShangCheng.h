@@ -38,6 +38,9 @@
                                  failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 //1006_狗狗用品搜索
++ (void)searchGoodsListWithPageIndex:(NSInteger)pageIndex
+                             success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
+                             failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 //1008_犬舍详情
 + (void)getQuanSheDetailInfoWithShopId:(NSString *)shopId

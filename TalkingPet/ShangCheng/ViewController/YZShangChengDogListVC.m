@@ -45,6 +45,7 @@ NSString *const TypeFilterKey       = @"TypeFilterKey";
 - (void)dealloc {
     NSLog(@"dealloc:[%@]", self);
     _restoreFilters = nil;
+    _items = nil;
 }
 
 #pragma mark -- NavigationAction
@@ -200,17 +201,23 @@ NSString *const TypeFilterKey       = @"TypeFilterKey";
                               shopId:nil
                            pageIndex:pageIndex
                              success:^(NSArray *items, NSInteger nextPageIndex) {
+                                 weakSelf.pageIndex = nextPageIndex;
                                  if (refresh) {
                                      weakSelf.items = [NSArray arrayWithArray:items];
+                                     [weakSelf.collectionView headerEndRefreshing];
                                  } else {
                                      weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
+                                     [weakSelf.collectionView footerEndRefreshing];
                                  }
-                                 weakSelf.pageIndex = nextPageIndex;
-                                 [weakSelf.collectionView headerEndRefreshing];
                                  [weakSelf.collectionView reloadData];
                              }
                              failure:^(NSError *error, AFHTTPRequestOperation *operation) {
                                  [weakSelf inner_RestoreFiltersWhenError];
+                                 if (refresh) {
+                                     [weakSelf.collectionView headerEndRefreshing];
+                                 } else {
+                                     [weakSelf.collectionView footerEndRefreshing];
+                                 }
                              }];
 }
 

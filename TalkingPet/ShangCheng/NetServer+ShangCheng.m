@@ -172,6 +172,31 @@
                              }];
 }
 
++ (void)searchGoodsListWithPageIndex:(NSInteger)pageIndex
+                             success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
+                             failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure {
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:[NetServer commonDict]];
+    parameters[@"command"] = @"mall";
+    parameters[@"options"] = @"generalSearch";
+    parameters[@"pageIndex"] = @(pageIndex);
+    parameters[@"pageSize"] = @(20);
+    [NetServer requestWithParameters:parameters
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 NSArray *value = responseObject[@"value"];
+                                 JSONModelError *error = nil;
+                                 NSArray *responseItems = [YZGoodsModel arrayOfModelsFromDictionaries:value
+                                                                                              error:&error];
+                                 if (responseItems && responseItems.count > 0) {
+                                     NSInteger newPageIndex = pageIndex + 1;
+                                     success(responseItems, newPageIndex);
+                                 } else {
+                                     success(nil, pageIndex);
+                                 }
+                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 failure(error, operation);
+                             }];
+}
+
 + (void)getQuanSheDetailInfoWithShopId:(NSString *)shopId
                                success:(void(^)(id data))success
                                failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure {

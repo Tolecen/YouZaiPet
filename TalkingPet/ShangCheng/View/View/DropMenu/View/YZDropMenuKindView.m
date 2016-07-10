@@ -14,6 +14,8 @@
 
 @property (nonatomic, weak) UITableView *tableView;
 
+@property (nonatomic, weak) YZShangChengKindScrollCell *scrollCell;
+
 @end
 
 @implementation YZDropMenuKindView
@@ -37,12 +39,12 @@
         [tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:NSStringFromClass(UITableViewHeaderFooterView.class)];
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         tableView.sectionIndexColor = CommonGreenColor;
-//        if ([tableView respondsToSelector:@selector(sectionIndexBackgroundColor)]) {
-//            tableView.sectionIndexBackgroundColor = [UIColor clearColor];
-//        }
-//        if ([tableView respondsToSelector:@selector(sectionIndexTrackingBackgroundColor)]) {
-//            tableView.sectionIndexTrackingBackgroundColor = [UIColor clearColor];
-//        }
+        if ([tableView respondsToSelector:@selector(sectionIndexBackgroundColor)]) {
+            tableView.sectionIndexBackgroundColor = [UIColor clearColor];
+        }
+        if ([tableView respondsToSelector:@selector(sectionIndexTrackingBackgroundColor)]) {
+            tableView.sectionIndexTrackingBackgroundColor = [UIColor clearColor];
+        }
         [self addSubview:tableView];
         self.tableView = tableView;
         
@@ -63,6 +65,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(self.class)];
     YZShangChengKindScrollCell *scrollCell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(YZShangChengKindScrollCell.class)];
     if (indexPath.section == 0) {
+        self.scrollCell = scrollCell;
         scrollCell.hots = self.hots;
         return scrollCell;
     }
@@ -93,7 +96,7 @@
     } else if (section == 1) {
         return 0;
     }
-    return self.alphabet.count;
+    return [self.alphabet[section - 2] count];
 }
 
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {

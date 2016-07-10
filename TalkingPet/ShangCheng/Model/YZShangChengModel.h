@@ -18,7 +18,7 @@
 @property (nonatomic, copy) NSString *alias;
 @property (nonatomic, copy) NSString *fullName;
 @property (nonatomic, copy) NSString *icon;
-@property (nonatomic, copy) NSString *dogId;
+@property (nonatomic, copy) NSString *dogId;//狗狗类型ID
 @property (nonatomic, copy) NSString *typeName;
 
 @end
@@ -43,7 +43,7 @@
 
 @property (nonatomic, strong) NSNumber *createTime;
 
-@property (nonatomic, copy) NSString *dogId;
+@property (nonatomic, copy) NSString *dogId;//狗狗ID
 
 @property (nonatomic, copy) NSString *name;
 
@@ -67,7 +67,32 @@
 
 @end
 
+//品牌
+@protocol YZBrandModel <NSObject>
+@end
+
+@interface YZBrandModel : YZShangChengModel
+
+@property (nonatomic, copy) NSString *brand;
+@property (nonatomic, copy) NSString *content;
+@property (nonatomic, strong) NSNumber *createTime;
+@property (nonatomic, copy) NSString *brandId;//品牌ID
+@property (nonatomic, copy) NSString *logo;
+@property (nonatomic, copy) NSString *subTitle;
+@property (nonatomic, copy, readonly) NSString *createString;
+
+@end
+
 @interface YZGoodsModel : YZShangChengModel
+
+@property (nonatomic, strong) YZBrandModel<YZBrandModel> *brand;
+@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *goodsId;//产品ID
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, assign) long long sellPrice;
+@property (nonatomic, strong) NSNumber *createTime;
+@property (nonatomic, copy) NSString *thumb;
+@property (nonatomic, copy, readonly) NSString *createString;
 
 @end
 
