@@ -15,12 +15,12 @@
 #import "InitializeData.h"
 #import "GTScrollNavigationBar.h"
 #import "Pingpp.h"
-#ifndef DevelopModeUU
-#define QINIUDomain @"petalk"
-#else
-#define QINIUDomain @"testpetalk"
-
-#endif
+//#ifndef DevelopModeUU
+//#define QINIUDomain @"images"
+//#else
+//#define QINIUDomain @"testimages"
+//
+//#endif
 
 #import "NetServer+ShangCheng.h"
 
