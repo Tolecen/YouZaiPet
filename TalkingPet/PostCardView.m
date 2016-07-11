@@ -79,7 +79,7 @@
         //        NSString *messageDateStr = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[talking.publishTime doubleValue]]];
         if (type==1) {
             [self.headerV setFrame:CGRectMake(spriteW*startX, spriteH*startY, spriteW*width, spriteH*height)];
-            //            self.headerV.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].currentPet.headImgURL];
+            //            self.headerV.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
             [self.spritesView addSubview:self.headerV];
         }
         else if (type==2){
@@ -112,7 +112,7 @@
         else if (type==6)
         {
             [self.nicknameL setFrame:CGRectMake(spriteW*startX, spriteH*startY-8, spriteW*width, 20)];
-            //            [self.nicknameL setText:[UserServe sharedUserServe].currentPet.nickname];
+            //            [self.nicknameL setText:[UserServe sharedUserServe].account.nickname];
             [self.templateImageV addSubview:self.nicknameL];
         }
         
@@ -140,7 +140,7 @@
         [dateFormatter setDateFormat:@"MM/dd*yyyy"];
         NSString *messageDateStr = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[talking.publishTime doubleValue]]];
         if (type==1) {
-            self.headerV.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].currentPet.headImgURL];
+            self.headerV.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
         }
         else if (type==2){
             self.contentImageV.imageURL = [NSURL URLWithString:talking.imgUrl];
@@ -158,7 +158,7 @@
         }
         else if (type==6)
         {
-            [self.nicknameL setText:[UserServe sharedUserServe].currentPet.nickname];
+            [self.nicknameL setText:[UserServe sharedUserServe].account.nickname];
         }
         
     }

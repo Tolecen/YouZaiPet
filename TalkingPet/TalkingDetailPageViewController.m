@@ -270,7 +270,7 @@
     [self.shareLabel setTextColor:[UIColor colorWithWhite:140/255.0f alpha:1]];
     
     if (self.talking.ifZan) {
-        if ([UserServe sharedUserServe].currentPet) {
+        if ([UserServe sharedUserServe].account) {
             [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
         }
 //        [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
@@ -363,7 +363,7 @@
     
     [mDict setObject:@"C_R" forKey:@"type"];
     [mDict setObject:@"20" forKey:@"pageSize"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
     
     
     NSLog(@"getAllCommentsAndForward:%@",mDict);
@@ -397,21 +397,21 @@
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"one" forKey:@"options"];
     [mDict setObject:self.talking.theID forKey:@"petalkId"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"currPetId"];
     NSLog(@"oneShuoshuo:%@",mDict);
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.talking = [[TalkingBrowse alloc] initWithHostInfo:[responseObject objectForKey:@"value"]];
         self.firstRowHeight = [BrowserForwardedTalkingTableViewCell heightForRowWithTalking:self.talking CellType:1];
         [self.contentTableView reloadData];
-        if ([UserServe sharedUserServe].currentPet.petID) {
-            if ([self.talking.petInfo.petID isEqualToString:[UserServe sharedUserServe].currentPet.petID]) {
+        if ([UserServe sharedUserServe].userID) {
+            if ([self.talking.petInfo.petID isEqualToString:[UserServe sharedUserServe].userID]) {
                 self.canEditComment = YES;
             }
         }
 
         NSLog(@"get shuoshuo content success:%@",responseObject);
         if (self.talking.ifZan) {
-            if ([UserServe sharedUserServe].currentPet) {
+            if ([UserServe sharedUserServe].account) {
                 [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
             }
             
@@ -446,7 +446,7 @@
     [mDict setObject:@"counter" forKey:@"command"];
     [mDict setObject:@"petalk" forKey:@"options"];
     [mDict setObject:self.talking.theID forKey:@"petalkId"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
     NSLog(@"getCommentAndFavorNum:%@",mDict);
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -498,7 +498,7 @@
     [mDict setObject:self.talking.theID forKey:@"petalkId"];
     [mDict setObject:@"F" forKey:@"type"];
     [mDict setObject:@"20" forKey:@"pageSize"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
     
     
     NSLog(@"getAllFavors:%@",mDict);
@@ -612,7 +612,7 @@
 }
 -(void)commentItBtn:(UIButton *)sender
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -632,7 +632,7 @@
 }
 -(void)forwardItBtn:(UIButton *)sender
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -816,7 +816,7 @@
 {
     if (indexPath.section==1) {
         if (!self.showFavorList) {
-            NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+            NSString * currentPetId = [UserServe sharedUserServe].userID;
             if (!currentPetId) {
                 if (![RootViewController sharedRootViewController].presentedViewController) {
                     [[RootViewController sharedRootViewController] showLoginViewController];
@@ -1011,7 +1011,7 @@
 
 -(void)forwardThisTalkingWithMsg:(NSString *)forwardMsg
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -1047,7 +1047,7 @@
 
 -(void)makeCommentToThisTalkingWithContent:(NSString *)commentContent AimPetID:(NSString *)aimPetId
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -1092,7 +1092,7 @@
 
 -(void)makeAudioCommentToThisTalkingWithAudioURL:(NSString *)audioUrl AudioSeconds:(NSString *)audioSeconds AimPetID:(NSString *)aimPetId
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -1138,7 +1138,7 @@
 
 -(void)favorThisTalking
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -1166,7 +1166,7 @@
         [mDict setObject:currentPetId forKey:@"petId"];
         
         
-        [self.talking.showZanArray insertObject:[NSDictionary dictionaryWithObjectsAndKeys:[UserServe sharedUserServe].currentPet.petID,@"petId",[UserServe sharedUserServe].currentPet.nickname,@"petNickName",[UserServe sharedUserServe].currentPet.headImgURL,@"petHeadPortrait", nil] atIndex:0];
+        [self.talking.showZanArray insertObject:[NSDictionary dictionaryWithObjectsAndKeys:[UserServe sharedUserServe].userID,@"petId",[UserServe sharedUserServe].account.nickname,@"petNickName",[UserServe sharedUserServe].account.headImgURL,@"petHeadPortrait", nil] atIndex:0];
         if (_delegate&& [_delegate respondsToSelector:@selector(resetShuoShuoStatus:)]) {
             
             [self.delegate resetShuoShuoStatus:self.talking];
@@ -1211,7 +1211,7 @@
         
 //        for (int i = 0; i<self.talking.showZanArray.count; i++) {
 //            NSDictionary * dict = self.talking.showZanArray[i];
-//            if ([UserServe sharedUserServe].currentPet.petID isEqualToString:[dict objectForKey:@"petI"]) {
+//            if ([UserServe sharedUserServe].userID isEqualToString:[dict objectForKey:@"petI"]) {
 //                <#statements#>
 //            }
 //        }
@@ -1239,7 +1239,7 @@
 {
     
     NSLog(@"%@",text);
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -1792,7 +1792,7 @@
 -(void)moreBtnClicked
 {
     UIActionSheet * act;
-    if ([self.talking.petInfo.petID isEqualToString:[UserServe sharedUserServe].currentPet.petID]) {
+    if ([self.talking.petInfo.petID isEqualToString:[UserServe sharedUserServe].userID]) {
         act= [[UIActionSheet alloc] initWithTitle:@"更多操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"删除这条宠物说",@"举报这条宠物说", nil];
         act.tag = 1;
     }
@@ -1835,9 +1835,9 @@
     [dict setObject:@"message" forKey:@"command"];
     [dict setObject:@"CUP" forKey:@"options"];
     [dict setObject:self.talking.theID forKey:@"petalkId"];
-    if([UserServe sharedUserServe].currentPet.petID)
+    if([UserServe sharedUserServe].userID)
     {
-        [dict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+        [dict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     
     [dict setObject:@"1" forKey:@"type"];
@@ -1932,8 +1932,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        if ([self.talking.petInfo.petID isEqualToString:[UserServe sharedUserServe].currentPet.petID]) {
+    if ([UserServe sharedUserServe].userID) {
+        if ([self.talking.petInfo.petID isEqualToString:[UserServe sharedUserServe].userID]) {
             self.canEditComment = YES;
         }
     }

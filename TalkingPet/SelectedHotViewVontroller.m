@@ -355,7 +355,7 @@
     [hotDic setObject:@"fun" forKey:@"command"];
     [hotDic setObject:@"10" forKey:@"pageSize"];
     [hotDic setObject:@"schedule" forKey:@"options"];
-    [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:hotDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray * arr = responseObject[@"value"];
         for (NSDictionary * dic in arr) {
@@ -765,7 +765,7 @@
     [hotDic setObject:talking.theID forKey:@"petalkId"];
     [hotDic setObject:@"0" forKey:@"code"];
     [hotDic setObject:@"choice" forKey:@"options"];
-    [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:hotDic success:nil failure:nil];
 }
 -(void)praiseThePetalk
@@ -780,7 +780,7 @@
     [hotDic setObject:talking.theID forKey:@"petalkId"];
     [hotDic setObject:@"1" forKey:@"code"];
     [hotDic setObject:@"choice" forKey:@"options"];
-    [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:hotDic success:nil failure:nil];
 }
 - (void)guodu

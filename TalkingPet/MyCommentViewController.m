@@ -287,9 +287,9 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"userList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     }
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:@"C" forKey:@"type"];
@@ -329,9 +329,9 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"userList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     }
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:@"C" forKey:@"type"];

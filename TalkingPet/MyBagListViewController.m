@@ -61,10 +61,10 @@
     [mDict setObject:@"giftBag" forKey:@"command"];
     [mDict setObject:@"mine" forKey:@"options"];
 //    [mDict setObject:@"DJ" forKey:@"code"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"no" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"no" forKey:@"petId"];
     [mDict setObject:@"20" forKey:@"pageSize"];
     [mDict setObject:[NSString stringWithFormat:@"%d",currentIndex] forKey:@"pageIndex"];
-    //    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    //    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     NSLog(@"Get ShuoShuo:%@",mDict);
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"error"] isEqualToString:@"200"]) {

@@ -17,4 +17,24 @@
 @dynamic userName;
 @dynamic actiontime;
 
+@dynamic daren;
+@dynamic attentionNo;
+@dynamic birthday;
+@dynamic breed;
+@dynamic comment;
+@dynamic fansNo;
+@dynamic favour;
+@dynamic gender;
+@dynamic headImgURL;
+@dynamic issue;
+@dynamic nickname;
+@dynamic owner;
+@dynamic petID;
+@dynamic region;
+@dynamic relay;
+@dynamic grade;
+@dynamic score;
+@dynamic coin;
+@dynamic chatLimits;
+
 @end

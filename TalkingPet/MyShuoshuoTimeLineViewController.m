@@ -34,8 +34,8 @@
     [hotDic setObject:@"petalk" forKey:@"command"];
     [hotDic setObject:@"userList" forKey:@"options"];
     [hotDic setObject:@"10" forKey:@"pageSize"];
-    [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
-    [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [hotDic setObject:@"O" forKey:@"type"];
     
     self.tHelper.reqDict = hotDic;

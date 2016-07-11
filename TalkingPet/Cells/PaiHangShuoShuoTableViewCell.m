@@ -422,7 +422,7 @@
 
 - (void)commentAction
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -440,7 +440,7 @@
 }
 - (void)favorAction
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -467,7 +467,7 @@
         [mDict setObject:@"cancelFavour" forKey:@"options"];
         [mDict setObject:self.talking.theID forKey:@"petalkId"];
         [mDict setObject:@"F" forKey:@"type"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
         
         
         NSLog(@"cancelFavor:%@",mDict);
@@ -495,7 +495,7 @@
         [mDict setObject:@"create" forKey:@"options"];
         [mDict setObject:self.talking.theID forKey:@"petalkId"];
         [mDict setObject:@"F" forKey:@"type"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
         
         
         NSLog(@"doFavor:%@",mDict);

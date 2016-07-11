@@ -178,7 +178,7 @@
     [mDict setObject:@"pet" forKey:@"command"];
     [mDict setObject:@"recommend" forKey:@"options"];
     [mDict setObject:@"9" forKey:@"pageSize"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.userArr = [NSMutableArray array];
         self.idArr = [NSMutableArray array];
@@ -212,7 +212,7 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"petfans" forKey:@"command"];
         [mDict setObject:@"batchFocus" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"fansPetId"];
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"fansPetId"];
         [mDict setObject:petIds forKey:@"petId"];
         [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [SVProgressHUD dismiss];

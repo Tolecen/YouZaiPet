@@ -78,7 +78,7 @@
     
     [self.tableView addFooterWithTarget:self action:@selector(tableViewFooterRereshing:)];
     [self reloadData];
-    if ([self.petID isEqual:[UserServe sharedUserServe].currentPet.petID]&&self.listType == UserListTypeAttention) {
+    if ([self.petID isEqual:[UserServe sharedUserServe].userID]&&self.listType == UserListTypeAttention) {
         self.mSearchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 44, 320, 44)];
         _mSearchBar.autocorrectionType=UITextAutocorrectionTypeNo;
         _mSearchBar.autocapitalizationType=UITextAutocapitalizationTypeNone;
@@ -106,24 +106,24 @@
         [mDict setObject:@"petfans" forKey:@"command"];
         [mDict setObject:@"findFocus" forKey:@"options"];
         [mDict setObject:self.petID forKey:@"petId"];
-        if ([UserServe sharedUserServe].currentPet.petID) {
-            [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+        if ([UserServe sharedUserServe].userID) {
+            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }
     if (self.listType == UserListTypeFans) {
         [mDict setObject:@"petfans" forKey:@"command"];
         [mDict setObject:@"findFans" forKey:@"options"];
         [mDict setObject:self.petID forKey:@"petId"];
-        if ([UserServe sharedUserServe].currentPet.petID) {
-            [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+        if ([UserServe sharedUserServe].userID) {
+            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }
     if (self.listType == UserListBlackList) {
         [mDict setObject:@"setting" forKey:@"command"];
         [mDict setObject:@"CBL" forKey:@"options"];
         [mDict setObject:self.petID forKey:@"petId"];
-        if ([UserServe sharedUserServe].currentPet.petID) {
-            [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+        if ([UserServe sharedUserServe].userID) {
+            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }
 
@@ -160,24 +160,24 @@
         [mDict setObject:@"petfans" forKey:@"command"];
         [mDict setObject:@"findFocus" forKey:@"options"];
         [mDict setObject:self.petID forKey:@"petId"];
-        if ([UserServe sharedUserServe].currentPet.petID) {
-            [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+        if ([UserServe sharedUserServe].userID) {
+            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }
     if (self.listType == UserListTypeFans) {
         [mDict setObject:@"petfans" forKey:@"command"];
         [mDict setObject:@"findFans" forKey:@"options"];
         [mDict setObject:self.petID forKey:@"petId"];
-        if ([UserServe sharedUserServe].currentPet.petID) {
-            [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+        if ([UserServe sharedUserServe].userID) {
+            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }
     if (self.listType == UserListBlackList) {
         [mDict setObject:@"setting" forKey:@"command"];
         [mDict setObject:@"CBL" forKey:@"options"];
         [mDict setObject:self.petID forKey:@"petId"];
-        if ([UserServe sharedUserServe].currentPet.petID) {
-            [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+        if ([UserServe sharedUserServe].userID) {
+            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }
 
@@ -319,8 +319,8 @@
     [mDict setObject:@"petfans" forKey:@"command"];
     [mDict setObject:@"findFocus" forKey:@"options"];
     [mDict setObject:self.petID forKey:@"petId"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+    if ([UserServe sharedUserServe].userID) {
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     }
     [mDict setObject:searchBar.text forKey:@"keyword"];
     [mDict setObject:@"0" forKey:@"pageIndex"];
@@ -343,7 +343,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"setting" forKey:@"command"];
     [mDict setObject:@"CBD" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     [mDict setObject:[dict objectForKey:@"id"] forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
 

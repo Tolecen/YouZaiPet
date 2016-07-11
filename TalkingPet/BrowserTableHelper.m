@@ -175,8 +175,8 @@
     }
     //    if ([theDict objectForKey:@"petId"]) {
     //        if (![[theDict objectForKey:@"petId"] isEqualToString:currentPetId]) {
-    //            if ([UserServe sharedUserServe].currentPet.petID) {
-    //                [theDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    //            if ([UserServe sharedUserServe].userID) {
+    //                [theDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     //            }
     //
     //        }
@@ -189,9 +189,9 @@
             self.dataArray = [self getModelArray:[[responseObject objectForKey:@"value"] objectForKey:@"list"]];
             self.usePage = YES;
             if ([[self.reqDict objectForKey:@"options"] isEqualToString:@"hotList"]) {
-                [[NSUserDefaults standardUserDefaults] setObject:[[responseObject objectForKey:@"value"] objectForKey:@"list"] forKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].currentPet.petID]];
+                [[NSUserDefaults standardUserDefaults] setObject:[[responseObject objectForKey:@"value"] objectForKey:@"list"] forKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].userID]];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-                [[NSUserDefaults standardUserDefaults] setObject:self.reqDict forKey:[NSString stringWithFormat:@"hotListReqDict%@",[UserServe sharedUserServe].currentPet.petID]];
+                [[NSUserDefaults standardUserDefaults] setObject:self.reqDict forKey:[NSString stringWithFormat:@"hotListReqDict%@",[UserServe sharedUserServe].userID]];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
             if ([self.delegate respondsToSelector:@selector(resultCount:)]) {
@@ -202,9 +202,9 @@
             self.dataArray = [self getModelArray:[responseObject objectForKey:@"value"]];
             self.usePage = NO;
             if ([[self.reqDict objectForKey:@"options"] isEqualToString:@"focusList"]) {
-                [[NSUserDefaults standardUserDefaults] setObject:[responseObject objectForKey:@"value"] forKey:[NSString stringWithFormat:@"focusList%@",[UserServe sharedUserServe].currentPet.petID]];
+                [[NSUserDefaults standardUserDefaults] setObject:[responseObject objectForKey:@"value"] forKey:[NSString stringWithFormat:@"focusList%@",[UserServe sharedUserServe].userID]];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-                [[NSUserDefaults standardUserDefaults] setObject:self.reqDict forKey:[NSString stringWithFormat:@"focusListReqDict%@",[UserServe sharedUserServe].currentPet.petID]];
+                [[NSUserDefaults standardUserDefaults] setObject:self.reqDict forKey:[NSString stringWithFormat:@"focusListReqDict%@",[UserServe sharedUserServe].userID]];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
         }
@@ -234,7 +234,7 @@
             [self loadFirstDataPageWithDict:self.reqDict];
         }
     }];
-    currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    currentPetId = [UserServe sharedUserServe].userID;
     
 }
 -(void)loadNextPage
@@ -255,8 +255,8 @@
     }
     //    if ([self.reqDict objectForKey:@"petId"]) {
     //        if (![[self.reqDict objectForKey:@"petId"] isEqualToString:currentPetId]) {
-    //            if ([UserServe sharedUserServe].currentPet.petID) {
-    //                [self.reqDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    //            if ([UserServe sharedUserServe].userID) {
+    //                [self.reqDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     //            }
     //        }
     //    }
@@ -282,7 +282,7 @@
         [self endFooterRefreshing:self.tableV];
     }];
     
-    currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    currentPetId = [UserServe sharedUserServe].userID;
     
 }
 -(void)getHotShuoShuoListWithMark:(int)lastMark
@@ -290,10 +290,10 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"hotList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"no" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"no" forKey:@"petId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:[NSString stringWithFormat:@"%d",lastMark] forKey:@"pageIndex"];
-    //    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    //    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     NSLog(@"Get ShuoShuo:%@",mDict);
     [NetServer requestWithParameters:mDict Controller:self.theController success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"error"] isEqualToString:@"200"]) {
@@ -329,13 +329,13 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"focusList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"no" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"no" forKey:@"petId"];
     if (lastMark) {
         [mDict setObject:lastMark forKey:@"id"];
     }
     
     [mDict setObject:@"10" forKey:@"pageSize"];
-    //    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    //    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     NSLog(@"Get attention ShuoShuo:%@",mDict);
     [NetServer requestWithParameters:mDict Controller:self.theController success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"error"] isEqualToString:@"200"]) {
@@ -503,7 +503,7 @@
 }
 -(void)resendThisTaskWithTaskId:(NSString *)taskId
 {
-    NSDictionary * failedDict = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"FailedContent%@",[UserServe sharedUserServe].currentPet.petID]];
+    NSDictionary * failedDict = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"FailedContent%@",[UserServe sharedUserServe].userID]];
     NSDictionary * theD = [failedDict objectForKey:taskId];
     
     NSString *documentsw = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory , NSUserDomainMask, YES) objectAtIndex:0];
@@ -528,7 +528,7 @@
     
     NSMutableDictionary * toSaveD = [NSMutableDictionary dictionaryWithDictionary:failedDict];
     [toSaveD removeObjectForKey:taskId];
-    [[NSUserDefaults standardUserDefaults] setObject:toSaveD forKey:[NSString stringWithFormat:@"FailedContent%@",[UserServe sharedUserServe].currentPet.petID]];
+    [[NSUserDefaults standardUserDefaults] setObject:toSaveD forKey:[NSString stringWithFormat:@"FailedContent%@",[UserServe sharedUserServe].userID]];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [NetServer uploadFailedShuoShuoWithImage:img ThumImg:thumbImg Audio:audioData ContentDict:contentDict Progress:nil Success:^(id responseObject, NSString *fileURL) {
@@ -541,7 +541,7 @@
 }
 -(void)removeThisTaskWithTaskId:(NSString *)taskId
 {
-    NSDictionary * failedDict = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"FailedContent%@",[UserServe sharedUserServe].currentPet.petID]];
+    NSDictionary * failedDict = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"FailedContent%@",[UserServe sharedUserServe].userID]];
     NSDictionary * theD = [failedDict objectForKey:taskId];
     
     NSString *documentsw = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory , NSUserDomainMask, YES) objectAtIndex:0];
@@ -552,7 +552,7 @@
     
     NSMutableDictionary * toSaveD = [NSMutableDictionary dictionaryWithDictionary:failedDict];
     [toSaveD removeObjectForKey:taskId];
-    [[NSUserDefaults standardUserDefaults] setObject:toSaveD forKey:[NSString stringWithFormat:@"FailedContent%@",[UserServe sharedUserServe].currentPet.petID]];
+    [[NSUserDefaults standardUserDefaults] setObject:toSaveD forKey:[NSString stringWithFormat:@"FailedContent%@",[UserServe sharedUserServe].userID]];
     [[NSUserDefaults standardUserDefaults] synchronize];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     [dict setObject:taskId forKey:@"taskID"];
@@ -1476,7 +1476,7 @@
 }
 - (void)petProfileWhoPublishTalkingBrowse: (TalkingBrowse *)talkingBrowse
 {
-    //    if ([talkingBrowse.petInfo.petID isEqualToString:[UserServe sharedUserServe].currentPet.petID]) {
+    //    if ([talkingBrowse.petInfo.petID isEqualToString:[UserServe sharedUserServe].userID]) {
     //
     //    }
     PersonProfileViewController * pv = [[PersonProfileViewController alloc] init];

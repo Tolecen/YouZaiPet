@@ -214,8 +214,8 @@
     [mDict setObject:@"interaction" forKey:@"command"];
     [mDict setObject:@"share" forKey:@"options"];
     [mDict setObject:petalkId forKey:@"petalkId"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }else
     {
         [mDict setObject:@"0" forKey:@"petId"];

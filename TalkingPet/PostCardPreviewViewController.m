@@ -294,7 +294,7 @@
 //        NSString *messageDateStr = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[talking.publishTime doubleValue]]];
         if (type==1) {
             [self.headerV setFrame:CGRectMake(spriteW*startX, spriteH*startY, spriteW*width, spriteH*height)];
-//            self.headerV.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].currentPet.headImgURL];
+//            self.headerV.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
             [self.spritesView addSubview:self.headerV];
         }
         else if (type==2){
@@ -327,7 +327,7 @@
         else if (type==6)
         {
             [self.nicknameL setFrame:CGRectMake(spriteW*startX, spriteH*startY, spriteW*width, spriteH*height)];
-//            [self.nicknameL setText:[UserServe sharedUserServe].currentPet.nickname];
+//            [self.nicknameL setText:[UserServe sharedUserServe].account.nickname];
             [self.templateImageV addSubview:self.nicknameL];
         }
         
@@ -355,7 +355,7 @@
         [dateFormatter setDateFormat:@"MM/dd*yyyy"];
         NSString *messageDateStr = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[talking.publishTime doubleValue]]];
         if (type==1) {
-            self.headerV.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].currentPet.headImgURL];
+            self.headerV.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
         }
         else if (type==2){
             self.contentImageV.imageURL = [NSURL URLWithString:talking.imgUrl];
@@ -373,7 +373,7 @@
         }
         else if (type==6)
         {
-            [self.nicknameL setText:[UserServe sharedUserServe].currentPet.nickname];
+            [self.nicknameL setText:[UserServe sharedUserServe].account.nickname];
         }
         
     }
@@ -400,8 +400,8 @@
     [hotDic setObject:@"list4Postcard" forKey:@"options"];
     [hotDic setObject:@"20" forKey:@"pageSize"];
 //    [hotDic setObject:[NSString stringWithFormat:@"%d",(int)self.pageIndex] forKey:@"pageIndex"];
-    [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
-    [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [hotDic setObject:@"O" forKey:@"type"];
     [NetServer requestWithParameters:hotDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.pageIndex++;
@@ -442,8 +442,8 @@
     [hotDic setObject:@"list4Postcard" forKey:@"options"];
     [hotDic setObject:@"20" forKey:@"pageSize"];
     [hotDic setObject:self.lastId forKey:@"id"];
-    [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
-    [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [hotDic setObject:@"O" forKey:@"type"];
     [NetServer requestWithParameters:hotDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.pageIndex++;
@@ -466,8 +466,8 @@
     [usersDict setObject:@"product" forKey:@"command"];
     [usersDict setObject:@"detailSpecsByCategory" forKey:@"options"];
     [usersDict setObject:@"1" forKey:@"categoryId"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dict = [responseObject objectForKey:@"value"];
@@ -567,8 +567,8 @@
     [usersDict setObject:@"order" forKey:@"command"];
     [usersDict setObject:@"create" forKey:@"options"];
     [usersDict setObject:itemArray forKey:@"orderItems"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [NetServer requestWithEncryptParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self toConfirmPageWithOrderId:[responseObject objectForKey:@"value"]];
@@ -654,7 +654,7 @@
 }
 -(void)addToList
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];

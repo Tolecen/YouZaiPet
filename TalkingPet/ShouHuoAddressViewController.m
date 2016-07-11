@@ -46,7 +46,7 @@
     [mDict setObject:@"shippingAddress" forKey:@"command"];
     [mDict setObject:@"one" forKey:@"options"];
 //    [mDict setObject:@"9" forKey:@"pageSize"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         ShouHuoInfoTableViewCell *cell1 = (ShouHuoInfoTableViewCell *)[_infoTableV cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         cell1.textView.text = [[[responseObject objectForKey:@"value"] objectForKey:@"name"] isEqualToString:@" "]?@"":[[responseObject objectForKey:@"value"] objectForKey:@"name"];
@@ -136,7 +136,7 @@
     else
         [mDict setObject:cell4.textView.text forKey:@"zipcode"];
     //    [mDict setObject:@"9" forKey:@"pageSize"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
      [SVProgressHUD showWithStatus:@"保存地址中..."];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.navigationController popViewControllerAnimated:YES];

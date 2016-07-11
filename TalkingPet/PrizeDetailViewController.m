@@ -141,8 +141,8 @@
     NSMutableDictionary* usersDict = [NetServer commonDict];
     [usersDict setObject:@"awardActivity" forKey:@"command"];
     [usersDict setObject:@"one" forKey:@"options"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [usersDict setObject:self.awardId forKey:@"id"];
     [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -280,11 +280,11 @@
     NSMutableDictionary* usersDict = [NetServer commonDict];
     [usersDict setObject:@"awardActivity" forKey:@"command"];
     [usersDict setObject:@"join" forKey:@"options"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [usersDict setObject:self.awardId forKey:@"activityId"];
-    [usersDict setObject:[UserServe sharedUserServe].currentPet.headImgURL forKey:@"headPortrait"];
+    [usersDict setObject:[UserServe sharedUserServe].account.headImgURL forKey:@"headPortrait"];
     [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];
         [self getDetail];

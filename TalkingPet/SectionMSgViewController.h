@@ -12,7 +12,7 @@
 #import "ChatViewController.h"
 #import "DatabaseServe.h"
 @class RootViewController;
-@interface SectionMSgViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+@interface SectionMSgViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>{
     int c_r_count;
     int f_count;
     int fans_count;

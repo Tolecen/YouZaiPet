@@ -19,6 +19,10 @@
 #import "RootViewController.h"
 #import "PublishServer.h"
 #import "MyOrderViewConyroller.h"
+#import "UserCenterGouWuFuncTableViewCell.h"
+#import "AddressManageViewController.h"
+#import "SetViewController.h"
+#import "SectionMSgViewController.h"
 
 @interface UserCenterCell : UITableViewCell
 @property (nonatomic,retain)UIImageView * imageV;
@@ -94,8 +98,8 @@
     if (self) {
         // Custom initialization
         self.title = @"个人中心";
-        self.stringArr = @[@"我的等级",@"我的宠豆",@"我的积分",@"订单管理",@"我的优惠券"];
-        self.imgArr = @[@"usercenter_gradeIcon",@"usercenter_peaIcon",@"usercenter_scoreIcon",@"usercenter_myOrder",@"usercenter_myQuan"];
+        self.stringArr = @[@"我的等级",@"我的仔币"];
+        self.imgArr = @[@"wodedengji@2x",@"wodezaibi@2x"];
         self.hideNaviBg = YES;
     }
     return self;
@@ -108,81 +112,101 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithR:240 g:240 b:240 alpha:1];
     // Do any additional setup after loading the view.
-    [self setBackButtonWithTarget:@selector(backAction)];
-    [self setRightButtonWithName:nil BackgroundImg:@"morebtn" Target:@selector(moreBtnClicked)];
-    bgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width*673/750)];
+//    [self setBackButtonWithTarget:@selector(backAction)];
+//    [self setRightButtonWithName:nil BackgroundImg:@"morebtn" Target:@selector(moreBtnClicked)];
+    
+    UIImage *image1 = [UIImage imageNamed:@"shezhi@2x"];
+    image1 = [image1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *lItem = [[UIBarButtonItem alloc] initWithImage:image1 style:UIBarButtonItemStyleDone target:self action:@selector(showSetViewController)];
+    self.navigationItem.leftBarButtonItem = lItem;
+    
+    UIImage *image = [UIImage imageNamed:@"xiaoxi@2x"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *rightMoreItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toMessageVC:)];
+    self.navigationItem.rightBarButtonItem = rightMoreItem;
+    
+    bgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, -100, self.view.frame.size.width, 400)];
     [bgV setImage:[UIImage imageNamed:@"usercenter_topBg"]];
     [self.view addSubview:bgV];
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     [self.view addSubview:_tableView];
+//    _tableView.hidden = YES;
     _tableView.backgroundView = nil;
     _tableView.clipsToBounds = YES;
     _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.backgroundView = nil;
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
 //    _tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.rowHeight = 50;
+//    _tableView.rowHeight = 50;
     [_tableView addHeaderWithTarget:self action:@selector(getCurrentPetInfo)];
     _tableView.tableHeaderView = ({
-        UIView * view  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width*673/750)];
+        UIView * view  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 300)];
         view.backgroundColor = [UIColor clearColor];
         
-        signInB = [UIButton buttonWithType:UIButtonTypeCustom];
-        signInB.frame = CGRectMake(ScreenWidth-10-48, 10+navigationBarHeight, 46, 20);
-        signInB.titleLabel.font = [UIFont systemFontOfSize:13];
-        [signInB addTarget:self action:@selector(currentPetSignIn) forControlEvents:UIControlEventTouchUpInside];
-        [self buildSignInButtonWithCurrentPetSignatured];
-        [view addSubview:signInB];
+        UIView * whiteV = [[UIView alloc] initWithFrame:CGRectMake(0, 120, self.view.frame.size.width, 180)];
+        whiteV.backgroundColor = [UIColor whiteColor];
+        [view addSubview:whiteV];
         
-        photoIB = [[EGOImageButton alloc] initWithFrame:CGRectMake(view.center.x-37, 23+navigationBarHeight, 74, 74)];
+//        signInB = [UIButton buttonWithType:UIButtonTypeCustom];
+//        signInB.frame = CGRectMake(ScreenWidth-10-48, 10+navigationBarHeight, 46, 20);
+//        signInB.titleLabel.font = [UIFont systemFontOfSize:13];
+//        [signInB addTarget:self action:@selector(currentPetSignIn) forControlEvents:UIControlEventTouchUpInside];
+//        [self buildSignInButtonWithCurrentPetSignatured];
+//        [view addSubview:signInB];
+        
+        photoIB = [[EGOImageButton alloc] initWithFrame:CGRectMake(view.center.x-37, 120-37, 74, 74)];
         photoIB.placeholderImage = [UIImage imageNamed:@"placeholderHead"];
         photoIB.layer.masksToBounds=YES;
         photoIB.layer.cornerRadius = 37;
+        photoIB.layer.borderColor = [CommonGreenColor CGColor];
+        photoIB.layer.borderWidth = 1;
         [view addSubview:photoIB];
         [photoIB addTarget:self action:@selector(pushToEditCurrentPetVC) forControlEvents:UIControlEventTouchUpInside];
         
-        self.darenV = [[UIImageView alloc] initWithFrame:CGRectMake(view.center.x-37+74-20, 23+74-20+navigationBarHeight, 20, 20)];
-        [self.darenV setImage:[UIImage imageNamed:@"daren"]];
-        [view addSubview:self.darenV];
-        self.darenV.hidden = YES;
+//        self.darenV = [[UIImageView alloc] initWithFrame:CGRectMake(view.center.x-37+74-20, 23+74-20+navigationBarHeight, 20, 20)];
+//        [self.darenV setImage:[UIImage imageNamed:@"daren"]];
+//        [view addSubview:self.darenV];
+//        self.darenV.hidden = YES;
         
-        nicknameL = [[UILabel alloc] initWithFrame:CGRectMake(0, 100+navigationBarHeight, 300, 20)];
+        nicknameL = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(photoIB.frame)+10, 300, 20)];
         nicknameL.center = CGPointMake(photoIB.center.x, nicknameL.center.y);
         nicknameL.backgroundColor = [UIColor clearColor];
         nicknameL.font = [UIFont systemFontOfSize:15];
         nicknameL.textAlignment = NSTextAlignmentCenter;
-        nicknameL.textColor = [UIColor whiteColor];
+        nicknameL.textColor = CommonGreenColor;
         [view addSubview:nicknameL];
         
-        genderIV = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(photoIB.frame)-20, CGRectGetMaxY(photoIB.frame)-20, 20, 20)];
-        [view addSubview:genderIV];
+//        genderIV = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(photoIB.frame)-20, CGRectGetMaxY(photoIB.frame)-20, 20, 20)];
+//        [view addSubview:genderIV];
         
-        breedAgeL = [[UILabel alloc] initWithFrame:CGRectMake(0, 123+navigationBarHeight, ScreenWidth, 20)];
-        breedAgeL.backgroundColor = [UIColor clearColor];
-        breedAgeL.textColor = [UIColor whiteColor];
-        breedAgeL.font = [UIFont systemFontOfSize:14];
-        breedAgeL.textAlignment = NSTextAlignmentCenter;
-        [view addSubview:breedAgeL];
+//        breedAgeL = [[UILabel alloc] initWithFrame:CGRectMake(0, 123+navigationBarHeight, ScreenWidth, 20)];
+//        breedAgeL.backgroundColor = [UIColor clearColor];
+//        breedAgeL.textColor = [UIColor whiteColor];
+//        breedAgeL.font = [UIFont systemFontOfSize:14];
+//        breedAgeL.textAlignment = NSTextAlignmentCenter;
+//        [view addSubview:breedAgeL];
         
         attentionB = [UIButton buttonWithType:UIButtonTypeCustom];
-        [attentionB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [attentionB setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         attentionB.titleLabel.font = [UIFont systemFontOfSize:16];
         [attentionB addTarget:self action:@selector(puthAttentionViewCntroller) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:attentionB];
-        [attentionB setTitleShadowColor:[UIColor colorWithWhite:0.3 alpha:0.6] forState:UIControlStateNormal];
-        attentionB.titleLabel.shadowOffset = CGSizeMake(1, 1);
+//        [attentionB setTitleShadowColor:[UIColor colorWithWhite:0.3 alpha:0.6] forState:UIControlStateNormal];
+//        attentionB.titleLabel.shadowOffset = CGSizeMake(1, 1);
         
         fansB = [UIButton buttonWithType:UIButtonTypeCustom];
-        [fansB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [fansB setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         fansB.titleLabel.font = [UIFont systemFontOfSize:16];
         [fansB addTarget:self action:@selector(puthFansViewCntroller) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:fansB];
-        [fansB setTitleShadowColor:[UIColor colorWithWhite:0.3 alpha:0.6] forState:UIControlStateNormal];
-        fansB.titleLabel.shadowOffset = CGSizeMake(1, 1);
+//        [fansB setTitleShadowColor:[UIColor colorWithWhite:0.3 alpha:0.6] forState:UIControlStateNormal];
+//        fansB.titleLabel.shadowOffset = CGSizeMake(1, 1);
         
-        UILabel * lineL = [[UILabel alloc] initWithFrame:CGRectMake(view.center.x-10, 153+navigationBarHeight, 20, 10)];
+        UILabel * lineL = [[UILabel alloc] initWithFrame:CGRectMake(view.center.x-10, CGRectGetMaxY(nicknameL.frame)+16, 20, 10)];
         [lineL setText:@"|"];
         [lineL setTextColor:[UIColor whiteColor]];
         [lineL setBackgroundColor:[UIColor clearColor]];
@@ -192,26 +216,26 @@
         lineL.shadowOffset = CGSizeMake(1, 1);
         [view addSubview:lineL];
         
-        UIView * bView = [[UIView alloc] initWithFrame:CGRectMake(0,  view.frame.size.height-40, view.frame.size.width, 40)];
-        bView.backgroundColor = [UIColor colorWithWhite:228/255.0 alpha:0.36];
+        UIView * bView = [[UIView alloc] initWithFrame:CGRectMake(10,  CGRectGetMaxY(nicknameL.frame)+45, view.frame.size.width-20, 1)];
+        bView.backgroundColor = [UIColor colorWithWhite:240/255.0 alpha:1];
         [view addSubview:bView];
         
         shuoshuoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         shuoshuoBtn.backgroundColor = [UIColor clearColor];
-        [shuoshuoBtn setFrame:CGRectMake(0, view.frame.size.height-40, ScreenWidth/4, 40)];
+        [shuoshuoBtn setFrame:CGRectMake(0, view.frame.size.height-55, ScreenWidth/4, 40)];
         [view addSubview:shuoshuoBtn];
         shuoshuoNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/4, 20)];
         shuoshuoNumL.backgroundColor = [UIColor clearColor];
         shuoshuoNumL.textAlignment = NSTextAlignmentCenter;
         shuoshuoNumL.font = [UIFont boldSystemFontOfSize:15];
-        shuoshuoNumL.textColor = [UIColor whiteColor];
+        shuoshuoNumL.textColor = [UIColor grayColor];
         [shuoshuoBtn addSubview:shuoshuoNumL];
         UILabel * shuoshuoL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/4, 20)];
         [shuoshuoL setBackgroundColor:[UIColor clearColor]];
         shuoshuoL.textAlignment = NSTextAlignmentCenter;
         [shuoshuoL setText:@"说说"];
         shuoshuoL.font = [UIFont systemFontOfSize:13];
-        shuoshuoL.textColor = [UIColor whiteColor];
+        shuoshuoL.textColor = [UIColor lightGrayColor];
         [shuoshuoBtn addSubview:shuoshuoL];
         [shuoshuoBtn addTarget:self action:@selector(toshuoshuoListPage) forControlEvents:UIControlEventTouchUpInside];
         shuoshuoBtn.showsTouchWhenHighlighted = YES;
@@ -219,40 +243,40 @@
         
         forwardBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         forwardBtn.backgroundColor = [UIColor clearColor];
-        [forwardBtn setFrame:CGRectMake(ScreenWidth/4, view.frame.size.height-40, ScreenWidth/4, 40)];
+        [forwardBtn setFrame:CGRectMake(ScreenWidth/4, view.frame.size.height-55, ScreenWidth/4, 40)];
         [view addSubview:forwardBtn];
         forwardNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/4, 20)];
         forwardNumL.backgroundColor = [UIColor clearColor];
         forwardNumL.textAlignment = NSTextAlignmentCenter;
         forwardNumL.font = [UIFont boldSystemFontOfSize:15];
-        forwardNumL.textColor = [UIColor whiteColor];
+        forwardNumL.textColor = [UIColor grayColor];
         [forwardBtn addSubview:forwardNumL];
         UILabel * forwardL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/4, 20)];
         [forwardL setBackgroundColor:[UIColor clearColor]];
         forwardL.textAlignment = NSTextAlignmentCenter;
         [forwardL setText:@"转发"];
         forwardL.font = [UIFont systemFontOfSize:13];
-        forwardL.textColor = [UIColor whiteColor];
+        forwardL.textColor = [UIColor lightGrayColor];
         [forwardBtn addSubview:forwardL];
         [forwardBtn addTarget:self action:@selector(tomyForwardPage) forControlEvents:UIControlEventTouchUpInside];
         forwardBtn.showsTouchWhenHighlighted = YES;
         
         commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         commentBtn.backgroundColor = [UIColor clearColor];
-        [commentBtn setFrame:CGRectMake((ScreenWidth/4)*2, view.frame.size.height-40, ScreenWidth/4, 40)];
+        [commentBtn setFrame:CGRectMake((ScreenWidth/4)*2, view.frame.size.height-55, ScreenWidth/4, 40)];
         [view addSubview:commentBtn];
         commentNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/4, 20)];
         commentNumL.backgroundColor = [UIColor clearColor];
         commentNumL.textAlignment = NSTextAlignmentCenter;
         commentNumL.font = [UIFont boldSystemFontOfSize:15];
-        commentNumL.textColor = [UIColor whiteColor];
+        commentNumL.textColor = [UIColor grayColor];
         [commentBtn addSubview:commentNumL];
         UILabel * comentL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/4, 20)];
         [comentL setBackgroundColor:[UIColor clearColor]];
         comentL.textAlignment = NSTextAlignmentCenter;
         [comentL setText:@"评论"];
         comentL.font = [UIFont systemFontOfSize:13];
-        comentL.textColor = [UIColor whiteColor];
+        comentL.textColor = [UIColor lightGrayColor];
         [commentBtn addSubview:comentL];
         [commentBtn addTarget:self action:@selector(tomyCommentPage) forControlEvents:UIControlEventTouchUpInside];
         commentBtn.showsTouchWhenHighlighted = YES;
@@ -260,20 +284,20 @@
         
         caiBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         caiBtn.backgroundColor = [UIColor clearColor];
-        [caiBtn setFrame:CGRectMake((ScreenWidth/4)*3, view.frame.size.height-40, ScreenWidth/4, 40)];
+        [caiBtn setFrame:CGRectMake((ScreenWidth/4)*3, view.frame.size.height-55, ScreenWidth/4, 40)];
         [view addSubview:caiBtn];
         caiNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/4, 20)];
         caiNumL.backgroundColor = [UIColor clearColor];
         caiNumL.textAlignment = NSTextAlignmentCenter;
         caiNumL.font = [UIFont boldSystemFontOfSize:15];
-        caiNumL.textColor = [UIColor whiteColor];
+        caiNumL.textColor = [UIColor grayColor];
         [caiBtn addSubview:caiNumL];
         UILabel * caiL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/4, 20)];
         [caiL setBackgroundColor:[UIColor clearColor]];
         caiL.textAlignment = NSTextAlignmentCenter;
         [caiL setText:@"踩的"];
         caiL.font = [UIFont systemFontOfSize:13];
-        caiL.textColor = [UIColor whiteColor];
+        caiL.textColor = [UIColor lightGrayColor];
         [caiBtn addSubview:caiL];
         [caiBtn addTarget:self action:@selector(tomyFavorPage) forControlEvents:UIControlEventTouchUpInside];
         caiBtn.showsTouchWhenHighlighted = YES;
@@ -298,43 +322,43 @@
 }
 - (void)loadViewContent
 {
-    nicknameL.text = [UserServe sharedUserServe].currentPet.nickname;
-    photoIB.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].currentPet.headImgURL];
-    if ([UserServe sharedUserServe].petArr.count>0) {
-        [moreB setBackgroundImage:[UIImage imageNamed:@"usercenter_changePet"] forState:UIControlStateNormal];
-    }else
-    {
-        [moreB setBackgroundImage:[UIImage imageNamed:@"usercenter_addPet"] forState:UIControlStateNormal];
-    }
-    [attentionB setTitle:[NSString stringWithFormat:@"关注:%@",[UserServe sharedUserServe].currentPet.attentionNo] forState:UIControlStateNormal];
-    [fansB setTitle:[NSString stringWithFormat:@"粉丝:%@",[UserServe sharedUserServe].currentPet.fansNo] forState:UIControlStateNormal];
+    nicknameL.text = [UserServe sharedUserServe].account.nickname;
+    photoIB.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
+//    if ([UserServe sharedUserServe].petArr.count>0) {
+//        [moreB setBackgroundImage:[UIImage imageNamed:@"usercenter_changePet"] forState:UIControlStateNormal];
+//    }else
+//    {
+//        [moreB setBackgroundImage:[UIImage imageNamed:@"usercenter_addPet"] forState:UIControlStateNormal];
+//    }
+    [attentionB setTitle:[NSString stringWithFormat:@"关注:%@",[UserServe sharedUserServe].account.attentionNo] forState:UIControlStateNormal];
+    [fansB setTitle:[NSString stringWithFormat:@"粉丝:%@",[UserServe sharedUserServe].account.fansNo] forState:UIControlStateNormal];
     CGSize attentionSize = [attentionB.titleLabel.text sizeWithFont:attentionB.titleLabel.font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
     CGSize fansSize = [fansB.titleLabel.text sizeWithFont:fansB.titleLabel.font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
     UIView * view = attentionB.superview;
-    attentionB.frame = CGRectMake(view.center.x - attentionSize.width-30, 147+navigationBarHeight, attentionSize.width+20, 20);
-    fansB.frame = CGRectMake(view.center.x + 10, 147+navigationBarHeight, fansSize.width+20, 20);
-    switch ([[UserServe sharedUserServe].currentPet.gender integerValue]) {
-        case 0:{
-            genderIV.image = [UIImage imageNamed:@"female_border"];
-        }break;
-        case 1:{
-            genderIV.image = [UIImage imageNamed:@"male_border"];
-        }break;
-        default:{
-            genderIV.image = nil;
-        }break;
-    }
-    self.darenV.hidden = [UserServe sharedUserServe].currentPet.ifDaren?NO:YES;
-    CGSize k = [nicknameL.text sizeWithFont:nicknameL.font constrainedToSize:CGSizeMake(ScreenWidth-40, nicknameL.frame.size.height)];
-    [self.darenV setFrame:CGRectMake(ScreenWidth/2-k.width/2-25, nicknameL.frame.origin.y, 20, 20)];
-    PetCategoryParser * pet = [[PetCategoryParser alloc] init];
-    breedAgeL.text = [[[pet breedWithIDcode:[[UserServe sharedUserServe].currentPet.breed integerValue]] stringByAppendingString:[NSString stringWithFormat:@"  %@",[Common calAgeWithBirthDate:[NSString stringWithFormat:@"%f",[[UserServe sharedUserServe].currentPet.birthday timeIntervalSince1970]*1000]]]] stringByAppendingString:[NSString stringWithFormat:@"   LV.%d",[[UserServe sharedUserServe].currentPet.grade intValue]]];
+    attentionB.frame = CGRectMake(view.center.x - attentionSize.width-30, CGRectGetMaxY(nicknameL.frame)+10, attentionSize.width+20, 20);
+    fansB.frame = CGRectMake(view.center.x + 10, CGRectGetMaxY(nicknameL.frame)+10, fansSize.width+20, 20);
+//    switch ([[UserServe sharedUserServe].account.gender integerValue]) {
+//        case 0:{
+//            genderIV.image = [UIImage imageNamed:@"female_border"];
+//        }break;
+//        case 1:{
+//            genderIV.image = [UIImage imageNamed:@"male_border"];
+//        }break;
+//        default:{
+//            genderIV.image = nil;
+//        }break;
+//    }
+////    self.darenV.hidden = [UserServe sharedUserServe].account.ifDaren?NO:YES;
+//    CGSize k = [nicknameL.text sizeWithFont:nicknameL.font constrainedToSize:CGSizeMake(ScreenWidth-40, nicknameL.frame.size.height)];
+//    [self.darenV setFrame:CGRectMake(ScreenWidth/2-k.width/2-25, nicknameL.frame.origin.y, 20, 20)];
+//    PetCategoryParser * pet = [[PetCategoryParser alloc] init];
+//    breedAgeL.text = [[[pet breedWithIDcode:[[UserServe sharedUserServe].account.breed integerValue]] stringByAppendingString:[NSString stringWithFormat:@"  %@",[Common calAgeWithBirthDate:[NSString stringWithFormat:@"%f",[[UserServe sharedUserServe].account.birthday timeIntervalSince1970]*1000]]]] stringByAppendingString:[NSString stringWithFormat:@"   LV.%d",[[UserServe sharedUserServe].account.grade intValue]]];
     [_tableView reloadData];
     
-    shuoshuoNumL.text = [UserServe sharedUserServe].currentPet.issue;
-    forwardNumL.text = [UserServe sharedUserServe].currentPet.relay;
-    commentNumL.text = [UserServe sharedUserServe].currentPet.comment;
-    caiNumL.text = [UserServe sharedUserServe].currentPet.favour;
+    shuoshuoNumL.text = [UserServe sharedUserServe].account.issue;
+    forwardNumL.text = [UserServe sharedUserServe].account.relay;
+    commentNumL.text = [UserServe sharedUserServe].account.comment;
+    caiNumL.text = [UserServe sharedUserServe].account.favour;
     
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"UserCenterScorePrompt"]) {
         [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"UserCenterScorePrompt"];
@@ -349,7 +373,7 @@
     NSMutableDictionary * regDict = [NetServer commonDict];
     [regDict setObject:@"pet" forKey:@"command"];
     [regDict setObject:@"active" forKey:@"options"];
-    [regDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"id"];
+    [regDict setObject:[UserServe sharedUserServe].userID forKey:@"id"];
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -360,25 +384,25 @@
 {
     UserListViewController * attentionV = [[UserListViewController alloc] init];
     attentionV.listType = UserListTypeAttention;
-    attentionV.petID = [UserServe sharedUserServe].currentPet.petID;
+    attentionV.petID = [UserServe sharedUserServe].userID;
     [self.navigationController pushViewController:attentionV animated:YES];
 }
 - (void)puthFansViewCntroller
 {
     UserListViewController * fansV = [[UserListViewController alloc] init];
     fansV.listType = UserListTypeFans;
-    fansV.petID = [UserServe sharedUserServe].currentPet.petID;
+    fansV.petID = [UserServe sharedUserServe].userID;
     [self.navigationController pushViewController:fansV animated:YES];
 }
 - (void)buildSignInButtonWithCurrentPetSignatured
 {
-    if ([UserServe sharedUserServe].currentPetSignatured) {
-//        [signInB setTitle:@"已签到" forState:UIControlStateNormal];
-        [signInB setBackgroundImage:[UIImage imageNamed:@"usercenter_signedBtn"] forState:UIControlStateNormal];
-    }else
-    {
-        [signInB setBackgroundImage:[UIImage imageNamed:@"usercenter_signBtn"] forState:UIControlStateNormal];
-    }
+//    if ([UserServe sharedUserServe].accountSignatured) {
+////        [signInB setTitle:@"已签到" forState:UIControlStateNormal];
+//        [signInB setBackgroundImage:[UIImage imageNamed:@"usercenter_signedBtn"] forState:UIControlStateNormal];
+//    }else
+//    {
+//        [signInB setBackgroundImage:[UIImage imageNamed:@"usercenter_signBtn"] forState:UIControlStateNormal];
+//    }
     
 }
 - (void)currentPetSignIn
@@ -400,21 +424,21 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"pet" forKey:@"command"];
     [mDict setObject:@"one" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dict = [responseObject objectForKey:@"value"];
-        [UserServe sharedUserServe].currentPet.fansNo = (dict[@"counter"])[@"fans"];
-        [UserServe sharedUserServe].currentPet.attentionNo = (dict[@"counter"])[@"focus"];
-        [UserServe sharedUserServe].currentPet.issue = (dict[@"counter"])[@"issue"];
-        [UserServe sharedUserServe].currentPet.relay = (dict[@"counter"])[@"relay"];
-        [UserServe sharedUserServe].currentPet.comment = (dict[@"counter"])[@"comment"];
-        [UserServe sharedUserServe].currentPet.favour = (dict[@"counter"])[@"favour"];
-        [UserServe sharedUserServe].currentPet.grade = [dict[@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
-        [UserServe sharedUserServe].currentPet.score = dict[@"score"];
-        [UserServe sharedUserServe].currentPet.coin = dict[@"coin"];
+        [UserServe sharedUserServe].account.fansNo = (dict[@"counter"])[@"fans"];
+        [UserServe sharedUserServe].account.attentionNo = (dict[@"counter"])[@"focus"];
+        [UserServe sharedUserServe].account.issue = (dict[@"counter"])[@"issue"];
+        [UserServe sharedUserServe].account.relay = (dict[@"counter"])[@"relay"];
+        [UserServe sharedUserServe].account.comment = (dict[@"counter"])[@"comment"];
+        [UserServe sharedUserServe].account.favour = (dict[@"counter"])[@"favour"];
+        [UserServe sharedUserServe].account.grade = [dict[@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
+        [UserServe sharedUserServe].account.score = dict[@"score"];
+        [UserServe sharedUserServe].account.coin = dict[@"coin"];
         [self loadViewContent];
-        [DatabaseServe activatePet:[UserServe sharedUserServe].currentPet WithUsername:[UserServe sharedUserServe].userName];
+        [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
         
         [self.tableView headerEndRefreshing];
         
@@ -431,24 +455,46 @@
     }
     bgV.transform = CGAffineTransformMakeScale(scale, scale);
 }
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return section==0?1:_stringArr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CommentCellIdentifier = @"Cell";
-    UserCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier ];
-    if (cell == nil) {
-        cell = [[UserCenterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentCellIdentifier];
+    if (indexPath.section==0) {
+        static NSString *CommentCellIdentifier1 = @"mallCell";
+        UserCenterGouWuFuncTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier1 ];
+        if (cell == nil) {
+            cell = [[UserCenterGouWuFuncTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentCellIdentifier1];
+        }
+        cell.buttonClicked = ^(int index){
+            [self toSomePage:index];
+        };
+        return cell;
+
     }
-    cell.textL.text = _stringArr[indexPath.row];
-    cell.imageV.image = [UIImage imageNamed:_imgArr[indexPath.row]];
-    return cell;
+    else{
+        static NSString *CommentCellIdentifier = @"Cell";
+        UserCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier ];
+        if (cell == nil) {
+            cell = [[UserCenterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentCellIdentifier];
+        }
+        cell.textL.text = _stringArr[indexPath.row];
+        cell.imageV.image = [UIImage imageNamed:_imgArr[indexPath.row]];
+        return cell;
+    }
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return indexPath.section==0?140.f:50.f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0;
+    return 20;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
@@ -517,6 +563,28 @@
         }
     }
 }
+-(void)toSomePage:(int)index
+{
+    switch (index) {
+        case 0:{
+            MyGradeViewController * myGradeVC = [[MyGradeViewController alloc] init];
+            myGradeVC.title = @"我的等级";
+            [self.navigationController pushViewController:myGradeVC animated:YES];
+        }break;
+        case 1:{
+            AddressManageViewController * sv = [[AddressManageViewController alloc] init];
+            sv.finishTitle = @"保存";
+            [self.navigationController pushViewController:sv animated:YES];
+        }break;
+        case 2:{
+            MyOrderViewConyroller * myOrderVC = [[MyOrderViewConyroller alloc] init];
+            [self.navigationController pushViewController:myOrderVC animated:YES];
+        }break;
+        default:
+            break;
+    }
+
+}
 -(void)toshuoshuoListPage
 {
     MyShuoshuoTimeLineViewController * tagTlistV = [[MyShuoshuoTimeLineViewController alloc] init];
@@ -570,7 +638,7 @@
 - (Pet*)petWithWithNewUserViewController:(NewUserViewController*)controller
 {
     if (controller == _editCurrentPetVC) {
-        return [UserServe sharedUserServe].currentPet;
+        return [UserServe sharedUserServe].account;
     }
     return nil;
 }
@@ -642,7 +710,7 @@
     NSMutableDictionary * regDict = [NetServer commonDict];
     [regDict setObject:@"pet" forKey:@"command"];
     [regDict setObject:@"update" forKey:@"options"];
-    [regDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"id"];
+    [regDict setObject:[UserServe sharedUserServe].userID forKey:@"id"];
     [regDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     [regDict setObject:[_editCurrentPetVC.nameTF.text CutSpacing] forKey:@"nickName"];
     [regDict setObject:_editCurrentPetVC.avatarUrl forKey:@"headPortrait"];
@@ -651,8 +719,8 @@
     [regDict setObject:[NSString stringWithFormat:@"%.0f",_editCurrentPetVC.selectedBirthday*1000] forKey:@"birthday"];
     [regDict setObject:_editCurrentPetVC.regionTL.text forKey:@"address"];
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [UserServe sharedUserServe].currentPet = ({
-            Pet * pet = [UserServe sharedUserServe].currentPet;
+        [UserServe sharedUserServe].account = ({
+            Pet * pet = [UserServe sharedUserServe].account;
             pet.nickname = [_editCurrentPetVC.nameTF.text CutSpacing];
             pet.headImgURL = _editCurrentPetVC.avatarUrl;
             pet.gender = _editCurrentPetVC.genderCode;
@@ -661,7 +729,7 @@
             pet.birthday = [NSDate dateWithTimeIntervalSince1970:_editCurrentPetVC.selectedBirthday];
             pet;
         });
-        [DatabaseServe activatePet:[UserServe sharedUserServe].currentPet WithUsername:[UserServe sharedUserServe].userName];
+        [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
         
         [SVProgressHUD dismiss];
         [self loadViewContent];
@@ -705,8 +773,8 @@
         pet.score = petDic[@"score"];
         pet.coin = petDic[@"coin"];
         pet.ifDaren = [petDic[@"star"] isEqualToString:@"1"]?YES:NO;
-        [UserServe sharedUserServe].petArr = [NSMutableArray arrayWithArray:[UserServe sharedUserServe].petArr];
-        [[UserServe sharedUserServe].petArr addObject:pet];
+//        [UserServe sharedUserServe].petArr = [NSMutableArray arrayWithArray:[UserServe sharedUserServe].petArr];
+//        [[UserServe sharedUserServe].petArr addObject:pet];
         [DatabaseServe savePet:pet WithUsername:[UserServe sharedUserServe].userName];
         [SVProgressHUD dismiss];
         [self loadViewContent];
@@ -716,6 +784,19 @@
         [SVProgressHUD dismiss];
         [_addNewPetVC showAlertWithMessage:error.domain];
     }];
+}
+
+- (void)showSetViewController
+{
+    SetViewController * setVC = [[SetViewController alloc] init];
+
+    [self.navigationController pushViewController:setVC animated:YES];
+
+}
+-(void)toMessageVC:(UIButton *)sender
+{
+    SectionMSgViewController * secmsg = [[SectionMSgViewController alloc] init];
+    [self.navigationController pushViewController:secmsg animated:YES];
 }
 -(void)moreBtnClicked
 {

@@ -270,7 +270,7 @@
 {
     switch (_type) {
         case GoodsDetailTyepExchange:{
-            if ([_goodsDic[@"price"] intValue]>[[UserServe sharedUserServe].currentPet.coin intValue]) {
+            if ([_goodsDic[@"price"] intValue]>[[UserServe sharedUserServe].account.coin intValue]) {
                 UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"哎呀，你的宠豆太少了，攒攒再来兑换吧" delegate:self cancelButtonTitle:@"知道啦" otherButtonTitles: nil];
                 [alert show];
             }else{
@@ -285,7 +285,7 @@
                 [mDict setObject:@"goods" forKey:@"command"];
                 [mDict setObject:@"orderCreate" forKey:@"options"];
                 [mDict setObject:_goodsDic[@"code"] forKey:@"code"];
-                [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+                [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
                 [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     [SVProgressHUD showSuccessWithStatus:@"申请成功"];
                     [exchangeB setTitle:@"申请中" forState:UIControlStateNormal];
@@ -342,13 +342,13 @@
             [mDict setObject:@"goods" forKey:@"command"];
             [mDict setObject:@"orderCreate" forKey:@"options"];
             [mDict setObject:_goodsDic[@"code"] forKey:@"code"];
-            [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
             [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 exchangeAlertView = [[UIAlertView alloc] initWithTitle:@"商品兑换成功!" message:@"快去兑换记录中领取该商品吧" delegate:self cancelButtonTitle:@"继续兑换" otherButtonTitles:@"领取商品" ,nil];
                 [exchangeAlertView show];
                 [SVProgressHUD dismiss];
-                int currentCoin = [[UserServe sharedUserServe].currentPet.coin intValue] -[_goodsDic[@"price"] intValue];
-                [UserServe sharedUserServe].currentPet.coin = [NSString stringWithFormat:@"%d",currentCoin];
+                int currentCoin = [[UserServe sharedUserServe].account.coin intValue] -[_goodsDic[@"price"] intValue];
+                [UserServe sharedUserServe].account.coin = [NSString stringWithFormat:@"%d",currentCoin];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRExchangeSuccess" object:self userInfo:nil];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  [SVProgressHUD dismiss];

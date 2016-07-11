@@ -140,13 +140,13 @@
             UILabel * genderL = [[UILabel alloc] initWithFrame:CGRectMake(imageView.frame.size.width*673/1819, imageView.frame.size.height*1838/2551, imageView.frame.size.width*328/1819, imageView.frame.size.height*41/2551)];
             genderL.adjustsFontSizeToFitWidth=YES;
             genderL.numberOfLines = 0;
-            genderL.text = [[UserServe sharedUserServe].currentPet.gender integerValue]==1?@"男":@"女";
+            genderL.text = [[UserServe sharedUserServe].account.gender integerValue]==1?@"男":@"女";
             genderL.textColor = [UIColor colorWithWhite:136/255.0 alpha:1];
             [imageView addSubview:genderL];
             UILabel * birthdayL = [[UILabel alloc] initWithFrame:CGRectMake(imageView.frame.size.width*673/1819, imageView.frame.size.height*1925/2551, imageView.frame.size.width*818/1819, imageView.frame.size.height*40/2551)];
             birthdayL.adjustsFontSizeToFitWidth=YES;
             birthdayL.numberOfLines = 0;
-            NSDate* date = [UserServe sharedUserServe].currentPet.birthday;
+            NSDate* date = [UserServe sharedUserServe].account.birthday;
             NSDateFormatter * dateF= [[NSDateFormatter alloc]init];
             dateF.dateFormat = @"yyyy-MM-dd";
             birthdayL.text = [dateF stringFromDate:date];
@@ -273,7 +273,7 @@
 - (EGOImageView*)addCurrentPetHeaderView
 {
     EGOImageView * header = [[EGOImageView alloc]init];
-    header.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?imageView2/2/w/100",[UserServe sharedUserServe].currentPet.headImgURL]];
+    header.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?imageView2/2/w/100",[UserServe sharedUserServe].account.headImgURL]];
     [imageView addSubview:header];
     return header;
 }
@@ -290,7 +290,7 @@
     nameL.font = [UIFont fontWithName:@"DFPWaWaW5" size:14];
     nameL.adjustsFontSizeToFitWidth=YES;
     nameL.numberOfLines = 0;
-    nameL.text = [UserServe sharedUserServe].currentPet.nickname;
+    nameL.text = [UserServe sharedUserServe].account.nickname;
     nameL.textColor = colour;
     [imageView addSubview:nameL];
     return nameL;

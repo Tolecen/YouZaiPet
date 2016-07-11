@@ -127,8 +127,8 @@
     [usersDict setObject:@"list" forKey:@"options"];
     [usersDict setObject:@"20" forKey:@"pageSize"];
     [usersDict setObject:self.lastId forKey:@"startId"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         

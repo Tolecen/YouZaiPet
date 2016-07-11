@@ -254,7 +254,7 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"petalk" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
         [mDict setObject:@"10" forKey:@"pageSize"];
         [mDict setObject:@"0" forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
@@ -272,7 +272,7 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"tag" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
         [mDict setObject:@"10" forKey:@"pageSize"];
         [mDict setObject:@"0" forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
@@ -307,7 +307,7 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"user" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
         [mDict setObject:@"20" forKey:@"pageSize"];
         [mDict setObject:@"0" forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
@@ -379,7 +379,7 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"petalk" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
         [mDict setObject:@"10" forKey:@"pageSize"];
         [mDict setObject:@"0" forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
@@ -397,7 +397,7 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"tag" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
         [mDict setObject:@"10" forKey:@"pageSize"];
         [mDict setObject:@"0" forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
@@ -433,7 +433,7 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"user" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
         [mDict setObject:@"20" forKey:@"pageSize"];
         [mDict setObject:@"0" forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
@@ -471,7 +471,7 @@
 //        NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"tag" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
         [mDict setObject:@"10" forKey:@"pageSize"];
         [mDict setObject:[NSString stringWithFormat:@"%d",currentPage] forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
@@ -479,7 +479,7 @@
     else if (searchType==3){
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"user" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
         [mDict setObject:@"20" forKey:@"pageSize"];
         [mDict setObject:[NSString stringWithFormat:@"%d",currentPage] forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];

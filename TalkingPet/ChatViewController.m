@@ -66,7 +66,7 @@
     UserListViewController * ul = [[UserListViewController alloc] init];
     ul.listType = UserListTypeAttention;
     ul.shouldSelectChatUser = YES;
-    ul.petID = [UserServe sharedUserServe].currentPet.petID;
+    ul.petID = [UserServe sharedUserServe].userID;
     [self.navigationController pushViewController:ul animated:YES];
 }
 -(void)normalChatMsgDeleted:(NSNotification *)noti

@@ -35,7 +35,7 @@
     self.tableView.dataSource = self.attentionTableViewHelper;
     self.attentionTableViewHelper.needScrollTopDelegate = YES;
     
-    NSArray * attentionArray = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"focusList%@",[UserServe sharedUserServe].currentPet.petID]];
+    NSArray * attentionArray = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"focusList%@",[UserServe sharedUserServe].userID]];
     if (attentionArray) {
         self.attentionTableViewHelper.dataArray = [self.attentionTableViewHelper getModelArray:attentionArray];
         [self.tableView reloadData];
@@ -45,7 +45,7 @@
 }
 - (void)beginRefreshing
 {
-    if (![UserServe sharedUserServe].currentPet.petID) {
+    if (![UserServe sharedUserServe].userID) {
         self.tableView.hidden = YES;
         self.attentionTableViewHelper.headerCanRefresh = NO;
         self.attentionTableViewHelper.footerCanRefresh = NO;
@@ -56,7 +56,7 @@
             }];
         }
     }
-    else if ([UserServe sharedUserServe].currentPet.petID){
+    else if ([UserServe sharedUserServe].userID){
         self.tableView.hidden = NO;
         self.attentionTableViewHelper.headerCanRefresh = YES;
         self.attentionTableViewHelper.footerCanRefresh = YES;
@@ -67,7 +67,7 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"petalk" forKey:@"command"];
         [mDict setObject:@"focusList" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
         [mDict setObject:@"10" forKey:@"pageSize"];
         
         self.attentionTableViewHelper.reqDict = mDict;

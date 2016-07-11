@@ -1189,7 +1189,7 @@
 }
 - (void)forwardAction
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -1207,7 +1207,7 @@
 }
 - (void)commentAction
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -1225,7 +1225,7 @@
 }
 - (void)favorAction
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -1252,7 +1252,7 @@
         [mDict setObject:@"cancelFavour" forKey:@"options"];
         [mDict setObject:self.talking.theID forKey:@"petalkId"];
         [mDict setObject:@"F" forKey:@"type"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
         
         
         NSLog(@"cancelFavor:%@",mDict);
@@ -1281,7 +1281,7 @@
         [mDict setObject:@"create" forKey:@"options"];
         [mDict setObject:self.talking.theID forKey:@"petalkId"];
         [mDict setObject:@"F" forKey:@"type"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
         
         
         NSLog(@"doFavor:%@",mDict);
@@ -1321,7 +1321,7 @@
 -(void)doAttention
 {
 
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -1341,10 +1341,10 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petfans" forKey:@"command"];
     [mDict setObject:@"focus" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"fansPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"fansPetId"];
     [mDict setObject:self.talking.petInfo.petID forKey:@"petId"];
     
-    //    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    //    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     NSLog(@"focus user:%@",mDict);
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (self.lastIndex!=self.cellIndex) {
@@ -1493,7 +1493,7 @@
     else if (self.bigZanImageV.tag==2){
         if ([self.delegate respondsToSelector:@selector(addZanToZanArray:cellIndex:)]) {
             self.talking.favorNum =[NSString stringWithFormat:@"%d",[self.talking.favorNum intValue]+1];
-            [self.delegate addZanToZanArray:[NSDictionary dictionaryWithObjectsAndKeys:[UserServe sharedUserServe].currentPet.petID,@"petId",[UserServe sharedUserServe].currentPet.nickname,@"petNickName",[UserServe sharedUserServe].currentPet.headImgURL,@"petHeadPortrait", nil] cellIndex:(int)self.cellIndex];
+            [self.delegate addZanToZanArray:[NSDictionary dictionaryWithObjectsAndKeys:[UserServe sharedUserServe].userID,@"petId",[UserServe sharedUserServe].account.nickname,@"petNickName",[UserServe sharedUserServe].account.headImgURL,@"petHeadPortrait", nil] cellIndex:(int)self.cellIndex];
         }
         [self performSelector:@selector(makeBigZanHidden) withObject:nil afterDelay:1.2];
     }

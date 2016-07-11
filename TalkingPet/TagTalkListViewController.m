@@ -256,8 +256,8 @@
     [hotDic setObject:@"10" forKey:@"pageSize"];
     [hotDic setObject:@"tagList" forKey:@"options"];
     [hotDic setObject:self.tag.tagID forKey:@"tagId"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [_tableViewHelper loadFirstDataPageWithDict:hotDic];
 }
@@ -269,8 +269,8 @@
     [listDic setObject:@"10" forKey:@"pageSize"];
     [listDic setObject:@"tagListTimeline" forKey:@"options"];
     [listDic setObject:self.tag.tagID forKey:@"tagId"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [listDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [listDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [_tableViewHelper loadFirstDataPageWithDict:listDic];
 }

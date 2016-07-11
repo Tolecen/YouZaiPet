@@ -13,7 +13,7 @@
 #import "MainViewController.h"
 #import "CustomizeViewController.h"
 #import "ShangchengMainViewController.h"
-#import "PersonProfileViewController.h"
+#import "UserCenterViewController.h"
 
 @interface TopViewController ()<UINavigationControllerDelegate>
 {
@@ -77,7 +77,7 @@
     [self addChildViewController:_marketNav];
     [_marketNav.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-49)];
     
-    PersonProfileViewController * personVC = [[PersonProfileViewController alloc]init];
+    UserCenterViewController * personVC = [[UserCenterViewController alloc]init];
     self.personNav = [[UINavigationController alloc] initWithRootViewController:personVC];
     _personNav.delegate = self;
     [self addChildViewController:_personNav];
@@ -169,7 +169,7 @@
 //    }
 //    else
 //    {
-//        NSString * unreadCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"needMetionCount%@",[UserServe sharedUserServe].currentPet.petID]];
+//        NSString * unreadCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"needMetionCount%@",[UserServe sharedUserServe].userID]];
 //        if ([unreadCount intValue]<=0) {
 //            [self removeNormalChatNoti];
 //        }
@@ -312,7 +312,7 @@
 }
 - (void)showMsgView
 {
-    if (![UserServe sharedUserServe].currentPet) {
+    if (![UserServe sharedUserServe].account) {
         [[RootViewController sharedRootViewController] showLoginViewController];
         return;
     }
@@ -337,7 +337,7 @@
 //}
 //-(void)msgNotiReceived
 //{
-//    NSString * unreadCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"needMetionCount%@",[UserServe sharedUserServe].currentPet.petID]];
+//    NSString * unreadCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"needMetionCount%@",[UserServe sharedUserServe].userID]];
 //    if ([unreadCount intValue]>0||needNotiNormalChat) {
 //        self.menuBarNotiImg.hidden = NO;
 //        

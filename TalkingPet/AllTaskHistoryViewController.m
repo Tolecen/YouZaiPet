@@ -85,8 +85,8 @@
     NSMutableDictionary* usersDict = [NetServer commonDict];
     [usersDict setObject:@"awardActivity" forKey:@"command"];
     [usersDict setObject:@"myListAll" forKey:@"options"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [usersDict setObject:self.lastId forKey:@"startId"];
     [usersDict setObject:@"20" forKey:@"pageSize"];

@@ -205,8 +205,8 @@
     [usersDict setObject:@"order" forKey:@"command"];
     [usersDict setObject:@"create" forKey:@"options"];
     [usersDict setObject:itemArray forKey:@"orderItems"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [NetServer requestWithEncryptParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self toConfirmPageWithOrderId:[responseObject objectForKey:@"value"]];

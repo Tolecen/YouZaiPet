@@ -134,7 +134,7 @@
     [mDict setObject:@"giftBag" forKey:@"command"];
     [mDict setObject:@"draw" forKey:@"options"];
     [mDict setObject:self.packageInfo.packageId forKey:@"code"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"no" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"no" forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"error"] isEqualToString:@"200"]) {
             [SVProgressHUD showSuccessWithStatus:@"领取成功"];

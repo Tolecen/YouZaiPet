@@ -48,17 +48,17 @@
     [self setBackButtonWithTarget:@selector(backBtnDo:)];
    
     
-    self.dataArray = [NSMutableArray arrayWithArray:[UserServe sharedUserServe].petArr];
+//    self.dataArray = [NSMutableArray arrayWithArray:[UserServe sharedUserServe].petArr];
     int y = 0;
     for (int i = 0; i<self.dataArray.count; i++) {
         Pet *p = [self.dataArray objectAtIndex:i];
-        if ([p.petID isEqualToString:[UserServe sharedUserServe].currentPet.petID]) {
+        if ([p.petID isEqualToString:[UserServe sharedUserServe].userID]) {
             y = 1;
             currentInddex = i;
         }
     }
     if (y==0) {
-        [self.dataArray insertObject:[UserServe sharedUserServe].currentPet atIndex:0];
+        [self.dataArray insertObject:[UserServe sharedUserServe].account atIndex:0];
     }
     
     
@@ -131,16 +131,16 @@
         [self.tableView reloadData];
         
         
-        [UserServe sharedUserServe].currentPet = [self.dataArray objectAtIndex:index];
-        NSLog(@"currentPet:%@",[UserServe sharedUserServe].currentPet.petID);
+        [UserServe sharedUserServe].account = [self.dataArray objectAtIndex:index];
+        NSLog(@"currentPet:%@",[UserServe sharedUserServe].userID);
         NSMutableArray * as = [NSMutableArray array];
         for (int i = 0; i<self.dataArray.count; i++) {
             if (i!=index) {
                 [as addObject:self.dataArray[i]];
             }
         }
-        [UserServe sharedUserServe].petArr = as;
-        [DatabaseServe activatePet:[UserServe sharedUserServe].currentPet WithUsername:[UserServe sharedUserServe].userName];
+//        [UserServe sharedUserServe].petArr = as;
+//        [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"不好意思，切换失败哦，稍后再试吧，如果一直不行，请重新登录"];
@@ -177,7 +177,7 @@
 - (Pet*)petWithWithNewUserViewController:(NewUserViewController*)controller
 {
     if (controller == _editCurrentPetVC) {
-        return [UserServe sharedUserServe].currentPet;
+        return [UserServe sharedUserServe].account;
     }
     return nil;
 }
@@ -251,7 +251,7 @@
     NSMutableDictionary * regDict = [NetServer commonDict];
     [regDict setObject:@"pet" forKey:@"command"];
     [regDict setObject:@"update" forKey:@"options"];
-    [regDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"id"];
+    [regDict setObject:[UserServe sharedUserServe].userID forKey:@"id"];
     [regDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     [regDict setObject:[_editCurrentPetVC.nameTF.text CutSpacing] forKey:@"nickName"];
     [regDict setObject:_editCurrentPetVC.avatarUrl forKey:@"headPortrait"];
@@ -260,8 +260,8 @@
     [regDict setObject:[NSString stringWithFormat:@"%.0f",_editCurrentPetVC.selectedBirthday*1000] forKey:@"birthday"];
     [regDict setObject:_editCurrentPetVC.regionTL.text forKey:@"address"];
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [UserServe sharedUserServe].currentPet = ({
-            Pet * pet = [UserServe sharedUserServe].currentPet;
+        [UserServe sharedUserServe].account = ({
+            Pet * pet = [UserServe sharedUserServe].account;
             pet.nickname = [_editCurrentPetVC.nameTF.text CutSpacing];
             pet.headImgURL = _editCurrentPetVC.avatarUrl;
             pet.gender = _editCurrentPetVC.genderCode;
@@ -270,7 +270,7 @@
             pet.birthday = [NSDate dateWithTimeIntervalSince1970:_editCurrentPetVC.selectedBirthday];
             pet;
         });
-        [DatabaseServe activatePet:[UserServe sharedUserServe].currentPet WithUsername:[UserServe sharedUserServe].userName];
+        [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
         
         [SVProgressHUD dismiss];
 //        [self loadViewContent];
@@ -283,6 +283,7 @@
 }
 - (void)saveEditNewPet
 {
+    /*
     [SVProgressHUD showWithStatus:@"设置个人资料..."];
     NSMutableDictionary * regDict = [NetServer commonDict];
     [regDict setObject:@"pet" forKey:@"command"];
@@ -321,7 +322,7 @@
 //        [self loadViewContent];
         [_addNewPetVC back];
         self.dataArray = [UserServe sharedUserServe].petArr;
-        [self.dataArray insertObject:[UserServe sharedUserServe].currentPet atIndex:0];
+        [self.dataArray insertObject:[UserServe sharedUserServe].account atIndex:0];
         currentInddex = 0;
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -329,6 +330,7 @@
         [SVProgressHUD dismiss];
         [_addNewPetVC showAlertWithMessage:error.domain];
     }];
+     */
 }
 //-()
 -(void)backBtnDo:(UIButton *)sender

@@ -60,7 +60,7 @@
         petHeadView.layer.cornerRadius = 13.5;
         petHeadView.layer.masksToBounds = YES;
         [userB addSubview:petHeadView];
-        petHeadView.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].currentPet.headImgURL];
+        petHeadView.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
         if ([[UIDevice currentDevice].systemVersion integerValue]>=7) {
             userB.imageEdgeInsets = UIEdgeInsetsMake(0, 12, 0, -12);
             petHeadView.frame = CGRectOffset(petHeadView.frame, 12, 0);
@@ -220,20 +220,20 @@
 }
 - (void)mainViewNeedSignIn
 {
-    UIButton * signB = (UIButton*)[self.view viewWithTag:10086];
-    if (![UserServe sharedUserServe].currentPetSignatured) {
-        if (!signB) {
-            signB = [UIButton buttonWithType:UIButtonTypeCustom];
-            signB.tag = 10086;
-            signB.frame = CGRectMake(ScreenWidth-86, self.view.frame.size.height-100, 76, 89);
-            [signB setBackgroundImage:[UIImage imageNamed:@"mainViewSignIn"] forState:UIControlStateNormal];
-            [signB addTarget:self action:@selector(mainViewSignIn:) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:signB];
-        }
-    }else
-    {
-        [signB removeFromSuperview];
-    }
+//    UIButton * signB = (UIButton*)[self.view viewWithTag:10086];
+//    if (![UserServe sharedUserServe].accountSignatured) {
+//        if (!signB) {
+//            signB = [UIButton buttonWithType:UIButtonTypeCustom];
+//            signB.tag = 10086;
+//            signB.frame = CGRectMake(ScreenWidth-86, self.view.frame.size.height-100, 76, 89);
+//            [signB setBackgroundImage:[UIImage imageNamed:@"mainViewSignIn"] forState:UIControlStateNormal];
+//            [signB addTarget:self action:@selector(mainViewSignIn:) forControlEvents:UIControlEventTouchUpInside];
+//            [self.view addSubview:signB];
+//        }
+//    }else
+//    {
+//        [signB removeFromSuperview];
+//    }
 }
 -(void)mainViewSignIn:(UIButton*)btn
 {
@@ -248,7 +248,7 @@
 - (void)loadViewContent
 {
     petHeadView.image = nil;
-    petHeadView.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].currentPet.headImgURL];
+    petHeadView.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
     [_hotVC beginRefreshing];
     [_squareVC beginRefreshing];
     [_attentionVC beginRefreshing];

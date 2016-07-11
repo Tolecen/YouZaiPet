@@ -50,6 +50,18 @@
         user.action = [[NSNumber alloc] initWithBool:YES];
         user.actiontime = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
 //        user.passWord = account.password;
+        user.userID = account.userID;
+        user.nickname = account.nickname;
+        user.fansNo = account.fansNo;
+        user.attentionNo = account.attentionNo;
+        user.headImgURL = account.headImgURL;
+        user.issue = account.issue;
+        user.relay = account.relay;
+        user.comment = account.comment;
+        user.favour = account.favour;
+        user.grade = account.grade;
+        user.score = account.score;
+        user.coin = account.coin;
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     }else
     {
@@ -59,6 +71,19 @@
             user.actiontime = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
             user.userID = account.userID;
             user.userName = account.username;
+            
+            user.nickname = account.nickname;
+            user.fansNo = account.fansNo;
+            user.attentionNo = account.attentionNo;
+            user.headImgURL = account.headImgURL;
+            user.issue = account.issue;
+            user.relay = account.relay;
+            user.comment = account.comment;
+            user.favour = account.favour;
+            user.grade = account.grade;
+            user.score = account.score;
+            user.coin = account.coin;
+
 //            user.passWord = account.password;
         }];
     }
@@ -134,7 +159,7 @@
 }
 +(int)getChatSettingForCurrentPet
 {
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"petID==[c]%@",[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"petID==[c]%@",[UserServe sharedUserServe].userID];
     PetEntity * petE = [PetEntity MR_findFirstWithPredicate:predicate];
     if (petE) {
         return [petE.chatLimits intValue];
@@ -207,6 +232,19 @@
     acc.username = user.userName;
 //    acc.password = user.passWord;
     acc.userID = user.userID;
+    
+    acc.nickname = user.nickname;
+    acc.fansNo = user.fansNo;
+    acc.attentionNo = user.attentionNo;
+    acc.headImgURL = user.headImgURL;
+    acc.issue = user.issue;
+    acc.relay = user.relay;
+    acc.comment = user.comment;
+    acc.favour = user.favour;
+    acc.grade = user.grade;
+    acc.score = user.score;
+    acc.coin = user.coin;
+    
     return acc;
 }
 +(Account*)getLastActionedAccount
@@ -443,7 +481,7 @@
         nE.sendDate = [NSDate dateWithTimeIntervalSince1970:chatMsg.date];
         nE.startSendTime = [NSString stringWithFormat:@"%f",chatMsg.date];
         nE.content = chatMsg.content;
-        nE.mineId = [UserServe sharedUserServe].currentPet.petID;
+        nE.mineId = [UserServe sharedUserServe].userID;
         nE.type = chatMsg.type;
         nE.tagId = [NSNumber numberWithLong:chatMsg.tagId];
         nE.msgId = chatMsg.msgid;
@@ -459,7 +497,7 @@
             msgE.sendDate = [NSDate dateWithTimeIntervalSince1970:chatMsg.date];
             msgE.startSendTime = [NSString stringWithFormat:@"%f",chatMsg.date];
             msgE.content = chatMsg.content;
-            msgE.mineId = [UserServe sharedUserServe].currentPet.petID;
+            msgE.mineId = [UserServe sharedUserServe].userID;
             msgE.type = chatMsg.type;
             msgE.tagId = [NSNumber numberWithLong:chatMsg.tagId];
             msgE.msgId = chatMsg.msgid;
@@ -467,7 +505,7 @@
         }];
     }
     
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",chatMsg.fromid,[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",chatMsg.fromid,[UserServe sharedUserServe].userID];
     ThumbNormalMsgEntity * thumbE = [ThumbNormalMsgEntity MR_findFirstWithPredicate:predicate];
     if (thumbE) {
         thumbE.sidePetId = chatMsg.fromid;
@@ -476,7 +514,7 @@
         }
         
         thumbE.content = chatMsg.content;
-        thumbE.mineId = [UserServe sharedUserServe].currentPet.petID;
+        thumbE.mineId = [UserServe sharedUserServe].userID;
         thumbE.type = chatMsg.type;
         thumbE.sendDate = [NSDate dateWithTimeIntervalSince1970:chatMsg.date];
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
@@ -488,17 +526,17 @@
             thumbME.sidePetId = chatMsg.fromid;
             thumbME.content = chatMsg.content;
             thumbE.unreadCount = [NSNumber numberWithInt:1];
-            thumbME.mineId = [UserServe sharedUserServe].currentPet.petID;
+            thumbME.mineId = [UserServe sharedUserServe].userID;
             thumbME.type = chatMsg.type;
             thumbME.sendDate = [NSDate dateWithTimeIntervalSince1970:chatMsg.date];
             
         }];
     }
 //    
-//    NSPredicate * predicate3 = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@",[UserServe sharedUserServe].currentPet.petID];
+//    NSPredicate * predicate3 = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@",[UserServe sharedUserServe].userID];
 //    NeedNotiEntity * needNoti = [NeedNotiEntity MR_findFirstWithPredicate:predicate3];
 //    if (needNoti) {
-//        needNoti.sidePetId = [UserServe sharedUserServe].currentPet.petID;
+//        needNoti.sidePetId = [UserServe sharedUserServe].userID;
 //        needNoti.needNoti = [NSNumber numberWithInt:1];
 //        needNoti.needNotiCount = [NSNumber numberWithInt:([needNoti.needNotiCount intValue]+1)];
 //        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
@@ -507,7 +545,7 @@
 //    {
 //        [MagicalRecord saveUsingCurrentThreadContextWithBlockAndWait:^(NSManagedObjectContext *localContext) {
 //            NeedNotiEntity * needNoti = [NeedNotiEntity MR_createInContext:localContext];
-//            needNoti.sidePetId = [UserServe sharedUserServe].currentPet.petID;
+//            needNoti.sidePetId = [UserServe sharedUserServe].userID;
 //            needNoti.needNoti = [NSNumber numberWithInt:1];
 //            needNoti.needNotiCount = [NSNumber numberWithInt:1];
 //            
@@ -538,7 +576,7 @@
 
 +(int)getAllUnreadNormalChatCount
 {
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"mineId==[c]%@",[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"mineId==[c]%@",[UserServe sharedUserServe].userID];
     NSArray * dsArray = [ThumbNormalMsgEntity MR_findAllWithPredicate:predicate];
     int g = 0;
     for (int i = 0; i<dsArray.count; i++) {
@@ -551,7 +589,7 @@
 
 +(BOOL)needNotiNormalChatInOtherPage
 {
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@",[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@",[UserServe sharedUserServe].userID];
     NeedNotiEntity * needNoti = [NeedNotiEntity MR_findFirstWithPredicate:predicate];
     if (needNoti) {
         if ([needNoti.needNoti intValue]==1) {
@@ -566,10 +604,10 @@
 
 +(void)setNeedNotiNormalChatWithStatus:(int)status
 {
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@",[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@",[UserServe sharedUserServe].userID];
     NeedNotiEntity * needNoti = [NeedNotiEntity MR_findFirstWithPredicate:predicate];
     if (needNoti) {
-        needNoti.sidePetId = [UserServe sharedUserServe].currentPet.petID;
+        needNoti.sidePetId = [UserServe sharedUserServe].userID;
         needNoti.needNoti = [NSNumber numberWithInt:status];
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     }
@@ -577,7 +615,7 @@
     {
         [MagicalRecord saveUsingCurrentThreadContextWithBlockAndWait:^(NSManagedObjectContext *localContext) {
             NeedNotiEntity * needNoti = [NeedNotiEntity MR_createInContext:localContext];
-            needNoti.sidePetId = [UserServe sharedUserServe].currentPet.petID;
+            needNoti.sidePetId = [UserServe sharedUserServe].userID;
             needNoti.needNoti = [NSNumber numberWithInt:status];
 //            needNoti.needNotiCount = [NSNumber numberWithInt:1];
             
@@ -587,7 +625,7 @@
 
 +(int)needNotiNormalChatNumInOtherPage
 {
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@",[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@",[UserServe sharedUserServe].userID];
     NeedNotiEntity * needNoti = [NeedNotiEntity MR_findFirstWithPredicate:predicate];
     if (needNoti) {
         return [needNoti.needNotiCount intValue];
@@ -601,7 +639,7 @@
 {
 
     //  NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc]initWithKey:@"senTime" ascending:NO];
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"mineId==[c]%@",[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"mineId==[c]%@",[UserServe sharedUserServe].userID];
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc]initWithKey:@"sendDate" ascending:NO];
     NSFetchRequest * fetchRequest = [ThumbNormalMsgEntity MR_requestAllWithPredicate:predicate];
     [fetchRequest setFetchOffset:thePage*20];
@@ -636,7 +674,7 @@
 
 +(NSArray *)getDetailMsgArrayByPage:(int)thePage PetId:(NSString *)petId
 {
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",petId,[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",petId,[UserServe sharedUserServe].userID];
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc]initWithKey:@"sendDate" ascending:NO];
     NSFetchRequest * fetchRequest = [NormalMsgEntity MR_requestAllWithPredicate:predicate];
     [fetchRequest setFetchOffset:20*thePage];
@@ -670,7 +708,7 @@
 
 +(void)setUnreadCount:(int)unread petId:(NSString *)petId
 {
-    NSPredicate * predicate = predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",petId,[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate = predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",petId,[UserServe sharedUserServe].userID];
     ThumbNormalMsgEntity * thumbE = [ThumbNormalMsgEntity MR_findFirstWithPredicate:predicate];
     if (thumbE) {
         thumbE.unreadCount = [NSNumber numberWithInt:unread];
@@ -681,7 +719,7 @@
 
 +(void)deleteAllMsgForPetId:(NSString *)petId
 {
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",petId,[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",petId,[UserServe sharedUserServe].userID];
     [ThumbNormalMsgEntity MR_deleteAllMatchingPredicate:predicate];
     [NormalMsgEntity MR_deleteAllMatchingPredicate:predicate];
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
@@ -692,10 +730,10 @@
     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"msgId==[c]%@",msgId];
     [NormalMsgEntity MR_deleteAllMatchingPredicate:predicate];
     
-    NSPredicate * predicate2 = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",sidePetId,[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate2 = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",sidePetId,[UserServe sharedUserServe].userID];
     NormalMsgEntity * nE = [NormalMsgEntity MR_findFirstWithPredicate:predicate2 sortedBy:@"sendDate" ascending:NO];
     if (nE) {
-       NSPredicate * predicate3 = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",sidePetId,[UserServe sharedUserServe].currentPet.petID];
+       NSPredicate * predicate3 = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",sidePetId,[UserServe sharedUserServe].userID];
         ThumbNormalMsgEntity * er = [ThumbNormalMsgEntity MR_findFirstWithPredicate:predicate3];
         if (er) {
             er.content = nE.content;
@@ -704,7 +742,7 @@
     }
     else
     {
-        NSPredicate * predicate3 = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",sidePetId,[UserServe sharedUserServe].currentPet.petID];
+        NSPredicate * predicate3 = [NSPredicate predicateWithFormat:@"sidePetId==[c]%@ AND mineId==[c]%@",sidePetId,[UserServe sharedUserServe].userID];
         [ThumbNormalMsgEntity MR_deleteAllMatchingPredicate:predicate3];
     }
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
@@ -712,13 +750,13 @@
 
 +(void)AddPetToChatBlackList:(NSString *)petId
 {
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"taId==[c]%@ AND mineId==[c]%@",petId,[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"taId==[c]%@ AND mineId==[c]%@",petId,[UserServe sharedUserServe].userID];
     ChatBlackList * chtL = [ChatBlackList MR_findFirstWithPredicate:predicate];
     if (!chtL) {
         [MagicalRecord saveUsingCurrentThreadContextWithBlockAndWait:^(NSManagedObjectContext *localContext) {
             ChatBlackList * chL = [ChatBlackList MR_createInContext:localContext];
             chL.taId = petId;
-            chL.mineId = [UserServe sharedUserServe].currentPet.petID;
+            chL.mineId = [UserServe sharedUserServe].userID;
             
         }];
     }
@@ -727,7 +765,7 @@
 
 +(void)removePetFromChatBlackList:(NSString *)petId
 {
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"taId==[c]%@ AND mineId==[c]%@",petId,[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"taId==[c]%@ AND mineId==[c]%@",petId,[UserServe sharedUserServe].userID];
 //    ChatBlackList * chtL = [ChatBlackList MR_findFirstWithPredicate:predicate];
     [ChatBlackList MR_deleteAllMatchingPredicate:predicate];
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
@@ -735,7 +773,7 @@
 
 +(BOOL)ifThisPetInMyBlackList:(NSString *)petId
 {
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"taId==[c]%@ AND mineId==[c]%@",petId,[UserServe sharedUserServe].currentPet.petID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"taId==[c]%@ AND mineId==[c]%@",petId,[UserServe sharedUserServe].userID];
     ChatBlackList * chtL = [ChatBlackList MR_findFirstWithPredicate:predicate];
     if (chtL) {
         return YES;

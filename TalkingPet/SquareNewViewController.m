@@ -539,7 +539,7 @@
 }
 -(void)toLiWuPage
 {
-    if (![UserServe sharedUserServe].currentPet) {
+    if (![UserServe sharedUserServe].account) {
         [[RootViewController sharedRootViewController] showLoginViewController];
         return;
     }

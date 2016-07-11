@@ -26,7 +26,7 @@
         self.desLabel = [[UILabel alloc] initWithFrame:CGRectMake(55,15, 260, 20)];
         self.desLabel.backgroundColor = [UIColor clearColor];
         self.desLabel.font = [UIFont boldSystemFontOfSize:14];
-        self.desLabel.textColor = [UIColor whiteColor];
+        self.desLabel.textColor = [UIColor colorWithR:120 g:120 b:120 alpha:1];
         [self.contentView addSubview:self.desLabel];
         
         self.unreadBgV = [[UIImageView alloc] initWithFrame:CGRectMake(30, 9, 26, 16)];
