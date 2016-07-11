@@ -68,6 +68,7 @@
         [mDict setObject:@"petalk" forKey:@"command"];
         [mDict setObject:@"focusList" forKey:@"options"];
         [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         [mDict setObject:@"10" forKey:@"pageSize"];
         
         self.attentionTableViewHelper.reqDict = mDict;
@@ -80,12 +81,12 @@
 }
 -(void)attentionNoContent:(BOOL)have
 {
-    if (!have) {
-        self.tableView.hidden = YES;
-        self.attentionTableViewHelper.headerCanRefresh = NO;
-        self.attentionTableViewHelper.footerCanRefresh = NO;
-    }
-    else{
+//    if (!have) {
+//        self.tableView.hidden = YES;
+//        self.attentionTableViewHelper.headerCanRefresh = NO;
+//        self.attentionTableViewHelper.footerCanRefresh = NO;
+//    }
+//    else{
         self.tableView.hidden = NO;
         self.attentionTableViewHelper.headerCanRefresh = YES;
         self.attentionTableViewHelper.footerCanRefresh = YES;
@@ -93,6 +94,6 @@
             [blankPage removeFromSuperview];
             blankPage = nil;
         }
-    }
+//    }
 }
 @end

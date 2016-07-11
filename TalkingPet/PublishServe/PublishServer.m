@@ -292,6 +292,7 @@ static PublishServer* publishServer;
             NSMutableDictionary * finalDict = [NetServer commonDict];
             [finalDict setObject:@"petalk" forKey:@"command"];
             [finalDict setObject:@"create" forKey:@"options"];
+            [finalDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
             NSMutableArray * pieces = [NSMutableArray array];
             for (NSDictionary * dic in blockPublisher.storyItem) {
                 NSDictionary * piec ;
@@ -628,7 +629,7 @@ static PublishServer* publishServer;
         [finalDict setObject:@"petalk" forKey:@"command"];
         [finalDict setObject:@"create" forKey:@"options"];
         [finalDict setObject:talkDic forKey:@"petalkDTO"];
-        
+        [finalDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
         __block NSMutableArray * blockArr = publishServer.publishArray;
         __block TalkingPublish * blockTalk = talkingPublish;
         __block PetalkPublisher * blockPublisher = publisher;
@@ -636,7 +637,7 @@ static PublishServer* publishServer;
             [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
             NSString * issue = [NSString stringWithFormat:@"%d",[[UserServe sharedUserServe].account.issue intValue]+1];
             [UserServe sharedUserServe].account.issue = issue;
-            [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
+//            [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
             for (Publisher * pp in blockArr) {
                 if ([pp.publishID isEqualToString:publisher.publishID]) {
                     [blockArr removeObject:pp];

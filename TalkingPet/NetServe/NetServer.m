@@ -620,7 +620,7 @@
                             [finalDict setObject:@"petalk" forKey:@"command"];
                             [finalDict setObject:@"create" forKey:@"options"];
                             [finalDict setObject:contentDict forKey:@"petalkDTO"];
-                            
+                            [finalDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
                             [NetServer uploadShuoShuoWithContent:finalDict TaskID:taskID Success:^(id responseObject) {
                                 if (success) {
                                     success(responseObject,nil);
@@ -670,7 +670,7 @@
                         [finalDict setObject:@"petalk" forKey:@"command"];
                         [finalDict setObject:@"create" forKey:@"options"];
                         [finalDict setObject:contentDict forKey:@"petalkDTO"];
-                        
+                        [finalDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
                         [NetServer uploadShuoShuoWithContent:finalDict TaskID:taskID Success:^(id responseObject) {
                             if (success) {
                                 success(responseObject,nil);
@@ -863,7 +863,7 @@
                             [finalDict setObject:@"petalk" forKey:@"command"];
                             [finalDict setObject:@"create" forKey:@"options"];
                             [finalDict setObject:contentDict forKey:@"petalkDTO"];
-                            
+                            [finalDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
                             [NetServer uploadShuoShuoWithContent:finalDict TaskID:taskID Success:^(id responseObject) {
                                 if (success) {
                                     success(responseObject,nil);
@@ -913,7 +913,7 @@
                         [finalDict setObject:@"petalk" forKey:@"command"];
                         [finalDict setObject:@"create" forKey:@"options"];
                         [finalDict setObject:contentDict forKey:@"petalkDTO"];
-                        
+                        [finalDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
                         [NetServer uploadShuoShuoWithContent:finalDict TaskID:taskID Success:^(id responseObject) {
                             if (success) {
                                 success(responseObject,nil);
