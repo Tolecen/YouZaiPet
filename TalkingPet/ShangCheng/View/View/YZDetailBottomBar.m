@@ -135,19 +135,21 @@
 }
 
 - (void)inner_EnterDogHome:(UIButton *)sender {
-    
+    if ([self.delegate respondsToSelector:@selector(enterDogHomeAction)]) {
+        [self.delegate enterDogHomeAction];
+    }
 }
 
 - (void)inner_Share:(UIButton *)sender {
-    
+    [self.delegate shareAction];
 }
 
 - (void)inner_AddShoppingCar:(UIButton *)sender {
-    
+    [self.delegate addShoppingCarAction];
 }
 
 - (void)inner_ClearPrice:(UIButton *)sender {
-    
+    [self.delegate clearPriceAction];
 }
 
 @end

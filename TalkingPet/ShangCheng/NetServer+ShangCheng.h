@@ -45,7 +45,7 @@
 
 //1008_犬舍详情
 + (void)getQuanSheDetailInfoWithShopId:(NSString *)shopId
-                               success:(void(^)(id data))success
+                               success:(void(^)(YZQuanSheDetailModel *quanSheDetail))success
                                failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 //1009_犬舍搜索

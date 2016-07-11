@@ -17,7 +17,7 @@
 #import "NetServer+ShangCheng.h"
 #import "MJRefresh.h"
 
-@interface YZDogDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface YZDogDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YZDetailBottomBarDelegate>
 
 @property (nonatomic, weak) UICollectionView *collectionView;
 
@@ -79,6 +79,7 @@
     [collectionView addFooterWithTarget:self action:@selector(inner_LoadMore:)];
     
     YZDetailBottomBar *bottomBar = [[YZDetailBottomBar alloc] initWithFrame:CGRectZero type:YZShangChengType_Dog];
+    bottomBar.delegate = self;
     [self.view addSubview:bottomBar];
     [bottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_equalTo(self.view).mas_offset(0);
@@ -211,5 +212,26 @@
     }
     return nil;
 }
+
+#pragma mark -- 
+
+- (void)shareAction {
+    
+}
+
+- (void)clearPriceAction {
+    
+}
+
+- (void)enterDogHomeAction {
+    YZQuanSheDetailViewController *quanShe = [[YZQuanSheDetailViewController alloc] init];
+    quanShe.quanSheId = self.detailModel.shop.shopId;
+    [self.navigationController pushViewController:quanShe animated:YES];
+}
+
+- (void)addShoppingCarAction {
+    
+}
+
 
 @end

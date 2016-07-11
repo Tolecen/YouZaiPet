@@ -9,7 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "YZShangChengConst.h"
 
+@protocol YZDetailBottomBarDelegate <NSObject>
+
+@optional
+- (void)enterDogHomeAction;
+
+@required
+- (void)shareAction;
+- (void)clearPriceAction;
+- (void)addShoppingCarAction;
+
+@end
+
 @interface YZDetailBottomBar : UIView
+
+@property (nonatomic, weak) id<YZDetailBottomBarDelegate> delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame
                          type:(YZShangChengType)type;

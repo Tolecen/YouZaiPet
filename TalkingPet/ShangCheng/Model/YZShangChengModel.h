@@ -37,10 +37,14 @@
 @interface YZQuanSheModel : YZShangChengModel
 
 @property (nonatomic, copy) NSString *shopName;
+@property (nonatomic, copy) NSString *shopId;
 
 @end
 
 @interface YZQuanSheDetailModel : YZQuanSheModel
+
+@property (nonatomic, copy) NSString *dogIntro;
+@property (nonatomic, assign) long long shopNo;
 
 @end
 

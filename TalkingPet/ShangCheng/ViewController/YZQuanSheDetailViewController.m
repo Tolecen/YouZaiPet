@@ -12,6 +12,8 @@
 #import "YZQuanSheDetailCollectionHeaderView.h"
 #import "YZDetailTextCollectionView.h"
 #import "YZQuanSheDetailIntroView.h"
+#import "NetServer+ShangCheng.h"
+#import "MJRefresh.h"
 
 @interface YZQuanSheDetailViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -72,6 +74,17 @@
     [self.quanSheIntroView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view).insets(UIEdgeInsetsZero);
     }];
+    [self inner_GetQuanSheDetail];
+}
+
+- (void)inner_GetQuanSheDetail {
+    [NetServer getQuanSheDetailInfoWithShopId:self.quanSheId
+                                      success:^(id data) {
+                                          
+                                      }
+                                      failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+                                          
+                                      }];
 }
 
 - (void)inner_ShowQuanSheIntroView {

@@ -27,6 +27,10 @@
 
 @implementation YZQuanSheModel
 
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id": @"shopId"}];
+}
+
 @end
 
 @implementation YZQuanSheDetailModel

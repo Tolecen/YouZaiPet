@@ -10,4 +10,7 @@
 
 @interface YZQuanSheDetailViewController : BaseViewController
 
+@property (nonatomic, copy) NSString *quanSheId;
+
 @end
+

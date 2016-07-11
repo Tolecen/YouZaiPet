@@ -16,7 +16,7 @@
 #import "NetServer+ShangCheng.h"
 #import "MJRefresh.h"
 
-@interface YZGoodsDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface YZGoodsDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YZDetailBottomBarDelegate>
 
 @property (nonatomic, weak) UICollectionView *collectionView;
 
@@ -78,6 +78,7 @@
     }];
     
     YZDetailBottomBar *bottomBar = [[YZDetailBottomBar alloc] initWithFrame:CGRectZero type:YZShangChengType_Goods];
+    bottomBar.delegate = self;
     [self.view addSubview:bottomBar];
     [bottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_equalTo(self.view).mas_offset(0);
@@ -246,6 +247,20 @@
         detailVC.hideNaviBg = YES;
         [self.navigationController pushViewController:detailVC animated:YES];
     }
+}
+
+#pragma mark --
+
+- (void)shareAction {
+    
+}
+
+- (void)clearPriceAction {
+    
+}
+
+- (void)addShoppingCarAction {
+    
 }
 
 @end

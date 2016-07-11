@@ -216,7 +216,7 @@
 }
 
 + (void)getQuanSheDetailInfoWithShopId:(NSString *)shopId
-                               success:(void(^)(id data))success
+                               success:(void(^)(YZQuanSheDetailModel *quanSheDetail))success
                                failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:[NetServer commonDict]];
     parameters[@"command"] = @"mall";
@@ -224,7 +224,11 @@
     parameters[@"shopId"] = shopId;
     [NetServer requestWithParameters:parameters
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                 
+                                 JSONModelError *error = nil;
+                                 NSDictionary *value = responseObject[@"value"];
+                                 YZQuanSheDetailModel *detailModel = [[YZQuanSheDetailModel alloc] initWithDictionary:value
+                                                                                                                error:&error];
+                                 success(detailModel);
                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  failure(error, operation);
                              }];
