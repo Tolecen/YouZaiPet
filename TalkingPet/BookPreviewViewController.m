@@ -43,7 +43,7 @@
     self = [super init];
     if (self) {
         self.canScrollBack = NO;
-        totalPetalk = [[UserServe sharedUserServe].currentPet.issue intValue];
+        totalPetalk = [[UserServe sharedUserServe].account.issue intValue];
         totalPage = [DiaryLayouter totalPage:totalPetalk];
         self.sourceArr = [NSMutableArray array];
         loading = NO;

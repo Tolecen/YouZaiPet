@@ -173,8 +173,8 @@
     [usersDict setObject:@"product" forKey:@"command"];
     [usersDict setObject:@"detailSpecs" forKey:@"options"];
     [usersDict setObject:self.productId forKey:@"id"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dict = [responseObject objectForKey:@"value"];

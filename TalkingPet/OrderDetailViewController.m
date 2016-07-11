@@ -555,8 +555,8 @@
     [usersDict setObject:[dict objectForKey:@"shippingCity"] forKey:@"shippingCity"];
     [usersDict setObject:[dict objectForKey:@"shippingAddress"] forKey:@"shippingAddress"];
     
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     OrderDetailViewController * __weak weakSelf = self;
     [NetServer requestWithEncryptParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {

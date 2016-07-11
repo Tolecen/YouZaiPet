@@ -290,8 +290,8 @@
     [DatabaseServe unActivateUeser];
     [UserServe sharedUserServe].userName = nil;
     [UserServe sharedUserServe].userID = nil;
-    [UserServe sharedUserServe].petArr = nil;
-    [UserServe sharedUserServe].currentPet = nil;
+//    [UserServe sharedUserServe].petArr = nil;
+    [UserServe sharedUserServe].account = nil;
     //        [SFHFKeychainUtils deleteItemForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
     [[SystemServer sharedSystemServer].chatClient logout];
@@ -1006,7 +1006,7 @@
     [realContentDict setObject:[NSString stringWithFormat:@"/%@thumb.jpg",fileName] forKey:@"localThumbImgPath"];
     [realContentDict setObject:[NSString stringWithFormat:@"/%@audio.caf",fileName] forKey:@"localAudioPath"];
     
-    NSDictionary * fff = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"FailedContent%@",[UserServe sharedUserServe].currentPet.petID]];
+    NSDictionary * fff = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"FailedContent%@",[UserServe sharedUserServe].userID]];
     NSMutableDictionary * toSaveDict;
     if (fff) {
         toSaveDict = [NSMutableDictionary dictionaryWithDictionary:fff];
@@ -1018,7 +1018,7 @@
     }
 //    NSMutableDictionary *
     [toSaveDict setObject:realContentDict forKey:[taskDict objectForKey:@"taskID"]];
-    [[NSUserDefaults standardUserDefaults] setObject:toSaveDict forKey:[NSString stringWithFormat:@"FailedContent%@",[UserServe sharedUserServe].currentPet.petID]];
+    [[NSUserDefaults standardUserDefaults] setObject:toSaveDict forKey:[NSString stringWithFormat:@"FailedContent%@",[UserServe sharedUserServe].userID]];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSLog(@"saved dict:%@",toSaveDict);
@@ -1148,17 +1148,17 @@ failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"message" forKey:@"command"];
     [mDict setObject:@"UMC" forKey:@"options"];
-    NSString * petId = [UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"";
+    NSString * petId = [UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"";
     [mDict setObject:petId forKey:@"petId"];
     if ([petId isEqualToString:@""]) {
         return;
     }
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString * allCount = [responseObject objectForKey:@"value"];
-        NSString * haveCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"haveCount%@",[UserServe sharedUserServe].currentPet.petID]];
+        NSString * haveCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"haveCount%@",[UserServe sharedUserServe].userID]];
         if (haveCount) {
             int cha = [allCount intValue]-[haveCount intValue];
-            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",cha] forKey:[NSString stringWithFormat:@"needMetionCount%@",[UserServe sharedUserServe].currentPet.petID]];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",cha] forKey:[NSString stringWithFormat:@"needMetionCount%@",[UserServe sharedUserServe].userID]];
             if (cha>0) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"MsgNotiReceived" object:self userInfo:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"SectionmsgNotiReceived" object:self userInfo:nil];
@@ -1167,9 +1167,9 @@ failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
         }
         else
         {
-            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:[NSString stringWithFormat:@"needMetionCount%@",[UserServe sharedUserServe].currentPet.petID]];
+            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:[NSString stringWithFormat:@"needMetionCount%@",[UserServe sharedUserServe].userID]];
         }
-        [[NSUserDefaults standardUserDefaults] setObject:allCount forKey:[NSString stringWithFormat:@"haveCount%@",[UserServe sharedUserServe].currentPet.petID]];
+        [[NSUserDefaults standardUserDefaults] setObject:allCount forKey:[NSString stringWithFormat:@"haveCount%@",[UserServe sharedUserServe].userID]];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         
@@ -1199,7 +1199,7 @@ failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
     [mDict setObject:@"pet" forKey:@"command"];
     [mDict setObject:@"one" forKey:@"options"];
     [mDict setObject:petId forKey:@"petId"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"currPetId"];
     
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         success(operation,responseObject);

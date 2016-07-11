@@ -252,7 +252,7 @@
     petPeaL.backgroundColor = [UIColor clearColor];
     petPeaL.font = [UIFont systemFontOfSize:13];
     petPeaL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
-    petPeaL.text = [NSString stringWithFormat:@"宠豆:%@",[UserServe sharedUserServe].currentPet.coin];
+    petPeaL.text = [NSString stringWithFormat:@"宠豆:%@",[UserServe sharedUserServe].account.coin];
     
     [self setRightButtonWithName:@"兑换记录" BackgroundImg:nil Target:@selector(ExchangeRecordAction)];
 
@@ -269,7 +269,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"goods" forKey:@"command"];
     [mDict setObject:@"trialTop2" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [_tryArr addObjectsFromArray:responseObject[@"value"]];
         [_packageTableview reloadData];
@@ -283,7 +283,7 @@
 }
 - (void)exchangeSuccess:(NSNotification*)notification
 {
-    petPeaL.text = [NSString stringWithFormat:@"宠豆:%@",[UserServe sharedUserServe].currentPet.coin];
+    petPeaL.text = [NSString stringWithFormat:@"宠豆:%@",[UserServe sharedUserServe].account.coin];
 }
 - (void)trialSuccess:(NSNotification*)notification
 {
@@ -484,7 +484,7 @@
     [mDict setObject:@"exchangeList" forKey:@"options"];
     [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
     [mDict setObject:@"10" forKey:@"pageSize"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         page++;
         [_commodityArr addObjectsFromArray:responseObject[@"value"]];

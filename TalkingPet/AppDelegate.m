@@ -51,7 +51,7 @@
     [InitializeData intialzeAccessoryDataSource];
     [self startUp];
     if ([UserServe sharedUserServe].userName) {
-        NSString * currentChatUser = [[UserServe sharedUserServe].userName stringByAppendingString:[UserServe sharedUserServe].currentPet.petID];
+        NSString * currentChatUser = [[UserServe sharedUserServe].userName stringByAppendingString:[UserServe sharedUserServe].userID];
         [SystemServer sharedSystemServer].currentChatUserId = currentChatUser;
         [[SystemServer sharedSystemServer] chatClientAuth];
         [self synchronousPetlist];
@@ -100,7 +100,7 @@
         [dict setObject:@"message" forKey:@"command"];
         [dict setObject:@"MPTS" forKey:@"options"];
         [dict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
-        [dict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+        [dict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
         [dict setObject:@"1" forKey:@"type"];
         [dict setObject:self.devicePushToken forKey:@"token"];
         [NetServer requestWithParameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -306,11 +306,12 @@
 }
 -(void)synchronousPetlist
 {
+    /*
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"pet" forKey:@"command"];
     [mDict setObject:@"user" forKey:@"options"];
     [mDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         int d = 0;
         UserServe * userServe = [UserServe sharedUserServe];
@@ -372,6 +373,7 @@
         }
         
     } failure:nil];
+     */
 }
 -(void)noActivePetThenFail
 {
@@ -386,8 +388,8 @@
     [DatabaseServe unActivateUeser];
     [UserServe sharedUserServe].userName = nil;
     [UserServe sharedUserServe].userID = nil;
-    [UserServe sharedUserServe].petArr = nil;
-    [UserServe sharedUserServe].currentPet = nil;
+//    [UserServe sharedUserServe].petArr = nil;
+    [UserServe sharedUserServe].account = nil;
     //        [SFHFKeychainUtils deleteItemForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
     [[SystemServer sharedSystemServer].chatClient logout];

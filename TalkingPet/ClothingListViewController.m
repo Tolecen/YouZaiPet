@@ -208,8 +208,8 @@
     [usersDict setObject:@"product" forKey:@"command"];
     [usersDict setObject:@"listByCategory" forKey:@"options"];
     [usersDict setObject:self.goodsKey forKey:@"categoryId"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [usersDict setObject:[NSString stringWithFormat:@"%d",self.pageIndex] forKey:@"pageIndex"];
     [usersDict setObject:@"20" forKey:@"pageSize"];

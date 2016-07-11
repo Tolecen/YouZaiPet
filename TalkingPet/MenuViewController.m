@@ -72,11 +72,11 @@
     [self.nicknameL setFrame:CGRectMake((self.frame.size.width/2-50), 120, 100, 20)];
     [self.darenV setFrame:CGRectMake((self.frame.size.width/2-22)/2.0f-30+60-17, 10+60-17, 17, 17)];
     _darenV.frame = CGRectMake((self.frame.size.width/2+26), 86, 17, 17);
-    if ([UserServe sharedUserServe].currentPet) {
-        self.darenV.hidden = ![UserServe sharedUserServe].currentPet.ifDaren;
-    }
-    else
-        self.darenV.hidden = YES;
+//    if ([UserServe sharedUserServe].account) {
+//        self.darenV.hidden = ![UserServe sharedUserServe].account.ifDaren;
+//    }
+//    else
+//        self.darenV.hidden = YES;
 }
 - (void)goToDrafts
 {
@@ -213,9 +213,9 @@
             cell = [[CurrentPetCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:petCellIdentifier];
         }
         cell.delegate = self;
-        if ([UserServe sharedUserServe].currentPet) {
-            cell.photoView.imageURL =[NSURL URLWithString:[UserServe sharedUserServe].currentPet.headImgURL];
-            cell.nicknameL.text = [UserServe sharedUserServe].currentPet.nickname;
+        if ([UserServe sharedUserServe].account) {
+            cell.photoView.imageURL =[NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
+            cell.nicknameL.text = [UserServe sharedUserServe].account.nickname;
         }else
         {
             cell.photoView.imageURL =nil;

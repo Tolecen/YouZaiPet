@@ -333,8 +333,8 @@
     [usersDict setObject:@"product" forKey:@"command"];
     [usersDict setObject:@"detailSpecsByCategory" forKey:@"options"];
     [usersDict setObject:@"2" forKey:@"categoryId"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dict = [responseObject objectForKey:@"value"];
@@ -614,8 +614,8 @@
     [usersDict setObject:@"order" forKey:@"command"];
     [usersDict setObject:@"create" forKey:@"options"];
     [usersDict setObject:itemArray forKey:@"orderItems"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [NetServer requestWithEncryptParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self toConfirmPageWithOrderId:[responseObject objectForKey:@"value"]];

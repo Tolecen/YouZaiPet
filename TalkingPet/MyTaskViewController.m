@@ -45,7 +45,7 @@
     
     EGOImageView * im = [[EGOImageView alloc] initWithFrame:CGRectMake(15, 10, 40, 40)];
     im.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
-    [im setImageURL:[NSURL URLWithString:[UserServe sharedUserServe].currentPet.headImgURL]];
+    [im setImageURL:[NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL]];
     [bottomBGV addSubview:im];
     im.layer.cornerRadius = 20;
     im.layer.masksToBounds = YES;
@@ -81,8 +81,8 @@
     NSMutableDictionary* usersDict = [NetServer commonDict];
     [usersDict setObject:@"awardActivity" forKey:@"command"];
     [usersDict setObject:@"myListInfo" forKey:@"options"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
 
     [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -102,8 +102,8 @@
     NSMutableDictionary* usersDict = [NetServer commonDict];
     [usersDict setObject:@"awardActivity" forKey:@"command"];
     [usersDict setObject:@"myList" forKey:@"options"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [usersDict setObject:self.lastId forKey:@"startId"];
     [usersDict setObject:@"20" forKey:@"pageSize"];

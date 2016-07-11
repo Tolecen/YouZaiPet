@@ -57,7 +57,7 @@
     photoIB.placeholderImage = [UIImage imageNamed:@"placeholderHead"];
     photoIB.layer.masksToBounds=YES;
     photoIB.layer.cornerRadius = 30;
-    photoIB.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].currentPet.headImgURL];
+    photoIB.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
     [self.view addSubview:photoIB];
     
     UILabel*nicknameL = [[UILabel alloc] initWithFrame:CGRectMake(110, 30, 170, 20)];
@@ -65,11 +65,11 @@
 //    nicknameL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
 //    nicknameL.shadowOffset = CGSizeMake(2, 2);
     nicknameL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
-    nicknameL.text = [UserServe sharedUserServe].currentPet.nickname;
+    nicknameL.text = [UserServe sharedUserServe].account.nickname;
     [self.view addSubview:nicknameL];
     
     UIImageView*genderIV = [[UIImageView alloc] initWithFrame:CGRectMake(85, 30, 20, 20)];
-    switch ([[UserServe sharedUserServe].currentPet.gender integerValue]) {
+    switch ([[UserServe sharedUserServe].account.gender integerValue]) {
         case 0:{
             genderIV.image = [UIImage imageNamed:@"female"];
         }break;
@@ -89,7 +89,7 @@
     scoreL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
 //    scoreL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
 //    scoreL.shadowOffset = CGSizeMake(2, 2);
-    scoreL.text = [NSString stringWithFormat:@"积分:%@",[UserServe sharedUserServe].currentPet.score];
+    scoreL.text = [NSString stringWithFormat:@"积分:%@",[UserServe sharedUserServe].account.score];
     [self.view addSubview:scoreL];
     
     CGSize zs = [scoreL.text sizeWithFont:scoreL.font constrainedToSize:CGSizeMake(200, 20) lineBreakMode:NSLineBreakByCharWrapping];
@@ -98,7 +98,7 @@
     
     
     UIImageView * LVIV= [[UIImageView alloc] initWithFrame:CGRectMake(85+zs.width+5, 58, 15, 15)];
-    LVIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"LV%d",(int)[[UserServe sharedUserServe].currentPet.grade integerValue]]];
+    LVIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"LV%d",(int)[[UserServe sharedUserServe].account.grade integerValue]]];
     [self.view addSubview:LVIV];
     
     UILabel * LVL = [[UILabel alloc] initWithFrame:CGRectMake(85+zs.width+5+15, 55, 60, 20)];
@@ -107,7 +107,7 @@
     LVL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
 //    LVL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
 //    LVL.shadowOffset = CGSizeMake(2, 2);
-    LVL.text = [NSString stringWithFormat:@"等级:%d",(int)[[UserServe sharedUserServe].currentPet.grade integerValue]];
+    LVL.text = [NSString stringWithFormat:@"等级:%d",(int)[[UserServe sharedUserServe].account.grade integerValue]];
     [self.view addSubview:LVL];
     
     UILabel * gradeL = [[UILabel alloc] initWithFrame:CGRectMake(30, 82, 30, 20)];
@@ -116,7 +116,7 @@
     gradeL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
 //    gradeL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
 //    gradeL.shadowOffset = CGSizeMake(2, 2);
-    gradeL.text = [NSString stringWithFormat:@"LV.%d",(int)[[UserServe sharedUserServe].currentPet.grade integerValue]];
+    gradeL.text = [NSString stringWithFormat:@"LV.%d",(int)[[UserServe sharedUserServe].account.grade integerValue]];
     [self.view addSubview:gradeL];
     
     UILabel * nextGradeL = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width-85, 82, 30, 20)];
@@ -125,7 +125,7 @@
     nextGradeL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
 //    nextGradeL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
 //    nextGradeL.shadowOffset = CGSizeMake(2, 2);
-    nextGradeL.text = [NSString stringWithFormat:@"LV.%d",(int)[[UserServe sharedUserServe].currentPet.grade integerValue]+1];
+    nextGradeL.text = [NSString stringWithFormat:@"LV.%d",(int)[[UserServe sharedUserServe].account.grade integerValue]+1];
     [self.view addSubview:nextGradeL];
     
     UIView*gradeBV = [[UIView alloc] initWithFrame:CGRectMake(60, 85, self.view.frame.size.width-150, 15)];
@@ -171,14 +171,14 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petGrade" forKey:@"command"];
     [mDict setObject:@"rule" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray * ruleArr = responseObject[@"value"];
-        if ([[UserServe sharedUserServe].currentPet.grade integerValue]<12) {
-            NSDictionary * dic = ruleArr[[[UserServe sharedUserServe].currentPet.grade integerValue]];
-            float sc = [[UserServe sharedUserServe].currentPet.score floatValue]/[dic[@"scoreMax"] floatValue];
+        if ([[UserServe sharedUserServe].account.grade integerValue]<12) {
+            NSDictionary * dic = ruleArr[[[UserServe sharedUserServe].account.grade integerValue]];
+            float sc = [[UserServe sharedUserServe].account.score floatValue]/[dic[@"scoreMax"] floatValue];
             gradeV.frame = CGRectMake(0, 0, (self.view.frame.size.width-150)*sc, 15);
-            upL.text = [NSString stringWithFormat:@"升级还需积分:%d",[dic[@"scoreMax"] integerValue]-[[UserServe sharedUserServe].currentPet.score integerValue]+1];
+            upL.text = [NSString stringWithFormat:@"升级还需积分:%d",[dic[@"scoreMax"] integerValue]-[[UserServe sharedUserServe].account.score integerValue]+1];
         }else
         {
             gradeV.frame = CGRectMake(0, 0, 170, 15);
@@ -196,7 +196,7 @@
     if ([self.dataArr lastObject]) {
         [mDict setObject:[self.dataArr lastObject][@"id"] forKey:@"startId"];
     }
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.dataArr addObjectsFromArray:responseObject[@"value"]];
         [_tableView reloadData];

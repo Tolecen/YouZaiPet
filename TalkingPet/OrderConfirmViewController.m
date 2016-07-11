@@ -615,8 +615,8 @@
     [usersDict setObject:self.rAddress.city forKey:@"shippingCity"];
     [usersDict setObject:self.rAddress.address forKey:@"shippingAddress"];
     
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     OrderConfirmViewController * __weak weakSelf = self;
     [NetServer requestWithEncryptParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {

@@ -155,7 +155,7 @@
     [mDict setObject:@"orderList" forKey:@"options"];
     [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
     [mDict setObject:@"10" forKey:@"pageSize"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         page++;
         [_packageTableview headerEndRefreshing];
@@ -176,7 +176,7 @@
     [mDict setObject:@"orderList" forKey:@"options"];
     [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
     [mDict setObject:@"10" forKey:@"pageSize"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         page++;
         [_packageTableview footerEndRefreshing];

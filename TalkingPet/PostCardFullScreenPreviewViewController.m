@@ -106,8 +106,8 @@
     [hotDic setObject:@"list4Postcard" forKey:@"options"];
     [hotDic setObject:@"100" forKey:@"pageSize"];
     //    [hotDic setObject:[NSString stringWithFormat:@"%d",(int)self.pageIndex] forKey:@"pageIndex"];
-    [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
-    [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [hotDic setObject:@"O" forKey:@"type"];
     [NetServer requestWithParameters:hotDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.pageIndex++;
@@ -298,7 +298,7 @@
 -(void)addToList
 {
     
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];

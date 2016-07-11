@@ -60,8 +60,8 @@
         [hotDic setObject:@"10" forKey:@"pageSize"];
         [hotDic setObject:@"channel" forKey:@"options"];
         [hotDic setObject:self.otherCode forKey:@"code"];
-        if ([UserServe sharedUserServe].currentPet.petID) {
-            [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+        if ([UserServe sharedUserServe].userID) {
+            [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
         }
     }if (self.listTyep == PetalkListTyepPetBreed) {
         [hotDic setObject:@"petalk" forKey:@"command"];
@@ -69,29 +69,29 @@
         [hotDic setObject:@"10" forKey:@"pageSize"];
         [hotDic setObject:@"petBreed" forKey:@"options"];
         [hotDic setObject:self.otherCode forKey:@"code"];
-        if ([UserServe sharedUserServe].currentPet.petID) {
-            [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+        if ([UserServe sharedUserServe].userID) {
+            [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }if (self.listTyep == PetalkListTyepAllPetalk) {
         [hotDic setObject:@"petalk" forKey:@"command"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
         [hotDic setObject:@"all" forKey:@"options"];
-        if ([UserServe sharedUserServe].currentPet.petID) {
-            [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+        if ([UserServe sharedUserServe].userID) {
+            [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }if (self.listTyep == PetalkListTyepMyPublish) {
         [hotDic setObject:@"petalk" forKey:@"command"];
         [hotDic setObject:@"userList" forKey:@"options"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
-        [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
-        [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
         [hotDic setObject:@"O" forKey:@"type"];
     }if (self.listTyep == PetalkListTyepMyForWord) {
         [hotDic setObject:@"petalk" forKey:@"command"];
         [hotDic setObject:@"userList" forKey:@"options"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
-        [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
-        [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
         [hotDic setObject:@"R" forKey:@"type"];
         self.tableViewHelper.needShowZanAndComment = NO;
         
@@ -99,8 +99,8 @@
         [hotDic setObject:@"petalk" forKey:@"command"];
         [hotDic setObject:@"userList" forKey:@"options"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
-        [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
-        [hotDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
         [hotDic setObject:@"F" forKey:@"type"];
         self.tableViewHelper.needShowZanAndComment = NO;
     }

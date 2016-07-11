@@ -79,7 +79,7 @@
     
     
     
-    /**
+    
     listType = 1;
     self.tableView = [[UITableView alloc] init];
     _tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -173,8 +173,8 @@
         [chatBtn addTarget:self action:@selector(chatBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [chatBtn setBackgroundImage:[UIImage imageNamed:@"usercenter_chat"] forState:UIControlStateNormal];
         [view addSubview:chatBtn];
-        if ([UserServe sharedUserServe].currentPet) {
-            if ([[UserServe sharedUserServe].currentPet.petID isEqualToString:self.petId]) {
+        if ([UserServe sharedUserServe].account) {
+            if ([[UserServe sharedUserServe].userID isEqualToString:self.petId]) {
                 chatBtn.hidden = YES;
             }
         }
@@ -234,11 +234,11 @@
     
     [self buildViewWithSkintype];
      
-     **/
+     
 }
 -(void)chatBtnAction:(UIButton *)sender
 {
-    if (![UserServe sharedUserServe].currentPet.petID) {
+    if (![UserServe sharedUserServe].userID) {
         [[RootViewController sharedRootViewController] showLoginViewController];
         return;
     }
@@ -260,7 +260,7 @@
 }
 - (void)relationAction:(UIButton *)button
 {
-    if (![UserServe sharedUserServe].currentPet.petID) {
+    if (![UserServe sharedUserServe].userID) {
         [[RootViewController sharedRootViewController] showLoginViewController];
         return;
     }
@@ -269,7 +269,7 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"petfans" forKey:@"command"];
         [mDict setObject:@"focus" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"fansPetId"];
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"fansPetId"];
         [mDict setObject:self.petId forKey:@"petId"];
         [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[[responseObject objectForKey:@"value"] objectForKey:@"bothway"] isEqualToString:@"false"]) {
@@ -300,7 +300,7 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"petfans" forKey:@"command"];
         [mDict setObject:@"cancelFocus" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"fansPetId"];
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"fansPetId"];
         [mDict setObject:self.petId forKey:@"petId"];
         [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             self.relationShip = @"0";
@@ -323,7 +323,7 @@
     [mDict setObject:@"pet" forKey:@"command"];
     [mDict setObject:@"one" forKey:@"options"];
     [mDict setObject:self.petId forKey:@"petId"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"currPetId"];
     
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([self.petId isEqualToString:@"44239"]) {
@@ -449,8 +449,8 @@
     [mDict setObject:self.petId forKey:@"petId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:@"R" forKey:@"type"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+    if ([UserServe sharedUserServe].userID) {
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     }
     [self.tableviewHelpeer loadFirstDataPageWithDict:mDict];
 }
@@ -468,8 +468,8 @@
     [mDict setObject:self.petId forKey:@"petId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:@"O" forKey:@"type"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+    if ([UserServe sharedUserServe].userID) {
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     }
     [self.tableviewTimeLineHelper loadFirstDataPageWithDict:mDict];
 }

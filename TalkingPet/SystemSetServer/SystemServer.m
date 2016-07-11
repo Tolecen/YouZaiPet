@@ -42,7 +42,7 @@ static SystemServer* systemServer;
 }
 -(void)chatClientAuth
 {
-    if (![UserServe sharedUserServe].currentPet) {
+    if (![UserServe sharedUserServe].account) {
         return;
     }
     if(![systemServer.chatClient isAuthed])
@@ -50,11 +50,11 @@ static SystemServer* systemServer;
 //        if (!systemServer.chatClient.jid) {
 //            return;
 //        }
-        BOOL successed=[systemServer.chatClient auth:[NSString stringWithFormat:@"%@@%@",[UserServe sharedUserServe].currentPet.petID,DomainName] withPassword:[NSString stringWithFormat:@"%@",[UserServe sharedUserServe].currentPet.petID]];
+        BOOL successed=[systemServer.chatClient auth:[NSString stringWithFormat:@"%@@%@",[UserServe sharedUserServe].userID,DomainName] withPassword:[NSString stringWithFormat:@"%@",[UserServe sharedUserServe].userID]];
         
         if(successed)//连接成功
         {
-            NSLog(@"%@ account auth success",[UserServe sharedUserServe].currentPet.petID);
+            NSLog(@"%@ account auth success",[UserServe sharedUserServe].userID);
         }
         else{//连接失败
 //            NSLog(@"auth failed");
@@ -66,8 +66,9 @@ static SystemServer* systemServer;
 }
 -(void)userOrPetChanged
 {
+    /*
     self.shouldReNewTree = YES;
-    NSString * currentChatUser = [[UserServe sharedUserServe].userName stringByAppendingString:[UserServe sharedUserServe].currentPet.petID];
+    NSString * currentChatUser = [[UserServe sharedUserServe].userName stringByAppendingString:[UserServe sharedUserServe].userID];
     if (![currentChatUser isEqualToString:[SystemServer sharedSystemServer].currentChatUserId]) {
         [systemServer.chatClient logout];
     }
@@ -76,6 +77,8 @@ static SystemServer* systemServer;
     [SystemServer sharedSystemServer].currentChatUserId = currentChatUser;
     [self chatClientAuth];
     NSLog(@"catch you changed!");
+     
+     */
 }
 -(void)didAuthSuccessed
 {

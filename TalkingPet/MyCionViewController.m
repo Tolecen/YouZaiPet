@@ -56,7 +56,7 @@
     photoIB.placeholderImage = [UIImage imageNamed:@"placeholderHead"];
     photoIB.layer.masksToBounds=YES;
     photoIB.layer.cornerRadius = 30;
-    photoIB.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].currentPet.headImgURL];
+    photoIB.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
     [self.view addSubview:photoIB];
     
     UILabel*nicknameL = [[UILabel alloc] initWithFrame:CGRectMake(110, 30, 170, 20)];
@@ -64,11 +64,11 @@
 //    nicknameL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
 //    nicknameL.shadowOffset = CGSizeMake(2, 2);
     nicknameL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
-    nicknameL.text = [UserServe sharedUserServe].currentPet.nickname;
+    nicknameL.text = [UserServe sharedUserServe].account.nickname;
     [self.view addSubview:nicknameL];
     
     UIImageView*genderIV = [[UIImageView alloc] initWithFrame:CGRectMake(85, 30, 20, 20)];
-    switch ([[UserServe sharedUserServe].currentPet.gender integerValue]) {
+    switch ([[UserServe sharedUserServe].account.gender integerValue]) {
         case 0:{
             genderIV.image = [UIImage imageNamed:@"male"];
         }break;
@@ -88,7 +88,7 @@
     cionL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
 //    cionL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
 //    cionL.shadowOffset = CGSizeMake(2, 2);
-    cionL.text = [NSString stringWithFormat:@"宠豆:%@",[UserServe sharedUserServe].currentPet.coin];
+    cionL.text = [NSString stringWithFormat:@"宠豆:%@",[UserServe sharedUserServe].account.coin];
     [self.view addSubview:cionL];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(5, self.view.frame.size.width*0.57-60, self.view.frame.size.width-10, self.view.frame.size.height - navigationBarHeight-(self.view.frame.size.width*0.57-60+5)) style:UITableViewStylePlain];
@@ -122,7 +122,7 @@
     if ([self.dataArr lastObject]) {
         [mDict setObject:[self.dataArr lastObject][@"id"] forKey:@"startId"];
     }
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.dataArr addObjectsFromArray:responseObject[@"value"]];
         [_tableView reloadData];

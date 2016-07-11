@@ -97,7 +97,8 @@ static PublishServer* publishServer;
 //签到
 +(void)signInWithNavigationController:(UINavigationController *)controller completion:(void (^)(void))completion
 {
-    if ([UserServe sharedUserServe].currentPetSignatured) {
+    /*
+    if ([UserServe sharedUserServe].accountSignatured) {
         SignInHistoryViewController * signInHistoryVC = [[SignInHistoryViewController alloc] init];
         signInHistoryVC.title = @"今日已签到";
         [controller pushViewController:signInHistoryVC animated:YES];
@@ -108,15 +109,15 @@ static PublishServer* publishServer;
         [mDict setObject:@"activity" forKey:@"command"];
         [mDict setObject:@"signIn" forKey:@"options"];
         [mDict setObject:@"signInNormal" forKey:@"code"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
         [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [SVProgressHUD dismiss];
-            [[RootViewController sharedRootViewController] showPetaikAlertWithTitle:[NSString stringWithFormat:@"%@签到成功!",[UserServe sharedUserServe].currentPet.nickname] message:[NSString stringWithFormat:@"恭喜获得%@积分",responseObject[@"value"]]];
+            [[RootViewController sharedRootViewController] showPetaikAlertWithTitle:[NSString stringWithFormat:@"%@签到成功!",[UserServe sharedUserServe].account.nickname] message:[NSString stringWithFormat:@"恭喜获得%@积分",responseObject[@"value"]]];
             
-            [UserServe sharedUserServe].currentPetSignatured = YES;
+            [UserServe sharedUserServe].accountSignatured = YES;
             //本地用户积分累加
-            [UserServe sharedUserServe].currentPet.score = [NSString stringWithFormat:@"%d",[[UserServe sharedUserServe].currentPet.score intValue]+[responseObject[@"value"] intValue]];
-            [DatabaseServe activatePet:[UserServe sharedUserServe].currentPet WithUsername:[UserServe sharedUserServe].userName];
+            [UserServe sharedUserServe].account.score = [NSString stringWithFormat:@"%d",[[UserServe sharedUserServe].account.score intValue]+[responseObject[@"value"] intValue]];
+            [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
             
             SignInHistoryViewController * signInHistoryVC = [[SignInHistoryViewController alloc] init];
             signInHistoryVC.title = @"签到成功";
@@ -130,13 +131,14 @@ static PublishServer* publishServer;
             [SVProgressHUD dismiss];
         }];
     }
+     */
 }
 +(void)loadHotTag
 {
     dispatch_queue_t queue = dispatch_queue_create("com.pet.getHotTag", NULL);
     dispatch_async(queue, ^{
         NSMutableDictionary* mDict = [NetServer commonDict];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
         [mDict setObject:@"tag" forKey:@"command"];
         [mDict setObject:@"all" forKey:@"options"];
         [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -454,7 +456,7 @@ static PublishServer* publishServer;
             NSMutableDictionary* mDict = [NetServer commonDict];
             [mDict setObject:@"decoration" forKey:@"command"];
             [mDict setObject:@"tree" forKey:@"options"];
-            [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
             [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSMutableDictionary * newDic = [NSMutableDictionary dictionary];
                 NSArray * arr = [responseObject objectForKey:@"value"][@"children"];
@@ -602,7 +604,7 @@ static PublishServer* publishServer;
             [arr addObject:dic];
         }
         [talkDic setObject:arr forKey:@"tags"];
-        [talkDic setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+        [talkDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
         [talkDic setObject:[NSString stringWithFormat:@"%ld",(long)talkingPublish.audioDuration] forKey:@"audioSecond"];
         if (talkingPublish.location) {
             [talkDic setObject:talkingPublish.location.address forKey:@"positionName"];
@@ -632,9 +634,9 @@ static PublishServer* publishServer;
         __block PetalkPublisher * blockPublisher = publisher;
         [NetServer requestWithParameters:finalDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
-            NSString * issue = [NSString stringWithFormat:@"%d",[[UserServe sharedUserServe].currentPet.issue intValue]+1];
-            [UserServe sharedUserServe].currentPet.issue = issue;
-            [DatabaseServe activatePet:[UserServe sharedUserServe].currentPet WithUsername:[UserServe sharedUserServe].userName];
+            NSString * issue = [NSString stringWithFormat:@"%d",[[UserServe sharedUserServe].account.issue intValue]+1];
+            [UserServe sharedUserServe].account.issue = issue;
+            [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
             for (Publisher * pp in blockArr) {
                 if ([pp.publishID isEqualToString:publisher.publishID]) {
                     [blockArr removeObject:pp];
@@ -731,7 +733,7 @@ static PublishServer* publishServer;
     petalkDraft.thumImgPath = publisher.thumImgPath;
     petalkDraft.publishAudioURL = publisher.publishAudioURL;
     petalkDraft.publishAudioPath = publisher.publishAudioPath;
-    petalkDraft.currentPetID = [UserServe sharedUserServe].currentPet.petID;
+    petalkDraft.currentPetID = [UserServe sharedUserServe].userID;
     petalkDraft.tagID = ((Tag*)[talkingPublish.tagArray firstObject]).tagID;
     petalkDraft.audioDuration = [NSString stringWithFormat:@"%ld",(long)talkingPublish.audioDuration];
     if (talkingPublish.animationImg.tagID) {
@@ -872,8 +874,8 @@ static const void * assetsLibraryKey =&assetsLibraryKey;
             [usersDict setObject:blockPublisher.interactionID forKey:@"topicId"];
             [usersDict setObject:arr forKey:@"pictures"];
             [usersDict setObject:blockPublisher.text forKey:@"content"];
-            if ([UserServe sharedUserServe].currentPet.petID) {
-                [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+            if ([UserServe sharedUserServe].userID) {
+                [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
             }
             [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 [self cleanDraftDataWithInteractionPublisher:publisher];

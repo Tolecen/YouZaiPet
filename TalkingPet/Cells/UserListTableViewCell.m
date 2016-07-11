@@ -154,7 +154,7 @@
 }
 -(void)doAttention
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -169,10 +169,10 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petfans" forKey:@"command"];
     [mDict setObject:@"focus" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"fansPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"fansPetId"];
     [mDict setObject:[self.petDict objectForKey:@"id"] forKey:@"petId"];
     
-    //    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    //    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     NSLog(@"focus user:%@",mDict);
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"error"] isEqualToString:@"200"]) {
@@ -218,7 +218,7 @@
 }
 -(void)cancelAttention
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -233,7 +233,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petfans" forKey:@"command"];
     [mDict setObject:@"cancelFocus" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"fansPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"fansPetId"];
     [mDict setObject:[self.petDict objectForKey:@"id"] forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.relationShip = @"0";

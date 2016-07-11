@@ -73,7 +73,7 @@
     [mDict setObject:@"tag" forKey:@"command"];
     [mDict setObject:@"create" forKey:@"options"];
     [mDict setObject:[searchTF.text CutSpacing] forKey:@"keyword"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];
         NSDictionary * dic = responseObject[@"value"];
@@ -111,7 +111,7 @@
         [mDict setObject:searchTF.text forKey:@"keyword"];
         [mDict setObject:@"100" forKey:@"pageSize"];
         [mDict setObject:@"0" forKey:@"pageIndex"];
-        [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             self.searchArr = [NSMutableArray array];
             if (((NSArray*)responseObject[@"value"]).count) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14C109" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15F34" minimumToolsVersion="Xcode 4.3">
     <entity name="AccessoryEntity" representedClassName="AccessoryEntity" syncable="YES">
         <attribute name="accId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="downLoadURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -112,7 +112,25 @@
     <entity name="UserEntity" representedClassName="UserEntity" syncable="YES">
         <attribute name="action" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="actiontime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="attentionNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="birthday" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="breed" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="chatLimits" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="coin" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="daren" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="fansNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="favour" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="grade" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="headImgURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="issue" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="owner" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="passWord" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="region" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="relay" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -127,6 +145,6 @@
         <element name="SystemSetEntity" positionX="36" positionY="279" width="128" height="120"/>
         <element name="TagEntity" positionX="0" positionY="351" width="128" height="103"/>
         <element name="ThumbNormalMsgEntity" positionX="-9" positionY="225" width="128" height="165"/>
-        <element name="UserEntity" positionX="9" positionY="360" width="128" height="120"/>
+        <element name="UserEntity" positionX="9" positionY="360" width="128" height="390"/>
     </elements>
 </model>

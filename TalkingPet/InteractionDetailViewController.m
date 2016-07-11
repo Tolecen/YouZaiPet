@@ -109,8 +109,8 @@
     [usersDict setObject:@"topic" forKey:@"command"];
     [usersDict setObject:@"talkOne" forKey:@"options"];
     [usersDict setObject:self.hudongId forKey:@"id"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.contentDict = [NSMutableDictionary dictionaryWithDictionary:[responseObject objectForKey:@"value"]];
@@ -131,8 +131,8 @@
     [usersDict setObject:self.hudongId forKey:@"talkId"];
     [usersDict setObject:@"20" forKey:@"pageSize"];
     [usersDict setObject:self.lastId forKey:@"startId"];
-    if ([UserServe sharedUserServe].currentPet.petID) {
-        [usersDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    if ([UserServe sharedUserServe].userID) {
+        [usersDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     }
     [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        self.commentArray = [self getModelArray:[responseObject objectForKey:@"value"]];
@@ -171,7 +171,7 @@
 
 - (void)didSendTextAction:(NSString *)text
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];
@@ -199,7 +199,7 @@
 }
 -(void)makeCommentToThisTalkingWithContent:(NSString *)commentContent AimPetID:(NSString *)aimPetId
 {
-    NSString * currentPetId = [UserServe sharedUserServe].currentPet.petID;
+    NSString * currentPetId = [UserServe sharedUserServe].userID;
     if (!currentPetId) {
         if (![RootViewController sharedRootViewController].presentedViewController) {
             [[RootViewController sharedRootViewController] showLoginViewController];

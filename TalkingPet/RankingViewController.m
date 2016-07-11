@@ -102,7 +102,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"rank" forKey:@"command"];
     [mDict setObject:@"petalkTotalPopRankList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:@"0" forKey:@"pageIndex"];
     self.paihangHelper.reqDict = mDict;
@@ -113,7 +113,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"rank" forKey:@"command"];
     [mDict setObject:@"petalkWeekPopRankList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:@"0" forKey:@"pageIndex"];
     self.paihangHelper.reqDict = mDict;

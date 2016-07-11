@@ -479,7 +479,7 @@
                 petalkDraft.publishImgPath = publishImgPath;
                 petalkDraft.thumImgPath = thumImgPath;
                 petalkDraft.publishAudioPath = publishAudioPath;
-                petalkDraft.currentPetID = [UserServe sharedUserServe].currentPet.petID;
+                petalkDraft.currentPetID = [UserServe sharedUserServe].userID;
                 petalkDraft.tagID = ((Tag*)[_talkingPublish.tagArray firstObject]).tagID;
                 petalkDraft.audioDuration = [NSString stringWithFormat:@"%ld",(long)_talkingPublish.audioDuration];
                 if (_talkingPublish.animationImg.tagID) {

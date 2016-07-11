@@ -58,7 +58,7 @@
 @implementation HotViewController
 -(void)viewDidLoad
 {
-    NSArray * baseArr = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].currentPet.petID]];
+    NSArray * baseArr = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].userID]];
     self.dataArr = [NSMutableArray array];
     for (NSDictionary * dic in baseArr) {
         TalkingBrowse * petalk = [[TalkingBrowse alloc] initWithHostInfo:dic];
@@ -95,8 +95,8 @@
     self.tableViewHelper.cellNeedShowPublishTime = NO;
 //    self.tableViewHelper.tableViewType = TableViewTypeTagList;
     
-    NSArray * hotArray = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].currentPet.petID]];
-    NSDictionary * hotReqDict = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotListReqDict%@",[UserServe sharedUserServe].currentPet.petID]];
+    NSArray * hotArray = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].userID]];
+    NSDictionary * hotReqDict = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotListReqDict%@",[UserServe sharedUserServe].userID]];
     if (hotArray&&hotReqDict) {
         self.tableViewHelper.dataArray = [self.tableViewHelper getModelArray:hotArray];
         self.tableViewHelper.reqDict = [NSMutableDictionary dictionaryWithDictionary:hotReqDict];
@@ -109,7 +109,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"hotList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
     
@@ -134,14 +134,14 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"hotList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [_dataArr removeAllObjects];
         [_hotView headerEndRefreshing];
         NSArray * array = [responseObject[@"value"] objectForKey:@"list"];
-        [[NSUserDefaults standardUserDefaults] setObject:array forKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].currentPet.petID]];
+        [[NSUserDefaults standardUserDefaults] setObject:array forKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].userID]];
         [[NSUserDefaults standardUserDefaults] synchronize];
         for (NSDictionary * dic in array) {
             TalkingBrowse * petalk = [[TalkingBrowse alloc] initWithHostInfo:dic];
@@ -158,7 +158,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"hotList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {

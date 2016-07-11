@@ -72,11 +72,14 @@ static RootViewController* rootViewController;
     
     NSString * firstIn = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"firstIn%@",CurrentVersion]];
     if (!firstIn) {
-        WelcomeViewController * welcomeVC = [[WelcomeViewController alloc] init];
-        [self addChildViewController:welcomeVC];
-        [welcomeVC.view setFrame:[[UIScreen mainScreen] bounds]];
-        [self.view addSubview:welcomeVC.view];
-        [welcomeVC didMoveToParentViewController:self];
+//        WelcomeViewController * welcomeVC = [[WelcomeViewController alloc] init];
+//        [self addChildViewController:welcomeVC];
+//        [welcomeVC.view setFrame:[[UIScreen mainScreen] bounds]];
+//        [self.view addSubview:welcomeVC.view];
+//        [welcomeVC didMoveToParentViewController:self];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"first" forKey:[NSString stringWithFormat:@"firstIn%@",CurrentVersion]];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     else
     {

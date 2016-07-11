@@ -156,14 +156,14 @@
     [mDict setObject:@"activity" forKey:@"command"];
     [mDict setObject:@"signCal" forKey:@"options"];
     [mDict setObject:@"7" forKey:@"pageSize"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dic = responseObject[@"value"];
         _congratulateL.text = [NSString stringWithFormat:@"恭喜获得%@积分",dic[@"award"]];
         _signCountL.text = [NSString stringWithFormat:@"已连续签到%@天",dic[@"count"]];
         _futureL.text = dic[@"memo"];
         [self buildCalendarListWithBaseList:dic[@"details"]];
-        secceL.text = [NSString stringWithFormat:@"%@签到成功",[UserServe sharedUserServe].currentPet.nickname];
+        secceL.text = [NSString stringWithFormat:@"%@签到成功",[UserServe sharedUserServe].account.nickname];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];

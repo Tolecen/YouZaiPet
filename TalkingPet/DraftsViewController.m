@@ -85,7 +85,7 @@
     [self setBackButtonWithTarget:@selector(back)];
     [self buildViewWithSkintype];
     
-    NSArray * arr = [DatabaseServe allPetalkDraftsWithCurrentPetID:[UserServe sharedUserServe].currentPet.petID];
+    NSArray * arr = [DatabaseServe allPetalkDraftsWithCurrentPetID:[UserServe sharedUserServe].userID];
     self.draftsArrar = [NSMutableArray arrayWithArray:arr];
     for (NSDictionary * dic in [PublishServer sharedPublishServer].publishArray) {
         for (DraftModel * model in arr) {

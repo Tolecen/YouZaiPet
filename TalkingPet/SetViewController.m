@@ -373,7 +373,8 @@
     loggingOut = YES;
     NSMutableDictionary* dict = [NetServer commonDict];
     [dict setObject:@"logout" forKey:@"command"];
-    [dict setObject:@"" forKey:@"options"];
+    [dict setObject:@"logout" forKey:@"options"];
+    [dict setObject:[SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil] forKey:@"sessionToken"];
     [dict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     [NetServer requestWithParameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"sucess logout :%@",responseObject);
@@ -390,12 +391,12 @@
         [DatabaseServe unActivateUeser];
         [UserServe sharedUserServe].userName = nil;
         [UserServe sharedUserServe].userID = nil;
-        [UserServe sharedUserServe].petArr = nil;
-        [UserServe sharedUserServe].currentPet = nil;
+//        [UserServe sharedUserServe].petArr = nil;
+        [UserServe sharedUserServe].account = nil;
 //        [SFHFKeychainUtils deleteItemForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
         [self refreshLogStatus];
-        [[SystemServer sharedSystemServer].chatClient logout];
+//        [[SystemServer sharedSystemServer].chatClient logout];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"网络不好，退出失败哦"];
         loggingOut = NO;

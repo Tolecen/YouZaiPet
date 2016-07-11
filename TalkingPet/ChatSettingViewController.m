@@ -57,10 +57,10 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"setting" forKey:@"command"];
     [mDict setObject:@"PSL" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.chatSetting = [[[responseObject objectForKey:@"value"] objectForKey:@"mesg"] intValue];
-        [DatabaseServe setChatSettingForPetId:[UserServe sharedUserServe].currentPet.petID setting:self.chatSetting];
+        [DatabaseServe setChatSettingForPetId:[UserServe sharedUserServe].userID setting:self.chatSetting];
         [self.settingTableView reloadData];
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -146,7 +146,7 @@
     if (indexPath.row==0&&indexPath.section==0) {
         UserListViewController * attentionV = [[UserListViewController alloc] init];
         attentionV.listType = UserListBlackList;
-        attentionV.petID = [UserServe sharedUserServe].currentPet.petID;
+        attentionV.petID = [UserServe sharedUserServe].userID;
         [self.navigationController pushViewController:attentionV animated:YES];
     }
     if (indexPath.row==0&&indexPath.section==1) {
@@ -164,11 +164,11 @@
     [mDict setObject:@"PSM" forKey:@"options"];
     [mDict setObject:@"mesg" forKey:@"key"];
     [mDict setObject:[NSString stringWithFormat:@"%d",chatSetting] forKey:@"val"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];
         self.chatSetting = chatSetting;
-        [DatabaseServe setChatSettingForPetId:[UserServe sharedUserServe].currentPet.petID setting:self.chatSetting];
+        [DatabaseServe setChatSettingForPetId:[UserServe sharedUserServe].userID setting:self.chatSetting];
         [self.settingTableView reloadData];
     }
      failure:^(AFHTTPRequestOperation *operation, NSError *error) {

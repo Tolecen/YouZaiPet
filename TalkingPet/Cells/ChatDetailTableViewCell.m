@@ -138,7 +138,7 @@
     if (self.chatMsg.isMe) {
 //        self.contentLabel.hidden = NO;
         self.contentLabel.textColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
-        self.avatarImgV.imageURL = [NSURL URLWithString:[[UserServe sharedUserServe].currentPet.headImgURL stringByAppendingString:@"?imageView2/2/w/50"]];
+        self.avatarImgV.imageURL = [NSURL URLWithString:[[UserServe sharedUserServe].account.headImgURL stringByAppendingString:@"?imageView2/2/w/50"]];
         UIImage * fg = [UIImage imageNamed:@"chatbubbleme"];
         UIImage *image=[fg resizableImageWithCapInsets:UIEdgeInsetsMake(fg.size.height * (1.28/1.91f), fg.size.width * 0.20, fg.size.height * 0.19, fg.size.width * (0.85/2.33f)) resizingMode:UIImageResizingModeStretch];
         [self.bgImageV setImage:image];

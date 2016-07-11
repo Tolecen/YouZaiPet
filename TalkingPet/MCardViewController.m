@@ -30,7 +30,7 @@
     [mDict setObject:@"card" forKey:@"command"];
     [mDict setObject:@"profile" forKey:@"options"];
 //    [mDict setObject:self.packageInfo.packageId forKey:@"code"];
-//    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"no" forKey:@"petId"];
+//    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"no" forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
 

@@ -18,13 +18,14 @@ static UserServe* userServe;
     
     dispatch_once(&onceToken, ^{
         userServe =[[self alloc] init];
-        userServe.currentPetSignatured = NO;
+//        userServe.currentPetSignatured = NO;
         [[NSNotificationCenter defaultCenter] addObserver:userServe selector:@selector(activityOfCurrentPet) name:@"WXRLoginSucceed" object:nil];
         userServe.userName = [DatabaseServe getActionAccount].username;
         if (userServe.userName) {
             userServe.userID = [DatabaseServe getActionAccount].userID;
-            userServe.currentPet = [DatabaseServe getActionPetWithWithUsername:userServe.userName];
-            userServe.petArr = [NSMutableArray arrayWithArray:[DatabaseServe getUnactionPetsWithWithUsername:userServe.userName]];
+            userServe.account = [DatabaseServe getActionAccount];
+//            userServe.currentPet = [DatabaseServe getActionPetWithWithUsername:userServe.userName];
+//            userServe.petArr = [NSMutableArray arrayWithArray:[DatabaseServe getUnactionPetsWithWithUsername:userServe.userName]];
            
         }
     });
@@ -32,25 +33,25 @@ static UserServe* userServe;
 }
 - (void)activityOfCurrentPet
 {
-    self.currentPetSignatured = NO;
-    if (self.currentPet) {
-        NSMutableDictionary* mDict = [NetServer commonDict];
-        [mDict setObject:@"activity" forKey:@"command"];
-        [mDict setObject:@"partake" forKey:@"options"];
-        [mDict setObject:self.currentPet.petID forKey:@"petId"];
-        [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            for (NSDictionary * dic in responseObject[@"value"]) {
-                if ([dic[@"code"] isEqualToString:@"signIn"]&&[dic[@"state"] integerValue] != 1) {
-                    self.currentPetSignatured = YES;
-                }
-            }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRUsersignInOrNo" object:self userInfo:nil];
-//            [[RootViewController sharedRootViewController].mainVC mainViewNeedSignIn];
-        } failure:nil];
-    }else
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRUsersignInOrNo" object:self userInfo:nil];
-//        [[RootViewController sharedRootViewController].mainVC mainViewNeedSignIn];
-    }
+//    self.currentPetSignatured = NO;
+//    if (self.currentPet) {
+//        NSMutableDictionary* mDict = [NetServer commonDict];
+//        [mDict setObject:@"activity" forKey:@"command"];
+//        [mDict setObject:@"partake" forKey:@"options"];
+//        [mDict setObject:self.userID forKey:@"petId"];
+//        [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            for (NSDictionary * dic in responseObject[@"value"]) {
+//                if ([dic[@"code"] isEqualToString:@"signIn"]&&[dic[@"state"] integerValue] != 1) {
+//                    self.currentPetSignatured = YES;
+//                }
+//            }
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRUsersignInOrNo" object:self userInfo:nil];
+////            [[RootViewController sharedRootViewController].mainVC mainViewNeedSignIn];
+//        } failure:nil];
+//    }else
+//    {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRUsersignInOrNo" object:self userInfo:nil];
+////        [[RootViewController sharedRootViewController].mainVC mainViewNeedSignIn];
+//    }
 }
 @end

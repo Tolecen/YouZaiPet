@@ -90,7 +90,7 @@
     }
     
     
-    NSArray * msgA = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"receivedMsgArray%@%@",msgTypeStr,[UserServe sharedUserServe].currentPet.petID]];
+    NSArray * msgA = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"receivedMsgArray%@%@",msgTypeStr,[UserServe sharedUserServe].userID]];
     if (msgA) {
         self.msgArray = [NSMutableArray arrayWithArray:msgA];
     }
@@ -170,7 +170,7 @@
         if (sysNoti_page==0) {
             self.msgArray = [NSMutableArray arrayWithArray:[[responseObject objectForKey:@"value"] objectForKey:@"list"]];
             if (self.msgArray.count>0) {
-                [[NSUserDefaults standardUserDefaults] setObject:self.msgArray forKey:[NSString stringWithFormat:@"receivedMsgArray%@%@",msgTypeStr,[UserServe sharedUserServe].currentPet.petID]];
+                [[NSUserDefaults standardUserDefaults] setObject:self.msgArray forKey:[NSString stringWithFormat:@"receivedMsgArray%@%@",msgTypeStr,[UserServe sharedUserServe].userID]];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
             
@@ -200,7 +200,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"message" forKey:@"command"];
     [mDict setObject:@"UML" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
     if (self.msgType==MsgTypeC_R) {
         [mDict setObject:@"C_R" forKey:@"type"];
     }
@@ -221,7 +221,7 @@
         if ([self.startId isEqualToString:@""]) {
             self.msgArray = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"value"]];
             if (self.msgArray.count>0) {
-                [[NSUserDefaults standardUserDefaults] setObject:self.msgArray forKey:[NSString stringWithFormat:@"receivedMsgArray%@%@",msgTypeStr,[UserServe sharedUserServe].currentPet.petID]];
+                [[NSUserDefaults standardUserDefaults] setObject:self.msgArray forKey:[NSString stringWithFormat:@"receivedMsgArray%@%@",msgTypeStr,[UserServe sharedUserServe].userID]];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
             

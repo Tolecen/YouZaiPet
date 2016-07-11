@@ -243,44 +243,23 @@
     [regDict setObject:[NSString stringWithFormat:@"%.0f",_selectedBirthday*1000] forKey:@"birthday"];
     [regDict setObject:self.regionTL.text forKey:@"address"];
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary * petDic = ((responseObject[@"value"])[@"petList"])[0];
+//        NSDictionary * petDic = ((responseObject[@"value"])[@"petList"])[0];
         UserServe * userServe = [UserServe sharedUserServe];
         [SystemServer sharedSystemServer].metionTokenOutTime = NO;
         userServe.userName = _username;
         userServe.userID = (responseObject[@"value"])[@"id"];
-        userServe.petArr = nil;
+//        userServe.petArr = nil;
         
         [SFHFKeychainUtils storeUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,userServe.userID] andPassword:(responseObject[@"value"])[@"sessionToken"] forServiceName:CHONGWUSHUOTOKENSTORESERVICE updateExisting:YES error:nil];
         [SFHFKeychainUtils storeUsername:[NSString stringWithFormat:@"%@%@SKey",DomainName,userServe.userID] andPassword:(responseObject[@"value"])[@"sessionKey"] forServiceName:CHONGWUSHUOTOKENSTORESERVICE updateExisting:YES error:nil];
         
-        userServe.currentPet = ({
-            Pet * pet = [[Pet alloc] init];
-            pet.petID = petDic[@"id"];
-            pet.nickname = petDic[@"nickName"];
-            pet.headImgURL = petDic[@"headPortrait"];
-            pet.gender = petDic[@"gender"];
-            pet.breed = petDic[@"type"];
-            pet.region = petDic[@"address"];
-            pet.birthday = [NSDate dateWithTimeIntervalSince1970:[petDic[@"birthday"] doubleValue]/1000];
-            pet.fansNo = (petDic[@"counter"])[@"fans"];
-            pet.attentionNo = (petDic[@"counter"])[@"focus"];
-            pet.issue = (petDic[@"counter"])[@"issue"];
-            pet.relay = (petDic[@"counter"])[@"relay"];
-            pet.comment = (petDic[@"counter"])[@"comment"];
-            pet.favour = (petDic[@"counter"])[@"favour"];
-            pet.grade = [petDic[@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
-            pet.score = petDic[@"score"];
-            pet.coin = petDic[@"coin"];
-            pet;
-        });
         
-        Account * acc = [[Account alloc]init];
-        acc.username = _username;
-        acc.userID = userServe.userID;
-        acc.password = _password;
+        Account * acc = [[Account alloc]initWithDictionary:responseObject[@"value"] error:nil];
+       
+        
         [DatabaseServe activateUeserWithAccount:acc];
-        [DatabaseServe activatePet:userServe.currentPet WithUsername:acc.username];
 
+        userServe.account = [DatabaseServe getActionAccount];
 //        [SVProgressHUD dismiss];
         if ([responseObject objectForKey:@"message"]) {
             [SVProgressHUD showSuccessWithStatus:[responseObject objectForKey:@"message"]];

@@ -368,72 +368,27 @@
     [SVProgressHUD showWithStatus:@"登录中..."];
     NSMutableDictionary * regDict = [NetServer commonDict];
     [regDict setObject:@"login" forKey:@"command"];
-    [regDict setObject:[infoDict objectForKey:@"id"] forKey:@"loginName"];
+    [regDict setObject:@"login" forKey:@"options"];
+    [regDict setObject:[infoDict objectForKey:@"id"] forKey:@"username"];
     [regDict setObject:[self calPasswordWithUserId:[infoDict objectForKey:@"id"]] forKey:@"password"];
     
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         UserServe * userServe = [UserServe sharedUserServe];
         userServe.userName = [infoDict objectForKey:@"id"];
         userServe.userID = (responseObject[@"value"])[@"id"];
-        NSArray * petlist = (responseObject[@"value"])[@"petList"];
+
         
         [SFHFKeychainUtils storeUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,userServe.userID] andPassword:(responseObject[@"value"])[@"sessionToken"] forServiceName:CHONGWUSHUOTOKENSTORESERVICE updateExisting:YES error:nil];
         [SFHFKeychainUtils storeUsername:[NSString stringWithFormat:@"%@%@SKey",DomainName,userServe.userID] andPassword:(responseObject[@"value"])[@"sessionKey"] forServiceName:CHONGWUSHUOTOKENSTORESERVICE updateExisting:YES error:nil];
         
-        NSMutableArray * petArr = [NSMutableArray array];
-        for (NSDictionary * petDic in petlist) {
-            if ([petDic[@"active"] isEqualToString:@"false"]) {
-                Pet * pet = [[Pet alloc] init];
-                pet.petID = petDic[@"id"];
-                pet.nickname = petDic[@"nickName"];
-                pet.headImgURL = petDic[@"headPortrait"];
-                pet.gender = petDic[@"gender"];
-                pet.breed = petDic[@"type"];
-                pet.region = petDic[@"address"];
-                pet.birthday = [NSDate dateWithTimeIntervalSince1970:[petDic[@"birthday"] doubleValue]/1000];
-                pet.fansNo = (petDic[@"counter"])[@"fans"];
-                pet.attentionNo = (petDic[@"counter"])[@"focus"];
-                pet.issue = (petDic[@"counter"])[@"issue"];
-                pet.relay = (petDic[@"counter"])[@"relay"];
-                pet.comment = (petDic[@"counter"])[@"comment"];
-                pet.favour = (petDic[@"counter"])[@"favour"];
-                pet.grade = [petDic[@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
-                pet.score = petDic[@"score"];
-                pet.coin = petDic[@"coin"];
-                pet.ifDaren = [petDic[@"star"] isEqualToString:@"1"]?YES:NO;
-                [petArr addObject:pet];
-                [DatabaseServe savePet:pet WithUsername:userServe.userName];
-            }else{
-                userServe.currentPet = ({
-                    Pet * pet = [[Pet alloc] init];
-                    pet.petID = petDic[@"id"];
-                    pet.nickname = petDic[@"nickName"];
-                    pet.headImgURL = petDic[@"headPortrait"];
-                    pet.gender = petDic[@"gender"];
-                    pet.breed = petDic[@"type"];
-                    pet.region = petDic[@"address"];
-                    pet.birthday = [NSDate dateWithTimeIntervalSince1970:[petDic[@"birthday"] doubleValue]/1000];
-                    pet.fansNo = (petDic[@"counter"])[@"fans"];
-                    pet.attentionNo = (petDic[@"counter"])[@"focus"];
-                    pet.issue = (petDic[@"counter"])[@"issue"];
-                    pet.relay = (petDic[@"counter"])[@"relay"];
-                    pet.comment = (petDic[@"counter"])[@"comment"];
-                    pet.favour = (petDic[@"counter"])[@"favour"];
-                    pet.grade = [petDic[@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
-                    pet.score = petDic[@"score"];
-                    pet.coin = petDic[@"coin"];
-                    pet;
-                });
-            }
-        }
-        userServe.petArr = petArr;
+
         
-        Account * acc = [[Account alloc]init];
-        acc.username = [infoDict objectForKey:@"id"];
-        acc.userID = userServe.userID;
-        acc.password = [self calPasswordWithUserId:[infoDict objectForKey:@"id"]];
+        Account * acc = [[Account alloc]initWithDictionary:responseObject[@"value"] error:nil];
+        
         [DatabaseServe activateUeserWithAccount:acc];
-        [DatabaseServe activatePet:userServe.currentPet WithUsername:acc.username];
+        
+        userServe.account = [DatabaseServe getActionAccount];
+
         [SVProgressHUD dismiss];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
         [self dismissViewControllerAnimated:YES completion:^{
@@ -508,7 +463,8 @@
     [SVProgressHUD showWithStatus:@"设置资料..."];
     NSMutableDictionary * regDict = [NetServer commonDict];
     [regDict setObject:@"register" forKey:@"command"];
-    [regDict setObject:[infoDict objectForKey:@"id"] forKey:@"loginName"];
+    [regDict setObject:@"register" forKey:@"options"];
+    [regDict setObject:[infoDict objectForKey:@"id"] forKey:@"username"];
     [regDict setObject:[self calPasswordWithUserId:[infoDict objectForKey:@"id"]] forKey:@"password"];
     [regDict setObject:[infoDict objectForKey:@"name"] forKey:@"nickName"];
     [regDict setObject:@"" forKey:@"headPortrait"];
@@ -517,38 +473,15 @@
     [regDict setObject:@"" forKey:@"birthday"];
     [regDict setObject:@"" forKey:@"address"];
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary * petDic = ((responseObject[@"value"])[@"petList"])[0];
+//        NSDictionary * petDic = ((responseObject[@"value"])[@"petList"])[0];
         UserServe * userServe = [UserServe sharedUserServe];
         userServe.userName = [infoDict objectForKey:@"id"];
         userServe.userID = (responseObject[@"value"])[@"id"];
-        userServe.petArr = nil;
-        userServe.currentPet = ({
-            Pet * pet = [[Pet alloc] init];
-            pet.petID = petDic[@"id"];
-            pet.nickname = petDic[@"nickName"];
-            pet.headImgURL = petDic[@"headPortrait"];
-            pet.gender = petDic[@"gender"];
-            pet.breed = petDic[@"type"];
-            pet.region = petDic[@"address"];
-            pet.birthday = [NSDate dateWithTimeIntervalSince1970:[petDic[@"birthday"] doubleValue]/1000];
-            pet.fansNo = (petDic[@"counter"])[@"fans"];
-            pet.attentionNo = (petDic[@"counter"])[@"focus"];
-            pet.issue = (petDic[@"counter"])[@"issue"];
-            pet.relay = (petDic[@"counter"])[@"relay"];
-            pet.comment = (petDic[@"counter"])[@"comment"];
-            pet.favour = (petDic[@"counter"])[@"favour"];
-            pet.grade = [petDic[@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
-            pet.score = petDic[@"score"];
-            pet.coin = petDic[@"coin"];
-            pet;
-        });
         
-        Account * acc = [[Account alloc]init];
-        acc.username = [infoDict objectForKey:@"id"];
-        acc.userID = userServe.userID;
-        acc.password = [self calPasswordWithUserId:[infoDict objectForKey:@"id"]];
+         Account * acc = [[Account alloc]initWithDictionary:responseObject[@"value"] error:nil];
         [DatabaseServe activateUeserWithAccount:acc];
-        [DatabaseServe activatePet:userServe.currentPet WithUsername:acc.username];
+        
+        userServe.account = [DatabaseServe getActionAccount];
         
         [SVProgressHUD dismiss];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
@@ -602,73 +535,41 @@
     [self.passwordTF resignFirstResponder];
     NSMutableDictionary * regDict = [NetServer commonDict];
     [regDict setObject:@"login" forKey:@"command"];
-    [regDict setObject:self.usernameTF.text forKey:@"loginName"];
+    [regDict setObject:@"login" forKey:@"options"];
+    [regDict setObject:self.usernameTF.text forKey:@"username"];
     [regDict setObject:self.passwordTF.text forKey:@"password"];
     
-    [NetServer requestWithEncryptParameters:regDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetServer requestWithParameters:regDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         UserServe * userServe = [UserServe sharedUserServe];
         [SystemServer sharedSystemServer].metionTokenOutTime = NO;
         userServe.userName = _usernameTF.text;
         userServe.userID = (responseObject[@"value"])[@"id"];
-        NSArray * petlist = (responseObject[@"value"])[@"petList"];
+//        NSArray * petlist = (responseObject[@"value"])[@"petList"];
         
         [SFHFKeychainUtils storeUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,userServe.userID] andPassword:(responseObject[@"value"])[@"sessionToken"] forServiceName:CHONGWUSHUOTOKENSTORESERVICE updateExisting:YES error:nil];
         [SFHFKeychainUtils storeUsername:[NSString stringWithFormat:@"%@%@SKey",DomainName,userServe.userID] andPassword:(responseObject[@"value"])[@"sessionKey"] forServiceName:CHONGWUSHUOTOKENSTORESERVICE updateExisting:YES error:nil];
         
-        NSMutableArray * petArr = [NSMutableArray array];
-        for (NSDictionary * petDic in petlist) {
-            if ([petDic[@"active"] isEqualToString:@"false"]) {
-                Pet * pet = [[Pet alloc] init];
-                pet.petID = petDic[@"id"];
-                pet.nickname = petDic[@"nickName"];
-                pet.headImgURL = petDic[@"headPortrait"];
-                pet.gender = petDic[@"gender"];
-                pet.breed = petDic[@"type"];
-                pet.region = petDic[@"address"];
-                pet.birthday = [NSDate dateWithTimeIntervalSince1970:[petDic[@"birthday"] doubleValue]/1000];
-                pet.fansNo = (petDic[@"counter"])[@"fans"];
-                pet.attentionNo = (petDic[@"counter"])[@"focus"];
-                pet.issue = (petDic[@"counter"])[@"issue"];
-                pet.relay = (petDic[@"counter"])[@"relay"];
-                pet.comment = (petDic[@"counter"])[@"comment"];
-                pet.favour = (petDic[@"counter"])[@"favour"];
-                pet.grade = [petDic[@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
-                pet.score = petDic[@"score"];
-                pet.coin = petDic[@"coin"];
-                pet.ifDaren = [petDic[@"star"] isEqualToString:@"1"]?YES:NO;
-                [petArr addObject:pet];
-                [DatabaseServe savePet:pet WithUsername:userServe.userName];
-            }else{
-                userServe.currentPet = ({
-                    Pet * pet = [[Pet alloc] init];
-                    pet.petID = petDic[@"id"];
-                    pet.nickname = petDic[@"nickName"];
-                    pet.headImgURL = petDic[@"headPortrait"];
-                    pet.gender = petDic[@"gender"];
-                    pet.breed = petDic[@"type"];
-                    pet.region = petDic[@"address"];
-                    pet.birthday = [NSDate dateWithTimeIntervalSince1970:[petDic[@"birthday"] doubleValue]/1000];
-                    pet.fansNo = (petDic[@"counter"])[@"fans"];
-                    pet.attentionNo = (petDic[@"counter"])[@"focus"];
-                    pet.issue = (petDic[@"counter"])[@"issue"];
-                    pet.relay = (petDic[@"counter"])[@"relay"];
-                    pet.comment = (petDic[@"counter"])[@"comment"];
-                    pet.favour = (petDic[@"counter"])[@"favour"];
-                    pet.grade = [petDic[@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
-                    pet.score = petDic[@"score"];
-                    pet.coin = petDic[@"coin"];
-                    pet;
-                });
-            }
-        }
-        userServe.petArr = petArr;
+       
         
-        Account * acc = [[Account alloc]init];
-        acc.username = _usernameTF.text;
-        acc.userID = userServe.userID;
-        acc.password = _passwordTF.text;
+      
+        
+        Account * acc = [[Account alloc]initWithDictionary:responseObject[@"value"] error:nil];
+//        acc.username = _usernameTF.text;
+//        acc.userID = userServe.userID;
+//        acc.password = _passwordTF.text;
+        
+//        userServe.action = [[NSNumber alloc] initWithBool:YES];
+//        userServe.daren = [NSNumber numberWithBool:pet.ifDaren];
+//        use.owner = username;
+//        petE.petID = pet.petID;
+
+//        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+
+        
+        
         [DatabaseServe activateUeserWithAccount:acc];
-        [DatabaseServe activatePet:userServe.currentPet WithUsername:acc.username];
+        userServe.account = [DatabaseServe getActionAccount];
+//        [DatabaseServe activatePet:userServe.currentPet WithUsername:acc.username];
         [SVProgressHUD dismiss];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
         [self dismissViewControllerAnimated:YES completion:^{

@@ -167,7 +167,7 @@
 //            //排行
 //        }break;
         case 10:{
-            if (![UserServe sharedUserServe].currentPet) {
+            if (![UserServe sharedUserServe].account) {
                 [[RootViewController sharedRootViewController] showLoginViewController];
                 return;
             }
@@ -182,7 +182,7 @@
             [navigationController pushViewController:interBar animated:YES];
         }break;
         case 15:{
-            if (![UserServe sharedUserServe].currentPet) {
+            if (![UserServe sharedUserServe].account) {
                 [[RootViewController sharedRootViewController] showLoginViewController];
                 return;
             }

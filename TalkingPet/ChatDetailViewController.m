@@ -211,7 +211,7 @@
     [mDict setObject:@"pet" forKey:@"command"];
     [mDict setObject:@"one" forKey:@"options"];
     [mDict setObject:self.thePet.petID forKey:@"petId"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"currPetId"];
     
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (!self.thePet) {
@@ -234,7 +234,7 @@
     [mDict setObject:@"setting" forKey:@"command"];
     [mDict setObject:@"CCT" forKey:@"options"];
     [mDict setObject:self.thePet.petID forKey:@"petId"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID?[UserServe sharedUserServe].currentPet.petID:@"" forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"currPetId"];
     
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[[responseObject objectForKey:@"value"] objectForKey:@"black"] isEqualToString:@"true"]) {
@@ -878,7 +878,7 @@
     [self.audioPlayer stopAudio];
     PersonProfileViewController * pv = [[PersonProfileViewController alloc] init];
     if (chatMsg.isMe) {
-        pv.petId = [UserServe sharedUserServe].currentPet.petID;
+        pv.petId = [UserServe sharedUserServe].userID;
     }
     else
         pv.petId = self.thePet.petID;
@@ -894,7 +894,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"setting" forKey:@"command"];
     [mDict setObject:@"CBA" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     [mDict setObject:self.thePet.petID forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         inMyBlackList = YES;
@@ -913,7 +913,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"setting" forKey:@"command"];
     [mDict setObject:@"CBD" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].currentPet.petID forKey:@"currPetId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     [mDict setObject:self.thePet.petID forKey:@"petId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         inMyBlackList = NO;
