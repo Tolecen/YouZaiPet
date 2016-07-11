@@ -46,7 +46,6 @@
         UILabel *contentLb = [[UILabel alloc] init];
         contentLb.font = [UIFont systemFontOfSize:12];
         contentLb.textColor = [UIColor commonGrayColor];
-        contentLb.backgroundColor = [UIColor yellowColor];
         contentLb.numberOfLines = 0;
         [self addSubview:contentLb];
         self.contentLb = contentLb;
@@ -110,7 +109,7 @@
 - (UIView *)flowView:(PagedFlowView *)flowView cellForPageAtIndex:(NSInteger)index {
     EGOImageView * imageV = (EGOImageView*)[flowView dequeueReusableCell];
     if (!imageV) {
-        imageV = [[EGOImageView alloc] init];
+        imageV = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"dog_goods_placeholder"]];
         imageV.backgroundColor = [UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1];
         imageV.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth);
     }

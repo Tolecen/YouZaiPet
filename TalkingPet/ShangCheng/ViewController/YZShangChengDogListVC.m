@@ -293,7 +293,7 @@ NSString *const TypeFilterKey       = @"TypeFilterKey";
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     YZDogDetailVC *detailVC = [[YZDogDetailVC alloc] init];
     YZDogModel *dogModel = self.items[indexPath.row];
-    detailVC.dogId = dogModel.dogId;
+    detailVC.dogModel = dogModel;
     detailVC.hideNaviBg = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
 }

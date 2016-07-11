@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "YZShangChengModel.h"
 
 @interface YZDogDetailVC : BaseViewController
 
-@property (nonatomic, copy) NSString *dogId;
+@property (nonatomic, strong) YZDogModel *dogModel;
 
 @end

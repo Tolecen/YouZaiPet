@@ -8,15 +8,13 @@
 
 #import "YZGoodsDetailVC.h"
 #import "YZGoodsDetailCollectionHeaderView.h"
-#import "YZGoodsDetailTextCollectionView.h"
+#import "YZDetailTextCollectionView.h"
 
 #import "YZShoppingCarVC.h"
 #import "YZShangChengGoodsListCell.h"
 #import "YZDetailBottomBar.h"
 #import "NetServer+ShangCheng.h"
 #import "MJRefresh.h"
-
-NSString *const kCacheReferenceHeaderSizeHeightKey  = @"kCacheReferenceHeaderSizeHeightKey";
 
 @interface YZGoodsDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -62,7 +60,6 @@ NSString *const kCacheReferenceHeaderSizeHeightKey  = @"kCacheReferenceHeaderSiz
                                                           collectionViewLayout:flowLayout];
     collectionView.delegate = self;
     collectionView.dataSource = self;
-    collectionView.pagingEnabled = YES;
     collectionView.backgroundColor = [UIColor colorWithRed:.9
                                                      green:.9
                                                       blue:.9
@@ -70,7 +67,7 @@ NSString *const kCacheReferenceHeaderSizeHeightKey  = @"kCacheReferenceHeaderSiz
     [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass(UICollectionViewCell.class)];
     [collectionView registerClass:[YZShangChengGoodsListCell class] forCellWithReuseIdentifier:NSStringFromClass(YZShangChengGoodsListCell.class)];
     [collectionView registerClass:[YZGoodsDetailCollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZGoodsDetailCollectionHeaderView.class)];
-    [collectionView registerClass:[YZGoodsDetailTextCollectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZGoodsDetailTextCollectionView.class)];
+    [collectionView registerClass:[YZDetailTextCollectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDetailTextCollectionView.class)];
     
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
@@ -202,21 +199,6 @@ NSString *const kCacheReferenceHeaderSizeHeightKey  = @"kCacheReferenceHeaderSiz
     return CGSizeMake(ScreenWidth, 30);
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    if (kind == UICollectionElementKindSectionHeader) {
-        if (indexPath.section == 0) {
-            YZGoodsDetailCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZGoodsDetailCollectionHeaderView.class) forIndexPath:indexPath];
-            headerView.detailModel = self.detailModel;
-            headerView.backgroundColor = [UIColor whiteColor];
-            return headerView;
-        } else {
-            YZGoodsDetailTextCollectionView *reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZGoodsDetailTextCollectionView.class) forIndexPath:indexPath];
-            return reusableView;
-        }
-    }
-    return nil;
-}
-
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 2;
 }
@@ -236,6 +218,22 @@ NSString *const kCacheReferenceHeaderSizeHeightKey  = @"kCacheReferenceHeaderSiz
     YZShangChengGoodsListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(YZShangChengGoodsListCell.class) forIndexPath:indexPath];
     cell.goods = self.items[indexPath.row];
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    if (kind == UICollectionElementKindSectionHeader) {
+        if (indexPath.section == 0) {
+            YZGoodsDetailCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZGoodsDetailCollectionHeaderView.class) forIndexPath:indexPath];
+            headerView.detailModel = self.detailModel;
+            headerView.backgroundColor = [UIColor whiteColor];
+            return headerView;
+        } else {
+            YZDetailTextCollectionView *reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDetailTextCollectionView.class) forIndexPath:indexPath];
+            reusableView.text = @"相关推荐";
+            return reusableView;
+        }
+    }
+    return nil;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

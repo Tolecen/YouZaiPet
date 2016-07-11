@@ -6,16 +6,21 @@
 //  Copyright © 2016年 wangxr. All rights reserved.
 //
 
-#import "YZGoodsDetailTextCollectionView.h"
+#import "YZDetailTextCollectionView.h"
 
-@implementation YZGoodsDetailTextCollectionView
+@interface YZDetailTextCollectionView()
+
+@property (nonatomic, weak) UILabel *textLb;
+
+@end
+
+@implementation YZDetailTextCollectionView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor commonGrayColor];
         
         UILabel *allLb = [[UILabel alloc] init];
-        allLb.text = @"相关推荐";
         allLb.textColor = [UIColor colorWithR:172
                                             g:172
                                             b:172 alpha:1.f];
@@ -26,8 +31,17 @@
             make.bottom.equalTo(self);
             make.centerX.equalTo(self);
         }];
+        self.textLb = allLb;
     }
     return self;
+}
+
+- (void)setText:(NSString *)text {
+    if (!text) {
+        return;
+    }
+    _text = text;
+    self.textLb.text = text;
 }
 
 @end

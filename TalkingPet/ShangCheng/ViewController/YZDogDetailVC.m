@@ -9,10 +9,13 @@
 #import "YZDogDetailVC.h"
 #import "YZShoppingCarVC.h"
 #import "YZQuanSheDetailViewController.h"
-#import "YZShangChengDetailImageCell.h"
 #import "YZShangChengDogListCell.h"
+#import "YZDogDetailCollectionHeaderView.h"
+#import "YZDetailTextCollectionView.h"
+
 #import "YZDetailBottomBar.h"
 #import "NetServer+ShangCheng.h"
+#import "MJRefresh.h"
 
 @interface YZDogDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -22,14 +25,19 @@
 
 @property (nonatomic, copy) NSArray *items;
 
+@property (nonatomic, assign) NSInteger pageIndex;
+
+@property (nonatomic, strong) NSMutableDictionary *cache;
+
 @end
 
 @implementation YZDogDetailVC
 
 - (void)dealloc {
-    _dogId = nil;
+    _dogModel = nil;
     _detailModel = nil;
     _items = nil;
+    _cache = nil;
 }
 
 - (void)inner_Pop:(id)sender {
@@ -39,12 +47,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setAnotherBackButtonWithTarget:@selector(inner_Pop:)];
-    
+    self.cache = [[NSMutableDictionary alloc] init];
+
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 10.f;
     flowLayout.minimumLineSpacing = 10.f;
-    UIEdgeInsets sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-    flowLayout.sectionInset = sectionInset;
+
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,
                                                                                           0,
                                                                                           ScreenWidth,
@@ -52,19 +60,23 @@
                                                           collectionViewLayout:flowLayout];
     collectionView.delegate = self;
     collectionView.dataSource = self;
-    collectionView.pagingEnabled = YES;
     collectionView.backgroundColor = [UIColor colorWithRed:.9
                                                      green:.9
                                                       blue:.9
                                                      alpha:1.f];
-    [collectionView registerClass:[YZShangChengDetailImageCell class] forCellWithReuseIdentifier:NSStringFromClass(self.class)];
-    [collectionView registerClass:[YZShangChengDogListCell class] forCellWithReuseIdentifier:NSStringFromClass(self.class)];
+    [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass(UICollectionViewCell.class)];
+    [collectionView registerClass:[YZShangChengDogListCell class] forCellWithReuseIdentifier:NSStringFromClass(YZShangChengDogListCell.class)];
+    [collectionView registerClass:[YZDogDetailCollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDogDetailCollectionHeaderView.class)];
+    [collectionView registerClass:[YZDetailTextCollectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDetailTextCollectionView.class)];
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
     
     [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self.view).insets(UIEdgeInsetsZero);
+        make.left.top.right.mas_equalTo(self.view).mas_offset(0);
+        make.bottom.mas_equalTo(self.view).mas_offset(-50);
     }];
+    
+    [collectionView addFooterWithTarget:self action:@selector(inner_LoadMore:)];
     
     YZDetailBottomBar *bottomBar = [[YZDetailBottomBar alloc] initWithFrame:CGRectZero type:YZShangChengType_Dog];
     [self.view addSubview:bottomBar];
@@ -74,14 +86,15 @@
     }];
     
     [self inner_GetDogDetail];
+    [self inner_GetDogListWithLoadMore:NO];
 }
 
 - (void)inner_GetDogDetail {
-    if (!self.dogId) {
+    if (!self.dogModel.dogId) {
         return;
     }
     WS(weakSelf);
-    [NetServer getDogDetailInfoWithDogId:self.dogId
+    [NetServer getDogDetailInfoWithDogId:self.dogModel.dogId
                                  success:^(YZDogDetailModel *detailModel) {
                                      weakSelf.detailModel = detailModel;
                                      [weakSelf.collectionView reloadData];
@@ -91,12 +104,57 @@
                                  }];
 }
 
+- (void)inner_GetDogListWithLoadMore:(BOOL)loadMore {
+    NSInteger pageIndex = loadMore ? self.pageIndex : 1;
+    WS(weakSelf);
+    [NetServer searchDogListWithType:self.dogModel.productType.dogTypeId
+                                size:YZDogSize_All
+                                 sex:YZDogSex_All
+                           sellPrice:YZDogValueRange_All
+                                area:nil
+                                 age:YZDogAgeRange_All
+                              shopId:nil
+                           pageIndex:pageIndex
+                             success:^(NSArray *items, NSInteger nextPageIndex) {
+                                 if (items && items.count > 0) {
+                                     weakSelf.pageIndex = nextPageIndex;
+                                     if (loadMore) {
+                                         weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
+                                     } else {
+                                         weakSelf.items = [NSArray arrayWithArray:items];
+                                     }
+                                     [weakSelf.collectionView footerEndRefreshing];
+                                     [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+                                 } else {
+                                     if (loadMore) {
+                                         [weakSelf.collectionView footerEndRefreshing];
+                                     }
+                                 }
+                             }
+                             failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+                                 if (loadMore) {
+                                     [weakSelf.collectionView footerEndRefreshing];
+                                 }
+                             }];
+}
+
+- (void)inner_LoadMore:(id)sender {
+    [self inner_GetDogListWithLoadMore:YES];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self showNaviBg];
 }
 
 #pragma mark -- UICollectionView
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    if (section == 0) {
+        return UIEdgeInsetsZero;
+    }
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
@@ -107,21 +165,51 @@
                       width / 5 * 6);
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        if (self.detailModel) {
+            return CGSizeMake(ScreenWidth, ScreenWidth + 120);
+        }
+        return CGSizeZero;
+    }
+    return CGSizeMake(ScreenWidth, 30);
+}
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (section == 0) {
-        return 1;
+        return self.detailModel ? 1 : 0;
     }
     return self.items.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    YZShangChengDetailImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.class) forIndexPath:indexPath];
-    cell.backgroundColor = RandomColor;
+    if (indexPath.section == 0) {
+        UICollectionViewCell *collectionViewCell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(UICollectionViewCell.class) forIndexPath:indexPath];
+        return collectionViewCell;
+    }
+    YZShangChengDogListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(YZShangChengDogListCell.class) forIndexPath:indexPath];
+    cell.dogModel = self.items[indexPath.row];
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    if (kind == UICollectionElementKindSectionHeader) {
+        if (indexPath.section == 0) {
+            YZDogDetailCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDogDetailCollectionHeaderView.class) forIndexPath:indexPath];
+            headerView.detailModel = self.detailModel;
+            headerView.backgroundColor = [UIColor whiteColor];
+            return headerView;
+        } else {
+            YZDetailTextCollectionView *reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDetailTextCollectionView.class) forIndexPath:indexPath];
+            reusableView.text = @"邻舍狗狗";
+            return reusableView;
+        }
+    }
+    return nil;
 }
 
 @end

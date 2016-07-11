@@ -43,6 +43,8 @@ typedef NS_ENUM(NSUInteger, YZDogAgeRange) {
     YZDogAgeRange_1Y    = (4)
 };
 
+extern NSString *const kCacheReferenceHeaderSizeHeightKey;
+
 @interface YZShangChengConst : NSObject
 
 @property (nonatomic, strong) NSNumberFormatter *priceNumberFormatter;

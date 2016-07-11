@@ -15,6 +15,10 @@
 
 #pragma mark -- 狗狗类型对象
 
+@protocol YZDogTypeAlphabetModel <NSObject>
+
+@end
+
 @interface YZDogTypeAlphabetModel : YZShangChengModel
 
 @property (nonatomic, copy) NSString *alias;
@@ -81,6 +85,8 @@
 @property (nonatomic, copy, readonly) NSString *createString;
 
 @property (nonatomic, assign) BOOL vaccine;//是否三针疫苗，0为否，1为是
+
+@property (nonatomic, strong) YZDogTypeAlphabetModel<YZDogTypeAlphabetModel> *productType;
 
 @end
 

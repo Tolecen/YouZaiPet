@@ -8,6 +8,8 @@
 
 #import "YZShangChengConst.h"
 
+NSString *const kCacheReferenceHeaderSizeHeightKey  = @"kCacheReferenceHeaderSizeHeightKey";
+
 @implementation YZShangChengConst
 
 + (instancetype)sharedInstance {

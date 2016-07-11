@@ -102,7 +102,8 @@
 		2EA22D751D333D810052992C /* YZGoodsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D741D333D810052992C /* YZGoodsDetailVC.m */; };
 		2EA22D791D336A7D0052992C /* YZQuanSheDetailCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D781D336A7D0052992C /* YZQuanSheDetailCollectionHeaderView.m */; };
 		2EA22D7C1D336ABE0052992C /* YZGoodsDetailCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D7B1D336ABE0052992C /* YZGoodsDetailCollectionHeaderView.m */; };
-		2EA22D7F1D337AEA0052992C /* YZGoodsDetailTextCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D7E1D337AEA0052992C /* YZGoodsDetailTextCollectionView.m */; };
+		2EA22D7F1D337AEA0052992C /* YZDetailTextCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D7E1D337AEA0052992C /* YZDetailTextCollectionView.m */; };
+		2EA22D821D338F430052992C /* YZDogDetailCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D811D338F430052992C /* YZDogDetailCollectionHeaderView.m */; };
 		7200B9EB1A8300F0008630D9 /* Sound9.png in Resources */ = {isa = PBXBuildFile; fileRef = 7200B9E01A8300F0008630D9 /* Sound9.png */; };
 		7200B9EC1A8300F0008630D9 /* Sound10.png in Resources */ = {isa = PBXBuildFile; fileRef = 7200B9E11A8300F0008630D9 /* Sound10.png */; };
 		7200B9ED1A8300F0008630D9 /* Sound11.png in Resources */ = {isa = PBXBuildFile; fileRef = 7200B9E21A8300F0008630D9 /* Sound11.png */; };
@@ -1443,8 +1444,10 @@
 		2EA22D781D336A7D0052992C /* YZQuanSheDetailCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZQuanSheDetailCollectionHeaderView.m; sourceTree = "<group>"; };
 		2EA22D7A1D336ABE0052992C /* YZGoodsDetailCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZGoodsDetailCollectionHeaderView.h; sourceTree = "<group>"; };
 		2EA22D7B1D336ABE0052992C /* YZGoodsDetailCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZGoodsDetailCollectionHeaderView.m; sourceTree = "<group>"; };
-		2EA22D7D1D337AEA0052992C /* YZGoodsDetailTextCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZGoodsDetailTextCollectionView.h; sourceTree = "<group>"; };
-		2EA22D7E1D337AEA0052992C /* YZGoodsDetailTextCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZGoodsDetailTextCollectionView.m; sourceTree = "<group>"; };
+		2EA22D7D1D337AEA0052992C /* YZDetailTextCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDetailTextCollectionView.h; sourceTree = "<group>"; };
+		2EA22D7E1D337AEA0052992C /* YZDetailTextCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZDetailTextCollectionView.m; sourceTree = "<group>"; };
+		2EA22D801D338F430052992C /* YZDogDetailCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDogDetailCollectionHeaderView.h; sourceTree = "<group>"; };
+		2EA22D811D338F430052992C /* YZDogDetailCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZDogDetailCollectionHeaderView.m; sourceTree = "<group>"; };
 		7200B9E01A8300F0008630D9 /* Sound9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sound9.png; sourceTree = "<group>"; };
 		7200B9E11A8300F0008630D9 /* Sound10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sound10.png; sourceTree = "<group>"; };
 		7200B9E21A8300F0008630D9 /* Sound11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sound11.png; sourceTree = "<group>"; };
@@ -3523,8 +3526,10 @@
 				2EA22D781D336A7D0052992C /* YZQuanSheDetailCollectionHeaderView.m */,
 				2EA22D7A1D336ABE0052992C /* YZGoodsDetailCollectionHeaderView.h */,
 				2EA22D7B1D336ABE0052992C /* YZGoodsDetailCollectionHeaderView.m */,
-				2EA22D7D1D337AEA0052992C /* YZGoodsDetailTextCollectionView.h */,
-				2EA22D7E1D337AEA0052992C /* YZGoodsDetailTextCollectionView.m */,
+				2EA22D801D338F430052992C /* YZDogDetailCollectionHeaderView.h */,
+				2EA22D811D338F430052992C /* YZDogDetailCollectionHeaderView.m */,
+				2EA22D7D1D337AEA0052992C /* YZDetailTextCollectionView.h */,
+				2EA22D7E1D337AEA0052992C /* YZDetailTextCollectionView.m */,
 			);
 			path = CollectionReusableView;
 			sourceTree = "<group>";
@@ -6189,6 +6194,11 @@
 			attributes = {
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = wangxr;
+				TargetAttributes = {
+					72831C2F196A34B700B9CA4C = {
+						DevelopmentTeam = S9QBHC9Y99;
+					};
+				};
 			};
 			buildConfigurationList = 72831C2B196A34B700B9CA4C /* Build configuration list for PBXProject "TalkingPet" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -7320,6 +7330,7 @@
 				977D9A0619B5996F00C0B8C9 /* OHAttributedLabel.m in Sources */,
 				971F4C36196B95EC00C7913A /* FinalPublishPageViewController.m in Sources */,
 				97A6856419F8A1C9006BA3F9 /* SectionMSgViewController.m in Sources */,
+				2EA22D821D338F430052992C /* YZDogDetailCollectionHeaderView.m in Sources */,
 				972F3878197620DC00952DC9 /* EGOImageLoader.m in Sources */,
 				D860FDF31D3360F800487E2D /* UserCenterGouWuFuncTableViewCell.m in Sources */,
 				72555F5B1A7F1FBD00D8D5E2 /* DecorateViewController.mm in Sources */,
@@ -7357,7 +7368,7 @@
 				72069981198399A500BE8C2A /* RecordView.m in Sources */,
 				9771E06F1B0EBB6C0011F58D /* PostCardFullScreenPreviewViewController.m in Sources */,
 				973F007C1A85E0D20029107B /* MyShuoshuoTimeLineViewController.m in Sources */,
-				2EA22D7F1D337AEA0052992C /* YZGoodsDetailTextCollectionView.m in Sources */,
+				2EA22D7F1D337AEA0052992C /* YZDetailTextCollectionView.m in Sources */,
 				72EEF96B1AC3B5F9001DF661 /* ImageAssetsViewController.m in Sources */,
 				723F03FF1A89A334008E2D19 /* CreateTagViewController.m in Sources */,
 				06E4A9661D1CD1FA00BBC617 /* YZDropMenuAgeView.m in Sources */,
@@ -7599,8 +7610,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhongshan Zhang (4ZJV2KP3QN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jitao Hu (YHH5M33KAM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jitao Hu (YHH5M33KAM)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -7635,9 +7646,9 @@
 					"$(PROJECT_DIR)/TalkingPet/OpenSource/pingXXlib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.commontest.chongwushuoTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youzai.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "05b2759b-a88e-43bf-bee6-635eab03ca44";
+				PROVISIONING_PROFILE = "3f4587a8-54bb-4ac2-812e-e645e0b9a9e1";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -7648,8 +7659,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhongshan Zhang (4ZJV2KP3QN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jitao Hu (YHH5M33KAM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jitao Hu (YHH5M33KAM)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -7684,9 +7695,9 @@
 					"$(PROJECT_DIR)/TalkingPet/OpenSource/pingXXlib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.commontest.chongwushuoTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youzai.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "05b2759b-a88e-43bf-bee6-635eab03ca44";
+				PROVISIONING_PROFILE = "3f4587a8-54bb-4ac2-812e-e645e0b9a9e1";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YZGoodsDetailTextCollectionView : UICollectionReusableView
+@interface YZDetailTextCollectionView : UICollectionReusableView
+
+@property (nonatomic, copy) NSString *text;
 
 @end

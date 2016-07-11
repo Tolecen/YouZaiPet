@@ -10,13 +10,16 @@
 #import "YZDogDetailVC.h"
 #import "YZShangChengDogListCell.h"
 #import "YZQuanSheDetailCollectionHeaderView.h"
+#import "YZDetailTextCollectionView.h"
 #import "YZQuanSheDetailIntroView.h"
 
-@interface YZQuanSheDetailViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
+@interface YZQuanSheDetailViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, weak) UICollectionView *collectionView;
 
 @property (nonatomic, strong) YZQuanSheDetailIntroView *quanSheIntroView;
+
+@property (nonatomic, copy) NSArray *items;
 
 @end
 
@@ -24,6 +27,7 @@
 
 - (void)dealloc {
     _quanSheIntroView = nil;
+    _items = nil;
 }
 
 - (NSString *)title {
@@ -42,11 +46,6 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 10.f;
     flowLayout.minimumLineSpacing = 10.f;
-    UIEdgeInsets sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-    flowLayout.sectionInset = sectionInset;
-    CGFloat width = ([UIScreen mainScreen].bounds.size.width - sectionInset.left - sectionInset.right - 10) / 2;
-    flowLayout.itemSize = CGSizeMake(width,
-                                     width / 5 * 6);
     flowLayout.headerReferenceSize = CGSizeMake(50, 200);
 
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
@@ -59,6 +58,8 @@
                                                      alpha:1.f];
     [collectionView registerClass:[YZShangChengDogListCell class] forCellWithReuseIdentifier:NSStringFromClass(self.class)];
     [collectionView registerClass:[YZQuanSheDetailCollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZQuanSheDetailCollectionHeaderView.class)];
+    [collectionView registerClass:[YZDetailTextCollectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDetailTextCollectionView.class)];
+
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
     
@@ -79,6 +80,32 @@
 
 #pragma mark -- UICollectionView
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    if (section == 0) {
+        return UIEdgeInsetsZero;
+    }
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return CGSizeZero;
+    }
+    CGFloat width = (ScreenWidth - 30) / 2;
+    return CGSizeMake(width,
+                      width / 5 * 6);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return CGSizeMake(ScreenWidth, 160);
+    }
+    if (self.items && self.items.count > 0) {
+        return CGSizeMake(ScreenWidth, 30);
+    }
+    return CGSizeZero;
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     YZShangChengDogListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.class) forIndexPath:indexPath];
     return cell;
@@ -86,18 +113,27 @@
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        YZQuanSheDetailCollectionHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(YZQuanSheDetailCollectionHeaderView.class) forIndexPath:indexPath];
-        __weak __typeof(self) weakSelf = self;
-        [header setShowQuanSheIntroBlock:^{
-            [weakSelf inner_ShowQuanSheIntroView];
-        }];
-        return header;
+        if (indexPath.section == 0) {
+            YZQuanSheDetailCollectionHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(YZQuanSheDetailCollectionHeaderView.class) forIndexPath:indexPath];
+            __weak __typeof(self) weakSelf = self;
+            [header setShowQuanSheIntroBlock:^{
+                [weakSelf inner_ShowQuanSheIntroView];
+            }];
+            return header;
+        } else {
+            YZDetailTextCollectionView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(YZDetailTextCollectionView.class) forIndexPath:indexPath];
+            header.text = @"全部狗狗";
+            return header;
+        }
     }
     return nil;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 25;
+    if (section == 0) {
+        return 1;
+    }
+    return self.items.count;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

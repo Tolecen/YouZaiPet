@@ -205,19 +205,6 @@
             make.bottom.left.right.mas_equalTo(self).mas_offset(0);
             make.top.mas_equalTo(containerView.mas_bottom).mas_offset(0);
         }];
-        
-        UILabel *allLb = [[UILabel alloc] init];
-        allLb.text = @"全部狗狗";
-        allLb.textColor = [UIColor colorWithR:172
-                                            g:172
-                                            b:172 alpha:1.f];
-        allLb.font = [UIFont systemFontOfSize:10];
-        [bottomView addSubview:allLb];
-        
-        [allLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(bottomView);
-            make.centerX.equalTo(bottomView);
-        }];
     }
     return self;
 }
