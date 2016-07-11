@@ -79,7 +79,11 @@
     }
     parameters[@"pageIndex"] = @(pageIndex);
     parameters[@"pageSize"] = @(20);
-    parameters[@"type"] = type;
+    if (type && ![type isEqualToString:@""]) {
+        parameters[@"type"] = type;
+    } else {
+        [parameters removeObjectForKey:@"type"];
+    }
     if (size == YZDogSize_All) {
         [parameters removeObjectForKey:@"size"];
     } else {

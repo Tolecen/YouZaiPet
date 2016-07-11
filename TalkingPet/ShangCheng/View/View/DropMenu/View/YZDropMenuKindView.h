@@ -14,6 +14,8 @@
 @property (nonatomic, copy) NSArray *alphabet;
 @property (nonatomic, copy) NSArray *hots;
 
+@property (nonatomic, copy) void(^kindViewSelectedKindBlock)(NSString *dogType);
+
 - (void)reloadKindMenu;
 
 @end

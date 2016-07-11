@@ -80,7 +80,7 @@ NSString *const TypeFilterKey       = @"TypeFilterKey";
     self.restoreFilters[PriceFilterKey] = @(self.valueRangeFilter);
     self.restoreFilters[TypeFilterKey] = self.typeFilter;
     
-    self.typeFilter = @"6";
+    self.typeFilter = @"";
     self.sexFilter = YZDogSex_All;
     self.sizeFilter = YZDogSize_All;
     self.ageRangeFilter = YZDogAgeRange_All;
@@ -244,6 +244,13 @@ NSString *const TypeFilterKey       = @"TypeFilterKey";
         return @"体型";
     }
     return nil;
+}
+
+- (void)menuFilterSelectDogType:(NSString *)type {
+    self.restoreFilters[TypeFilterKey] = self.typeFilter;
+    self.typeFilter = type;
+    
+    [self.collectionView headerBeginRefreshing];
 }
 
 - (void)menuFilterSelectSize:(YZDogSize)size {

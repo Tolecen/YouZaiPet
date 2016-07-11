@@ -17,6 +17,11 @@
 
 @implementation YZShangChengKindScrollCell
 
+- (void)dealloc {
+    _hots = nil;
+    _kindViewSelectedKindBlock = nil;
+}
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -74,6 +79,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    YZDogTypeAlphabetModel *dogModel = self.hots[indexPath.row];
+    self.kindViewSelectedKindBlock(dogModel.dogTypeId);
 }
 
 @end

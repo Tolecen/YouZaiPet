@@ -104,6 +104,7 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
     if (!_kindView) {
         _kindView = [[YZDropMenuKindView alloc] init];
         __weak __typeof(_kindView) weakKindView = _kindView;
+        WS(weakSelf);
         [NetServer getDogTypeAlphabetSuccess:^(NSArray *indexKeys, NSArray *alphabet, NSArray *hots) {
             weakKindView.indexKeys = indexKeys;
             weakKindView.alphabet = alphabet;
@@ -111,6 +112,11 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
             [weakKindView reloadKindMenu];
         } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
             
+        }];
+        [_kindView setKindViewSelectedKindBlock:^(NSString *dogTypeId) {
+            [weakSelf hideCurrentFilterViewWithCompletionBlock:^{
+                [weakSelf.delegate menuFilterSelectDogType:dogTypeId];
+            }];
         }];
     }
     return _kindView;

@@ -121,7 +121,7 @@
         return;
     }
     _goods = goods;
-    [self.thumbImageV setImageWithURL:[NSURL URLWithString:goods.brand.logo]
+    [self.thumbImageV setImageWithURL:[NSURL URLWithString:goods.thumb]
                      placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
     
     self.titleLb.text = goods.name;

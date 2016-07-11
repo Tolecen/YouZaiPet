@@ -25,7 +25,7 @@
 
 - (void)menuFilterSelectValue:(YZDogValueRange)value sex:(YZDogSex)sex;
 
-- (void)menuFilterSelectDogType:(id)type;
+- (void)menuFilterSelectDogType:(NSString *)type;
 
 @end
 

@@ -18,7 +18,7 @@
 @property (nonatomic, copy) NSString *alias;
 @property (nonatomic, copy) NSString *fullName;
 @property (nonatomic, copy) NSString *icon;
-@property (nonatomic, copy) NSString *dogId;//狗狗类型ID
+@property (nonatomic, copy) NSString *dogTypeId;//狗狗类型ID
 @property (nonatomic, copy) NSString *typeName;
 
 @end

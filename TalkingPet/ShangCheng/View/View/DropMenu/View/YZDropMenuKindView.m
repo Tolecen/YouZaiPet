@@ -14,8 +14,6 @@
 
 @property (nonatomic, weak) UITableView *tableView;
 
-@property (nonatomic, weak) YZShangChengKindScrollCell *scrollCell;
-
 @end
 
 @implementation YZDropMenuKindView
@@ -65,8 +63,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(self.class)];
     YZShangChengKindScrollCell *scrollCell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(YZShangChengKindScrollCell.class)];
     if (indexPath.section == 0) {
-        self.scrollCell = scrollCell;
         scrollCell.hots = self.hots;
+        WS(weakSelf);
+        [scrollCell setKindViewSelectedKindBlock:^(NSString *dogTypeId) {
+            weakSelf.kindViewSelectedKindBlock(dogTypeId);
+        }];
         return scrollCell;
     }
     YZDogTypeAlphabetModel *dogModel = self.alphabet[indexPath.section - 2][indexPath.row];
@@ -143,6 +144,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section > 2) {
+        YZDogTypeAlphabetModel *dogModel = self.alphabet[indexPath.section - 2][indexPath.row];
+        self.kindViewSelectedKindBlock(dogModel.dogTypeId);
+    }
 }
 
 @end
