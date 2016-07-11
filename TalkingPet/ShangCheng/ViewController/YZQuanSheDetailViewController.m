@@ -7,7 +7,7 @@
 //
 
 #import "YZQuanSheDetailViewController.h"
-#import "YZShangChengDetailVC.h"
+#import "YZDogDetailVC.h"
 #import "YZShangChengDogListCell.h"
 #import "YZQuanSheDetailCollectionHeaderView.h"
 #import "YZQuanSheDetailIntroView.h"
@@ -102,7 +102,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    YZShangChengDetailVC *detailVC = [[YZShangChengDetailVC alloc] init];
+    YZDogDetailVC *detailVC = [[YZDogDetailVC alloc] init];
     detailVC.hideNaviBg = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
 }

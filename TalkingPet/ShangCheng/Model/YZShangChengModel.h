@@ -13,6 +13,8 @@
 
 @end
 
+#pragma mark -- 狗狗类型对象
+
 @interface YZDogTypeAlphabetModel : YZShangChengModel
 
 @property (nonatomic, copy) NSString *alias;
@@ -26,6 +28,8 @@
 @protocol YZQuanSheModel <NSObject>
 @end
 
+#pragma mark -- 犬舍相关对象
+
 @interface YZQuanSheModel : YZShangChengModel
 
 @property (nonatomic, copy) NSString *shopName;
@@ -36,6 +40,21 @@
 
 @end
 
+#pragma mark -- 狗狗对象
+
+@protocol YZDogParents <NSObject>
+
+@end
+
+@interface YZDogParents : YZShangChengModel
+
+@property (nonatomic, copy) NSString *parentsId;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *photos;
+@property (nonatomic, assign) YZDogSex sex;
+@property (nonatomic, assign) BOOL vaccine;//是否三针疫苗，0为否，1为是
+
+@end
 
 @interface YZDogModel : YZShangChengModel
 
@@ -61,13 +80,19 @@
 
 @property (nonatomic, copy, readonly) NSString *createString;
 
+@property (nonatomic, assign) BOOL vaccine;//是否三针疫苗，0为否，1为是
+
 @end
 
 @interface YZDogDetailModel : YZDogModel
 
+@property (nonatomic, strong) YZDogParents<YZDogParents> *mother;
+@property (nonatomic, strong) YZDogParents<YZDogParents> *father;
+
 @end
 
-//品牌
+#pragma mark -- 商品,货物对象
+
 @protocol YZBrandModel <NSObject>
 @end
 

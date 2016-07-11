@@ -17,7 +17,7 @@
 
 //1003_狗狗详情
 + (void)getDogDetailInfoWithDogId:(NSString *)dogId
-                          success:(void(^)(id data))success
+                          success:(void(^)(YZDogDetailModel *detailModel))success
                           failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 //1004_狗狗搜索（不带任何查询条件即为所有的列表）
@@ -34,13 +34,14 @@
 
 //1005_狗狗用品详情
 + (void)getDogGoodsDetailInfoWithGoodsId:(NSString *)goodsId
-                                 success:(void(^)(id data))success
+                                 success:(void(^)(YZGoodsDetailModel *detailModel))success
                                  failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 //1006_狗狗用品搜索
-+ (void)searchGoodsListWithPageIndex:(NSInteger)pageIndex
-                             success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
-                             failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
++ (void)searchGoodsListWithName:(NSString *)name
+                      pageIndex:(NSInteger)pageIndex
+                        success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
+                        failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 //1008_犬舍详情
 + (void)getQuanSheDetailInfoWithShopId:(NSString *)shopId

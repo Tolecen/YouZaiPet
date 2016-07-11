@@ -8,7 +8,7 @@
 
 #import "YZShangChengGoodsListVC.h"
 #import "YZShangChengGoodsListCell.h"
-#import "YZShangChengDetailVC.h"
+#import "YZGoodsDetailVC.h"
 #import "MJRefresh.h"
 #import "NetServer+ShangCheng.h"
 
@@ -91,24 +91,25 @@
         [self.collectionView headerEndRefreshing];
     }
     __weak __typeof(self) weakSelf = self;
-    [NetServer searchGoodsListWithPageIndex:pageIndex
-                                    success:^(NSArray *items, NSInteger nextPageIndex) {
-                                        weakSelf.pageIndex = nextPageIndex;
-                                        if (refresh) {
-                                            weakSelf.items = [NSArray arrayWithArray:items];
-                                            [weakSelf.collectionView headerEndRefreshing];
-                                        } else {
-                                            weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
-                                            [weakSelf.collectionView footerEndRefreshing];
-                                        }
-                                        [weakSelf.collectionView reloadData];
-                                    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-                                        if (refresh) {
-                                            [weakSelf.collectionView headerEndRefreshing];
-                                        } else {
-                                            [weakSelf.collectionView footerEndRefreshing];
-                                        }
-                                    }];
+    [NetServer searchGoodsListWithName:nil
+                             pageIndex:pageIndex
+                               success:^(NSArray *items, NSInteger nextPageIndex) {
+                                   weakSelf.pageIndex = nextPageIndex;
+                                   if (refresh) {
+                                       weakSelf.items = [NSArray arrayWithArray:items];
+                                       [weakSelf.collectionView headerEndRefreshing];
+                                   } else {
+                                       weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
+                                       [weakSelf.collectionView footerEndRefreshing];
+                                   }
+                                   [weakSelf.collectionView reloadData];
+                               } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+                                   if (refresh) {
+                                       [weakSelf.collectionView headerEndRefreshing];
+                                   } else {
+                                       [weakSelf.collectionView footerEndRefreshing];
+                                   }
+                               }];
 }
 
 #pragma mark -- UICollectionView
@@ -125,7 +126,10 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    YZShangChengDetailVC *detailVC = [[YZShangChengDetailVC alloc] init];
+    YZGoodsDetailVC *detailVC = [[YZGoodsDetailVC alloc] init];
+    YZGoodsModel *goodsModel = self.items[indexPath.row];
+    detailVC.goodsId = goodsModel.goodsId;
+    detailVC.goodsName = goodsModel.brand.brand;
     detailVC.hideNaviBg = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
 }

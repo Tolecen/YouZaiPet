@@ -18,6 +18,7 @@
 - (instancetype)initWithFrame:(CGRect)frame
                          type:(YZShangChengType)type {
     if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor whiteColor];
         UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [shareBtn setImage:[UIImage imageNamed:@"share_icon"] forState:UIControlStateNormal];
         [shareBtn addTarget:self action:@selector(inner_Share:) forControlEvents:UIControlEventTouchUpInside];

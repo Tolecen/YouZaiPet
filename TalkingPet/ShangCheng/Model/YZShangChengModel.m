@@ -33,6 +33,16 @@
 
 @end
 
+#pragma mark -- 狗狗对象
+
+@implementation YZDogParents
+
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"id": @"parentsId"}];
+}
+
+@end
+
 @interface YZDogModel()
 
 @property (nonatomic, assign, readwrite) YZDogSex sex;
@@ -72,6 +82,12 @@
 }
 
 @end
+
+@implementation YZDogDetailModel
+
+@end
+
+#pragma mark -- 商品,货物对象
 
 @interface YZBrandModel()
 
@@ -114,5 +130,9 @@
     }
     return _createString;
 }
+
+@end
+
+@implementation YZGoodsDetailModel
 
 @end

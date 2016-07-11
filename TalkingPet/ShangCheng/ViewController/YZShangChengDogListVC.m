@@ -7,7 +7,7 @@
 //
 
 #import "YZShangChengDogListVC.h"
-#import "YZShangChengDetailVC.h"
+#import "YZDogDetailVC.h"
 #import "YZShangChengDropMenu.h"
 #import "YZShangChengDogListCell.h"
 #import "YZShangChengModel.h"
@@ -291,7 +291,9 @@ NSString *const TypeFilterKey       = @"TypeFilterKey";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    YZShangChengDetailVC *detailVC = [[YZShangChengDetailVC alloc] init];
+    YZDogDetailVC *detailVC = [[YZDogDetailVC alloc] init];
+    YZDogModel *dogModel = self.items[indexPath.row];
+    detailVC.dogId = dogModel.dogId;
     detailVC.hideNaviBg = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
 }

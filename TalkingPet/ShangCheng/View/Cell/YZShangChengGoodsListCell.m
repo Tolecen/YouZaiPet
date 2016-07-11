@@ -122,7 +122,7 @@
     }
     _goods = goods;
     [self.thumbImageV setImageWithURL:[NSURL URLWithString:goods.thumb]
-                     placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
+                     placeholderImage:[UIImage imageNamed:@"dog_goods_placeholder"]];
     
     self.titleLb.text = goods.name;
     self.brandLb.text = goods.brand.brand;

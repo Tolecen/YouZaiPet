@@ -44,7 +44,7 @@
 }
 
 + (void)getDogDetailInfoWithDogId:(NSString *)dogId
-                          success:(void(^)(id data))success
+                          success:(void(^)(YZDogDetailModel *detailModel))success
                           failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:[NetServer commonDict]];
     parameters[@"command"] = @"mall";
@@ -52,7 +52,11 @@
     parameters[@"id"] = dogId;
     [NetServer requestWithParameters:parameters
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                 
+                                 JSONModelError *error = nil;
+                                 NSDictionary *value = responseObject[@"value"];
+                                 YZDogDetailModel *detailModel = [[YZDogDetailModel alloc] initWithDictionary:value
+                                                                                                        error:&error];
+                                 success(detailModel);
                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  failure(error, operation);
                              }];
@@ -162,7 +166,7 @@
 }
 
 + (void)getDogGoodsDetailInfoWithGoodsId:(NSString *)goodsId
-                                 success:(void(^)(id data))success
+                                 success:(void(^)(YZGoodsDetailModel *detailModel))success
                                  failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:[NetServer commonDict]];
     parameters[@"command"] = @"mall";
@@ -170,20 +174,30 @@
     parameters[@"id"] = goodsId;
     [NetServer requestWithParameters:parameters
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                 
+                                 JSONModelError *error = nil;
+                                 NSDictionary *value = responseObject[@"value"];
+                                 YZGoodsDetailModel *detailModel = [[YZGoodsDetailModel alloc] initWithDictionary:value
+                                                                                                            error:&error];
+                                 success(detailModel);
                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  failure(error, operation);
                              }];
 }
 
-+ (void)searchGoodsListWithPageIndex:(NSInteger)pageIndex
-                             success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
-                             failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure {
++ (void)searchGoodsListWithName:(NSString *)name
+                      pageIndex:(NSInteger)pageIndex
+                        success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
+                        failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:[NetServer commonDict]];
     parameters[@"command"] = @"mall";
     parameters[@"options"] = @"generalSearch";
     parameters[@"pageIndex"] = @(pageIndex);
     parameters[@"pageSize"] = @(20);
+    if (name && ![name isEqualToString:@""]) {
+        parameters[@"name"] = name;
+    } else {
+        [parameters removeObjectForKey:@"name"];
+    }
     [NetServer requestWithParameters:parameters
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  NSArray *value = responseObject[@"value"];
