@@ -36,7 +36,7 @@
 //    [self.headerV addSubview:photoView];
 //    
     self.msgTableV = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-navigationBarHeight) style:UITableViewStylePlain];
-    _msgTableV.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _msgTableV.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.msgTableV.delegate = self;
     self.msgTableV.dataSource = self;
     self.msgTableV.scrollsToTop = YES;

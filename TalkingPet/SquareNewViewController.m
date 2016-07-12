@@ -42,6 +42,7 @@
     float forthTableVH;
 }
 @property (nonatomic,retain)UIView * sameView;
+@property (nonatomic,strong)UIView * middleView;
 @property (nonatomic,strong)NSArray * topAdArray;
 @property (nonatomic,retain)NSDictionary * todayTopicDic;
 @end
@@ -59,11 +60,14 @@
     [self.view addSubview:_scrollView];
     self.scrollView.contentSize = CGSizeMake(ScreenWidth, 1300);
     
-    self.sameView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, self.view.frame.size.width-20, (self.view.frame.size.width-20)/3)];
+    self.sameView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.width)/2)];
     _sameView.backgroundColor = [UIColor whiteColor];
 //    _sameView.hidden = YES;
     [self.scrollView addSubview:_sameView];
     
+    
+    
+    /*
     self.firstV = [[UIView alloc] initWithFrame:CGRectMake(10, 10+self.sameView.frame.size.height+10, ScreenWidth-20, (ScreenWidth-20)/3.0f)];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoTodayTopic)];
     [_firstV addGestureRecognizer:tap];
@@ -80,18 +84,27 @@
     t.font = [UIFont systemFontOfSize:18];
     t.text = @"每日话题";
     [self.firstV addSubview:t];
+     
+     */
     
   
-    flowView = [[PagedFlowView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 20, (self.view.frame.size.width-20)/3)];
+    flowView = [[PagedFlowView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.width)/2)];
     flowView.delegate = self;
     flowView.dataSource = self;
     [_sameView addSubview:flowView];
-    UIPageControl * page = [[UIPageControl alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.width-10)/3-20, self.view.frame.size.width, 20)];
+    UIPageControl * page = [[UIPageControl alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.width)/2-20, self.view.frame.size.width, 20)];
     page.currentPageIndicatorTintColor = [UIColor colorWithRed:135/255.0 green:130/255.0 blue:250/255.0 alpha:1];
     page.pageIndicatorTintColor = [UIColor colorWithWhite:200/255.0 alpha:1];
     flowView.pageControl = page;
     [flowView addSubview:page];
     
+    [self addGuangChangView];
+    
+    
+    
+    
+    
+    /*
     self.topicImageV = [[EGOImageView alloc] initWithFrame:CGRectMake(10, 52, (self.firstV.frame.size.height-10-32-10-10)*5/3, self.firstV.frame.size.height-10-32-10-10)];
     [self.topicImageV setBackgroundColor:[UIColor colorWithWhite:240/255.0f alpha:1]];
     [self.firstV addSubview:self.topicImageV];
@@ -325,9 +338,102 @@
     [self getTuijianList];
     [self getTopAd];
     // Do any additional setup after loading the view.
+     
+     
+     
+     
+     
+     */
+    
+    
+    [self getTopAd];
+}
+-(void)addGuangChangView
+{
+    self.middleView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_sameView.frame), ScreenWidth, 85)];
+    self.middleView.backgroundColor = [UIColor whiteColor];
+    [self.scrollView addSubview:self.middleView];
+    
+    UIButton * button1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button1 setBackgroundImage:[UIImage imageNamed:@"quanshezhuanfang@2x"] forState:UIControlStateNormal];
+    [button1 setFrame:CGRectMake(ScreenWidth/4-20-20, 15, 40, 40)];
+    [self.middleView addSubview:button1];
+    button1.tag = 1;
+    [button1 addTarget:self action:@selector(middleBtnDo:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel * bL1 = [[UILabel alloc] initWithFrame:CGRectMake(button1.frame.origin.x-10, CGRectGetMaxY(button1.frame), button1.frame.size.width+20, 20)];
+    bL1.textColor = [UIColor colorWithRed:150/255.0 green:150/255.0 blue:150/255.0 alpha:1];
+    bL1.font = [UIFont systemFontOfSize:12];
+    bL1.text = @"犬舍专访";
+    bL1.textAlignment = NSTextAlignmentCenter;
+    [self.middleView addSubview:bL1];
+    
+    
+    UIButton * button2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button2 setBackgroundImage:[UIImage imageNamed:@"huodongquwen@2x"] forState:UIControlStateNormal];
+    [button2 setFrame:CGRectMake(2*(ScreenWidth/4)-20, 15, 40, 40)];
+    [self.middleView addSubview:button2];
+    button2.tag = 2;
+    [button2 addTarget:self action:@selector(middleBtnDo:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel * bL2 = [[UILabel alloc] initWithFrame:CGRectMake(button2.frame.origin.x-10, CGRectGetMaxY(button2.frame), button2.frame.size.width+20, 20)];
+    bL2.textColor = [UIColor colorWithRed:150/255.0 green:150/255.0 blue:150/255.0 alpha:1];
+    bL2.font = [UIFont systemFontOfSize:12];
+    bL2.text = @"活动趣闻";
+    bL2.textAlignment = NSTextAlignmentCenter;
+    [self.middleView addSubview:bL2];
+    
+    
+    UIButton * button3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button3 setBackgroundImage:[UIImage imageNamed:@"xunlianfuwu@2x"] forState:UIControlStateNormal];
+    [button3 setFrame:CGRectMake(3*(ScreenWidth/4)-20+20, 15, 40, 40)];
+    [self.middleView addSubview:button3];
+    button3.tag = 3;
+    [button3 addTarget:self action:@selector(middleBtnDo:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel * bL3 = [[UILabel alloc] initWithFrame:CGRectMake(button3.frame.origin.x-10, CGRectGetMaxY(button3.frame), button3.frame.size.width+20, 20)];
+    bL3.textColor = [UIColor colorWithRed:150/255.0 green:150/255.0 blue:150/255.0 alpha:1];
+    bL3.font = [UIFont systemFontOfSize:12];
+    bL3.text = @"训练服务";
+    bL3.textAlignment = NSTextAlignmentCenter;
+    [self.middleView addSubview:bL3];
+    
+    float h = ScreenWidth * 0.4;
+    for (int i = 0; i<3; i++) {
+        EGOImageButton * guangchangbottomv = [[EGOImageButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.middleView.frame)+10*(i+1)+h*i, ScreenWidth, h)];
+        [guangchangbottomv setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"guangchang0%d",i+1]] forState:UIControlStateNormal];
+        guangchangbottomv.tag = 300+i;
+        [self.scrollView addSubview:guangchangbottomv];
+        
+        self.scrollView.contentSize = CGSizeMake(ScreenWidth, CGRectGetMaxY(guangchangbottomv.frame)+10);
+    }
+    
+    
+    
+}
+-(void)middleBtnDo:(UIButton *)sender
+{
+    
 }
 -(void)getTopAd
 {
+    NSMutableArray * da = [NSMutableArray array];
+    for (int i = 0;i<2 ;i++) {
+
+            SquareIteam * iteam = [[SquareIteam alloc] init];
+            iteam.handleType = @"";
+            iteam.iconUrl = @"http://xlimage.uzero.cn/dacfd675c59f9c9bc5021f84e64d5ff7.jpg";
+            iteam.title = @"";
+            iteam.key = @"";
+            [da addObject:iteam];
+
+        
+    }
+    self.topAdArray = da;
+    [flowView reloadData];
+    
+    
+    return;
 
     NSMutableDictionary* updateDict = [NetServer commonDict];
     [updateDict setObject:@"layout" forKey:@"command"];
@@ -351,7 +457,7 @@
         [flowView reloadData];
         //        [self setHeaderArray:[responseObject objectForKey:@"value"]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [self.scrollView headerEndRefreshing];
     }];
     
 }
@@ -583,7 +689,7 @@
 }
 - (void)beginRefreshing
 {
-    [self getTuijianList];
+//    [self getTuijianList];
     [self getTopAd];
 }
 
@@ -615,7 +721,7 @@
 
 - (CGSize)sizeForPageInFlowView:(PagedFlowView *)flowView
 {
-    return CGSizeMake(self.view.frame.size.width-20, (self.view.frame.size.width-20)/3);
+    return CGSizeMake(self.view.frame.size.width, (self.view.frame.size.width)/2);
 }
 - (NSInteger)numberOfPagesInFlowView:(PagedFlowView *)flowView
 {
