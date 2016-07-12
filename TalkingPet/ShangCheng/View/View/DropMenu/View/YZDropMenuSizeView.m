@@ -104,11 +104,20 @@
     CGPoint touchPoint = [tapGesture locationInView:self];
     if (CGRectContainsPoint(self.smallDogV.frame, touchPoint)) {
         NSLog(@"小");
+//        self.smallDogV.image = [UIImage imageNamed:@"small_dog_select_icon"];
+//        self.middleDogV.image = [UIImage imageNamed:@"middle_dog_icon"];
+//        self.bigDogV.image = [UIImage imageNamed:@"big_dog_icon"];
         self.sizeViewSelectSizeBlock(YZDogSize_Small);
     } else if (CGRectContainsPoint(self.middleDogV.frame, touchPoint)) {
+//        self.smallDogV.image = [UIImage imageNamed:@"small_dog_icon"];
+//        self.middleDogV.image = [UIImage imageNamed:@"middle_dog_select_icon"];
+//        self.bigDogV.image = [UIImage imageNamed:@"big_dog_icon"];
         NSLog(@"中");
         self.sizeViewSelectSizeBlock(YZDogSize_Middle);
     } else if (CGRectContainsPoint(self.bigDogV.frame, touchPoint)) {
+//        self.smallDogV.image = [UIImage imageNamed:@"small_dog_icon"];
+//        self.middleDogV.image = [UIImage imageNamed:@"middle_dog_icon"];
+//        self.bigDogV.image = [UIImage imageNamed:@"big_dog_select_icon"];
         NSLog(@"大");
         self.sizeViewSelectSizeBlock(YZDogSize_Big);
     }

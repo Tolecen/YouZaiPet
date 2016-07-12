@@ -86,6 +86,7 @@ NSString *const TypeFilterKey       = @"TypeFilterKey";
     self.sizeFilter = YZDogSize_All;
     self.ageRangeFilter = YZDogAgeRange_All;
     self.valueRangeFilter = YZDogValueRange_All;
+    [self.dropMenu clearFilter];
 }
 
 - (void)viewDidLoad {

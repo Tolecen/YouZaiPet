@@ -213,6 +213,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     YZDogDetailVC *detailVC = [[YZDogDetailVC alloc] init];
+    detailVC.dogModel = self.items[indexPath.row];
     detailVC.hideNaviBg = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
 }

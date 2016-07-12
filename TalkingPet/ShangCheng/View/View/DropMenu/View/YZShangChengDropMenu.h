@@ -34,4 +34,6 @@
 @property (nonatomic, weak) id <YZDropMenuDataSource> dataSource;
 @property (nonatomic, weak) id <YZDropMenuDelegate> delegate;
 
+- (void)clearFilter;
+
 @end

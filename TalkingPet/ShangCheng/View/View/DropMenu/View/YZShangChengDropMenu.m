@@ -55,6 +55,10 @@ static CGFloat YZDropMenuOtherFilterViewHeight  = 180.f;
     _titleButtons = nil;
 }
 
+- (void)clearFilter {
+    
+}
+
 #pragma mark -- CurrentView
 
 - (YZDropMenuAgeView *)ageView {
