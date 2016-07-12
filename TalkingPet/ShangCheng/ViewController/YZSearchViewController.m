@@ -50,7 +50,7 @@
 
 - (MLKMenuPopover *)menuPopover {
     if (!_menuPopover) {
-        _menuPopover = [[MLKMenuPopover alloc] initWithFrame:CGRectMake(ScreenWidth - 80, 0, 80, 88)
+        _menuPopover = [[MLKMenuPopover alloc] initWithFrame:CGRectMake(ScreenWidth - 90, 0, 80, 88)
                                                    menuItems:@[@"搜狗狗",@"搜犬舍"]];
         _menuPopover.menuPopoverDelegate = self;
     }
