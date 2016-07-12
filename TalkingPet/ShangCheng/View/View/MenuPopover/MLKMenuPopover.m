@@ -29,9 +29,41 @@
 
 #define LANDSCAPE_WIDTH_PADDING 50
 
+@interface MenuCell : UITableViewCell
+
+@property (nonatomic, weak) UIImageView *icon;
+
+@end
+
+@implementation MenuCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.7];
+        self.textLabel.font = [UIFont systemFontOfSize:14];
+        self.textLabel.textColor = [UIColor whiteColor];
+
+        UIImageView *icon = [[UIImageView alloc] init];
+        icon.contentMode = UIViewContentModeCenter;
+        [self.contentView addSubview:icon];
+        self.icon = icon;
+    }
+    return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.icon.frame = CGRectMake(0, 0, 30, CGRectGetHeight(self.frame));
+    self.textLabel.frame = CGRectMake(35, 0, CGRectGetWidth(self.frame) - 35, CGRectGetHeight(self.frame));
+}
+
+@end
+
 @interface MLKMenuPopover ()
 
 @property(nonatomic,retain) NSArray *menuItems;
+@property(nonatomic,retain) NSArray *imageItems;
 @property(nonatomic,retain) UIButton *containerButton;
 
 - (void)hide;
@@ -45,14 +77,14 @@
 @synthesize menuItems;
 @synthesize containerButton;
 
-- (id)initWithFrame:(CGRect)frame menuItems:(NSArray *)aMenuItems
+- (id)initWithFrame:(CGRect)frame menuItems:(NSArray *)menus imageItems:(NSArray *)imageItems
 {
     self = [super initWithFrame:frame];
     
     if (self)
     {
-        self.menuItems = aMenuItems;
-        
+        self.menuItems = menus;
+        self.imageItems = imageItems;
         // Adding Container Button which will take care of hiding menu when user taps outside of menu area
         self.containerButton = [[UIButton alloc] init];
         [self.containerButton setBackgroundColor:CONTAINER_BG_COLOR];
@@ -60,7 +92,7 @@
         [self.containerButton setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin];
         
         // Adding Menu Options Pointer
-        UIImageView *menuPointerView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame), 0, 23, 11)];
+        UIImageView *menuPointerView = [[UIImageView alloc] initWithFrame:MENU_POINTER_RECT];
         menuPointerView.image = [UIImage imageNamed:@"options_pointer"];
         menuPointerView.tag = MENU_POINTER_TAG;
         [self.containerButton addSubview:menuPointerView];
@@ -74,10 +106,8 @@
         menuItemsTableView.scrollEnabled = NO;
         menuItemsTableView.backgroundColor = [UIColor clearColor];
         menuItemsTableView.tag = MENU_TABLE_VIEW_TAG;
-        
-        UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Menu_PopOver_BG"]];
-        menuItemsTableView.backgroundView = bgView;
-        
+        menuItemsTableView.tableFooterView = [[UIView alloc] init];
+        [menuItemsTableView registerClass:[MenuCell class] forCellReuseIdentifier:NSStringFromClass(MenuCell.class)];
         [self addSubview:menuItemsTableView];
         
         [self.containerButton addSubview:self];
@@ -101,26 +131,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = CELL_IDENTIGIER;
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        [cell.textLabel setFont:[UIFont boldSystemFontOfSize:FONT_SIZE]];
-        [cell.textLabel setTextColor:[UIColor whiteColor]];
-        [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-        [cell setBackgroundColor:[UIColor clearColor]];
-    }
-    
     NSInteger numberOfRows = [tableView numberOfRowsInSection:indexPath.section];
+    MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(MenuCell.class)];
+    cell.textLabel.text = [self.menuItems objectAtIndex:indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:self.imageItems[indexPath.row]];
     if( [tableView numberOfRowsInSection:indexPath.section] > ONE && !(indexPath.row == numberOfRows - 1) )
     {
         [self addSeparatorImageToCell:cell];
     }
-    
-    cell.textLabel.text = [self.menuItems objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -140,6 +158,7 @@
 - (void)dismissMenuPopover
 {
     [self hide];
+    [self.menuPopoverDelegate menuPopover:self didSelectMenuItemAtIndex:-1];
 }
 
 - (void)showInView:(UIView *)view

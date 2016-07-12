@@ -16,7 +16,7 @@
 #import "YZDogDetailVC.h"
 #import "MLKMenuPopover.h"
 
-@interface YZSearchViewController()<UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, MLKMenuPopoverDelegate>
+@interface YZSearchViewController()<UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, MLKMenuPopoverDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, assign) YZShangChengType searchType;
 @property (nonatomic, weak) UISearchBar *searchBar;
@@ -26,6 +26,7 @@
 @property (nonatomic, copy) NSString *quansheKeyword;
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, strong) MLKMenuPopover *menuPopover;
+@property (nonatomic, weak) UIButton *searchBtn;
 
 @end
 
@@ -40,18 +41,23 @@
 }
 
 - (void)menuPopover:(MLKMenuPopover *)menuPopover didSelectMenuItemAtIndex:(NSInteger)selectedIndex {
-    [self.menuPopover dismissMenuPopover];
+    [UIView animateWithDuration:.5 animations:^{
+        self.searchBtn.imageView.layer.affineTransform = CGAffineTransformRotate(self.searchBtn.imageView.layer.affineTransform, M_PI);
+    }];
     if (selectedIndex == 0) {
         self.searchType = YZShangChengType_Dog;
-    } else {
+        [self.searchBtn setTitle:@"狗狗" forState:UIControlStateNormal];
+    } else if (selectedIndex == 1) {
         self.searchType = YZShangChengType_Goods;
+        [self.searchBtn setTitle:@"犬舍" forState:UIControlStateNormal];
     }
 }
 
 - (MLKMenuPopover *)menuPopover {
     if (!_menuPopover) {
-        _menuPopover = [[MLKMenuPopover alloc] initWithFrame:CGRectMake(ScreenWidth - 90, 0, 80, 88)
-                                                   menuItems:@[@"搜狗狗",@"搜犬舍"]];
+        _menuPopover = [[MLKMenuPopover alloc] initWithFrame:CGRectMake(10, 0, 90, 88)
+                                                   menuItems:@[@"狗狗",@"犬舍"]
+                                                  imageItems:@[@"search_gou", @"search_quanshe"]];
         _menuPopover.menuPopoverDelegate = self;
     }
     return _menuPopover;
@@ -59,18 +65,20 @@
 
 - (void)inner_ChangeSearchStyle:(UIButton *)sender {
     if (self.menuPopover.menuShow) {
+        [UIView animateWithDuration:.5 animations:^{
+            self.searchBtn.imageView.layer.affineTransform = CGAffineTransformRotate(self.searchBtn.imageView.layer.affineTransform, M_PI);
+        }];
         [self.menuPopover dismissMenuPopover];
     } else {
+        [UIView animateWithDuration:.5 animations:^{
+            self.searchBtn.imageView.layer.affineTransform = CGAffineTransformRotate(self.searchBtn.imageView.layer.affineTransform, M_PI);
+        }];
         [self.menuPopover showInView:self.view];
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImage *backImage = [UIImage imageNamed:@"shangcheng_back_icon"];
-    backImage = [backImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStyleDone target:self action:@selector(inner_Pop:)];
-    self.navigationItem.leftBarButtonItem = backButtonItem;
         
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
@@ -80,23 +88,32 @@
 
     self.searchType = YZShangChengType_Dog;
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [searchBtn setTitle:@"搜狗狗" forState:UIControlStateNormal];
+    [searchBtn setTitle:@"狗狗" forState:UIControlStateNormal];
+    [searchBtn setImage:[UIImage imageNamed:@"search_arrow"] forState:UIControlStateNormal];
+    searchBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 0);
+    searchBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -25, 0, 0);
     [searchBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     searchBtn.titleLabel.font = [UIFont systemFontOfSize:15.f];
     [searchBtn sizeToFit];
     [searchBtn addTarget:self action:@selector(inner_ChangeSearchStyle:) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *searchBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
-    self.navigationItem.rightBarButtonItem = searchBarButtonItem;
+    self.navigationItem.leftBarButtonItem = searchBarButtonItem;
+    self.searchBtn = searchBtn;
+    
+    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    cancelBtn.titleLabel.font = [UIFont systemFontOfSize:15.f];
+    [cancelBtn sizeToFit];
+    [cancelBtn addTarget:self action:@selector(inner_Pop:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 10.f;
     flowLayout.minimumLineSpacing = 10.f;
     UIEdgeInsets sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     flowLayout.sectionInset = sectionInset;
-    CGFloat width = ([UIScreen mainScreen].bounds.size.width - sectionInset.left - sectionInset.right - 10) / 2;
-    flowLayout.itemSize = CGSizeMake(width,
-                                     width / 5 * 6);//card w / h = 5 / 6;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                                           collectionViewLayout:flowLayout];
@@ -189,6 +206,16 @@
 }
 
 #pragma mark -- UICollectionView
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.searchType == YZShangChengType_Dog) {
+        CGFloat width = ([UIScreen mainScreen].bounds.size.width - 30) / 2;
+        return CGSizeMake(width,
+                          width / 5 * 6);
+    } else {
+        return CGSizeMake(ScreenWidth, 80);
+    }
+}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     YZShangChengGoodsListCell *goodsCell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(YZShangChengGoodsListCell.class) forIndexPath:indexPath];
