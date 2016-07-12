@@ -178,4 +178,9 @@
     [self setNeedsUpdateConstraints];
 }
 
+- (void)setHideQuanShe:(BOOL)hideQuanShe {
+    _hideQuanShe = hideQuanShe;
+    self.areaLb.hidden = hideQuanShe;
+}
+
 @end

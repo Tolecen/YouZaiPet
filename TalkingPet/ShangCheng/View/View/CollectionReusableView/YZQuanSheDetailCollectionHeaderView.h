@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YZShangChengModel.h"
 
 @interface YZQuanSheDetailCollectionHeaderView : UICollectionReusableView
+
+@property (nonatomic, strong) YZQuanSheDetailModel *detailModel;
 
 @property (nonatomic, copy) void(^ShowQuanSheIntroBlock)(void);
 

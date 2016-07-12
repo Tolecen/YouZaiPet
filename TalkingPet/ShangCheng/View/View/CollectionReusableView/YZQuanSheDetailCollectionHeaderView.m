@@ -34,6 +34,11 @@
 
 @implementation YZQuanSheDetailCollectionHeaderView
 
+- (void)dealloc {
+    _detailModel = nil;
+    _ShowQuanSheIntroBlock = nil;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         UIView *containerView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -65,7 +70,7 @@
         UILabel *nameLb = [[UILabel alloc] init];
         nameLb.font = [UIFont systemFontOfSize:14];
         nameLb.textColor = CommonGreenColor;
-        nameLb.text = @"汉源犬舍";
+//        nameLb.text = @"汉源犬舍";
         [containerView addSubview:nameLb];
         self.nameLb = nameLb;
         
@@ -80,7 +85,7 @@
                                                g:179
                                                b:179
                                            alpha:1.f];
-        numberLb.text = @"(80999)";
+//        numberLb.text = @"(80999)";
         [containerView addSubview:numberLb];
         self.numberLb = numberLb;
         
@@ -99,6 +104,7 @@
         favoriteBtn.layer.borderColor = CommonGreenColor.CGColor;
         favoriteBtn.layer.borderWidth = 1.f;
         favoriteBtn.layer.masksToBounds = YES;
+        favoriteBtn.hidden = YES;
         [containerView addSubview:favoriteBtn];
         self.favoriteBtn = favoriteBtn;
         
@@ -112,7 +118,7 @@
         UITextView *textView = [[UITextView alloc] init];
         textView.backgroundColor = [UIColor clearColor];
         textView.editable = NO;
-        textView.text = @"主营犬 迷你雪纳瑞";
+//        textView.text = @"主营犬 迷你雪纳瑞";
         [containerView addSubview:textView];
         self.textView = textView;
         
@@ -176,7 +182,7 @@
         CGFloat offset = ScreenWidth / 4;
 
         UILabel *priceRangeLb = [[UILabel alloc] init];
-        priceRangeLb.text = @"¥4000-¥100000";
+//        priceRangeLb.text = @"¥4000-¥100000";
         priceRangeLb.font = [UIFont systemFontOfSize:12.f];
         priceRangeLb.textColor = commonPriceColor;
         [containerView addSubview:priceRangeLb];
@@ -187,7 +193,7 @@
         }];
         
         UILabel *dogCountLb = [[UILabel alloc] init];
-        dogCountLb.text = @"8只";
+//        dogCountLb.text = @"8只";
         dogCountLb.font = [UIFont systemFontOfSize:12.f];
         dogCountLb.textColor = commonPriceColor;
         [containerView addSubview:dogCountLb];
@@ -207,6 +213,18 @@
         }];
     }
     return self;
+}
+
+- (void)setDetailModel:(YZQuanSheDetailModel *)detailModel {
+    if (!detailModel || _detailModel == detailModel) {
+        return;
+    }
+    _detailModel = detailModel;
+    self.nameLb.text = detailModel.shopName;
+    self.numberLb.text = [NSString stringWithFormat:@"(%lld)", detailModel.shopNo];
+    self.textView.text = detailModel.dogIntro;
+    [self.avatarImageV setImageWithURL:[NSURL URLWithString:detailModel.thumb] placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)inner_AddFavorite:(UIButton *)sender {

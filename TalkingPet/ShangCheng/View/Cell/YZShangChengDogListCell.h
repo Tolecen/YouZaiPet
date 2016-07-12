@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) YZDogModel *dogModel;
 
+@property (nonatomic, assign) BOOL hideQuanShe;
+
 @end

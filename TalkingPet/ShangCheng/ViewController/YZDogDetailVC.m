@@ -214,6 +214,17 @@
     return nil;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1) {
+        YZDogDetailVC *detailVC = [[YZDogDetailVC alloc] init];
+        YZDogModel *dogModel = self.items[indexPath.row];
+        detailVC.dogModel = dogModel;
+        detailVC.hideNaviBg = YES;
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
+}
+
 #pragma mark -- 
 
 - (void)shareAction {
@@ -227,6 +238,7 @@
 - (void)enterDogHomeAction {
     YZQuanSheDetailViewController *quanShe = [[YZQuanSheDetailViewController alloc] init];
     quanShe.quanSheId = self.detailModel.shop.shopId;
+    quanShe.quanSheName = self.detailModel.shop.shopName;
     [self.navigationController pushViewController:quanShe animated:YES];
 }
 

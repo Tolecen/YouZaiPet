@@ -25,6 +25,8 @@
 
 @property (nonatomic, strong) YZQuanSheDetailModel *quanSheDetail;
 
+@property (nonatomic, assign) NSInteger pageIndex;
+
 @end
 
 @implementation YZQuanSheDetailViewController
@@ -36,7 +38,7 @@
 }
 
 - (NSString *)title {
-    return @"汉源犬舍";
+    return self.quanSheName;
 }
 
 - (void)inner_Pop:(id)sender {
@@ -51,7 +53,6 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 10.f;
     flowLayout.minimumLineSpacing = 10.f;
-    flowLayout.headerReferenceSize = CGSizeMake(50, 200);
 
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                                           collectionViewLayout:flowLayout];
@@ -61,7 +62,9 @@
                                                      green:.9
                                                       blue:.9
                                                      alpha:1.f];
-    [collectionView registerClass:[YZShangChengDogListCell class] forCellWithReuseIdentifier:NSStringFromClass(self.class)];
+    [collectionView registerClass:[YZShangChengDogListCell class] forCellWithReuseIdentifier:NSStringFromClass(YZShangChengDogListCell.class)];
+    [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass(UICollectionViewCell.class)];
+
     [collectionView registerClass:[YZQuanSheDetailCollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZQuanSheDetailCollectionHeaderView.class)];
     [collectionView registerClass:[YZDetailTextCollectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDetailTextCollectionView.class)];
 
@@ -72,12 +75,15 @@
         make.edges.mas_equalTo(self.view).insets(UIEdgeInsetsZero);
     }];
     
+    [collectionView addFooterWithTarget:self action:@selector(inner_LoadMore)];
+    
     self.quanSheIntroView = [[YZQuanSheDetailIntroView alloc] init];
     [self.view addSubview:self.quanSheIntroView];
     [self.quanSheIntroView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view).insets(UIEdgeInsetsZero);
     }];
     [self inner_GetQuanSheDetail];
+    [self inner_GetQuanSheDogListWithLoadMore:NO];
 }
 
 - (void)inner_GetQuanSheDetail {
@@ -85,10 +91,50 @@
     [NetServer getQuanSheDetailInfoWithShopId:self.quanSheId
                                       success:^(YZQuanSheDetailModel *quanSheDetail) {
                                           weakSelf.quanSheDetail = quanSheDetail;
+                                          [weakSelf.collectionView reloadData];
                                       }
                                       failure:^(NSError *error, AFHTTPRequestOperation *operation) {
                                           
                                       }];
+}
+
+- (void)inner_GetQuanSheDogListWithLoadMore:(BOOL)loadMore {
+    NSInteger pageIndex = loadMore ? self.pageIndex : 1;
+    WS(weakSelf);
+    [NetServer searchDogListWithType:nil
+                             keyword:nil
+                                size:YZDogSize_All
+                                 sex:YZDogSex_All
+                           sellPrice:YZDogValueRange_All
+                                area:nil
+                                 age:YZDogAgeRange_All
+                              shopId:self.quanSheId
+                           pageIndex:pageIndex
+                             success:^(NSArray *items, NSInteger nextPageIndex) {
+                                 if (items && items.count > 0) {
+                                     weakSelf.pageIndex = nextPageIndex;
+                                     if (loadMore) {
+                                         weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
+                                     } else {
+                                         weakSelf.items = [NSArray arrayWithArray:items];
+                                     }
+                                     [weakSelf.collectionView footerEndRefreshing];
+                                     [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+                                 } else {
+                                     if (loadMore) {
+                                         [weakSelf.collectionView footerEndRefreshing];
+                                     }
+                                 }
+                             }
+                             failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+                                 if (loadMore) {
+                                     [weakSelf.collectionView footerEndRefreshing];
+                                 }
+                             }];
+}
+
+- (void)inner_LoadMore {
+    [self inner_GetQuanSheDogListWithLoadMore:YES];
 }
 
 - (void)inner_ShowQuanSheIntroView {
@@ -115,7 +161,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return CGSizeMake(ScreenWidth, 160);
+        return CGSizeMake(ScreenWidth, 180);
     }
     if (self.items && self.items.count > 0) {
         return CGSizeMake(ScreenWidth, 30);
@@ -124,7 +170,13 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    YZShangChengDogListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.class) forIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        UICollectionViewCell *collectionViewCell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(UICollectionViewCell.class) forIndexPath:indexPath];
+        return collectionViewCell;
+    }
+    YZShangChengDogListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(YZShangChengDogListCell.class) forIndexPath:indexPath];
+    cell.dogModel = self.items[indexPath.row];
+    cell.hideQuanShe = YES;
     return cell;
 }
 
@@ -132,6 +184,7 @@
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         if (indexPath.section == 0) {
             YZQuanSheDetailCollectionHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(YZQuanSheDetailCollectionHeaderView.class) forIndexPath:indexPath];
+            header.detailModel = self.quanSheDetail;
             __weak __typeof(self) weakSelf = self;
             [header setShowQuanSheIntroBlock:^{
                 [weakSelf inner_ShowQuanSheIntroView];
@@ -144,6 +197,10 @@
         }
     }
     return nil;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {

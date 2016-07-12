@@ -47,6 +47,10 @@
 
 @end
 
+@implementation YZDogImage
+
+@end
+
 @interface YZDogModel()
 
 @property (nonatomic, assign, readwrite) YZDogSex sex;

@@ -96,6 +96,8 @@
 		1595E5611B905E7300C1A770 /* story_audio_play3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1595E55E1B905E7300C1A770 /* story_audio_play3.png */; };
 		1595E5621B905E7300C1A770 /* story_audio_play2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1595E55F1B905E7300C1A770 /* story_audio_play2.png */; };
 		1595E5631B905E7300C1A770 /* story_audio_play1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1595E5601B905E7300C1A770 /* story_audio_play1.png */; };
+		2E0882831D347F7E00D6D4BA /* YZSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0882821D347F7E00D6D4BA /* YZSearchViewController.m */; };
+		2E0882871D34962D00D6D4BA /* MLKMenuPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0882861D34962D00D6D4BA /* MLKMenuPopover.m */; };
 		2E2D733B1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D733A1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m */; };
 		2E2D73411D2E2FBC000B7F00 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D73401D2E2FBC000B7F00 /* UIColor+HexString.m */; };
 		2E2D73441D2E4F34000B7F00 /* YZQuanSheDetailIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D73431D2E4F34000B7F00 /* YZQuanSheDetailIntroView.m */; };
@@ -1501,6 +1503,10 @@
 		1595E55E1B905E7300C1A770 /* story_audio_play3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = story_audio_play3.png; sourceTree = "<group>"; };
 		1595E55F1B905E7300C1A770 /* story_audio_play2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = story_audio_play2.png; sourceTree = "<group>"; };
 		1595E5601B905E7300C1A770 /* story_audio_play1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = story_audio_play1.png; sourceTree = "<group>"; };
+		2E0882811D347F7E00D6D4BA /* YZSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZSearchViewController.h; sourceTree = "<group>"; };
+		2E0882821D347F7E00D6D4BA /* YZSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZSearchViewController.m; sourceTree = "<group>"; };
+		2E0882851D34962D00D6D4BA /* MLKMenuPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLKMenuPopover.h; sourceTree = "<group>"; };
+		2E0882861D34962D00D6D4BA /* MLKMenuPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLKMenuPopover.m; sourceTree = "<group>"; };
 		2E2D73391D2E23F9000B7F00 /* YZQuanSheDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZQuanSheDetailViewController.h; sourceTree = "<group>"; };
 		2E2D733A1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZQuanSheDetailViewController.m; sourceTree = "<group>"; };
 		2E2D733F1D2E2FBC000B7F00 /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexString.h"; sourceTree = "<group>"; };
@@ -3399,6 +3405,8 @@
 				2EA22D741D333D810052992C /* YZGoodsDetailVC.m */,
 				2E2D73391D2E23F9000B7F00 /* YZQuanSheDetailViewController.h */,
 				2E2D733A1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m */,
+				2E0882811D347F7E00D6D4BA /* YZSearchViewController.h */,
+				2E0882821D347F7E00D6D4BA /* YZSearchViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -3463,6 +3471,7 @@
 		0688A2E11D1BFAC9002AA960 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2E0882841D34962D00D6D4BA /* MenuPopover */,
 				2EA22D761D336A7D0052992C /* CollectionReusableView */,
 				06E4A9591D1CD1FA00BBC617 /* DropMenu */,
 				063E29A61D20BB5600C3FD3F /* YZDetailBottomBar.h */,
@@ -3655,6 +3664,15 @@
 				150EFABD1B845C7E003729A8 /* zanPetalk_toZan@2x.png */,
 			);
 			name = BlankPage;
+			sourceTree = "<group>";
+		};
+		2E0882841D34962D00D6D4BA /* MenuPopover */ = {
+			isa = PBXGroup;
+			children = (
+				2E0882851D34962D00D6D4BA /* MLKMenuPopover.h */,
+				2E0882861D34962D00D6D4BA /* MLKMenuPopover.m */,
+			);
+			path = MenuPopover;
 			sourceTree = "<group>";
 		};
 		2EA22D761D336A7D0052992C /* CollectionReusableView */ = {
@@ -7619,6 +7637,7 @@
 				D860FDF31D3360F800487E2D /* UserCenterGouWuFuncTableViewCell.m in Sources */,
 				72555F5B1A7F1FBD00D8D5E2 /* DecorateViewController.mm in Sources */,
 				7251B99519AC78B80046E9BC /* ChangePasswordViewController.m in Sources */,
+				2E0882871D34962D00D6D4BA /* MLKMenuPopover.m in Sources */,
 				063E29DE1D2122A000C3FD3F /* WMPageController.m in Sources */,
 				7260E1561B4BFA740067FAA0 /* StoryTitleViewController.m in Sources */,
 				979C5AF11AF9AAE7000DF115 /* GTMBase64.m in Sources */,
@@ -7708,6 +7727,7 @@
 				972F387F19762E0400952DC9 /* LoginViewController.m in Sources */,
 				72831CD0196A3FE200B9CA4C /* NSManagedObject+MagicalRequests.m in Sources */,
 				722F870D19AED493008CD021 /* OpinionViewController.m in Sources */,
+				2E0882831D347F7E00D6D4BA /* YZSearchViewController.m in Sources */,
 				7228BD1D196B8D5B005502CE /* DCTextView.m in Sources */,
 				9791E8F31A6E349400893E17 /* SoundSong.m in Sources */,
 				971D8CEC1975117000C4C580 /* MJRefreshFooterView.m in Sources */,

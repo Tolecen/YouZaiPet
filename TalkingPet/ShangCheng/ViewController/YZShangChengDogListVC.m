@@ -8,6 +8,7 @@
 
 #import "YZShangChengDogListVC.h"
 #import "YZDogDetailVC.h"
+#import "YZSearchViewController.h"
 #import "YZShangChengDropMenu.h"
 #import "YZShangChengDogListCell.h"
 #import "YZShangChengModel.h"
@@ -105,7 +106,7 @@ NSString *const TypeFilterKey       = @"TypeFilterKey";
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
-    searchBar.placeholder = @"test";
+    searchBar.placeholder = @"请输入狗狗种类/犬舍名称";
     [self.navigationItem setTitleView:searchBar];
     
     YZShangChengDropMenu *dropMenu = [[YZShangChengDropMenu alloc] initWithFrame:CGRectZero];
@@ -312,8 +313,9 @@ NSString *const TypeFilterKey       = @"TypeFilterKey";
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    [searchBar setShowsCancelButton:YES animated:YES];
-    return YES;
+    YZSearchViewController *searchVC = [[YZSearchViewController alloc] init];
+    [self.navigationController pushViewController:searchVC animated:YES];
+    return NO;
 }
 
 @end

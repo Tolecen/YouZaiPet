@@ -44,6 +44,7 @@
 @interface YZQuanSheDetailModel : YZQuanSheModel
 
 @property (nonatomic, copy) NSString *dogIntro;
+@property (nonatomic, copy) NSString *thumb;
 @property (nonatomic, assign) long long shopNo;
 
 @end
@@ -61,6 +62,17 @@
 @property (nonatomic, copy) NSString *photos;
 @property (nonatomic, assign) YZDogSex sex;
 @property (nonatomic, assign) BOOL vaccine;//是否三针疫苗，0为否，1为是
+
+@end
+
+@protocol YZDogImage <NSObject>
+
+@end
+
+@interface YZDogImage : YZShangChengModel
+
+@property (nonatomic, copy) NSString *type;
+@property (nonatomic, copy) NSString *url;
 
 @end
 
@@ -98,6 +110,7 @@
 
 @property (nonatomic, strong) YZDogParents<YZDogParents> *mother;
 @property (nonatomic, strong) YZDogParents<YZDogParents> *father;
+@property (nonatomic, copy) NSArray<YZDogImage> *images;
 
 @end
 

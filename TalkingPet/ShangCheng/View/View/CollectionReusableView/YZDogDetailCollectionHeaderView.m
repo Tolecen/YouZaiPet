@@ -38,6 +38,12 @@
         [self addSubview:flowView];
         self.flowView = flowView;
         
+        UIPageControl *page = [[UIPageControl alloc] initWithFrame:CGRectZero];
+        page.currentPageIndicatorTintColor = CommonGreenColor;
+        page.pageIndicatorTintColor = [UIColor colorWithWhite:200/255.0 alpha:1];
+        flowView.pageControl = page;
+        [flowView addSubview:page];
+        
         UILabel *nameLb = [[UILabel alloc] initWithFrame:CGRectZero];
         nameLb.font = [UIFont systemFontOfSize:16.f];
         nameLb.textColor = [UIColor colorWithRed:(102 / 255.f)
@@ -99,6 +105,11 @@
             make.width.height.mas_equalTo(ScreenWidth);
         }];
         
+        [page mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(flowView.mas_bottom).mas_offset(-10);
+            make.centerX.mas_equalTo(flowView).mas_offset(0);
+        }];
+        
         [nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self).mas_offset(10);
             make.top.mas_equalTo(flowView.mas_bottom).mas_offset(15);
@@ -156,11 +167,20 @@
     [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.f], NSForegroundColorAttributeName: self.daysNumberLb.textColor} range:NSMakeRange(daysNumberString.length - 1, 1)];
     self.daysNumberLb.attributedText = attr;
 
+    if (self.detailModel.images && self.detailModel.images.count > 1) {
+        self.flowView.pageControl.numberOfPages = self.detailModel.images.count;
+        self.flowView.pageControl.hidden = NO;
+    } else {
+        self.flowView.pageControl.hidden = YES;
+    }
     [self.flowView reloadData];
     [self setNeedsUpdateConstraints];
 }
 
 - (NSInteger)numberOfPagesInFlowView:(PagedFlowView *)flowView {
+    if (self.detailModel.images && self.detailModel.images.count > 0) {
+        return self.detailModel.images.count;
+    }
     return 1;
 }
 
@@ -170,6 +190,10 @@
         imageV = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"dog_placeholder"]];
         imageV.backgroundColor = [UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1];
         imageV.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth);
+    }
+    if (self.detailModel.images && self.detailModel.images.count > 0) {
+        YZDogImage *imageModel = self.detailModel.images[index];
+        [imageV setImageURL:[NSURL URLWithString:imageModel.url]];
     }
     return imageV;
 }
