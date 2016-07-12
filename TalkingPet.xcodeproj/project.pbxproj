@@ -98,6 +98,7 @@
 		1595E5631B905E7300C1A770 /* story_audio_play1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1595E5601B905E7300C1A770 /* story_audio_play1.png */; };
 		2E0882831D347F7E00D6D4BA /* YZSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0882821D347F7E00D6D4BA /* YZSearchViewController.m */; };
 		2E0882871D34962D00D6D4BA /* MLKMenuPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0882861D34962D00D6D4BA /* MLKMenuPopover.m */; };
+		2E08828A1D34CA3900D6D4BA /* YZQuanSheSearchListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0882891D34CA3900D6D4BA /* YZQuanSheSearchListCell.m */; };
 		2E2D733B1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D733A1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m */; };
 		2E2D73411D2E2FBC000B7F00 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D73401D2E2FBC000B7F00 /* UIColor+HexString.m */; };
 		2E2D73441D2E4F34000B7F00 /* YZQuanSheDetailIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D73431D2E4F34000B7F00 /* YZQuanSheDetailIntroView.m */; };
@@ -1507,6 +1508,8 @@
 		2E0882821D347F7E00D6D4BA /* YZSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZSearchViewController.m; sourceTree = "<group>"; };
 		2E0882851D34962D00D6D4BA /* MLKMenuPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLKMenuPopover.h; sourceTree = "<group>"; };
 		2E0882861D34962D00D6D4BA /* MLKMenuPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLKMenuPopover.m; sourceTree = "<group>"; };
+		2E0882881D34CA3900D6D4BA /* YZQuanSheSearchListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZQuanSheSearchListCell.h; sourceTree = "<group>"; };
+		2E0882891D34CA3900D6D4BA /* YZQuanSheSearchListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZQuanSheSearchListCell.m; sourceTree = "<group>"; };
 		2E2D73391D2E23F9000B7F00 /* YZQuanSheDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZQuanSheDetailViewController.h; sourceTree = "<group>"; };
 		2E2D733A1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZQuanSheDetailViewController.m; sourceTree = "<group>"; };
 		2E2D733F1D2E2FBC000B7F00 /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexString.h"; sourceTree = "<group>"; };
@@ -3418,6 +3421,8 @@
 				0696313D1D1D995E00AF6B6D /* YZShangChengKindScrollCell.m */,
 				066B84991D1BBDFE003AAD64 /* YZShangChengDogListCell.h */,
 				066B849A1D1BBDFE003AAD64 /* YZShangChengDogListCell.m */,
+				2E0882881D34CA3900D6D4BA /* YZQuanSheSearchListCell.h */,
+				2E0882891D34CA3900D6D4BA /* YZQuanSheSearchListCell.m */,
 				06BC28D11D1E6CE2003AC9A3 /* YZShangChengGoodsListCell.h */,
 				06BC28D21D1E6CE2003AC9A3 /* YZShangChengGoodsListCell.m */,
 				066B84C01D1BD0E0003AAD64 /* YZShangChengBannerCell.h */,
@@ -7719,6 +7724,7 @@
 				975F65D31AD3D8F200E8F4D4 /* ShouHuoAddressViewController.m in Sources */,
 				974636C01A15F00700720F33 /* SFHFKeychainUtils.m in Sources */,
 				7228BD18196B8D5B005502CE /* SCCommon.m in Sources */,
+				2E08828A1D34CA3900D6D4BA /* YZQuanSheSearchListCell.m in Sources */,
 				72831CD8196A3FE200B9CA4C /* MagicalRecord+Actions.m in Sources */,
 				726F2FC31B4E6968007A7668 /* TextEditViewController.m in Sources */,
 				977EC5BC1AC2674500081A6E /* XLHeaderView.m in Sources */,

@@ -9,7 +9,7 @@
 #import "YZSearchViewController.h"
 #import "YZShangChengConst.h"
 #import "YZShangChengDogListCell.h"
-#import "YZShangChengGoodsListCell.h"
+#import "YZQuanSheSearchListCell.h"
 #import "MJRefresh.h"
 #import "NetServer+ShangCheng.h"
 #import "YZGoodsDetailVC.h"
@@ -123,7 +123,7 @@
                                                      green:.9
                                                       blue:.9
                                                      alpha:1.f];
-    [collectionView registerClass:[YZShangChengGoodsListCell class] forCellWithReuseIdentifier:NSStringFromClass(YZShangChengGoodsListCell.class)];
+    [collectionView registerClass:[YZQuanSheSearchListCell class] forCellWithReuseIdentifier:NSStringFromClass(YZQuanSheSearchListCell.class)];
     [collectionView registerClass:[YZShangChengDogListCell class] forCellWithReuseIdentifier:NSStringFromClass(YZShangChengDogListCell.class)];
 
     [self.view addSubview:collectionView];
@@ -195,9 +195,16 @@
     WS(weakSelf);
     [NetServer searchQuanSheListWithShopName:keyword
                                    pageIndex:pageIndex
-                                     success:^(id data, NSInteger nextPageIndex) {
+                                     success:^(NSArray *items, NSInteger nextPageIndex) {
+                                         weakSelf.pageIndex = nextPageIndex;
+                                         if (loadMore) {
+                                             weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
+                                         } else {
+                                             weakSelf.items = [NSArray arrayWithArray:items];
+                                         }
                                          [weakSelf.collectionView footerEndRefreshing];
                                          [weakSelf.collectionView headerEndRefreshing];
+                                         [weakSelf.collectionView reloadData];
                                      }
                                      failure:^(NSError *error, AFHTTPRequestOperation *operation) {
                                          [weakSelf.collectionView footerEndRefreshing];
@@ -213,20 +220,20 @@
         return CGSizeMake(width,
                           width / 5 * 6);
     } else {
-        return CGSizeMake(ScreenWidth, 80);
+        return CGSizeMake(ScreenWidth - 20, 80);
     }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    YZShangChengGoodsListCell *goodsCell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(YZShangChengGoodsListCell.class) forIndexPath:indexPath];
+    YZQuanSheSearchListCell *quanSheCell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(YZQuanSheSearchListCell.class) forIndexPath:indexPath];
     YZShangChengDogListCell *dogCell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(YZShangChengDogListCell.class) forIndexPath:indexPath];
     id searchModel = self.items[indexPath.row];
     if ([searchModel isKindOfClass:[YZDogModel class]]) {
         dogCell.dogModel = searchModel;
         return dogCell;
-    } else if ([searchModel isKindOfClass:[YZGoodsModel class]]) {
-        goodsCell.goods = searchModel;
-        return goodsCell;
+    } else if ([searchModel isKindOfClass:[YZQuanSheModel class]]) {
+        quanSheCell.quanSheModel = searchModel;
+        return quanSheCell;
     }
     return nil;
 }

@@ -52,7 +52,7 @@
 //1009_犬舍搜索
 + (void)searchQuanSheListWithShopName:(NSString *)shopName
                             pageIndex:(NSInteger)pageIndex
-                              success:(void(^)(id data, NSInteger nextPageIndex))success
+                              success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
                               failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 @end

@@ -38,14 +38,16 @@
 
 @property (nonatomic, copy) NSString *shopName;
 @property (nonatomic, copy) NSString *shopId;
+@property (nonatomic, copy) NSString *dogIntro;
+@property (nonatomic, copy) NSString *thumb;
+@property (nonatomic, assign) long long shopNo;
 
 @end
 
 @interface YZQuanSheDetailModel : YZQuanSheModel
 
-@property (nonatomic, copy) NSString *dogIntro;
-@property (nonatomic, copy) NSString *thumb;
-@property (nonatomic, assign) long long shopNo;
+@property (nonatomic, assign) float badestScore;
+@property (nonatomic, assign) float bestScore;
 
 @end
 
