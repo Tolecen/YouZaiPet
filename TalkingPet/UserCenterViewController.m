@@ -86,6 +86,8 @@
 @property(nonatomic,retain)NSArray * stringArr;
 @property(nonatomic,retain)NSArray * imgArr;
 @property (nonatomic,retain) UIImageView * darenV;
+@property (nonatomic,strong)UIButton * loginBtn;
+@property (nonatomic,strong)UIBarButtonItem * msgBtnItem;
 
 @property (nonatomic,retain)NewUserViewController * editCurrentPetVC;
 @property (nonatomic,retain)NewUserViewController * addNewPetVC;
@@ -109,6 +111,21 @@
     [super viewWillDisappear:animated];
     [self showNaviBg];
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (![UserServe sharedUserServe].userName) {
+        _tableView.hidden = YES;
+        _loginBtn.hidden = NO;
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    else{
+        _tableView.hidden = NO;
+        _loginBtn.hidden = YES;
+        self.navigationItem.rightBarButtonItem = _msgBtnItem;
+    }
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -124,12 +141,28 @@
     
     UIImage *image = [UIImage imageNamed:@"xiaoxi@2x"];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *rightMoreItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toMessageVC:)];
-    self.navigationItem.rightBarButtonItem = rightMoreItem;
+    _msgBtnItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toMessageVC:)];
+    self.navigationItem.rightBarButtonItem = _msgBtnItem;
     
     bgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, -100, self.view.frame.size.width, 400)];
     [bgV setImage:[UIImage imageNamed:@"usercenter_topBg"]];
     [self.view addSubview:bgV];
+    
+    
+    _loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _loginBtn.frame = CGRectMake((ScreenWidth-100)/2, CGRectGetMaxY(bgV.frame)+30, 100, 30);
+    _loginBtn.backgroundColor = [UIColor whiteColor];
+    _loginBtn.layer.cornerRadius = 15;
+    _loginBtn.layer.borderWidth = 1;
+    _loginBtn.layer.borderColor = [CommonGreenColor CGColor];
+    _loginBtn.layer.masksToBounds = YES;
+    [_loginBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
+    [_loginBtn setTitle:@"立刻登录" forState:UIControlStateNormal];
+    [self.view addSubview:_loginBtn];
+    _loginBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [_loginBtn addTarget:self action:@selector(toLogInPage) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     [self.view addSubview:_tableView];
 //    _tableView.hidden = YES;
@@ -804,6 +837,10 @@
     chv.title = @"切换宠物";
     [self.navigationController pushViewController:chv animated:YES];
     
+}
+-(void)toLogInPage
+{
+    [[RootViewController sharedRootViewController] showLoginViewController];
 }
 #pragma mark -
 @end
