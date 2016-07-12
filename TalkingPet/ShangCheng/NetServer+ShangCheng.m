@@ -63,6 +63,7 @@
 }
 
 + (void)searchDogListWithType:(NSString *)type
+                      keyword:(NSString *)keyword
                          size:(YZDogSize)size
                           sex:(YZDogSex)sex
                     sellPrice:(YZDogValueRange)sellPrice
@@ -80,6 +81,9 @@
     }
     if (shopId) {
         parameters[@"shopId"] = shopId;
+    }
+    if (keyword) {
+        parameters[@"keyword"] = keyword;
     }
     parameters[@"pageIndex"] = @(pageIndex);
     parameters[@"pageSize"] = @(20);
@@ -184,17 +188,17 @@
                              }];
 }
 
-+ (void)searchGoodsListWithName:(NSString *)name
-                      pageIndex:(NSInteger)pageIndex
-                        success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
-                        failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure {
++ (void)searchGoodsListWithKeyword:(NSString *)keyword
+                         pageIndex:(NSInteger)pageIndex
+                           success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
+                           failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:[NetServer commonDict]];
     parameters[@"command"] = @"mall";
     parameters[@"options"] = @"generalSearch";
     parameters[@"pageIndex"] = @(pageIndex);
     parameters[@"pageSize"] = @(20);
-    if (name && ![name isEqualToString:@""]) {
-        parameters[@"name"] = name;
+    if (keyword && ![keyword isEqualToString:@""]) {
+        parameters[@"keyword"] = keyword;
     } else {
         [parameters removeObjectForKey:@"name"];
     }

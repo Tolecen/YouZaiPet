@@ -109,31 +109,31 @@
 
 - (void)inner_GetGoodsList {
     __weak __typeof(self) weakSelf = self;
-    [NetServer searchGoodsListWithName:self.goodsName
-                             pageIndex:1
-                               success:^(NSArray *items, NSInteger nextPageIndex) {
-                                   weakSelf.pageIndex = nextPageIndex;
-                                   weakSelf.items = items;
-                                   [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
-                               } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-                               }];
+    [NetServer searchGoodsListWithKeyword:self.goodsName
+                                pageIndex:1
+                                  success:^(NSArray *items, NSInteger nextPageIndex) {
+                                      weakSelf.pageIndex = nextPageIndex;
+                                      weakSelf.items = items;
+                                      [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+                                  } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+                                  }];
 }
 
 - (void)inner_LoadMore:(id)sender {
     __weak __typeof(self) weakSelf = self;
-    [NetServer searchGoodsListWithName:self.goodsName
-                             pageIndex:self.pageIndex
-                               success:^(NSArray *items, NSInteger nextPageIndex) {
-                                   if (items && items.count > 0) {
-                                       weakSelf.pageIndex = nextPageIndex;
-                                       weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
-                                       [weakSelf.collectionView footerEndRefreshing];
-                                       [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
-                                   } else {
-                                       [weakSelf.collectionView footerEndRefreshing];
-                                   }
-                               } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-                               }];
+    [NetServer searchGoodsListWithKeyword:self.goodsName
+                                pageIndex:self.pageIndex
+                                  success:^(NSArray *items, NSInteger nextPageIndex) {
+                                      if (items && items.count > 0) {
+                                          weakSelf.pageIndex = nextPageIndex;
+                                          weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
+                                          [weakSelf.collectionView footerEndRefreshing];
+                                          [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+                                      } else {
+                                          [weakSelf.collectionView footerEndRefreshing];
+                                      }
+                                  } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+                                  }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

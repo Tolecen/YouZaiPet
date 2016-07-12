@@ -22,6 +22,7 @@
 
 //1004_狗狗搜索（不带任何查询条件即为所有的列表）
 + (void)searchDogListWithType:(NSString *)type
+                      keyword:(NSString *)keyword
                          size:(YZDogSize)size
                           sex:(YZDogSex)sex
                     sellPrice:(YZDogValueRange)sellPrice
@@ -38,10 +39,10 @@
                                  failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 //1006_狗狗用品搜索
-+ (void)searchGoodsListWithName:(NSString *)name
-                      pageIndex:(NSInteger)pageIndex
-                        success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
-                        failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
++ (void)searchGoodsListWithKeyword:(NSString *)keyword
+                         pageIndex:(NSInteger)pageIndex
+                           success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
+                           failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 //1008_犬舍详情
 + (void)getQuanSheDetailInfoWithShopId:(NSString *)shopId

@@ -195,6 +195,7 @@ NSString *const TypeFilterKey       = @"TypeFilterKey";
     }
     __weak __typeof(self) weakSelf = self;
     [NetServer searchDogListWithType:type
+                             keyword:nil
                                 size:size
                                  sex:sex
                            sellPrice:price

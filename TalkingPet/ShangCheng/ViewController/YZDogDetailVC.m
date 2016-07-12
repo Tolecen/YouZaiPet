@@ -109,6 +109,7 @@
     NSInteger pageIndex = loadMore ? self.pageIndex : 1;
     WS(weakSelf);
     [NetServer searchDogListWithType:self.dogModel.productType.dogTypeId
+                             keyword:nil
                                 size:YZDogSize_All
                                  sex:YZDogSex_All
                            sellPrice:YZDogValueRange_All

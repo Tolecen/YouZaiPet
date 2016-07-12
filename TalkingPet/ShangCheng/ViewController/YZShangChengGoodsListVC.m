@@ -91,25 +91,25 @@
         [self.collectionView headerEndRefreshing];
     }
     __weak __typeof(self) weakSelf = self;
-    [NetServer searchGoodsListWithName:nil
-                             pageIndex:pageIndex
-                               success:^(NSArray *items, NSInteger nextPageIndex) {
-                                   weakSelf.pageIndex = nextPageIndex;
-                                   if (refresh) {
-                                       weakSelf.items = [NSArray arrayWithArray:items];
-                                       [weakSelf.collectionView headerEndRefreshing];
-                                   } else {
-                                       weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
-                                       [weakSelf.collectionView footerEndRefreshing];
-                                   }
-                                   [weakSelf.collectionView reloadData];
-                               } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-                                   if (refresh) {
-                                       [weakSelf.collectionView headerEndRefreshing];
-                                   } else {
-                                       [weakSelf.collectionView footerEndRefreshing];
-                                   }
-                               }];
+    [NetServer searchGoodsListWithKeyword:nil
+                                pageIndex:pageIndex
+                                  success:^(NSArray *items, NSInteger nextPageIndex) {
+                                      weakSelf.pageIndex = nextPageIndex;
+                                      if (refresh) {
+                                          weakSelf.items = [NSArray arrayWithArray:items];
+                                          [weakSelf.collectionView headerEndRefreshing];
+                                      } else {
+                                          weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
+                                          [weakSelf.collectionView footerEndRefreshing];
+                                      }
+                                      [weakSelf.collectionView reloadData];
+                                  } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+                                      if (refresh) {
+                                          [weakSelf.collectionView headerEndRefreshing];
+                                      } else {
+                                          [weakSelf.collectionView footerEndRefreshing];
+                                      }
+                                  }];
 }
 
 #pragma mark -- UICollectionView

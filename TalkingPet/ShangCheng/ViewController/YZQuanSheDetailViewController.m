@@ -23,6 +23,8 @@
 
 @property (nonatomic, copy) NSArray *items;
 
+@property (nonatomic, strong) YZQuanSheDetailModel *quanSheDetail;
+
 @end
 
 @implementation YZQuanSheDetailViewController
@@ -30,6 +32,7 @@
 - (void)dealloc {
     _quanSheIntroView = nil;
     _items = nil;
+    _quanSheDetail = nil;
 }
 
 - (NSString *)title {
@@ -78,9 +81,10 @@
 }
 
 - (void)inner_GetQuanSheDetail {
+    WS(weakSelf);
     [NetServer getQuanSheDetailInfoWithShopId:self.quanSheId
-                                      success:^(id data) {
-                                          
+                                      success:^(YZQuanSheDetailModel *quanSheDetail) {
+                                          weakSelf.quanSheDetail = quanSheDetail;
                                       }
                                       failure:^(NSError *error, AFHTTPRequestOperation *operation) {
                                           
