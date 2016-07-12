@@ -96,12 +96,12 @@ NSString *const TypeFilterKey       = @"TypeFilterKey";
                              PriceFilterKey: @(self.valueRangeFilter),
                              TypeFilterKey: self.typeFilter} mutableCopy];
     
-//    UIImage *backImage = [UIImage imageNamed:@"shangcheng_back_icon"];
-//    backImage = [backImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStyleDone target:self action:@selector(inner_Pop:)];
-//    self.navigationItem.leftBarButtonItem = backButtonItem;
+    UIImage *backImage = [UIImage imageNamed:@"shangcheng_back_icon"];
+    backImage = [backImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage style:UIBarButtonItemStyleDone target:self action:@selector(inner_Pop:)];
+    self.navigationItem.leftBarButtonItem = backButtonItem;
     
-    [self setBackButtonWithTarget:@selector(inner_Pop:)];
+//    [self setBackButtonWithTarget:@selector(inner_Pop:)];
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
