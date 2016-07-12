@@ -11,6 +11,7 @@
 #import "BrowserTableHelper.h"
 @interface HotViewController : BaseViewController
 @property (nonatomic,retain)UICollectionView * hotView;
+@property (nonatomic,retain)UICollectionView * jingyanView;
 @property (nonatomic, strong)UITableView * contentTableView;
 @property (nonatomic,strong) BrowserTableHelper * tableViewHelper;
 - (void)beginRefreshing;

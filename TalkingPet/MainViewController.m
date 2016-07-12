@@ -51,33 +51,33 @@
     [super viewDidLoad];
     self.view.frame = self.parentViewController.view.bounds;
     // Do any additional setup after loading the view.
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:({
-        UIButton*userB = [UIButton buttonWithType:UIButtonTypeCustom];
-        [userB setImage:[UIImage imageNamed:@"user"] forState:UIControlStateNormal];
-        userB.frame = CGRectMake(0.0, 0.0, 38, 38);
-        petHeadView = [[EGOImageView alloc] initWithFrame:CGRectMake(0, 0, 27, 27)];
-        petHeadView.center = CGPointMake(CGRectGetMidX(userB.bounds), CGRectGetMidY(userB.bounds));
-        petHeadView.layer.cornerRadius = 13.5;
-        petHeadView.layer.masksToBounds = YES;
-        [userB addSubview:petHeadView];
-        petHeadView.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
-        if ([[UIDevice currentDevice].systemVersion integerValue]>=7) {
-            userB.imageEdgeInsets = UIEdgeInsetsMake(0, 12, 0, -12);
-            petHeadView.frame = CGRectOffset(petHeadView.frame, 12, 0);
-        }
-        [userB addTarget:self action:@selector(showUserSide) forControlEvents:UIControlEventTouchUpInside];
-        userB;
-    })];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:({
-        UIButton * messageB = [UIButton buttonWithType:UIButtonTypeCustom];
-        [messageB setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
-        messageB.frame = CGRectMake(0.0, 0.0, 38, 38);
-        if ([[UIDevice currentDevice].systemVersion integerValue]>=7) {
-            messageB.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 15);
-        }
-        [messageB addTarget:self action:@selector(showMessageSide) forControlEvents:UIControlEventTouchUpInside];
-        messageB;
-    })];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:({
+//        UIButton*userB = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [userB setImage:[UIImage imageNamed:@"user"] forState:UIControlStateNormal];
+//        userB.frame = CGRectMake(0.0, 0.0, 38, 38);
+//        petHeadView = [[EGOImageView alloc] initWithFrame:CGRectMake(0, 0, 27, 27)];
+//        petHeadView.center = CGPointMake(CGRectGetMidX(userB.bounds), CGRectGetMidY(userB.bounds));
+//        petHeadView.layer.cornerRadius = 13.5;
+//        petHeadView.layer.masksToBounds = YES;
+//        [userB addSubview:petHeadView];
+//        petHeadView.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
+//        if ([[UIDevice currentDevice].systemVersion integerValue]>=7) {
+//            userB.imageEdgeInsets = UIEdgeInsetsMake(0, 12, 0, -12);
+//            petHeadView.frame = CGRectOffset(petHeadView.frame, 12, 0);
+//        }
+//        [userB addTarget:self action:@selector(showUserSide) forControlEvents:UIControlEventTouchUpInside];
+//        userB;
+//    })];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:({
+//        UIButton * messageB = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [messageB setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
+//        messageB.frame = CGRectMake(0.0, 0.0, 38, 38);
+//        if ([[UIDevice currentDevice].systemVersion integerValue]>=7) {
+//            messageB.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 15);
+//        }
+//        [messageB addTarget:self action:@selector(showMessageSide) forControlEvents:UIControlEventTouchUpInside];
+//        messageB;
+//    })];
     UIView * segmentIV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 194, 28)];
     UIImageView * imageV = [[UIImageView alloc]initWithFrame:segmentIV.bounds];
     imageV.image = [UIImage imageNamed:@"segmentBG"];

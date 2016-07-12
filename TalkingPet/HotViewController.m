@@ -135,32 +135,110 @@
 //@property (nonatomic,retain)PetalkView * petalkV;
 @property (nonatomic,retain)EGOImageView * imageV;
 @property (nonatomic,retain)EGOImageView * headView;
+@property (nonatomic,retain) TalkingBrowse * talking;
+@property (nonatomic,retain)UILabel * desL;
+@property (nonatomic,retain)UIButton * tagButton;
+@property (nonatomic,retain)UILabel * tagLabel;
+@property (nonatomic,retain)UILabel * zanL;
+@property (nonatomic,retain)UILabel *commentL;
+@property (nonatomic,retain)UILabel *liulanL;
+@property (nonatomic,retain)UIButton *zanButton;
 @property (nonatomic,retain)UILabel * nameL;
-@property (nonatomic,retain)UILabel *timesL;//次数
+@property (nonatomic,retain)UILabel *gradeL;
 @end
 @implementation HotJingYanCell
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.layer.cornerRadius = 5;
+        self.layer.masksToBounds = YES;
         self.contentView.backgroundColor = [UIColor whiteColor];
-    
-        self.headView = [[EGOImageView alloc] initWithFrame:CGRectMake(5, 10+frame.size.width, 24, 24)];
-        _headView.placeholderImage = [UIImage imageNamed:@"browser_avatarPlaceholder"];
-        _headView.layer.cornerRadius = 12;
+        //        self.petalkV  = [[PetalkView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.width)];
+        //        [self.contentView addSubview:_petalkV];
+        
+        self.imageV = [[EGOImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.width)];
+        self.imageV.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
+        [self.contentView addSubview:self.imageV];
+        
+        self.desL = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.imageV.frame)+5, frame.size.width-20, 40)];
+        self.desL.backgroundColor = [UIColor clearColor];
+        self.desL.textColor = [UIColor colorWithR:150 g:150 b:150 alpha:1];
+        self.desL.font = [UIFont systemFontOfSize:13];
+        self.desL.numberOfLines = 2;
+        self.desL.lineBreakMode = NSLineBreakByCharWrapping;
+        self.desL.text = @"要在这里添加描述哦哈哈急急急预约啊啊";
+        [self.contentView addSubview:self.desL];
+
+        
+        self.headView = [[EGOImageView alloc] initWithFrame:CGRectMake(10,CGRectGetMaxY(self.desL.frame)+5, 36, 36)];
+        _headView.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
+        _headView.layer.cornerRadius = 18;
         _headView.layer.masksToBounds=YES;
         [self.contentView addSubview:_headView];
         
-        self.nameL = [[UILabel alloc] initWithFrame:CGRectMake(35, 10+frame.size.width, frame.size.width-40, 12)];
+        self.nameL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.headView.frame)+7, CGRectGetMinY(self.headView.frame), frame.size.width-46-40, 18)];
         _nameL.textColor = [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1];
         _nameL.font = [UIFont systemFontOfSize:12];
         [self.contentView addSubview:_nameL];
-        self.timesL = [[UILabel alloc] initWithFrame:CGRectMake(35, 22+frame.size.width, frame.size.width-40, 12)];
-        _timesL.textColor = [UIColor colorWithRed:160/255.0 green:160/255.0 blue:160/255.0 alpha:1];
-        _timesL.font = [UIFont systemFontOfSize:10];
-        [self.contentView addSubview:_timesL];
+        _nameL.text = @"啦啦啦";
+        
+        self.gradeL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.headView.frame)+7, CGRectGetMaxY(self.nameL.frame), self.nameL.frame.size.width, 18)];
+        self.gradeL.textColor = [UIColor colorWithRed:160/255.0 green:160/255.0 blue:160/255.0 alpha:1];
+        self.gradeL.font = [UIFont systemFontOfSize:10];
+        [self.contentView addSubview:self.gradeL];
+        self.gradeL.text = @"LV.7";
+        
+        self.zanButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.zanButton.frame = CGRectMake(frame.size.width-10-28, CGRectGetMinY(self.headView.frame)+7, 24, 22);
+        [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-off@2x"] forState:UIControlStateNormal];
+        [self.contentView addSubview:self.zanButton];
+        
+        UIImageView * zanimgv = [[UIImageView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.gradeL.frame)+12, 10, 10)];
+        zanimgv.image = [UIImage imageNamed:@"zan@2x"];
+        [self.contentView addSubview:zanimgv];
+        
+        self.zanL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(zanimgv.frame)+5, CGRectGetMaxY(self.gradeL.frame)+10, 30, 14)];
+        self.zanL.backgroundColor = [UIColor clearColor];
+        self.zanL.textColor = [UIColor colorWithR:200 g:200 b:200 alpha:1];
+        self.zanL.font = [UIFont systemFontOfSize:11];
+        self.zanL.text = @"120";
+        self.zanL.adjustsFontSizeToFitWidth = YES;
+        [self.contentView addSubview:self.zanL];
+        
+        UIImageView * cimgv = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.zanL.frame), CGRectGetMaxY(self.gradeL.frame)+12, 10, 10)];
+        cimgv.image = [UIImage imageNamed:@"pinglun@2x"];
+        [self.contentView addSubview:cimgv];
+        
+        self.commentL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(cimgv.frame)+5, CGRectGetMaxY(self.gradeL.frame)+10, 30, 14)];
+        self.commentL.backgroundColor = [UIColor clearColor];
+        self.commentL.textColor = [UIColor colorWithR:200 g:200 b:200 alpha:1];
+        self.commentL.font = [UIFont systemFontOfSize:11];
+        self.commentL.text = @"23";
+        self.commentL.adjustsFontSizeToFitWidth = YES;
+        [self.contentView addSubview:self.commentL];
+        
+        UIImageView * limgv = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commentL.frame), CGRectGetMaxY(self.gradeL.frame)+12, 10, 10)];
+        limgv.image = [UIImage imageNamed:@"liulanliang-hui@2x"];
+        [self.contentView addSubview:limgv];
+        
+        self.liulanL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(limgv.frame)+5, CGRectGetMaxY(self.gradeL.frame)+10, 30, 14)];
+        self.liulanL.backgroundColor = [UIColor clearColor];
+        self.liulanL.textColor = [UIColor colorWithR:200 g:200 b:200 alpha:1];
+        self.liulanL.font = [UIFont systemFontOfSize:11];
+        self.liulanL.text = @"223";
+        self.liulanL.adjustsFontSizeToFitWidth = YES;
+        [self.contentView addSubview:self.liulanL];
+
     }
     return self;
+}
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self.imageV setImageWithURL:[NSURL URLWithString:@"http://testimages.buybestpet.com/img/content/20160711/DB217CBD9DF647899C331D7355FB139C.jpg"]];
+    [self.headView setImageWithURL:[NSURL URLWithString:@"http://xlimage.uzero.cn/img/avatar/20141227/3E76C2395A5644DCB29A1DD24602D16F.jpg"]];
 }
 @end
 
@@ -207,17 +285,42 @@
     [_hotView addHeaderWithTarget:self action:@selector(getHotListFirstPage)];
     [_hotView addFooterWithTarget:self action:@selector(getHotListOtherPage)];
     
-    self.contentTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
-    _contentTableView.backgroundColor = [UIColor colorWithWhite:240/255.0f alpha:1];
-    _contentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    _contentTableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
-    [self.view addSubview:_contentTableView];
-    _contentTableView.hidden = YES;
     
-    self.tableViewHelper = [[BrowserTableHelper alloc] initWithController:self Tableview:_contentTableView SectionView:nil];
-    _contentTableView.delegate = self.tableViewHelper;
-    _contentTableView.dataSource = self.tableViewHelper;
-    self.tableViewHelper.cellNeedShowPublishTime = NO;
+    UICollectionViewFlowLayout* layout2 = [[UICollectionViewFlowLayout alloc]init];
+//    float width = (self.view.frame.size.width-30)/2;
+    layout2.itemSize = CGSizeMake(whith,whith+5+40+10+10+10+10+40);
+    layout2.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    layout2.minimumInteritemSpacing = 10;
+    layout2.minimumLineSpacing = 10;
+    layout2.scrollDirection = UICollectionViewScrollDirectionVertical;
+
+    
+    
+    self.jingyanView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight) collectionViewLayout:layout2];
+    _jingyanView.alwaysBounceVertical = YES;
+    _jingyanView.delegate = self;
+    _jingyanView.dataSource = self;
+    _jingyanView.backgroundColor = [UIColor colorWithWhite:238/255.0 alpha:1];
+    [self.view addSubview:_jingyanView];
+    _jingyanView.showsHorizontalScrollIndicator = NO;
+    [_jingyanView registerClass:[HotJingYanCell class] forCellWithReuseIdentifier:@"JingyanPetalkCell"];
+    
+    [_jingyanView addHeaderWithTarget:self action:@selector(getHotListFirstPage)];
+    [_jingyanView addFooterWithTarget:self action:@selector(getHotListOtherPage)];
+    _jingyanView.hidden = YES;
+
+    
+//    self.contentTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
+//    _contentTableView.backgroundColor = [UIColor colorWithWhite:240/255.0f alpha:1];
+//    _contentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+////    _contentTableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
+//    [self.view addSubview:_contentTableView];
+//    _contentTableView.hidden = YES;
+//    
+//    self.tableViewHelper = [[BrowserTableHelper alloc] initWithController:self Tableview:_contentTableView SectionView:nil];
+//    _contentTableView.delegate = self.tableViewHelper;
+//    _contentTableView.dataSource = self.tableViewHelper;
+//    self.tableViewHelper.cellNeedShowPublishTime = NO;
 //    self.tableViewHelper.tableViewType = TableViewTypeTagList;
     
     NSArray * hotArray = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].userID]];
@@ -257,7 +360,7 @@
     [self.topSelV addSubview:bgav];
     
     self.shuoshuoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_shuoshuoBtn setBackgroundImage:[UIImage imageNamed:@"chongyoudongtai-on@3x"] forState:UIControlStateNormal];
+    [_shuoshuoBtn setBackgroundImage:[UIImage imageNamed:@"chongyoudongtai-on@2x"] forState:UIControlStateNormal];
     [_shuoshuoBtn setFrame:CGRectMake(ScreenWidth/4-15, 10, 30, 30)];
     [self.topSelV addSubview:_shuoshuoBtn];
     [_shuoshuoBtn addTarget:self action:@selector(showShuoShuoTable) forControlEvents:UIControlEventTouchUpInside];
@@ -270,7 +373,7 @@
     [self.topSelV addSubview:_ssbtnL];
     
     _jingyanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_jingyanBtn setBackgroundImage:[UIImage imageNamed:@"yangchongfenxiang-off@3x"] forState:UIControlStateNormal];
+    [_jingyanBtn setBackgroundImage:[UIImage imageNamed:@"yangchongfenxiang-off@2x"] forState:UIControlStateNormal];
     [_jingyanBtn setFrame:CGRectMake(3*(ScreenWidth/4)-15, 10, 30, 30)];
     [self.topSelV addSubview:_jingyanBtn];
     [_jingyanBtn addTarget:self action:@selector(showJingYanTable) forControlEvents:UIControlEventTouchUpInside];
@@ -316,17 +419,26 @@
 }
 -(void)showShuoShuoTable
 {
-    
+    [_shuoshuoBtn setBackgroundImage:[UIImage imageNamed:@"chongyoudongtai-on@2x"] forState:UIControlStateNormal];
+    [_jingyanBtn setBackgroundImage:[UIImage imageNamed:@"yangchongfenxiang-off@2x"] forState:UIControlStateNormal];
+    self.hotView.hidden = NO;
+    self.jingyanView.hidden = YES;
+    [self showOrHideTopSelV];
 }
 -(void)showJingYanTable
 {
-    
+    [_shuoshuoBtn setBackgroundImage:[UIImage imageNamed:@"chongyoudongtai-off@2x"] forState:UIControlStateNormal];
+    [_jingyanBtn setBackgroundImage:[UIImage imageNamed:@"yangchongfenxiang-on@2x"] forState:UIControlStateNormal];
+    self.hotView.hidden = YES;
+    self.jingyanView.hidden = NO;
+    [self showOrHideTopSelV];
 }
 -(void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    [self.contentTableView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
+//    [self.contentTableView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
     [self.hotView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
+    [self.jingyanView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
 }
 - (void)beginRefreshing
 {
@@ -387,13 +499,26 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 //    TalkingBrowse * petalk = _dataArr[indexPath.row];
-    static NSString *SectionCellIdentifier = @"HotPetalkCell";
-    HotPetalkCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:SectionCellIdentifier forIndexPath:indexPath];
-//    [cell.petalkV layoutSubviewsWithTalking:petalk];
-//    cell.headView.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?imageView2/2/w/50",petalk.petInfo.headImgURL]];
-//    cell.nameL.text = petalk.petInfo.nickname;
-//    cell.timesL.text = [NSString stringWithFormat:@"%@人浏览",petalk.browseNum];
-    return cell;
+    if ([collectionView isEqual:_hotView]) {
+        static NSString *SectionCellIdentifier = @"HotPetalkCell";
+        HotPetalkCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:SectionCellIdentifier forIndexPath:indexPath];
+        //    [cell.petalkV layoutSubviewsWithTalking:petalk];
+        //    cell.headView.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?imageView2/2/w/50",petalk.petInfo.headImgURL]];
+        //    cell.nameL.text = petalk.petInfo.nickname;
+        //    cell.timesL.text = [NSString stringWithFormat:@"%@人浏览",petalk.browseNum];
+        return cell;
+    }
+    else
+    {
+        static NSString *SectionCellIdentifier2 = @"JingyanPetalkCell";
+        HotJingYanCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:SectionCellIdentifier2 forIndexPath:indexPath];
+        //    [cell.petalkV layoutSubviewsWithTalking:petalk];
+        //    cell.headView.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?imageView2/2/w/50",petalk.petInfo.headImgURL]];
+        //    cell.nameL.text = petalk.petInfo.nickname;
+        //    cell.timesL.text = [NSString stringWithFormat:@"%@人浏览",petalk.browseNum];
+        return cell;
+    }
+
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -401,5 +526,17 @@
     talkingDV.talking = _dataArr[indexPath.row];
     
     [self.parentViewController.navigationController pushViewController:talkingDV animated:YES];
+}
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (self.topSelV.frame.origin.y==0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.topSelV setFrame:CGRectMake(0, -70, ScreenWidth, 100)];
+        } completion:^(BOOL finished) {
+            self.zhiV.image = [UIImage imageNamed:@"xiala@2x"];
+        }];
+        
+    }
 }
 @end
