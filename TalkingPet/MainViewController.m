@@ -78,31 +78,33 @@
 //        [messageB addTarget:self action:@selector(showMessageSide) forControlEvents:UIControlEventTouchUpInside];
 //        messageB;
 //    })];
-    UIView * segmentIV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 194, 28)];
-    UIImageView * imageV = [[UIImageView alloc]initWithFrame:segmentIV.bounds];
-    imageV.image = [UIImage imageNamed:@"segmentBG"];
-    [segmentIV addSubview:imageV];
+    UIView * segmentIV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 194, 44)];
+//    UIImageView * imageV = [[UIImageView alloc]initWithFrame:segmentIV.bounds];
+//    imageV.image = [UIImage imageNamed:@"segmentBG"];
+//    [segmentIV addSubview:imageV];
     segmentIV.clipsToBounds = YES;
     self.navigationItem.titleView = segmentIV;
-    scrollBG = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 63, 28)];
-    scrollBG.image = [UIImage imageNamed:@"mover"];
+    scrollBG = [[UIImageView alloc] initWithFrame:CGRectMake(0, 36, 63, 8)];
+    scrollBG.image = [UIImage imageNamed:@"shouye-zhishiqi@2x"];
     [segmentIV addSubview:scrollBG];
     hotB = [UIButton buttonWithType:UIButtonTypeCustom];
-    hotB.frame = CGRectMake(0, 0, 63, 28);
-    hotB.titleLabel.font = [UIFont systemFontOfSize:15];
+    hotB.frame = CGRectMake(0, 2, 63, 28);
+    hotB.titleLabel.font = [UIFont systemFontOfSize:16];
     [hotB setTitle:@"热门" forState:UIControlStateNormal];
-    [hotB setTitleColor:[UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:1] forState:UIControlStateNormal];
+    [hotB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [hotB addTarget:self action:@selector(scrollBackScrollView:) forControlEvents:UIControlEventTouchUpInside];
     [segmentIV addSubview:hotB];
     squareB = [UIButton buttonWithType:UIButtonTypeCustom];
-    squareB.frame = CGRectMake(65.5, 0, 63, 28);
+    squareB.frame = CGRectMake(65.5, 2, 63, 28);
     squareB.titleLabel.font = [UIFont systemFontOfSize:15];
+    [squareB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
     [squareB setTitle:@"广场" forState:UIControlStateNormal];
     [squareB addTarget:self action:@selector(scrollBackScrollView:) forControlEvents:UIControlEventTouchUpInside];
     [segmentIV addSubview:squareB];
     careB = [UIButton buttonWithType:UIButtonTypeCustom];
-    careB.frame = CGRectMake(131, 0, 63, 28);
+    careB.frame = CGRectMake(131, 2, 63, 28);
     careB.titleLabel.font = [UIFont systemFontOfSize:15];
+    [careB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
     [careB setTitle:@"关注" forState:UIControlStateNormal];
     [careB addTarget:self action:@selector(scrollBackScrollView:) forControlEvents:UIControlEventTouchUpInside];
     [segmentIV addSubview:careB];
@@ -300,37 +302,48 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView == _backScrollV) {
-        scrollBG.frame = CGRectMake(scrollView.contentOffset.x*194/scrollView.contentSize.width, 0, 63, 28);
+        scrollBG.frame = CGRectMake(scrollView.contentOffset.x*194/scrollView.contentSize.width, 36, 63, 8);
     }
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (scrollView == _backScrollV) {
         if (scrollBG.center.x < 22 + hotB.frame.size.width) {
-            [hotB setTitleColor:[UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:1] forState:UIControlStateNormal];
-            [squareB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [careB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [hotB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [squareB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
+            [careB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
             _hotVC.contentTableView.scrollsToTop = YES;
             _squareVC.scrollView.scrollsToTop = NO;
             _attentionVC.tableView.scrollsToTop = NO;
+            hotB.titleLabel.font = [UIFont systemFontOfSize:16];
+            squareB.titleLabel.font = [UIFont systemFontOfSize:15];
+            careB.titleLabel.font = [UIFont systemFontOfSize:15];
         }
         if (scrollBG.center.x > 2 + hotB.frame.size.width && scrollBG.center.x < 2 + 2*hotB.frame.size.width) {
-            [hotB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [squareB setTitleColor:[UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:1] forState:UIControlStateNormal];
-            [careB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [hotB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
+            [squareB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [careB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
             _hotVC.contentTableView.scrollsToTop = NO;
             _squareVC.scrollView.scrollsToTop = YES;
             _attentionVC.tableView.scrollsToTop = NO;
             [_hotVC.tableViewHelper stopAudio];
+            
+            hotB.titleLabel.font = [UIFont systemFontOfSize:15];
+            squareB.titleLabel.font = [UIFont systemFontOfSize:16];
+            careB.titleLabel.font = [UIFont systemFontOfSize:15];
         }
         if (scrollBG.center.x > 2 + 2*hotB.frame.size.width) {
-            [hotB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [squareB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [careB setTitleColor:[UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:1] forState:UIControlStateNormal];
+            [hotB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
+            [squareB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
+            [careB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             _hotVC.contentTableView.scrollsToTop = NO;
             _squareVC.scrollView.scrollsToTop = NO;
             _attentionVC.tableView.scrollsToTop = YES;
             [_hotVC.tableViewHelper stopAudio];
+            
+            hotB.titleLabel.font = [UIFont systemFontOfSize:15];
+            squareB.titleLabel.font = [UIFont systemFontOfSize:15];
+            careB.titleLabel.font = [UIFont systemFontOfSize:16];
         }
     }
 }
