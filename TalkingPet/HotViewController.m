@@ -173,7 +173,10 @@
 
 @property (nonatomic,strong)UIView * topSelV;
 @property (nonatomic,strong)UIImageView * zhiV;
-
+@property (nonatomic,strong)UIButton *shuoshuoBtn;
+@property (nonatomic,strong)UIButton *jingyanBtn;
+@property (nonatomic,strong)UILabel * ssbtnL;
+@property (nonatomic,strong)UILabel * jybtnL;
 
 @end
 @implementation HotViewController
@@ -253,6 +256,32 @@
     bgav.backgroundColor = [UIColor whiteColor];
     [self.topSelV addSubview:bgav];
     
+    self.shuoshuoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_shuoshuoBtn setBackgroundImage:[UIImage imageNamed:@"chongyoudongtai-on@3x"] forState:UIControlStateNormal];
+    [_shuoshuoBtn setFrame:CGRectMake(ScreenWidth/4-15, 10, 30, 30)];
+    [self.topSelV addSubview:_shuoshuoBtn];
+    [_shuoshuoBtn addTarget:self action:@selector(showShuoShuoTable) forControlEvents:UIControlEventTouchUpInside];
+    
+    _ssbtnL = [[UILabel alloc] initWithFrame:CGRectMake(_shuoshuoBtn.frame.origin.x-10, CGRectGetMaxY(_shuoshuoBtn.frame)+5, _shuoshuoBtn.frame.size.width+20, 20)];
+    _ssbtnL.textColor = [UIColor colorWithRed:150/255.0 green:150/255.0 blue:150/255.0 alpha:1];
+    _ssbtnL.font = [UIFont systemFontOfSize:12];
+    _ssbtnL.text = @"说说精选";
+    _ssbtnL.textAlignment = NSTextAlignmentCenter;
+    [self.topSelV addSubview:_ssbtnL];
+    
+    _jingyanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_jingyanBtn setBackgroundImage:[UIImage imageNamed:@"yangchongfenxiang-off@3x"] forState:UIControlStateNormal];
+    [_jingyanBtn setFrame:CGRectMake(3*(ScreenWidth/4)-15, 10, 30, 30)];
+    [self.topSelV addSubview:_jingyanBtn];
+    [_jingyanBtn addTarget:self action:@selector(showJingYanTable) forControlEvents:UIControlEventTouchUpInside];
+    
+    _jybtnL = [[UILabel alloc] initWithFrame:CGRectMake(_jingyanBtn.frame.origin.x-10, CGRectGetMaxY(_jingyanBtn.frame)+5, _jingyanBtn.frame.size.width+20, 20)];
+    _jybtnL.textColor = [UIColor colorWithRed:150/255.0 green:150/255.0 blue:150/255.0 alpha:1];
+    _jybtnL.font = [UIFont systemFontOfSize:12];
+    _jybtnL.text = @"经验分享";
+    _jybtnL.textAlignment = NSTextAlignmentCenter;
+    [self.topSelV addSubview:_jybtnL];
+    
     UIButton * buttonSel = [UIButton buttonWithType:UIButtonTypeCustom];
     [buttonSel setBackgroundImage:[UIImage imageNamed:@"shouye_more@2x"] forState:UIControlStateNormal];
     [buttonSel setFrame:CGRectMake(ScreenWidth/2-40, CGRectGetMaxY(bgav.frame), 80, 25)];
@@ -260,7 +289,7 @@
     [buttonSel addTarget:self action:@selector(showOrHideTopSelV) forControlEvents:UIControlEventTouchUpInside];
     
     self.zhiV = [[UIImageView alloc] initWithFrame:CGRectMake(65/2, 5, 15, 5)];
-    self.zhiV.image = [UIImage imageNamed:@"shouqi@2x"];
+    self.zhiV.image = [UIImage imageNamed:@"xiala@2x"];
     [buttonSel addSubview:self.zhiV];
     self.zhiV.userInteractionEnabled = NO;
     
@@ -285,10 +314,19 @@
         
         
 }
+-(void)showShuoShuoTable
+{
+    
+}
+-(void)showJingYanTable
+{
+    
+}
 -(void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
     [self.contentTableView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
+    [self.hotView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
 }
 - (void)beginRefreshing
 {
