@@ -19,6 +19,8 @@
 {
     UIButton * photoB;
     UIImageView * tabBar;
+    
+    float publishFrameX;
 //    BOOL needNotiNormalChat;
 }
 @property (nonatomic,retain)UINavigationController * petalkNav;
@@ -118,6 +120,8 @@
     photoB.showsTouchWhenHighlighted = YES;
     [tabBar addSubview:photoB];
     
+    publishFrameX = photoB.frame.origin.x;
+    
     UILabel * photoBL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(photoB.frame), CGRectGetMaxY(photoB.frame)-10, 40, 20)];
     photoBL.font = [UIFont systemFontOfSize:10];
     photoBL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
@@ -186,7 +190,7 @@
             [self transitionFromViewController:_currentC toViewController:_petalkNav duration:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
                 
             } completion:^(BOOL finished) {
-                if (finished) {
+//                if (finished) {
                     [_currentC willMoveToParentViewController:nil];
                     [_currentC.view removeFromSuperview];
                     [btn setBackgroundImage:[UIImage imageNamed:@"petalk-sel"] forState:UIControlStateNormal];
@@ -199,7 +203,7 @@
                     UILabel * l2 = (UILabel*)[btn.superview viewWithTag:300];
                     l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
                      _currentC = _petalkNav;
-                }
+//                }
             }];
         }break;
         case 2:{
@@ -209,7 +213,7 @@
             [self transitionFromViewController:_currentC toViewController:_marketNav duration:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
                 
             } completion:^(BOOL finished) {
-                if (finished) {
+//                if (finished) {
                     [_currentC willMoveToParentViewController:nil];
                     [_currentC.view removeFromSuperview];
                     [btn setBackgroundImage:[UIImage imageNamed:@"market-sel"] forState:UIControlStateNormal];
@@ -222,7 +226,7 @@
                     UILabel * l2 = (UILabel*)[btn.superview viewWithTag:300];
                     l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
                      _currentC = _marketNav;
-                }
+//                }
             }];
         }break;
         case 3:{
@@ -232,7 +236,7 @@
             [self transitionFromViewController:_currentC toViewController:_personNav duration:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
                 
             } completion:^(BOOL finished) {
-                if (finished) {
+//                if (finished) {
                     [_currentC willMoveToParentViewController:nil];
                     [_currentC.view removeFromSuperview];
                     [btn setBackgroundImage:[UIImage imageNamed:@"myp-sel"] forState:UIControlStateNormal];
@@ -245,7 +249,7 @@
                     UILabel * l2 = (UILabel*)[btn.superview viewWithTag:200];
                     l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
                     _currentC = _personNav;
-                }
+//                }
             }];
         }break;
         default:
@@ -259,6 +263,7 @@
         return;
     }
     PublishView * view = [[PublishView alloc] init];
+    view.publishox = publishFrameX;
     __weak PublishView * weakView = view;
     [view showWithAction:^(NSInteger index) {
         switch (index) {

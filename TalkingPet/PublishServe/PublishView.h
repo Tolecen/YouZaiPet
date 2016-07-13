@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "TishiNewView.h"
 @interface PublishView : UIView
+@property (nonatomic,assign)float publishox;
 - (void)showWithAction:(void (^)(NSInteger index))action;
 @end
