@@ -57,11 +57,12 @@
     storyB.frame = CGRectMake(CGRectGetMidX([self bounds])-130, frame.size.height, 60, 86);
     petalkB.frame = CGRectMake(CGRectGetMidX([self bounds])-30, frame.size.height, 60, 86);
     pictureB.frame = CGRectMake(CGRectGetMidX([self bounds])+70, frame.size.height, 60, 86);
-    image.frame = CGRectMake(0, 0, 46, 46);
-    image.center = CGPointMake(CGRectGetMidX([self bounds]), frame.size.height-24);
+    image.frame = CGRectMake(self.publishox, frame.size.height-60, 40, 40);
+//    image.center = CGPointMake(CGRectGetMidX([self bounds]), frame.size.height-24);
 }
 - (void)showWithAction:(void (^)(NSInteger index))action
 {
+    image.frame = CGRectMake(self.publishox-1, self.frame.size.height-50-1, 42, 42);
     self.action = action;
     [RootViewController sharedRootViewController].view.userInteractionEnabled = NO;
     self.userInteractionEnabled = NO;

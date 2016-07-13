@@ -18,8 +18,8 @@
 @implementation BlankPageView
 -(void)showWithView:(UIView*)view image:(UIImage*)image buttonImage:(UIImage*)bImage action:(void(^)())action
 {
-    imageView.image = image;
-    [button setImage:bImage forState:UIControlStateNormal];
+//    imageView.image = image;
+//    [button setImage:bImage forState:UIControlStateNormal];
     [button addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
     self.action = action;
     [view addSubview:self];
@@ -30,12 +30,28 @@
 {
     self = [super init];
     if (self) {
+        /*
         imageView = [[UIImageView alloc] init];
         imageView.contentMode = UIViewContentModeCenter;
         [self addSubview:imageView];
+         */
+//        button = [UIButton buttonWithType:UIButtonTypeCustom];
+//        button.frame = CGRectMake(ScreenWidth, 0, button.currentImage.size.width, button.currentImage.size.width);
+//        [button addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:button];
+        
         button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
+        button.frame = CGRectMake((ScreenWidth-100)/2, ScreenHeight/2-70, 100, 30);
+        button.backgroundColor = [UIColor whiteColor];
+        button.layer.cornerRadius = 15;
+        button.layer.borderWidth = 1;
+        button.layer.borderColor = [CommonGreenColor CGColor];
+        button.layer.masksToBounds = YES;
+        [button setTitleColor:CommonGreenColor forState:UIControlStateNormal];
+        [button setTitle:@"立刻登录" forState:UIControlStateNormal];
         [self addSubview:button];
+        button.titleLabel.font = [UIFont systemFontOfSize:15];
+        [button addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
         self.userInteractionEnabled = NO;
     }
     return self;
@@ -43,10 +59,10 @@
 -(void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
-    imageView.frame = CGRectMake(0, 0, frame.size.width, frame.size.width*imageView.image.size.height/imageView.image.size.width);
-    button.frame = CGRectMake(0, 0, button.currentImage.size.width, button.currentImage.size.width);
-    imageView.center = CGPointMake(imageView.center.x, CGRectGetMidY(frame)-50);
-    button.center = CGPointMake(imageView.center.x, CGRectGetMaxY(imageView.frame)+40);
+//    imageView.frame = CGRectMake(0, 0, frame.size.width, frame.size.width*imageView.image.size.height/imageView.image.size.width);
+//    button.frame = CGRectMake(0, 0, button.currentImage.size.width, button.currentImage.size.width);
+//    imageView.center = CGPointMake(imageView.center.x, CGRectGetMidY(frame)-50);
+//    button.center = CGPointMake(imageView.center.x, CGRectGetMaxY(imageView.frame)+40);
 }
 -(void)removeFromSuperview
 {
