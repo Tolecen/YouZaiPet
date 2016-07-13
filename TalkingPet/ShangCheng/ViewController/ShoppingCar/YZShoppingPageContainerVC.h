@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YZShoppingCarHelper.h"
 
 @interface YZShoppingPageContainerVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
 

@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YZShangChengModel.h"
+#import "YZQuansheHeaderView.h"
 
 @interface YZShoppingCarEditCell : UITableViewCell
 
@@ -17,6 +19,8 @@
 @property (nonatomic, weak) UILabel *priceLb;
 
 @property (nonatomic, weak) UILabel *yunfeiLb;
+
+@property (nonatomic, weak) YZQuansheHeaderView *quansheHeaderV;
 
 @property (nonatomic, assign) BOOL selectToBuy;
 

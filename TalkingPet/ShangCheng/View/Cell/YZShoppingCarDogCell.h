@@ -10,4 +10,6 @@
 
 @interface YZShoppingCarDogCell : YZShoppingCarEditCell
 
+@property (nonatomic, strong) YZDogDetailModel *detailModel;
+
 @end

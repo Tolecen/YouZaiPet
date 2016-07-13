@@ -149,3 +149,13 @@
 @interface YZGoodsDetailModel : YZGoodsModel
 
 @end
+
+#pragma mark -- 购物车对象
+
+@interface YZShoppingCarModel : YZShangChengModel
+
+@property (nonatomic, copy) NSString *shoppingCarFlag;
+@property (nonatomic, assign) NSInteger count;
+@property (nonatomic, strong) YZShangChengModel *shoppingCarItem;
+
+@end

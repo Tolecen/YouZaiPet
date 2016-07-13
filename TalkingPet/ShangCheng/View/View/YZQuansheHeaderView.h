@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YZShangChengModel.h"
 
 @interface YZQuansheHeaderView : UIControl
+
+@property (nonatomic, strong) YZQuanSheModel *quanSheModel;
 
 @end

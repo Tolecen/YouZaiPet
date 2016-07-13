@@ -7,13 +7,10 @@
 //
 
 #import "YZShoppingCarEditCell.h"
-#import "YZQuansheHeaderView.h"
 
 @interface YZShoppingCarEditCell()
 
 @property (nonatomic, weak) UIView *containerView;
-
-@property (nonatomic, weak) YZQuansheHeaderView *quansheHeaderV;
 
 @end
 
@@ -85,14 +82,14 @@
         
         UILabel *priceLb = [[UILabel alloc] initWithFrame:CGRectZero];
         priceLb.font = [UIFont systemFontOfSize:14.f];
-        priceLb.textColor = [UIColor redColor];
-        priceLb.text = @"¥ 180,000.00";
+        priceLb.textColor = [UIColor commonPriceColor];
+//        priceLb.text = @"¥ 180,000.00";
         [containerView addSubview:priceLb];
         self.priceLb = priceLb;
         
         UILabel *yunfeiLb = [[UILabel alloc] initWithFrame:CGRectZero];
         yunfeiLb.font = [UIFont systemFontOfSize:12.f];
-        yunfeiLb.textColor = [UIColor grayColor];
+        yunfeiLb.textColor = [UIColor commonGrayColor];
         yunfeiLb.text = @"运费 免运费";
         [containerView addSubview:yunfeiLb];
         self.yunfeiLb = yunfeiLb;

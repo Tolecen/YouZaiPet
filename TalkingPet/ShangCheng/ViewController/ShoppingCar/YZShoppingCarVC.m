@@ -23,6 +23,7 @@
     [super viewDidLoad];
     [self setBackButtonWithTarget:@selector(inner_Pop:)];
     YZShoppingCarPageVC *pageVC = [[YZShoppingCarPageVC alloc] init];
+    pageVC.selectIndex = self.selectedIndex;
     [self addChildViewController:pageVC];
     [self.view addSubview:pageVC.view];
     [pageVC didMoveToParentViewController:self];

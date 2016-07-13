@@ -21,7 +21,7 @@
     titleLb.font = [UIFont systemFontOfSize:14.f];
     titleLb.textColor = [UIColor lightGrayColor];
     titleLb.numberOfLines = 2;
-    titleLb.text = @"英国海洋之星三文鱼配方狗粮五谷天然粮中小型犬12kg小颗粒";
+//    titleLb.text = @"英国海洋之星三文鱼配方狗粮五谷天然粮中小型犬12kg小颗粒";
     [superView addSubview:titleLb];
     self.titleLb = titleLb;
     
@@ -31,6 +31,17 @@
         make.right.mas_equalTo(superView).mas_equalTo(-5);
         make.height.mas_equalTo(ceil(titleLb.font.lineHeight) * 2 + 2);
     }];
+}
+
+- (void)setDetailModel:(YZGoodsDetailModel *)detailModel {
+    if (!detailModel) {
+        return;
+    }
+    _detailModel = detailModel;
+    self.titleLb.text = detailModel.name;
+    [self.thumbImageV setImageWithURL:[NSURL URLWithString:detailModel.thumb] placeholderImage:[UIImage imageNamed:@"dog_goods_placeholder"]];
+    self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:detailModel.sellPrice]];
+    [self setNeedsUpdateConstraints];
 }
 
 @end

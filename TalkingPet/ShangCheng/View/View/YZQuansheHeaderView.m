@@ -31,14 +31,14 @@
         UILabel *titleLb = [[UILabel alloc] init];
         titleLb.font = [UIFont systemFontOfSize:14.f];
         titleLb.textColor = [UIColor blackColor];
-        titleLb.text = @"汉源犬舍";
+//        titleLb.text = @"汉源犬舍";
         [self addSubview:titleLb];
         self.titleLb = titleLb;
         
         UILabel *numberLb = [[UILabel alloc] init];
         numberLb.font = [UIFont systemFontOfSize:12.f];
         numberLb.textColor = [UIColor blackColor];
-        numberLb.text = @"(87499)";
+//        numberLb.text = @"(87499)";
         [self addSubview:numberLb];
         self.numberLb = numberLb;
         
@@ -67,6 +67,16 @@
         }];
     }
     return self;
+}
+
+- (void)setQuanSheModel:(YZQuanSheModel *)quanSheModel {
+    if (!quanSheModel) {
+        return;
+    }
+    _quanSheModel = quanSheModel;
+    self.titleLb.text = quanSheModel.shopName;
+    self.numberLb.text = [NSString stringWithFormat:@"(%lld)", quanSheModel.shopNo];
+    [self setNeedsUpdateConstraints];
 }
 
 @end

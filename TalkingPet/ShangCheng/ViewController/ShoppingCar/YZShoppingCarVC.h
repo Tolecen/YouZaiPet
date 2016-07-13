@@ -10,4 +10,6 @@
 
 @interface YZShoppingCarVC : BaseViewController
 
+@property (nonatomic, assign) int selectedIndex;
+
 @end

@@ -144,3 +144,7 @@
 @implementation YZGoodsDetailModel
 
 @end
+
+@implementation YZShoppingCarModel
+
+@end

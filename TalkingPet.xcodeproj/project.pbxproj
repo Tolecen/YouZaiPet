@@ -107,6 +107,8 @@
 		2EA22D7C1D336ABE0052992C /* YZGoodsDetailCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D7B1D336ABE0052992C /* YZGoodsDetailCollectionHeaderView.m */; };
 		2EA22D7F1D337AEA0052992C /* YZDetailTextCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D7E1D337AEA0052992C /* YZDetailTextCollectionView.m */; };
 		2EA22D821D338F430052992C /* YZDogDetailCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D811D338F430052992C /* YZDogDetailCollectionHeaderView.m */; };
+		2EF82F2B1D35D1DF002A58ED /* YZShangChengShareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF82F2A1D35D1DF002A58ED /* YZShangChengShareHelper.m */; };
+		2EF82F2E1D35D558002A58ED /* YZShoppingCarHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF82F2D1D35D558002A58ED /* YZShoppingCarHelper.m */; };
 		7200B9EB1A8300F0008630D9 /* Sound9.png in Resources */ = {isa = PBXBuildFile; fileRef = 7200B9E01A8300F0008630D9 /* Sound9.png */; };
 		7200B9EC1A8300F0008630D9 /* Sound10.png in Resources */ = {isa = PBXBuildFile; fileRef = 7200B9E11A8300F0008630D9 /* Sound10.png */; };
 		7200B9ED1A8300F0008630D9 /* Sound11.png in Resources */ = {isa = PBXBuildFile; fileRef = 7200B9E21A8300F0008630D9 /* Sound11.png */; };
@@ -1530,6 +1532,10 @@
 		2EA22D7E1D337AEA0052992C /* YZDetailTextCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZDetailTextCollectionView.m; sourceTree = "<group>"; };
 		2EA22D801D338F430052992C /* YZDogDetailCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDogDetailCollectionHeaderView.h; sourceTree = "<group>"; };
 		2EA22D811D338F430052992C /* YZDogDetailCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZDogDetailCollectionHeaderView.m; sourceTree = "<group>"; };
+		2EF82F291D35D1DF002A58ED /* YZShangChengShareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShangChengShareHelper.h; sourceTree = "<group>"; };
+		2EF82F2A1D35D1DF002A58ED /* YZShangChengShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengShareHelper.m; sourceTree = "<group>"; };
+		2EF82F2C1D35D558002A58ED /* YZShoppingCarHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShoppingCarHelper.h; sourceTree = "<group>"; };
+		2EF82F2D1D35D558002A58ED /* YZShoppingCarHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShoppingCarHelper.m; sourceTree = "<group>"; };
 		7200B9E01A8300F0008630D9 /* Sound9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sound9.png; sourceTree = "<group>"; };
 		7200B9E11A8300F0008630D9 /* Sound10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sound10.png; sourceTree = "<group>"; };
 		7200B9E21A8300F0008630D9 /* Sound11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sound11.png; sourceTree = "<group>"; };
@@ -3360,6 +3366,8 @@
 				063E29F41D2128D600C3FD3F /* YZShoppingDogVC.m */,
 				063E29F61D2128E700C3FD3F /* YZShoppingGoodsVC.h */,
 				063E29F71D2128E700C3FD3F /* YZShoppingGoodsVC.m */,
+				2EF82F2C1D35D558002A58ED /* YZShoppingCarHelper.h */,
+				2EF82F2D1D35D558002A58ED /* YZShoppingCarHelper.m */,
 			);
 			path = ShoppingCar;
 			sourceTree = "<group>";
@@ -3414,6 +3422,8 @@
 				0688A2DF1D1BF60D002AA960 /* YZDogDetailVC.m */,
 				2EA22D731D333D810052992C /* YZGoodsDetailVC.h */,
 				2EA22D741D333D810052992C /* YZGoodsDetailVC.m */,
+				2EF82F291D35D1DF002A58ED /* YZShangChengShareHelper.h */,
+				2EF82F2A1D35D1DF002A58ED /* YZShangChengShareHelper.m */,
 				2E2D73391D2E23F9000B7F00 /* YZQuanSheDetailViewController.h */,
 				2E2D733A1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m */,
 				2E0882811D347F7E00D6D4BA /* YZSearchViewController.h */,
@@ -7397,6 +7407,7 @@
 				72831CD3196A3FE200B9CA4C /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				729CB6761A5A60E500BD2303 /* cpu_detect_x86_gcc.cpp in Sources */,
 				97F362D51980B1650023D008 /* TFileManager.m in Sources */,
+				2EF82F2B1D35D1DF002A58ED /* YZShangChengShareHelper.m in Sources */,
 				725A95821A63BC4800E8C8ED /* MarketViewController.m in Sources */,
 				9764DD521B636FFC0065A9D2 /* TishiNewView.m in Sources */,
 				9762286D1AD4C9CA003B9147 /* ShouHuoInfoTableViewCell.m in Sources */,
@@ -7674,6 +7685,7 @@
 				971D3F0D19AED037002E7A74 /* SearchResultTagTableViewCell.m in Sources */,
 				9796E0AF197CB3CF0082A75D /* RNDecryptor.m in Sources */,
 				97712C731B2FC3760034FB72 /* PaySuccessViewController.m in Sources */,
+				2EF82F2E1D35D558002A58ED /* YZShoppingCarHelper.m in Sources */,
 				72831CC6196A3FE200B9CA4C /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				06A5DBC01D2CD1D7002A5159 /* YZShangChengModel.m in Sources */,
 				973F650D1A80957D0026C95C /* CustomBarItem.m in Sources */,

@@ -16,6 +16,9 @@
 #import "YZDetailBottomBar.h"
 #import "NetServer+ShangCheng.h"
 #import "MJRefresh.h"
+#import "YZShangChengShareHelper.h"
+#import "YZShoppingCarHelper.h"
+#import "YZShoppingCarVC.h"
 
 @interface YZDogDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YZDetailBottomBarDelegate>
 
@@ -228,11 +231,17 @@
 #pragma mark -- 
 
 - (void)shareAction {
-    
+    [YZShangChengShareHelper shareWithScene:YZShangChengType_Dog
+                                     target:self
+                                      model:nil
+                                    success:nil
+                                    failure:nil];
 }
 
 - (void)clearPriceAction {
-    
+    YZShoppingCarVC *shoppingCarVC = [[YZShoppingCarVC alloc] init];
+    shoppingCarVC.selectedIndex = 0;
+    [self.navigationController pushViewController:shoppingCarVC animated:YES];
 }
 
 - (void)enterDogHomeAction {
@@ -243,7 +252,11 @@
 }
 
 - (void)addShoppingCarAction {
-    
+    if (!self.detailModel) {
+        return;
+    }
+    [[YZShoppingCarHelper instanceManager] addShoppingCarWithScene:YZShangChengType_Dog
+                                                             model:self.detailModel];
 }
 
 

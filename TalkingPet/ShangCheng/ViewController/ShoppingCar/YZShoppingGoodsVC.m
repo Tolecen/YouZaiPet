@@ -20,8 +20,14 @@
     self.tableView.rowHeight = 150.f;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [YZShoppingCarHelper instanceManager].goodsShangPinCache.count;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     YZShoppingCarGoodsCell *goodsCell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([self registerCellClass])];
+    YZShoppingCarModel *shoppingCarModel = [YZShoppingCarHelper instanceManager].goodsShangPinCache[indexPath.row];
+    goodsCell.detailModel = (YZGoodsDetailModel *)shoppingCarModel.shoppingCarItem;
     return goodsCell;
 }
 
