@@ -10,6 +10,7 @@
 #import "YZShoppingCarPageVC.h"
 #import "YZShoppingCarBottomBar.h"
 #import "YZShoppingCarHelper.h"
+#import "OrderConfirmViewController.h"
 
 @interface YZShoppingCarVC()<YZShoppingCarBottomBarDelegate>
 
@@ -98,7 +99,8 @@
 }
 
 - (void)shoppingCarClearPrice {
-    
+    OrderConfirmViewController *viewC = [[OrderConfirmViewController alloc] init];
+    [self.navigationController pushViewController:viewC animated:YES];
 }
 
 @end
