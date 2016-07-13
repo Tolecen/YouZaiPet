@@ -27,8 +27,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     YZShoppingCarGoodsCell *goodsCell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([self registerCellClass])];
     YZShoppingCarModel *shoppingCarModel = [YZShoppingCarHelper instanceManager].goodsShangPinCache[indexPath.row];
-    goodsCell.detailModel = (YZGoodsDetailModel *)shoppingCarModel.shoppingCarItem;
+    goodsCell.detailModel = shoppingCarModel;
     return goodsCell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    YZShoppingCarModel *shoppingCarModel = [YZShoppingCarHelper instanceManager].goodsShangPinCache[indexPath.row];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [[YZShoppingCarHelper instanceManager] removeShoppingCarItemWithScene:YZShangChengType_Goods
+                                                                        model:shoppingCarModel];
+    }
+    [self.tableView reloadData];
+    if (shoppingCarModel.selected) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kShoppingCarCalcutePriceNotification object:nil];
+    }
 }
 
 @end

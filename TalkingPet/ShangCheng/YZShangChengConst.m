@@ -30,7 +30,7 @@ NSString *const kCacheReferenceHeaderSizeHeightKey  = @"kCacheReferenceHeaderSiz
         self.priceNumberFormatter = [[NSNumberFormatter alloc] init];
         self.priceNumberFormatter.roundingMode = kCFNumberFormatterRoundDown;
         self.priceNumberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-        self.priceNumberFormatter.positivePrefix = @"¥";
+        self.priceNumberFormatter.positivePrefix = @"¥ ";
         self.priceNumberFormatter.maximumFractionDigits = 2;
     }
     return self;

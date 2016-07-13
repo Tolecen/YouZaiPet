@@ -15,6 +15,7 @@
 @end
 
 @implementation YZShoppingCarGoodsCell
+@synthesize detailModel = _detailModel;
 
 - (void)setUpContentViewsWithSuperView:(UIView *)superView {
     UILabel *titleLb = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -33,14 +34,16 @@
     }];
 }
 
-- (void)setDetailModel:(YZGoodsDetailModel *)detailModel {
+- (void)setDetailModel:(YZShoppingCarModel *)detailModel {
     if (!detailModel) {
         return;
     }
     _detailModel = detailModel;
-    self.titleLb.text = detailModel.name;
-    [self.thumbImageV setImageWithURL:[NSURL URLWithString:detailModel.thumb] placeholderImage:[UIImage imageNamed:@"dog_goods_placeholder"]];
-    self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:detailModel.sellPrice]];
+    self.selectBtn.selected = detailModel.selected;
+    YZGoodsDetailModel *goodsModel = (YZGoodsDetailModel *)detailModel.shoppingCarItem;
+    self.titleLb.text = goodsModel.name;
+    [self.thumbImageV setImageWithURL:[NSURL URLWithString:goodsModel.thumb] placeholderImage:[UIImage imageNamed:@"dog_goods_placeholder"]];
+    self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:goodsModel.sellPrice]];
     [self setNeedsUpdateConstraints];
 }
 

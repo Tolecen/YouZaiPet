@@ -7,6 +7,7 @@
 //
 
 #import "YZShoppingCarEditCell.h"
+#import "YZShoppingCarHelper.h"
 
 @interface YZShoppingCarEditCell()
 
@@ -114,6 +115,9 @@
 
 - (void)inner_Select:(UIButton *)sender {
     sender.selected = !sender.selected;
+    self.detailModel.selected = sender.selected;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kShoppingCarChangeItemSelectStateNotification
+                                                        object:self.detailModel];
 }
 
 @end

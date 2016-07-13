@@ -20,6 +20,7 @@
 @end
 
 @implementation YZShoppingCarDogCell
+@synthesize detailModel = _detailModel;
 
 - (void)setUpContentViewsWithSuperView:(UIView *)superView {
     UILabel *nameLb = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -78,25 +79,26 @@
     }];
 }
 
-- (void)setDetailModel:(YZDogDetailModel *)detailModel {
+- (void)setDetailModel:(YZShoppingCarModel *)detailModel {
     if (!detailModel) {
         return;
     }
     _detailModel = detailModel;
-    [self.thumbImageV setImageWithURL:[NSURL URLWithString:detailModel.thumb]
+    self.selectBtn.selected = detailModel.selected;
+    YZDogDetailModel *dogModel = (YZDogDetailModel *)detailModel.shoppingCarItem;
+    [self.thumbImageV setImageWithURL:[NSURL URLWithString:dogModel.thumb]
                      placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
-    
-    self.nameLb.text = detailModel.name;
-    self.sexImageV.image = (detailModel.sex == YZDogSex_Female) ? [UIImage imageNamed:@"female_icon"] : [UIImage imageNamed:@"male_icon"];
-    self.birthdayLb.text = detailModel.birthdayString;
-    self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:detailModel.sellPrice]];
-    NSString *daysNumberString = [NSString stringWithFormat:@"降临地球 %ld 天", (unsigned long)detailModel.birtydayDays];
+    self.nameLb.text = dogModel.name;
+    self.sexImageV.image = (dogModel.sex == YZDogSex_Female) ? [UIImage imageNamed:@"female_icon"] : [UIImage imageNamed:@"male_icon"];
+    self.birthdayLb.text = dogModel.birthdayString;
+    self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:dogModel.sellPrice]];
+    NSString *daysNumberString = [NSString stringWithFormat:@"降临地球 %ld 天", (unsigned long)dogModel.birtydayDays];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:daysNumberString];
     [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.f], NSForegroundColorAttributeName: self.daysNumberLb.textColor} range:NSMakeRange(0, 4)];
     [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.f], NSForegroundColorAttributeName: CommonGreenColor} range:NSMakeRange(4, daysNumberString.length - 5)];
     [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.f], NSForegroundColorAttributeName: self.daysNumberLb.textColor} range:NSMakeRange(daysNumberString.length - 1, 1)];
     self.daysNumberLb.attributedText = attr;
-    self.quansheHeaderV.quanSheModel = detailModel.shop;
+    self.quansheHeaderV.quanSheModel = dogModel.shop;
     [self setNeedsUpdateConstraints];
 }
 

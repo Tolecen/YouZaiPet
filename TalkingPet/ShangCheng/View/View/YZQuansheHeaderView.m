@@ -18,6 +18,10 @@
 
 @implementation YZQuansheHeaderView
 
+- (void)dealloc {
+    _quanSheModel = nil;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
@@ -76,6 +80,7 @@
     _quanSheModel = quanSheModel;
     self.titleLb.text = quanSheModel.shopName;
     self.numberLb.text = [NSString stringWithFormat:@"(%lld)", quanSheModel.shopNo];
+    [self.avatar setImageWithURL:[NSURL URLWithString:quanSheModel.thumb] placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
     [self setNeedsUpdateConstraints];
 }
 

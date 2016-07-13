@@ -22,7 +22,7 @@
 
 @property (nonatomic, weak) YZQuansheHeaderView *quansheHeaderV;
 
-@property (nonatomic, assign) BOOL selectToBuy;
+@property (nonatomic, strong) YZShoppingCarModel *detailModel;
 
 - (void)setUpContentViewsWithSuperView:(UIView *)superView;
 

@@ -14,18 +14,28 @@
 
 @implementation YZShoppingPageContainerVC
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (Class)registerCellClass {
     return NULL;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(inner_Refresh:)
+                                                 name:kShoppingCarSeletedAllBtnChangeStateNotification
+                                               object:nil];
+    
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero];
     tableView.delegate = self;
     tableView.dataSource = self;
     [tableView registerClass:[self registerCellClass] forCellReuseIdentifier:NSStringFromClass([self registerCellClass])];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.tableFooterView = [[UIView alloc] init];
+    tableView.backgroundColor = [UIColor commonGrayColor];
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
@@ -59,8 +69,10 @@
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+#pragma mark -- Notification
+
+- (void)inner_Refresh:(UIButton *)sender {
+    [self.tableView reloadData];
 }
 
 @end

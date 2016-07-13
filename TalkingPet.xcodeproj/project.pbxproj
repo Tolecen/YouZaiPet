@@ -10,7 +10,6 @@
 		063E29A81D20BB5600C3FD3F /* YZDetailBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 063E29A71D20BB5600C3FD3F /* YZDetailBottomBar.m */; };
 		063E29AB1D20BBDB00C3FD3F /* YZShangChengConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 063E29AA1D20BBDB00C3FD3F /* YZShangChengConst.m */; };
 		063E29AE1D20C1DC00C3FD3F /* UIButton+VerticalTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 063E29AD1D20C1DC00C3FD3F /* UIButton+VerticalTitle.m */; };
-		063E29CC1D211F9800C3FD3F /* YZClearPriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 063E29CB1D211F9800C3FD3F /* YZClearPriceView.m */; };
 		063E29DA1D2122A000C3FD3F /* WMFooldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 063E29D01D2122A000C3FD3F /* WMFooldView.m */; };
 		063E29DB1D2122A000C3FD3F /* WMMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 063E29D21D2122A000C3FD3F /* WMMenuItem.m */; };
 		063E29DC1D2122A000C3FD3F /* WMMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 063E29D41D2122A000C3FD3F /* WMMenuView.m */; };
@@ -109,6 +108,7 @@
 		2EA22D821D338F430052992C /* YZDogDetailCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D811D338F430052992C /* YZDogDetailCollectionHeaderView.m */; };
 		2EF82F2B1D35D1DF002A58ED /* YZShangChengShareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF82F2A1D35D1DF002A58ED /* YZShangChengShareHelper.m */; };
 		2EF82F2E1D35D558002A58ED /* YZShoppingCarHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF82F2D1D35D558002A58ED /* YZShoppingCarHelper.m */; };
+		2EF82F311D360FA9002A58ED /* YZShoppingCarBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF82F301D360FA9002A58ED /* YZShoppingCarBottomBar.m */; };
 		7200B9EB1A8300F0008630D9 /* Sound9.png in Resources */ = {isa = PBXBuildFile; fileRef = 7200B9E01A8300F0008630D9 /* Sound9.png */; };
 		7200B9EC1A8300F0008630D9 /* Sound10.png in Resources */ = {isa = PBXBuildFile; fileRef = 7200B9E11A8300F0008630D9 /* Sound10.png */; };
 		7200B9ED1A8300F0008630D9 /* Sound11.png in Resources */ = {isa = PBXBuildFile; fileRef = 7200B9E21A8300F0008630D9 /* Sound11.png */; };
@@ -1359,8 +1359,6 @@
 		063E29AA1D20BBDB00C3FD3F /* YZShangChengConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengConst.m; sourceTree = "<group>"; };
 		063E29AC1D20C1DC00C3FD3F /* UIButton+VerticalTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+VerticalTitle.h"; sourceTree = "<group>"; };
 		063E29AD1D20C1DC00C3FD3F /* UIButton+VerticalTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+VerticalTitle.m"; sourceTree = "<group>"; };
-		063E29CA1D211F9800C3FD3F /* YZClearPriceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZClearPriceView.h; sourceTree = "<group>"; };
-		063E29CB1D211F9800C3FD3F /* YZClearPriceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZClearPriceView.m; sourceTree = "<group>"; };
 		063E29CF1D2122A000C3FD3F /* WMFooldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMFooldView.h; sourceTree = "<group>"; };
 		063E29D01D2122A000C3FD3F /* WMFooldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMFooldView.m; sourceTree = "<group>"; };
 		063E29D11D2122A000C3FD3F /* WMMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMMenuItem.h; sourceTree = "<group>"; };
@@ -1536,6 +1534,8 @@
 		2EF82F2A1D35D1DF002A58ED /* YZShangChengShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengShareHelper.m; sourceTree = "<group>"; };
 		2EF82F2C1D35D558002A58ED /* YZShoppingCarHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShoppingCarHelper.h; sourceTree = "<group>"; };
 		2EF82F2D1D35D558002A58ED /* YZShoppingCarHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShoppingCarHelper.m; sourceTree = "<group>"; };
+		2EF82F2F1D360FA9002A58ED /* YZShoppingCarBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShoppingCarBottomBar.h; sourceTree = "<group>"; };
+		2EF82F301D360FA9002A58ED /* YZShoppingCarBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShoppingCarBottomBar.m; sourceTree = "<group>"; };
 		7200B9E01A8300F0008630D9 /* Sound9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sound9.png; sourceTree = "<group>"; };
 		7200B9E11A8300F0008630D9 /* Sound10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sound10.png; sourceTree = "<group>"; };
 		7200B9E21A8300F0008630D9 /* Sound11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sound11.png; sourceTree = "<group>"; };
@@ -3356,6 +3356,8 @@
 		063E29E91D21288300C3FD3F /* ShoppingCar */ = {
 			isa = PBXGroup;
 			children = (
+				2EF82F2F1D360FA9002A58ED /* YZShoppingCarBottomBar.h */,
+				2EF82F301D360FA9002A58ED /* YZShoppingCarBottomBar.m */,
 				063E29EA1D21288300C3FD3F /* YZShoppingCarPageVC.h */,
 				063E29EB1D21288300C3FD3F /* YZShoppingCarPageVC.m */,
 				063E29EC1D21288300C3FD3F /* YZShoppingCarVC.h */,
@@ -3499,8 +3501,6 @@
 				06E4A9591D1CD1FA00BBC617 /* DropMenu */,
 				063E29A61D20BB5600C3FD3F /* YZDetailBottomBar.h */,
 				063E29A71D20BB5600C3FD3F /* YZDetailBottomBar.m */,
-				063E29CA1D211F9800C3FD3F /* YZClearPriceView.h */,
-				063E29CB1D211F9800C3FD3F /* YZClearPriceView.m */,
 				063E29AC1D20C1DC00C3FD3F /* UIButton+VerticalTitle.h */,
 				063E29AD1D20C1DC00C3FD3F /* UIButton+VerticalTitle.m */,
 				0694A9831D22181000BEC263 /* YZQuansheHeaderView.h */,
@@ -7596,7 +7596,6 @@
 				066B84B81D1BBF52003AAD64 /* MASConstraintMaker.m in Sources */,
 				97F930B519790B850026BCFA /* SearchViewController.m in Sources */,
 				724FD34D1B25284A00D215A3 /* MonthBoxViewController.m in Sources */,
-				063E29CC1D211F9800C3FD3F /* YZClearPriceView.m in Sources */,
 				72831C67196A34E700B9CA4C /* TopViewController.m in Sources */,
 				97F7D3FA197E3AB7008D458A /* NSString+MD5Addition.m in Sources */,
 				72831C44196A34B700B9CA4C /* AppDelegate.m in Sources */,
@@ -7681,6 +7680,7 @@
 				727A33151A3E7E440066882A /* PetEntity.m in Sources */,
 				974203B71A5B81540064BB4F /* ChatMsg.m in Sources */,
 				72DDF34B1B03391E00A59A66 /* HotViewController.m in Sources */,
+				2EF82F311D360FA9002A58ED /* YZShoppingCarBottomBar.m in Sources */,
 				066B84BC1D1BBF52003AAD64 /* NSArray+MASAdditions.m in Sources */,
 				971D3F0D19AED037002E7A74 /* SearchResultTagTableViewCell.m in Sources */,
 				9796E0AF197CB3CF0082A75D /* RNDecryptor.m in Sources */,

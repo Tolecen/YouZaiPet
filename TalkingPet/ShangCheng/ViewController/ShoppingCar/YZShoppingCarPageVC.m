@@ -9,7 +9,6 @@
 #import "YZShoppingCarPageVC.h"
 #import "YZShoppingDogVC.h"
 #import "YZShoppingGoodsVC.h"
-#import "YZClearPriceView.h"
 
 @interface YZShoppingCarPageVC()
 

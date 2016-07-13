@@ -11,12 +11,17 @@
 NSString *const kShangPinkey    = @"kShangPinkey";
 NSString *const kItemNumberkey  = @"kItemNumberkey";
 
+NSString *const kShoppingCarSeletedAllBtnChangeStateNotification = @"kShoppingCarSeletedAllBtnChangeStateNotification";
+NSString *const kShoppingCarChangeItemSelectStateNotification = @"kShoppingCarChangeItemSelectStateNotification";
+NSString *const kShoppingCarCalcutePriceNotification  = @"kShoppingCarCalcutePriceNotification";
+
 @interface YZShoppingCarHelper()
 
 @property (nonatomic, strong, readwrite) NSMutableArray *dogShangPinCache;
 @property (nonatomic, strong, readwrite) NSMutableArray *goodsShangPinCache;
 
 @property (nonatomic, strong) NSMutableArray *shoppingCarContainsIds;
+@property (nonatomic, assign, readwrite) long long totalPrice;
 
 @end
 
@@ -56,12 +61,12 @@ NSString *const kItemNumberkey  = @"kItemNumberkey";
         }
         BOOL checkContains = [self inner_CheckShoppingCarContainsItem:dogModel.dogId];
         if (checkContains) {
-            [self.dogShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([shoppingCarModel.shoppingCarFlag isEqualToString:dogModel.dogId]) {
-                    shoppingCarModel.count += 1;
-                    *stop = YES;
-                }
-            }];
+//            [self.dogShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
+//                if ([shoppingCarModel.shoppingCarFlag isEqualToString:dogModel.dogId]) {
+//                    shoppingCarModel.count += 1;
+//                    *stop = YES;
+//                }
+//            }];
         } else {
             YZShoppingCarModel *shoppingCarModel = [[YZShoppingCarModel alloc] init];
             shoppingCarModel.shoppingCarFlag = dogModel.dogId;
@@ -77,12 +82,12 @@ NSString *const kItemNumberkey  = @"kItemNumberkey";
         }
         BOOL checkContains = [self inner_CheckShoppingCarContainsItem:goodsModel.goodsId];
         if (checkContains) {
-            [self.goodsShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([shoppingCarModel.shoppingCarFlag isEqualToString:goodsModel.goodsId]) {
-                    shoppingCarModel.count += 1;
-                    *stop = YES;
-                }
-            }];
+//            [self.goodsShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
+//                if ([shoppingCarModel.shoppingCarFlag isEqualToString:goodsModel.goodsId]) {
+//                    shoppingCarModel.count += 1;
+//                    *stop = YES;
+//                }
+//            }];
         } else {
             YZShoppingCarModel *shoppingCarModel = [[YZShoppingCarModel alloc] init];
             shoppingCarModel.shoppingCarFlag = goodsModel.goodsId;
@@ -94,9 +99,85 @@ NSString *const kItemNumberkey  = @"kItemNumberkey";
     }
 }
 
+- (void)updateShoppingCarGoodsCountWithModel:(YZShangChengModel *)model {
+    
+}
+
+- (void)removeShoppingCarItemWithScene:(YZShangChengType)scene model:(YZShangChengModel *)model {
+    if (scene == YZShangChengType_Dog) {
+        [self.dogShangPinCache removeObject:model];
+    } else if (scene == YZShangChengType_Goods) {
+        [self.goodsShangPinCache removeObject:model];
+    }
+    YZShoppingCarModel *shoppingCarModel = (YZShoppingCarModel *)model;
+    [self.shoppingCarContainsIds removeObject:shoppingCarModel.shoppingCarFlag];
+}
+
+- (void)shoppingCarSelectedAllWithSelectedState:(BOOL)selected {
+    [self.dogShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
+        shoppingCarModel.selected = selected;
+    }];
+    
+    [self.goodsShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
+        shoppingCarModel.selected = selected;
+    }];
+}
+
+- (BOOL)shoppingCarCheckAllSelected {
+    if (self.dogShangPinCache.count == 0 &&
+        self.goodsShangPinCache.count == 0) {
+        return NO;
+    }
+    BOOL __block selectAllDog = YES;
+    BOOL __block selectAllGoods = YES;
+    [self.dogShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (!shoppingCarModel.selected) {
+            selectAllDog = NO;
+            *stop = YES;
+        }
+    }];
+    if (!selectAllDog) {
+        return NO;
+    }
+    [self.goodsShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (!shoppingCarModel.selected) {
+            selectAllGoods = NO;
+            *stop = YES;
+        }
+    }];
+    if (!selectAllGoods) {
+        return NO;
+    }
+    return YES;
+}
+
+- (long long)calcuteShoppingCarTotalPrice {
+    long long __block __totalPrice = 0;
+    [self.dogShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (shoppingCarModel.selected) {
+            YZDogDetailModel *detailModel = (YZDogDetailModel *)shoppingCarModel.shoppingCarItem;
+            __totalPrice += detailModel.sellPrice;
+        }
+    }];
+    
+    [self.goodsShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (shoppingCarModel.selected) {
+            YZGoodsDetailModel *detailModel = (YZGoodsDetailModel *)shoppingCarModel.shoppingCarItem;
+            __totalPrice += (detailModel.sellPrice * shoppingCarModel.count);
+        }
+    }];
+    return __totalPrice;
+}
+
 - (void)clearShoppingCar {
     [self.dogShangPinCache removeAllObjects];
     [self.goodsShangPinCache removeAllObjects];
+    [self.shoppingCarContainsIds removeAllObjects];
+    self.totalPrice = 0;
+}
+
+- (long long)totalPrice {
+    return [self calcuteShoppingCarTotalPrice];
 }
 
 @end
