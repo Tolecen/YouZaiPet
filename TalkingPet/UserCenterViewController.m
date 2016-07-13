@@ -23,6 +23,7 @@
 #import "AddressManageViewController.h"
 #import "SetViewController.h"
 #import "SectionMSgViewController.h"
+#import "YZShoppingCarVC.h"
 
 @interface UserCenterCell : UITableViewCell
 @property (nonatomic,retain)UIImageView * imageV;
@@ -600,9 +601,7 @@
 {
     switch (index) {
         case 0:{
-            MyGradeViewController * myGradeVC = [[MyGradeViewController alloc] init];
-            myGradeVC.title = @"我的等级";
-            [self.navigationController pushViewController:myGradeVC animated:YES];
+            [self toShoppingCarVC];
         }break;
         case 1:{
             AddressManageViewController * sv = [[AddressManageViewController alloc] init];
@@ -830,6 +829,12 @@
 {
     SectionMSgViewController * secmsg = [[SectionMSgViewController alloc] init];
     [self.navigationController pushViewController:secmsg animated:YES];
+}
+-(void)toShoppingCarVC
+{
+    YZShoppingCarVC *shoppingCarVC = [[YZShoppingCarVC alloc] init];
+    shoppingCarVC.selectedIndex = 0;
+    [self.navigationController pushViewController:shoppingCarVC animated:YES];
 }
 -(void)moreBtnClicked
 {
