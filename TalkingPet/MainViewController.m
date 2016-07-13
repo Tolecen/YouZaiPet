@@ -14,7 +14,7 @@
 #import "EGOImageView.h"
 #import "PublishServer.h"
 #import "SquareNewViewController.h"
-
+#import "SearchViewController.h"
 @interface MainViewController ()<UIScrollViewDelegate>
 {
     UIButton * hotB;
@@ -51,19 +51,24 @@
     [super viewDidLoad];
     self.view.frame = self.parentViewController.view.bounds;
     // Do any additional setup after loading the view.
+    
+    UIImage *image = [UIImage imageNamed:@"sousuo@2x"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *rightMoreItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toSearchPage)];
+    self.navigationItem.rightBarButtonItem = rightMoreItem;
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:({
 //        UIButton*userB = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [userB setImage:[UIImage imageNamed:@"user"] forState:UIControlStateNormal];
+//        [userB setImage:[UIImage imageNamed:@"sousuo-ico2"] forState:UIControlStateNormal];
 //        userB.frame = CGRectMake(0.0, 0.0, 38, 38);
-//        petHeadView = [[EGOImageView alloc] initWithFrame:CGRectMake(0, 0, 27, 27)];
-//        petHeadView.center = CGPointMake(CGRectGetMidX(userB.bounds), CGRectGetMidY(userB.bounds));
-//        petHeadView.layer.cornerRadius = 13.5;
-//        petHeadView.layer.masksToBounds = YES;
-//        [userB addSubview:petHeadView];
-//        petHeadView.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
+////        petHeadView = [[EGOImageView alloc] initWithFrame:CGRectMake(0, 0, 27, 27)];
+////        petHeadView.center = CGPointMake(CGRectGetMidX(userB.bounds), CGRectGetMidY(userB.bounds));
+////        petHeadView.layer.cornerRadius = 13.5;
+////        petHeadView.layer.masksToBounds = YES;
+////        [userB addSubview:petHeadView];
+////        petHeadView.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
 //        if ([[UIDevice currentDevice].systemVersion integerValue]>=7) {
 //            userB.imageEdgeInsets = UIEdgeInsetsMake(0, 12, 0, -12);
-//            petHeadView.frame = CGRectOffset(petHeadView.frame, 12, 0);
+////            petHeadView.frame = CGRectOffset(petHeadView.frame, 12, 0);
 //        }
 //        [userB addTarget:self action:@selector(showUserSide) forControlEvents:UIControlEventTouchUpInside];
 //        userB;
@@ -88,21 +93,21 @@
     scrollBG.image = [UIImage imageNamed:@"shouye-zhishiqi@2x"];
     [segmentIV addSubview:scrollBG];
     hotB = [UIButton buttonWithType:UIButtonTypeCustom];
-    hotB.frame = CGRectMake(0, 2, 63, 28);
+    hotB.frame = CGRectMake(0, 4, 63, 28);
     hotB.titleLabel.font = [UIFont systemFontOfSize:16];
     [hotB setTitle:@"热门" forState:UIControlStateNormal];
     [hotB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [hotB addTarget:self action:@selector(scrollBackScrollView:) forControlEvents:UIControlEventTouchUpInside];
     [segmentIV addSubview:hotB];
     squareB = [UIButton buttonWithType:UIButtonTypeCustom];
-    squareB.frame = CGRectMake(65.5, 2, 63, 28);
+    squareB.frame = CGRectMake(65.5, 4, 63, 28);
     squareB.titleLabel.font = [UIFont systemFontOfSize:15];
     [squareB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
     [squareB setTitle:@"广场" forState:UIControlStateNormal];
     [squareB addTarget:self action:@selector(scrollBackScrollView:) forControlEvents:UIControlEventTouchUpInside];
     [segmentIV addSubview:squareB];
     careB = [UIButton buttonWithType:UIButtonTypeCustom];
-    careB.frame = CGRectMake(131, 2, 63, 28);
+    careB.frame = CGRectMake(131, 4, 63, 28);
     careB.titleLabel.font = [UIFont systemFontOfSize:15];
     [careB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
     [careB setTitle:@"关注" forState:UIControlStateNormal];
@@ -346,6 +351,14 @@
             careB.titleLabel.font = [UIFont systemFontOfSize:16];
         }
     }
+}
+
+-(void)toSearchPage
+{
+    SearchViewController * searchVC = [[SearchViewController alloc] init];
+    UINavigationController *navigationController = [RootViewController sharedRootViewController].topVC.currentC;
+    [navigationController pushViewController:searchVC animated:NO];
+    [[RootViewController sharedRootViewController].sideMenu hideMenuViewController];
 }
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
