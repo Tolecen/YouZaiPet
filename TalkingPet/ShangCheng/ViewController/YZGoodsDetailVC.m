@@ -113,7 +113,7 @@
 - (void)inner_GetGoodsList {
     __weak __typeof(self) weakSelf = self;
     [NetServer searchGoodsListWithKeyword:self.goodsName
-                                pageIndex:0
+                                pageIndex:1
                                   success:^(NSArray *items, NSInteger nextPageIndex) {
                                       weakSelf.pageIndex = nextPageIndex;
                                       weakSelf.items = items;

@@ -169,7 +169,7 @@ NSString *const TypeFilterKey       = @"TypeFilterKey";
                          sex:self.sexFilter
                          age:self.ageRangeFilter
                        price:self.valueRangeFilter
-                   pageIndex:0
+                   pageIndex:1
                      refresh:YES];
 }
 

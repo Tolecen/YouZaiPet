@@ -109,7 +109,7 @@
 }
 
 - (void)inner_GetDogListWithLoadMore:(BOOL)loadMore {
-    NSInteger pageIndex = loadMore ? self.pageIndex : 0;
+    NSInteger pageIndex = loadMore ? self.pageIndex : 1;
     WS(weakSelf);
     [NetServer searchDogListWithType:self.dogModel.productType.dogTypeId
                              keyword:nil
