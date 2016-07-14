@@ -85,6 +85,10 @@
 }
 
 - (void)inner_ShoppingCarCalcutePrice:(NSNotification *)notification {
+    if ([YZShoppingCarHelper instanceManager].dogShangPinCache.count == 0 &&
+        [YZShoppingCarHelper instanceManager].goodsShangPinCache.count == 0) {
+        [self.bottomBar changeSelectBtnState:NO];
+    }
     [self.bottomBar resetTotalPrice:[YZShoppingCarHelper instanceManager].totalPrice];
 }
 

@@ -157,7 +157,7 @@
 }
 
 - (void)inner_SearchDogListWithKeyword:(NSString *)keyword loadMore:(BOOL)loadMore {
-    NSInteger pageIndex = loadMore ? self.pageIndex : 1;
+    NSInteger pageIndex = loadMore ? self.pageIndex : 0;
     WS(weakSelf);
     [self.collectionView footerEndRefreshing];
     [self.collectionView headerEndRefreshing];
@@ -191,7 +191,7 @@
     [self.collectionView footerEndRefreshing];
     [self.collectionView headerEndRefreshing];
     self.quansheKeyword = keyword;
-    NSInteger pageIndex = loadMore ? self.pageIndex : 1;
+    NSInteger pageIndex = loadMore ? self.pageIndex : 0;
     WS(weakSelf);
     [NetServer searchQuanSheListWithShopName:keyword
                                    pageIndex:pageIndex

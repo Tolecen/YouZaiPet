@@ -99,7 +99,7 @@
 }
 
 - (void)inner_GetQuanSheDogListWithLoadMore:(BOOL)loadMore {
-    NSInteger pageIndex = loadMore ? self.pageIndex : 1;
+    NSInteger pageIndex = loadMore ? self.pageIndex : 0;
     WS(weakSelf);
     [NetServer searchDogListWithType:nil
                              keyword:nil

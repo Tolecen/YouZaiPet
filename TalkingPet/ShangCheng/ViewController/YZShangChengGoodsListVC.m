@@ -76,7 +76,7 @@
 #pragma mark -- Refresh
 
 - (void)inner_Refresh:(id)sender {
-    [self inner_PostWithPageIndex:1 refresh:YES];
+    [self inner_PostWithPageIndex:0 refresh:YES];
 }
 
 - (void)inner_LoadMore:(id)sender {
