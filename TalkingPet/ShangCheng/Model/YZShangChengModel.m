@@ -148,3 +148,11 @@
 @implementation YZShoppingCarModel
 
 @end
+
+@implementation YZShoppingCarDogModel
+
+@end
+
+@implementation YZShoppingCarGoodsModel
+
+@end

@@ -156,7 +156,18 @@
 
 @property (nonatomic, copy) NSString *shoppingCarFlag;
 @property (nonatomic, assign) NSInteger count;
-@property (nonatomic, strong) YZShangChengModel *shoppingCarItem;
 @property (nonatomic, assign) BOOL selected;
+
+@end
+
+@interface YZShoppingCarDogModel : YZShoppingCarModel
+
+@property (nonatomic, strong) YZDogModel *shoppingCarItem;
+
+@end
+
+@interface YZShoppingCarGoodsModel : YZShoppingCarModel
+
+@property (nonatomic, strong) YZGoodsDetailModel *shoppingCarItem;
 
 @end

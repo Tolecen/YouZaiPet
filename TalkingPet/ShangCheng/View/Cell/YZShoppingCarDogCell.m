@@ -85,7 +85,7 @@
     }
     _detailModel = detailModel;
     self.selectBtn.selected = detailModel.selected;
-    YZDogDetailModel *dogModel = (YZDogDetailModel *)detailModel.shoppingCarItem;
+    YZDogModel *dogModel = [(YZShoppingCarDogModel *)detailModel shoppingCarItem];
     [self.thumbImageV setImageWithURL:[NSURL URLWithString:dogModel.thumb]
                      placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
     self.nameLb.text = dogModel.name;

@@ -109,7 +109,7 @@
 }
 
 - (void)inner_GetDogListWithLoadMore:(BOOL)loadMore {
-    NSInteger pageIndex = loadMore ? self.pageIndex : 1;
+    NSInteger pageIndex = loadMore ? self.pageIndex : 1 ;
     WS(weakSelf);
     [NetServer searchDogListWithType:self.dogModel.productType.dogTypeId
                              keyword:nil
@@ -252,11 +252,11 @@
 }
 
 - (void)addShoppingCarAction {
-    if (!self.detailModel) {
+    if (!self.dogModel) {
         return;
     }
     [[YZShoppingCarHelper instanceManager] addShoppingCarWithScene:YZShangChengType_Dog
-                                                             model:self.detailModel];
+                                                             model:self.dogModel];
 }
 
 

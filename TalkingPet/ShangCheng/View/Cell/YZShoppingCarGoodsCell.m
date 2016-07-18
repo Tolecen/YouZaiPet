@@ -40,7 +40,7 @@
     }
     _detailModel = detailModel;
     self.selectBtn.selected = detailModel.selected;
-    YZGoodsDetailModel *goodsModel = (YZGoodsDetailModel *)detailModel.shoppingCarItem;
+    YZGoodsDetailModel *goodsModel = [(YZShoppingCarGoodsModel *)detailModel shoppingCarItem];
     self.titleLb.text = goodsModel.name;
     [self.thumbImageV setImageWithURL:[NSURL URLWithString:goodsModel.thumb] placeholderImage:[UIImage imageNamed:@"dog_goods_placeholder"]];
     self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:goodsModel.sellPrice]];
