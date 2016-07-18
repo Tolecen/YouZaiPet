@@ -12,10 +12,25 @@
 
 @property (nonatomic, weak) UILabel *titleLb;
 
+@property (nonatomic, weak) UIButton *minusBtn;
+
+@property (nonatomic, weak) UIButton *plusBtn;
+
+@property (nonatomic, weak) UITextField *textField;
+
 @end
 
 @implementation YZShoppingCarGoodsCell
 @synthesize detailModel = _detailModel;
+
+- (UIButton *)inner_CreateBtnWithNormalImage:(NSString *)normal disableImage:(NSString *)disable {
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:normal] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:disable] forState:UIControlStateDisabled];
+    [btn sizeToFit];
+    [btn addTarget:self action:@selector(inner_MinusOrAdd:) forControlEvents:UIControlEventTouchUpInside];
+    return btn;
+}
 
 - (void)setUpContentViewsWithSuperView:(UIView *)superView {
     UILabel *titleLb = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -32,6 +47,56 @@
         make.right.mas_equalTo(superView).mas_equalTo(-5);
         make.height.mas_equalTo(ceil(titleLb.font.lineHeight) * 2 + 2);
     }];
+    
+    [self.yunfeiLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.thumbImageV.mas_right).mas_offset(5);
+        make.width.mas_equalTo(60);
+        make.bottom.mas_equalTo(self.priceLb);
+    }];
+    
+    UIButton *minusBtn = [self inner_CreateBtnWithNormalImage:@"product_detail_sub_normal"
+                                                 disableImage:@"product_detail_sub_no"];
+    minusBtn.enabled = NO;
+    [superView addSubview:minusBtn];
+    self.minusBtn = minusBtn;
+    
+    UIButton *plusBtn = [self inner_CreateBtnWithNormalImage:@"product_detail_add_normal"
+                                                disableImage:@"product_detail_add_no"];
+    [superView addSubview:plusBtn];
+    self.plusBtn = plusBtn;
+    
+    UITextField *textField = [[UITextField alloc] init];
+    textField.textAlignment = NSTextAlignmentCenter;
+    textField.keyboardType = UIKeyboardTypeNumberPad;
+    textField.clipsToBounds = YES;
+    textField.layer.borderColor = [[UIColor colorWithHexCode:@"dddddd"] CGColor];
+    textField.layer.borderWidth = 0.5;
+    textField.textColor = [UIColor colorWithHexCode:@"333333"];
+    textField.font = [UIFont systemFontOfSize:12];
+    textField.backgroundColor = [UIColor whiteColor];
+    [superView addSubview:textField];
+    self.textField = textField;
+    
+    [minusBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(titleLb.mas_bottom).mas_offset(10);
+        make.left.mas_equalTo(self.thumbImageV.mas_right).mas_equalTo(5);
+        make.width.mas_equalTo(CGRectGetWidth(minusBtn.frame));
+        make.height.mas_equalTo(CGRectGetHeight(minusBtn.frame));
+    }];
+    
+    [textField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(titleLb.mas_bottom).mas_offset(10);
+        make.left.mas_equalTo(minusBtn.mas_right).mas_equalTo(0);
+        make.width.mas_equalTo(30);
+        make.height.mas_equalTo(CGRectGetHeight(minusBtn.frame));
+    }];
+    
+    [plusBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(titleLb.mas_bottom).mas_offset(10);
+        make.left.mas_equalTo(textField.mas_right).mas_equalTo(0);
+        make.width.mas_equalTo(CGRectGetWidth(minusBtn.frame));
+        make.height.mas_equalTo(CGRectGetHeight(minusBtn.frame));
+    }];
 }
 
 - (void)setDetailModel:(YZShoppingCarModel *)detailModel {
@@ -40,11 +105,25 @@
     }
     _detailModel = detailModel;
     self.selectBtn.selected = detailModel.selected;
-    YZGoodsDetailModel *goodsModel = [(YZShoppingCarGoodsModel *)detailModel shoppingCarItem];
+    YZShoppingCarGoodsModel *goodsModel = (YZShoppingCarGoodsModel *)detailModel;
     self.titleLb.text = goodsModel.name;
     [self.thumbImageV setImageWithURL:[NSURL URLWithString:goodsModel.thumb] placeholderImage:[UIImage imageNamed:@"dog_goods_placeholder"]];
     self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:goodsModel.sellPrice]];
+    self.textField.text = [NSString stringWithFormat:@"%ld", (long)detailModel.count];
+    if (detailModel.count > 1) {
+        self.minusBtn.enabled = YES;
+    } else {
+        self.minusBtn.enabled = NO;
+    }
     [self setNeedsUpdateConstraints];
+}
+
+- (void)inner_MinusOrAdd:(UIButton *)sender {
+    if ([sender isEqual:self.minusBtn]) {
+        
+    } else {
+        
+    }
 }
 
 @end

@@ -77,6 +77,12 @@
         make.left.mas_equalTo(birthdayImageV.mas_right).mas_offset(5);
         make.centerY.mas_equalTo(birthdayImageV.mas_centerY).mas_offset(0);
     }];
+    
+    [self.yunfeiLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.thumbImageV.mas_right).mas_offset(5);
+        make.width.mas_equalTo(60);
+        make.bottom.mas_equalTo(self.priceLb);
+    }];
 }
 
 - (void)setDetailModel:(YZShoppingCarModel *)detailModel {
@@ -85,7 +91,7 @@
     }
     _detailModel = detailModel;
     self.selectBtn.selected = detailModel.selected;
-    YZDogModel *dogModel = [(YZShoppingCarDogModel *)detailModel shoppingCarItem];
+    YZShoppingCarDogModel *dogModel = (YZShoppingCarDogModel *)detailModel;
     [self.thumbImageV setImageWithURL:[NSURL URLWithString:dogModel.thumb]
                      placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
     self.nameLb.text = dogModel.name;
@@ -98,7 +104,13 @@
     [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.f], NSForegroundColorAttributeName: CommonGreenColor} range:NSMakeRange(4, daysNumberString.length - 5)];
     [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.f], NSForegroundColorAttributeName: self.daysNumberLb.textColor} range:NSMakeRange(daysNumberString.length - 1, 1)];
     self.daysNumberLb.attributedText = attr;
-    self.quansheHeaderV.quanSheModel = dogModel.shop;
+    
+    YZQuanSheModel *shop = [[YZQuanSheModel alloc] init];
+    shop.shopNo = dogModel.shopNo;
+    shop.shopId = dogModel.shopId;
+    shop.shopName = dogModel.shopName;
+    shop.thumb = dogModel.shopThumb;
+    self.quansheHeaderV.quanSheModel = shop;
     [self setNeedsUpdateConstraints];
 }
 

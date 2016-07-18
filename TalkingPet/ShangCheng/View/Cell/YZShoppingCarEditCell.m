@@ -92,16 +92,12 @@
         yunfeiLb.font = [UIFont systemFontOfSize:12.f];
         yunfeiLb.textColor = [UIColor commonGrayColor];
         yunfeiLb.text = @"运费 免运费";
+        yunfeiLb.adjustsFontSizeToFitWidth = YES;
         [containerView addSubview:yunfeiLb];
         self.yunfeiLb = yunfeiLb;
         
         [priceLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.bottom.mas_equalTo(containerView).mas_offset(-5);
-        }];
-        
-        [yunfeiLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(thumbImageV.mas_right).mas_offset(10);
-            make.bottom.mas_equalTo(containerView).mas_offset(-5);
         }];
         
         [self setUpContentViewsWithSuperView:containerView];

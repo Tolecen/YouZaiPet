@@ -19,6 +19,7 @@ extern NSString *const kShoppingCarCalcutePriceNotification;
 @property (nonatomic, strong, readonly) NSMutableArray *goodsShangPinCache;
 
 @property (nonatomic, assign, readonly) long long totalPrice;
+@property (nonatomic, assign) BOOL shoppingCarCheckAllSelected;
 
 + (instancetype)instanceManager;
 
@@ -32,7 +33,7 @@ extern NSString *const kShoppingCarCalcutePriceNotification;
 
 - (void)shoppingCarSelectedAllWithSelectedState:(BOOL)selected;
 
-- (BOOL)shoppingCarCheckAllSelected;
+//- (BOOL)shoppingCarCheckAllSelected;
 
 - (void)clearShoppingCar;
 

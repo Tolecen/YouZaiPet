@@ -71,17 +71,19 @@
         make.bottom.left.right.mas_equalTo(self.view).mas_offset(0);
         make.height.mas_equalTo(44);
     }];
+    
+    [self.bottomBar resetTotalPrice:[YZShoppingCarHelper instanceManager].totalPrice];
+    [self.bottomBar changeSelectBtnState:[YZShoppingCarHelper instanceManager].shoppingCarCheckAllSelected];
 }
 
 - (void)inner_ChangeShoppingCarItemSelectState:(NSNotification *)notification {
     YZShoppingCarModel *shoppingCarModel = notification.object;
+    [self.bottomBar resetTotalPrice:[YZShoppingCarHelper instanceManager].totalPrice];
     if (!shoppingCarModel.selected) {
         [self.bottomBar changeSelectBtnState:NO];
     } else {
-        BOOL shoppingCarCheckAllSelected = [[YZShoppingCarHelper instanceManager] shoppingCarCheckAllSelected];
-        [self.bottomBar changeSelectBtnState:shoppingCarCheckAllSelected];
+        [self.bottomBar changeSelectBtnState:[YZShoppingCarHelper instanceManager].shoppingCarCheckAllSelected];
     }
-    [self.bottomBar resetTotalPrice:[YZShoppingCarHelper instanceManager].totalPrice];
 }
 
 - (void)inner_ShoppingCarCalcutePrice:(NSNotification *)notification {

@@ -162,12 +162,26 @@
 
 @interface YZShoppingCarDogModel : YZShoppingCarModel
 
-@property (nonatomic, strong) YZDogModel *shoppingCarItem;
+@property (nonatomic, copy) NSString *dogId;//狗狗ID
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, assign) long long sellPrice;
+@property (nonatomic, copy) NSString *thumb;
+@property (nonatomic, assign) NSInteger birtydayDays;
+@property (nonatomic, copy) NSString *birthdayString;
+@property (nonatomic, assign) YZDogSex sex;
+
+@property (nonatomic, copy) NSString *shopId;
+@property (nonatomic, copy) NSString *shopThumb;
+@property (nonatomic, copy) NSString *shopName;
+@property (nonatomic, assign) long long shopNo;
 
 @end
 
 @interface YZShoppingCarGoodsModel : YZShoppingCarModel
 
-@property (nonatomic, strong) YZGoodsDetailModel *shoppingCarItem;
+@property (nonatomic, copy) NSString *goodsId;//产品ID
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, assign) long long sellPrice;
+@property (nonatomic, copy) NSString *thumb;
 
 @end
