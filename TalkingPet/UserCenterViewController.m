@@ -472,7 +472,7 @@
         [UserServe sharedUserServe].account.score = dict[@"score"];
         [UserServe sharedUserServe].account.coin = dict[@"coin"];
         [self loadViewContent];
-        [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
+//        [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
         
         [self.tableView headerEndRefreshing];
         
