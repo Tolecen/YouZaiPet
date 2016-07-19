@@ -112,6 +112,7 @@
 - (void)inner_Select:(UIButton *)sender {
     sender.selected = !sender.selected;
     self.detailModel.selected = sender.selected;
+    [[YZShoppingCarHelper instanceManager] updateShoppingCarModelSelectStateWithModel:self.detailModel];
     [[NSNotificationCenter defaultCenter] postNotificationName:kShoppingCarChangeItemSelectStateNotification
                                                         object:self.detailModel];
 }

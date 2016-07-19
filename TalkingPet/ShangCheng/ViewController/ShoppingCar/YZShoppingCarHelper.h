@@ -28,6 +28,8 @@ extern NSString *const kShoppingCarCalcutePriceNotification;
 
 - (void)updateShoppingCarGoodsCountWithModel:(YZShangChengModel *)model;
 
+- (void)updateShoppingCarModelSelectStateWithModel:(YZShangChengModel *)model;
+
 - (void)removeShoppingCarItemWithScene:(YZShangChengType)scene
                                  model:(YZShangChengModel *)model;
 
