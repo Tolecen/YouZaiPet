@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface BlankPageView : UIView
+-(void)showWithWithView:(UIView*)view Title:(NSString *)title action:(void(^)())action;
 -(void)showWithView:(UIView*)view image:(UIImage*)image buttonImage:(UIImage*)bImage action:(void(^)())action;
+- (instancetype)initWithNoImage;
+- (instancetype)initWithImage;
 @end

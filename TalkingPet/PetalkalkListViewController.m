@@ -117,7 +117,7 @@
     if (!not.userInfo) {
         if (!blankPage) {
             __weak UINavigationController * weakNav = self.navigationController;
-            blankPage = [[BlankPageView alloc] init];
+            blankPage = [[BlankPageView alloc] initWithImage];
             if (_listTyep == PetalkListTyepMyForWord) {
                 [blankPage showWithView:self.view image:[UIImage imageNamed:@"forWord_without"] buttonImage:[UIImage imageNamed:@"forWord_toFo"] action:^{
                     [weakNav popToRootViewControllerAnimated:YES];

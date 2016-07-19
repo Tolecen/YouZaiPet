@@ -147,7 +147,7 @@
         if (!_orderArr.count) {
             if (!blankPage) {
                 __weak UINavigationController * weakNav = self.navigationController;
-                blankPage = [[BlankPageView alloc] init];
+                blankPage = [[BlankPageView alloc] initWithImage];
                 [blankPage showWithView:self.view image:[UIImage imageNamed:@"order_without"] buttonImage:[UIImage imageNamed:@"order_toShop"] action:^{
                     [weakNav popToRootViewControllerAnimated:YES];
                 }];
