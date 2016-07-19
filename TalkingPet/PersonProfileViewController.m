@@ -74,7 +74,7 @@
 {
     [super viewDidLoad];
     self.title = @"我的";
-//    [self setBackButtonWithTarget:@selector(backBtnDo:)];
+    [self setBackButtonWithTarget:@selector(backBtnDo:)];
     // Do any additional setup after loading the view.
     
     
@@ -320,10 +320,10 @@
 -(void)getUserInfoById
 {
     NSMutableDictionary* mDict = [NetServer commonDict];
-    [mDict setObject:@"pet" forKey:@"command"];
-    [mDict setObject:@"one" forKey:@"options"];
-    [mDict setObject:self.petId forKey:@"petId"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"currPetId"];
+    [mDict setObject:@"account" forKey:@"command"];
+    [mDict setObject:@"userInfo" forKey:@"options"];
+    [mDict setObject:self.petId forKey:@"userId"];
+//    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"currPetId"];
     
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([self.petId isEqualToString:@"44239"]) {
@@ -348,7 +348,7 @@
                 break;
         }
         PetCategoryParser * pet = [[PetCategoryParser alloc] init];
-        int lv = [[[[responseObject objectForKey:@"value"] objectForKey:@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""] integerValue];
+        int lv = [[[[responseObject objectForKey:@"value"] objectForKey:@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""] intValue];
         if(lv>0)
         {
             breedAgeL.text = [NSString stringWithFormat:@"%@, %@, ",[pet breedWithIDcode:[[[responseObject objectForKey:@"value"] objectForKey:@"type"] integerValue]],[Common calAgeWithBirthDate:[[responseObject objectForKey:@"value"] objectForKey:@"birthday"]]];
@@ -465,12 +465,12 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"userList" forKey:@"options"];
-    [mDict setObject:self.petId forKey:@"petId"];
+    [mDict setObject:self.petId forKey:@"userId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:@"O" forKey:@"type"];
-    if ([UserServe sharedUserServe].userID) {
-        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
-    }
+//    if ([UserServe sharedUserServe].userID) {
+//        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+//    }
     [self.tableviewTimeLineHelper loadFirstDataPageWithDict:mDict];
 }
 

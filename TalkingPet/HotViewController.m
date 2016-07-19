@@ -12,11 +12,12 @@
 #import "PetalkView.h"
 #import "EGOImageView.h"
 #import "TalkingDetailPageViewController.h"
+#import "RootViewController.h"
 //#import "BrowserTableHelper.h"
 @interface HotPetalkCell : UICollectionViewCell
 @property (nonatomic,retain)PetalkView * petalkV;
 @property (nonatomic,retain)EGOImageView * imageV;
-@property (nonatomic,retain)EGOImageView * headView;
+@property (nonatomic,retain)EGOImageButton * headView;
 @property (nonatomic,retain) TalkingBrowse * talking;
 @property (nonatomic,retain)UILabel * desL;
 @property (nonatomic,retain)UIButton * tagButton;
@@ -26,6 +27,9 @@
 @property (nonatomic,retain)UIButton *zanButton;
 @property (nonatomic,retain)UILabel * nameL;
 @property (nonatomic,retain)UILabel *gradeL;
+
+@property (nonatomic,copy)void(^HeadTapped) (TalkingBrowse *talkingBrowse);
+-(void)layoutSubviewsManul;
 @end
 @implementation HotPetalkCell
 - (id)initWithFrame:(CGRect)frame
@@ -97,11 +101,12 @@
         [self.contentView addSubview:lineV];
         
         
-        self.headView = [[EGOImageView alloc] initWithFrame:CGRectMake(10,CGRectGetMaxY(lineV.frame)+5, 36, 36)];
+        self.headView = [[EGOImageButton alloc] initWithFrame:CGRectMake(10,CGRectGetMaxY(lineV.frame)+5, 36, 36)];
         _headView.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
         _headView.layer.cornerRadius = 18;
         _headView.layer.masksToBounds=YES;
         [self.contentView addSubview:_headView];
+        [self.headView addTarget:self action:@selector(headClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         self.nameL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.headView.frame)+7, CGRectGetMinY(self.headView.frame), frame.size.width-46-40, 18)];
         _nameL.textColor = [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1];
@@ -119,22 +124,122 @@
         self.zanButton.frame = CGRectMake(frame.size.width-10-28, CGRectGetMinY(self.headView.frame)+7, 24, 22);
         [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-off@2x"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.zanButton];
+        [self.zanButton addTarget:self action:@selector(zanAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
 
--(void)layoutSubviews
+-(void)headClicked:(UIButton *)sender
 {
-    [super layoutSubviews];
-    [self.imageV setImageWithURL:[NSURL URLWithString:@"http://testimages.buybestpet.com/img/content/20160711/DB217CBD9DF647899C331D7355FB139C.jpg"]];
-    [self.headView setImageWithURL:[NSURL URLWithString:@"http://xlimage.uzero.cn/img/avatar/20141227/3E76C2395A5644DCB29A1DD24602D16F.jpg"]];
+    if (self.HeadTapped) {
+        self.HeadTapped(self.talking);
+    }
+}
+
+-(void)layoutSubviewsManul
+{
+//    [super layoutSubviews];
+    [self.imageV setImageWithURL:[NSURL URLWithString:self.talking.thumbImgUrl]];
+    self.nameL.text = self.talking.petInfo.nickname;
+    self.desL.text = self.talking.descriptionContent;
+    self.gradeL.text = [NSString stringWithFormat:@"LV.%@",self.talking.petInfo.grade];
+    [self.headView setImageURL:[NSURL URLWithString:@"http://xlimage.uzero.cn/img/avatar/20141227/3E76C2395A5644DCB29A1DD24602D16F.jpg"]];
+    
+    self.zanL.text = self.talking.favorNum;
+    self.commentL.text = self.talking.commentNum;
+    
+    self.tagLabel.text = [[self.talking.tagArray firstObject] objectForKey:@"name"];
+    
+    if (self.talking.ifZan) {
+        [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-on@2x"] forState:UIControlStateNormal];
+    }
+    else
+        [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-off@2x"] forState:UIControlStateNormal];
+}
+
+-(void)zanAction:(UIButton *)sender
+{
+    NSString * currentUserId = [UserServe sharedUserServe].userID;
+    if (!currentUserId) {
+        if (![RootViewController sharedRootViewController].presentedViewController) {
+            [[RootViewController sharedRootViewController] showLoginViewController];
+        }
+        return;
+    }
+    
+    
+    if (self.talking.ifZan) {
+//        return;
+       [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-off@2x"] forState:UIControlStateNormal];
+        self.talking.ifZan = NO;
+        self.zanButton.enabled = NO;
+        
+        self.zanL.text =[NSString stringWithFormat:@"%d",[self.zanL.text intValue]>0?([self.zanL.text intValue]-1):0];
+        NSMutableDictionary* mDict = [NetServer commonDict];
+        [mDict setObject:@"interaction" forKey:@"command"];
+        [mDict setObject:@"cancelFavour" forKey:@"options"];
+        [mDict setObject:self.talking.theID forKey:@"petalkId"];
+        [mDict setObject:@"F" forKey:@"type"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
+        
+        
+        NSLog(@"cancelFavor:%@",mDict);
+        [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            NSLog(@"cancel favor success:%@",responseObject);
+            
+            self.zanButton.enabled = YES;
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"cancel favor error:%@",error);
+            self.zanButton.enabled = YES;
+        }];
+    }
+    else{
+        self.talking.ifZan = YES;
+        self.zanButton.enabled = NO;
+        
+        //        [self performSelector:@selector(zanMakeBig) withObject:nil afterDelay:0.2];
+//        [self zanMakeBig];
+        [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-on@2x"] forState:UIControlStateNormal];
+        self.zanL.text =[NSString stringWithFormat:@"%d",[self.zanL.text intValue]+1];
+        
+        NSMutableDictionary* mDict = [NetServer commonDict];
+        [mDict setObject:@"interaction" forKey:@"command"];
+        [mDict setObject:@"create" forKey:@"options"];
+        [mDict setObject:self.talking.theID forKey:@"petalkId"];
+        [mDict setObject:@"F" forKey:@"type"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
+        
+        
+        NSLog(@"doFavor:%@",mDict);
+        [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            self.zanButton.enabled = YES;
+            NSLog(@"favor success:%@",responseObject);
+            if ([responseObject objectForKey:@"message"]) {
+                if([[responseObject objectForKey:@"message"] rangeOfString:@"("].location !=NSNotFound)
+                {
+                    [SVProgressHUD showSuccessWithStatus:[responseObject objectForKey:@"message"]];
+                }
+                else{
+                    
+                }
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"favor error:%@",error);
+            self.zanButton.enabled = YES;
+        }];
+    }
+
+
 }
 @end
 
 @interface HotJingYanCell : UICollectionViewCell
 //@property (nonatomic,retain)PetalkView * petalkV;
 @property (nonatomic,retain)EGOImageView * imageV;
-@property (nonatomic,retain)EGOImageView * headView;
+@property (nonatomic,retain)EGOImageButton * headView;
 @property (nonatomic,retain) TalkingBrowse * talking;
 @property (nonatomic,retain)UILabel * desL;
 @property (nonatomic,retain)UIButton * tagButton;
@@ -145,6 +250,9 @@
 @property (nonatomic,retain)UIButton *zanButton;
 @property (nonatomic,retain)UILabel * nameL;
 @property (nonatomic,retain)UILabel *gradeL;
+
+@property (nonatomic,copy)void(^HeadTapped) (TalkingBrowse *talkingBrowse);
+-(void)layoutSubviewsManul;
 @end
 @implementation HotJingYanCell
 - (id)initWithFrame:(CGRect)frame
@@ -171,11 +279,12 @@
         [self.contentView addSubview:self.desL];
 
         
-        self.headView = [[EGOImageView alloc] initWithFrame:CGRectMake(10,CGRectGetMaxY(self.desL.frame)+5, 36, 36)];
+        self.headView = [[EGOImageButton alloc] initWithFrame:CGRectMake(10,CGRectGetMaxY(self.desL.frame)+5, 36, 36)];
         _headView.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
         _headView.layer.cornerRadius = 18;
         _headView.layer.masksToBounds=YES;
         [self.contentView addSubview:_headView];
+        [self.headView addTarget:self action:@selector(headClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         self.nameL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.headView.frame)+7, CGRectGetMinY(self.headView.frame), frame.size.width-46-40, 18)];
         _nameL.textColor = [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1];
@@ -193,6 +302,7 @@
         self.zanButton.frame = CGRectMake(frame.size.width-10-28, CGRectGetMinY(self.headView.frame)+7, 24, 22);
         [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-off@2x"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.zanButton];
+        [self.zanButton addTarget:self action:@selector(zanAction:) forControlEvents:UIControlEventTouchUpInside];
         
         UIImageView * zanimgv = [[UIImageView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.gradeL.frame)+12, 10, 10)];
         zanimgv.image = [UIImage imageNamed:@"zan@2x"];
@@ -234,20 +344,130 @@
     return self;
 }
 
--(void)layoutSubviews
+-(void)headClicked:(UIButton *)sender
 {
-    [super layoutSubviews];
-    [self.imageV setImageWithURL:[NSURL URLWithString:@"http://testimages.buybestpet.com/img/content/20160711/DB217CBD9DF647899C331D7355FB139C.jpg"]];
-    [self.headView setImageWithURL:[NSURL URLWithString:@"http://xlimage.uzero.cn/img/avatar/20141227/3E76C2395A5644DCB29A1DD24602D16F.jpg"]];
+    if (self.HeadTapped) {
+        self.HeadTapped(self.talking);
+    }
 }
+
+-(void)layoutSubviewsManul
+{
+//    [super layoutSubviews];
+    [self.imageV setImageWithURL:[NSURL URLWithString:self.talking.thumbImgUrl]];
+    self.nameL.text = self.talking.petInfo.nickname;
+    self.desL.text = self.talking.descriptionContent;
+    self.gradeL.text = [NSString stringWithFormat:@"LV.%@",self.talking.petInfo.grade];
+    [self.headView setImageURL:[NSURL URLWithString:@"http://xlimage.uzero.cn/img/avatar/20141227/3E76C2395A5644DCB29A1DD24602D16F.jpg"]];
+    
+    self.zanL.text = self.talking.favorNum;
+    self.commentL.text = self.talking.commentNum;
+    self.liulanL.text = self.talking.browseNum;
+    
+    if (self.talking.ifZan) {
+        [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-on@2x"] forState:UIControlStateNormal];
+    }
+    else
+        [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-off@2x"] forState:UIControlStateNormal];
+    
+//    self.tagLabel.text = [[self.talking.tagArray firstObject] objectForKey:@"name"];
+
+}
+
+-(void)zanAction:(UIButton *)sender
+{
+    NSString * currentUserId = [UserServe sharedUserServe].userID;
+    if (!currentUserId) {
+        if (![RootViewController sharedRootViewController].presentedViewController) {
+            [[RootViewController sharedRootViewController] showLoginViewController];
+        }
+        return;
+    }
+    
+    
+    if (self.talking.ifZan) {
+        //        return;
+        [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-off@2x"] forState:UIControlStateNormal];
+        self.talking.ifZan = NO;
+        self.zanButton.enabled = NO;
+        
+        self.zanL.text =[NSString stringWithFormat:@"%d",[self.zanL.text intValue]>0?([self.zanL.text intValue]-1):0];
+        NSMutableDictionary* mDict = [NetServer commonDict];
+        [mDict setObject:@"interaction" forKey:@"command"];
+        [mDict setObject:@"cancelFavour" forKey:@"options"];
+        [mDict setObject:self.talking.theID forKey:@"petalkId"];
+        [mDict setObject:@"F" forKey:@"type"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
+        
+        
+        NSLog(@"cancelFavor:%@",mDict);
+        [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            NSLog(@"cancel favor success:%@",responseObject);
+            
+            self.zanButton.enabled = YES;
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"cancel favor error:%@",error);
+            self.zanButton.enabled = YES;
+        }];
+    }
+    else{
+        self.talking.ifZan = YES;
+        self.zanButton.enabled = NO;
+        
+        //        [self performSelector:@selector(zanMakeBig) withObject:nil afterDelay:0.2];
+        //        [self zanMakeBig];
+        [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-on@2x"] forState:UIControlStateNormal];
+        self.zanL.text =[NSString stringWithFormat:@"%d",[self.zanL.text intValue]+1];
+        
+        NSMutableDictionary* mDict = [NetServer commonDict];
+        [mDict setObject:@"interaction" forKey:@"command"];
+        [mDict setObject:@"create" forKey:@"options"];
+        [mDict setObject:self.talking.theID forKey:@"petalkId"];
+        [mDict setObject:@"F" forKey:@"type"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
+        
+        
+        NSLog(@"doFavor:%@",mDict);
+        [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            self.zanButton.enabled = YES;
+            NSLog(@"favor success:%@",responseObject);
+            if ([responseObject objectForKey:@"message"]) {
+                if([[responseObject objectForKey:@"message"] rangeOfString:@"("].location !=NSNotFound)
+                {
+                    [SVProgressHUD showSuccessWithStatus:[responseObject objectForKey:@"message"]];
+                }
+                else{
+                    
+                }
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"favor error:%@",error);
+            self.zanButton.enabled = YES;
+        }];
+    }
+    
+    
+}
+
 @end
 
-
+static NSString * hotcellId = @"hotcell";
+static NSString * jycellId = @"jycell";
 @interface HotViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
     int page;
+    int jyPage;
+    
+    int listType;
+    
+    BOOL shuoshuoLoaded;
+    BOOL jyLoaded;
 }
 @property (nonatomic,retain)NSMutableArray * dataArr;
+@property (nonatomic,strong)NSMutableArray * jyArray;
 
 @property (nonatomic,strong)UIView * topSelV;
 @property (nonatomic,strong)UIImageView * zhiV;
@@ -261,12 +481,24 @@
 -(void)viewDidLoad
 {
     page = 1;
-    NSArray * baseArr = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].userID]];
+    jyPage = 1;
+    
+    listType = 1;
+    
+    NSArray * baseArr = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotListShuoShuo%@",[UserServe sharedUserServe].userID]];
     self.dataArr = [NSMutableArray array];
     for (NSDictionary * dic in baseArr) {
         TalkingBrowse * petalk = [[TalkingBrowse alloc] initWithHostInfo:dic];
         [_dataArr addObject:petalk];
     }
+    
+    NSArray * baseArr2 = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotListJY%@",[UserServe sharedUserServe].userID]];
+    self.jyArray = [NSMutableArray array];
+    for (NSDictionary * dic in baseArr2) {
+        TalkingBrowse * petalk = [[TalkingBrowse alloc] initWithHostInfo:dic];
+        [_jyArray addObject:petalk];
+    }
+    
     UICollectionViewFlowLayout* layout = [[UICollectionViewFlowLayout alloc]init];
     float whith = (self.view.frame.size.width-30)/2;
     layout.itemSize = CGSizeMake(whith,whith+5+40+10+10+10+10+10+40+10);
@@ -281,10 +513,10 @@
     _hotView.backgroundColor = [UIColor colorWithWhite:238/255.0 alpha:1];
     [self.view addSubview:_hotView];
     _hotView.showsHorizontalScrollIndicator = NO;
-    [_hotView registerClass:[HotPetalkCell class] forCellWithReuseIdentifier:@"HotPetalkCell"];
+    [_hotView registerClass:[HotPetalkCell class] forCellWithReuseIdentifier:hotcellId];
     
-    [_hotView addHeaderWithTarget:self action:@selector(getHotListFirstPage)];
-    [_hotView addFooterWithTarget:self action:@selector(getHotListOtherPage)];
+    [_hotView addHeaderWithTarget:self action:@selector(shuoshuoHeaderDo)];
+    [_hotView addFooterWithTarget:self action:@selector(shuoshuoFooterDo)];
     
     
     UICollectionViewFlowLayout* layout2 = [[UICollectionViewFlowLayout alloc]init];
@@ -304,10 +536,10 @@
     _jingyanView.backgroundColor = [UIColor colorWithWhite:238/255.0 alpha:1];
     [self.view addSubview:_jingyanView];
     _jingyanView.showsHorizontalScrollIndicator = NO;
-    [_jingyanView registerClass:[HotJingYanCell class] forCellWithReuseIdentifier:@"JingyanPetalkCell"];
+    [_jingyanView registerClass:[HotJingYanCell class] forCellWithReuseIdentifier:jycellId];
     
-    [_jingyanView addHeaderWithTarget:self action:@selector(getHotListFirstPage)];
-    [_jingyanView addFooterWithTarget:self action:@selector(getHotListOtherPage)];
+    [_jingyanView addHeaderWithTarget:self action:@selector(jyHeaderDo)];
+    [_jingyanView addFooterWithTarget:self action:@selector(jyFooterDo)];
     _jingyanView.hidden = YES;
 
     
@@ -324,29 +556,32 @@
 //    self.tableViewHelper.cellNeedShowPublishTime = NO;
 //    self.tableViewHelper.tableViewType = TableViewTypeTagList;
     
-    NSArray * hotArray = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].userID]];
-    NSDictionary * hotReqDict = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotListReqDict%@",[UserServe sharedUserServe].userID]];
-    if (hotArray&&hotReqDict) {
-        self.tableViewHelper.dataArray = [self.tableViewHelper getModelArray:hotArray];
-        self.tableViewHelper.reqDict = [NSMutableDictionary dictionaryWithDictionary:hotReqDict];
-        [self.contentTableView reloadData];
-        
-    }
+//    NSArray * hotArray = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].userID]];
+//    NSDictionary * hotReqDict = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotListReqDict%@",[UserServe sharedUserServe].userID]];
+//    if (hotArray&&hotReqDict) {
+//        self.tableViewHelper.dataArray = [self.tableViewHelper getModelArray:hotArray];
+//        self.tableViewHelper.reqDict = [NSMutableDictionary dictionaryWithDictionary:hotReqDict];
+//        [self.contentTableView reloadData];
+//        
+//    }
 
     
     
-    NSMutableDictionary* mDict = [NetServer commonDict];
-    [mDict setObject:@"petalk" forKey:@"command"];
-    [mDict setObject:@"hotList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
-    [mDict setObject:@"10" forKey:@"pageSize"];
-    [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
-    
-    self.tableViewHelper.reqDict = mDict;
-    
-    [self.contentTableView headerBeginRefreshing];
+//    NSMutableDictionary* mDict = [NetServer commonDict];
+//    [mDict setObject:@"petalk" forKey:@"command"];
+//    [mDict setObject:@"hotList" forKey:@"options"];
+//    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
+//    [mDict setObject:@"10" forKey:@"pageSize"];
+//    [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
+//    
+//    self.tableViewHelper.reqDict = mDict;
+//    
+//    [self.contentTableView headerBeginRefreshing];
     
     [self addTopSelView];
+    
+    
+    [self.hotView headerBeginRefreshing];
 //    [self.tableViewHelper loadFirstDataPageWithDict:mDict];
 }
 
@@ -420,19 +655,29 @@
 }
 -(void)showShuoShuoTable
 {
+    listType = 1;
     [_shuoshuoBtn setBackgroundImage:[UIImage imageNamed:@"chongyoudongtai-on@2x"] forState:UIControlStateNormal];
     [_jingyanBtn setBackgroundImage:[UIImage imageNamed:@"yangchongfenxiang-off@2x"] forState:UIControlStateNormal];
     self.hotView.hidden = NO;
     self.jingyanView.hidden = YES;
     [self showOrHideTopSelV];
+    
+    if (!shuoshuoLoaded) {
+        [_hotView headerBeginRefreshing];
+    }
 }
 -(void)showJingYanTable
 {
+    listType = 2;
     [_shuoshuoBtn setBackgroundImage:[UIImage imageNamed:@"chongyoudongtai-off@2x"] forState:UIControlStateNormal];
     [_jingyanBtn setBackgroundImage:[UIImage imageNamed:@"yangchongfenxiang-on@2x"] forState:UIControlStateNormal];
     self.hotView.hidden = YES;
     self.jingyanView.hidden = NO;
     [self showOrHideTopSelV];
+    
+    if (!jyLoaded) {
+        [_jingyanView headerBeginRefreshing];
+    }
 }
 -(void)viewWillLayoutSubviews
 {
@@ -446,9 +691,32 @@
 //    [_hotView headerBeginRefreshing];
     [self.contentTableView headerBeginRefreshing];
 }
--(void)getHotListFirstPage
+
+-(void)shuoshuoHeaderDo
 {
     page = 1;
+    [self getHotShuoshuoList];
+}
+-(void)shuoshuoFooterDo
+{
+    [self getHotShuoshuoList];
+}
+
+
+
+-(void)jyHeaderDo
+{
+    jyPage = 1;
+    [self getHotJYList];
+}
+-(void)jyFooterDo
+{
+    [self getHotJYList];
+}
+
+-(void)getHotShuoshuoList
+{
+    
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"hotList" forKey:@"options"];
@@ -456,11 +724,19 @@
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [_dataArr removeAllObjects];
+        
+        
         [_hotView headerEndRefreshing];
+        [_hotView footerEndRefreshing];
         NSArray * array = [responseObject[@"value"] objectForKey:@"list"];
-        [[NSUserDefaults standardUserDefaults] setObject:array forKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].userID]];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        if (page==1) {
+            shuoshuoLoaded = YES;
+            [_dataArr removeAllObjects];
+            [[NSUserDefaults standardUserDefaults] setObject:array forKey:[NSString stringWithFormat:@"hotListShuoShuo%@",[UserServe sharedUserServe].userID]];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
         for (NSDictionary * dic in array) {
             TalkingBrowse * petalk = [[TalkingBrowse alloc] initWithHostInfo:dic];
             [_dataArr addObject:petalk];
@@ -469,54 +745,84 @@
         page++;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [_hotView headerEndRefreshing];
+        [_hotView footerEndRefreshing];
     }];
 }
--(void)getHotListOtherPage
+-(void)getHotJYList
 {
+    
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"hotList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
-    [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
+    [mDict setObject:[NSString stringWithFormat:@"%d",jyPage] forKey:@"pageIndex"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [_hotView footerEndRefreshing];
+       
+        
+        [_jingyanView headerEndRefreshing];
+        [_jingyanView footerEndRefreshing];
         NSArray * array = [responseObject[@"value"] objectForKey:@"list"];
+        
+        if (jyPage==1) {
+            jyLoaded = YES;
+            [_jyArray removeAllObjects];
+            [[NSUserDefaults standardUserDefaults] setObject:array forKey:[NSString stringWithFormat:@"hotListJY%@",[UserServe sharedUserServe].userID]];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
         for (NSDictionary * dic in array) {
             TalkingBrowse * petalk = [[TalkingBrowse alloc] initWithHostInfo:dic];
-            [_dataArr addObject:petalk];
+            [_jyArray addObject:petalk];
         }
-        [_hotView reloadData];
-        page++;
+        [_jingyanView reloadData];
+        jyPage++;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [_hotView footerEndRefreshing];
+        [_jingyanView headerEndRefreshing];
+        [_jingyanView footerEndRefreshing];
     }];
 }
+
+
 #pragma mark - UICollectionView
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 20;
+    if ([collectionView isEqual:_hotView]) {
+        return _dataArr.count;
+    }
+    else
+        return _jyArray.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 //    TalkingBrowse * petalk = _dataArr[indexPath.row];
     if ([collectionView isEqual:_hotView]) {
-        static NSString *SectionCellIdentifier = @"HotPetalkCell";
-        HotPetalkCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:SectionCellIdentifier forIndexPath:indexPath];
+//        static NSString *SectionCellIdentifier = @"HotPetalkCell";
+        HotPetalkCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:hotcellId forIndexPath:indexPath];
         //    [cell.petalkV layoutSubviewsWithTalking:petalk];
         //    cell.headView.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?imageView2/2/w/50",petalk.petInfo.headImgURL]];
         //    cell.nameL.text = petalk.petInfo.nickname;
         //    cell.timesL.text = [NSString stringWithFormat:@"%@人浏览",petalk.browseNum];
+        cell.HeadTapped = ^(TalkingBrowse *talkingBrowse){
+            [self toUserPageWithBrowse:talkingBrowse];
+        };
+        cell.talking = _dataArr[indexPath.row];
+        [cell layoutSubviewsManul];
         return cell;
     }
     else
     {
-        static NSString *SectionCellIdentifier2 = @"JingyanPetalkCell";
-        HotJingYanCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:SectionCellIdentifier2 forIndexPath:indexPath];
+//        static NSString *SectionCellIdentifier2 = @"JingyanPetalkCell";
+        HotJingYanCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:jycellId forIndexPath:indexPath];
         //    [cell.petalkV layoutSubviewsWithTalking:petalk];
         //    cell.headView.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?imageView2/2/w/50",petalk.petInfo.headImgURL]];
         //    cell.nameL.text = petalk.petInfo.nickname;
         //    cell.timesL.text = [NSString stringWithFormat:@"%@人浏览",petalk.browseNum];
+        cell.HeadTapped = ^(TalkingBrowse *talkingBrowse){
+            [self toUserPageWithBrowse:talkingBrowse];
+        };
+        cell.talking = _jyArray[indexPath.row];
+        [cell layoutSubviewsManul];
         return cell;
     }
 
@@ -527,6 +833,17 @@
     talkingDV.talking = _dataArr[indexPath.row];
     
     [self.parentViewController.navigationController pushViewController:talkingDV animated:YES];
+}
+
+-(void)toUserPageWithBrowse: (TalkingBrowse *)talkingBrowse
+{
+    PersonProfileViewController * pv = [[PersonProfileViewController alloc] init];
+    pv.petId = talkingBrowse.petInfo.petID;
+    pv.petAvatarUrlStr = talkingBrowse.petInfo.headImgURL;
+    pv.petNickname = talkingBrowse.petInfo.nickname;
+    pv.relationShip = talkingBrowse.relationShip;
+   
+    [self.navigationController pushViewController:pv animated:YES];
 }
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView

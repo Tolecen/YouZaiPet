@@ -41,8 +41,8 @@
         id petDict = [info objectForKey:@"pet"];
         if (petDict&&[petDict isKindOfClass:[NSDictionary class]]) {
             self.petInfo.petID = [petDict objectForKey:@"id"];
-            self.petInfo.nickname = [petDict objectForKey:@"nickName"];
-            self.petInfo.headImgURL = [petDict objectForKey:@"headPortrait"];
+            self.petInfo.nickname = [petDict objectForKey:@"nickname"];
+            self.petInfo.headImgURL = [petDict objectForKey:@"head"];
             self.petInfo.gender = [petDict objectForKey:@"gender"];
             //        self.petInfo.breed = [petDict objectForKey:@"type"];
             
