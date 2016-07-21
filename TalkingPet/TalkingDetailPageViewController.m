@@ -1155,7 +1155,7 @@
         self.talking.ifZan = YES;
         self.favorBtn.enabled = NO;
         [self zanMakeBig];
-        int n = self.caiNum;
+        int n = (int)self.caiNum;
         [self.favorNumBtn setTitle:[NSString stringWithFormat:@"%d踩",n+1] forState:UIControlStateNormal];
         self.caiNum++;
         NSMutableDictionary* mDict = [NetServer commonDict];
