@@ -147,12 +147,12 @@
         return;
     }
 //    self.userAvatarV.enabled =YES;
-    CGSize forwardedNameSize = [[self.notiDict objectForKey:@"petNickName"] sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(120, 20)];
+    CGSize forwardedNameSize = [[self.notiDict objectForKey:@"petNickname"] sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(120, 20)];
     //    NSLog(@"sssss%f",forwardedNameSize.width);
     [self.userNameL setFrame:CGRectMake(self.userNameL.frame.origin.x, self.userNameL.frame.origin.y, forwardedNameSize.width, 20)];
     //    [self.forwardedNameL setBackgroundColor:[UIColor redColor]];
     [self.actionStyleL setFrame:CGRectMake(self.userNameL.frame.origin.x+forwardedNameSize.width+5, 16, 50, 20)];
-    self.userNameL.text = [self.notiDict objectForKey:@"petNickName"];
+    self.userNameL.text = [self.notiDict objectForKey:@"petNickname"];
     self.actionImgV.imageURL = [NSURL URLWithString:[[self.notiDict objectForKey:@"thumbUrl"] stringByAppendingString:@"?imageView2/2/w/100"]];
     self.userAvatarV.imageURL = [NSURL URLWithString:[[self.notiDict objectForKey:@"petHeadPortrait"] stringByAppendingString:@"?imageView2/2/w/80"]];
     if ([[self.notiDict objectForKey:@"type"] isEqualToString:@"C"]) {

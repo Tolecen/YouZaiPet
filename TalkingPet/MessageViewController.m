@@ -28,7 +28,7 @@
         self.startId = @"";
         self.needRefreshMsg = NO;
         
-        sysNoti_page = 0;
+        sysNoti_page = 1;
     }
     return self;
 }
@@ -128,7 +128,7 @@
     self.startId = @"";
     
     if (self.msgType==MsgTypeSys) {
-        sysNoti_page = 0;
+        sysNoti_page = 1;
         [self getSysNoti];
     }
     else
@@ -167,7 +167,7 @@
     //    [mDict setObject:self.searchTF.text forKey:@"keyword"];
     
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (sysNoti_page==0) {
+        if (sysNoti_page==1) {
             self.msgArray = [NSMutableArray arrayWithArray:[[responseObject objectForKey:@"value"] objectForKey:@"list"]];
             if (self.msgArray.count>0) {
                 [[NSUserDefaults standardUserDefaults] setObject:self.msgArray forKey:[NSString stringWithFormat:@"receivedMsgArray%@%@",msgTypeStr,[UserServe sharedUserServe].userID]];
@@ -200,7 +200,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"message" forKey:@"command"];
     [mDict setObject:@"UML" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
     if (self.msgType==MsgTypeC_R) {
         [mDict setObject:@"C_R" forKey:@"type"];
     }

@@ -45,6 +45,7 @@
 @property (nonatomic,strong)UIView * middleView;
 @property (nonatomic,strong)NSArray * topAdArray;
 @property (nonatomic,retain)NSDictionary * todayTopicDic;
+@property (nonatomic,retain)NSMutableArray * gudinggcArray;//友仔固定6个频道
 @end
 
 @implementation SquareNewViewController
@@ -101,7 +102,7 @@
     [self addGuangChangView];
     
     
-    
+    [self makeSquareItem];
     
     
     /*
@@ -402,9 +403,9 @@
     for (int i = 0; i<3; i++) {
         EGOImageButton * guangchangbottomv = [[EGOImageButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.middleView.frame)+10*(i+1)+h*i, ScreenWidth, h)];
         [guangchangbottomv setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"guangchang0%d",i+1]] forState:UIControlStateNormal];
-        guangchangbottomv.tag = 300+i;
+        guangchangbottomv.tag = 4+i;
         [self.scrollView addSubview:guangchangbottomv];
-        
+        [guangchangbottomv addTarget:self action:@selector(middleBtnDo:) forControlEvents:UIControlEventTouchUpInside];
         self.scrollView.contentSize = CGSizeMake(ScreenWidth, CGRectGetMaxY(guangchangbottomv.frame)+10);
     }
     
@@ -413,27 +414,28 @@
 }
 -(void)middleBtnDo:(UIButton *)sender
 {
-    
+    NSInteger index = sender.tag;
+    [SquareListViewController actionTheSquareIteam:self.gudinggcArray[index-1] withNavigationController:self.navigationController];
 }
 -(void)getTopAd
 {
-    NSMutableArray * da = [NSMutableArray array];
-    for (int i = 0;i<2 ;i++) {
-
-            SquareIteam * iteam = [[SquareIteam alloc] init];
-            iteam.handleType = @"";
-            iteam.iconUrl = @"http://xlimage.uzero.cn/dacfd675c59f9c9bc5021f84e64d5ff7.jpg";
-            iteam.title = @"";
-            iteam.key = @"";
-            [da addObject:iteam];
-
-        
-    }
-    self.topAdArray = da;
-    [flowView reloadData];
-    
-    
-    return;
+//    NSMutableArray * da = [NSMutableArray array];
+//    for (int i = 0;i<2 ;i++) {
+//
+//            SquareIteam * iteam = [[SquareIteam alloc] init];
+//            iteam.handleType = @"";
+//            iteam.iconUrl = @"http://xlimage.uzero.cn/dacfd675c59f9c9bc5021f84e64d5ff7.jpg";
+//            iteam.title = @"";
+//            iteam.key = @"";
+//            [da addObject:iteam];
+//
+//        
+//    }
+//    self.topAdArray = da;
+//    [flowView reloadData];
+//    
+//    
+//    return;
 
     NSMutableDictionary* updateDict = [NetServer commonDict];
     [updateDict setObject:@"layout" forKey:@"command"];
@@ -751,6 +753,20 @@
 
     iteam = self.topAdArray[sender.tag-200];
     [SquareListViewController actionTheSquareIteam:iteam withNavigationController:self.navigationController];
+}
+
+-(void)makeSquareItem
+{
+    self.gudinggcArray = [NSMutableArray array];
+    for (int i = 0; i<6; i++) {
+        SquareIteam * item = [[SquareIteam alloc] init];
+        item.handleType = @"3";
+        item.title = @"测试";
+        item.key = @"hot";
+        [self.gudinggcArray addObject:item];
+    }
+    
+    
 }
 
 
