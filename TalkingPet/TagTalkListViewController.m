@@ -56,7 +56,7 @@
     [self.sectionBtnView setBackgroundColor:[UIColor colorWithWhite:235/255.0f alpha:1]];
     self.commentNumBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     currentButton = _commentNumBtn;
-    [self.commentNumBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+    [self.commentNumBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
     [self.commentNumBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [self.commentNumBtn setFrame:CGRectMake(0, 0, ScreenWidth/2, 30)];
 //    [self.commentNumBtn setBackgroundImage:[UIImage imageNamed:@"seleted_lift"] forState:UIControlStateNormal];
@@ -79,7 +79,7 @@
     self.favorNumBtn.adjustsImageWhenHighlighted = NO;
     
     self.selectedLine = [[UIView alloc] initWithFrame:CGRectMake(currentButton.center.x-50, 28, 100, 2)];
-    [self.selectedLine setBackgroundColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1]];
+    [self.selectedLine setBackgroundColor:CommonGreenColor];
     [self.sectionBtnView addSubview:self.selectedLine];
 
     
@@ -228,7 +228,7 @@
                 [self.selectedLine setFrame:CGRectMake(self.commentNumBtn.center.x-50, 28, 100, 2)];
         }];
 
-        [self.commentNumBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+        [self.commentNumBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
         [self.favorNumBtn setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
         [self getHotPetalkList];
         currentButton = _commentNumBtn;
@@ -241,7 +241,7 @@
             [self.selectedLine setFrame:CGRectMake(self.favorNumBtn.center.x-50, 28, 100, 2)];
         }];
         
-        [self.favorNumBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+        [self.favorNumBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
         [self.commentNumBtn setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
         [self getPetalkList];
         currentButton = _favorNumBtn;
