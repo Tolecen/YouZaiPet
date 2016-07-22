@@ -105,7 +105,7 @@
     if (self.listType == UserListTypeAttention) {
         [mDict setObject:@"petfans" forKey:@"command"];
         [mDict setObject:@"findFocus" forKey:@"options"];
-        [mDict setObject:self.petID forKey:@"petId"];
+        [mDict setObject:self.petID forKey:@"userId"];
         if ([UserServe sharedUserServe].userID) {
             [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
@@ -113,7 +113,7 @@
     if (self.listType == UserListTypeFans) {
         [mDict setObject:@"petfans" forKey:@"command"];
         [mDict setObject:@"findFans" forKey:@"options"];
-        [mDict setObject:self.petID forKey:@"petId"];
+        [mDict setObject:self.petID forKey:@"userId"];
         if ([UserServe sharedUserServe].userID) {
             [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
@@ -121,7 +121,7 @@
     if (self.listType == UserListBlackList) {
         [mDict setObject:@"setting" forKey:@"command"];
         [mDict setObject:@"CBL" forKey:@"options"];
-        [mDict setObject:self.petID forKey:@"petId"];
+        [mDict setObject:self.petID forKey:@"userId"];
         if ([UserServe sharedUserServe].userID) {
             [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
@@ -154,12 +154,12 @@
 }
 -(void)reloadData
 {
-    currentPage = 0;
+    currentPage = 1;
     NSMutableDictionary* mDict = [NetServer commonDict];
     if (self.listType == UserListTypeAttention) {
         [mDict setObject:@"petfans" forKey:@"command"];
         [mDict setObject:@"findFocus" forKey:@"options"];
-        [mDict setObject:self.petID forKey:@"petId"];
+        [mDict setObject:self.petID forKey:@"userId"];
         if ([UserServe sharedUserServe].userID) {
             [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
@@ -167,7 +167,7 @@
     if (self.listType == UserListTypeFans) {
         [mDict setObject:@"petfans" forKey:@"command"];
         [mDict setObject:@"findFans" forKey:@"options"];
-        [mDict setObject:self.petID forKey:@"petId"];
+        [mDict setObject:self.petID forKey:@"userId"];
         if ([UserServe sharedUserServe].userID) {
             [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
@@ -175,13 +175,13 @@
     if (self.listType == UserListBlackList) {
         [mDict setObject:@"setting" forKey:@"command"];
         [mDict setObject:@"CBL" forKey:@"options"];
-        [mDict setObject:self.petID forKey:@"petId"];
+        [mDict setObject:self.petID forKey:@"userId"];
         if ([UserServe sharedUserServe].userID) {
             [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }
 
-    [mDict setObject:@"0" forKey:@"pageIndex"];
+    [mDict setObject:@"1" forKey:@"pageIndex"];
     [mDict setObject:@"20" forKey:@"pageSize"];
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         currentPage++;
@@ -318,7 +318,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petfans" forKey:@"command"];
     [mDict setObject:@"findFocus" forKey:@"options"];
-    [mDict setObject:self.petID forKey:@"petId"];
+    [mDict setObject:self.petID forKey:@"userId"];
     if ([UserServe sharedUserServe].userID) {
         [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     }
@@ -344,7 +344,7 @@
     [mDict setObject:@"setting" forKey:@"command"];
     [mDict setObject:@"CBD" forKey:@"options"];
     [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
-    [mDict setObject:[dict objectForKey:@"id"] forKey:@"petId"];
+    [mDict setObject:[dict objectForKey:@"id"] forKey:@"userId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         [SVProgressHUD showSuccessWithStatus:@"已从黑名单移除"];

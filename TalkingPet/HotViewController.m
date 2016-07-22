@@ -719,7 +719,9 @@ static NSString * jycellId = @"jycell";
     
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
-    [mDict setObject:@"hotList" forKey:@"options"];
+    [mDict setObject:@"channel" forKey:@"options"];
+    [mDict setObject:@"hot" forKey:@"code"];
+    [mDict setObject:@"1" forKey:@"type"];
     [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
@@ -753,7 +755,9 @@ static NSString * jycellId = @"jycell";
     
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
-    [mDict setObject:@"hotList" forKey:@"options"];
+    [mDict setObject:@"channel" forKey:@"options"];
+    [mDict setObject:@"hotstory" forKey:@"code"];
+    [mDict setObject:@"2" forKey:@"type"];
     [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:[NSString stringWithFormat:@"%d",jyPage] forKey:@"pageIndex"];

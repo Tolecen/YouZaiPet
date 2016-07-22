@@ -85,8 +85,8 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    self.commentNameL.text = [self.petDict objectForKey:@"nickName"];
-    self.commentAvatarV.imageURL = [NSURL URLWithString:[[self.petDict objectForKey:@"headPortrait"] stringByAppendingString:@"?imageView2/2/w/80"]];
+    self.commentNameL.text = [self.petDict objectForKey:@"nickname"];
+    self.commentAvatarV.imageURL = [NSURL URLWithString:[[self.petDict objectForKey:@"head"] stringByAppendingString:@"?imageView2/2/w/80"]];
     self.talkNoL.text = [NSString stringWithFormat:@"宠物说:%@",[[self.petDict objectForKey:@"counter"] objectForKey:@"issue"]];
     self.fansNoL.text = [NSString stringWithFormat:@"粉丝:%@",[[self.petDict objectForKey:@"counter"] objectForKey:@"fans"]];
     self.relationShip = [self.petDict objectForKey:@"rs"];

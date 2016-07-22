@@ -141,7 +141,7 @@
 {
     [super layoutSubviews];
     self.commentAvatarV.imageURL = [NSURL URLWithString:[[self.favorDict objectForKey:@"petHeadPortrait"] stringByAppendingString:@"?imageView2/2/w/80"]];
-    self.commentNameL.text = [self.favorDict objectForKey:@"petNickName"];
+    self.commentNameL.text = [self.favorDict objectForKey:@"petNickname"];
     self.relationShip = [self.favorDict objectForKey:@"rs"];
     
     if ([self.relationShip isEqualToString:@"0"]) {

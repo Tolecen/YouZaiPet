@@ -160,7 +160,7 @@
     shuoshuoB.frame = CGRectMake(0, 0, ScreenWidth/3, 30);
     [shuoshuoB setTitle:@"宠物说" forState:UIControlStateNormal];
     [shuoshuoB.titleLabel setFont:[UIFont systemFontOfSize:15]];
-    [shuoshuoB setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+    [shuoshuoB setTitleColor:CommonGreenColor forState:UIControlStateNormal];
     shuoshuoB.tag = 1;
 
 //    [shuoshuoB setBackgroundImage:[UIImage imageNamed:@"hot"] forState:UIControlStateNormal];
@@ -190,7 +190,7 @@
     [self.search becomeFirstResponder];
     
     searchType = 1;
-    currentPage = 0;
+    currentPage = 1;
     
     
     self.resultTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 30, ScreenWidth, self.view.frame.size.height-30-navigationBarHeight)];
@@ -247,16 +247,16 @@
 {
     if (searchType==1) {
         g.hidden = YES;
-        currentPage = 0;
+        currentPage = 1;
         _resultTableView.delegate = self.shuoshuoTableViewHelper;
         _resultTableView.dataSource = self.shuoshuoTableViewHelper;
         self.shuoshuoTableViewHelper.footerShouldDelegateToUserCenter = NO;
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"petalk" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         [mDict setObject:@"10" forKey:@"pageSize"];
-        [mDict setObject:@"0" forKey:@"pageIndex"];
+        [mDict setObject:@"1" forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
         //        [mDict setObject:@"O" forKey:@"type"];
         
@@ -264,7 +264,7 @@
     }
     else if (searchType==2){
         g.hidden = YES;
-        currentPage = 0;
+        currentPage = 1;
         _resultTableView.delegate = self;
         _resultTableView.dataSource = self;
         self.shuoshuoTableViewHelper.footerShouldDelegateToUserCenter = YES;
@@ -272,9 +272,9 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"tag" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         [mDict setObject:@"10" forKey:@"pageSize"];
-        [mDict setObject:@"0" forKey:@"pageIndex"];
+        [mDict setObject:@"1" forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
         
         [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -299,7 +299,7 @@
     }
     else if (searchType==3){
         g.hidden = YES;
-        currentPage = 0;
+        currentPage = 1;
         _resultTableView.delegate = self;
         _resultTableView.dataSource = self;
         self.shuoshuoTableViewHelper.footerShouldDelegateToUserCenter = YES;
@@ -307,9 +307,9 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"user" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         [mDict setObject:@"20" forKey:@"pageSize"];
-        [mDict setObject:@"0" forKey:@"pageIndex"];
+        [mDict setObject:@"1" forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
         
         [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -344,7 +344,7 @@
 //    sender.layer.masksToBounds = YES;
 //    sender.layer.borderWidth = 1;
 //    sender.layer.borderColor = [[UIColor whiteColor] CGColor];
-    [sender setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+    [sender setTitleColor:CommonGreenColor forState:UIControlStateNormal];
     for (int i = 0; i<3; i++) {
         UIButton * btn = (UIButton *)[segmentIV viewWithTag:(i+1)];
         if (i+1!=sender.tag) {
@@ -372,16 +372,16 @@
 {
     if (searchType==1) {
         g.hidden = YES;
-        currentPage = 0;
+        currentPage = 1;
         _resultTableView.delegate = self.shuoshuoTableViewHelper;
         _resultTableView.dataSource = self.shuoshuoTableViewHelper;
         self.shuoshuoTableViewHelper.footerShouldDelegateToUserCenter = NO;
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"petalk" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         [mDict setObject:@"10" forKey:@"pageSize"];
-        [mDict setObject:@"0" forKey:@"pageIndex"];
+        [mDict setObject:@"1" forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
 //        [mDict setObject:@"O" forKey:@"type"];
         
@@ -389,7 +389,7 @@
     }
     else if (searchType==2){
         g.hidden = YES;
-        currentPage = 0;
+        currentPage = 1;
         _resultTableView.delegate = self;
         _resultTableView.dataSource = self;
         self.shuoshuoTableViewHelper.footerShouldDelegateToUserCenter = YES;
@@ -397,9 +397,9 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"tag" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         [mDict setObject:@"10" forKey:@"pageSize"];
-        [mDict setObject:@"0" forKey:@"pageIndex"];
+        [mDict setObject:@"1" forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
         
         [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -425,7 +425,7 @@
     }
     else if (searchType==3){
         g.hidden = YES;
-        currentPage = 0;
+        currentPage = 1;
         _resultTableView.delegate = self;
         _resultTableView.dataSource = self;
         self.shuoshuoTableViewHelper.footerShouldDelegateToUserCenter = YES;
@@ -433,9 +433,9 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"user" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         [mDict setObject:@"20" forKey:@"pageSize"];
-        [mDict setObject:@"0" forKey:@"pageIndex"];
+        [mDict setObject:@"1" forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
         
         [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -471,7 +471,7 @@
 //        NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"tag" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         [mDict setObject:@"10" forKey:@"pageSize"];
         [mDict setObject:[NSString stringWithFormat:@"%d",currentPage] forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
@@ -479,7 +479,7 @@
     else if (searchType==3){
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"user" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         [mDict setObject:@"20" forKey:@"pageSize"];
         [mDict setObject:[NSString stringWithFormat:@"%d",currentPage] forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];

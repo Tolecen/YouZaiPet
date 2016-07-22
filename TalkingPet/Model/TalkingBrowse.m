@@ -118,12 +118,15 @@
         
         if ([[info objectForKey:@"type"] isEqualToString:@"R"]) {
             
-            
+            NSDictionary * sd = [info objectForKey:@"aimPet"];
             self.ifForward = YES;
             self.forwardInfo = [[ForwardInfo alloc] init];
-            self.forwardInfo.forwardPetId = [info objectForKey:@"aimPetId"];
-            self.forwardInfo.forwardPetAvatar = [info objectForKey:@"aimPetHeadPortrait"];
-            self.forwardInfo.forwardPetNickname = [info objectForKey:@"aimPetNickName"];
+//            self.forwardInfo.forwardPetId = [info objectForKey:@"aimPetId"];
+//            self.forwardInfo.forwardPetAvatar = [info objectForKey:@"aimPetHeadPortrait"];
+//            self.forwardInfo.forwardPetNickname = [info objectForKey:@"aimPetNickName"];
+            self.forwardInfo.forwardPetId = [sd objectForKey:@"id"];
+            self.forwardInfo.forwardPetAvatar = [sd objectForKey:@"head"];
+            self.forwardInfo.forwardPetNickname = [sd objectForKey:@"nickname"];
             self.forwardInfo.forwardDescription = [info objectForKey:@"comment"];
             self.forwardInfo.forwardTime = [NSString stringWithFormat:@"%.0f",(double)([[info objectForKey:@"relayTime"] longLongValue]/1000)];
             

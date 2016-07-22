@@ -163,7 +163,7 @@
 
 -(void)loadFirstDataPageWithDict:(NSMutableDictionary *)theDict
 {
-    currentID = 0;
+    currentID = 1;
     if ([[theDict allKeys] containsObject:@"pageIndex"]) {
         [theDict setObject:[NSString stringWithFormat:@"%d",currentID] forKey:@"pageIndex"];
     }
