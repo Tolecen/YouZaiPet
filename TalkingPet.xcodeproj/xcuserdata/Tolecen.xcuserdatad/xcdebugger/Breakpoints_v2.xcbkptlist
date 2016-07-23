@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/NewUserViewController.m"
-            timestampString = "453884316.214292"
+            timestampString = "490953665.192091"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "-goToRegister"
             landmarkType = "5">
          </BreakpointContent>
@@ -742,7 +742,7 @@
             startingLineNumber = "1196"
             endingLineNumber = "1196"
             landmarkName = "+getUserInfoById:success:failure:"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -758,7 +758,7 @@
             startingLineNumber = "1199"
             endingLineNumber = "1199"
             landmarkName = "+getUserInfoById:success:failure:"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -774,7 +774,7 @@
             startingLineNumber = "635"
             endingLineNumber = "635"
             landmarkName = "-getUploadToken"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -790,7 +790,7 @@
             startingLineNumber = "638"
             endingLineNumber = "638"
             landmarkName = "-getUploadToken"
-            landmarkType = "7">
+            landmarkType = "5">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
@@ -838,7 +838,7 @@
             startingLineNumber = "98"
             endingLineNumber = "98"
             landmarkName = "+requestWithParameters:Controller:success:failure:"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -854,7 +854,7 @@
             startingLineNumber = "82"
             endingLineNumber = "82"
             landmarkName = "+requestWithParameters:Controller:success:failure:"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -870,7 +870,7 @@
             startingLineNumber = "85"
             endingLineNumber = "85"
             landmarkName = "+requestWithParameters:Controller:success:failure:"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -886,7 +886,7 @@
             startingLineNumber = "89"
             endingLineNumber = "89"
             landmarkName = "+requestWithParameters:Controller:success:failure:"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -902,7 +902,7 @@
             startingLineNumber = "92"
             endingLineNumber = "92"
             landmarkName = "+requestWithParameters:Controller:success:failure:"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1014,7 +1014,7 @@
             startingLineNumber = "307"
             endingLineNumber = "307"
             landmarkName = "-synchronousPetlist"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1030,7 +1030,7 @@
             startingLineNumber = "163"
             endingLineNumber = "163"
             landmarkName = "+requestWithParameters:success:failure:"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1046,7 +1046,7 @@
             startingLineNumber = "170"
             endingLineNumber = "170"
             landmarkName = "+requestWithParameters:success:failure:"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
