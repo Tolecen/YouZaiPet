@@ -23,7 +23,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"我的宠豆";
+        self.title = @"我的仔币";
         self.dataArr = [NSMutableArray array];
     }
     return self;
@@ -88,7 +88,7 @@
     cionL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
 //    cionL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
 //    cionL.shadowOffset = CGSizeMake(2, 2);
-    cionL.text = [NSString stringWithFormat:@"宠豆:%@",[UserServe sharedUserServe].account.coin];
+    cionL.text = [NSString stringWithFormat:@"仔币:%@",[UserServe sharedUserServe].account.coin];
     [self.view addSubview:cionL];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(5, self.view.frame.size.width*0.57-60, self.view.frame.size.width-10, self.view.frame.size.height - navigationBarHeight-(self.view.frame.size.width*0.57-60+5)) style:UITableViewStylePlain];

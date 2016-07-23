@@ -537,7 +537,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section==0) {
+    if (indexPath.section==1) {
         switch (indexPath.row) {
             case 0:{
                 MyGradeViewController * myGradeVC = [[MyGradeViewController alloc] init];
@@ -548,54 +548,54 @@
                 MyCionViewController * myGradeVC = [[MyCionViewController alloc] init];
                 [self.navigationController pushViewController:myGradeVC animated:YES];
             }break;
-            case 2:{
-                MyGradeViewController * myGradeVC = [[MyGradeViewController alloc] init];
-                myGradeVC.title = @"我的积分";
-                [self.navigationController pushViewController:myGradeVC animated:YES];
-            }break;
-            case 3:{
-                MyOrderViewConyroller * myOrderVC = [[MyOrderViewConyroller alloc] init];
-                [self.navigationController pushViewController:myOrderVC animated:YES];
-            }break;
-            case 4:{
-                QuanViewController * quanVC = [[QuanViewController alloc] init];
-                quanVC.pageType = 0;
-                [self.navigationController pushViewController:quanVC animated:YES];
-            }break;
+//            case 2:{
+//                MyGradeViewController * myGradeVC = [[MyGradeViewController alloc] init];
+//                myGradeVC.title = @"我的积分";
+//                [self.navigationController pushViewController:myGradeVC animated:YES];
+//            }break;
+//            case 3:{
+//                MyOrderViewConyroller * myOrderVC = [[MyOrderViewConyroller alloc] init];
+//                [self.navigationController pushViewController:myOrderVC animated:YES];
+//            }break;
+//            case 4:{
+//                QuanViewController * quanVC = [[QuanViewController alloc] init];
+//                quanVC.pageType = 0;
+//                [self.navigationController pushViewController:quanVC animated:YES];
+//            }break;
             default:
                 break;
         }
     }
-    if (indexPath.section==1) {
-        switch (indexPath.row) {
-            case 0:{
-                PetalkalkListViewController * tagTlistV = [[PetalkalkListViewController alloc] init];
-                tagTlistV.title = _stringArr[indexPath.row+2];
-                tagTlistV.listTyep = PetalkListTyepMyPublish;
-                [self.navigationController pushViewController:tagTlistV animated:YES];
-            }break;
-            case 1:{
-                PetalkalkListViewController * tagTlistV = [[PetalkalkListViewController alloc] init];
-                tagTlistV.title = _stringArr[indexPath.row+2];
-                tagTlistV.listTyep = PetalkListTyepMyForWord;
-                [self.navigationController pushViewController:tagTlistV animated:YES];
-            }break;
-            case 2:{
-                MyCommentViewController * myCV = [[MyCommentViewController alloc] init];
-                [self.navigationController pushViewController:myCV animated:YES];
-                
-            }break;
-            case 3:{
-                PetalkalkListViewController * tagTlistV = [[PetalkalkListViewController alloc] init];
-                tagTlistV.title = _stringArr[indexPath.row+2];
-                tagTlistV.listTyep = PetalkListTyepMyZan;
-                [self.navigationController pushViewController:tagTlistV animated:YES];
-            }break;
-            
-            default:
-                break;
-        }
-    }
+//    if (indexPath.section==1) {
+//        switch (indexPath.row) {
+//            case 0:{
+//                PetalkalkListViewController * tagTlistV = [[PetalkalkListViewController alloc] init];
+//                tagTlistV.title = _stringArr[indexPath.row+2];
+//                tagTlistV.listTyep = PetalkListTyepMyPublish;
+//                [self.navigationController pushViewController:tagTlistV animated:YES];
+//            }break;
+//            case 1:{
+//                PetalkalkListViewController * tagTlistV = [[PetalkalkListViewController alloc] init];
+//                tagTlistV.title = _stringArr[indexPath.row+2];
+//                tagTlistV.listTyep = PetalkListTyepMyForWord;
+//                [self.navigationController pushViewController:tagTlistV animated:YES];
+//            }break;
+//            case 2:{
+//                MyCommentViewController * myCV = [[MyCommentViewController alloc] init];
+//                [self.navigationController pushViewController:myCV animated:YES];
+//                
+//            }break;
+//            case 3:{
+//                PetalkalkListViewController * tagTlistV = [[PetalkalkListViewController alloc] init];
+//                tagTlistV.title = _stringArr[indexPath.row+2];
+//                tagTlistV.listTyep = PetalkListTyepMyZan;
+//                [self.navigationController pushViewController:tagTlistV animated:YES];
+//            }break;
+//            
+//            default:
+//                break;
+//        }
+//    }
 }
 -(void)toSomePage:(int)index
 {
