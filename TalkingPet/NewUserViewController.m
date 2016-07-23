@@ -266,9 +266,9 @@
         if ([responseObject objectForKey:@"message"]) {
             [SVProgressHUD showSuccessWithStatus:[responseObject objectForKey:@"message"]];
         }
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
         [self dismissViewControllerAnimated:YES completion:^{
-            [[RootViewController sharedRootViewController] showHotUserViewController];
+//            [[RootViewController sharedRootViewController] showHotUserViewController];
         }];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"register failed info:%@",error);
