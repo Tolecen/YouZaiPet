@@ -161,7 +161,7 @@
         [mDict setObject:@"findFocus" forKey:@"options"];
         [mDict setObject:self.petID forKey:@"userId"];
         if ([UserServe sharedUserServe].userID) {
-            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+//            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }
     if (self.listType == UserListTypeFans) {
@@ -169,7 +169,7 @@
         [mDict setObject:@"findFans" forKey:@"options"];
         [mDict setObject:self.petID forKey:@"userId"];
         if ([UserServe sharedUserServe].userID) {
-            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+//            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }
     if (self.listType == UserListBlackList) {

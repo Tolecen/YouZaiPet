@@ -171,7 +171,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petGrade" forKey:@"command"];
     [mDict setObject:@"rule" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray * ruleArr = responseObject[@"value"];
         if ([[UserServe sharedUserServe].account.grade integerValue]<12) {
@@ -196,7 +196,7 @@
     if ([self.dataArr lastObject]) {
         [mDict setObject:[self.dataArr lastObject][@"id"] forKey:@"startId"];
     }
-    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.dataArr addObjectsFromArray:responseObject[@"value"]];
         [_tableView reloadData];
