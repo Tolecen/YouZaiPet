@@ -61,7 +61,7 @@
         [hotDic setObject:@"channel" forKey:@"options"];
         [hotDic setObject:self.otherCode forKey:@"code"];
         if ([UserServe sharedUserServe].userID) {
-            [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+            [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
         }
     }if (self.listTyep == PetalkListTyepPetBreed) {
         [hotDic setObject:@"petalk" forKey:@"command"];
@@ -84,14 +84,14 @@
         [hotDic setObject:@"userList" forKey:@"options"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
         [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
-        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
         [hotDic setObject:@"O" forKey:@"type"];
     }if (self.listTyep == PetalkListTyepMyForWord) {
         [hotDic setObject:@"petalk" forKey:@"command"];
         [hotDic setObject:@"userList" forKey:@"options"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
         [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
-        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
         [hotDic setObject:@"R" forKey:@"type"];
         self.tableViewHelper.needShowZanAndComment = NO;
         
@@ -99,8 +99,8 @@
         [hotDic setObject:@"petalk" forKey:@"command"];
         [hotDic setObject:@"userList" forKey:@"options"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
-        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
-        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+//        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
         [hotDic setObject:@"F" forKey:@"type"];
         self.tableViewHelper.needShowZanAndComment = NO;
     }

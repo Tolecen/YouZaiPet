@@ -206,10 +206,10 @@
 //        [view addSubview:self.darenV];
 //        self.darenV.hidden = YES;
         
-        nicknameL = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(photoIB.frame)+10, 300, 20)];
+        nicknameL = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(photoIB.frame)+8, 300, 20)];
         nicknameL.center = CGPointMake(photoIB.center.x, nicknameL.center.y);
         nicknameL.backgroundColor = [UIColor clearColor];
-        nicknameL.font = [UIFont systemFontOfSize:15];
+        nicknameL.font = [UIFont boldSystemFontOfSize:16];
         nicknameL.textAlignment = NSTextAlignmentCenter;
         nicknameL.textColor = CommonGreenColor;
         [view addSubview:nicknameL];
@@ -217,12 +217,12 @@
 //        genderIV = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(photoIB.frame)-20, CGRectGetMaxY(photoIB.frame)-20, 20, 20)];
 //        [view addSubview:genderIV];
         
-//        breedAgeL = [[UILabel alloc] initWithFrame:CGRectMake(0, 123+navigationBarHeight, ScreenWidth, 20)];
-//        breedAgeL.backgroundColor = [UIColor clearColor];
-//        breedAgeL.textColor = [UIColor whiteColor];
-//        breedAgeL.font = [UIFont systemFontOfSize:14];
-//        breedAgeL.textAlignment = NSTextAlignmentCenter;
-//        [view addSubview:breedAgeL];
+        breedAgeL = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(nicknameL.frame)+5, ScreenWidth, 20)];
+        breedAgeL.backgroundColor = [UIColor clearColor];
+        breedAgeL.textColor = CommonGreenColor;
+        breedAgeL.font = [UIFont systemFontOfSize:14];
+        breedAgeL.textAlignment = NSTextAlignmentCenter;
+        [view addSubview:breedAgeL];
         
         attentionB = [UIButton buttonWithType:UIButtonTypeCustom];
         [attentionB setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
@@ -240,7 +240,7 @@
 //        [fansB setTitleShadowColor:[UIColor colorWithWhite:0.3 alpha:0.6] forState:UIControlStateNormal];
 //        fansB.titleLabel.shadowOffset = CGSizeMake(1, 1);
         
-        UILabel * lineL = [[UILabel alloc] initWithFrame:CGRectMake(view.center.x-10, CGRectGetMaxY(nicknameL.frame)+16, 20, 10)];
+        UILabel * lineL = [[UILabel alloc] initWithFrame:CGRectMake(view.center.x-10, CGRectGetMaxY(breedAgeL.frame)+16, 20, 10)];
         [lineL setText:@"|"];
         [lineL setTextColor:[UIColor whiteColor]];
         [lineL setBackgroundColor:[UIColor clearColor]];
@@ -250,24 +250,24 @@
         lineL.shadowOffset = CGSizeMake(1, 1);
         [view addSubview:lineL];
         
-        UIView * bView = [[UIView alloc] initWithFrame:CGRectMake(10,  CGRectGetMaxY(nicknameL.frame)+45, view.frame.size.width-20, 1)];
+        UIView * bView = [[UIView alloc] initWithFrame:CGRectMake(10,  CGRectGetMaxY(breedAgeL.frame)+40, view.frame.size.width-20, 1)];
         bView.backgroundColor = [UIColor colorWithWhite:240/255.0 alpha:1];
         [view addSubview:bView];
         
         shuoshuoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         shuoshuoBtn.backgroundColor = [UIColor clearColor];
-        [shuoshuoBtn setFrame:CGRectMake(0, view.frame.size.height-55, ScreenWidth/4, 40)];
+        [shuoshuoBtn setFrame:CGRectMake(0, view.frame.size.height-45, ScreenWidth/3, 40)];
         [view addSubview:shuoshuoBtn];
-        shuoshuoNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/4, 20)];
+        shuoshuoNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, 20)];
         shuoshuoNumL.backgroundColor = [UIColor clearColor];
         shuoshuoNumL.textAlignment = NSTextAlignmentCenter;
         shuoshuoNumL.font = [UIFont boldSystemFontOfSize:15];
         shuoshuoNumL.textColor = [UIColor grayColor];
         [shuoshuoBtn addSubview:shuoshuoNumL];
-        UILabel * shuoshuoL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/4, 20)];
+        UILabel * shuoshuoL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/3, 20)];
         [shuoshuoL setBackgroundColor:[UIColor clearColor]];
         shuoshuoL.textAlignment = NSTextAlignmentCenter;
-        [shuoshuoL setText:@"说说"];
+        [shuoshuoL setText:@"发布"];
         shuoshuoL.font = [UIFont systemFontOfSize:13];
         shuoshuoL.textColor = [UIColor lightGrayColor];
         [shuoshuoBtn addSubview:shuoshuoL];
@@ -275,37 +275,37 @@
         shuoshuoBtn.showsTouchWhenHighlighted = YES;
         
         
-        forwardBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        forwardBtn.backgroundColor = [UIColor clearColor];
-        [forwardBtn setFrame:CGRectMake(ScreenWidth/4, view.frame.size.height-55, ScreenWidth/4, 40)];
-        [view addSubview:forwardBtn];
-        forwardNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/4, 20)];
-        forwardNumL.backgroundColor = [UIColor clearColor];
-        forwardNumL.textAlignment = NSTextAlignmentCenter;
-        forwardNumL.font = [UIFont boldSystemFontOfSize:15];
-        forwardNumL.textColor = [UIColor grayColor];
-        [forwardBtn addSubview:forwardNumL];
-        UILabel * forwardL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/4, 20)];
-        [forwardL setBackgroundColor:[UIColor clearColor]];
-        forwardL.textAlignment = NSTextAlignmentCenter;
-        [forwardL setText:@"转发"];
-        forwardL.font = [UIFont systemFontOfSize:13];
-        forwardL.textColor = [UIColor lightGrayColor];
-        [forwardBtn addSubview:forwardL];
-        [forwardBtn addTarget:self action:@selector(tomyForwardPage) forControlEvents:UIControlEventTouchUpInside];
-        forwardBtn.showsTouchWhenHighlighted = YES;
+//        forwardBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        forwardBtn.backgroundColor = [UIColor clearColor];
+//        [forwardBtn setFrame:CGRectMake(ScreenWidth/3, view.frame.size.height-55, ScreenWidth/3, 40)];
+//        [view addSubview:forwardBtn];
+//        forwardNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, 20)];
+//        forwardNumL.backgroundColor = [UIColor clearColor];
+//        forwardNumL.textAlignment = NSTextAlignmentCenter;
+//        forwardNumL.font = [UIFont boldSystemFontOfSize:15];
+//        forwardNumL.textColor = [UIColor grayColor];
+//        [forwardBtn addSubview:forwardNumL];
+//        UILabel * forwardL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/3, 20)];
+//        [forwardL setBackgroundColor:[UIColor clearColor]];
+//        forwardL.textAlignment = NSTextAlignmentCenter;
+//        [forwardL setText:@"转发"];
+//        forwardL.font = [UIFont systemFontOfSize:13];
+//        forwardL.textColor = [UIColor lightGrayColor];
+//        [forwardBtn addSubview:forwardL];
+//        [forwardBtn addTarget:self action:@selector(tomyForwardPage) forControlEvents:UIControlEventTouchUpInside];
+//        forwardBtn.showsTouchWhenHighlighted = YES;
         
         commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         commentBtn.backgroundColor = [UIColor clearColor];
-        [commentBtn setFrame:CGRectMake((ScreenWidth/4)*2, view.frame.size.height-55, ScreenWidth/4, 40)];
+        [commentBtn setFrame:CGRectMake(ScreenWidth/3, view.frame.size.height-45, ScreenWidth/3, 40)];
         [view addSubview:commentBtn];
-        commentNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/4, 20)];
+        commentNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, 20)];
         commentNumL.backgroundColor = [UIColor clearColor];
         commentNumL.textAlignment = NSTextAlignmentCenter;
         commentNumL.font = [UIFont boldSystemFontOfSize:15];
         commentNumL.textColor = [UIColor grayColor];
         [commentBtn addSubview:commentNumL];
-        UILabel * comentL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/4, 20)];
+        UILabel * comentL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/3, 20)];
         [comentL setBackgroundColor:[UIColor clearColor]];
         comentL.textAlignment = NSTextAlignmentCenter;
         [comentL setText:@"评论"];
@@ -318,18 +318,18 @@
         
         caiBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         caiBtn.backgroundColor = [UIColor clearColor];
-        [caiBtn setFrame:CGRectMake((ScreenWidth/4)*3, view.frame.size.height-55, ScreenWidth/4, 40)];
+        [caiBtn setFrame:CGRectMake((ScreenWidth/3)*2, view.frame.size.height-45, ScreenWidth/3, 40)];
         [view addSubview:caiBtn];
-        caiNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/4, 20)];
+        caiNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, 20)];
         caiNumL.backgroundColor = [UIColor clearColor];
         caiNumL.textAlignment = NSTextAlignmentCenter;
         caiNumL.font = [UIFont boldSystemFontOfSize:15];
         caiNumL.textColor = [UIColor grayColor];
         [caiBtn addSubview:caiNumL];
-        UILabel * caiL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/4, 20)];
+        UILabel * caiL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/3, 20)];
         [caiL setBackgroundColor:[UIColor clearColor]];
         caiL.textAlignment = NSTextAlignmentCenter;
-        [caiL setText:@"踩的"];
+        [caiL setText:@"喜欢"];
         caiL.font = [UIFont systemFontOfSize:13];
         caiL.textColor = [UIColor lightGrayColor];
         [caiBtn addSubview:caiL];
@@ -369,8 +369,8 @@
     CGSize attentionSize = [attentionB.titleLabel.text sizeWithFont:attentionB.titleLabel.font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
     CGSize fansSize = [fansB.titleLabel.text sizeWithFont:fansB.titleLabel.font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
     UIView * view = attentionB.superview;
-    attentionB.frame = CGRectMake(view.center.x - attentionSize.width-30, CGRectGetMaxY(nicknameL.frame)+10, attentionSize.width+20, 20);
-    fansB.frame = CGRectMake(view.center.x + 10, CGRectGetMaxY(nicknameL.frame)+10, fansSize.width+20, 20);
+    attentionB.frame = CGRectMake(view.center.x - attentionSize.width-30, CGRectGetMaxY(breedAgeL.frame)+10, attentionSize.width+20, 20);
+    fansB.frame = CGRectMake(view.center.x + 10, CGRectGetMaxY(breedAgeL.frame)+10, fansSize.width+20, 20);
 //    switch ([[UserServe sharedUserServe].account.gender integerValue]) {
 //        case 0:{
 //            genderIV.image = [UIImage imageNamed:@"female_border"];
@@ -387,6 +387,8 @@
 //    [self.darenV setFrame:CGRectMake(ScreenWidth/2-k.width/2-25, nicknameL.frame.origin.y, 20, 20)];
 //    PetCategoryParser * pet = [[PetCategoryParser alloc] init];
 //    breedAgeL.text = [[[pet breedWithIDcode:[[UserServe sharedUserServe].account.breed integerValue]] stringByAppendingString:[NSString stringWithFormat:@"  %@",[Common calAgeWithBirthDate:[NSString stringWithFormat:@"%f",[[UserServe sharedUserServe].account.birthday timeIntervalSince1970]*1000]]]] stringByAppendingString:[NSString stringWithFormat:@"   LV.%d",[[UserServe sharedUserServe].account.grade intValue]]];
+    breedAgeL.text = [NSString stringWithFormat:@" LV.%d",[[UserServe sharedUserServe].account.grade intValue]];
+    
     [_tableView reloadData];
     
     shuoshuoNumL.text = [UserServe sharedUserServe].account.issue;
@@ -640,7 +642,7 @@
 -(void)tomyFavorPage
 {
     PetalkalkListViewController * tagTlistV = [[PetalkalkListViewController alloc] init];
-    tagTlistV.title = @"我踩过的";
+    tagTlistV.title = @"我喜欢的";
     tagTlistV.listTyep = PetalkListTyepMyZan;
     [self.navigationController pushViewController:tagTlistV animated:YES];
 }
