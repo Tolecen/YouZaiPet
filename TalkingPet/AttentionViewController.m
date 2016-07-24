@@ -51,7 +51,11 @@
         self.attentionTableViewHelper.footerCanRefresh = NO;
         if (!blankPage) {
             blankPage = [[BlankPageView alloc] initWithNoImage];
-            [blankPage showWithView:self.view image:[UIImage imageNamed:@"attention_login"] buttonImage:[UIImage imageNamed:@"attention_unLogin"] action:^{
+//            [blankPage showWithView:self.view image:[UIImage imageNamed:@"attention_login"] buttonImage:[UIImage imageNamed:@"attention_unLogin"] action:^{
+//                [[RootViewController sharedRootViewController] showLoginViewController];
+//            }];
+            
+            [blankPage showWithWithView:self.view Title:@"立即登录" action:^{
                 [[RootViewController sharedRootViewController] showLoginViewController];
             }];
         }
