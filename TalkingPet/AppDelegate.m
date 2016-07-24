@@ -53,7 +53,7 @@
     if ([UserServe sharedUserServe].userName) {
         NSString * currentChatUser = [[UserServe sharedUserServe].userName stringByAppendingString:[UserServe sharedUserServe].userID];
         [SystemServer sharedSystemServer].currentChatUserId = currentChatUser;
-        [[SystemServer sharedSystemServer] chatClientAuth];
+//        [[SystemServer sharedSystemServer] chatClientAuth];
 //        [self synchronousPetlist];
         [self getCurrentUserInfo];
         [[UserServe sharedUserServe] activityOfCurrentPet];
@@ -576,7 +576,7 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [SystemServer sharedSystemServer].inPay = NO;
     if (canUseActive) {
-        [[SystemServer sharedSystemServer] chatClientAuth];
+//        [[SystemServer sharedSystemServer] chatClientAuth];
     }
     appActive = YES;
 //    [self processNotification:[NSDictionary dictionaryWithObjectsAndKeys:@"7",@"type",@"1",@"id", nil]];

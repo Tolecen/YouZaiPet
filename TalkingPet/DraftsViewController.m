@@ -87,14 +87,14 @@
     
     NSArray * arr = [DatabaseServe allPetalkDraftsWithCurrentPetID:[UserServe sharedUserServe].userID];
     self.draftsArrar = [NSMutableArray arrayWithArray:arr];
-    for (NSDictionary * dic in [PublishServer sharedPublishServer].publishArray) {
-        for (DraftModel * model in arr) {
-            if (!dic[@"failure"]&&[model.publishID isEqualToString:dic[@"publisherID"]]) {
-                [_draftsArrar removeObject:model];
-                break;
-            }
-        }
-    }
+//    for (id dic in [PublishServer sharedPublishServer].publishArray) {
+//        for (DraftModel * model in arr) {
+//            if (!dic[@"failure"]&&[model.publishID isEqualToString:dic[@"publisherID"]]) {
+//                [_draftsArrar removeObject:model];
+//                break;
+//            }
+//        }
+//    }
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-navigationBarHeight)];
     [self.view addSubview:_tableView];

@@ -6429,7 +6429,7 @@
 				ORGANIZATIONNAME = wangxr;
 				TargetAttributes = {
 					72831C2F196A34B700B9CA4C = {
-						DevelopmentTeam = S9QBHC9Y99;
+						DevelopmentTeam = 4225KQ7WC5;
 					};
 				};
 			};
@@ -7861,7 +7861,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "05b2759b-a88e-43bf-bee6-635eab03ca44";
+				PROVISIONING_PROFILE = "f8ca02c0-cd68-4396-afd9-a82bcde83e12";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -7883,8 +7883,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Zhongshan Zhang (4ZJV2KP3QN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhongshan Zhang (4ZJV2KP3QN)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jitao Hu (S9QBHC9Y99)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jitao Hu (S9QBHC9Y99)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -7900,7 +7900,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "05b2759b-a88e-43bf-bee6-635eab03ca44";
+				PROVISIONING_PROFILE = "f8ca02c0-cd68-4396-afd9-a82bcde83e12";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";
@@ -7912,7 +7912,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jitao Hu (YHH5M33KAM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jitao Hu (YHH5M33KAM)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7950,7 +7950,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.youzai.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3f4587a8-54bb-4ac2-812e-e645e0b9a9e1";
+				PROVISIONING_PROFILE = "f8ca02c0-cd68-4396-afd9-a82bcde83e12";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -7961,8 +7961,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jitao Hu (YHH5M33KAM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jitao Hu (YHH5M33KAM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jitao Hu (S9QBHC9Y99)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jitao Hu (S9QBHC9Y99)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -7999,7 +7999,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.youzai.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3f4587a8-54bb-4ac2-812e-e645e0b9a9e1";
+				PROVISIONING_PROFILE = "f8ca02c0-cd68-4396-afd9-a82bcde83e12";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
