@@ -591,7 +591,7 @@ vector<IImageFilter*> vectorFilter = LoadFilterVector();
 }
 - (UIImage*)getThumImage
 {
-    UIImageView * view = [[UIImageView alloc] initWithFrame:{CGPointZero,{100,100}}];
+    UIImageView * view = [[UIImageView alloc] initWithFrame:{CGPointZero,{300,300}}];
     view.image = _talkingPublish.publishImg;
     UIImageView * imgV = [[UIImageView alloc] initWithFrame:CGRectZero];
     imgV.image = [_mouthAccessoryView getAccessoryStaticImage];

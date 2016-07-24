@@ -28,6 +28,9 @@
 @property (nonatomic,retain)UILabel * nameL;
 @property (nonatomic,retain)UILabel *gradeL;
 
+@property (nonatomic,strong)UIView * audioLengthView;
+@property (nonatomic,retain)UILabel *audioL;
+
 @property (nonatomic,copy)void(^HeadTapped) (TalkingBrowse *talkingBrowse);
 -(void)layoutSubviewsManul;
 @end
@@ -45,6 +48,25 @@
         self.imageV = [[EGOImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.width)];
         self.imageV.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
         [self.contentView addSubview:self.imageV];
+        
+        self.audioLengthView = [[UIView alloc] initWithFrame:CGRectMake(8, 8, 50, 14)];
+        self.audioLengthView.backgroundColor = CommonGreenColor;
+        self.audioLengthView.layer.cornerRadius = 5;
+        self.audioLengthView.layer.masksToBounds = YES;
+        [self.contentView addSubview:self.audioLengthView];
+        
+        UIImageView * p = [[UIImageView alloc] initWithFrame:CGRectMake(8, 3, 5, 7)];
+        p.image = [UIImage imageNamed:@"bofang@2x"];
+        [self.audioLengthView addSubview:p];
+        
+        self.audioL = [[UILabel alloc] initWithFrame:CGRectMake(50-5-30, 0, 30, self.audioLengthView.frame.size.height)];
+        _audioL.backgroundColor = [UIColor clearColor];
+        _audioL.font = [UIFont systemFontOfSize:10];
+        _audioL.textColor = [UIColor whiteColor];
+        _audioL.textAlignment = NSTextAlignmentRight;
+        [self.audioLengthView addSubview:_audioL];
+        _audioL.text = @"";
+        _audioL.adjustsFontSizeToFitWidth = YES;
         
         self.desL = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.imageV.frame)+5, frame.size.width-20, 40)];
         self.desL.backgroundColor = [UIColor clearColor];
@@ -143,10 +165,17 @@
     self.nameL.text = self.talking.petInfo.nickname;
     self.desL.text = self.talking.descriptionContent;
     self.gradeL.text = [NSString stringWithFormat:@"LV.%@",self.talking.petInfo.grade];
-    [self.headView setImageURL:[NSURL URLWithString:@"http://xlimage.uzero.cn/img/avatar/20141227/3E76C2395A5644DCB29A1DD24602D16F.jpg"]];
+    [self.headView setImageURL:[NSURL URLWithString:[self.talking.petInfo.headImgURL stringByAppendingString:@"?imageView2/2/w/60"]]];
     
     self.zanL.text = self.talking.favorNum;
     self.commentL.text = self.talking.commentNum;
+    
+    if (self.talking.audioUrl && self.talking.audioUrl.length>1) {
+        self.audioLengthView.hidden = NO;
+        _audioL.text = [NSString stringWithFormat:@"%.1f\"",[self.talking.audioDuration floatValue]];
+    }
+    else
+        self.audioLengthView.hidden = YES;
     
     self.tagLabel.text = [[self.talking.tagArray firstObject] objectForKey:@"name"];
     
@@ -251,6 +280,8 @@
 @property (nonatomic,retain)UILabel * nameL;
 @property (nonatomic,retain)UILabel *gradeL;
 
+
+
 @property (nonatomic,copy)void(^HeadTapped) (TalkingBrowse *talkingBrowse);
 -(void)layoutSubviewsManul;
 @end
@@ -268,6 +299,8 @@
         self.imageV = [[EGOImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.width)];
         self.imageV.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
         [self.contentView addSubview:self.imageV];
+        
+
         
         self.desL = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.imageV.frame)+5, frame.size.width-20, 40)];
         self.desL.backgroundColor = [UIColor clearColor];
@@ -358,7 +391,7 @@
     self.nameL.text = self.talking.petInfo.nickname;
     self.desL.text = self.talking.descriptionContent;
     self.gradeL.text = [NSString stringWithFormat:@"LV.%@",self.talking.petInfo.grade];
-    [self.headView setImageURL:[NSURL URLWithString:@"http://xlimage.uzero.cn/img/avatar/20141227/3E76C2395A5644DCB29A1DD24602D16F.jpg"]];
+    [self.headView setImageURL:[NSURL URLWithString:[self.talking.petInfo.headImgURL stringByAppendingString:@"?imageView2/2/w/60"]]];
     
     self.zanL.text = self.talking.favorNum;
     self.commentL.text = self.talking.commentNum;

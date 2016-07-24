@@ -263,9 +263,9 @@
 -(void)reloadPublishSection
 {
     [self.backScrollV setContentOffset:CGPointMake(self.view.frame.size.width*2, 0) animated:NO];
-    [hotB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [squareB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [careB setTitleColor:CommonGreenColor forState:UIControlStateNormal];
+    [hotB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
+    [squareB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
+    [careB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _hotVC.contentTableView.scrollsToTop = NO;
     _squareVC.scrollView.scrollsToTop = NO;
     _attentionVC.tableView.scrollsToTop = YES;
