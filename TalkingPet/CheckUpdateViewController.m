@@ -23,7 +23,7 @@
     if (self) {
         // Custom initialization
         self.title = @"关于我们";
-        self.titleArray = [NSArray arrayWithObjects:@"什么是宠物说",@"宠物说小助手",@"支持我们，投一票", nil];
+        self.titleArray = [NSArray arrayWithObjects:@"友仔小助手",@"支持我们，给好评", nil];
         
     }
     return self;
@@ -40,14 +40,14 @@
     [self.view addSubview:bgIV];
     
     UIImageView * iconV = [[UIImageView alloc] initWithFrame:CGRectMake(bgIV.center.x-75+5, 40, 70, 70)];
-    [iconV setImage:[UIImage imageNamed:@"icon-256"]];
+    [iconV setImage:[UIImage imageNamed:@"iconabout"]];
     [bgIV addSubview:iconV];
     iconV.layer.cornerRadius = 10;
     iconV.layer.masksToBounds = YES;
     
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(bgIV.center.x+5+5, 60, 70, 50)];
     label.numberOfLines = 0;
-    label.text =[NSString stringWithFormat:@"宠物说\nV%@",CurrentVersion];
+    label.text =[NSString stringWithFormat:@"友仔\nV%@",CurrentVersion];
     [bgIV addSubview:label];
     
 //    UILabel * addressL = [[UILabel alloc] initWithFrame:CGRectMake(0, 120, bgIV.frame.size.width, 20)];
@@ -75,7 +75,7 @@
 //    [bgIV addSubview:updateB];
     
     UILabel * statementL= [[UILabel alloc] initWithFrame:CGRectMake(0, bgIV.frame.size.height-50, bgIV.frame.size.width, 40)];
-    statementL.text = @"北京爱宠联盟科技有限公司\t版权所有\n© Chongwushuo.com, All Rights Reserved";
+    statementL.text = @"上海友仔科技有限公司\t版权所有\n© buybestpet.com, All Rights Reserved";
     statementL.font = [UIFont systemFontOfSize:12];
     statementL.numberOfLines = 0;
     statementL.textAlignment = NSTextAlignmentCenter;
@@ -151,20 +151,20 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row==0) {
-        WelcomeViewController * welcomeVC = [[WelcomeViewController alloc] init];
-        welcomeVC.needCloseBn = YES;
-        [self addChildViewController:welcomeVC];
-        [welcomeVC.view setFrame:self.view.bounds];
-        [self.view addSubview:welcomeVC.view];
-    }
-    else if (indexPath.row==1){
+//    if (indexPath.row==0) {
+//        WelcomeViewController * welcomeVC = [[WelcomeViewController alloc] init];
+//        welcomeVC.needCloseBn = YES;
+//        [self addChildViewController:welcomeVC];
+//        [welcomeVC.view setFrame:self.view.bounds];
+//        [self.view addSubview:welcomeVC.view];
+//    }
+    if (indexPath.row==0){
         WebContentViewController * vb = [[WebContentViewController alloc] init];
         vb.urlStr =[@"http://mp.weixin.qq.com/s?__biz=MjM5MDM1ODExMQ==&mid=200867907&idx=1&sn=7119893f3ed7c8615b074347a56c9519#rd" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         vb.title = @"宠物说小帮手";
         [self.navigationController pushViewController:vb animated:YES];
     }
-    else if (indexPath.row==2){
+    else if (indexPath.row==1){
         NSString *evaluateString = [NSString stringWithFormat:@"https://itunes.apple.com/app/id914242691"];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:evaluateString]];
     }
