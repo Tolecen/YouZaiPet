@@ -55,7 +55,7 @@
     [self.commentNumBtn setFrame:CGRectMake(0, 0, ScreenWidth/2.0f, 40)];
     [self.commentNumBtn setTitle:@"54转发和300评论" forState:UIControlStateNormal];
     [self.sectionBtnView addSubview:self.commentNumBtn];
-    [self.commentNumBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+    [self.commentNumBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
     [self.commentNumBtn addTarget:self action:@selector(commentBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     self.favorNumBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -68,7 +68,7 @@
     [self.favorNumBtn addTarget:self action:@selector(favorBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     self.bottomImageV = [[UIImageView alloc] initWithFrame:CGRectMake(30, 38, ScreenWidth/2.0f-60, 2)];
-    [self.bottomImageV setBackgroundColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1]];
+    [self.bottomImageV setBackgroundColor:CommonGreenColor];
     [self.sectionBtnView addSubview:self.bottomImageV];
     
     if (self.talking) {
@@ -233,7 +233,7 @@
     
     self.favorLabel = [[UILabel alloc] initWithFrame:CGRectMake(37, 10, 50, 20)];
     [self.favorLabel setBackgroundColor:[UIColor clearColor]];
-    [self.favorLabel setText:@"踩踩"];
+    [self.favorLabel setText:@"喜欢"];
     [self.favorLabel setFont:[UIFont systemFontOfSize:14]];
     //            [self.favorLabel setTextColor:[UIColor whiteColor]];
     [self.favorLabel setTextAlignment:NSTextAlignmentLeft];
@@ -683,7 +683,7 @@
     self.showFavorList = NO;
     [self getAllCommentsAndForward:nil];
     [UIView animateWithDuration:0.1 animations:^{
-        [self.commentNumBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+        [self.commentNumBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
         [self.favorNumBtn setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
         [self.bottomImageV setFrame:CGRectMake(30, 38, ScreenWidth/2.0f-60, 2)];
     } completion:^(BOOL finished) {
@@ -696,7 +696,7 @@
     self.showFavorList = YES;
     [self getAllFavors:nil];
     [UIView animateWithDuration:0.1 animations:^{
-        [self.favorNumBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+        [self.favorNumBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
         [self.commentNumBtn setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
         [self.bottomImageV setFrame:CGRectMake(ScreenWidth/2.0f+30, 38, ScreenWidth/2.0f-60, 2)];
     } completion:^(BOOL finished) {

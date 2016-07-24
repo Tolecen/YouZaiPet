@@ -151,8 +151,8 @@
     _datePicker.hidden = YES;
     _datePicker.maximumDate = [NSDate date];
     
-    self.petCategory = [[PetCategoryParser alloc] init];
-    self.petCategoryArray = [self.petCategory getParentCategorys];
+//    self.petCategory = [[PetCategoryParser alloc] init];
+//    self.petCategoryArray = [self.petCategory getParentCategorys];
 //
     self.nameTF = [[UITextField alloc] initWithFrame:CGRectMake(90, 7.5, ScreenWidth-120, 30)];
     _nameTF.delegate = self;
@@ -173,30 +173,30 @@
     [_regionTL setTextColor:[UIColor lightGrayColor]];
 //
     if (self.delegate&&[_delegate respondsToSelector:@selector(petWithWithNewUserViewController:)]) {
-        Pet * pet = [_delegate petWithWithNewUserViewController:self];
+        Account * pet = [_delegate petWithWithNewUserViewController:self];
         if (pet) {
             self.nameTF.text = pet.nickname;
-            self.genderCode = pet.gender;
+            self.genderCode = pet.gender?pet.gender:@"0";
             switch ([pet.gender intValue]) {
                 case 0:{
-                    self.genderTL.text = @"女孩";
+                    self.genderTL.text = @"女";
                 }break;
                 case 1:{
-                    self.genderTL.text = @"男孩";
+                    self.genderTL.text = @"男";
                 }break;
                 default:{
                     self.genderTL.text = @"保密";
                 }
                     break;
             }
-            self.breedCode = pet.breed;
-            self.breedTL.text = [_petCategory breedWithIDcode:[pet.breed integerValue]];
-            self.regionTL.text = pet.region;
-            _selectedBirthday = [pet.birthday timeIntervalSince1970];
-            NSDateFormatter * dateF= [[NSDateFormatter alloc]init];
-            dateF.dateFormat = @"yyyy-MM-dd";
-            NSString *messageDateStr = [dateF stringFromDate:pet.birthday];
-            [self.birthTL setText:messageDateStr];
+//            self.breedCode = pet.breed;
+//            self.breedTL.text = [_petCategory breedWithIDcode:[pet.breed integerValue]];
+//            self.regionTL.text = pet.region;
+//            _selectedBirthday = [pet.birthday timeIntervalSince1970];
+//            NSDateFormatter * dateF= [[NSDateFormatter alloc]init];
+//            dateF.dateFormat = @"yyyy-MM-dd";
+//            NSString *messageDateStr = [dateF stringFromDate:pet.birthday];
+//            [self.birthTL setText:messageDateStr];
             self.nameTF.textColor = [UIColor blackColor];
             self.genderTL.textColor = [UIColor blackColor];
             self.breedTL.textColor = [UIColor blackColor];

@@ -446,11 +446,11 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"userList" forKey:@"options"];
-    [mDict setObject:self.petId forKey:@"petId"];
+    [mDict setObject:self.petId forKey:@"userId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:@"R" forKey:@"type"];
     if ([UserServe sharedUserServe].userID) {
-        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+//        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     }
     [self.tableviewHelpeer loadFirstDataPageWithDict:mDict];
 }

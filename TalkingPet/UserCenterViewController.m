@@ -622,7 +622,7 @@
 -(void)toshuoshuoListPage
 {
     MyShuoshuoTimeLineViewController * tagTlistV = [[MyShuoshuoTimeLineViewController alloc] init];
-    tagTlistV.title = @"我的说说";
+    tagTlistV.title = @"我的发布";
 //    tagTlistV.listTyep = PetalkListTyepMyPublish;
     [self.navigationController pushViewController:tagTlistV animated:YES];
 }
@@ -669,7 +669,7 @@
     }
     return registerB;
 }
-- (Pet*)petWithWithNewUserViewController:(NewUserViewController*)controller
+- (Account*)petWithWithNewUserViewController:(NewUserViewController*)controller
 {
     if (controller == _editCurrentPetVC) {
         return [UserServe sharedUserServe].account;
@@ -746,21 +746,21 @@
     [regDict setObject:@"update" forKey:@"options"];
     [regDict setObject:[UserServe sharedUserServe].userID forKey:@"id"];
     [regDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
-    [regDict setObject:[_editCurrentPetVC.nameTF.text CutSpacing] forKey:@"nickName"];
+    [regDict setObject:[_editCurrentPetVC.nameTF.text CutSpacing] forKey:@"nickname"];
     [regDict setObject:_editCurrentPetVC.avatarUrl forKey:@"headPortrait"];
     [regDict setObject:_editCurrentPetVC.genderCode forKey:@"gender"];
-    [regDict setObject:_editCurrentPetVC.breedCode forKey:@"type"];
-    [regDict setObject:[NSString stringWithFormat:@"%.0f",_editCurrentPetVC.selectedBirthday*1000] forKey:@"birthday"];
-    [regDict setObject:_editCurrentPetVC.regionTL.text forKey:@"address"];
+//    [regDict setObject:_editCurrentPetVC.breedCode forKey:@"type"];
+//    [regDict setObject:[NSString stringWithFormat:@"%.0f",_editCurrentPetVC.selectedBirthday*1000] forKey:@"birthday"];
+//    [regDict setObject:_editCurrentPetVC.regionTL.text forKey:@"address"];
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UserServe sharedUserServe].account = ({
-            Pet * pet = [UserServe sharedUserServe].account;
+            Account * pet = [UserServe sharedUserServe].account;
             pet.nickname = [_editCurrentPetVC.nameTF.text CutSpacing];
             pet.headImgURL = _editCurrentPetVC.avatarUrl;
             pet.gender = _editCurrentPetVC.genderCode;
-            pet.breed = _editCurrentPetVC.breedCode;
-            pet.region = _editCurrentPetVC.regionTL.text;
-            pet.birthday = [NSDate dateWithTimeIntervalSince1970:_editCurrentPetVC.selectedBirthday];
+//            pet.breed = _editCurrentPetVC.breedCode;
+//            pet.region = _editCurrentPetVC.regionTL.text;
+//            pet.birthday = [NSDate dateWithTimeIntervalSince1970:_editCurrentPetVC.selectedBirthday];
             pet;
         });
         [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];

@@ -49,7 +49,7 @@
         self.commentNameL = [[UILabel alloc] initWithFrame:CGRectMake(70, 15, 200, 20)];
         [self.commentNameL setBackgroundColor:[UIColor clearColor]];
         [self.commentNameL setFont:[UIFont systemFontOfSize:15]];
-        self.commentNameL.textColor = [UIColor colorWithRed:60/255.0 green:198/255.0 blue:255/255.0 alpha:1];
+        self.commentNameL.textColor = CommonGreenColor;
         [self.contentView addSubview:self.commentNameL];
         self.commentNameL.userInteractionEnabled = YES;
         

@@ -280,7 +280,7 @@
             [tB setFrame:CGRectMake(10, 370, 80, 20)];
             [tB addTarget:self action:@selector(tagBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
             [self.tagView addSubview:tB];
-        [tB setBackgroundColor:[UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:0.7]];
+        [tB setBackgroundColor:[UIColor colorWithRed:99/255.0f green:203/255.0f blue:175/255.f alpha:0.8]];
         tB.layer.cornerRadius = 8;
         tB.layer.masksToBounds = YES;
             tB.hidden = YES;
@@ -293,7 +293,7 @@
         self.locationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.locationBtn setFrame:CGRectMake(310-87-5, 370, 82, 20)];
         [self.contentTextBgV addSubview:self.locationBtn];
-        [self.locationBtn setBackgroundColor:[UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:0.7]];
+        [self.locationBtn setBackgroundColor:[UIColor colorWithRed:99/255.0f green:203/255.0f blue:175/255.f alpha:0.8]];
         self.locationBtn.layer.cornerRadius = 5;
         self.locationBtn.layer.masksToBounds = YES;
         [_locationBtn addTarget:self action:@selector(locationAction) forControlEvents:UIControlEventTouchUpInside];
@@ -821,7 +821,7 @@
                 }
             }
     }
-    self.favorLabel.text = [self.talking.favorNum intValue]>0?self.talking.favorNum:@"踩踩";
+    self.favorLabel.text = [self.talking.favorNum intValue]>0?self.talking.favorNum:@"喜欢";
 //    self.forwardLabel.text = self.talking.forwardNum;
     self.commentLabel.text = [self.talking.commentNum intValue]>0?self.talking.commentNum:@"评论";
     self.shareLabel.text = ([self.talking.shareNum intValue]+[self.talking.forwardNum intValue])>0?[NSString stringWithFormat:@"%d",[self.talking.shareNum intValue]+[self.talking.forwardNum intValue]]:@"分享";

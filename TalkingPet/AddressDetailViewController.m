@@ -97,7 +97,7 @@
     
     UIButton * saveAddressB = [UIButton buttonWithType:UIButtonTypeCustom];
     saveAddressB.frame = CGRectMake(0, self.view.frame.size.height-navigationBarHeight-self.view.frame.size.width*98/750, self.view.frame.size.width, self.view.frame.size.width*98/750);
-    [saveAddressB setTitleColor:[UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:1] forState:UIControlStateNormal];
+    [saveAddressB setTitleColor:CommonGreenColor forState:UIControlStateNormal];
     saveAddressB.backgroundColor = [UIColor whiteColor];
     [saveAddressB addTarget:self action:@selector(saveAddressB) forControlEvents:UIControlEventTouchUpInside];
     [saveAddressB setTitle:_finishTitle forState:UIControlStateNormal];

@@ -61,7 +61,7 @@
         UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         activityView.bounds = self.arrowImage.bounds;
         activityView.autoresizingMask = self.arrowImage.autoresizingMask;
-        activityView.color = [UIColor colorWithRed:133/255.0f green:209/255.0f blue:252/255.0f alpha:1];
+        activityView.color = CommonGreenColor;
         [self addSubview:_activityView = activityView];
     }
     return _activityView;

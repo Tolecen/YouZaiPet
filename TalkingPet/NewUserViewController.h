@@ -17,7 +17,7 @@
 - (NSString *)titleWithNewUserViewController:(NewUserViewController*)controller;
 - (UIButton *)finishButtonWithWithNewUserViewController:(NewUserViewController*)controller;
 @optional
-- (Pet*)petWithWithNewUserViewController:(NewUserViewController*)controller;
+- (Account*)petWithWithNewUserViewController:(NewUserViewController*)controller;
 @end
 typedef enum
 {

@@ -27,7 +27,7 @@
     [super layoutSubviews];
     
     self.statusLabel.frame = self.bounds;
-    self.statusLabel.textColor = [UIColor colorWithRed:133/255.0f green:209/255.0f blue:252/255.0f alpha:1];
+    self.statusLabel.textColor = CommonGreenColor;
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview

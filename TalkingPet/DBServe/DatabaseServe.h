@@ -26,7 +26,7 @@
 +(void)savePet:(Pet*)pet WithUsername:(NSString*)username;
 +(void)setChatSettingForPetId:(NSString *)petId setting:(int)setting;
 +(int)getChatSettingForCurrentPet;
-+(void)activatePet:(Pet*)pet WithUsername:(NSString*)username;
++(void)activatePet:(Account*)pet WithUsername:(NSString*)username;
 +(Account*)getActionAccount;
 +(Account*)getLastActionedAccount;
 +(Pet*)getActionPetWithWithUsername:(NSString*)username;

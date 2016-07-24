@@ -54,9 +54,12 @@
 {
     [super setFrame:frame];
 //    headView.center = CGPointMake(CGRectGetMidX([self bounds]), headView.center.y);
-    storyB.frame = CGRectMake(CGRectGetMidX([self bounds])-130, frame.size.height, 60, 86);
+//    storyB.frame = CGRectMake(CGRectGetMidX([self bounds])-130, frame.size.height, 60, 86);
+//    petalkB.frame = CGRectMake(CGRectGetMidX([self bounds])-30, frame.size.height, 60, 86);
+//    pictureB.frame = CGRectMake(CGRectGetMidX([self bounds])+70, frame.size.height, 60, 86);
+    pictureB.frame = CGRectMake(CGRectGetMidX([self bounds])-130, frame.size.height, 60, 86);
     petalkB.frame = CGRectMake(CGRectGetMidX([self bounds])-30, frame.size.height, 60, 86);
-    pictureB.frame = CGRectMake(CGRectGetMidX([self bounds])+70, frame.size.height, 60, 86);
+    storyB.frame = CGRectMake(CGRectGetMidX([self bounds])+70, frame.size.height, 60, 86);
     image.frame = CGRectMake(self.publishox, frame.size.height-60, 40, 40);
 //    image.center = CGPointMake(CGRectGetMidX([self bounds]), frame.size.height-24);
 }
@@ -74,7 +77,7 @@
               initialSpringVelocity:7.5
                             options:UIViewAnimationOptionCurveEaseIn
                          animations:^{
-                             storyB.frame = CGRectMake(CGRectGetMidX([self bounds])-130, self.frame.size.height-200,60, 86);
+                             pictureB.frame = CGRectMake(CGRectGetMidX([self bounds])-130, self.frame.size.height-200,60, 86);
                              image.transform = CGAffineTransformMakeRotation(M_PI_4);
                          }
                          completion:^(BOOL finished){
@@ -97,7 +100,7 @@
               initialSpringVelocity:7.5
                             options:UIViewAnimationOptionCurveEaseIn
                          animations:^{
-                             pictureB.frame = CGRectMake(CGRectGetMidX([self bounds])+70, self.frame.size.height-200,60, 86);
+                             storyB.frame = CGRectMake(CGRectGetMidX([self bounds])+70, self.frame.size.height-200,60, 86);
                          }
                          completion:^(BOOL finished){
                              [RootViewController sharedRootViewController].view.userInteractionEnabled = YES;
@@ -107,9 +110,9 @@
     }else{
         [UIView animateWithDuration:0.3
                          animations:^{
-                             storyB.frame = CGRectMake(CGRectGetMidX([self bounds])-130, self.frame.size.height-200, 60, 86);
+                             pictureB.frame = CGRectMake(CGRectGetMidX([self bounds])-130, self.frame.size.height-200, 60, 86);
                              petalkB.frame = CGRectMake(CGRectGetMidX([self bounds])-30, self.frame.size.height-200, 60, 86);
-                             pictureB.frame = CGRectMake(CGRectGetMidX([self bounds])+70, self.frame.size.height-200,60, 86);
+                             storyB.frame = CGRectMake(CGRectGetMidX([self bounds])+70, self.frame.size.height-200,60, 86);
                              image.transform = CGAffineTransformMakeRotation(M_PI_4);
                          } completion:^(BOOL finished) {
                              [RootViewController sharedRootViewController].view.userInteractionEnabled = YES;
@@ -144,7 +147,7 @@
     [UIView animateWithDuration:0.3
                           delay:0.1
                         options:UIViewAnimationOptionLayoutSubviews animations:^{
-                            pictureB.frame = CGRectMake(CGRectGetMidX([self bounds])+70, self.frame.size.height,60, 86);
+                            storyB.frame = CGRectMake(CGRectGetMidX([self bounds])+70, self.frame.size.height,60, 86);
                         } completion:^(BOOL finished) {
                             
                         } ];
@@ -158,7 +161,7 @@
     [UIView animateWithDuration:0.3
                           delay:0.2
                         options:UIViewAnimationOptionLayoutSubviews animations:^{
-                            storyB.frame = CGRectMake(CGRectGetMidX([self bounds])-130, self.frame.size.height,60, 86);
+                            pictureB.frame = CGRectMake(CGRectGetMidX([self bounds])-130, self.frame.size.height,60, 86);
                             image.transform = CGAffineTransformMakeRotation(0);
                         } completion:^(BOOL finished) {
                             [RootViewController sharedRootViewController].view.userInteractionEnabled = YES;
