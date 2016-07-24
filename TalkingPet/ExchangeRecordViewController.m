@@ -149,7 +149,7 @@
 }
 - (void)getFristRecordList
 {
-    page = 0;
+    page = 1;
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"goods" forKey:@"command"];
     [mDict setObject:@"orderList" forKey:@"options"];

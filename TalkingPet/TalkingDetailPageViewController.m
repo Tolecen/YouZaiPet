@@ -1154,7 +1154,7 @@
         [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
         self.talking.ifZan = YES;
         self.favorBtn.enabled = NO;
-        [self zanMakeBig];
+//        [self zanMakeBig];
         int n = (int)self.caiNum;
         [self.favorNumBtn setTitle:[NSString stringWithFormat:@"%d踩",n+1] forState:UIControlStateNormal];
         self.caiNum++;

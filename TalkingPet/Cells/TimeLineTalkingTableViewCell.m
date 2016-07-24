@@ -509,7 +509,7 @@
         [mDict setObject:@"cancelFavour" forKey:@"options"];
         [mDict setObject:self.talking.theID forKey:@"petalkId"];
         [mDict setObject:@"F" forKey:@"type"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         
         
         NSLog(@"cancelFavor:%@",mDict);
@@ -526,7 +526,7 @@
     else{
         self.talking.ifZan = YES;
         self.favorBtn.enabled = NO;
-        [self zanMakeBig];
+//        [self zanMakeBig];
         [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
         self.favorLabel.text =[NSString stringWithFormat:@"%d",[self.favorLabel.text intValue]+1];
         NSMutableDictionary* mDict = [NetServer commonDict];
@@ -534,7 +534,7 @@
         [mDict setObject:@"create" forKey:@"options"];
         [mDict setObject:self.talking.theID forKey:@"petalkId"];
         [mDict setObject:@"F" forKey:@"type"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         
         
         NSLog(@"doFavor:%@",mDict);

@@ -26,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    currentIndex = 0;
+    currentIndex = 1;
     [self setBackButtonWithTarget:@selector(backBtnDo:)];
     self.packageTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
     _packageTableview.delegate = self;
@@ -68,7 +68,7 @@
     NSLog(@"Get ShuoShuo:%@",mDict);
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"error"] isEqualToString:@"200"]) {
-            if (currentIndex==0) {
+            if (currentIndex==1) {
                 self.dataArray = [self getModelArray:[responseObject objectForKey:@"value"]];
                 //               self.dataArray = [self getModelArray:self.dataArray];
             }
@@ -181,7 +181,7 @@
 
 - (void)tableViewHeaderRereshing:(UITableView *)tableView
 {
-    currentIndex=0;
+    currentIndex=1;
 //    [self getPackageByType:0];
     [self getmyBag];
 }

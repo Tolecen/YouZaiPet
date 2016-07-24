@@ -320,10 +320,10 @@
     [mDict setObject:@"findFocus" forKey:@"options"];
     [mDict setObject:self.petID forKey:@"userId"];
     if ([UserServe sharedUserServe].userID) {
-        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+//        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     }
     [mDict setObject:searchBar.text forKey:@"keyword"];
-    [mDict setObject:@"0" forKey:@"pageIndex"];
+    [mDict setObject:@"1" forKey:@"pageIndex"];
     [mDict setObject:@"20" forKey:@"pageSize"];
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.searchArr = [NSMutableArray arrayWithArray:[responseObject[@"value"] objectForKey:@"list"]];

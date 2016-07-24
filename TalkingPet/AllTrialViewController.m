@@ -144,13 +144,13 @@
 }
 - (void)getFristTrialList
 {
-    page = 0;
+    page = 1;
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"goods" forKey:@"command"];
     [mDict setObject:@"trialList" forKey:@"options"];
     [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
     [mDict setObject:@"10" forKey:@"pageSize"];
-    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         page++;
         [_packageTableview headerEndRefreshing];
@@ -167,7 +167,7 @@
     [mDict setObject:@"trialList" forKey:@"options"];
     [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
     [mDict setObject:@"10" forKey:@"pageSize"];
-    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         page++;
         [_packageTableview footerEndRefreshing];

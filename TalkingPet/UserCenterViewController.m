@@ -458,10 +458,10 @@
 - (void)getCurrentPetInfo
 {
     NSMutableDictionary* mDict = [NetServer commonDict];
-    [mDict setObject:@"pet" forKey:@"command"];
-    [mDict setObject:@"one" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
-    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+    [mDict setObject:@"account" forKey:@"command"];
+    [mDict setObject:@"userInfo" forKey:@"options"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
+//    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dict = [responseObject objectForKey:@"value"];
         [UserServe sharedUserServe].account.fansNo = (dict[@"counter"])[@"fans"];
@@ -475,6 +475,10 @@
         [UserServe sharedUserServe].account.coin = dict[@"coin"];
         [self loadViewContent];
 //        [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
+        
+        Account * acc = [[Account alloc]initWithDictionary:dict error:nil];
+        [DatabaseServe activateUeserWithAccount:acc];
+//        userServe.account = [DatabaseServe getActionAccount];
         
         [self.tableView headerEndRefreshing];
         

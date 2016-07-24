@@ -44,7 +44,7 @@
         self.headerCanRefresh = YES;
         currentPetId = @"";
         
-        currentID = 0;
+        currentID = 1;
         
         self.footerShouldDelegateToUserCenter = NO;
         
@@ -297,7 +297,7 @@
     NSLog(@"Get ShuoShuo:%@",mDict);
     [NetServer requestWithParameters:mDict Controller:self.theController success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"error"] isEqualToString:@"200"]) {
-            if (currentID==0) {
+            if (currentID==1) {
                 self.dataArray = [self getModelArray:[[responseObject objectForKey:@"value"] objectForKey:@"list"]];
                 [self endHeaderRefreshing:self.tableV];
             }
@@ -314,7 +314,7 @@
 //        [self cellPlayAni:self.tableV];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"get hot shuoshuo failed error:%@",error);
-        if (currentID==0) {
+        if (currentID==1) {
             [self endHeaderRefreshing:self.tableV];
         }
         else
@@ -1366,7 +1366,7 @@
     [mDict setObject:@"create" forKey:@"options"];
     [mDict setObject:talkingBrowse.theID forKey:@"petalkId"];
     [mDict setObject:@"F" forKey:@"type"];
-    [mDict setObject:currentPetId forKey:@"petId"];
+    [mDict setObject:currentPetId forKey:@"userId"];
     
     
     NSLog(@"doFavor:%@",mDict);

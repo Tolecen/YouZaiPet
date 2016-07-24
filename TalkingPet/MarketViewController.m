@@ -228,7 +228,7 @@
     if (self) {
         // Custom initialization
         self.title = @"商城";
-        page = 0;
+        page = 1;
         self.tryArr = [NSMutableArray array];
         self.commodityArr = [NSMutableArray array];
     }

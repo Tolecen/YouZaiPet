@@ -107,7 +107,7 @@
     [hotDic setObject:@"100" forKey:@"pageSize"];
     //    [hotDic setObject:[NSString stringWithFormat:@"%d",(int)self.pageIndex] forKey:@"pageIndex"];
     [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
-    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     [hotDic setObject:@"O" forKey:@"type"];
     [NetServer requestWithParameters:hotDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.pageIndex++;

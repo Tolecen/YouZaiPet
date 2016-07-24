@@ -209,7 +209,7 @@
         [mDict setObject:@"cancelLike" forKey:@"options"];
         [mDict setObject:[self.contentDict objectForKey:@"id"] forKey:@"talkId"];
 //        [mDict setObject:@"F" forKey:@"type"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         
         
         NSLog(@"cancelFavor:%@",mDict);

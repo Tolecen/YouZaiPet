@@ -37,7 +37,7 @@
         self.headerCanRefresh = YES;
         currentPetId = @"";
         
-        currentID = 0;
+        currentID = 1;
         
         self.footerShouldDelegateToUserCenter = NO;
         
@@ -230,14 +230,14 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"hotList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"no" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"no" forKey:@"userId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:[NSString stringWithFormat:@"%d",lastMark] forKey:@"pageIndex"];
     //    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     NSLog(@"Get ShuoShuo:%@",mDict);
     [NetServer requestWithParameters:mDict Controller:self.theController success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"error"] isEqualToString:@"200"]) {
-            if (currentID==0) {
+            if (currentID==1) {
                 self.dataArray = [self getModelArray:[[responseObject objectForKey:@"value"] objectForKey:@"list"]];
                 [self endHeaderRefreshing:self.tableV];
             }
@@ -254,7 +254,7 @@
         //        [self cellPlayAni:self.tableV];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"get hot shuoshuo failed error:%@",error);
-        if (currentID==0) {
+        if (currentID==1) {
             [self endHeaderRefreshing:self.tableV];
         }
         else
@@ -535,7 +535,7 @@
     [mDict setObject:@"create" forKey:@"options"];
     [mDict setObject:talkingBrowse.theID forKey:@"petalkId"];
     [mDict setObject:@"F" forKey:@"type"];
-    [mDict setObject:currentPetId forKey:@"petId"];
+    [mDict setObject:currentPetId forKey:@"userId"];
     
     
     NSLog(@"doFavor:%@",mDict);

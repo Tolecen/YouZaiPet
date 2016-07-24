@@ -252,12 +252,12 @@
     _tableViewHelper.cellNeedShowPublishTime = NO;
     NSMutableDictionary * hotDic = [NetServer commonDict];
     [hotDic setObject:@"petalk" forKey:@"command"];
-    [hotDic setObject:@"0" forKey:@"pageIndex"];
+    [hotDic setObject:@"1" forKey:@"pageIndex"];
     [hotDic setObject:@"10" forKey:@"pageSize"];
     [hotDic setObject:@"tagList" forKey:@"options"];
     [hotDic setObject:self.tag.tagID forKey:@"tagId"];
     if ([UserServe sharedUserServe].userID) {
-        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     }
     [_tableViewHelper loadFirstDataPageWithDict:hotDic];
 }

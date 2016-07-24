@@ -467,7 +467,7 @@
         [mDict setObject:@"cancelFavour" forKey:@"options"];
         [mDict setObject:self.talking.theID forKey:@"petalkId"];
         [mDict setObject:@"F" forKey:@"type"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         
         
         NSLog(@"cancelFavor:%@",mDict);
@@ -486,7 +486,7 @@
         self.favorBtn.enabled = NO;
         
         //        [self performSelector:@selector(zanMakeBig) withObject:nil afterDelay:0.2];
-        [self zanMakeBig];
+//        [self zanMakeBig];
         [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
         self.favorLabel.text =[NSString stringWithFormat:@"%d",[self.favorLabel.text intValue]+1];
         
@@ -495,7 +495,7 @@
         [mDict setObject:@"create" forKey:@"options"];
         [mDict setObject:self.talking.theID forKey:@"petalkId"];
         [mDict setObject:@"F" forKey:@"type"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         
         
         NSLog(@"doFavor:%@",mDict);

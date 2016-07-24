@@ -56,7 +56,7 @@
     if (self.listTyep == PetalkListTyepChannel) {
         [self requestChannelInfo];
         [hotDic setObject:@"petalk" forKey:@"command"];
-        [hotDic setObject:@"0" forKey:@"pageIndex"];
+        [hotDic setObject:@"1" forKey:@"pageIndex"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
         [hotDic setObject:@"channel" forKey:@"options"];
         [hotDic setObject:self.otherCode forKey:@"code"];
@@ -65,7 +65,7 @@
         }
     }if (self.listTyep == PetalkListTyepPetBreed) {
         [hotDic setObject:@"petalk" forKey:@"command"];
-        [hotDic setObject:@"0" forKey:@"pageIndex"];
+        [hotDic setObject:@"1" forKey:@"pageIndex"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
         [hotDic setObject:@"petBreed" forKey:@"options"];
         [hotDic setObject:self.otherCode forKey:@"code"];

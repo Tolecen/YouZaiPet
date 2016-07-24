@@ -54,7 +54,8 @@
         NSString * currentChatUser = [[UserServe sharedUserServe].userName stringByAppendingString:[UserServe sharedUserServe].userID];
         [SystemServer sharedSystemServer].currentChatUserId = currentChatUser;
         [[SystemServer sharedSystemServer] chatClientAuth];
-        [self synchronousPetlist];
+//        [self synchronousPetlist];
+        [self getCurrentUserInfo];
         [[UserServe sharedUserServe] activityOfCurrentPet];
     }
    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadUserAPNSToken) name:@"WXRLoginSucceed" object:nil];//当登录用户发生改变时发送向服务端发送APNSToken
@@ -298,6 +299,29 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:evaluateString]];
         }
     }
+}
+
+-(void)getCurrentUserInfo
+{
+    if (![UserServe sharedUserServe].userID) {
+        return;
+    }
+    NSMutableDictionary* mDict = [NetServer commonDict];
+    [mDict setObject:@"account" forKey:@"command"];
+    [mDict setObject:@"userInfo" forKey:@"options"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
+    //    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+    [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary * dict = [responseObject objectForKey:@"value"];
+        //        [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
+        
+        Account * acc = [[Account alloc]initWithDictionary:dict error:nil];
+        [DatabaseServe activateUeserWithAccount:acc];
+        [UserServe sharedUserServe].account = [DatabaseServe getActionAccount];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }];
 }
 -(void)synchronousPetlist
 {
