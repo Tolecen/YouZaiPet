@@ -189,7 +189,7 @@
             self.userListArr = [NSMutableArray arrayWithArray:responseObject[@"value"]];
         }
         else
-            self.userListArr = [NSMutableArray arrayWithArray:[responseObject[@"value"] objectForKey:@"list"]];
+            self.userListArr = [NSMutableArray arrayWithArray:responseObject[@"value"]];
         [_tableView reloadData];
         if (self.userListArr.count==0) {
             g.hidden = NO;

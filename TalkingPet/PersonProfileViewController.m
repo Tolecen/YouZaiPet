@@ -269,8 +269,8 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"petfans" forKey:@"command"];
         [mDict setObject:@"focus" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"fansPetId"];
-        [mDict setObject:self.petId forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"fansId"];
+        [mDict setObject:self.petId forKey:@"userId"];
         [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[[responseObject objectForKey:@"value"] objectForKey:@"bothway"] isEqualToString:@"false"]) {
                 self.relationShip = @"1";

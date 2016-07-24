@@ -87,10 +87,13 @@
     [super layoutSubviews];
     self.commentNameL.text = [self.petDict objectForKey:@"nickname"];
     self.commentAvatarV.imageURL = [NSURL URLWithString:[[self.petDict objectForKey:@"head"] stringByAppendingString:@"?imageView2/2/w/80"]];
-    self.talkNoL.text = [NSString stringWithFormat:@"宠物说:%@",[[self.petDict objectForKey:@"counter"] objectForKey:@"issue"]];
-    self.fansNoL.text = [NSString stringWithFormat:@"粉丝:%@",[[self.petDict objectForKey:@"counter"] objectForKey:@"fans"]];
+    if ([[self.petDict objectForKey:@"counter"] isKindOfClass:[NSDictionary class]]) {
+        self.talkNoL.text = [NSString stringWithFormat:@"发布:%@",[[self.petDict objectForKey:@"counter"] objectForKey:@"issue"]];
+        self.fansNoL.text = [NSString stringWithFormat:@"粉丝:%@",[[self.petDict objectForKey:@"counter"] objectForKey:@"fans"]];
+    }
+    
     self.relationShip = [self.petDict objectForKey:@"rs"];
-    self.darenV.hidden = [[self.petDict objectForKey:@"star"] isEqualToString:@"1"]?NO:YES;
+//    self.darenV.hidden = [[self.petDict objectForKey:@"star"] isEqualToString:@"1"]?NO:YES;
     if (self.listType==2) {
         self.relationBtn.hidden = NO;
         [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"removeBlackList"] forState:UIControlStateNormal];
@@ -169,8 +172,8 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petfans" forKey:@"command"];
     [mDict setObject:@"focus" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"fansPetId"];
-    [mDict setObject:[self.petDict objectForKey:@"id"] forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"fansId"];
+    [mDict setObject:[self.petDict objectForKey:@"id"] forKey:@"userId"];
     
     //    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     NSLog(@"focus user:%@",mDict);
