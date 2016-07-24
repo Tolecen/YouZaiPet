@@ -333,7 +333,7 @@
         self.publisherNameL = [[UILabel alloc] initWithFrame:CGRectMake(75, 370+35, 200, 20)];
         [self.publisherNameL setBackgroundColor:[UIColor clearColor]];
         [self.publisherNameL setFont:[UIFont systemFontOfSize:16]];
-        self.publisherNameL.textColor = [UIColor colorWithWhite:100/255.0f alpha:1];
+        self.publisherNameL.textColor = CommonGreenColor;
         [self.publisherNameL setText:@"我是小黄瓜"];
         [self.contentTextBgV addSubview:self.publisherNameL];
         
@@ -343,12 +343,12 @@
         [self.publisherNameL addGestureRecognizer:tapw];
         //        self.publisherNameL.shadowColor = [UIColor grayColor];
         
-        self.bL = [[UILabel alloc] initWithFrame:CGRectMake(65, 370+35+20, 40, 20)];
-        [_bL setBackgroundColor:[UIColor clearColor]];
-        [_bL setText:@"发表于:"];
-        _bL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
-        [_bL setFont:[UIFont systemFontOfSize:12]];
-        [self.contentTextBgV addSubview:_bL];
+//        self.bL = [[UILabel alloc] initWithFrame:CGRectMake(65, 370+35+20, 40, 20)];
+//        [_bL setBackgroundColor:[UIColor clearColor]];
+//        [_bL setText:@"发表于:"];
+//        _bL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
+//        [_bL setFont:[UIFont systemFontOfSize:12]];
+//        [self.contentTextBgV addSubview:_bL];
         
         self.gradeImageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
         [self.contentTextBgV addSubview:self.gradeImageV];
@@ -983,39 +983,40 @@
 
     //    NSLog(@"%f,%f",self.talking.animationImg.rotationY,self.talking.animationImg.rotationZ);
     int lv = [self.talking.petInfo.grade intValue];
-    NSString * blStr;
+//    NSString * blStr;
 //    lv = arc4random()%12+1;
 //    NSLog(@"currentLVStr:%@,currentLV:%d",self.talking.petInfo.grade,lv);
-    if (lv>0) {
-        blStr = [NSString stringWithFormat:@"%@ |",self.talking.petInfo.breed];
+//    if (lv>0) {
+//        blStr = [NSString stringWithFormat:@"%@ |",self.talking.petInfo.breed];
         self.gradeImageV.hidden = NO;
         self.gradeLabel.hidden = NO;
         
-        CGSize bls = [blStr sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(300, 20) lineBreakMode:NSLineBreakByCharWrapping];
-        
-        
-        [self.bL setFrame:CGRectMake(65, self.publisherNameL.frame.origin.y+23, bls.width, 20)];
-        [self.bL setText:blStr];
+//        CGSize bls = [blStr sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(300, 20) lineBreakMode:NSLineBreakByCharWrapping];
+    
+//        
+//        [self.bL setFrame:CGRectMake(65, self.publisherNameL.frame.origin.y+23, bls.width, 20)];
+//        [self.bL setText:blStr];
         self.gradeImageV.frame = CGRectMake(self.bL.frame.origin.x+self.bL.frame.size.width+5, self.publisherNameL.frame.origin.y+27, 14, 14);
         
         self.gradeImageV.image = [UIImage imageNamed:[NSString stringWithFormat:@"LV%d",lv]];
         //    self.gradeImageV.backgroundColor = [UIColor redColor];
-        self.gradeLabel.frame = CGRectMake(self.bL.frame.origin.x+self.bL.frame.size.width+5+14+3, self.publisherNameL.frame.origin.y+23, 60, 20);
+//        self.gradeLabel.frame = CGRectMake(self.bL.frame.origin.x+self.bL.frame.size.width+5+14+3, self.publisherNameL.frame.origin.y+23, 60, 20);
+    self.gradeLabel.frame = CGRectMake(65, self.publisherNameL.frame.origin.y+23, 60, 20);
         self.gradeLabel.text = [NSString stringWithFormat:@"LV.%d",lv];
-    }
-    else
-    {
-        blStr = [NSString stringWithFormat:@"%@",self.talking.petInfo.breed];
-        self.gradeLabel.hidden = YES;
-        self.gradeImageV.hidden = YES;
-        
-        CGSize bls = [blStr sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(300, 20) lineBreakMode:NSLineBreakByCharWrapping];
-        
-        
-        [self.bL setFrame:CGRectMake(65, self.publisherNameL.frame.origin.y+23, bls.width, 20)];
-        [self.bL setText:blStr];
-
-    }
+//    }
+//    else
+//    {
+//        blStr = [NSString stringWithFormat:@"%@",self.talking.petInfo.breed];
+//        self.gradeLabel.hidden = YES;
+//        self.gradeImageV.hidden = YES;
+//        
+//        CGSize bls = [blStr sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(300, 20) lineBreakMode:NSLineBreakByCharWrapping];
+//        
+//        
+//        [self.bL setFrame:CGRectMake(65, self.publisherNameL.frame.origin.y+23, bls.width, 20)];
+//        [self.bL setText:blStr];
+//
+//    }
     
 
     if ([self.talking.petInfo.gender isEqualToString:@"1"]) {

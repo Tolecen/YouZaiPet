@@ -832,11 +832,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/Cells/BrowserForwardedTalkingTableViewCell.m"
-            timestampString = "461730212.024175"
+            timestampString = "491041308.200246"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1152"
-            endingLineNumber = "1152"
+            startingLineNumber = "1153"
+            endingLineNumber = "1153"
             landmarkName = "-storyClicked"
             landmarkType = "5">
          </BreakpointContent>
@@ -848,11 +848,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/Cells/BrowserForwardedTalkingTableViewCell.m"
-            timestampString = "461730212.024175"
+            timestampString = "491041308.200246"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1158"
-            endingLineNumber = "1158"
+            startingLineNumber = "1159"
+            endingLineNumber = "1159"
             landmarkName = "-clickedContentImageV:"
             landmarkType = "5">
          </BreakpointContent>
