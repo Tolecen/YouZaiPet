@@ -1392,7 +1392,7 @@
 }
 - (void)shareWithTalkingBrowse: (TalkingBrowse *)talkingBrowse
 {
-    ShareSheet * shareSheet = [[ShareSheet alloc]initWithIconArray:@[@"weiChatFriend",@"friendCircle",@"sina",@"qq",@"petaking"] titleArray:@[@"微信好友",@"朋友圈",@"微博",@"QQ",@"宠物说"] action:^(NSInteger index) {
+    ShareSheet * shareSheet = [[ShareSheet alloc]initWithIconArray:@[@"weiChatFriend",@"friendCircle",@"sina",@"qq",@"petaking"] titleArray:@[@"微信好友",@"朋友圈",@"微博",@"QQ",@"友仔"] action:^(NSInteger index) {
         switch (index) {
             case 0:{
                 [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"听%@的宠物说",talkingBrowse.petInfo.nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent] imageUrl:talkingBrowse.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",talkingBrowse.theID] Succeed:^{

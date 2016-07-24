@@ -51,7 +51,7 @@
         [self.talkNoL setBackgroundColor:[UIColor clearColor]];
         self.talkNoL.textColor = [UIColor grayColor];
         [self.talkNoL setFont:[UIFont systemFontOfSize:14]];
-        [self.talkNoL setText:@"宠物说:20"];
+        [self.talkNoL setText:@"发布:20"];
         [self.contentView addSubview:self.talkNoL];
         
         self.fansNoL = [[UILabel alloc] initWithFrame:CGRectMake(180, 40, 100, 20)];

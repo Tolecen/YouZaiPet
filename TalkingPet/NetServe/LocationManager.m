@@ -151,7 +151,7 @@ static  LocationManager *sharedInstance=nil;
         {
             //Access denied by user
             if (!self.autoCheck) {
-                errorString = @"请到手机系统的【设置】>【隐私】>【定位服务】中开启宠物说的定位服务";
+                errorString = @"请到手机系统的【设置】>【隐私】>【定位服务】中开启友仔的定位服务";
                 //Do something...
                 //            if (![self.locType isEqualToString:@"open"]) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未开启定位服务" message:errorString delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];

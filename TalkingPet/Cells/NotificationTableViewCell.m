@@ -125,7 +125,7 @@
 {
     [super layoutSubviews];
     if (self.notiStyle==notiStyleSystem) {
-        NSString * theName = @"宠物说助手";
+        NSString * theName = @"友仔助手";
         [self.userAvatarV setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
 //        self.userAvatarV.enabled = NO;
         CGSize forwardedNameSize = [theName sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(120, 20)];

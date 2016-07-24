@@ -60,9 +60,9 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>允许获取位置可以使您发表的宠物说带有一个大致位置</string>
+	<string>允许获取位置可以使您发表的内容带有一个大致位置</string>
 	<key>NSLocationWhenInUseDescription</key>
-	<string>允许获取位置可以使您发表的宠物说带有一个大致位置</string>
+	<string>允许获取位置可以使您发表的内容带有一个大致位置</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>huakangwawa.TTF</string>

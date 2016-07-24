@@ -158,7 +158,7 @@
 //    [segmentIV addSubview:_scrollBG];
     shuoshuoB = [UIButton buttonWithType:UIButtonTypeCustom];
     shuoshuoB.frame = CGRectMake(0, 0, ScreenWidth/3, 30);
-    [shuoshuoB setTitle:@"宠物说" forState:UIControlStateNormal];
+    [shuoshuoB setTitle:@"说说" forState:UIControlStateNormal];
     [shuoshuoB.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [shuoshuoB setTitleColor:CommonGreenColor forState:UIControlStateNormal];
     shuoshuoB.tag = 1;

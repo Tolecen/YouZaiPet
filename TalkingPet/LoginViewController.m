@@ -34,7 +34,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"登录宠物说";
+        self.title = @"登录友仔";
     }
     return self;
 }
@@ -214,7 +214,7 @@
 - (void)buildViewWithSkintype
 {
     [super buildViewWithSkintype];
-    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:@"同意《宠物说用户协议》"];
+    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:@"同意《友仔用户协议》"];
     [str addAttribute:NSForegroundColorAttributeName
                 value:(id)[UIColor grayColor].CGColor
                 range:NSMakeRange(0, 3)];

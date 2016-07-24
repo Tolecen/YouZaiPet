@@ -422,7 +422,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"get shuoshuo content failed with error:%@",error);
         if ([error code]!=-1004) {
-            UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"宠物说不存在" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+            UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"内容不存在" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
             errorAlert.tag = 12;
             [errorAlert show];
         }
@@ -578,7 +578,7 @@
 }
 -(void)shareBtnClicked
 {
-    ShareSheet * shareSheet = [[ShareSheet alloc]initWithIconArray:@[@"weiChatFriend",@"friendCircle",@"sina",@"qq",@"petaking"] titleArray:@[@"微信好友",@"朋友圈",@"微博",@"QQ",@"宠物说"] action:^(NSInteger index) {
+    ShareSheet * shareSheet = [[ShareSheet alloc]initWithIconArray:@[@"weiChatFriend",@"friendCircle",@"sina",@"qq",@"petaking"] titleArray:@[@"微信好友",@"朋友圈",@"微博",@"QQ",@"友仔"] action:^(NSInteger index) {
         switch (index) {
             case 0:{
                 [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"听%@的宠物说",_talking.petInfo.nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",_talking.petInfo.nickname,_talking.descriptionContent] imageUrl:_talking.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_talking.theID] Succeed:^{
