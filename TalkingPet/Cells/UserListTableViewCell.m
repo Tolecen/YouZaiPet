@@ -34,9 +34,9 @@
         self.commentAvatarV.layer.masksToBounds = YES;
         [self.commentAvatarV addTarget:self action:@selector(headBtnClicked) forControlEvents:UIControlEventTouchUpInside];
         
-        self.darenV = [[UIImageView alloc] initWithFrame:CGRectMake(10+50-17, 10+50-17, 17, 17)];
-        [self.darenV setImage:[UIImage imageNamed:@"daren"]];
-        [self.contentView addSubview:self.darenV];
+//        self.darenV = [[UIImageView alloc] initWithFrame:CGRectMake(10+50-17, 10+50-17, 17, 17)];
+//        [self.darenV setImage:[UIImage imageNamed:@"daren"]];
+//        [self.contentView addSubview:self.darenV];
         
         //        UIImageView * avatarbg = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
         //        [avatarbg setImage:[UIImage imageNamed:@"avatarbg1"]];

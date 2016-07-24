@@ -33,7 +33,11 @@
             self.content = @"语音评论";
         }
         
-        self.aimPetNickname = [info objectForKey:@"aimPetNickname"];
+        if ([info objectForKey:@"aimPet"] && [[info objectForKey:@"aimPet"] isKindOfClass:[NSDictionary class]]) {
+            self.aimPetNickname = [[info objectForKey:@"aimPet"] objectForKey:@"nickname"];
+        }
+        else
+            self.aimPetNickname = [info objectForKey:@"aimPetNickname"];
         
         if ([[info allKeys] containsObject:@"petalkId"]) {
             self.talkId = [info objectForKey:@"petalkId"];
