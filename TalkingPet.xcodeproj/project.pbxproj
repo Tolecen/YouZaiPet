@@ -101,6 +101,7 @@
 		2E2D733B1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D733A1D2E23F9000B7F00 /* YZQuanSheDetailViewController.m */; };
 		2E2D73411D2E2FBC000B7F00 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D73401D2E2FBC000B7F00 /* UIColor+HexString.m */; };
 		2E2D73441D2E4F34000B7F00 /* YZQuanSheDetailIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D73431D2E4F34000B7F00 /* YZQuanSheDetailIntroView.m */; };
+		2E8988431D45AC48004052CE /* NetServer+Payment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8988421D45AC48004052CE /* NetServer+Payment.m */; };
 		2EA22D751D333D810052992C /* YZGoodsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D741D333D810052992C /* YZGoodsDetailVC.m */; };
 		2EA22D791D336A7D0052992C /* YZQuanSheDetailCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D781D336A7D0052992C /* YZQuanSheDetailCollectionHeaderView.m */; };
 		2EA22D7C1D336ABE0052992C /* YZGoodsDetailCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D7B1D336ABE0052992C /* YZGoodsDetailCollectionHeaderView.m */; };
@@ -1511,6 +1512,8 @@
 		2E2D73401D2E2FBC000B7F00 /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
 		2E2D73421D2E4F34000B7F00 /* YZQuanSheDetailIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZQuanSheDetailIntroView.h; sourceTree = "<group>"; };
 		2E2D73431D2E4F34000B7F00 /* YZQuanSheDetailIntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZQuanSheDetailIntroView.m; sourceTree = "<group>"; };
+		2E8988411D45AC48004052CE /* NetServer+Payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NetServer+Payment.h"; sourceTree = "<group>"; };
+		2E8988421D45AC48004052CE /* NetServer+Payment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NetServer+Payment.m"; sourceTree = "<group>"; };
 		2EA22D731D333D810052992C /* YZGoodsDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZGoodsDetailVC.h; sourceTree = "<group>"; };
 		2EA22D741D333D810052992C /* YZGoodsDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZGoodsDetailVC.m; sourceTree = "<group>"; };
 		2EA22D771D336A7D0052992C /* YZQuanSheDetailCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZQuanSheDetailCollectionHeaderView.h; sourceTree = "<group>"; };
@@ -3363,6 +3366,8 @@
 				063E29AA1D20BBDB00C3FD3F /* YZShangChengConst.m */,
 				06A5DB991D2CAA4D002A5159 /* NetServer+ShangCheng.h */,
 				06A5DB9A1D2CAA4D002A5159 /* NetServer+ShangCheng.m */,
+				2E8988411D45AC48004052CE /* NetServer+Payment.h */,
+				2E8988421D45AC48004052CE /* NetServer+Payment.m */,
 				066B848F1D1BBBFA003AAD64 /* Model */,
 				066B84901D1BBBFA003AAD64 /* View */,
 				066B84911D1BBBFA003AAD64 /* ViewController */,
@@ -7621,6 +7626,7 @@
 				06A5DBB51D2CD196002A5159 /* JSONModelError.m in Sources */,
 				977D9A0619B5996F00C0B8C9 /* OHAttributedLabel.m in Sources */,
 				971F4C36196B95EC00C7913A /* FinalPublishPageViewController.m in Sources */,
+				2E8988431D45AC48004052CE /* NetServer+Payment.m in Sources */,
 				97A6856419F8A1C9006BA3F9 /* SectionMSgViewController.m in Sources */,
 				2EA22D821D338F430052992C /* YZDogDetailCollectionHeaderView.m in Sources */,
 				972F3878197620DC00952DC9 /* EGOImageLoader.m in Sources */,

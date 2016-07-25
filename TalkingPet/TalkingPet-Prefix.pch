@@ -48,6 +48,7 @@
     #define BaseQiNiuDownloadURL @"http://qnfile.chongwushuo.com/"
     #define QINIUDomain @"images"
     #define DomainName @"chongwushuo"
+    #define BasePayUrl  @"http://faces.buybestpet.com/server"
     #else
     #define BaseURL @"http://testapi.buybestpet.com/bbp-api/servlet?isCompress=0&isEncrypt=0"
     #define BaseUrlO @"http://testapi.buybestpet.com/bbp-api/servlet?isEncrypt=0&isCompress=0&sToken="
@@ -56,7 +57,7 @@
     #define BaseQiNiuDownloadURL @"http://testimages.buybestpet.com/"
     #define QINIUDomain @"testimages"
     #define DomainName @"chongwushuotest"
-
+    #define BasePayUrl  @"http://faces.buybestpet.com/server"
     #endif
 
     #define kUrlScheme     @"wxb62f795f2bc6b770"

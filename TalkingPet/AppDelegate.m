@@ -23,6 +23,7 @@
 //#endif
 
 #import "NetServer+ShangCheng.h"
+#import "NetServer+Payment.h"
 
 @interface AppDelegate ()<UIAlertViewDelegate>
 @property (nonatomic,retain)NSString * devicePushToken;
@@ -85,7 +86,11 @@
     }
     
     [self checkNetwork];
-
+    [NetServer fetchOrderListWithPageIndex:1 success:^(id result) {
+        
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        
+    }];
 //    [self performSelector:@selector(saaaaa) withObject:nil afterDelay:2];
     return YES;
 }
