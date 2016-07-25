@@ -36,7 +36,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    currentIndex = 0;
+    currentIndex = 1;
     buttonIndex = 0;
 //    self.view.backgroundColor = [UIColor colorWithWhite:240/255.0f alpha:1];
     [self setBackButtonWithTarget:@selector(backBtnDo:)];
@@ -161,14 +161,14 @@
 //        
 //    }
 //    [self.packageTableview reloadData];
-    currentIndex = 0;
+    currentIndex = 1;
     [self getPackageByType:(int)buttonIndex];
 
 }
 -(void)alsoResetStatusHaveGotToIndex:(NSInteger)index
 {
 //    dispatch_async(dispatch_get_main_queue(), ^{
-        currentIndex = 0;
+        currentIndex = 1;
         [self getPackageByType:(int)buttonIndex];
 //    });
     
@@ -216,7 +216,7 @@
     NSLog(@"Get ShuoShuo:%@",mDict);
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"error"] isEqualToString:@"200"]) {
-            if (currentIndex==0) {
+            if (currentIndex==1) {
                 self.dataArray = [self getModelArray:[responseObject objectForKey:@"value"]];
 //               self.dataArray = [self getModelArray:self.dataArray];
             }
@@ -280,7 +280,7 @@
 - (void)actionbtn:(UIButton *)btn
 {
 //    [_scrollV scrollRectToVisible:CGRectMake(_scrollV.frame.size.width * (btn.tag - 1), _scrollV.frame.origin.y, _scrollV.frame.size.width, _scrollV.frame.size.height) animated:YES];
-    currentIndex = 0;
+    currentIndex = 1;
     float xx = ScreenWidth * (btn.tag - 1) * (MENU_BUTTON_WIDTH / self.view.frame.size.width) - MENU_BUTTON_WIDTH;
     [_navScrollV scrollRectToVisible:CGRectMake(xx, 0, _navScrollV.frame.size.width, _navScrollV.frame.size.height) animated:YES];
     [self changeView:(int)btn.tag];
@@ -413,7 +413,7 @@
 
 - (void)tableViewHeaderRereshing:(UITableView *)tableView
 {
-    currentIndex=0;
+    currentIndex=1;
     [self getPackageByType:(int)buttonIndex];
 }
 - (void)tableViewFooterRereshing:(UITableView *)tableView

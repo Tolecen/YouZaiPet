@@ -110,7 +110,7 @@
         [mDict setObject:@"search" forKey:@"options"];
         [mDict setObject:searchTF.text forKey:@"keyword"];
         [mDict setObject:@"100" forKey:@"pageSize"];
-        [mDict setObject:@"0" forKey:@"pageIndex"];
+        [mDict setObject:@"1" forKey:@"pageIndex"];
         [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             self.searchArr = [NSMutableArray array];

@@ -156,7 +156,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doSthWhenPoped) name:@"popedToRoot" object:nil];
 //    NSString * firstIn = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"firstIn%@",CurrentVersion]];
 //    if (!firstIn) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addTishi) name:@"MainPrompt" object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addTishi) name:@"MainPrompt" object:nil];
 //    }
     
 }
@@ -263,9 +263,9 @@
 -(void)reloadPublishSection
 {
     [self.backScrollV setContentOffset:CGPointMake(self.view.frame.size.width*2, 0) animated:NO];
-    [hotB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [squareB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [careB setTitleColor:[UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:1] forState:UIControlStateNormal];
+    [hotB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
+    [squareB setTitleColor:[UIColor colorWithR:245 g:245 b:245 alpha:1] forState:UIControlStateNormal];
+    [careB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _hotVC.contentTableView.scrollsToTop = NO;
     _squareVC.scrollView.scrollsToTop = NO;
     _attentionVC.tableView.scrollsToTop = YES;

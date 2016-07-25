@@ -19,7 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"宠物说位置";
+        self.title = @"发布位置";
     }
     return self;
 }
@@ -61,7 +61,7 @@
     
     UILabel * tL = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, ScreenWidth-10, 20)];
     [tL setBackgroundColor:[UIColor clearColor]];
-    [tL setText:@"宠物说位置仅供参考"];
+    [tL setText:@"位置仅供参考"];
     [tL setTextAlignment:NSTextAlignmentRight];
     tL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
     tL.font = [UIFont systemFontOfSize:10];
@@ -75,7 +75,7 @@
     // Empire State Building
     JPSThumbnail *empire = [[JPSThumbnail alloc] init];
     empire.imageUrl = self.thumbImgUrl;
-    empire.title = self.contentStr.length<1?@"没有描述内容的宠物说":self.contentStr;
+    empire.title = self.contentStr.length<1?@"没有描述内容":self.contentStr;
     empire.subtitle = self.publisher;
     empire.coordinate = CLLocationCoordinate2DMake(self.lat, self.lon);
     empire.disclosureBlock = ^{ NSLog(@"selected Empire"); };

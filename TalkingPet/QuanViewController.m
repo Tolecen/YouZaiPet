@@ -152,7 +152,7 @@
         [self endRefresh];
         if (!_quanArray.count) {
             if (!blankPage) {
-                blankPage = [[BlankPageView alloc] init];
+                blankPage = [[BlankPageView alloc] initWithImage];
                 [blankPage showWithView:self.view image:[UIImage imageNamed:@"quan_without"] buttonImage:nil action:nil];
             }
         }

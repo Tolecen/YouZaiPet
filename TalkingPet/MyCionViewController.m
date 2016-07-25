@@ -23,7 +23,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"我的宠豆";
+        self.title = @"我的仔币";
         self.dataArr = [NSMutableArray array];
     }
     return self;
@@ -88,7 +88,7 @@
     cionL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
 //    cionL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
 //    cionL.shadowOffset = CGSizeMake(2, 2);
-    cionL.text = [NSString stringWithFormat:@"宠豆:%@",[UserServe sharedUserServe].account.coin];
+    cionL.text = [NSString stringWithFormat:@"仔币:%@",[UserServe sharedUserServe].account.coin];
     [self.view addSubview:cionL];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(5, self.view.frame.size.width*0.57-60, self.view.frame.size.width-10, self.view.frame.size.height - navigationBarHeight-(self.view.frame.size.width*0.57-60+5)) style:UITableViewStylePlain];
@@ -136,7 +136,7 @@
 {
     WebContentViewController * vb = [[WebContentViewController alloc] init];
     vb.urlStr =[@"http://mp.weixin.qq.com/s?__biz=MjM5MDM1ODExMQ==&mid=202670540&idx=1&sn=35f8555c432bfb9df8217f8f34cff90c#rd" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    vb.title = @"宠豆规则";
+    vb.title = @"仔币规则";
     [self.navigationController pushViewController:vb animated:YES];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -165,7 +165,7 @@
     c.textAlignment = NSTextAlignmentRight;
     c.font = [UIFont systemFontOfSize:15];
     c.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
-    c.text = @"宠豆";
+    c.text = @"仔币";
     [view addSubview:c];
     UIView * lineV = [[UIView alloc] initWithFrame:CGRectMake(5, 29, ScreenWidth-20, 1)];
     lineV.backgroundColor = [UIColor colorWithWhite:230/255.0f alpha:1];

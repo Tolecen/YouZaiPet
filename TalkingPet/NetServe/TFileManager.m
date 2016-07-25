@@ -143,17 +143,18 @@
     {
         ZipArchive * zc = [[ZipArchive alloc] initWithFileManager:fileManager];
         if ([zc UnzipOpenFile:zipPath]) {
-            NSLog(@"%@ unzip success!!",zipPath);
+//            NSLog(@"%@ unzip success!!",zipPath);
             if ([zc UnzipFileTo:subdirectory overWrite:YES]) {
-                NSLog(@"%@ write success!!",zipPath);
+//                NSLog(@"%@ write success!!",zipPath);
             }
             else
-                NSLog(@"%@ write failed!!",zipPath);
+//                NSLog(@"%@ write failed!!",zipPath);
             [zc UnzipCloseFile];
             [fileManager removeItemAtPath:zipPath error:nil];
         }
-        else
-            NSLog(@"%@ unzip failed!!",zipPath);
+        else{
+//            NSLog(@"%@ unzip failed!!",zipPath);
+        }
     }
 }
 +(NSArray*)getAllImagesWithID:(NSString*)accessoryID

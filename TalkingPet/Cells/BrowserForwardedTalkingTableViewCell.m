@@ -280,7 +280,7 @@
             [tB setFrame:CGRectMake(10, 370, 80, 20)];
             [tB addTarget:self action:@selector(tagBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
             [self.tagView addSubview:tB];
-        [tB setBackgroundColor:[UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:0.7]];
+        [tB setBackgroundColor:[UIColor colorWithRed:99/255.0f green:203/255.0f blue:175/255.f alpha:0.8]];
         tB.layer.cornerRadius = 8;
         tB.layer.masksToBounds = YES;
             tB.hidden = YES;
@@ -293,7 +293,7 @@
         self.locationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.locationBtn setFrame:CGRectMake(310-87-5, 370, 82, 20)];
         [self.contentTextBgV addSubview:self.locationBtn];
-        [self.locationBtn setBackgroundColor:[UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:0.7]];
+        [self.locationBtn setBackgroundColor:[UIColor colorWithRed:99/255.0f green:203/255.0f blue:175/255.f alpha:0.8]];
         self.locationBtn.layer.cornerRadius = 5;
         self.locationBtn.layer.masksToBounds = YES;
         [_locationBtn addTarget:self action:@selector(locationAction) forControlEvents:UIControlEventTouchUpInside];
@@ -333,7 +333,7 @@
         self.publisherNameL = [[UILabel alloc] initWithFrame:CGRectMake(75, 370+35, 200, 20)];
         [self.publisherNameL setBackgroundColor:[UIColor clearColor]];
         [self.publisherNameL setFont:[UIFont systemFontOfSize:16]];
-        self.publisherNameL.textColor = [UIColor colorWithWhite:100/255.0f alpha:1];
+        self.publisherNameL.textColor = CommonGreenColor;
         [self.publisherNameL setText:@"我是小黄瓜"];
         [self.contentTextBgV addSubview:self.publisherNameL];
         
@@ -343,12 +343,12 @@
         [self.publisherNameL addGestureRecognizer:tapw];
         //        self.publisherNameL.shadowColor = [UIColor grayColor];
         
-        self.bL = [[UILabel alloc] initWithFrame:CGRectMake(65, 370+35+20, 40, 20)];
-        [_bL setBackgroundColor:[UIColor clearColor]];
-        [_bL setText:@"发表于:"];
-        _bL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
-        [_bL setFont:[UIFont systemFontOfSize:12]];
-        [self.contentTextBgV addSubview:_bL];
+//        self.bL = [[UILabel alloc] initWithFrame:CGRectMake(65, 370+35+20, 40, 20)];
+//        [_bL setBackgroundColor:[UIColor clearColor]];
+//        [_bL setText:@"发表于:"];
+//        _bL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
+//        [_bL setFont:[UIFont systemFontOfSize:12]];
+//        [self.contentTextBgV addSubview:_bL];
         
         self.gradeImageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
         [self.contentTextBgV addSubview:self.gradeImageV];
@@ -821,7 +821,7 @@
                 }
             }
     }
-    self.favorLabel.text = [self.talking.favorNum intValue]>0?self.talking.favorNum:@"踩踩";
+    self.favorLabel.text = [self.talking.favorNum intValue]>0?self.talking.favorNum:@"喜欢";
 //    self.forwardLabel.text = self.talking.forwardNum;
     self.commentLabel.text = [self.talking.commentNum intValue]>0?self.talking.commentNum:@"评论";
     self.shareLabel.text = ([self.talking.shareNum intValue]+[self.talking.forwardNum intValue])>0?[NSString stringWithFormat:@"%d",[self.talking.shareNum intValue]+[self.talking.forwardNum intValue]]:@"分享";
@@ -983,39 +983,40 @@
 
     //    NSLog(@"%f,%f",self.talking.animationImg.rotationY,self.talking.animationImg.rotationZ);
     int lv = [self.talking.petInfo.grade intValue];
-    NSString * blStr;
+//    NSString * blStr;
 //    lv = arc4random()%12+1;
 //    NSLog(@"currentLVStr:%@,currentLV:%d",self.talking.petInfo.grade,lv);
-    if (lv>0) {
-        blStr = [NSString stringWithFormat:@"%@ |",self.talking.petInfo.breed];
+//    if (lv>0) {
+//        blStr = [NSString stringWithFormat:@"%@ |",self.talking.petInfo.breed];
         self.gradeImageV.hidden = NO;
         self.gradeLabel.hidden = NO;
         
-        CGSize bls = [blStr sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(300, 20) lineBreakMode:NSLineBreakByCharWrapping];
-        
-        
-        [self.bL setFrame:CGRectMake(65, self.publisherNameL.frame.origin.y+23, bls.width, 20)];
-        [self.bL setText:blStr];
+//        CGSize bls = [blStr sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(300, 20) lineBreakMode:NSLineBreakByCharWrapping];
+    
+//        
+//        [self.bL setFrame:CGRectMake(65, self.publisherNameL.frame.origin.y+23, bls.width, 20)];
+//        [self.bL setText:blStr];
         self.gradeImageV.frame = CGRectMake(self.bL.frame.origin.x+self.bL.frame.size.width+5, self.publisherNameL.frame.origin.y+27, 14, 14);
         
         self.gradeImageV.image = [UIImage imageNamed:[NSString stringWithFormat:@"LV%d",lv]];
         //    self.gradeImageV.backgroundColor = [UIColor redColor];
-        self.gradeLabel.frame = CGRectMake(self.bL.frame.origin.x+self.bL.frame.size.width+5+14+3, self.publisherNameL.frame.origin.y+23, 60, 20);
+//        self.gradeLabel.frame = CGRectMake(self.bL.frame.origin.x+self.bL.frame.size.width+5+14+3, self.publisherNameL.frame.origin.y+23, 60, 20);
+    self.gradeLabel.frame = CGRectMake(65, self.publisherNameL.frame.origin.y+23, 60, 20);
         self.gradeLabel.text = [NSString stringWithFormat:@"LV.%d",lv];
-    }
-    else
-    {
-        blStr = [NSString stringWithFormat:@"%@",self.talking.petInfo.breed];
-        self.gradeLabel.hidden = YES;
-        self.gradeImageV.hidden = YES;
-        
-        CGSize bls = [blStr sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(300, 20) lineBreakMode:NSLineBreakByCharWrapping];
-        
-        
-        [self.bL setFrame:CGRectMake(65, self.publisherNameL.frame.origin.y+23, bls.width, 20)];
-        [self.bL setText:blStr];
-
-    }
+//    }
+//    else
+//    {
+//        blStr = [NSString stringWithFormat:@"%@",self.talking.petInfo.breed];
+//        self.gradeLabel.hidden = YES;
+//        self.gradeImageV.hidden = YES;
+//        
+//        CGSize bls = [blStr sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(300, 20) lineBreakMode:NSLineBreakByCharWrapping];
+//        
+//        
+//        [self.bL setFrame:CGRectMake(65, self.publisherNameL.frame.origin.y+23, bls.width, 20)];
+//        [self.bL setText:blStr];
+//
+//    }
     
 
     if ([self.talking.petInfo.gender isEqualToString:@"1"]) {
@@ -1252,7 +1253,7 @@
         [mDict setObject:@"cancelFavour" forKey:@"options"];
         [mDict setObject:self.talking.theID forKey:@"petalkId"];
         [mDict setObject:@"F" forKey:@"type"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         
         
         NSLog(@"cancelFavor:%@",mDict);
@@ -1272,7 +1273,7 @@
         self.favorBtn.enabled = NO;
 
 //        [self performSelector:@selector(zanMakeBig) withObject:nil afterDelay:0.2];
-        [self zanMakeBig];
+//        [self zanMakeBig];
         [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
         self.favorLabel.text =[NSString stringWithFormat:@"%d",[self.favorLabel.text intValue]+1];
 
@@ -1281,7 +1282,7 @@
         [mDict setObject:@"create" forKey:@"options"];
         [mDict setObject:self.talking.theID forKey:@"petalkId"];
         [mDict setObject:@"F" forKey:@"type"];
-        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
         
         
         NSLog(@"doFavor:%@",mDict);
@@ -1341,8 +1342,8 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petfans" forKey:@"command"];
     [mDict setObject:@"focus" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"fansPetId"];
-    [mDict setObject:self.talking.petInfo.petID forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"fansId"];
+    [mDict setObject:self.talking.petInfo.petID forKey:@"userId"];
     
     //    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     NSLog(@"focus user:%@",mDict);

@@ -164,7 +164,7 @@
 
 -(void)loadFirstDataPageWithDict:(NSMutableDictionary *)theDict
 {
-    currentID = 0;
+    currentID = 1;
     if ([[theDict allKeys] containsObject:@"pageIndex"]) {
         [theDict setObject:[NSString stringWithFormat:@"%d",currentID] forKey:@"pageIndex"];
     }
@@ -288,7 +288,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"hotList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"no" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"no" forKey:@"userId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:[NSString stringWithFormat:@"%d",lastMark] forKey:@"pageIndex"];
     //    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
@@ -1295,7 +1295,7 @@
     [mDict setObject:@"create" forKey:@"options"];
     [mDict setObject:talkingBrowse.theID forKey:@"petalkId"];
     [mDict setObject:@"F" forKey:@"type"];
-    [mDict setObject:currentPetId forKey:@"petId"];
+    [mDict setObject:currentPetId forKey:@"userId"];
     
     
     NSLog(@"doFavor:%@",mDict);

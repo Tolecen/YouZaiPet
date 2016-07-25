@@ -52,7 +52,7 @@
     [self.view addSubview:headerView];
     
     lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 29, self.view.frame.size.width/4, 1)];
-    lineView.backgroundColor = [UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:1];
+    lineView.backgroundColor = CommonGreenColor;
     [headerView addSubview:lineView];
     
     for (int i = 0; i<4; i++) {
@@ -72,7 +72,7 @@
             case 0:{
                 [button setTitle:@"待支付" forState:UIControlStateNormal];
                 currentButton = button;
-                [button setTitleColor:[UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:1] forState:UIControlStateNormal];
+                [button setTitleColor:CommonGreenColor forState:UIControlStateNormal];
             }break;
             case 1:{
                 [button setTitle:@"待发货" forState:UIControlStateNormal];
@@ -126,7 +126,7 @@
         default:
             break;
     }
-    [currentButton  setTitleColor:[UIColor colorWithRed:133/255.0 green:203/255.0 blue:252/255.0 alpha:1] forState:UIControlStateNormal];
+    [currentButton  setTitleColor:CommonGreenColor forState:UIControlStateNormal];
     __block UIView * view = lineView;
     [UIView animateWithDuration:0.3 animations:^{
         view.center = CGPointMake(btn.center.x, view.center.y);
@@ -135,6 +135,10 @@
 }
 -(void)getFristList
 {
+    [_tableView headerEndRefreshing];
+    return;
+    
+    
     NSMutableDictionary* usersDict = [NetServer commonDict];
     [usersDict setObject:@"order" forKey:@"command"];
     [usersDict setObject:option forKey:@"options"];
@@ -147,7 +151,7 @@
         if (!_orderArr.count) {
             if (!blankPage) {
                 __weak UINavigationController * weakNav = self.navigationController;
-                blankPage = [[BlankPageView alloc] init];
+                blankPage = [[BlankPageView alloc] initWithImage];
                 [blankPage showWithView:self.view image:[UIImage imageNamed:@"order_without"] buttonImage:[UIImage imageNamed:@"order_toShop"] action:^{
                     [weakNav popToRootViewControllerAnimated:YES];
                 }];

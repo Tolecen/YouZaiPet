@@ -56,16 +56,16 @@
     if (self.listTyep == PetalkListTyepChannel) {
         [self requestChannelInfo];
         [hotDic setObject:@"petalk" forKey:@"command"];
-        [hotDic setObject:@"0" forKey:@"pageIndex"];
+        [hotDic setObject:@"1" forKey:@"pageIndex"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
         [hotDic setObject:@"channel" forKey:@"options"];
         [hotDic setObject:self.otherCode forKey:@"code"];
         if ([UserServe sharedUserServe].userID) {
-            [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+            [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
         }
     }if (self.listTyep == PetalkListTyepPetBreed) {
         [hotDic setObject:@"petalk" forKey:@"command"];
-        [hotDic setObject:@"0" forKey:@"pageIndex"];
+        [hotDic setObject:@"1" forKey:@"pageIndex"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
         [hotDic setObject:@"petBreed" forKey:@"options"];
         [hotDic setObject:self.otherCode forKey:@"code"];
@@ -84,14 +84,14 @@
         [hotDic setObject:@"userList" forKey:@"options"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
         [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
-        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
         [hotDic setObject:@"O" forKey:@"type"];
     }if (self.listTyep == PetalkListTyepMyForWord) {
         [hotDic setObject:@"petalk" forKey:@"command"];
         [hotDic setObject:@"userList" forKey:@"options"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
         [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
-        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
         [hotDic setObject:@"R" forKey:@"type"];
         self.tableViewHelper.needShowZanAndComment = NO;
         
@@ -99,8 +99,8 @@
         [hotDic setObject:@"petalk" forKey:@"command"];
         [hotDic setObject:@"userList" forKey:@"options"];
         [hotDic setObject:@"10" forKey:@"pageSize"];
-        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
-        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+//        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
         [hotDic setObject:@"F" forKey:@"type"];
         self.tableViewHelper.needShowZanAndComment = NO;
     }
@@ -117,7 +117,7 @@
     if (!not.userInfo) {
         if (!blankPage) {
             __weak UINavigationController * weakNav = self.navigationController;
-            blankPage = [[BlankPageView alloc] init];
+            blankPage = [[BlankPageView alloc] initWithImage];
             if (_listTyep == PetalkListTyepMyForWord) {
                 [blankPage showWithView:self.view image:[UIImage imageNamed:@"forWord_without"] buttonImage:[UIImage imageNamed:@"forWord_toFo"] action:^{
                     [weakNav popToRootViewControllerAnimated:YES];

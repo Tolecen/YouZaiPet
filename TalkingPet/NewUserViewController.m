@@ -25,7 +25,7 @@
     if (self) {
         // Custom initialization
 
-        self.genderArray = [NSArray arrayWithObjects:@"男孩",@"女孩",@"保密", nil];
+        self.genderArray = [NSArray arrayWithObjects:@"男",@"女",@"保密", nil];
         NSString *path =[[NSString alloc]initWithString:[[NSBundle mainBundle]pathForResource:@"city"ofType:@"txt"]];
         NSData* data = [[NSData alloc]initWithContentsOfFile:path];
         self.provinceArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -46,11 +46,13 @@
     {
         self.title = @"完善信息";
     }
-    if (self.fromUserCenter) {
-        self.titleArray = [NSArray arrayWithObjects:@"昵称",@"性别",@"生日",@"品种",@"地区",@"收货地址", nil];
-    }
-    else
-        self.titleArray = [NSArray arrayWithObjects:@"昵称",@"性别",@"生日",@"品种",@"地区", nil];
+//    if (self.fromUserCenter) {
+//        self.titleArray = [NSArray arrayWithObjects:@"昵称",@"性别",@"生日",@"品种",@"地区",@"收货地址", nil];
+//    }
+//    else
+//        self.titleArray = [NSArray arrayWithObjects:@"昵称",@"性别",@"生日",@"品种",@"地区", nil];
+    
+    self.titleArray = [NSArray arrayWithObjects:@"昵称",@"性别", nil];
     // Do any additional setup after loading the view.
     [self setBackButtonWithTarget:@selector(back)];
     
@@ -89,7 +91,7 @@
         [iL setBackgroundColor:[UIColor clearColor]];
         [iL setTextColor:[UIColor grayColor]];
         [iL setTextAlignment:NSTextAlignmentCenter];
-        [iL setText:@"完善一下宠物的信息吧"];
+        [iL setText:@"完善一下您的信息吧"];
         [_bgV addSubview:iL];
     }
     
@@ -107,7 +109,7 @@
 //    [headMask setImage:[UIImage imageNamed:@"selectHeadMask"]];
 //    [_bgV addSubview:headMask];
     
-    self.infoTableV = [[UITableView alloc] initWithFrame:CGRectMake(5, 235, ScreenWidth-10, self.fromUserCenter?270:235) style:UITableViewStylePlain];
+    self.infoTableV = [[UITableView alloc] initWithFrame:CGRectMake(5, 235, ScreenWidth-10, 90) style:UITableViewStylePlain];
     _infoTableV.delegate = self;
     _infoTableV.dataSource = self;
     _infoTableV.backgroundView = nil;
@@ -149,16 +151,16 @@
     _datePicker.hidden = YES;
     _datePicker.maximumDate = [NSDate date];
     
-    self.petCategory = [[PetCategoryParser alloc] init];
-    self.petCategoryArray = [self.petCategory getParentCategorys];
+//    self.petCategory = [[PetCategoryParser alloc] init];
+//    self.petCategoryArray = [self.petCategory getParentCategorys];
 //
     self.nameTF = [[UITextField alloc] initWithFrame:CGRectMake(90, 7.5, ScreenWidth-120, 30)];
     _nameTF.delegate = self;
     _nameTF.backgroundColor = [UIColor clearColor];
-    _nameTF.placeholder = @"输入宠物昵称，2-15个字";
+    _nameTF.placeholder = @"输入您的昵称，2-15个字";
     _nameTF.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.genderTL = [[UILabel alloc] initWithFrame:CGRectMake(0, 12.5, 140, 20)];
-    [_genderTL setText:@"选择宠物性别"];
+    [_genderTL setText:@"您的性别"];
     [_genderTL setTextColor:[UIColor lightGrayColor]];
     self.birthTL = [[UILabel alloc] initWithFrame:CGRectMake(0, 12.5, 140, 20)];
     [_birthTL setText:@"选择宠物生日"];
@@ -171,30 +173,30 @@
     [_regionTL setTextColor:[UIColor lightGrayColor]];
 //
     if (self.delegate&&[_delegate respondsToSelector:@selector(petWithWithNewUserViewController:)]) {
-        Pet * pet = [_delegate petWithWithNewUserViewController:self];
+        Account * pet = [_delegate petWithWithNewUserViewController:self];
         if (pet) {
             self.nameTF.text = pet.nickname;
-            self.genderCode = pet.gender;
+            self.genderCode = pet.gender?pet.gender:@"0";
             switch ([pet.gender intValue]) {
                 case 0:{
-                    self.genderTL.text = @"女孩";
+                    self.genderTL.text = @"女";
                 }break;
                 case 1:{
-                    self.genderTL.text = @"男孩";
+                    self.genderTL.text = @"男";
                 }break;
                 default:{
                     self.genderTL.text = @"保密";
                 }
                     break;
             }
-            self.breedCode = pet.breed;
-            self.breedTL.text = [_petCategory breedWithIDcode:[pet.breed integerValue]];
-            self.regionTL.text = pet.region;
-            _selectedBirthday = [pet.birthday timeIntervalSince1970];
-            NSDateFormatter * dateF= [[NSDateFormatter alloc]init];
-            dateF.dateFormat = @"yyyy-MM-dd";
-            NSString *messageDateStr = [dateF stringFromDate:pet.birthday];
-            [self.birthTL setText:messageDateStr];
+//            self.breedCode = pet.breed;
+//            self.breedTL.text = [_petCategory breedWithIDcode:[pet.breed integerValue]];
+//            self.regionTL.text = pet.region;
+//            _selectedBirthday = [pet.birthday timeIntervalSince1970];
+//            NSDateFormatter * dateF= [[NSDateFormatter alloc]init];
+//            dateF.dateFormat = @"yyyy-MM-dd";
+//            NSString *messageDateStr = [dateF stringFromDate:pet.birthday];
+//            [self.birthTL setText:messageDateStr];
             self.nameTF.textColor = [UIColor blackColor];
             self.genderTL.textColor = [UIColor blackColor];
             self.breedTL.textColor = [UIColor blackColor];
@@ -240,8 +242,8 @@
     [regDict setObject:self.avatarUrl forKey:@"head"];
     [regDict setObject:self.genderCode forKey:@"gender"];
     [regDict setObject:@"0" forKey:@"type"];
-    [regDict setObject:[NSString stringWithFormat:@"%.0f",_selectedBirthday*1000] forKey:@"birthday"];
-    [regDict setObject:self.regionTL.text forKey:@"address"];
+//    [regDict setObject:[NSString stringWithFormat:@"%.0f",_selectedBirthday*1000] forKey:@"birthday"];
+//    [regDict setObject:self.regionTL.text forKey:@"address"];
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSDictionary * petDic = ((responseObject[@"value"])[@"petList"])[0];
         UserServe * userServe = [UserServe sharedUserServe];
@@ -264,9 +266,9 @@
         if ([responseObject objectForKey:@"message"]) {
             [SVProgressHUD showSuccessWithStatus:[responseObject objectForKey:@"message"]];
         }
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
         [self dismissViewControllerAnimated:YES completion:^{
-            [[RootViewController sharedRootViewController] showHotUserViewController];
+//            [[RootViewController sharedRootViewController] showHotUserViewController];
         }];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"register failed info:%@",error);
@@ -706,18 +708,18 @@
         [SVProgressHUD showErrorWithStatus:@"性别要选呀"];
         return;
     }
-    if (self.birthTL.textColor==[UIColor lightGrayColor]) {
-        [SVProgressHUD showErrorWithStatus:@"生日要选呀"];
-        return;
-    }
-    if (self.breedTL.textColor==[UIColor lightGrayColor]) {
-        [SVProgressHUD showErrorWithStatus:@"你的种族得让人家知道呀"];
-        return;
-    }
-    if (self.regionTL.textColor==[UIColor lightGrayColor]) {
-        [SVProgressHUD showErrorWithStatus:@"填一下你在哪吧"];
-        return;
-    }
+//    if (self.birthTL.textColor==[UIColor lightGrayColor]) {
+//        [SVProgressHUD showErrorWithStatus:@"生日要选呀"];
+//        return;
+//    }
+//    if (self.breedTL.textColor==[UIColor lightGrayColor]) {
+//        [SVProgressHUD showErrorWithStatus:@"你的种族得让人家知道呀"];
+//        return;
+//    }
+//    if (self.regionTL.textColor==[UIColor lightGrayColor]) {
+//        [SVProgressHUD showErrorWithStatus:@"填一下你在哪吧"];
+//        return;
+//    }
     if (self.headIMG) {
         [self uploadUserHeadImg];
     }

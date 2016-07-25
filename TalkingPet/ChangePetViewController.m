@@ -174,7 +174,7 @@
     }
     return registerB;
 }
-- (Pet*)petWithWithNewUserViewController:(NewUserViewController*)controller
+- (Account*)petWithWithNewUserViewController:(NewUserViewController*)controller
 {
     if (controller == _editCurrentPetVC) {
         return [UserServe sharedUserServe].account;

@@ -167,7 +167,7 @@
     else
         return 0;
 }
-+(void)activatePet:(Pet*)pet WithUsername:(NSString*)username
++(void)activatePet:(Account*)pet WithUsername:(NSString*)username
 {
     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"owner==[c]%@&&action!=0",username];
     PetEntity * petE = [PetEntity MR_findFirstWithPredicate:predicate];
@@ -175,18 +175,18 @@
         petE.action = [[NSNumber alloc] initWithBool:NO];
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     }
-    predicate = [NSPredicate predicateWithFormat:@"petID==[c]%@",pet.petID];
+    predicate = [NSPredicate predicateWithFormat:@"petID==[c]%@",pet.userID];
     petE = [PetEntity MR_findFirstWithPredicate:predicate];
     if (petE) {
         petE.action = [[NSNumber alloc] initWithBool:YES];
-        petE.daren = [NSNumber numberWithBool:pet.ifDaren];
+//        petE.daren = [NSNumber numberWithBool:pet.ifDaren];
         petE.owner = username;
-        petE.petID = pet.petID;
+//        petE.petID = pet.petID;
         petE.nickname = pet.nickname;
         petE.headImgURL = pet.headImgURL;
         petE.gender = pet.gender;
-        petE.breed = pet.breed;
-        petE.region = pet.region;
+//        petE.breed = pet.breed;
+//        petE.region = pet.region;
         petE.fansNo = pet.fansNo;
         petE.attentionNo = pet.attentionNo;
         petE.birthday = pet.birthday;
@@ -203,14 +203,14 @@
         [MagicalRecord saveUsingCurrentThreadContextWithBlockAndWait:^(NSManagedObjectContext *localContext) {
             PetEntity * petE = [PetEntity MR_createInContext:localContext];
             petE.action = [[NSNumber alloc] initWithBool:YES];
-            petE.daren = [NSNumber numberWithBool:pet.ifDaren];
+//            petE.daren = [NSNumber numberWithBool:pet.ifDaren];
             petE.owner = username;
-            petE.petID = pet.petID;
+            petE.petID = pet.userID;
             petE.nickname = pet.nickname;
             petE.headImgURL = pet.headImgURL;
             petE.gender = pet.gender;
-            petE.breed = pet.breed;
-            petE.region = pet.region;
+//            petE.breed = pet.breed;
+//            petE.region = pet.region;
             petE.fansNo = pet.fansNo;
             petE.attentionNo = pet.attentionNo;
             petE.birthday = pet.birthday;

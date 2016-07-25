@@ -307,7 +307,7 @@
 }
 - (void)getFristUserList
 {
-    page = 0;
+    page = 1;
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"rank" forKey:@"command"];
     [mDict setObject:@"petScoreTotalRankList" forKey:@"options"];
@@ -341,7 +341,7 @@
 
 - (void)getWeeklyFristUserList
 {
-    page = 0;
+    page = 1;
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"rank" forKey:@"command"];
     [mDict setObject:@"petScoreWeekRankList" forKey:@"options"];

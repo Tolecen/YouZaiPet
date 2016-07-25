@@ -19,7 +19,7 @@
         self.petID = [info objectForKey:@"petId"];
         self.commentId = [info objectForKey:@"id"];
         self.petAvatarURL = [info objectForKey:@"petHeadPortrait"];
-        self.petNickname = [info objectForKey:@"petNickName"];
+        self.petNickname = [info objectForKey:@"petNickname"];
         self.commentType = [info objectForKey:@"type"];
         if (![info objectForKey:@"commentAudioUrl"]||[[info objectForKey:@"commentAudioUrl"] isEqualToString:@""]) {
             self.contentType = @"TEXT";
@@ -33,7 +33,11 @@
             self.content = @"语音评论";
         }
         
-        self.aimPetNickname = [info objectForKey:@"aimPetNickName"];
+        if ([info objectForKey:@"aimPet"] && [[info objectForKey:@"aimPet"] isKindOfClass:[NSDictionary class]]) {
+            self.aimPetNickname = [[info objectForKey:@"aimPet"] objectForKey:@"nickname"];
+        }
+        else
+            self.aimPetNickname = [info objectForKey:@"aimPetNickname"];
         
         if ([[info allKeys] containsObject:@"petalkId"]) {
             self.talkId = [info objectForKey:@"petalkId"];

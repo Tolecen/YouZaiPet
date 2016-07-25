@@ -112,7 +112,7 @@
     [mDict setObject:@"UMCG" forKey:@"options"];
 //    [mDict setObject:@"C_R" forKey:@"type"];
     NSString * petId = [UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"";
-    [mDict setObject:petId forKey:@"petId"];
+    [mDict setObject:petId forKey:@"userId"];
     if ([petId isEqualToString:@""]) {
         return;
     }

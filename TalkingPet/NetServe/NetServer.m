@@ -1196,10 +1196,10 @@ failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 {
     NSMutableDictionary* mDict = [NetServer commonDict];
-    [mDict setObject:@"pet" forKey:@"command"];
-    [mDict setObject:@"one" forKey:@"options"];
-    [mDict setObject:petId forKey:@"petId"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"currPetId"];
+    [mDict setObject:@"account" forKey:@"command"];
+    [mDict setObject:@"userInfo" forKey:@"options"];
+    [mDict setObject:petId forKey:@"userId"];
+//    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"currPetId"];
     
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         success(operation,responseObject);

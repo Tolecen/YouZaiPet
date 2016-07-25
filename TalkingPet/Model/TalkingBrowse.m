@@ -41,8 +41,8 @@
         id petDict = [info objectForKey:@"pet"];
         if (petDict&&[petDict isKindOfClass:[NSDictionary class]]) {
             self.petInfo.petID = [petDict objectForKey:@"id"];
-            self.petInfo.nickname = [petDict objectForKey:@"nickName"];
-            self.petInfo.headImgURL = [petDict objectForKey:@"headPortrait"];
+            self.petInfo.nickname = [petDict objectForKey:@"nickname"];
+            self.petInfo.headImgURL = [petDict objectForKey:@"head"];
             self.petInfo.gender = [petDict objectForKey:@"gender"];
             //        self.petInfo.breed = [petDict objectForKey:@"type"];
             
@@ -118,12 +118,15 @@
         
         if ([[info objectForKey:@"type"] isEqualToString:@"R"]) {
             
-            
+            NSDictionary * sd = [info objectForKey:@"aimPet"];
             self.ifForward = YES;
             self.forwardInfo = [[ForwardInfo alloc] init];
-            self.forwardInfo.forwardPetId = [info objectForKey:@"aimPetId"];
-            self.forwardInfo.forwardPetAvatar = [info objectForKey:@"aimPetHeadPortrait"];
-            self.forwardInfo.forwardPetNickname = [info objectForKey:@"aimPetNickName"];
+//            self.forwardInfo.forwardPetId = [info objectForKey:@"aimPetId"];
+//            self.forwardInfo.forwardPetAvatar = [info objectForKey:@"aimPetHeadPortrait"];
+//            self.forwardInfo.forwardPetNickname = [info objectForKey:@"aimPetNickName"];
+            self.forwardInfo.forwardPetId = [sd objectForKey:@"id"];
+            self.forwardInfo.forwardPetAvatar = [sd objectForKey:@"head"];
+            self.forwardInfo.forwardPetNickname = [sd objectForKey:@"nickname"];
             self.forwardInfo.forwardDescription = [info objectForKey:@"comment"];
             self.forwardInfo.forwardTime = [NSString stringWithFormat:@"%.0f",(double)([[info objectForKey:@"relayTime"] longLongValue]/1000)];
             

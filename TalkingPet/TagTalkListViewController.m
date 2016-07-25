@@ -56,7 +56,7 @@
     [self.sectionBtnView setBackgroundColor:[UIColor colorWithWhite:235/255.0f alpha:1]];
     self.commentNumBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     currentButton = _commentNumBtn;
-    [self.commentNumBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+    [self.commentNumBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
     [self.commentNumBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [self.commentNumBtn setFrame:CGRectMake(0, 0, ScreenWidth/2, 30)];
 //    [self.commentNumBtn setBackgroundImage:[UIImage imageNamed:@"seleted_lift"] forState:UIControlStateNormal];
@@ -79,7 +79,7 @@
     self.favorNumBtn.adjustsImageWhenHighlighted = NO;
     
     self.selectedLine = [[UIView alloc] initWithFrame:CGRectMake(currentButton.center.x-50, 28, 100, 2)];
-    [self.selectedLine setBackgroundColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1]];
+    [self.selectedLine setBackgroundColor:CommonGreenColor];
     [self.sectionBtnView addSubview:self.selectedLine];
 
     
@@ -228,7 +228,7 @@
                 [self.selectedLine setFrame:CGRectMake(self.commentNumBtn.center.x-50, 28, 100, 2)];
         }];
 
-        [self.commentNumBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+        [self.commentNumBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
         [self.favorNumBtn setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
         [self getHotPetalkList];
         currentButton = _commentNumBtn;
@@ -241,7 +241,7 @@
             [self.selectedLine setFrame:CGRectMake(self.favorNumBtn.center.x-50, 28, 100, 2)];
         }];
         
-        [self.favorNumBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+        [self.favorNumBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
         [self.commentNumBtn setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
         [self getPetalkList];
         currentButton = _favorNumBtn;
@@ -252,12 +252,12 @@
     _tableViewHelper.cellNeedShowPublishTime = NO;
     NSMutableDictionary * hotDic = [NetServer commonDict];
     [hotDic setObject:@"petalk" forKey:@"command"];
-    [hotDic setObject:@"0" forKey:@"pageIndex"];
+    [hotDic setObject:@"1" forKey:@"pageIndex"];
     [hotDic setObject:@"10" forKey:@"pageSize"];
     [hotDic setObject:@"tagList" forKey:@"options"];
     [hotDic setObject:self.tag.tagID forKey:@"tagId"];
     if ([UserServe sharedUserServe].userID) {
-        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+        [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     }
     [_tableViewHelper loadFirstDataPageWithDict:hotDic];
 }
@@ -294,7 +294,7 @@
         [[RootViewController sharedRootViewController] showLoginViewController];
         return;
     }
-    UIActionSheet * sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"发故事",@"发说说",@"发图片", nil];
+    UIActionSheet * sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"图片文字",@"图片语音",@"经验交流", nil];
     [sheet showInView:self.view];
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

@@ -287,10 +287,10 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"userList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
-    if ([UserServe sharedUserServe].userID) {
-        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
-    }
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
+//    if ([UserServe sharedUserServe].userID) {
+//        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+//    }
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:@"C" forKey:@"type"];
     
@@ -301,7 +301,7 @@
         if (!_commentArray.count) {
             if (!blankPage) {
                 __weak UINavigationController * weakNav = self.navigationController;
-                blankPage = [[BlankPageView alloc] init];
+                blankPage = [[BlankPageView alloc] initWithImage];
                 [blankPage showWithView:self.view image:[UIImage imageNamed:@"myComment_without"] buttonImage:[UIImage imageNamed:@"myComment_toCom"] action:^{
                     [weakNav popToRootViewControllerAnimated:YES];
                 }];
@@ -329,9 +329,9 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"userList" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
     if ([UserServe sharedUserServe].userID) {
-        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+//        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     }
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:@"C" forKey:@"type"];

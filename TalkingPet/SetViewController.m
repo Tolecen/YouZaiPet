@@ -32,7 +32,7 @@
     if (self) {
         // Custom initialization
         self.title = @"设置";
-        self.sectionFirstArray = [NSArray arrayWithObjects:@"关于宠物说", nil];
+        self.sectionFirstArray = [NSArray arrayWithObjects:@"关于友仔", nil];
         self.sectionFirstArray_2 = [NSArray arrayWithObjects:@"草稿箱", nil];
 
 //        self.sectionFirstArraytwo = [NSArray arrayWithObjects:@"播放设置",@"个性化皮肤", nil];

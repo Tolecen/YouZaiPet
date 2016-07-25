@@ -34,8 +34,8 @@
     [hotDic setObject:@"petalk" forKey:@"command"];
     [hotDic setObject:@"userList" forKey:@"options"];
     [hotDic setObject:@"10" forKey:@"pageSize"];
-    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
-    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+//    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     [hotDic setObject:@"O" forKey:@"type"];
     
     self.tHelper.reqDict = hotDic;
@@ -48,7 +48,7 @@
     if (!not.userInfo) {
         if (!blankPage) {
             __weak UINavigationController * weakNav = self.navigationController;
-            blankPage = [[BlankPageView alloc] init];
+            blankPage = [[BlankPageView alloc] initWithImage];
             [blankPage showWithView:self.view image:[UIImage imageNamed:@"myComment_without"] buttonImage:[UIImage imageNamed:@"myComment_toCom"] action:^{
                 [weakNav popToRootViewControllerAnimated:YES];
             }];

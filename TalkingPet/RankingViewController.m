@@ -104,7 +104,7 @@
     [mDict setObject:@"petalkTotalPopRankList" forKey:@"options"];
     [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
-    [mDict setObject:@"0" forKey:@"pageIndex"];
+    [mDict setObject:@"1" forKey:@"pageIndex"];
     self.paihangHelper.reqDict = mDict;
     [petalkView headerBeginRefreshing];
 }
@@ -115,7 +115,7 @@
     [mDict setObject:@"petalkWeekPopRankList" forKey:@"options"];
     [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
     [mDict setObject:@"10" forKey:@"pageSize"];
-    [mDict setObject:@"0" forKey:@"pageIndex"];
+    [mDict setObject:@"1" forKey:@"pageIndex"];
     self.paihangHelper.reqDict = mDict;
     [petalkView headerBeginRefreshing];
 }

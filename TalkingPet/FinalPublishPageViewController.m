@@ -107,9 +107,9 @@
     }
     else
     {
-        PromptView * p = [[PromptView alloc] initWithPoint:CGPointMake(tagBtn.center.x, tagBtn.frame.origin.y-8) image:[UIImage imageNamed:@"add_tag_prompt"] arrowDirection:3];
-        [self.view addSubview:p];
-        [p show];
+//        PromptView * p = [[PromptView alloc] initWithPoint:CGPointMake(tagBtn.center.x, tagBtn.frame.origin.y-8) image:[UIImage imageNamed:@"add_tag_prompt"] arrowDirection:3];
+//        [self.view addSubview:p];
+//        [p show];
     }
     
 //    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"TagPrompt"]) {
@@ -382,7 +382,7 @@
 }
 -(void)textViewDidChange:(UITextView *)textView
 {
-    self.remainingL.text = [NSString stringWithFormat:@"剩余:%ld",50-self.textV.text.length];
+    self.remainingL.text = [NSString stringWithFormat:@"剩余:%d",50-(int)self.textV.text.length];
     if (50-(int)self.textV.text.length<0) {
         self.remainingL.textColor = [UIColor redColor];
     }
@@ -426,6 +426,7 @@
 
 - (void)showActionsheet
 {
+    [self.textV resignFirstResponder];
     UIActionSheet * actionShoot = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"继续编辑",@"保存草稿",@"取消发布", nil];
     [actionShoot showInView:self.view];
 }

@@ -73,8 +73,8 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petfans" forKey:@"command"];
     [mDict setObject:@"focus" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"fansPetId"];
-    [mDict setObject:[self.favorDict objectForKey:@"petId"] forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"fansId"];
+    [mDict setObject:[self.favorDict objectForKey:@"petId"] forKey:@"userId"];
     
     //    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
     NSLog(@"focus user:%@",mDict);
@@ -141,7 +141,7 @@
 {
     [super layoutSubviews];
     self.commentAvatarV.imageURL = [NSURL URLWithString:[[self.favorDict objectForKey:@"petHeadPortrait"] stringByAppendingString:@"?imageView2/2/w/80"]];
-    self.commentNameL.text = [self.favorDict objectForKey:@"petNickName"];
+    self.commentNameL.text = [self.favorDict objectForKey:@"petNickname"];
     self.relationShip = [self.favorDict objectForKey:@"rs"];
     
     if ([self.relationShip isEqualToString:@"0"]) {

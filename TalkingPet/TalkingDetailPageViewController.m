@@ -55,7 +55,7 @@
     [self.commentNumBtn setFrame:CGRectMake(0, 0, ScreenWidth/2.0f, 40)];
     [self.commentNumBtn setTitle:@"54转发和300评论" forState:UIControlStateNormal];
     [self.sectionBtnView addSubview:self.commentNumBtn];
-    [self.commentNumBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+    [self.commentNumBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
     [self.commentNumBtn addTarget:self action:@selector(commentBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     self.favorNumBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -68,7 +68,7 @@
     [self.favorNumBtn addTarget:self action:@selector(favorBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     self.bottomImageV = [[UIImageView alloc] initWithFrame:CGRectMake(30, 38, ScreenWidth/2.0f-60, 2)];
-    [self.bottomImageV setBackgroundColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1]];
+    [self.bottomImageV setBackgroundColor:CommonGreenColor];
     [self.sectionBtnView addSubview:self.bottomImageV];
     
     if (self.talking) {
@@ -233,7 +233,7 @@
     
     self.favorLabel = [[UILabel alloc] initWithFrame:CGRectMake(37, 10, 50, 20)];
     [self.favorLabel setBackgroundColor:[UIColor clearColor]];
-    [self.favorLabel setText:@"踩踩"];
+    [self.favorLabel setText:@"喜欢"];
     [self.favorLabel setFont:[UIFont systemFontOfSize:14]];
     //            [self.favorLabel setTextColor:[UIColor whiteColor]];
     [self.favorLabel setTextAlignment:NSTextAlignmentLeft];
@@ -363,7 +363,7 @@
     
     [mDict setObject:@"C_R" forKey:@"type"];
     [mDict setObject:@"20" forKey:@"pageSize"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
     
     
     NSLog(@"getAllCommentsAndForward:%@",mDict);
@@ -422,7 +422,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"get shuoshuo content failed with error:%@",error);
         if ([error code]!=-1004) {
-            UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"宠物说不存在" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+            UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"内容不存在" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
             errorAlert.tag = 12;
             [errorAlert show];
         }
@@ -446,7 +446,7 @@
     [mDict setObject:@"counter" forKey:@"command"];
     [mDict setObject:@"petalk" forKey:@"options"];
     [mDict setObject:self.talking.theID forKey:@"petalkId"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
     NSLog(@"getCommentAndFavorNum:%@",mDict);
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -498,7 +498,7 @@
     [mDict setObject:self.talking.theID forKey:@"petalkId"];
     [mDict setObject:@"F" forKey:@"type"];
     [mDict setObject:@"20" forKey:@"pageSize"];
-    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
     
     
     NSLog(@"getAllFavors:%@",mDict);
@@ -578,7 +578,7 @@
 }
 -(void)shareBtnClicked
 {
-    ShareSheet * shareSheet = [[ShareSheet alloc]initWithIconArray:@[@"weiChatFriend",@"friendCircle",@"sina",@"qq",@"petaking"] titleArray:@[@"微信好友",@"朋友圈",@"微博",@"QQ",@"宠物说"] action:^(NSInteger index) {
+    ShareSheet * shareSheet = [[ShareSheet alloc]initWithIconArray:@[@"weiChatFriend",@"friendCircle",@"sina",@"qq",@"petaking"] titleArray:@[@"微信好友",@"朋友圈",@"微博",@"QQ",@"友仔"] action:^(NSInteger index) {
         switch (index) {
             case 0:{
                 [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"听%@的宠物说",_talking.petInfo.nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",_talking.petInfo.nickname,_talking.descriptionContent] imageUrl:_talking.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_talking.theID] Succeed:^{
@@ -683,7 +683,7 @@
     self.showFavorList = NO;
     [self getAllCommentsAndForward:nil];
     [UIView animateWithDuration:0.1 animations:^{
-        [self.commentNumBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+        [self.commentNumBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
         [self.favorNumBtn setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
         [self.bottomImageV setFrame:CGRectMake(30, 38, ScreenWidth/2.0f-60, 2)];
     } completion:^(BOOL finished) {
@@ -696,7 +696,7 @@
     self.showFavorList = YES;
     [self getAllFavors:nil];
     [UIView animateWithDuration:0.1 animations:^{
-        [self.favorNumBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+        [self.favorNumBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
         [self.commentNumBtn setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
         [self.bottomImageV setFrame:CGRectMake(ScreenWidth/2.0f+30, 38, ScreenWidth/2.0f-60, 2)];
     } completion:^(BOOL finished) {
@@ -1028,8 +1028,8 @@
     [mDict setObject:@"create" forKey:@"options"];
     [mDict setObject:self.talking.theID forKey:@"petalkId"];
     [mDict setObject:@"R" forKey:@"type"];
-    [mDict setObject:currentPetId forKey:@"petId"];
-    [mDict setObject:self.talking.petInfo.petID forKey:@"aimPetId"];
+    [mDict setObject:currentPetId forKey:@"userId"];
+    [mDict setObject:self.talking.petInfo.petID forKey:@"aimUserId"];
     [mDict setObject:forwardMsg forKey:@"comment"];
     NSLog(@"doForward:%@",mDict);
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -1064,9 +1064,9 @@
     [mDict setObject:@"create" forKey:@"options"];
     [mDict setObject:self.talking.theID forKey:@"petalkId"];
     [mDict setObject:@"C" forKey:@"type"];
-    [mDict setObject:currentPetId forKey:@"petId"];
+    [mDict setObject:currentPetId forKey:@"userId"];
     if (aimPetId) {
-        [mDict setObject:aimPetId forKey:@"aimPetId"];
+        [mDict setObject:aimPetId forKey:@"aimUserId"];
     }
     
     [mDict setObject:commentContent forKey:@"comment"];
@@ -1109,9 +1109,9 @@
     [mDict setObject:@"create" forKey:@"options"];
     [mDict setObject:self.talking.theID forKey:@"petalkId"];
     [mDict setObject:@"C" forKey:@"type"];
-    [mDict setObject:currentPetId forKey:@"petId"];
+    [mDict setObject:currentPetId forKey:@"userId"];
     if (aimPetId) {
-        [mDict setObject:aimPetId forKey:@"aimPetId"];
+        [mDict setObject:aimPetId forKey:@"aimUserId"];
     }
     
     [mDict setObject:@"" forKey:@"comment"];
@@ -1154,8 +1154,8 @@
         [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
         self.talking.ifZan = YES;
         self.favorBtn.enabled = NO;
-        [self zanMakeBig];
-        int n = self.caiNum;
+//        [self zanMakeBig];
+        int n = (int)self.caiNum;
         [self.favorNumBtn setTitle:[NSString stringWithFormat:@"%d踩",n+1] forState:UIControlStateNormal];
         self.caiNum++;
         NSMutableDictionary* mDict = [NetServer commonDict];
@@ -1163,7 +1163,7 @@
         [mDict setObject:@"create" forKey:@"options"];
         [mDict setObject:self.talking.theID forKey:@"petalkId"];
         [mDict setObject:@"F" forKey:@"type"];
-        [mDict setObject:currentPetId forKey:@"petId"];
+        [mDict setObject:currentPetId forKey:@"userId"];
         
         
         [self.talking.showZanArray insertObject:[NSDictionary dictionaryWithObjectsAndKeys:[UserServe sharedUserServe].userID,@"petId",[UserServe sharedUserServe].account.nickname,@"petNickName",[UserServe sharedUserServe].account.headImgURL,@"petHeadPortrait", nil] atIndex:0];
@@ -1207,7 +1207,7 @@
         [mDict setObject:@"cancelFavour" forKey:@"options"];
         [mDict setObject:self.talking.theID forKey:@"petalkId"];
         [mDict setObject:@"F" forKey:@"type"];
-        [mDict setObject:currentPetId forKey:@"petId"];
+        [mDict setObject:currentPetId forKey:@"userId"];
         
 //        for (int i = 0; i<self.talking.showZanArray.count; i++) {
 //            NSDictionary * dict = self.talking.showZanArray[i];
@@ -1837,7 +1837,7 @@
     [dict setObject:self.talking.theID forKey:@"petalkId"];
     if([UserServe sharedUserServe].userID)
     {
-        [dict setObject:[UserServe sharedUserServe].userID forKey:@"petId"];
+        [dict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     }
     
     [dict setObject:@"1" forKey:@"type"];

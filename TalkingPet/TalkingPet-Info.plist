@@ -5,18 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>宠物说</string>
+	<string>友仔</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFiles</key>
-	<array>
-		<string>icon.png</string>
-		<string>icon@2x.png</string>
-		<string>icon-72.png</string>
-		<string>icon-144.png</string>
-		<string>icon-120.png</string>
-		<string>icon-256.png</string>
-	</array>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -69,9 +60,9 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>允许获取位置可以使您发表的宠物说带有一个大致位置</string>
+	<string>允许获取位置可以使您发表的内容带有一个大致位置</string>
 	<key>NSLocationWhenInUseDescription</key>
-	<string>允许获取位置可以使您发表的宠物说带有一个大致位置</string>
+	<string>允许获取位置可以使您发表的内容带有一个大致位置</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>huakangwawa.TTF</string>

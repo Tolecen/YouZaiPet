@@ -77,7 +77,7 @@ static PublishServer* publishServer;
             if ([pp isKindOfClass:[PetalkPublisher class]]) {
                 [self rePublishPetalkWithPublishID:publishID];
             }
-            if ([pp isKindOfClass:[StoryPublisher class]]) {
+            else if ([pp isKindOfClass:[StoryPublisher class]]) {
                 [self publishStoryPublisher:(StoryPublisher*)pp];
             }
         }
