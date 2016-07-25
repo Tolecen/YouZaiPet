@@ -108,10 +108,10 @@
         self.darenV.hidden =YES;
         
         
-        self.nicknameL = [[UILabel alloc] initWithFrame:CGRectMake(0, 80+navigationBarHeight, 300, 20)];
+        self.nicknameL = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_photoIV.frame)+15, 300, 20)];
         _nicknameL.center = CGPointMake(_photoIV.center.x, _nicknameL.center.y);
         _nicknameL.backgroundColor = [UIColor clearColor];
-        _nicknameL.font = [UIFont systemFontOfSize:15];
+        _nicknameL.font = [UIFont boldSystemFontOfSize:17];
         _nicknameL.textAlignment = NSTextAlignmentCenter;
         _nicknameL.textColor = [UIColor whiteColor];
         [view addSubview:_nicknameL];
@@ -129,9 +129,10 @@
         gradeIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [view addSubview:gradeIV];
         
-        gradeL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        gradeL = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_nicknameL.frame)+5, ScreenWidth, 20)];
         gradeL.backgroundColor = [UIColor clearColor];
         gradeL.textColor = [UIColor whiteColor];
+        gradeL.textAlignment = NSTextAlignmentCenter;
         gradeL.font = [UIFont systemFontOfSize:14];
         [view addSubview:gradeL];
         
@@ -151,7 +152,7 @@
         [fansB setTitleShadowColor:[UIColor colorWithWhite:0.3 alpha:0.6] forState:UIControlStateNormal];
         fansB.titleLabel.shadowOffset = CGSizeMake(1, 1);
         
-        UILabel * lineL = [[UILabel alloc] initWithFrame:CGRectMake(view.center.x-10, 133+navigationBarHeight, 20, 10)];
+        UILabel * lineL = [[UILabel alloc] initWithFrame:CGRectMake(view.center.x-10, CGRectGetMaxY(gradeL.frame)+10, 20, 10)];
         [lineL setText:@"|"];
         [lineL setTextColor:[UIColor whiteColor]];
         [lineL setBackgroundColor:[UIColor clearColor]];
@@ -167,17 +168,17 @@
         [relationBtn addTarget:self action:@selector(relationAction:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:relationBtn];
         
-        UIButton * chatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        chatBtn.frame = CGRectMake(view.center.x+10, 152+navigationBarHeight, 65, 25);
-        chatBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-        [chatBtn addTarget:self action:@selector(chatBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [chatBtn setBackgroundImage:[UIImage imageNamed:@"usercenter_chat"] forState:UIControlStateNormal];
-        [view addSubview:chatBtn];
-        if ([UserServe sharedUserServe].account) {
-            if ([[UserServe sharedUserServe].userID isEqualToString:self.petId]) {
-                chatBtn.hidden = YES;
-            }
-        }
+//        UIButton * chatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        chatBtn.frame = CGRectMake(view.center.x+10, 152+navigationBarHeight, 65, 25);
+//        chatBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+//        [chatBtn addTarget:self action:@selector(chatBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [chatBtn setBackgroundImage:[UIImage imageNamed:@"usercenter_chat"] forState:UIControlStateNormal];
+//        [view addSubview:chatBtn];
+//        if ([UserServe sharedUserServe].account) {
+//            if ([[UserServe sharedUserServe].userID isEqualToString:self.petId]) {
+//                chatBtn.hidden = YES;
+//            }
+//        }
         UIView * bView = [[UIView alloc] initWithFrame:CGRectMake(0,  view.frame.size.height-30, view.frame.size.width, 30)];
         bView.backgroundColor = [UIColor colorWithWhite:228/255.0 alpha:0.36];
         [view addSubview:bView];
@@ -300,8 +301,8 @@
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"petfans" forKey:@"command"];
         [mDict setObject:@"cancelFocus" forKey:@"options"];
-        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"fansPetId"];
-        [mDict setObject:self.petId forKey:@"petId"];
+        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"fansId"];
+        [mDict setObject:self.petId forKey:@"userId"];
         [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             self.relationShip = @"0";
             //            [button setBackgroundImage:[UIImage imageNamed:@"addAttention"] forState:UIControlStateNormal];
@@ -329,14 +330,14 @@
         if ([self.petId isEqualToString:@"44239"]) {
             relationBtn.enabled = NO;
         }
-        [self.photoIV setImageURL:[NSURL URLWithString:[[responseObject objectForKey:@"value"] objectForKey:@"headPortrait"]]];
-        self.darenV.hidden = [[[responseObject objectForKey:@"value"] objectForKey:@"star"] isEqualToString:@"1"]?NO:YES;
-        self.nicknameL.text = [[responseObject objectForKey:@"value"] objectForKey:@"nickName"];
+        [self.photoIV setImageURL:[NSURL URLWithString:[[responseObject objectForKey:@"value"] objectForKey:@"head"]]];
+//        self.darenV.hidden = [[[responseObject objectForKey:@"value"] objectForKey:@"star"] isEqualToString:@"1"]?NO:YES;
+        self.nicknameL.text = [[responseObject objectForKey:@"value"] objectForKey:@"nickname"];
         self.title = @"";
-        self.petNickname = [[responseObject objectForKey:@"value"] objectForKey:@"nickName"];
+        self.petNickname = [[responseObject objectForKey:@"value"] objectForKey:@"nickname"];
         CGSize k = [self.petNickname sizeWithFont:self.nicknameL.font constrainedToSize:CGSizeMake(ScreenWidth-40, self.nicknameL.frame.size.height)];
         [self.darenV setFrame:CGRectMake(ScreenWidth/2-k.width/2-25, self.nicknameL.frame.origin.y, 20, 20)];
-        self.petAvatarUrlStr = [[responseObject objectForKey:@"value"] objectForKey:@"headPortrait"];
+        self.petAvatarUrlStr = [[responseObject objectForKey:@"value"] objectForKey:@"head"];
         switch ([[[responseObject objectForKey:@"value"] objectForKey:@"gender"] intValue]) {
             case 0:{
                 genderIV.image = [UIImage imageNamed:@"female_border"];
@@ -347,34 +348,34 @@
             default:
                 break;
         }
-        PetCategoryParser * pet = [[PetCategoryParser alloc] init];
+//        PetCategoryParser * pet = [[PetCategoryParser alloc] init];
         int lv = [[[[responseObject objectForKey:@"value"] objectForKey:@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""] intValue];
-        if(lv>0)
-        {
-            breedAgeL.text = [NSString stringWithFormat:@"%@, %@, ",[pet breedWithIDcode:[[[responseObject objectForKey:@"value"] objectForKey:@"type"] integerValue]],[Common calAgeWithBirthDate:[[responseObject objectForKey:@"value"] objectForKey:@"birthday"]]];
-            
-            CGSize hZ = [breedAgeL.text sizeWithFont:breedAgeL.font constrainedToSize:CGSizeMake(ScreenWidth-100, breedAgeL.frame.size.height) lineBreakMode:NSLineBreakByCharWrapping];
-            //            gradeIV.frame = CGRectMake(breedAgeL.frame.origin.x+hZ.width, breedAgeL.frame.origin.y, 15, 15);
-            gradeIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"LV%d.png",lv]];
-            gradeIV.hidden = NO;
-            gradeL.hidden = NO;
+//        if(lv>0)
+//        {
+//            breedAgeL.text = [NSString stringWithFormat:@"%@, %@, ",[pet breedWithIDcode:[[[responseObject objectForKey:@"value"] objectForKey:@"type"] integerValue]],[Common calAgeWithBirthDate:[[responseObject objectForKey:@"value"] objectForKey:@"birthday"]]];
+//            
+//            CGSize hZ = [breedAgeL.text sizeWithFont:breedAgeL.font constrainedToSize:CGSizeMake(ScreenWidth-100, breedAgeL.frame.size.height) lineBreakMode:NSLineBreakByCharWrapping];
+//            //            gradeIV.frame = CGRectMake(breedAgeL.frame.origin.x+hZ.width, breedAgeL.frame.origin.y, 15, 15);
+//            gradeIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"LV%d.png",lv]];
+//            gradeIV.hidden = NO;
+//            gradeL.hidden = NO;
             //            gradeL.frame = CGRectMake(breedAgeL.frame.origin.x+hZ.width+15+10, breedAgeL.frame.origin.y, 60, 20);
             gradeL.text = [NSString stringWithFormat:@"LV.%d",lv];
-            CGSize hZ2 = [gradeL.text sizeWithFont:gradeL.font constrainedToSize:CGSizeMake(ScreenWidth-100, 20) lineBreakMode:NSLineBreakByCharWrapping];
-            
-            int o = (self.view.frame.size.width - (hZ.width+18+5+hZ2.width))/2;
-            breedAgeL.frame = CGRectMake(o, breedAgeL.frame.origin.y, hZ.width, breedAgeL.frame.size.height);
-            gradeIV.frame = CGRectMake(o+hZ.width, breedAgeL.frame.origin.y+2, 18, 18);
-            gradeL.frame = CGRectMake(o+hZ.width+18+5, breedAgeL.frame.origin.y, hZ2.width, 20);
-            
-        }
-        else
-        {
-            breedAgeL.text = [[pet breedWithIDcode:[[[responseObject objectForKey:@"value"] objectForKey:@"type"] integerValue]] stringByAppendingString:[NSString stringWithFormat:@", %@",[Common calAgeWithBirthDate:[[responseObject objectForKey:@"value"] objectForKey:@"birthday"]]]];
-            gradeIV.hidden = YES;
-            gradeL.hidden = YES;
-            breedAgeL.frame = CGRectMake(0, breedAgeL.frame.origin.y, ScreenWidth, breedAgeL.frame.size.height);
-        }
+//            CGSize hZ2 = [gradeL.text sizeWithFont:gradeL.font constrainedToSize:CGSizeMake(ScreenWidth-100, 20) lineBreakMode:NSLineBreakByCharWrapping];
+//            
+//            int o = (self.view.frame.size.width - (hZ.width+18+5+hZ2.width))/2;
+//            breedAgeL.frame = CGRectMake(o, breedAgeL.frame.origin.y, hZ.width, breedAgeL.frame.size.height);
+//            gradeIV.frame = CGRectMake(o+hZ.width, breedAgeL.frame.origin.y+2, 18, 18);
+//            gradeL.frame = CGRectMake(0, CGRectGetMaxY(_nicknameL.frame)+5, ScreenWidth, 20);
+        
+//        }
+//        else
+//        {
+//            breedAgeL.text = [[pet breedWithIDcode:[[[responseObject objectForKey:@"value"] objectForKey:@"type"] integerValue]] stringByAppendingString:[NSString stringWithFormat:@", %@",[Common calAgeWithBirthDate:[[responseObject objectForKey:@"value"] objectForKey:@"birthday"]]]];
+//            gradeIV.hidden = YES;
+//            gradeL.hidden = YES;
+//            breedAgeL.frame = CGRectMake(0, breedAgeL.frame.origin.y, ScreenWidth, breedAgeL.frame.size.height);
+//        }
         
         
         [attentionB setTitle:[NSString stringWithFormat:@"关注:%@",[[[responseObject objectForKey:@"value"] objectForKey:@"counter"] objectForKey:@"focus"]] forState:UIControlStateNormal];
@@ -382,8 +383,11 @@
         CGSize attentionSize = [attentionB.titleLabel.text sizeWithFont:attentionB.titleLabel.font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
         CGSize fansSize = [fansB.titleLabel.text sizeWithFont:fansB.titleLabel.font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
         UIView * view = attentionB.superview;
-        attentionB.frame = CGRectMake(view.center.x - attentionSize.width-30, 127+navigationBarHeight, attentionSize.width+20, 20);
-        fansB.frame = CGRectMake(view.center.x + 10, 127+navigationBarHeight, fansSize.width+20, 20);
+        attentionB.frame = CGRectMake(view.center.x - attentionSize.width-30, CGRectGetMaxY(gradeL.frame)+5, attentionSize.width+20, 20);
+        fansB.frame = CGRectMake(view.center.x + 10, CGRectGetMaxY(gradeL.frame)+5, fansSize.width+20, 20);
+        
+        
+        relationBtn.frame = CGRectMake(view.center.x-65/2, CGRectGetMaxY(fansB.frame)+10, 65, 25);
         
         publishL.text = [NSString stringWithFormat:@"说说(%@)",[[[responseObject objectForKey:@"value"] objectForKey:@"counter"] objectForKey:@"issue"]] ;
         forwardL.text = [NSString stringWithFormat:@"转发(%@)",[[[responseObject objectForKey:@"value"] objectForKey:@"counter"] objectForKey:@"relay"]];

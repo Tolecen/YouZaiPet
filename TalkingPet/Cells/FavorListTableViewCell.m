@@ -118,8 +118,8 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petfans" forKey:@"command"];
     [mDict setObject:@"cancelFocus" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"fansPetId"];
-    [mDict setObject:[self.favorDict objectForKey:@"petId"] forKey:@"petId"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"fansId"];
+    [mDict setObject:[self.favorDict objectForKey:@"petId"] forKey:@"userId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.relationShip = @"0";
         [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"guanzhu_normal"] forState:UIControlStateNormal];

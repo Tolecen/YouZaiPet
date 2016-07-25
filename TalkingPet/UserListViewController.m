@@ -326,7 +326,7 @@
     [mDict setObject:@"1" forKey:@"pageIndex"];
     [mDict setObject:@"20" forKey:@"pageSize"];
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.searchArr = [NSMutableArray arrayWithArray:[responseObject[@"value"] objectForKey:@"list"]];
+        self.searchArr = [NSMutableArray arrayWithArray:responseObject[@"value"]];
         [_searchController.searchResultsTableView reloadData];
         [SVProgressHUD dismiss];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

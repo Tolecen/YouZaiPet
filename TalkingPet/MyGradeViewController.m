@@ -178,7 +178,7 @@
             NSDictionary * dic = ruleArr[[[UserServe sharedUserServe].account.grade integerValue]];
             float sc = [[UserServe sharedUserServe].account.score floatValue]/[dic[@"scoreMax"] floatValue];
             gradeV.frame = CGRectMake(0, 0, (self.view.frame.size.width-150)*sc, 15);
-            upL.text = [NSString stringWithFormat:@"升级还需积分:%d",[dic[@"scoreMax"] integerValue]-[[UserServe sharedUserServe].account.score integerValue]+1];
+            upL.text = [NSString stringWithFormat:@"升级还需积分:%d",[dic[@"scoreMax"] intValue]-[[UserServe sharedUserServe].account.score intValue]+1];
         }else
         {
             gradeV.frame = CGRectMake(0, 0, 170, 15);

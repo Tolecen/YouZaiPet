@@ -59,7 +59,11 @@
         user.relay = account.relay;
         user.comment = account.comment;
         user.favour = account.favour;
-        user.grade = account.grade;
+        if ([account.grade hasPrefix:@"DJ"]) {
+            user.grade = [account.grade stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
+        }
+        else
+            user.grade = account.grade;
         user.score = account.score;
         user.coin = account.coin;
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
@@ -80,7 +84,11 @@
             user.relay = account.relay;
             user.comment = account.comment;
             user.favour = account.favour;
-            user.grade = account.grade;
+            if ([account.grade hasPrefix:@"DJ"]) {
+                user.grade = [account.grade stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
+            }
+            else
+                user.grade = account.grade;
             user.score = account.score;
             user.coin = account.coin;
 
