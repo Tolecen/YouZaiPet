@@ -214,13 +214,13 @@
 - (void)buildViewWithSkintype
 {
     [super buildViewWithSkintype];
-    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:@"同意《宠物说用户协议》"];
+    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:@"同意《友仔用户协议》"];
     [str addAttribute:NSForegroundColorAttributeName
                 value:(id)[UIColor grayColor].CGColor
                 range:NSMakeRange(0, 3)];
     [str addAttribute:NSForegroundColorAttributeName
                 value:(id)[UIColor grayColor].CGColor
-                range:NSMakeRange(10, 1)];
+                range:NSMakeRange(9, 1)];
     
     [str addAttribute:NSFontAttributeName
                 value:[UIFont systemFontOfSize:14]
@@ -228,7 +228,7 @@
     [loginB setBackgroundImage:[UIImage imageNamed:@"login_normal"] forState:UIControlStateNormal];
     [str addAttribute:NSForegroundColorAttributeName
                 value:(id)CommonGreenColor.CGColor
-                range:NSMakeRange(3, 7)];
+                range:NSMakeRange(3, 6)];
     [agreeB setImage:[UIImage imageNamed:@"login_state_select"] forState:UIControlStateNormal];
     label.text = str;
 }

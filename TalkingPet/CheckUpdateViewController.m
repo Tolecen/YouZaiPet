@@ -75,7 +75,7 @@
 //    [bgIV addSubview:updateB];
     
     UILabel * statementL= [[UILabel alloc] initWithFrame:CGRectMake(0, bgIV.frame.size.height-50, bgIV.frame.size.width, 40)];
-    statementL.text = @"上海友仔科技有限公司\t版权所有\n© buybestpet.com, All Rights Reserved";
+    statementL.text = @"上海钰宠宠物用品有限公司\t版权所有\n© buybestpet.com, All Rights Reserved";
     statementL.font = [UIFont systemFontOfSize:12];
     statementL.numberOfLines = 0;
     statementL.textAlignment = NSTextAlignmentCenter;
@@ -161,7 +161,7 @@
     if (indexPath.row==0){
         WebContentViewController * vb = [[WebContentViewController alloc] init];
         vb.urlStr =[@"http://mp.weixin.qq.com/s?__biz=MjM5MDM1ODExMQ==&mid=200867907&idx=1&sn=7119893f3ed7c8615b074347a56c9519#rd" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        vb.title = @"宠物说小帮手";
+        vb.title = @"友仔小帮手";
         [self.navigationController pushViewController:vb animated:YES];
     }
     else if (indexPath.row==1){
@@ -309,7 +309,7 @@
         }
         else
         {
-            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您使用的就是最新版本的宠物说啦" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您使用的就是最新版本的友仔啦" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
 //            alert.tag = 1;
             [alert show];
         }

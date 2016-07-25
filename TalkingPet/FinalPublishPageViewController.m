@@ -54,7 +54,7 @@
     if (self) {
         // Custom initialization
         self.canScrollBack = NO;
-        self.title = @"发布宠物说";
+        self.title = @"编辑内容";
         hasLocation = NO;
     }
     return self;

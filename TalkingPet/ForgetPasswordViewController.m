@@ -85,7 +85,7 @@
     [_verificationCodeB setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     _verificationCodeB.titleLabel.font = [UIFont systemFontOfSize:14];
     [imageV addSubview:_verificationCodeB];
-    [_verificationCodeB addTarget:self action:@selector(sendVerifyCode) forControlEvents:UIControlEventTouchUpInside];
+    [_verificationCodeB addTarget:self action:@selector(checkUsername) forControlEvents:UIControlEventTouchUpInside];
     
     nextB = [UIButton buttonWithType:UIButtonTypeCustom];
     nextB .frame = CGRectMake(10, 180, imageV.frame.size.width - 20, 47);
@@ -146,8 +146,8 @@
 }
 - (void)sendVerifyCode
 {
-    if (![IdentifyingString validateMobile:self.usernameTF.text]) {
-        [SVProgressHUD showErrorWithStatus:@"请输入正确的手机号码"];
+    if (![IdentifyingString validateMobile:self.usernameTF.text] || usernameCanUse) {
+        [SVProgressHUD showErrorWithStatus:@"请输入正确的已注册手机号码"];
         return;
     }
     [SVProgressHUD showWithStatus:@"正在发送..."];
@@ -193,13 +193,14 @@
 {
     NSMutableDictionary * regDict = [NetServer commonDict];
     [regDict setObject:@"account" forKey:@"command"];
-    [regDict setObject:self.usernameTF.text forKey:@"loginName"];
-    [regDict setObject:@"checkLoginName"forKey:@"options"];
+    [regDict setObject:self.usernameTF.text forKey:@"username"];
+    [regDict setObject:@"checkUsername"forKey:@"options"];
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"register success info:%@",responseObject);
         if([[responseObject objectForKey:@"value"] isEqualToString:@"false"])
         {
             usernameCanUse = NO;
+            [self sendVerifyCode];
         }
         else{
             usernameCanUse = YES;

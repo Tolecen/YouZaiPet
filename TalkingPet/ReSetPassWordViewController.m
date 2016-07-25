@@ -116,7 +116,7 @@
     [regDict setObject:@"account" forKey:@"command"];
     [regDict setObject:@"restPw"forKey:@"options"];
     [regDict setObject:self.passwordTF.text forKey:@"password"];
-    [regDict setObject:_phoneNo forKey:@"loginName"];
+    [regDict setObject:_phoneNo forKey:@"username"];
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.navigationController popToRootViewControllerAnimated:YES];
         [SVProgressHUD showSuccessWithStatus:@"修改成功"];

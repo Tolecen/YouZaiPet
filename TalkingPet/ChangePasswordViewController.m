@@ -137,7 +137,7 @@
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"account" forKey:@"command"];
     [mDict setObject:@"updtPw" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"id"];
+    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     [mDict setObject:_oldpasswordTF.text forKey:@"password"];
     [mDict setObject:_newpasswordTF.text forKey:@"newPassword"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {

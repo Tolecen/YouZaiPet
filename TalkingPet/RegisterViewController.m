@@ -155,21 +155,21 @@
 - (void)buildViewWithSkintype
 {
     [super buildViewWithSkintype];
-    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:@"点击“下一步”按钮，即表示您同意《宠物说用户协议》"];
+    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:@"点击“下一步”按钮，即表示您同意《友仔用户协议》"];
     [str addAttribute:NSForegroundColorAttributeName
                 value:(id)[UIColor grayColor].CGColor
                 range:NSMakeRange(0, 17)];
     [str addAttribute:NSForegroundColorAttributeName
                 value:(id)[UIColor grayColor].CGColor
-                range:NSMakeRange(24, 1)];
+                range:NSMakeRange(23, 1)];
     
     [str addAttribute:NSFontAttributeName
                 value:[UIFont systemFontOfSize:14]
                 range:NSMakeRange(0, str.length)];
     [nextB setBackgroundImage:[UIImage imageNamed:@"login_normal"] forState:UIControlStateNormal];
     [str addAttribute:NSForegroundColorAttributeName
-                value:(id)[UIColor colorWithRed:6/255.0 green:198/255.0 blue:255/255.0 alpha:1].CGColor
-                range:NSMakeRange(17, 7)];
+                value:(id)CommonGreenColor.CGColor
+                range:NSMakeRange(17, 6)];
     label.text = str;
 }
 -(void)sendVerifyCode:(UIButton *)sender
