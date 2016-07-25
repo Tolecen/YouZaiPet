@@ -144,7 +144,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section > 2) {
+    if (indexPath.section >= 2) {
         YZDogTypeAlphabetModel *dogModel = self.alphabet[indexPath.section - 2][indexPath.row];
         self.kindViewSelectedKindBlock(dogModel.dogTypeId);
     }
