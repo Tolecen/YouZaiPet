@@ -233,6 +233,9 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
     [self.goodsShangPinCache removeAllObjects];
     [self.shoppingCarContainsIds removeAllObjects];
     self.totalPrice = 0;
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheDogKey]];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheGoodsKey]];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheContainsIdKey]];
 }
 
 - (long long)totalPrice {
