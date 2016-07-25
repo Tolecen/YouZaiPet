@@ -86,11 +86,11 @@
     }
     
     [self checkNetwork];
-//    [NetServer fetchOrderListWithPageIndex:1 success:^(id result) {
-//        
-//    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-//        
-//    }];
+    [NetServer fetchOrderListWithPageIndex:1 success:^(id result) {
+        
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        
+    }];
 //    [self performSelector:@selector(saaaaa) withObject:nil afterDelay:2];
     return YES;
 }

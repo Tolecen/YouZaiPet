@@ -57,7 +57,7 @@
     #define BaseQiNiuDownloadURL @"http://testimages.buybestpet.com/"
     #define QINIUDomain @"testimages"
     #define DomainName @"chongwushuotest"
-    #define BasePayUrl  @"http://faces.buybestpet.com/server"
+    #define BasePayUrl  @"http://faces.buybestpet.com"
     #endif
 
     #define kUrlScheme     @"wxb62f795f2bc6b770"
