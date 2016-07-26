@@ -13,6 +13,7 @@
 #import "ChatDetailViewController.h"
 #import "WXROrderCell.h"
 #import "BlankPageView.h"
+#import "NetServer+Payment.h"
 
 @interface MyOrderViewConyroller ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 {
@@ -135,37 +136,40 @@
 }
 -(void)getFristList
 {
-    [_tableView headerEndRefreshing];
-    return;
-    
-    
-    NSMutableDictionary* usersDict = [NetServer commonDict];
-    [usersDict setObject:@"order" forKey:@"command"];
-    [usersDict setObject:option forKey:@"options"];
-    [usersDict setObject:@"10" forKey:@"pageSize"];
-    [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [_tableView headerEndRefreshing];
-        [_orderArr removeAllObjects];
-        [_orderArr addObjectsFromArray:responseObject[@"value"]];
-        [_tableView reloadData];
-        if (!_orderArr.count) {
-            if (!blankPage) {
-                __weak UINavigationController * weakNav = self.navigationController;
-                blankPage = [[BlankPageView alloc] initWithImage];
-                [blankPage showWithView:self.view image:[UIImage imageNamed:@"order_without"] buttonImage:[UIImage imageNamed:@"order_toShop"] action:^{
-                    [weakNav popToRootViewControllerAnimated:YES];
-                }];
-            }
-        }
-        else if(blankPage){
-            [blankPage removeFromSuperview];
-            blankPage = nil;
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [_tableView headerEndRefreshing];
-        [_orderArr removeAllObjects];
-        [_tableView reloadData];
+
+    [NetServer fetchOrderListWithPageIndex:1 success:^(id result) {
+        NSLog(@"orderList:%@",result);
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        
     }];
+    
+//    NSMutableDictionary* usersDict = [NetServer commonDict];
+//    [usersDict setObject:@"order" forKey:@"command"];
+//    [usersDict setObject:option forKey:@"options"];
+//    [usersDict setObject:@"10" forKey:@"pageSize"];
+//    [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        [_tableView headerEndRefreshing];
+//        [_orderArr removeAllObjects];
+//        [_orderArr addObjectsFromArray:responseObject[@"value"]];
+//        [_tableView reloadData];
+//        if (!_orderArr.count) {
+//            if (!blankPage) {
+//                __weak UINavigationController * weakNav = self.navigationController;
+//                blankPage = [[BlankPageView alloc] initWithImage];
+//                [blankPage showWithView:self.view image:[UIImage imageNamed:@"order_without"] buttonImage:[UIImage imageNamed:@"order_toShop"] action:^{
+//                    [weakNav popToRootViewControllerAnimated:YES];
+//                }];
+//            }
+//        }
+//        else if(blankPage){
+//            [blankPage removeFromSuperview];
+//            blankPage = nil;
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [_tableView headerEndRefreshing];
+//        [_orderArr removeAllObjects];
+//        [_tableView reloadData];
+//    }];
 }
 -(void)getOtherlist
 {
