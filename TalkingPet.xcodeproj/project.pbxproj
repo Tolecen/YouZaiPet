@@ -851,6 +851,7 @@
 		972153B21977712D00FB34F2 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 972153AA1977712D00FB34F2 /* libopencore-amrwb.a */; };
 		972153B61977717800FB34F2 /* amrFileCodec.m in Sources */ = {isa = PBXBuildFile; fileRef = 972153B51977717800FB34F2 /* amrFileCodec.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		972153C31977B2E500FB34F2 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 972153C21977B2E500FB34F2 /* NotificationTableViewCell.m */; };
+		9723F3F01D47904B0075A8D8 /* OrderListSingleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9723F3EF1D47904B0075A8D8 /* OrderListSingleCell.m */; };
 		9725D0C51A8CA089008A7BC1 /* weitiao_prompt.png in Resources */ = {isa = PBXBuildFile; fileRef = 9725D0C41A8CA089008A7BC1 /* weitiao_prompt.png */; };
 		9725D0C61A8CA89A008A7BC1 /* main_publishpic.png in Resources */ = {isa = PBXBuildFile; fileRef = 971DC95C1A8B75FE004EF774 /* main_publishpic.png */; };
 		972689EE19E7BE3300A59643 /* addGuanzhu.png in Resources */ = {isa = PBXBuildFile; fileRef = 972689ED19E7BE3300A59643 /* addGuanzhu.png */; };
@@ -2590,6 +2591,8 @@
 		972153BD197771B900FB34F2 /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
 		972153C11977B2E500FB34F2 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
 		972153C21977B2E500FB34F2 /* NotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
+		9723F3EE1D47904B0075A8D8 /* OrderListSingleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListSingleCell.h; sourceTree = "<group>"; };
+		9723F3EF1D47904B0075A8D8 /* OrderListSingleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListSingleCell.m; sourceTree = "<group>"; };
 		9725D0C41A8CA089008A7BC1 /* weitiao_prompt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weitiao_prompt.png; sourceTree = "<group>"; };
 		972689ED19E7BE3300A59643 /* addGuanzhu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addGuanzhu.png; sourceTree = "<group>"; };
 		9729E4AC19A2F3B500A19575 /* Emoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emoji.h; sourceTree = "<group>"; };
@@ -5457,6 +5460,8 @@
 				72F6C2CF197B9E6F00CF5EB2 /* TalkingTableViewCellDelegate.h */,
 				D860FDF11D3360F800487E2D /* UserCenterGouWuFuncTableViewCell.h */,
 				D860FDF21D3360F800487E2D /* UserCenterGouWuFuncTableViewCell.m */,
+				9723F3EE1D47904B0075A8D8 /* OrderListSingleCell.h */,
+				9723F3EF1D47904B0075A8D8 /* OrderListSingleCell.m */,
 				9709D979198B43B70066421C /* UploadTaskTableViewCell.h */,
 				9709D97A198B43B70066421C /* UploadTaskTableViewCell.m */,
 				9781985D1B438DDF0034E0F9 /* TuijianTagTableViewCell.h */,
@@ -7370,6 +7375,7 @@
 				72D2DB9519A1A73E00459CA9 /* SystemServer.m in Sources */,
 				72831CD3196A3FE200B9CA4C /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				729CB6761A5A60E500BD2303 /* cpu_detect_x86_gcc.cpp in Sources */,
+				9723F3F01D47904B0075A8D8 /* OrderListSingleCell.m in Sources */,
 				97F362D51980B1650023D008 /* TFileManager.m in Sources */,
 				2EF82F2B1D35D1DF002A58ED /* YZShangChengShareHelper.m in Sources */,
 				725A95821A63BC4800E8C8ED /* MarketViewController.m in Sources */,
