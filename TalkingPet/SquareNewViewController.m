@@ -757,11 +757,13 @@
 
 -(void)makeSquareItem
 {
+    NSArray * keyArray = @[@"quanshezhuanfang",@"huodongquwen",@"xunlianfuwu",@"shidazuire",@"kuailehuoli",@"zuiqianyan"];
     self.gudinggcArray = [NSMutableArray array];
     for (int i = 0; i<6; i++) {
         SquareIteam * item = [[SquareIteam alloc] init];
         item.handleType = @"3";
         item.title = @"测试";
+//        item.key = keyArray[i];
         item.key = @"hot";
         [self.gudinggcArray addObject:item];
     }
