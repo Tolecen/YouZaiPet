@@ -19,6 +19,7 @@
 #import "YZShangChengShareHelper.h"
 #import "YZShoppingCarHelper.h"
 #import "YZShoppingCarVC.h"
+#import "SVProgressHUD.h"
 
 @interface YZDogDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YZDetailBottomBarDelegate>
 
@@ -257,6 +258,7 @@
     }
     [[YZShoppingCarHelper instanceManager] addShoppingCarWithScene:YZShangChengType_Dog
                                                              model:self.dogModel];
+    [SVProgressHUD showSuccessWithStatus:@"已添加到购物车"];
 }
 
 
