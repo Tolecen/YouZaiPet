@@ -14,4 +14,8 @@
                             success:(void(^)(id result))success
                             failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
++ (void)fetchOrderDetailWithOrderNo:(NSString *)orderNo
+                            success:(void (^)(id result))success
+                            failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
 @end

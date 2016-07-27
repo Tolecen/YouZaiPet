@@ -15,6 +15,7 @@
 #import "OrderListSingleCell.h"
 #import "OrderHeaderView.h"
 #import "OrderFooterView.h"
+#import "NetServer+Payment.h"
 
 @interface WXRLabelsCell : UITableViewCell
 {
@@ -344,13 +345,13 @@
     self.orderNoL = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, ScreenWidth-40, 20)];
     self.orderNoL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
     self.orderNoL.font = [UIFont systemFontOfSize:14];
-    self.orderNoL.text = @"订单编号：234567890876543";
+    self.orderNoL.text = [NSString stringWithFormat:@"订单编号：%@",self.myOrder.order_no];
     [self.footerV addSubview:self.orderNoL];
     
     self.orderTimeL = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, ScreenWidth-40, 20)];
     self.orderTimeL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
     self.orderTimeL.font = [UIFont systemFontOfSize:14];
-    self.orderTimeL.text = @"创建时间：2015-07-09 20：33：23";
+    self.orderTimeL.text = [NSString stringWithFormat:@"创建时间：%@",self.myOrder.time];
     [self.footerV addSubview:self.orderTimeL];
     
     
@@ -360,7 +361,7 @@
     [self.view addSubview:_tableView];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView addHeaderWithTarget:self action:@selector(loadOrderWithOrderID)];
-//    [_tableView headerBeginRefreshing];
+    [_tableView headerBeginRefreshing];
     
     _tableView.tableHeaderView = self.HeadAddressV;
     _tableView.tableFooterView = self.footerV;
@@ -465,41 +466,56 @@
 }
 -(void)loadOrderWithOrderID
 {
-    return;
-    if (!_orderID) {
+    if (!self.myOrder) {
         [_tableView headerEndRefreshing];
         return;
     }
-    NSMutableDictionary* usersDict = [NetServer commonDict];
-    [usersDict setObject:@"order" forKey:@"command"];
-    [usersDict setObject:@"one" forKey:@"options"];
-    [usersDict setObject:_orderID forKey:@"id"];
-    [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary * dic = responseObject[@"value"];
-        [_tableView headerEndRefreshing];
-        self.orderMessage = @{@"state":dic[@"state"],@"stateDesc":dic[@"stateDesc"],@"id":dic[@"id"],@"time":dic[@"confirmTime"]};
-        self.payMessage = @{@"amount":dic[@"amount"],@"payChannel":dic[@"payChannel"]};
-        self.productMessage = @{@"cover":[dic[@"orderProducts"] lastObject][@"cover"],@"name":[dic[@"orderProducts"] lastObject][@"name"],@"price":[dic[@"orderProducts"] lastObject][@"price"],@"count":dic[@"productCount"],@"transportationCosts":dic[@"shippingFee"],@"amount":dic[@"amount"]};
-        if ([dic[@"coupon"] isKindOfClass:[NSDictionary class]]) {
-            NSMutableDictionary * lDic = [NSMutableDictionary dictionaryWithDictionary:_productMessage];
-            [lDic setObject:[dic[@"coupon"] objectForKey:@"faceValue"] forKey:@"couponValue"];
-            self.productMessage = lDic;
+    
+    [NetServer fetchOrderDetailWithOrderNo:self.myOrder.order_no success:^(id result) {
+        NSLog(@"result:%@",result);
+        if ([result[@"code"] intValue]==200) {
+            NSDictionary * orderDict = [[result objectForKey:@"data"] objectForKey:@"order"];
+            self.shouhuoNameL.text = orderDict[@"consignee"];
+            self.shouhuoMobileL.text = orderDict[@"telphone"];
+            self.shouhuoAddressL.text = orderDict[@"address"];
+
         }
-        self.address = ({
-            ReceiptAddress * address = [[ReceiptAddress alloc] init];
-            address.receiptName = dic[@"shippingName"];
-            address.phoneNo = dic[@"shippingMobile"];
-            address.province = dic[@"shippingProvince"];
-            address.city = dic[@"shippingCity"];
-            address.address = dic[@"shippingAddress"];
-            address.zipCode = dic[@"shippingZipcode"];
-            address;
-        });
-        [_tableView reloadData];
-        [self loadTooleBarView];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [_tableView headerEndRefreshing];
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         [_tableView headerEndRefreshing];
     }];
+    
+//    NSMutableDictionary* usersDict = [NetServer commonDict];
+//    [usersDict setObject:@"order" forKey:@"command"];
+//    [usersDict setObject:@"one" forKey:@"options"];
+//    [usersDict setObject:_orderID forKey:@"id"];
+//    [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSDictionary * dic = responseObject[@"value"];
+//        [_tableView headerEndRefreshing];
+//        self.orderMessage = @{@"state":dic[@"state"],@"stateDesc":dic[@"stateDesc"],@"id":dic[@"id"],@"time":dic[@"confirmTime"]};
+//        self.payMessage = @{@"amount":dic[@"amount"],@"payChannel":dic[@"payChannel"]};
+//        self.productMessage = @{@"cover":[dic[@"orderProducts"] lastObject][@"cover"],@"name":[dic[@"orderProducts"] lastObject][@"name"],@"price":[dic[@"orderProducts"] lastObject][@"price"],@"count":dic[@"productCount"],@"transportationCosts":dic[@"shippingFee"],@"amount":dic[@"amount"]};
+//        if ([dic[@"coupon"] isKindOfClass:[NSDictionary class]]) {
+//            NSMutableDictionary * lDic = [NSMutableDictionary dictionaryWithDictionary:_productMessage];
+//            [lDic setObject:[dic[@"coupon"] objectForKey:@"faceValue"] forKey:@"couponValue"];
+//            self.productMessage = lDic;
+//        }
+//        self.address = ({
+//            ReceiptAddress * address = [[ReceiptAddress alloc] init];
+//            address.receiptName = dic[@"shippingName"];
+//            address.phoneNo = dic[@"shippingMobile"];
+//            address.province = dic[@"shippingProvince"];
+//            address.city = dic[@"shippingCity"];
+//            address.address = dic[@"shippingAddress"];
+//            address.zipCode = dic[@"shippingZipcode"];
+//            address;
+//        });
+//        [_tableView reloadData];
+//        [self loadTooleBarView];
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [_tableView headerEndRefreshing];
+//    }];
 }
 -(void)buildWithSimpleDic:(NSDictionary*)dic
 {
