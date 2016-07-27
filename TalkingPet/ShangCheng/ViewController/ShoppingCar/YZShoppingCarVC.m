@@ -11,6 +11,7 @@
 #import "YZShoppingCarBottomBar.h"
 #import "YZShoppingCarHelper.h"
 #import "OrderConfirmViewController.h"
+#import "SVProgressHUD.h"
 
 @interface YZShoppingCarVC()<YZShoppingCarBottomBarDelegate>
 
@@ -105,6 +106,10 @@
 }
 
 - (void)shoppingCarClearPrice {
+    if ([YZShoppingCarHelper instanceManager].totalPrice==0) {
+        [SVProgressHUD showErrorWithStatus:@"请先选择要买的商品"];
+        return;
+    }
     OrderConfirmViewController *viewC = [[OrderConfirmViewController alloc] init];
     [self.navigationController pushViewController:viewC animated:YES];
 }

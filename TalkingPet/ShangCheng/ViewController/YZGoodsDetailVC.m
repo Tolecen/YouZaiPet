@@ -264,6 +264,8 @@
 }
 
 - (void)clearPriceAction {
+    [[YZShoppingCarHelper instanceManager] addShoppingCarWithScene:YZShangChengType_Goods
+                                                             model:self.detailModel];
     YZShoppingCarVC *shoppingCarVC = [[YZShoppingCarVC alloc] init];
     shoppingCarVC.selectedIndex = 1;
     [self.navigationController pushViewController:shoppingCarVC animated:YES];

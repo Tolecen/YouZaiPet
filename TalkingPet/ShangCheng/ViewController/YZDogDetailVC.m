@@ -240,6 +240,8 @@
 }
 
 - (void)clearPriceAction {
+    [[YZShoppingCarHelper instanceManager] addShoppingCarWithScene:YZShangChengType_Dog
+                                                             model:self.dogModel];
     YZShoppingCarVC *shoppingCarVC = [[YZShoppingCarVC alloc] init];
     shoppingCarVC.selectedIndex = 0;
     [self.navigationController pushViewController:shoppingCarVC animated:YES];
