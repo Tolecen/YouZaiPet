@@ -746,13 +746,13 @@
 {
     [SVProgressHUD showWithStatus:@"设置个人资料..."];
     NSMutableDictionary * regDict = [NetServer commonDict];
-    [regDict setObject:@"pet" forKey:@"command"];
+    [regDict setObject:@"account" forKey:@"command"];
     [regDict setObject:@"update" forKey:@"options"];
     [regDict setObject:[UserServe sharedUserServe].userID forKey:@"id"];
-    [regDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
+    [regDict setObject:[UserServe sharedUserServe].userName forKey:@"username"];
     [regDict setObject:[_editCurrentPetVC.nameTF.text CutSpacing] forKey:@"nickname"];
-    [regDict setObject:_editCurrentPetVC.avatarUrl forKey:@"headPortrait"];
-    [regDict setObject:_editCurrentPetVC.genderCode forKey:@"gender"];
+    [regDict setObject:_editCurrentPetVC.avatarUrl forKey:@"head"];
+//    [regDict setObject:_editCurrentPetVC.genderCode forKey:@"gender"];
 //    [regDict setObject:_editCurrentPetVC.breedCode forKey:@"type"];
 //    [regDict setObject:[NSString stringWithFormat:@"%.0f",_editCurrentPetVC.selectedBirthday*1000] forKey:@"birthday"];
 //    [regDict setObject:_editCurrentPetVC.regionTL.text forKey:@"address"];
@@ -761,7 +761,7 @@
             Account * pet = [UserServe sharedUserServe].account;
             pet.nickname = [_editCurrentPetVC.nameTF.text CutSpacing];
             pet.headImgURL = _editCurrentPetVC.avatarUrl;
-            pet.gender = _editCurrentPetVC.genderCode;
+//            pet.gender = _editCurrentPetVC.genderCode;
 //            pet.breed = _editCurrentPetVC.breedCode;
 //            pet.region = _editCurrentPetVC.regionTL.text;
 //            pet.birthday = [NSDate dateWithTimeIntervalSince1970:_editCurrentPetVC.selectedBirthday];
