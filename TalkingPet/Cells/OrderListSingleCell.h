@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "EGOImageView.h"
+#import "OrderYZGoodInfo.h"
 @interface OrderListSingleCell : UITableViewCell
 
 @property (nonatomic,strong)EGOImageView * goodPicV;
@@ -15,5 +16,6 @@
 @property (nonatomic,strong)UILabel * goodDesL;
 @property (nonatomic,strong)UILabel * moneyL;
 @property (nonatomic,strong)UILabel * amountL;
+@property (nonatomic,strong)OrderYZGoodInfo * goodInfo;
 
 @end

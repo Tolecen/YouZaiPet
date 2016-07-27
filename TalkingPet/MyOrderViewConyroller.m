@@ -15,107 +15,11 @@
 #import "BlankPageView.h"
 #import "NetServer+Payment.h"
 #import "OrderListSingleCell.h"
+#import "OrderYZList.h"
+#import "OrderYZGoodInfo.h"
+#import "OrderHeaderView.h"
+#import "OrderFooterView.h"
 
-@interface OrderHeaderView : UITableViewHeaderFooterView
-@property (nonatomic,retain)UILabel * timeL;
-@property (nonatomic,strong)UILabel * statusL;
-@end
-@implementation OrderHeaderView
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
-{
-    if (self=[super initWithReuseIdentifier:reuseIdentifier]) {
-        self.timeL = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 160, 30)];
-        [self.contentView addSubview:_timeL];
-        self.contentView.backgroundColor = [UIColor whiteColor];
-        _timeL.backgroundColor = [UIColor clearColor];
-        _timeL.adjustsFontSizeToFitWidth = YES;
-        _timeL.textColor = [UIColor colorWithWhite:120/255.0 alpha:1];
-        _timeL.text = @"2016-07-22";
-        _timeL.font = [UIFont systemFontOfSize:14];
-        
-        self.statusL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-10-160, 0, 160, 30)];
-        [self.contentView addSubview:_statusL];
-        self.contentView.backgroundColor = [UIColor whiteColor];
-        _statusL.backgroundColor = [UIColor clearColor];
-        _statusL.adjustsFontSizeToFitWidth = YES;
-        _statusL.textColor = CommonGreenColor;
-        _statusL.textAlignment = NSTextAlignmentRight;
-        _statusL.text = @"待付款";
-        _statusL.font = [UIFont systemFontOfSize:13];
-        
-    }
-    return self;
-}
-
-@end
-
-
-@interface OrderFooterView : UITableViewHeaderFooterView
-@property (nonatomic,retain)UILabel * desL;
-@property (nonatomic,strong)UIButton * btn1;
-@property (nonatomic,strong)UIButton * btn2;
-@end
-@implementation OrderFooterView
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier WithButton:(BOOL)haveBtn;
-{
-    if (self=[super initWithReuseIdentifier:reuseIdentifier]) {
-        
-//        self.backgroundColor = [UIColor colorWithWhite:245/255.f alpha:1];
-//        self.contentView.backgroundColor = [UIColor colorWithWhite:245/255.f alpha:1];
-        
-        UIView * bgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 1)];
-        bgV.backgroundColor = [UIColor colorWithWhite:245/255.f alpha:1];
-        [self.contentView addSubview:bgV];
-        
-        self.desL = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, ScreenWidth-20, 30)];
-        [self.contentView addSubview:_desL];
-        self.contentView.backgroundColor = [UIColor whiteColor];
-        _desL.backgroundColor = [UIColor clearColor];
-        _desL.adjustsFontSizeToFitWidth = YES;
-        _desL.textAlignment = NSTextAlignmentRight;
-        _desL.textColor = [UIColor colorWithWhite:150/255.0 alpha:1];
-        _desL.text = @"共1件 合计：￥11000（含运费 ￥0.00）";
-        _desL.font = [UIFont systemFontOfSize:13];
-        
-        [bgV setFrame:CGRectMake(0, 35, ScreenWidth, 10)];
-        
-        if (haveBtn) {
-            UIView * linev = [[UIView alloc] initWithFrame:CGRectMake(10, 34, ScreenWidth-20, 1)];
-            linev.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
-            [self.contentView addSubview:linev];
-            
-            self.btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-            [self.btn1 setFrame:CGRectMake(ScreenWidth-10-70-10-70, CGRectGetMaxY(linev.frame)+10, 70, 20)];
-            self.btn1.layer.cornerRadius = 3;
-            self.btn1.layer.borderWidth = 1;
-            self.btn1.layer.borderColor = [[UIColor colorWithWhite:180/255.f alpha:1] CGColor];
-            self.btn1.layer.masksToBounds = YES;
-            [self.contentView addSubview:self.btn1];
-            [self.btn1 setTitle:@"取消订单" forState:UIControlStateNormal];
-            self.btn1.titleLabel.font = [UIFont systemFontOfSize:12];
-            [self.btn1 setTitleColor:[UIColor colorWithWhite:180/255.f alpha:1] forState:UIControlStateNormal];
-            
-            
-            self.btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-            [self.btn2 setFrame:CGRectMake(ScreenWidth-10-70, CGRectGetMaxY(linev.frame)+10, 70, 20)];
-            self.btn2.layer.cornerRadius = 3;
-            self.btn2.layer.borderWidth = 1;
-            self.btn2.layer.borderColor = [CommonGreenColor CGColor];
-            self.btn2.layer.masksToBounds = YES;
-            [self.contentView addSubview:self.btn2];
-            [self.btn2 setTitle:@"立刻付款" forState:UIControlStateNormal];
-            self.btn2.titleLabel.font = [UIFont systemFontOfSize:12];
-            [self.btn2 setTitleColor:CommonGreenColor forState:UIControlStateNormal];
-            
-            
-            [bgV setFrame:CGRectMake(0, 75, ScreenWidth, 10)];
-        }
-        
-    }
-    return self;
-}
-
-@end
 
 @interface MyOrderViewConyroller ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 {
@@ -200,7 +104,7 @@
     [self.view addSubview:_tableView];
     _tableView.backgroundColor = [UIColor colorWithWhite:245/255.f alpha:1];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    option = @"toPayList";
+    option = @"allList";
     [_tableView addHeaderWithTarget:self action:@selector(getFristList)];
     [_tableView addFooterWithTarget:self action:@selector(getOtherlist)];
     [_tableView headerBeginRefreshing];
@@ -223,16 +127,16 @@
             option = @"allList";
         }break;
         case 1:{
-            option = @"toPayList";
+            option = @"unpaid";
         }break;
         case 2:{
-            option = @"toShipList";
+            option = @"unposted";
         }break;
         case 3:{
-            option = @"toReceiveList";
+            option = @"unpicked";
         }break;
         case 4:{
-            option = @"finishedList";
+            option = @"picked";
         }break;
         default:
             break;
@@ -242,13 +146,20 @@
     [UIView animateWithDuration:0.3 animations:^{
         view.center = CGPointMake(btn.center.x, view.center.y);
     }];
+    [self.orderArr removeAllObjects];
+    [_tableView reloadData];
     [_tableView headerBeginRefreshing];
 }
 -(void)getFristList
 {
 
-    [NetServer fetchOrderListWithPageIndex:1 success:^(id result) {
+    [NetServer fetchOrderListWithPageIndex:1 Option:option  success:^(id result) {
         NSLog(@"orderList:%@",result);
+        if ([result[@"code"] intValue] == 200) {
+            self.orderArr = [self getModelArray:result[@"data"][@"list"]];
+            [_tableView reloadData];
+        }
+       
         [_tableView headerEndRefreshing];
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         
@@ -281,6 +192,36 @@
 //        [_orderArr removeAllObjects];
 //        [_tableView reloadData];
 //    }];
+}
+
+-(NSMutableArray *)getModelArray:(NSArray *)array
+{
+    NSMutableArray * arr = [NSMutableArray array];
+    
+    for (int i = 0; i<array.count; i++) {
+        NSDictionary * dict = array[i];
+        OrderYZList * listModel = [[OrderYZList alloc] initWithDictionary:dict error:nil];
+        int amount = 0;
+        NSMutableArray * garr = [NSMutableArray array];
+        for (int j = 0; j<listModel.goods.count; j++) {
+            NSDictionary * gd = listModel.goods[j];
+            OrderYZGoodInfo * goodModel = [[OrderYZGoodInfo alloc] initWithDictionary:gd error:nil];
+ 
+            listModel.total_money = goodModel.real_amount;
+            listModel.shippingfee = goodModel.real_shipping;
+            
+            amount = amount+[goodModel.total intValue];
+            
+            [garr addObject:goodModel];
+        }
+        listModel.goods = garr;
+        listModel.total_amount = [NSString stringWithFormat:@"%d",amount];
+        [arr addObject:listModel];
+    }
+    
+    
+    
+    return arr;
 }
 -(void)getOtherlist
 {
@@ -342,6 +283,9 @@
     if (view == nil) {
         view = [[OrderHeaderView alloc] initWithReuseIdentifier:header];
     }
+    OrderYZList * listModel = self.orderArr[section];
+    view.timeL.text = listModel.time;
+    view.statusL.text = listModel.pay_status_zh;
     return view;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -352,28 +296,35 @@
     if (view == nil) {
         view = [[OrderFooterView alloc] initWithReuseIdentifier:header WithButton:YES];
     }
+    OrderYZList * listModel = self.orderArr[section];
+    view.desL.text = [NSString stringWithFormat:@"共 %@ 件 合计：￥%@（含运费 ￥%@）",listModel.total_amount,listModel.total_money,listModel.shippingfee];
     return view;
 
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 //    return _orderArr.count;
-    return 20;
+    return self.orderArr.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    OrderYZList * listModel = self.orderArr[section];
+    return listModel.goods.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"tableViewCell";
-    __weak MyOrderViewConyroller * blockSelf = self;
-    __weak NSString * bolckOption = option;
+//    __weak MyOrderViewConyroller * blockSelf = self;
+//    __weak NSString * bolckOption = option;
     OrderListSingleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];
     if (cell == nil) {
         cell = [[OrderListSingleCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    OrderYZList * listModel = self.orderArr[indexPath.section];
+    cell.goodInfo = listModel.goods[indexPath.row];
+    
 //    NSDictionary * dic = _orderArr[indexPath.section];
 //    [cell bulidCellWithDictionary:dic];
 //    cell.liaisonAction = ^(){
@@ -522,19 +473,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    OrderYZList * listModel = self.orderArr[indexPath.section];
     OrderDetailViewController * orderVC = [[OrderDetailViewController alloc] init];
-    orderVC.orderID = _orderArr[indexPath.section][@"id"];
-    [orderVC buildWithSimpleDic:_orderArr[indexPath.section]];
-    __weak NSMutableArray * weakArr = _orderArr;
-    __weak MyOrderViewConyroller * weakSelf = self;
-    orderVC.deleteThisOrder =^(){
-        [weakArr removeObjectAtIndex:indexPath.section];
-        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-        [self.navigationController popToViewController:weakSelf animated:YES];
-    };
-    orderVC.actionOrder = ^(){
-        [self getFristList];
-    };
+    orderVC.myOrder = listModel;
+//    orderVC.orderID = _orderArr[indexPath.section][@"id"];
+//    [orderVC buildWithSimpleDic:_orderArr[indexPath.section]];
+//    __weak NSMutableArray * weakArr = _orderArr;
+//    __weak MyOrderViewConyroller * weakSelf = self;
+//    orderVC.deleteThisOrder =^(){
+//        [weakArr removeObjectAtIndex:indexPath.section];
+//        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+//        [self.navigationController popToViewController:weakSelf animated:YES];
+//    };
+//    orderVC.actionOrder = ^(){
+//        [self getFristList];
+//    };
     [self.navigationController pushViewController:orderVC animated:YES];
 }
 @end

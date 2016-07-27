@@ -31,14 +31,18 @@
     }];
 }
 
-+ (void)fetchOrderListWithPageIndex:(NSInteger)pageIndex
++ (void)fetchOrderListWithPageIndex:(NSInteger)pageIndex Option:(NSString *)option
                             success:(void (^)(id))success
                             failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
-//    params[@"uid"] = [UserServe sharedUserServe].userID;
-    params[@"uid"] = @"333";
+    params[@"uid"] = [UserServe sharedUserServe].userID;
+    if (![option isEqualToString:@"allList"]) {
+        params[@"get"] = option;
+    }
+//    params[@"uid"] = @"333";
 //    params[@"get"] = @"";
+    NSLog(@"req:%@",params);
     NSString *path = [[NSString alloc] initWithFormat:@"%@/orders/rows",BasePayUrl];
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params

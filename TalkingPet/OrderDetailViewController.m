@@ -12,6 +12,9 @@
 #import "ChatDetailViewController.h"
 #import "OrderConfirmViewController.h"
 #import "EGOImageView.h"
+#import "OrderListSingleCell.h"
+#import "OrderHeaderView.h"
+#import "OrderFooterView.h"
 
 @interface WXRLabelsCell : UITableViewCell
 {
@@ -269,6 +272,19 @@
 @property (nonatomic,retain)NSDictionary * productMessage;
 
 @property (nonatomic,retain)NSDictionary * toPayDic;
+
+
+@property (nonatomic,strong)UIView * HeadAddressV;
+@property (nonatomic,strong)UILabel * shouhuoNameL;
+@property (nonatomic,strong)UILabel * shouhuoMobileL;
+@property (nonatomic,strong)UILabel * shouhuoAddressL;
+
+@property (nonatomic,strong)UIView * footerV;
+@property (nonatomic,strong)UILabel * orderNoL;
+@property (nonatomic,strong)UILabel * orderTimeL;
+
+
+
 @end
 @implementation OrderDetailViewController
 - (void)dealloc
@@ -286,35 +302,88 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithWhite:240/255.0f alpha:1];
+    self.view.backgroundColor = [UIColor colorWithWhite:245/255.0f alpha:1];
     [self setBackButtonWithTarget:@selector(back)];
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight - 50) style:UITableViewStyleGrouped];
+    
+    
+    self.HeadAddressV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 90)];
+    self.HeadAddressV.backgroundColor = [UIColor whiteColor];
+    
+    
+    UIImageView * imageVq = [[UIImageView alloc] initWithFrame:CGRectMake(10, 32, 19.5, 27.5)];
+    imageVq.image = [UIImage imageNamed:@"defaultAddress"];
+    [self.HeadAddressV addSubview:imageVq];
+    
+    self.shouhuoNameL = [[UILabel alloc] initWithFrame:CGRectMake(40, 15, 150, 20)];
+    self.shouhuoNameL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
+    self.shouhuoNameL.font = [UIFont systemFontOfSize:16];
+    self.shouhuoNameL.text = [@"收货人:" stringByAppendingString:@"收货人"];
+    [self.HeadAddressV addSubview:self.shouhuoNameL];
+    
+    self.shouhuoMobileL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-110, 10, 100, 20)];
+    self.shouhuoMobileL.textColor = [UIColor colorWithWhite:140/255.0 alpha:1];
+    self.shouhuoMobileL.textAlignment = NSTextAlignmentRight;
+    self.shouhuoMobileL.font = [UIFont systemFontOfSize:14];
+    self.shouhuoMobileL.text = @"15000998877";
+    [self.HeadAddressV addSubview:self.shouhuoMobileL];
+    
+    self.shouhuoAddressL = [[UILabel alloc] initWithFrame:CGRectMake(40, 40, ScreenWidth-80, 40)];
+    self.shouhuoAddressL.textColor = [UIColor colorWithWhite:140/255.0 alpha:1];
+    self.shouhuoAddressL.numberOfLines = 2;
+    self.shouhuoAddressL.font = [UIFont systemFontOfSize:14];
+    self.shouhuoAddressL.text = @"北京市朝阳区大墩路11111";
+    [self.HeadAddressV addSubview:self.shouhuoAddressL];
+    
+    UIView * gb = [[UIView alloc] initWithFrame:CGRectMake(0, 80, ScreenWidth, 10)];
+    gb.backgroundColor = self.view.backgroundColor;
+    [self.HeadAddressV addSubview:gb];
+    
+    self.footerV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 90)];
+    self.footerV.backgroundColor = [UIColor whiteColor];
+    
+    self.orderNoL = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, ScreenWidth-40, 20)];
+    self.orderNoL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
+    self.orderNoL.font = [UIFont systemFontOfSize:14];
+    self.orderNoL.text = @"订单编号：234567890876543";
+    [self.footerV addSubview:self.orderNoL];
+    
+    self.orderTimeL = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, ScreenWidth-40, 20)];
+    self.orderTimeL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
+    self.orderTimeL.font = [UIFont systemFontOfSize:14];
+    self.orderTimeL.text = @"创建时间：2015-07-09 20：33：23";
+    [self.footerV addSubview:self.orderTimeL];
+    
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight) style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView addHeaderWithTarget:self action:@selector(loadOrderWithOrderID)];
-    [_tableView headerBeginRefreshing];
-    UIView * whiteView  = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 50 - navigationBarHeight, self.view.frame.size.width, 50)];
-    whiteView.backgroundColor = [UIColor whiteColor];
-    liaisonB = [UIButton buttonWithType:UIButtonTypeCustom];
-    liaisonB.frame = CGRectMake(10, 9, 90, 32);
-    [liaisonB addTarget:self action:@selector(liaison) forControlEvents:UIControlEventTouchUpInside];
-    [liaisonB setImage:[UIImage imageNamed:@"liaison"] forState:UIControlStateNormal];
-    [whiteView addSubview:liaisonB];
-    cancelB = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancelB.frame = CGRectMake(ScreenWidth/2-45, 9, 90, 32);
-    cancelB.hidden = YES;
-    [cancelB addTarget:self action:@selector(cancelOrder) forControlEvents:UIControlEventTouchUpInside];
-    [cancelB setImage:[UIImage imageNamed:@"cancelOrder"] forState:UIControlStateNormal];
-    [whiteView addSubview:cancelB];
-    payB = [UIButton buttonWithType:UIButtonTypeCustom];
-    payB.frame = CGRectMake(ScreenWidth-100, 9, 90, 32);
-    [payB addTarget:self action:@selector(pay) forControlEvents:UIControlEventTouchUpInside];
-    payB.hidden = YES;
-    [payB setImage:[UIImage imageNamed:@"pay"] forState:UIControlStateNormal];
-    [whiteView addSubview:payB];
-    [self.view addSubview:whiteView];
+//    [_tableView headerBeginRefreshing];
+    
+    _tableView.tableHeaderView = self.HeadAddressV;
+    _tableView.tableFooterView = self.footerV;
+//    UIView * whiteView  = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 50 - navigationBarHeight, self.view.frame.size.width, 50)];
+//    whiteView.backgroundColor = [UIColor whiteColor];
+//    liaisonB = [UIButton buttonWithType:UIButtonTypeCustom];
+//    liaisonB.frame = CGRectMake(10, 9, 90, 32);
+//    [liaisonB addTarget:self action:@selector(liaison) forControlEvents:UIControlEventTouchUpInside];
+//    [liaisonB setImage:[UIImage imageNamed:@"liaison"] forState:UIControlStateNormal];
+//    [whiteView addSubview:liaisonB];
+//    cancelB = [UIButton buttonWithType:UIButtonTypeCustom];
+//    cancelB.frame = CGRectMake(ScreenWidth/2-45, 9, 90, 32);
+//    cancelB.hidden = YES;
+//    [cancelB addTarget:self action:@selector(cancelOrder) forControlEvents:UIControlEventTouchUpInside];
+//    [cancelB setImage:[UIImage imageNamed:@"cancelOrder"] forState:UIControlStateNormal];
+//    [whiteView addSubview:cancelB];
+//    payB = [UIButton buttonWithType:UIButtonTypeCustom];
+//    payB.frame = CGRectMake(ScreenWidth-100, 9, 90, 32);
+//    [payB addTarget:self action:@selector(pay) forControlEvents:UIControlEventTouchUpInside];
+//    payB.hidden = YES;
+//    [payB setImage:[UIImage imageNamed:@"pay"] forState:UIControlStateNormal];
+//    [whiteView addSubview:payB];
+//    [self.view addSubview:whiteView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paymentResultReceived:) name:@"PaymentResultReceived" object:nil];
 }
@@ -396,6 +465,7 @@
 }
 -(void)loadOrderWithOrderID
 {
+    return;
     if (!_orderID) {
         [_tableView headerEndRefreshing];
         return;
@@ -458,78 +528,67 @@
 }
 #pragma mark -
 #pragma mark - UITableView
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30.f;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 85.f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    static NSString * header = @"header";
+    OrderHeaderView * view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:header];
+    if (view == nil) {
+        view = [[OrderHeaderView alloc] initWithReuseIdentifier:header];
+    }
+    OrderYZList * listModel = self.myOrder;
+    view.timeL.text = listModel.time;
+    view.statusL.text = listModel.pay_status_zh;
+    return view;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    
+    static NSString * header = @"footer";
+    OrderFooterView * view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:header];
+    if (view == nil) {
+        view = [[OrderFooterView alloc] initWithReuseIdentifier:header WithButton:YES];
+    }
+    OrderYZList * listModel = self.myOrder;
+    view.desL.text = [NSString stringWithFormat:@"共 %@ 件 合计：￥%@（含运费 ￥%@）",listModel.total_amount,listModel.total_money,listModel.shippingfee];
+    return view;
+    
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return self.myOrder.goods.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"WXRLabelsCell";
-    WXRLabelsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];
+    OrderListSingleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];
     if (cell == nil) {
-        cell = [[WXRLabelsCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        cell = [[OrderListSingleCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
-    switch (indexPath.section) {
-        case 0: {
-            [cell loadWithOrderMessage:_orderMessage];
-        }break;
-        case 1: {
-            [cell loadWithPayMessage:_payMessage];
-        }break;
-        case 2: {
-            [cell loadWithAddress:_address];
-        }break;
-        case 3: {
-            [cell loadWithproductMessage:_productMessage];
-        }break;
-        default:
-            break;
-    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.goodInfo = self.myOrder.goods[indexPath.row];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.section) {
-        case 0:{
-            if (_orderMessage) {
-                return 110;
-            }
-        }break;
-        case 1:{
-            if (_payMessage) {
-                return 110;
-            }
-        }break;
-        case 2:{
-            if (_address) {
-                return 90;
-            }
-        }break;
-        case 3:{
-            if (_productMessage) {
-                return 165;
-            }
-        }break;
-        default:
-        break;
-    }
-    return 0;
+
+    return 90;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 10;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    if (section == 3) {
-        return 50;
-    }
-    return 1;
-}
+
 
 -(void)payThisOrder:(NSDictionary *)dict
 {

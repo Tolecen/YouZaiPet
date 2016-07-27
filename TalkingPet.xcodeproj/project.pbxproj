@@ -1251,6 +1251,10 @@
 		97F930AE1978F0290026BCFA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F930AD1978F0290026BCFA /* QuartzCore.framework */; };
 		97F930B11978F11C0026BCFA /* shanchushuruwenzi.png in Resources */ = {isa = PBXBuildFile; fileRef = 97F930AF1978F11C0026BCFA /* shanchushuruwenzi.png */; };
 		97F930B519790B850026BCFA /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F930B419790B850026BCFA /* SearchViewController.m */; };
+		D81FB0BF1D488A1E00D7A566 /* OrderYZList.m in Sources */ = {isa = PBXBuildFile; fileRef = D81FB0BE1D488A1E00D7A566 /* OrderYZList.m */; };
+		D81FB0C21D488AF400D7A566 /* OrderYZGoodInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D81FB0C11D488AF400D7A566 /* OrderYZGoodInfo.m */; };
+		D81FB0C51D48A26B00D7A566 /* OrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D81FB0C41D48A26B00D7A566 /* OrderHeaderView.m */; };
+		D81FB0C81D48A2B600D7A566 /* OrderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D81FB0C71D48A2B600D7A566 /* OrderFooterView.m */; };
 		D857E4981D34B71100A69699 /* chongyoudongtai-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D857E4971D34B71100A69699 /* chongyoudongtai-off@2x.png */; };
 		D857E49C1D34D29000A69699 /* guangchang01.png in Resources */ = {isa = PBXBuildFile; fileRef = D857E4991D34D29000A69699 /* guangchang01.png */; };
 		D857E49D1D34D29000A69699 /* guangchang02.png in Resources */ = {isa = PBXBuildFile; fileRef = D857E49A1D34D29000A69699 /* guangchang02.png */; };
@@ -3167,6 +3171,14 @@
 		97F930AF1978F11C0026BCFA /* shanchushuruwenzi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shanchushuruwenzi.png; sourceTree = "<group>"; };
 		97F930B319790B850026BCFA /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		97F930B419790B850026BCFA /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		D81FB0BD1D488A1E00D7A566 /* OrderYZList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderYZList.h; sourceTree = "<group>"; };
+		D81FB0BE1D488A1E00D7A566 /* OrderYZList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderYZList.m; sourceTree = "<group>"; };
+		D81FB0C01D488AF400D7A566 /* OrderYZGoodInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderYZGoodInfo.h; sourceTree = "<group>"; };
+		D81FB0C11D488AF400D7A566 /* OrderYZGoodInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderYZGoodInfo.m; sourceTree = "<group>"; };
+		D81FB0C31D48A26B00D7A566 /* OrderHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHeaderView.h; sourceTree = "<group>"; };
+		D81FB0C41D48A26B00D7A566 /* OrderHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHeaderView.m; sourceTree = "<group>"; };
+		D81FB0C61D48A2B600D7A566 /* OrderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderFooterView.h; sourceTree = "<group>"; };
+		D81FB0C71D48A2B600D7A566 /* OrderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderFooterView.m; sourceTree = "<group>"; };
 		D857E4971D34B71100A69699 /* chongyoudongtai-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongyoudongtai-off@2x.png"; sourceTree = "<group>"; };
 		D857E4991D34D29000A69699 /* guangchang01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guangchang01.png; sourceTree = "<group>"; };
 		D857E49A1D34D29000A69699 /* guangchang02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guangchang02.png; sourceTree = "<group>"; };
@@ -4876,6 +4888,10 @@
 				72E81F461AA7F01F00E19184 /* DraftModel.m */,
 				97472E5E196FC1FD00592FB7 /* TalkingBrowse.h */,
 				97472E5F196FC1FD00592FB7 /* TalkingBrowse.m */,
+				D81FB0BD1D488A1E00D7A566 /* OrderYZList.h */,
+				D81FB0BE1D488A1E00D7A566 /* OrderYZList.m */,
+				D81FB0C01D488AF400D7A566 /* OrderYZGoodInfo.h */,
+				D81FB0C11D488AF400D7A566 /* OrderYZGoodInfo.m */,
 				9713BA5F1995BD9600F2C35B /* TalkComment.h */,
 				9713BA601995BD9600F2C35B /* TalkComment.m */,
 				975047441A36A7EA005C07ED /* PackageInfo.h */,
@@ -5462,6 +5478,10 @@
 				D860FDF21D3360F800487E2D /* UserCenterGouWuFuncTableViewCell.m */,
 				9723F3EE1D47904B0075A8D8 /* OrderListSingleCell.h */,
 				9723F3EF1D47904B0075A8D8 /* OrderListSingleCell.m */,
+				D81FB0C31D48A26B00D7A566 /* OrderHeaderView.h */,
+				D81FB0C41D48A26B00D7A566 /* OrderHeaderView.m */,
+				D81FB0C61D48A2B600D7A566 /* OrderFooterView.h */,
+				D81FB0C71D48A2B600D7A566 /* OrderFooterView.m */,
 				9709D979198B43B70066421C /* UploadTaskTableViewCell.h */,
 				9709D97A198B43B70066421C /* UploadTaskTableViewCell.m */,
 				9781985D1B438DDF0034E0F9 /* TuijianTagTableViewCell.h */,
@@ -7366,6 +7386,7 @@
 				726AA43B1973DD9600BC81C9 /* UserCenterViewController.m in Sources */,
 				9796E0AE197CB3CF0082A75D /* RNCryptorEngine.m in Sources */,
 				72FADA451A2C4411003670D0 /* PetalkalkListViewController.m in Sources */,
+				D81FB0C81D48A2B600D7A566 /* OrderFooterView.m in Sources */,
 				063E29E51D21282800C3FD3F /* YZShoppingCarDogCell.m in Sources */,
 				721887881A79DCCE00F82916 /* SquareIteam.m in Sources */,
 				97EFB1571AAED4A3000F8B61 /* PrizeDetailViewController.m in Sources */,
@@ -7478,6 +7499,7 @@
 				72831CCB196A3FE200B9CA4C /* NSString+MagicalDataImport.m in Sources */,
 				976B9D2D1A89E2F90078338F /* ChangePetViewController.m in Sources */,
 				72C000C819E6A2FA006CF1E0 /* iCarousel.m in Sources */,
+				D81FB0C51D48A26B00D7A566 /* OrderHeaderView.m in Sources */,
 				97877A6719D1158500951389 /* MDRadialProgressLabel.m in Sources */,
 				722FD99C1A7C891C00F67144 /* Accessory.m in Sources */,
 				726597331A80B44D00CF4C52 /* AccessoryCell.m in Sources */,
@@ -7632,6 +7654,7 @@
 				06A5DBB51D2CD196002A5159 /* JSONModelError.m in Sources */,
 				977D9A0619B5996F00C0B8C9 /* OHAttributedLabel.m in Sources */,
 				971F4C36196B95EC00C7913A /* FinalPublishPageViewController.m in Sources */,
+				D81FB0C21D488AF400D7A566 /* OrderYZGoodInfo.m in Sources */,
 				2E8988431D45AC48004052CE /* NetServer+Payment.m in Sources */,
 				97A6856419F8A1C9006BA3F9 /* SectionMSgViewController.m in Sources */,
 				2EA22D821D338F430052992C /* YZDogDetailCollectionHeaderView.m in Sources */,
@@ -7667,6 +7690,7 @@
 				9776D58C1A83509D00A3F191 /* UIImage+TOWebViewControllerIcons.m in Sources */,
 				06A5DBB31D2CD196002A5159 /* JSONModel.m in Sources */,
 				066B84BF1D1BBF52003AAD64 /* ViewController+MASAdditions.m in Sources */,
+				D81FB0BF1D488A1E00D7A566 /* OrderYZList.m in Sources */,
 				72831CDE196A3FE200B9CA4C /* MagicalRecord.m in Sources */,
 				97F052731A6C99DC0002B75A /* ThumbNormalMsgEntity.m in Sources */,
 				9716D1B71988EFBD00C725D8 /* SBJsonBase.m in Sources */,

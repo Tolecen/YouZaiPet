@@ -42,7 +42,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/SetViewController.m"
-                  timestampString = "491192740.467808"
+                  timestampString = "491296156.361218"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "379"
@@ -57,7 +57,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/SetViewController.m"
-                  timestampString = "491192740.46797"
+                  timestampString = "491296156.361359"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "379"
@@ -79,7 +79,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "80"
             endingLineNumber = "80"
-            landmarkName = "-doTouch"
+            landmarkName = "-beginRefreshing"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

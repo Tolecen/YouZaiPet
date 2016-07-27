@@ -10,7 +10,7 @@
 
 @interface NetServer (Payment)
 
-+ (void)fetchOrderListWithPageIndex:(NSInteger)pageIndex
++ (void)fetchOrderListWithPageIndex:(NSInteger)pageIndex Option:(NSString *)option
                             success:(void(^)(id result))success
                             failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
