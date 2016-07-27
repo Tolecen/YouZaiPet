@@ -273,7 +273,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 85.f;
+    return 45.f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -294,7 +294,7 @@
     static NSString * header = @"footer";
     OrderFooterView * view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:header];
     if (view == nil) {
-        view = [[OrderFooterView alloc] initWithReuseIdentifier:header WithButton:YES];
+        view = [[OrderFooterView alloc] initWithReuseIdentifier:header WithButton:NO];
     }
     OrderYZList * listModel = self.orderArr[section];
     view.desL.text = [NSString stringWithFormat:@"共 %@ 件 合计：￥%@（含运费 ￥%@）",listModel.total_amount,listModel.total_money,listModel.shippingfee];
