@@ -50,5 +50,9 @@ extern NSString *const kShoppingCarCalcutePriceNotification;
  清空购物车
  */
 - (void)clearShoppingCar;
+/*
+ 用户切换更新购物车
+ */
+- (void)updateCurrentUserShoppingCar;
 
 @end

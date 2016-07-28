@@ -11,6 +11,8 @@
 #import "NetServer.h"
 #import "RootViewController.h"
 #import "SectionMSgViewController.h"
+#import "YZShoppingCarHelper.h"
+
 @implementation SystemServer
 static SystemServer* systemServer;
 + (SystemServer*)sharedSystemServer
@@ -79,6 +81,7 @@ static SystemServer* systemServer;
     NSLog(@"catch you changed!");
      
      */
+    [[YZShoppingCarHelper instanceManager] updateCurrentUserShoppingCar];
 }
 -(void)didAuthSuccessed
 {

@@ -47,28 +47,31 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
         self.goodsShangPinCache = [[NSMutableArray alloc] init];
         self.shoppingCarContainsIds = [[NSMutableArray alloc] init];
         
-        id cacheDogs = [[NSUserDefaults standardUserDefaults] objectForKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheDogKey]];
-        id cacheGoods = [[NSUserDefaults standardUserDefaults] objectForKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheGoodsKey]];
-        id cacheIds = [[NSUserDefaults standardUserDefaults] objectForKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheContainsIdKey]];
+        NSString *cacheDogKey = [self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheDogKey];
+        NSString *cacheGoodsKey = [self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheGoodsKey];
+        NSString *cacheIdKey = [self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheContainsIdKey];
+        id cacheDogs = [[NSUserDefaults standardUserDefaults] objectForKey:cacheDogKey];
+        id cacheGoods = [[NSUserDefaults standardUserDefaults] objectForKey:cacheGoodsKey];
+        id cacheIds = [[NSUserDefaults standardUserDefaults] objectForKey:cacheIdKey];
         if (cacheDogs) {
             if ([[NSKeyedUnarchiver unarchiveObjectWithData:cacheDogs] isKindOfClass:[NSArray class]]) {
                 [self.dogShangPinCache addObjectsFromArray:[NSKeyedUnarchiver unarchiveObjectWithData:cacheDogs]];
             } else {
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:kShoppingCarCacheDogKey];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:cacheDogKey];
             }
         }
         if (cacheGoods) {
             if ([[NSKeyedUnarchiver unarchiveObjectWithData:cacheGoods] isKindOfClass:[NSArray class]]) {
                 [self.goodsShangPinCache addObjectsFromArray:[NSKeyedUnarchiver unarchiveObjectWithData:cacheGoods]];
             } else {
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:kShoppingCarCacheGoodsKey];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:cacheGoodsKey];
             }
         }
         if (cacheIds) {
             if ([[NSKeyedUnarchiver unarchiveObjectWithData:cacheIds] isKindOfClass:[NSArray class]]) {
                 [self.shoppingCarContainsIds addObjectsFromArray:[NSKeyedUnarchiver unarchiveObjectWithData:cacheIds]];
             } else {
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:kShoppingCarCacheContainsIdKey];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:cacheIdKey];
             }
         }
     }
@@ -263,6 +266,40 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheDogKey]];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheGoodsKey]];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheContainsIdKey]];
+}
+
+- (void)updateCurrentUserShoppingCar {
+    [self.dogShangPinCache removeAllObjects];
+    [self.goodsShangPinCache removeAllObjects];
+    [self.shoppingCarContainsIds removeAllObjects];
+    self.totalPrice = 0;
+    NSString *cacheDogKey = [self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheDogKey];
+    NSString *cacheGoodsKey = [self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheGoodsKey];
+    NSString *cacheIdKey = [self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheContainsIdKey];
+    id cacheDogs = [[NSUserDefaults standardUserDefaults] objectForKey:cacheDogKey];
+    id cacheGoods = [[NSUserDefaults standardUserDefaults] objectForKey:cacheGoodsKey];
+    id cacheIds = [[NSUserDefaults standardUserDefaults] objectForKey:cacheIdKey];
+    if (cacheDogs) {
+        if ([[NSKeyedUnarchiver unarchiveObjectWithData:cacheDogs] isKindOfClass:[NSArray class]]) {
+            [self.dogShangPinCache addObjectsFromArray:[NSKeyedUnarchiver unarchiveObjectWithData:cacheDogs]];
+        } else {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:cacheDogKey];
+        }
+    }
+    if (cacheGoods) {
+        if ([[NSKeyedUnarchiver unarchiveObjectWithData:cacheGoods] isKindOfClass:[NSArray class]]) {
+            [self.goodsShangPinCache addObjectsFromArray:[NSKeyedUnarchiver unarchiveObjectWithData:cacheGoods]];
+        } else {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:cacheGoodsKey];
+        }
+    }
+    if (cacheIds) {
+        if ([[NSKeyedUnarchiver unarchiveObjectWithData:cacheIds] isKindOfClass:[NSArray class]]) {
+            [self.shoppingCarContainsIds addObjectsFromArray:[NSKeyedUnarchiver unarchiveObjectWithData:cacheIds]];
+        } else {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:cacheIdKey];
+        }
+    }
 }
 
 - (long long)totalPrice {

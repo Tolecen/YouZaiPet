@@ -19,6 +19,7 @@
 #import "YZShoppingCarHelper.h"
 #import "YZShoppingCarVC.h"
 #import "SVProgressHUD.h"
+#import "RootViewController.h"
 
 @interface YZGoodsDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YZDetailBottomBarDelegate>
 
@@ -264,6 +265,9 @@
 }
 
 - (void)clearPriceAction {
+    if (![self inner_AlreadyLogin]) {
+        return;
+    }
     [[YZShoppingCarHelper instanceManager] addShoppingCarWithScene:YZShangChengType_Goods
                                                              model:self.detailModel
                                                         clearPrice:YES];
@@ -273,6 +277,9 @@
 }
 
 - (void)addShoppingCarAction {
+    if (![self inner_AlreadyLogin]) {
+        return;
+    }
     if (!self.detailModel) {
         return;
     }
@@ -281,6 +288,15 @@
                                                         clearPrice:NO];
     
     [SVProgressHUD showSuccessWithStatus:@"已添加到购物车"];
+}
+
+- (BOOL)inner_AlreadyLogin {
+    NSString *currentPetId = [UserServe sharedUserServe].userID;
+    if (!currentPetId) {
+        [[RootViewController sharedRootViewController] showLoginViewController];
+        return NO;
+    }
+    return YES;
 }
 
 @end
