@@ -13,4 +13,5 @@
 @property (nonatomic,strong)UIButton * btn1;
 @property (nonatomic,strong)UIButton * btn2;
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier WithButton:(BOOL)haveBtn;
+@property (nonatomic,copy)void(^buttonClicked) (NSString * title);
 @end

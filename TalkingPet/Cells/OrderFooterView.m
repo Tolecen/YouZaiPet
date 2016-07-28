@@ -48,6 +48,7 @@
             [self.btn1 setTitle:@"取消订单" forState:UIControlStateNormal];
             self.btn1.titleLabel.font = [UIFont systemFontOfSize:12];
             [self.btn1 setTitleColor:[UIColor colorWithWhite:180/255.f alpha:1] forState:UIControlStateNormal];
+            [self.btn1 addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
             
             
             self.btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -60,6 +61,7 @@
             [self.btn2 setTitle:@"立刻付款" forState:UIControlStateNormal];
             self.btn2.titleLabel.font = [UIFont systemFontOfSize:12];
             [self.btn2 setTitleColor:CommonGreenColor forState:UIControlStateNormal];
+            [self.btn2 addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
             
             
             [bgV setFrame:CGRectMake(0, 75, ScreenWidth, 10)];
@@ -69,6 +71,11 @@
     return self;
 }
 
-
+-(void)btnClicked:(UIButton *)btn
+{
+    if (self.buttonClicked) {
+        self.buttonClicked(btn.currentTitle);
+    }
+}
 
 @end

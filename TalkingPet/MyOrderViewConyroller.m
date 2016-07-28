@@ -209,6 +209,10 @@
  
             listModel.total_money = goodModel.real_amount;
             listModel.shippingfee = goodModel.real_shipping;
+            if (goodModel.confirmUrl && goodModel.confirmUrl.length>1) {
+                listModel.confirmUrl = goodModel.confirmUrl;
+            }
+            
             
             amount = amount+[goodModel.total intValue];
             

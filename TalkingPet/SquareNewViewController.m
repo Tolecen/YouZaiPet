@@ -457,6 +457,7 @@
         }
         self.topAdArray = da;
         [flowView reloadData];
+         [self.scrollView headerEndRefreshing];
         //        [self setHeaderArray:[responseObject objectForKey:@"value"]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.scrollView headerEndRefreshing];
