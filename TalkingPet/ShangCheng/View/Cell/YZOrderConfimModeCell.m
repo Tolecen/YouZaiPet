@@ -67,6 +67,12 @@
     return self;
 }
 
+- (void)changeBtnSelect {
+    if (!self.selectBtn.selected) {
+        self.changeBtnSelected(self);
+    }
+}
+
 - (void)inner_Select:(UIButton *)sender {
     if (!sender.selected) {
         self.changeBtnSelected(self);

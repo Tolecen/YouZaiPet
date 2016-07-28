@@ -231,6 +231,9 @@
             }];
             [weakSelf.navigationController pushViewController:viewC animated:YES];
         }
+    } else if (indexPath.section == 2) {
+        YZOrderConfimModeCell *cell = (YZOrderConfimModeCell *)[tableView cellForRowAtIndexPath:indexPath];
+        [cell changeBtnSelected];
     }
 }
 
