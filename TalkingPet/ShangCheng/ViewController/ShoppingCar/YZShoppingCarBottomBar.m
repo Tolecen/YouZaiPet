@@ -12,13 +12,14 @@
 
 @property (nonatomic, weak) UILabel *priceLb;
 @property (nonatomic, weak) UIButton *selectAllBtn;
+@property (nonatomic, assign) YZShoppingCarBottomBarStyle style;
 
 @end
 
 @implementation YZShoppingCarBottomBar
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
+- (instancetype)initWithStyle:(YZShoppingCarBottomBarStyle)style {
+    if (self = [super init]) {
         UIButton *clearPriceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [clearPriceBtn setImage:[UIImage imageNamed:@"jiesuan_icon"] forState:UIControlStateNormal];
         clearPriceBtn.backgroundColor = CommonGreenColor;
@@ -44,27 +45,39 @@
         totalLb.text = @"总计:";
         [self addSubview:totalLb];
         
-        [priceLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(clearPriceBtn.mas_left).mas_offset(-5);
-            make.centerY.mas_equalTo(self);
-        }];
-        
-        [totalLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(priceLb.mas_left).mas_offset(-5);
-            make.centerY.mas_equalTo(self);
-        }];
-        
-        UIButton *selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [selectBtn setImage:[UIImage imageNamed:@"shoppingcar_unselect"] forState:UIControlStateNormal];
-        [selectBtn setImage:[UIImage imageNamed:@"shoppingcar_select"] forState:UIControlStateSelected];
-        [selectBtn addTarget:self action:@selector(inner_SelectAll:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:selectBtn];
-        self.selectAllBtn = selectBtn;
-        
-        [selectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self).mas_offset(10);
-            make.centerY.equalTo(self);
-        }];
+        if (style == YZShoppingCarBottomBarStyle_ShoppingCar) {
+            [priceLb mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(clearPriceBtn.mas_left).mas_offset(-5);
+                make.centerY.mas_equalTo(self);
+            }];
+            
+            [totalLb mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(priceLb.mas_left).mas_offset(-5);
+                make.centerY.mas_equalTo(self);
+            }];
+            
+            UIButton *selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [selectBtn setImage:[UIImage imageNamed:@"shoppingcar_unselect"] forState:UIControlStateNormal];
+            [selectBtn setImage:[UIImage imageNamed:@"shoppingcar_select"] forState:UIControlStateSelected];
+            [selectBtn addTarget:self action:@selector(inner_SelectAll:) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:selectBtn];
+            self.selectAllBtn = selectBtn;
+            
+            [selectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self).mas_offset(10);
+                make.centerY.equalTo(self);
+            }];
+        } else {
+            [totalLb mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self).mas_offset(10);
+                make.centerY.mas_equalTo(self);
+            }];
+            
+            [priceLb mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(totalLb.mas_right).mas_offset(5);
+                make.centerY.mas_equalTo(self);
+            }];
+        }
     }
     return self;
 }

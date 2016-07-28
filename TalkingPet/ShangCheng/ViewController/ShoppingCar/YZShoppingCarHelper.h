@@ -47,6 +47,10 @@ extern NSString *const kShoppingCarCalcutePriceNotification;
  */
 - (void)shoppingCarSelectedAllWithSelectedState:(BOOL)selected;
 /*
+ 合并购物车选中商品形成订单数组
+ */
+- (NSArray *)orderMergeSelectDogsAndGoodsWithCount:(NSInteger *)count;
+/*
  清空购物车
  */
 - (void)clearShoppingCar;

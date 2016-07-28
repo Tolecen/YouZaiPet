@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, YZShoppingCarBottomBarStyle) {
+    YZShoppingCarBottomBarStyle_ShoppingCar = (0),
+    YZShoppingCarBottomBarStyle_OrderConfim = (1)
+};
+
 @class YZShoppingCarBottomBar;
 @protocol YZShoppingCarBottomBarDelegate <NSObject>
+
+@optional
 
 - (void)shoppingCarClearPrice;
 
@@ -20,6 +27,8 @@
 @interface YZShoppingCarBottomBar : UIView
 
 @property (nonatomic, weak) id<YZShoppingCarBottomBarDelegate> delegate;
+
+- (instancetype)initWithStyle:(YZShoppingCarBottomBarStyle)style;
 
 - (void)changeSelectBtnState:(BOOL)state;
 

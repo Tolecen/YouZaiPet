@@ -183,5 +183,6 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) long long sellPrice;
 @property (nonatomic, copy) NSString *thumb;
+@property (nonatomic, copy) NSString *brandName;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "YZShoppingCarHelper.h"
+#import "OrderYZGoodInfo.h"
 
 NSString *const kShangPinkey    = @"kShangPinkey";
 NSString *const kItemNumberkey  = @"kItemNumberkey";
@@ -158,6 +159,7 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
             shoppingCarModel.goodsId = goodsModel.goodsId;
             shoppingCarModel.sellPrice = goodsModel.sellPrice;
             shoppingCarModel.thumb = goodsModel.thumb;
+            shoppingCarModel.brandName = goodsModel.brand.brand;
             if (clearPrice) {
                 shoppingCarModel.selected = YES;
             }
@@ -226,6 +228,49 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.goodsShangPinCache]
                                               forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheGoodsKey]];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSArray *)orderMergeSelectDogsAndGoodsWithCount:(NSInteger *)count {
+    NSMutableArray *orders = [[NSMutableArray alloc] init];
+    NSInteger __block allSelectCount = 0;
+    [self.dogShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarDogModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (shoppingCarModel.selected) {
+            allSelectCount += shoppingCarModel.count;
+            OrderYZGoodInfo *orderInfo = [self inner_TransformFromShoppingCarDogModel:shoppingCarModel];
+            [orders addObject:orderInfo];
+        }
+    }];
+    
+    [self.goodsShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarGoodsModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (shoppingCarModel.selected) {
+            allSelectCount += shoppingCarModel.count;
+            OrderYZGoodInfo *orderInfo = [self inner_TransformFromShoppingCarGoodsModel:shoppingCarModel];
+            [orders addObject:orderInfo];
+        }
+    }];
+    
+    *count = allSelectCount;
+    return orders.copy;
+}
+
+- (OrderYZGoodInfo *)inner_TransformFromShoppingCarDogModel:(YZShoppingCarDogModel *)shoppingCarModel {
+    OrderYZGoodInfo *orderInfo = [[OrderYZGoodInfo alloc] init];
+    orderInfo.thumb = shoppingCarModel.thumb;
+    orderInfo.product_name = shoppingCarModel.name;
+    orderInfo.shop_name = shoppingCarModel.shopName;
+    orderInfo.unit_price = [NSString stringWithFormat:@"%lld", shoppingCarModel.sellPrice];
+    orderInfo.total = [NSString stringWithFormat:@"%ld", (unsigned long)shoppingCarModel.count];
+    return orderInfo;
+}
+
+- (OrderYZGoodInfo *)inner_TransformFromShoppingCarGoodsModel:(YZShoppingCarGoodsModel *)shoppingCarModel {
+    OrderYZGoodInfo *orderInfo = [[OrderYZGoodInfo alloc] init];
+    orderInfo.thumb = shoppingCarModel.thumb;
+    orderInfo.product_name = shoppingCarModel.name;
+    orderInfo.shop_name = shoppingCarModel.brandName;
+    orderInfo.unit_price = [NSString stringWithFormat:@"%lld", shoppingCarModel.sellPrice];
+    orderInfo.total = [NSString stringWithFormat:@"%ld", (unsigned long)shoppingCarModel.count];
+    return orderInfo;
 }
 
 - (long long)calcuteShoppingCarTotalPrice {

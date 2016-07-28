@@ -10,7 +10,7 @@
 #import "YZShoppingCarPageVC.h"
 #import "YZShoppingCarBottomBar.h"
 #import "YZShoppingCarHelper.h"
-#import "OrderConfirmViewController.h"
+#import "YZOrderConfimViewController.h"
 #import "SVProgressHUD.h"
 
 @interface YZShoppingCarVC()<YZShoppingCarBottomBarDelegate>
@@ -63,7 +63,7 @@
         make.edges.mas_equalTo(containerView).insets(UIEdgeInsetsZero);
     }];
     
-    YZShoppingCarBottomBar *bottomBar = [[YZShoppingCarBottomBar alloc] init];
+    YZShoppingCarBottomBar *bottomBar = [[YZShoppingCarBottomBar alloc] initWithStyle:YZShoppingCarBottomBarStyle_ShoppingCar];
     bottomBar.delegate = self;
     [self.view addSubview:bottomBar];
     self.bottomBar = bottomBar;
@@ -110,7 +110,7 @@
         [SVProgressHUD showErrorWithStatus:@"请先选择要买的商品"];
         return;
     }
-    OrderConfirmViewController *viewC = [[OrderConfirmViewController alloc] init];
+    YZOrderConfimViewController *viewC = [[YZOrderConfimViewController alloc] init];
     [self.navigationController pushViewController:viewC animated:YES];
 }
 
