@@ -18,4 +18,12 @@
                             success:(void (^)(id result))success
                             failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
++ (void)confirmReceviedGoodWithGoodUrl:(NSString *)goodUrl
+                               success:(void (^)(id result))success
+                               failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)cancelOrderWithOrderNo:(NSString *)orderNo
+                       success:(void (^)(id result))success
+                       failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
 @end

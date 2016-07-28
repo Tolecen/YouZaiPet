@@ -478,7 +478,11 @@
             self.shouhuoNameL.text = orderDict[@"consignee"];
             self.shouhuoMobileL.text = orderDict[@"telphone"];
             self.shouhuoAddressL.text = orderDict[@"address"];
-
+            self.myOrder.pay_status = [NSString stringWithFormat:@"%@",orderDict[@"pay_status"]];
+            self.myOrder.post_status = [NSString stringWithFormat:@"%@",orderDict[@"post_status"]];
+            self.myOrder.pay_status_zh = orderDict[@"pay_status"]?orderDict[@"pay_status"]:@"";
+            
+            [_tableView reloadData];
         }
         
         [_tableView headerEndRefreshing];
@@ -576,6 +580,26 @@
     }
     OrderYZList * listModel = self.myOrder;
     view.desL.text = [NSString stringWithFormat:@"共 %@ 件 合计：￥%@（含运费 ￥%@）",listModel.total_amount,listModel.total_money,listModel.shippingfee];
+    if ([self.myOrder.pay_status isEqualToString:@"0"]) {
+        view.btn1.hidden = NO;
+        view.btn2.hidden = NO;
+        [view.btn1 setTitle:@"取消订单" forState:UIControlStateNormal];
+        [view.btn2 setTitle:@"立刻付款" forState:UIControlStateNormal];
+    }
+    else if([self.myOrder.post_status isEqualToString:@"1"])
+    {
+        view.btn1.hidden = YES;
+        view.btn2.hidden = NO;
+        [view.btn2 setTitle:@"确认收货" forState:UIControlStateNormal];
+    }
+    else
+    {
+        view.btn1.hidden = YES;
+        view.btn2.hidden = YES;
+    }
+    view.buttonClicked = ^(NSString * title){
+        [self buttonAction:title];
+    };
     return view;
     
 }
@@ -714,6 +738,36 @@
     [self.navigationController presentViewController:ui animated:YES completion:^{
         
     }];
+}
+
+-(void)buttonAction:(NSString *)title
+{
+    if ([title isEqualToString:@"取消订单"]) {
+        [SVProgressHUD showWithStatus:@"取消中..."];
+        [NetServer cancelOrderWithOrderNo:self.myOrder.order_no success:^(id result) {
+            [SVProgressHUD showSuccessWithStatus:@"取消订单成功"];
+            self.myOrder.pay_status = @"2";
+            [_tableView reloadData];
+        } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+            [SVProgressHUD showErrorWithStatus:@"取消订单失败"];
+        }];
+    }
+    else if ([title isEqualToString:@"立刻付款"]){
+        
+    }
+    else if ([title isEqualToString:@"确认收货"]){
+        if (!self.myOrder.confirmUrl) {
+            return;
+        }
+        [SVProgressHUD showWithStatus:@"确认中..."];
+        [NetServer confirmReceviedGoodWithGoodUrl:self.myOrder.confirmUrl success:^(id result) {
+            [SVProgressHUD showSuccessWithStatus:@"确认收货成功"];
+            self.myOrder.post_status = @"2";
+            [_tableView reloadData];
+        } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+             [SVProgressHUD showErrorWithStatus:@"确认收货失败"];
+        }];
+    }
 }
 
 @end

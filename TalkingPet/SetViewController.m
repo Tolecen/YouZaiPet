@@ -37,7 +37,7 @@
 
 //        self.sectionFirstArraytwo = [NSArray arrayWithObjects:@"播放设置",@"个性化皮肤", nil];
         self.sectionSecondArray = [NSArray arrayWithObjects:@"播放设置", nil];
-        self.sectionSecondArrayA = [NSArray arrayWithObjects:@"播放设置",@"图片设置",@"私信设置", nil];
+        self.sectionSecondArrayA = [NSArray arrayWithObjects:@"播放设置",@"图片设置", nil];
         self.sectionSecondArrayB = [NSArray arrayWithObjects:@"播放设置", nil];
         self.sectionThirdArray = [NSArray arrayWithObjects:@"意见反馈",@"清理缓存", nil];
         self.sectionForthArrayA = [NSArray arrayWithObjects:@"修改密码",@"退出登录", nil];

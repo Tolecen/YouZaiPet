@@ -9,5 +9,7 @@
 #import "OrderYZGoodInfo.h"
 
 @implementation OrderYZGoodInfo
-
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"link.confirm": @"confirmUrl"}];
+}
 @end
