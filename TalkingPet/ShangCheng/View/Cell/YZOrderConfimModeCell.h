@@ -16,6 +16,6 @@
 
 @property (nonatomic, copy) void(^changeBtnSelected)(YZOrderConfimModeCell *cell);
 
-- (void)changeBtnSelect;
+- (void)changeConfimStyle;
 
 @end

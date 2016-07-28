@@ -67,7 +67,7 @@
     return self;
 }
 
-- (void)changeBtnSelect {
+- (void)changeConfimStyle {
     if (!self.selectBtn.selected) {
         self.changeBtnSelected(self);
     }

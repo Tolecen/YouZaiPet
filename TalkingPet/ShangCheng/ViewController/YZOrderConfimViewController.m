@@ -233,7 +233,7 @@
         }
     } else if (indexPath.section == 2) {
         YZOrderConfimModeCell *cell = (YZOrderConfimModeCell *)[tableView cellForRowAtIndexPath:indexPath];
-        [cell changeBtnSelected];
+        [cell changeConfimStyle];
     }
 }
 
