@@ -241,7 +241,8 @@
 
 - (void)clearPriceAction {
     [[YZShoppingCarHelper instanceManager] addShoppingCarWithScene:YZShangChengType_Dog
-                                                             model:self.dogModel];
+                                                             model:self.dogModel
+                                                        clearPrice:YES];
     YZShoppingCarVC *shoppingCarVC = [[YZShoppingCarVC alloc] init];
     shoppingCarVC.selectedIndex = 0;
     [self.navigationController pushViewController:shoppingCarVC animated:YES];
@@ -259,7 +260,8 @@
         return;
     }
     [[YZShoppingCarHelper instanceManager] addShoppingCarWithScene:YZShangChengType_Dog
-                                                             model:self.dogModel];
+                                                             model:self.dogModel
+                                                        clearPrice:NO];
     [SVProgressHUD showSuccessWithStatus:@"已添加到购物车"];
 }
 
