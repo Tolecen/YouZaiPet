@@ -26,4 +26,7 @@
                        success:(void (^)(id result))success
                        failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
++ (void)getAddressCodeWithsuccess:(void (^)(id result))success
+failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
 @end
