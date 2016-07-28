@@ -86,7 +86,11 @@
     }
     
     [self checkNetwork];
-
+//    [NetServer getAddressCodeWithsuccess:^(id result) {
+//        NSLog(@"areas:%@",result);
+//    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+//        
+//    }];
 //    [self performSelector:@selector(saaaaa) withObject:nil afterDelay:2];
     return YES;
 }
