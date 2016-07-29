@@ -35,7 +35,7 @@
         introLb.font = [UIFont systemFontOfSize:13];
         introLb.textColor = [UIColor colorWithR:102 g:102 b:102 alpha:1];
         [self addSubview:introLb];
-        introLb.text = @"●犬舍介绍●";
+        introLb.text = @"● 犬舍介绍 ●";
         
         UILabel *keeperLb = [self inner_CreateIntroLb];
         [self addSubview:keeperLb];
