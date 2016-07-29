@@ -35,29 +35,34 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
     [self setBackButtonWithTarget:@selector(back)];
     [self setRightButtonWithName:@"下一步" BackgroundImg:nil Target:@selector(selectImage)];
     self.view.backgroundColor = [UIColor colorWithWhite:238/255.0 alpha:1];
-    UIImageView * bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 70, self.view.frame.size.width, self.view.frame.size.height-70-navigationBarHeight)];
-    [self.view addSubview:bg];
-    bg.image = [UIImage imageNamed:@"story_preview_bg"];
-    UIImageView * defaultCover = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, self.view.frame.size.width-20, self.view.frame.size.width-20)];
-    [bg addSubview:defaultCover];
-    defaultCover.image = [UIImage imageNamed:@"story_preview_defaultCover"];
-    titleView = [[UITextView alloc] initWithFrame:CGRectMake(5, 5, self.view.frame.size.width-10, 60)];
-    titleView.backgroundColor = [UIColor whiteColor];
-    titleView.layer.borderWidth = 1;
+//    UIImageView * bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 70, self.view.frame.size.width, self.view.frame.size.height-70-navigationBarHeight)];
+//    [self.view addSubview:bg];
+//    bg.image = [UIImage imageNamed:@"story_preview_bg"];
+//    UIImageView * defaultCover = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, self.view.frame.size.width-20, self.view.frame.size.width-20)];
+//    [bg addSubview:defaultCover];
+//    defaultCover.image = [UIImage imageNamed:@"story_preview_defaultCover"];
+    titleView = [[UITextView alloc] initWithFrame:CGRectMake(10, 20, self.view.frame.size.width-10, 30)];
+    titleView.backgroundColor = [UIColor clearColor];
+//    titleView.layer.borderWidth = 1;
     titleView.delegate = self;
     titleView.returnKeyType = UIReturnKeyDone;
-    titleView.layer.borderColor = [UIColor colorWithWhite:200/255.0 alpha:1].CGColor;
+//    titleView.layer.borderColor = [UIColor colorWithWhite:200/255.0 alpha:1].CGColor;
     [self.view addSubview: titleView];
     
-    placeholderL = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, 20)];
+    placeholderL = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 150, 20)];
     placeholderL.textColor = [UIColor colorWithWhite:160/255.0 alpha:1];
-    placeholderL.text = @"输入标题";
+    placeholderL.text = @"请在此输入标题";
     [titleView addSubview:placeholderL];
     
     titleView.font = placeholderL.font;
+    
+    UIView * lineV = [[UIView alloc] initWithFrame:CGRectMake(10, 50, ScreenWidth-20, 1)];
+    lineV.backgroundColor = [UIColor colorWithR:200 g:200 b:200 alpha:1];
+    [self.view addSubview:lineV];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -69,7 +74,7 @@
 }
 -(void)addNameTishi
 {
-    p = [[PromptView alloc] initWithPoint:CGPointMake(140, titleView.frame.size.height) image:[UIImage imageNamed:@"story_name"] arrowDirection:1];
+    p = [[PromptView alloc] initWithPoint:CGPointMake(140, 50) image:[UIImage imageNamed:@"story_name"] arrowDirection:1];
     p.autoHide = NO;
     [self.view addSubview:p];
     [p show];

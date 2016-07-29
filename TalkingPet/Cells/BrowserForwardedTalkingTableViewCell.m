@@ -843,7 +843,7 @@
     if ([self.talking.relationShip isEqualToString:@"0"]) {
         self.relationBtn.hidden = NO;
                     [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"guanzhu2"] forState:UIControlStateNormal];
-                    [self.relationBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+                    [self.relationBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
 
         [self.relationBtn setTitle:@"  关注" forState:UIControlStateNormal];
         [self.addMarkLabel setTextColor:self.relationBtn.currentTitleColor];
@@ -1243,7 +1243,7 @@
     //    }
     self.lastIndex = self.cellIndex;
     if (self.talking.ifZan) {
-        return;
+        
         [_favorImgV setImage:[UIImage imageNamed:@"browser_zan"]];
         self.talking.ifZan = NO;
 
@@ -1288,7 +1288,7 @@
         NSLog(@"doFavor:%@",mDict);
         [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
+            self.favorBtn.enabled = YES;
             NSLog(@"favor success:%@",responseObject);
             if ([responseObject objectForKey:@"message"]) {
                 if([[responseObject objectForKey:@"message"] rangeOfString:@"("].location !=NSNotFound)
@@ -1301,7 +1301,7 @@
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"favor error:%@",error);
-            
+            self.favorBtn.enabled = YES;
         }];
     }
 }
