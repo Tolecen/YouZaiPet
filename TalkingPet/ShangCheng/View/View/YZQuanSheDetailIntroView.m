@@ -133,7 +133,7 @@
         self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.4f];
         self.alpha = 0.f;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inner_HideQuanSheIntro:)];
-
+        
         UIView *containerView = [[UIView alloc] initWithFrame:CGRectZero];
         containerView.backgroundColor = [UIColor whiteColor];
         containerView.layer.cornerRadius = 5.f;
@@ -161,8 +161,10 @@
         self.tableView = tableView;
         
         [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(containerView).insets(UIEdgeInsetsMake(10, 0, 10, 0));
+            make.edges.mas_equalTo(containerView).insets(UIEdgeInsetsZero);
         }];
+        
+        tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(containerView.frame), 10)];
     }
     return self;
 }
