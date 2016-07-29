@@ -843,7 +843,7 @@
     if ([self.talking.relationShip isEqualToString:@"0"]) {
         self.relationBtn.hidden = NO;
                     [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"guanzhu2"] forState:UIControlStateNormal];
-                    [self.relationBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
+                    [self.relationBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
 
         [self.relationBtn setTitle:@"  关注" forState:UIControlStateNormal];
         [self.addMarkLabel setTextColor:self.relationBtn.currentTitleColor];
