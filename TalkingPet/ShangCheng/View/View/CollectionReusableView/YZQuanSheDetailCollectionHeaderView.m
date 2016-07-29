@@ -186,6 +186,7 @@
         priceRangeLb.font = [UIFont systemFontOfSize:12.f];
         priceRangeLb.textColor = commonPriceColor;
         [containerView addSubview:priceRangeLb];
+        self.priceRangeLb = priceRangeLb;
         
         [priceRangeLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(containerView).mas_offset(-offset);
@@ -224,6 +225,7 @@
     self.numberLb.text = [NSString stringWithFormat:@"(%lld)", detailModel.shopNo];
     self.textView.text = detailModel.dogIntro;
     self.dogCountLb.text = detailModel.sale;
+    self.priceRangeLb.text = @"¥10 - ¥10000";
     [self.avatarImageV setImageWithURL:[NSURL URLWithString:detailModel.thumb] placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
     [self setNeedsUpdateConstraints];
 }

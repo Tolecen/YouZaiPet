@@ -41,7 +41,7 @@
         return;
     }
     _text = text;
-    self.textLb.text = text;
+    self.textLb.text = [NSString stringWithFormat:@"● %@ ●", text];
 }
 
 @end
