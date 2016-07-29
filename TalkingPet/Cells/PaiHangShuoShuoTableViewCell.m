@@ -457,7 +457,7 @@
     //    }
     self.lastIndex = self.cellIndex;
     if (self.talking.ifZan) {
-        return;
+       
         [_favorImgV setImage:[UIImage imageNamed:@"browser_zan"]];
         self.talking.ifZan = NO;
         
@@ -501,7 +501,7 @@
         NSLog(@"doFavor:%@",mDict);
         [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
+            self.favorBtn.enabled = YES;
             NSLog(@"favor success:%@",responseObject);
             if ([responseObject objectForKey:@"message"]) {
                 [SVProgressHUD showSuccessWithStatus:[responseObject objectForKey:@"message"]];
@@ -509,7 +509,7 @@
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"favor error:%@",error);
-            
+            self.favorBtn.enabled = YES;
         }];
     }
 }

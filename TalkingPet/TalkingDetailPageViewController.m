@@ -1196,11 +1196,11 @@
     }
     else
     {
-        return;
+        
         self.talking.ifZan = NO;
         [_favorImgV setImage:[UIImage imageNamed:@"browser_zan"]];
         int n = self.caiNum;
-        [self.favorNumBtn setTitle:[NSString stringWithFormat:@"%d踩",n-1] forState:UIControlStateNormal];
+        [self.favorNumBtn setTitle:[NSString stringWithFormat:@"%d喜欢",n-1] forState:UIControlStateNormal];
         self.caiNum--;
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"interaction" forKey:@"command"];
