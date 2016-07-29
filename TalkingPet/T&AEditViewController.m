@@ -30,23 +30,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     [self setBackButtonWithTarget:@selector(goBack)];
     [self setRightButtonWithName:@"确定" BackgroundImg:nil Target:@selector(finishEdit)];
     
-    self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
-    addressView = [[UITextView alloc] initWithFrame:CGRectMake(5, 5, self.view.frame.size.width-10, 60)];
-    addressView.backgroundColor = [UIColor whiteColor];
+//    self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
+    addressView = [[UITextView alloc] initWithFrame:CGRectMake(10, 70, self.view.frame.size.width-10, 60)];
+    addressView.backgroundColor = [UIColor clearColor];
     addressView.layer.borderWidth = 1;
     addressView.delegate = self;
     addressView.returnKeyType = UIReturnKeyDone;
-    addressView.layer.borderColor = [UIColor colorWithWhite:200/255.0 alpha:1].CGColor;
+    addressView.layer.borderColor = [UIColor colorWithWhite:240/255.0 alpha:1].CGColor;
     addressView.text = _address;
     [self.view addSubview: addressView];
     
-    placeholderL = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, self.view.frame.size.width-10, 20)];
-    placeholderL.textAlignment = NSTextAlignmentCenter;
-    placeholderL.textColor = [UIColor colorWithWhite:0.7 alpha:1];
+    placeholderL = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, self.view.frame.size.width-10, 20)];
+    placeholderL.textAlignment = NSTextAlignmentLeft;
+    placeholderL.textColor = [UIColor colorWithWhite:0.8 alpha:1];
     placeholderL.text = @"输入故事地点";
     [addressView addSubview:placeholderL];
     if(addressView.text.length>0)
@@ -56,13 +56,13 @@
     
     addressView.font = placeholderL.font;
     
-    timeTF = [[UITextField alloc] initWithFrame:CGRectMake(5, 70, self.view.frame.size.width-10, 40)];
+    timeTF = [[UITextField alloc] initWithFrame:CGRectMake(10, 20, self.view.frame.size.width-20, 30)];
     timeTF.placeholder = @"添加故事时间";
     timeTF.font = placeholderL.font;
-    timeTF.textAlignment = NSTextAlignmentCenter;
-    timeTF.backgroundColor = [UIColor whiteColor];
-    timeTF.layer.borderWidth = 1;
-    timeTF.layer.borderColor = [UIColor colorWithWhite:200/255.0 alpha:1].CGColor;
+    timeTF.textAlignment = NSTextAlignmentLeft;
+    timeTF.backgroundColor = [UIColor clearColor];
+//    timeTF.layer.borderWidth = 1;
+//    timeTF.layer.borderColor = [UIColor colorWithWhite:240/255.0 alpha:1].CGColor;
     timeTF.text = _time;
     timeTF.delegate = self;
     timeTF.inputView = ({
@@ -75,6 +75,10 @@
         datePicker.maximumDate = [NSDate date];
         datePicker;
     });
+    
+    UIView * lineV = [[UIView alloc] initWithFrame:CGRectMake(10, 50, ScreenWidth-20, 1)];
+    lineV.backgroundColor = [UIColor colorWithR:240 g:240 b:240 alpha:1];
+    [self.view addSubview:lineV];
 //    timeTF.inputAccessoryView =({
 //        UIToolbar* toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
 //        toolbar.tintColor = [UIColor blackColor];

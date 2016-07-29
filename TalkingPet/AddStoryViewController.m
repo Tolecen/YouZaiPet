@@ -44,20 +44,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
     [self setBackButtonWithTarget:@selector(back)];
     [self setRightButtonWithName:@"下一步" BackgroundImg:nil Target:@selector(setStoryCover)];
-    self.view.backgroundColor = [UIColor colorWithWhite:238/255.0 alpha:1];
-    titleView = [[UITextView alloc] initWithFrame:CGRectMake(5, 5, self.view.frame.size.width-10, 60)];
-    titleView.backgroundColor = [UIColor whiteColor];
-    titleView.layer.borderWidth = 1;
+//    self.view.backgroundColor = [UIColor colorWithWhite:238/255.0 alpha:1];
+    titleView = [[UITextView alloc] initWithFrame:CGRectMake(5, 20, self.view.frame.size.width-10, 30)];
+    titleView.backgroundColor = [UIColor clearColor];
+//    titleView.layer.borderWidth = 1;
     titleView.delegate = self;
-    titleView.textColor = [UIColor orangeColor];
-    titleView.textAlignment = NSTextAlignmentCenter;
+    titleView.textColor = [UIColor colorWithR:120 g:120 b:120 alpha:1];
+    titleView.textAlignment = NSTextAlignmentLeft;
     titleView.font = [UIFont systemFontOfSize:17];
     titleView.text = _story.title;
     titleView.returnKeyType = UIReturnKeyDone;
-    titleView.layer.borderColor = [UIColor colorWithWhite:200/255.0 alpha:1].CGColor;
+//    titleView.layer.borderColor = [UIColor colorWithWhite:200/255.0 alpha:1].CGColor;
     [self.view addSubview: titleView];
+    
+    UIView * lineV = [[UIView alloc] initWithFrame:CGRectMake(10, 50, ScreenWidth-20, 1)];
+    lineV.backgroundColor = [UIColor colorWithR:200 g:200 b:200 alpha:1];
+    [self.view addSubview:lineV];
     
     UICollectionViewFlowLayout* layout = [[UICollectionViewFlowLayout alloc]init];
     float whith = (self.view.frame.size.width-41)/3;
@@ -66,7 +71,7 @@
     layout.minimumLineSpacing = 10;
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.storyView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 70, self.view.frame.size.width, self.view.frame.size.height-70-navigationBarHeight) collectionViewLayout:layout];
-    _storyView.backgroundColor = [UIColor colorWithWhite:50/255.0 alpha:1];
+    _storyView.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
     _storyView.contentInset = UIEdgeInsetsMake(10, 10, 80, 10);
     _storyView.alwaysBounceVertical = YES;
     _storyView.delegate = self;
