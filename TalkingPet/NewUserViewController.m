@@ -52,7 +52,7 @@
 //    else
 //        self.titleArray = [NSArray arrayWithObjects:@"昵称",@"性别",@"生日",@"品种",@"地区", nil];
     
-    self.titleArray = [NSArray arrayWithObjects:@"昵称",@"性别", nil];
+    self.titleArray = [NSArray arrayWithObjects:@"昵称", nil];
     // Do any additional setup after loading the view.
     [self setBackButtonWithTarget:@selector(back)];
     
@@ -109,7 +109,7 @@
 //    [headMask setImage:[UIImage imageNamed:@"selectHeadMask"]];
 //    [_bgV addSubview:headMask];
     
-    self.infoTableV = [[UITableView alloc] initWithFrame:CGRectMake(5, 235, ScreenWidth-10, 90) style:UITableViewStylePlain];
+    self.infoTableV = [[UITableView alloc] initWithFrame:CGRectMake(5, 235, ScreenWidth-10, 45) style:UITableViewStylePlain];
     _infoTableV.delegate = self;
     _infoTableV.dataSource = self;
     _infoTableV.backgroundView = nil;
@@ -240,7 +240,7 @@
     [regDict setObject:self.userPlatform?self.userPlatform:@"0" forKey:@"source"];
     [regDict setObject:[self.nameTF.text CutSpacing] forKey:@"nickname"];
     [regDict setObject:self.avatarUrl forKey:@"head"];
-    [regDict setObject:self.genderCode forKey:@"gender"];
+//    [regDict setObject:self.genderCode forKey:@"gender"];
     [regDict setObject:@"0" forKey:@"type"];
 //    [regDict setObject:[NSString stringWithFormat:@"%.0f",_selectedBirthday*1000] forKey:@"birthday"];
 //    [regDict setObject:self.regionTL.text forKey:@"address"];
@@ -704,10 +704,10 @@
         [SVProgressHUD showErrorWithStatus:@"昵称要填哦，2-15个字"];
         return;
     }
-    if (self.genderTL.textColor==[UIColor lightGrayColor]) {
-        [SVProgressHUD showErrorWithStatus:@"性别要选呀"];
-        return;
-    }
+//    if (self.genderTL.textColor==[UIColor lightGrayColor]) {
+//        [SVProgressHUD showErrorWithStatus:@"性别要选呀"];
+//        return;
+//    }
 //    if (self.birthTL.textColor==[UIColor lightGrayColor]) {
 //        [SVProgressHUD showErrorWithStatus:@"生日要选呀"];
 //        return;
