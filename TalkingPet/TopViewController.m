@@ -22,6 +22,8 @@
     
     float publishFrameX;
 //    BOOL needNotiNormalChat;
+    
+    UILabel * currentL;
 }
 @property (nonatomic,retain)UINavigationController * petalkNav;
 @property (nonatomic,retain)UINavigationController * marketNav;
@@ -129,6 +131,7 @@
     photoBL.text = @"发布";
     photoBL.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
     [tabBar addSubview:photoBL];
+    photoBL.tag = 400;
     
     UIButton * marketB = [UIButton buttonWithType:UIButtonTypeCustom];
     marketB.tag = 2;
@@ -198,6 +201,9 @@
                     [button setBackgroundImage:[UIImage imageNamed:@"market-nom"] forState:UIControlStateNormal];
                     UIButton * button2 = (UIButton*)[btn.superview viewWithTag:3];
                     [button2 setBackgroundImage:[UIImage imageNamed:@"myp-nom"] forState:UIControlStateNormal];
+                    UILabel * l0 = (UILabel*)[btn.superview viewWithTag:100];
+                    l0.textColor = CommonGreenColor;
+                    currentL = l0;
                     UILabel * l1 = (UILabel*)[btn.superview viewWithTag:200];
                     l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
                     UILabel * l2 = (UILabel*)[btn.superview viewWithTag:300];
@@ -225,6 +231,9 @@
                     l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
                     UILabel * l2 = (UILabel*)[btn.superview viewWithTag:300];
                     l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+                    UILabel * l0 = (UILabel*)[btn.superview viewWithTag:200];
+                    l0.textColor = CommonGreenColor;
+                    currentL = l0;
                      _currentC = _marketNav;
 //                }
             }];
@@ -248,6 +257,9 @@
                     l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
                     UILabel * l2 = (UILabel*)[btn.superview viewWithTag:200];
                     l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+                    UILabel * l0 = (UILabel*)[btn.superview viewWithTag:300];
+                    l0.textColor = CommonGreenColor;
+                    currentL = l0;
                     _currentC = _personNav;
 //                }
             }];
@@ -265,28 +277,58 @@
     PublishView * view = [[PublishView alloc] init];
     view.publishox = publishFrameX;
     __weak PublishView * weakView = view;
+    UILabel * l0 = (UILabel*)[tabBar viewWithTag:400];
+    l0.textColor = CommonGreenColor;
+
+    UILabel * l1 = (UILabel*)[tabBar viewWithTag:200];
+    l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+    UILabel * l2 = (UILabel*)[tabBar viewWithTag:300];
+    l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+    UILabel * l3 = (UILabel*)[tabBar viewWithTag:100];
+    l3.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
     [view showWithAction:^(NSInteger index) {
         switch (index) {
             case 0:{
                 [PublishServer publishPetalkWithTag:nil completion:^{
                     [weakView removeFromSuperview];
+                    [self resetColor];
                 }];
             }break;
             case 1:{
                 [PublishServer publishPictureWithTag:nil completion:^{
                     [weakView removeFromSuperview];
+                    [self resetColor];
                 }];
             }break;
             case 2:{
                 [PublishServer publishStoryWithTag:nil completion:^{
                     [weakView removeFromSuperview];
+                    [self resetColor];
                 }];
+            }break;
+            case 3:{
+                [self resetColor];
             }break;
             default:
                 break;
         }
     }];
     
+}
+
+-(void)resetColor
+{
+    UILabel * l0 = (UILabel*)[tabBar viewWithTag:400];
+    l0.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+    
+    UILabel * l1 = (UILabel*)[tabBar viewWithTag:200];
+    l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+    UILabel * l2 = (UILabel*)[tabBar viewWithTag:300];
+    l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+    UILabel * l3 = (UILabel*)[tabBar viewWithTag:100];
+    l3.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+    
+    currentL.textColor = CommonGreenColor;
 }
 
 -(void)viewWillAppear:(BOOL)animated
