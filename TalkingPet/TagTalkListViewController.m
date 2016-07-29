@@ -88,36 +88,36 @@
     _contentTableView.dataSource = self.tableViewHelper;
     self.tableViewHelper.tableViewType = TableViewTypeTagList;
  
-    if (!self.shouldRequestTagInfo) {
-        if (![self.tag.backGroundURL isEqualToString:@" "]&&self.tag.backGroundURL.length>2) {
-            self.bgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 120)];
-            [self.bgV setBackgroundColor:[UIColor clearColor]];
-            
-//            [self.sectionBtnView setFrame:CGRectMake(0, self.bgV.frame.size.height-30, ScreenWidth, 30)];
-//            [self.bgV addSubview:self.sectionBtnView];
-            self.dButton = [[EGOImageButton alloc] initWithPlaceholderImage:nil delegate:self];
-            [self.dButton setFrame:CGRectMake(0, 0, ScreenWidth, 120)];
-            self.dButton.backgroundColor = [UIColor colorWithWhite:230/255.0f alpha:1];
-            [self.bgV addSubview:self.dButton];
-            [self.dButton setImageURL:[NSURL URLWithString:self.tag.backGroundURL]];
-            [self.dButton addTarget:self action:@selector(clickedContentImageV:) forControlEvents:UIControlEventTouchUpInside];
-             _contentTableView.tableHeaderView = self.bgV;
-            
-        }
-        else
-        {
-            self.bgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 35)];
-            [self.bgV setBackgroundColor:[UIColor clearColor]];
-            
-//            [self.sectionBtnView setFrame:CGRectMake(0, self.bgV.frame.size.height-30, 320, 30)];
-//            [self.bgV addSubview:self.sectionBtnView];
-            _contentTableView.tableHeaderView = self.bgV;
-        }
-    }
-    else
-    {
+//    if (!self.shouldRequestTagInfo) {
+//        if (![self.tag.backGroundURL isEqualToString:@" "]&&self.tag.backGroundURL.length>2) {
+//            self.bgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 120)];
+//            [self.bgV setBackgroundColor:[UIColor clearColor]];
+//            
+////            [self.sectionBtnView setFrame:CGRectMake(0, self.bgV.frame.size.height-30, ScreenWidth, 30)];
+////            [self.bgV addSubview:self.sectionBtnView];
+//            self.dButton = [[EGOImageButton alloc] initWithPlaceholderImage:nil delegate:self];
+//            [self.dButton setFrame:CGRectMake(0, 0, ScreenWidth, 120)];
+//            self.dButton.backgroundColor = [UIColor colorWithWhite:230/255.0f alpha:1];
+//            [self.bgV addSubview:self.dButton];
+//            [self.dButton setImageURL:[NSURL URLWithString:self.tag.backGroundURL]];
+//            [self.dButton addTarget:self action:@selector(clickedContentImageV:) forControlEvents:UIControlEventTouchUpInside];
+//             _contentTableView.tableHeaderView = self.bgV;
+//            
+//        }
+//        else
+//        {
+//            self.bgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 35)];
+//            [self.bgV setBackgroundColor:[UIColor clearColor]];
+//            
+////            [self.sectionBtnView setFrame:CGRectMake(0, self.bgV.frame.size.height-30, 320, 30)];
+////            [self.bgV addSubview:self.sectionBtnView];
+//            _contentTableView.tableHeaderView = self.bgV;
+//        }
+//    }
+//    else
+//    {
         [self requestTagInfo];
-    }
+//    }
    
     // Do any additional setup after loading the view.
 }

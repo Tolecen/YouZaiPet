@@ -764,8 +764,8 @@
         SquareIteam * item = [[SquareIteam alloc] init];
         item.handleType = @"3";
         item.title = @"测试";
-//        item.key = keyArray[i];
-        item.key = @"hot";
+        item.key = keyArray[i];
+//        item.key = @"hot";
         [self.gudinggcArray addObject:item];
     }
     
