@@ -15,6 +15,7 @@
 #import "InitializeData.h"
 #import "GTScrollNavigationBar.h"
 #import "Pingpp.h"
+#import "TFileManager.h"
 //#ifndef DevelopModeUU
 //#define QINIUDomain @"images"
 //#else
@@ -86,11 +87,16 @@
     }
     
     [self checkNetwork];
-//    [NetServer getAddressCodeWithsuccess:^(id result) {
-//        NSLog(@"areas:%@",result);
-//    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-//        
-//    }];
+    [NetServer getAddressCodeWithsuccess:^(id result) {
+        NSLog(@"areas:%@",result);
+        if (result) {
+            NSData * address = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingPrettyPrinted error:nil];
+            [TFileManager writeAddressFile:address];
+        }
+        
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        
+    }];
 //    [self performSelector:@selector(saaaaa) withObject:nil afterDelay:2];
     return YES;
 }

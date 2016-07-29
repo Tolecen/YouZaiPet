@@ -9,6 +9,7 @@
 #import "AddressDetailViewController.h"
 #import "ReceiptAddress.h"
 #import "SVProgressHUD.h"
+#import "TFileManager.h"
 
 @interface OneViewCell : UITableViewCell
 {
@@ -56,11 +57,14 @@
 {
     UITextField * cityL;
     BOOL canSwitch;
+    
+    NSDictionary * addressDict;
 }
 @property (nonatomic,retain)NSArray * titleArr;
 @property (nonatomic,retain)ReceiptAddress * address;
-@property (nonatomic,retain)NSArray * provinceArray;
-@property (nonatomic,retain)NSArray * cityArray;
+@property (nonatomic,retain)NSMutableArray * provinceArray;
+@property (nonatomic,retain)NSMutableArray * cityArray;
+@property (nonatomic,retain)NSMutableArray * quArray;
 @property (nonatomic,retain)UITableView * tableView;
 @end
 @implementation AddressDetailViewController
@@ -73,10 +77,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.address = [[ReceiptAddress alloc] init];
-        NSString *path =[[NSString alloc]initWithString:[[NSBundle mainBundle]pathForResource:@"city"ofType:@"txt"]];
-        NSData* data = [[NSData alloc]initWithContentsOfFile:path];
-        self.provinceArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        self.cityArray = [_provinceArray[0] objectForKey:@"city"];
+//        NSString *path =[[NSString alloc]initWithString:[[NSBundle mainBundle]pathForResource:@"city"ofType:@"txt"]];
+//        NSData* data = [[NSData alloc]initWithContentsOfFile:path];
+//        self.provinceArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+//        self.cityArray = [_provinceArray[0] objectForKey:@"city"];
         canSwitch = YES;
     }
     return self;
@@ -86,6 +90,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithWhite:240/255.0f alpha:1];
     [self setBackButtonWithTarget:@selector(back)];
+    
+    
+    self.provinceArray = [NSMutableArray array];
     
     self.titleArr = @[@"收货人:",@"联系电话:",@"所在区域:",@"详细地址:",@"邮政编码:",@"设为默认收货地址:"];
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 10, self.view.frame.size.width, self.view.frame.size.height-navigationBarHeight-10-self.view.frame.size.width*98/750)];
@@ -102,6 +109,39 @@
     [saveAddressB addTarget:self action:@selector(saveAddressB) forControlEvents:UIControlEventTouchUpInside];
     [saveAddressB setTitle:_finishTitle forState:UIControlStateNormal];
     [self.view addSubview:saveAddressB];
+    
+    
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    addressDict = [TFileManager getAddressDict];
+    if (addressDict) {
+        NSDictionary *lv1 = [addressDict objectForKey:@"lv1"];
+        NSArray * allPkeys = [lv1 allKeys];
+        NSArray * allPkey =[allPkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            if ([obj1 intValue] > [obj2 intValue]) {
+                return NSOrderedDescending;
+            }
+            if ([obj1 intValue] < [obj2 intValue]) {
+                return NSOrderedAscending;
+            }
+            return NSOrderedSame;
+        }];
+        for (int i = 0; i<allPkey.count; i++) {
+            NSArray * d = [NSArray arrayWithObjects:[lv1 objectForKey:allPkey[i]],allPkey[i], nil];
+            [self.provinceArray addObject:d];
+        }
+        NSDictionary *lv2 = [addressDict objectForKey:@"lv2"];
+        NSLog(@"dddffsss:%@",[self.provinceArray firstObject]);
+        self.cityArray = [lv2 objectForKey:[[self.provinceArray firstObject] lastObject]];
+        NSDictionary * lv3 = [addressDict objectForKey:@"lv3"];
+        self.quArray = [lv3 objectForKey:[[self.cityArray firstObject] lastObject]];
+    }
+}
+-(NSString *)makeString:(id)key
+{
+    return [NSString stringWithFormat:@"%@",key];
 }
 -(void)updateReceiptAddress:(ReceiptAddress *) address
 {
@@ -294,10 +334,14 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if ([textField isEqual:cityL]) {
-        if (!_address.province&&!_address.city) {
-            _address.province = [self.provinceArray[0] objectForKey:@"Province"];
-            _address.city = self.cityArray[0];
-            cityL.text = [_address.province stringByAppendingString:_address.city];
+        if (!_address.province&&!_address.city&&!_address.qu) {
+            _address.province = [self.provinceArray[0] firstObject];
+            _address.provinceCode = [self.provinceArray[0] lastObject];
+            _address.city = [self.cityArray[0] firstObject];
+            _address.cityCode = [self.cityArray[0] lastObject];
+            _address.qu = [self.quArray[0] firstObject];
+            _address.quCode = [self.quArray[0] lastObject];
+            cityL.text = [NSString stringWithFormat:@"%@%@%@",_address.province,_address.city,_address.qu];
         }
     }
 }
@@ -319,7 +363,7 @@
 #pragma mark - UITextField
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
@@ -327,30 +371,63 @@
     if (component==0) {
         return self.provinceArray.count;
     }
-    else
+    else if(component==1)
         return self.cityArray.count;
+    else
+        return self.quArray.count;
 }
 - (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger) row forComponent:(NSInteger) component
 {
     if (component == 0) {
-        return [self.provinceArray[row] objectForKey:@"Province"];
+        return [self.provinceArray[row] firstObject];
     }
-    return self.cityArray[row];
+    else if (component==1){
+        return [self.cityArray[row] firstObject];
+    }
+    return [self.quArray[row] firstObject];
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if (component == 0) {
-        self.cityArray = [self.provinceArray[row] objectForKey:@"city"];
-        [pickerView reloadComponent:1];
-        _address.province = [self.provinceArray[row] objectForKey:@"Province"];
-        _address.city = self.cityArray[[pickerView selectedRowInComponent:1]];
+//        self.cityArray = [self.provinceArray[row] objectForKey:@"city"];
+//        [pickerView reloadComponent:1];
+//        _address.province = [self.provinceArray[row] objectForKey:@"Province"];
+//        _address.city = self.cityArray[[pickerView selectedRowInComponent:1]];
         
+        
+        NSDictionary *lv2 = [addressDict objectForKey:@"lv2"];
+        self.cityArray = [lv2 objectForKey:[self.provinceArray[row] lastObject]];
+        NSDictionary * lv3 = [addressDict objectForKey:@"lv3"];
+        self.quArray = [lv3 objectForKey:[self.cityArray[[pickerView selectedRowInComponent:1]] lastObject]];
+        
+        [pickerView reloadComponent:1];
+        [pickerView reloadComponent:2];
+        
+        _address.province = [self.provinceArray[row] firstObject];
+        _address.provinceCode = [self.provinceArray[row] lastObject];
+        _address.city = [self.cityArray[[pickerView selectedRowInComponent:1]] firstObject];
+        _address.cityCode = [self.cityArray[[pickerView selectedRowInComponent:1]] lastObject];
+        _address.qu = [self.quArray[[pickerView selectedRowInComponent:2]] firstObject];
+        _address.quCode = [self.quArray[[pickerView selectedRowInComponent:2]] lastObject];
+        
+    }
+    else if (component==1){
+        NSDictionary * lv3 = [addressDict objectForKey:@"lv3"];
+        self.quArray = [lv3 objectForKey:[self.cityArray[row] lastObject]];
+        
+        [pickerView reloadComponent:2];
+        
+        _address.city = [self.cityArray[row] firstObject];
+        _address.cityCode = [self.cityArray[row] lastObject];
+        _address.qu = [self.quArray[[pickerView selectedRowInComponent:2]] firstObject];
+        _address.quCode = [self.quArray[[pickerView selectedRowInComponent:2]] lastObject];
     }
     else
     {
-        _address.city = self.cityArray[row];
+        _address.qu = [self.quArray[row] firstObject];
+        _address.quCode = [self.quArray[row] lastObject];
     }
-    cityL.text = [_address.province stringByAppendingString:_address.city];
+    cityL.text = [NSString stringWithFormat:@"%@%@%@",_address.province,_address.city,_address.qu];
 }
 @end

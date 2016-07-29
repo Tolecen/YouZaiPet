@@ -239,4 +239,44 @@
     }
     return folderSize/(1024.0*1024.0);
 }
+
+
++(BOOL)ifExsitAddressFile
+{
+    NSString *documents = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory , NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *subdirectory = [documents stringByAppendingPathComponent:@"AddressFile"];
+    NSString *audioPath = [subdirectory stringByAppendingPathComponent:@"address.json"];
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    return [fm fileExistsAtPath:audioPath];
+    
+}
+
++(void)writeAddressFile:(NSData *)data
+{
+    NSString *documentsw = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory , NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *subdirectoryw = [documentsw stringByAppendingPathComponent:@"AddressFile"];
+    BOOL isDirs = FALSE;
+    BOOL isDirExists = [[NSFileManager defaultManager] fileExistsAtPath:subdirectoryw isDirectory:&isDirs];
+    
+    
+    if (!(isDirExists && isDirs))
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:subdirectoryw withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
+    NSString *filePath = [subdirectoryw stringByAppendingPathComponent:@"address.json"];
+    [data writeToFile:filePath atomically:YES];
+}
+
++(NSDictionary *)getAddressDict
+{
+    NSString *documents = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory , NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *subdirectory = [documents stringByAppendingPathComponent:@"AddressFile"];
+    NSString *audioPath = [subdirectory stringByAppendingPathComponent:@"address.json"];
+    
+    NSData * data = [NSData dataWithContentsOfFile:audioPath];
+    return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+}
+
 @end

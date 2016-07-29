@@ -105,6 +105,9 @@
             [noAddressCell setOrderConfimAddAddressBlock:^{
                 AddressManageViewController *viewC = [[AddressManageViewController alloc] init];
                 __weak __typeof(viewC) weakViewC = viewC;
+   
+                viewC.finishTitle = @"使用并保存";
+
                 [viewC setUseAddress:^(ReceiptAddress *receiptAddress) {
                     weakSelf.address = receiptAddress;
                     [weakViewC.navigationController popViewControllerAnimated:YES];
@@ -223,6 +226,7 @@
         if (self.address) {
             AddressManageViewController *viewC = [[AddressManageViewController alloc] init];
             __weak __typeof(viewC) weakViewC = viewC;
+            viewC.finishTitle = @"使用并保存";
             WS(weakSelf);
             [viewC setUseAddress:^(ReceiptAddress *receiptAddress) {
                 weakSelf.address = receiptAddress;

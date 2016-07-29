@@ -33,6 +33,38 @@
             endingLineNumber = "379"
             landmarkName = "-realLogOut"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SetViewController realLogOut]"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/SetViewController.m"
+                  timestampString = "491477880.315475"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "379"
+                  endingLineNumber = "379"
+                  offsetFromSymbolStart = "907">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__31-[SetViewController realLogOut]_block_invoke"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/SetViewController.m"
+                  timestampString = "491477880.315615"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "379"
+                  endingLineNumber = "379"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -148,7 +180,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/BrowserTableHelper.m"
-                  timestampString = "491457622.330248"
+                  timestampString = "491477880.321349"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "186"
@@ -163,7 +195,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/BrowserTableHelper.m"
-                  timestampString = "491457622.330392"
+                  timestampString = "491477880.321483"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "188"
@@ -171,6 +203,54 @@
                   offsetFromSymbolStart = "79">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TalkingPet/AddressDetailViewController.m"
+            timestampString = "491476702.336819"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "-viewDidAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TalkingPet/AddressDetailViewController.m"
+            timestampString = "491476702.336819"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "-viewDidAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TalkingPet/ShangCheng/ViewController/YZOrderConfimViewController.m"
+            timestampString = "491477859.247399"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
