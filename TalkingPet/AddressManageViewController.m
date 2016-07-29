@@ -11,6 +11,7 @@
 #import "ReceiptAddress.h"
 #import "SVProgressHUD.h"
 #import "MJRefresh.h"
+#import "NetServer+Payment.h"
 @protocol WXRAddressCellDelegate <NSObject>
 @optional
 -(void)editAddress:(NSInteger)index;
@@ -161,27 +162,34 @@
     detailVC.finish = ^(ReceiptAddress * address){
         [blockArr addObject:address];
         [blockView reloadData];
-        [SVProgressHUD showWithStatus:@"正在保存收货地址"];
-        NSMutableDictionary* usersDict = [NetServer commonDict];
-        [usersDict setObject:@"shippingAddress" forKey:@"command"];
-        [usersDict setObject:@"create" forKey:@"options"];
-        [usersDict setObject:address.address forKey:@"address"];
-        [usersDict setObject:address.phoneNo forKey:@"mobile"];
-        [usersDict setObject:address.city forKey:@"city"];
-        [usersDict setObject:address.province forKey:@"province"];
-        [usersDict setObject:address.receiptName forKey:@"name"];
-        [usersDict setObject:address.zipCode forKey:@"zipcode"];
-        [usersDict setObject:address.action?@"true":@"false" forKey:@"isDefault"];
-        [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [SVProgressHUD dismiss];
-            if (bolckSelf.useAddress) {
-                bolckSelf.useAddress(address);
-            }else
-            {
-                [bolckSelf.navigationController popToViewController:bolckSelf animated:YES];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:@"保存收货地址失败"];
+//        [SVProgressHUD showWithStatus:@"正在保存收货地址"];
+//        NSMutableDictionary* usersDict = [NetServer commonDict];
+//        [usersDict setObject:@"shippingAddress" forKey:@"command"];
+//        [usersDict setObject:@"create" forKey:@"options"];
+//        [usersDict setObject:address.address forKey:@"address"];
+//        [usersDict setObject:address.phoneNo forKey:@"mobile"];
+//        [usersDict setObject:address.city forKey:@"city"];
+//        [usersDict setObject:address.province forKey:@"province"];
+//        [usersDict setObject:address.receiptName forKey:@"name"];
+//        [usersDict setObject:address.zipCode forKey:@"zipcode"];
+//        [usersDict setObject:address.action?@"true":@"false" forKey:@"isDefault"];
+//        [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            [SVProgressHUD dismiss];
+//            if (bolckSelf.useAddress) {
+//                bolckSelf.useAddress(address);
+//            }else
+//            {
+//                [bolckSelf.navigationController popToViewController:bolckSelf animated:YES];
+//            }
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            [SVProgressHUD showErrorWithStatus:@"保存收货地址失败"];
+//        }];
+        
+        
+        [NetServer addAddressWithAdress:address success:^(id result) {
+            
+        } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+            
         }];
     };
     [self.navigationController pushViewController:detailVC animated:YES];

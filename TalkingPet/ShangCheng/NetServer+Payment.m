@@ -138,4 +138,31 @@
                                          }];
 }
 
++ (void)addAddressWithAdress:(ReceiptAddress *)address
+                       success:(void (^)(id))success
+                       failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
+    params[@"uid"] = [UserServe sharedUserServe].userID;
+    //    params[@"order_no"] = orderNo;
+    params[@"consignee"] = address.receiptName;
+    params[@"address"] = address.address;
+    params[@"province"] = address.provinceCode;
+    params[@"city"] = address.cityCode;
+    params[@"area"] = address.quCode;
+    params[@"telphone"] = address.phoneNo;
+    params[@"default"] = [NSString stringWithFormat:@"%d",address.action];
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/address/add",BasePayUrl];
+    NSLog(@"req:%@,path:%@",params,path);
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:params
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
+
 @end
