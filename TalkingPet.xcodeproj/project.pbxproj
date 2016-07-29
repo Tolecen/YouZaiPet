@@ -6485,6 +6485,11 @@
 			attributes = {
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = wangxr;
+				TargetAttributes = {
+					72831C2F196A34B700B9CA4C = {
+						DevelopmentTeam = S9QBHC9Y99;
+					};
+				};
 			};
 			buildConfigurationList = 72831C2B196A34B700B9CA4C /* Build configuration list for PBXProject "TalkingPet" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -7926,7 +7931,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "497f21c2-ae7f-4355-9350-2fa86d935ebc";
+				PROVISIONING_PROFILE = "ac5dddff-db6c-4f21-99c3-e33f16375311";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -7965,7 +7970,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "497f21c2-ae7f-4355-9350-2fa86d935ebc";
+				PROVISIONING_PROFILE = "ac5dddff-db6c-4f21-99c3-e33f16375311";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";
@@ -8015,7 +8020,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.youzai.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "497f21c2-ae7f-4355-9350-2fa86d935ebc";
+				PROVISIONING_PROFILE = "ac5dddff-db6c-4f21-99c3-e33f16375311";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -8064,7 +8069,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.youzai.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "497f21c2-ae7f-4355-9350-2fa86d935ebc";
+				PROVISIONING_PROFILE = "ac5dddff-db6c-4f21-99c3-e33f16375311";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};

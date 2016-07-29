@@ -33,4 +33,18 @@ failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
                      success:(void (^)(id result))success
                      failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
++ (void)deleteAddressWithAdressId:(NSString *)addressId
+                     success:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)editAddressWithAdress:(ReceiptAddress *)address
+                     success:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)fentchAddressListsuccess:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)fentchDefaultAddressSuccess:(void (^)(id result))success
+                         failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
 @end
