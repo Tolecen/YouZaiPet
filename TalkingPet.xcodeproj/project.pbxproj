@@ -111,6 +111,7 @@
 		2EA22D7C1D336ABE0052992C /* YZGoodsDetailCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D7B1D336ABE0052992C /* YZGoodsDetailCollectionHeaderView.m */; };
 		2EA22D7F1D337AEA0052992C /* YZDetailTextCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D7E1D337AEA0052992C /* YZDetailTextCollectionView.m */; };
 		2EA22D821D338F430052992C /* YZDogDetailCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA22D811D338F430052992C /* YZDogDetailCollectionHeaderView.m */; };
+		2EC808DB1D4AFDC300EC0715 /* YZQuanSheDetailIntroCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC808DA1D4AFDC300EC0715 /* YZQuanSheDetailIntroCell.m */; };
 		2EF82F2B1D35D1DF002A58ED /* YZShangChengShareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF82F2A1D35D1DF002A58ED /* YZShangChengShareHelper.m */; };
 		2EF82F2E1D35D558002A58ED /* YZShoppingCarHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF82F2D1D35D558002A58ED /* YZShoppingCarHelper.m */; };
 		2EF82F311D360FA9002A58ED /* YZShoppingCarBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF82F301D360FA9002A58ED /* YZShoppingCarBottomBar.m */; };
@@ -1541,6 +1542,8 @@
 		2EA22D7E1D337AEA0052992C /* YZDetailTextCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZDetailTextCollectionView.m; sourceTree = "<group>"; };
 		2EA22D801D338F430052992C /* YZDogDetailCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZDogDetailCollectionHeaderView.h; sourceTree = "<group>"; };
 		2EA22D811D338F430052992C /* YZDogDetailCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZDogDetailCollectionHeaderView.m; sourceTree = "<group>"; };
+		2EC808D91D4AFDC300EC0715 /* YZQuanSheDetailIntroCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZQuanSheDetailIntroCell.h; sourceTree = "<group>"; };
+		2EC808DA1D4AFDC300EC0715 /* YZQuanSheDetailIntroCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZQuanSheDetailIntroCell.m; sourceTree = "<group>"; };
 		2EF82F291D35D1DF002A58ED /* YZShangChengShareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShangChengShareHelper.h; sourceTree = "<group>"; };
 		2EF82F2A1D35D1DF002A58ED /* YZShangChengShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZShangChengShareHelper.m; sourceTree = "<group>"; };
 		2EF82F2C1D35D558002A58ED /* YZShoppingCarHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZShoppingCarHelper.h; sourceTree = "<group>"; };
@@ -3479,6 +3482,8 @@
 				2E40FF801D49EF19007A4E44 /* YZOrderConfimAddressCell.m */,
 				2E40FF821D49F365007A4E44 /* YZOrderConfimModeCell.h */,
 				2E40FF831D49F365007A4E44 /* YZOrderConfimModeCell.m */,
+				2EC808D91D4AFDC300EC0715 /* YZQuanSheDetailIntroCell.h */,
+				2EC808DA1D4AFDC300EC0715 /* YZQuanSheDetailIntroCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -7436,6 +7441,7 @@
 				9716D1A01988ED5300C725D8 /* AFJSONRequestOperation.m in Sources */,
 				979AF3DD1A58DB2300F806C1 /* ChatDetailTableViewCell.m in Sources */,
 				7228BD14196B8D5B005502CE /* SCCaptureSessionManager.m in Sources */,
+				2EC808DB1D4AFDC300EC0715 /* YZQuanSheDetailIntroCell.m in Sources */,
 				9721538B1977624400FB34F2 /* XHAudioPlayerHelper.m in Sources */,
 				72CEF9711B535546006FA17B /* UIActionSheet+block.m in Sources */,
 				7228BCA9196B87ED005502CE /* BPMDetect.cpp in Sources */,

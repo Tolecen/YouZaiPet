@@ -223,6 +223,7 @@
     self.nameLb.text = detailModel.shopName;
     self.numberLb.text = [NSString stringWithFormat:@"(%lld)", detailModel.shopNo];
     self.textView.text = detailModel.dogIntro;
+    self.dogCountLb.text = detailModel.sale;
     [self.avatarImageV setImageWithURL:[NSURL URLWithString:detailModel.thumb] placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
     [self setNeedsUpdateConstraints];
 }

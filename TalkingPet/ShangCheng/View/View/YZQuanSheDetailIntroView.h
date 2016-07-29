@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YZShangChengModel.h"
 
 @interface YZQuanSheDetailIntroView : UIView
+
+@property (nonatomic, strong) YZQuanSheDetailModel *detailModel;
 
 - (void)show;
 

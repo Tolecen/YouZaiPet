@@ -29,28 +29,6 @@
 
 @end
 
-@protocol YZQuanSheModel <NSObject>
-@end
-
-#pragma mark -- 犬舍相关对象
-
-@interface YZQuanSheModel : YZShangChengModel
-
-@property (nonatomic, copy) NSString *shopName;
-@property (nonatomic, copy) NSString *shopId;
-@property (nonatomic, copy) NSString *dogIntro;
-@property (nonatomic, copy) NSString *thumb;
-@property (nonatomic, assign) long long shopNo;
-
-@end
-
-@interface YZQuanSheDetailModel : YZQuanSheModel
-
-@property (nonatomic, assign) float badestScore;
-@property (nonatomic, assign) float bestScore;
-
-@end
-
 #pragma mark -- 狗狗对象
 
 @protocol YZDogParents <NSObject>
@@ -65,6 +43,9 @@
 @property (nonatomic, assign) YZDogSex sex;
 @property (nonatomic, assign) BOOL vaccine;//是否三针疫苗，0为否，1为是
 
+@property (nonatomic, copy) NSString *boodNo;
+@property (nonatomic, copy) NSString *details;
+
 @end
 
 @protocol YZDogImage <NSObject>
@@ -77,6 +58,10 @@
 @property (nonatomic, copy) NSString *url;
 
 @end
+
+@protocol YZQuanSheModel <NSObject>
+@end
+@class YZQuanSheModel;
 
 @interface YZDogModel : YZShangChengModel
 
@@ -113,6 +98,30 @@
 @property (nonatomic, strong) YZDogParents<YZDogParents> *mother;
 @property (nonatomic, strong) YZDogParents<YZDogParents> *father;
 @property (nonatomic, copy) NSArray<YZDogImage> *images;
+
+@end
+
+#pragma mark -- 犬舍相关对象
+
+@interface YZQuanSheModel : YZShangChengModel
+
+@property (nonatomic, copy) NSString *shopName;//犬舍名字
+@property (nonatomic, copy) NSString *shopAddress;//犬舍地址
+@property (nonatomic, copy) NSString *shopId;//犬舍id
+@property (nonatomic, copy) NSString *dogIntro;//犬舍介绍
+@property (nonatomic, copy) NSString *thumb;
+@property (nonatomic, assign) long long shopNo;
+
+@property (nonatomic, copy) NSString *sale;//销售数量
+@property (nonatomic, copy) NSString *shopKeeper;//主理人
+
+@end
+
+@interface YZQuanSheDetailModel : YZQuanSheModel
+
+@property (nonatomic, assign) float badestScore;
+@property (nonatomic, assign) float bestScore;
+@property (nonatomic, copy) NSArray<YZDogParents> *dogParents;
 
 @end
 

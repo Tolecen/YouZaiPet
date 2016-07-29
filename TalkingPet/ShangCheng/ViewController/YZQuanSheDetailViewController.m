@@ -138,6 +138,7 @@
 }
 
 - (void)inner_ShowQuanSheIntroView {
+    self.quanSheIntroView.detailModel = self.quanSheDetail;
     [self.quanSheIntroView show];
 }
 
