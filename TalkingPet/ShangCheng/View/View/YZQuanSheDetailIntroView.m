@@ -35,7 +35,7 @@
         introLb.font = [UIFont systemFontOfSize:13];
         introLb.textColor = [UIColor colorWithR:102 g:102 b:102 alpha:1];
         [self addSubview:introLb];
-        introLb.text = @"犬舍介绍";
+        introLb.text = @"● 犬舍介绍 ●";
         
         UILabel *keeperLb = [self inner_CreateIntroLb];
         [self addSubview:keeperLb];
@@ -130,7 +130,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:.3f];
+        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.4f];
         self.alpha = 0.f;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inner_HideQuanSheIntro:)];
 
@@ -161,7 +161,7 @@
         self.tableView = tableView;
         
         [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(containerView).insets(UIEdgeInsetsZero);
+            make.edges.mas_equalTo(containerView).insets(UIEdgeInsetsMake(10, 0, 10, 0));
         }];
     }
     return self;
