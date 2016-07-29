@@ -44,7 +44,7 @@
         [self addSubview:storyB];
         
         image = [[UIImageView alloc] initWithFrame:CGRectZero];
-        image.image = [UIImage imageNamed:@"camera"];
+        image.image = [UIImage imageNamed:@"camera-sel"];
         [self addSubview:image];
         self.frame = [RootViewController sharedRootViewController].view.bounds;
     }
@@ -164,8 +164,12 @@
                             pictureB.frame = CGRectMake(CGRectGetMidX([self bounds])-130, self.frame.size.height,60, 86);
                             image.transform = CGAffineTransformMakeRotation(0);
                         } completion:^(BOOL finished) {
+                            if (_action) {
+                                _action(3);
+                            }
                             [RootViewController sharedRootViewController].view.userInteractionEnabled = YES;
                             [self removeFromSuperview];
+                            
                         } ];
 }
 - (void)petalkAction
