@@ -133,7 +133,7 @@
         self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.4f];
         self.alpha = 0.f;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inner_HideQuanSheIntro:)];
-
+        
         UIView *containerView = [[UIView alloc] initWithFrame:CGRectZero];
         containerView.backgroundColor = [UIColor whiteColor];
         containerView.layer.cornerRadius = 5.f;
