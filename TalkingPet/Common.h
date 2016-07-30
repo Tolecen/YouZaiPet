@@ -28,4 +28,7 @@
 +(NSString *)calAgeWithBirthDate:(NSString *)birthdate;
 +(BOOL)ifHaveGuided:(NSString *)key;
 +(void)setGuided:(NSString *)key;
+
++(void)addCountForCart;
++(void)clearCartCount;
 @end

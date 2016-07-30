@@ -8,7 +8,7 @@
 
 #import "YZShoppingCarHelper.h"
 #import "OrderYZGoodInfo.h"
-
+#import "Common.h"
 NSString *const kShangPinkey    = @"kShangPinkey";
 NSString *const kItemNumberkey  = @"kItemNumberkey";
 
@@ -132,7 +132,11 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
                                                       forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheDogKey]];
             [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.shoppingCarContainsIds]
                                                       forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheContainsIdKey]];
+            
+            
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [Common addCountForCart];
         }
     } else if (scene == YZShangChengType_Goods) {
         YZGoodsDetailModel *goodsModel = (YZGoodsDetailModel *)model;
@@ -171,6 +175,8 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
             [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.shoppingCarContainsIds]
                                                       forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheContainsIdKey]];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [Common addCountForCart];
         }
     }
 }

@@ -89,6 +89,8 @@
 @property (nonatomic,retain) UIImageView * darenV;
 @property (nonatomic,strong)UIButton * loginBtn;
 @property (nonatomic,strong)UIBarButtonItem * msgBtnItem;
+@property (nonatomic,strong)UIImageView * menuBarNotiImg;
+@property (nonatomic,assign)int cartCount;
 
 @property (nonatomic,retain)NewUserViewController * editCurrentPetVC;
 @property (nonatomic,retain)NewUserViewController * addNewPetVC;
@@ -113,9 +115,17 @@
     [self showNaviBg];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self checkNoti];
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+   
     if (![UserServe sharedUserServe].userName) {
         _tableView.hidden = YES;
         _loginBtn.hidden = NO;
@@ -125,6 +135,7 @@
         _tableView.hidden = NO;
         _loginBtn.hidden = YES;
         self.navigationItem.rightBarButtonItem = _msgBtnItem;
+        [self checkCart];
     }
 }
 - (void)viewDidLoad
@@ -144,6 +155,10 @@
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     _msgBtnItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toMessageVC:)];
     self.navigationItem.rightBarButtonItem = _msgBtnItem;
+    
+//    self.menuBarNotiImg = [[UIImageView alloc] initWithFrame:CGRectMake(32, 5, 10, 10)];
+//    [self.menuBarNotiImg setImage:[UIImage imageNamed:@"dotunread"]];
+//    [self.navigationItem.rightBarButtonItem addSubview:self.menuBarNotiImg];
     
     bgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, -100, self.view.frame.size.width, 400)];
     [bgV setImage:[UIImage imageNamed:@"usercenter_topBg"]];
@@ -415,6 +430,22 @@
         
     }];
 }
+
+-(void)checkCart
+{
+    if (![UserServe sharedUserServe].userID) {
+        return;
+    }
+    NSString * cartCounts = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"cartneedmetioncount%@",[UserServe sharedUserServe].userID]];
+    if (!cartCounts || [cartCounts intValue]==0) {
+        self.cartCount = 0;
+    }
+    else
+    {
+        self.cartCount = [cartCounts intValue];
+    }
+    [_tableView reloadData];
+}
 #pragma mark -
 - (void)puthAttentionViewCntroller
 {
@@ -511,6 +542,7 @@
         if (cell == nil) {
             cell = [[UserCenterGouWuFuncTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentCellIdentifier1];
         }
+        cell.cartCount = self.cartCount;
         cell.buttonClicked = ^(int index){
             [self toSomePage:index];
         };
@@ -852,6 +884,34 @@
 -(void)toLogInPage
 {
     [[RootViewController sharedRootViewController] showLoginViewController];
+}
+
+-(void)checkNoti
+{
+    [NetServer getAllMsgCountSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self ifTishi];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+    
+
+}
+-(void)ifTishi
+{
+    NSString * unreadCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"needMetionCount%@",[UserServe sharedUserServe].userID]];
+    if ([unreadCount intValue]>0) {
+        UIImage *image = [UIImage imageNamed:@"xiaoxiunread@2x"];
+        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        _msgBtnItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toMessageVC:)];
+        self.navigationItem.rightBarButtonItem = _msgBtnItem;
+        
+    }
+    else{
+        UIImage *image = [UIImage imageNamed:@"xiaoxi@2x"];
+        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        _msgBtnItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toMessageVC:)];
+        self.navigationItem.rightBarButtonItem = _msgBtnItem;
+    }
 }
 #pragma mark -
 @end

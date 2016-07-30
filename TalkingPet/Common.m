@@ -7,7 +7,7 @@
 //
 
 #import "Common.h"
-
+#import "UserServe.h"
 @implementation Common
 
 +(NSString *)getCurrentTime{
@@ -449,6 +449,25 @@
 +(void)setGuided:(NSString *)key
 {
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(void)addCountForCart
+{
+    NSString * cartCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"cartneedmetioncount%@",[UserServe sharedUserServe].userID]];
+    if (!cartCount) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:[NSString stringWithFormat:@"cartneedmetioncount%@",[UserServe sharedUserServe].userID]];
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",[cartCount intValue]+1] forKey:[NSString stringWithFormat:@"cartneedmetioncount%@",[UserServe sharedUserServe].userID]];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(void)clearCartCount
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:[NSString stringWithFormat:@"cartneedmetioncount%@",[UserServe sharedUserServe].userID]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
