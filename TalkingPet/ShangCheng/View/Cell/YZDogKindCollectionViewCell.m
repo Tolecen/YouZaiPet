@@ -56,7 +56,7 @@
     }
     _dogModel = dogModel;
     [self.imageV setImageWithURL:[NSURL URLWithString:dogModel.icon] placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
-    self.nameLb.text = dogModel.fullName;
+    self.nameLb.text = dogModel.typeName;
     [self setNeedsUpdateConstraints];
 }
 
