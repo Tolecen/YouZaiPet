@@ -42,8 +42,8 @@
         self.layer.cornerRadius = 5;
         self.layer.masksToBounds = YES;
         self.contentView.backgroundColor = [UIColor whiteColor];
-//        self.petalkV  = [[PetalkView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.width)];
-//        [self.contentView addSubview:_petalkV];
+        //        self.petalkV  = [[PetalkView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.width)];
+        //        [self.contentView addSubview:_petalkV];
         
         self.imageV = [[EGOImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.width)];
         self.imageV.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
@@ -160,7 +160,7 @@
 
 -(void)layoutSubviewsManul
 {
-//    [super layoutSubviews];
+    //[super layoutSubviews];
     [self.imageV setImageWithURL:[NSURL URLWithString:self.talking.thumbImgUrl]];
     self.nameL.text = self.talking.petInfo.nickname;
     self.desL.text = self.talking.descriptionContent;
@@ -198,8 +198,8 @@
     
     
     if (self.talking.ifZan) {
-//        return;
-       [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-off@2x"] forState:UIControlStateNormal];
+        //        return;
+        [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-off@2x"] forState:UIControlStateNormal];
         self.talking.ifZan = NO;
         self.zanButton.enabled = NO;
         
@@ -229,7 +229,7 @@
         self.zanButton.enabled = NO;
         
         //        [self performSelector:@selector(zanMakeBig) withObject:nil afterDelay:0.2];
-//        [self zanMakeBig];
+        //        [self zanMakeBig];
         [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-on@2x"] forState:UIControlStateNormal];
         self.zanL.text =[NSString stringWithFormat:@"%d",[self.zanL.text intValue]+1];
         
@@ -260,8 +260,8 @@
             self.zanButton.enabled = YES;
         }];
     }
-
-
+    
+    
 }
 @end
 
@@ -300,7 +300,7 @@
         self.imageV.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
         [self.contentView addSubview:self.imageV];
         
-
+        
         
         self.desL = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.imageV.frame)+5, frame.size.width-20, 40)];
         self.desL.backgroundColor = [UIColor clearColor];
@@ -310,7 +310,7 @@
         self.desL.lineBreakMode = NSLineBreakByCharWrapping;
         self.desL.text = @"要在这里添加描述哦哈哈急急急预约啊啊";
         [self.contentView addSubview:self.desL];
-
+        
         
         self.headView = [[EGOImageButton alloc] initWithFrame:CGRectMake(10,CGRectGetMaxY(self.desL.frame)+5, 36, 36)];
         _headView.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
@@ -372,7 +372,7 @@
         self.liulanL.text = @"223";
         self.liulanL.adjustsFontSizeToFitWidth = YES;
         [self.contentView addSubview:self.liulanL];
-
+        
     }
     return self;
 }
@@ -386,7 +386,7 @@
 
 -(void)layoutSubviewsManul
 {
-//    [super layoutSubviews];
+    //    [super layoutSubviews];
     [self.imageV setImageWithURL:[NSURL URLWithString:self.talking.thumbImgUrl]];
     self.nameL.text = self.talking.petInfo.nickname;
     self.desL.text = self.talking.descriptionContent;
@@ -403,8 +403,8 @@
     else
         [self.zanButton setBackgroundImage:[UIImage imageNamed:@"xihuan-off@2x"] forState:UIControlStateNormal];
     
-//    self.tagLabel.text = [[self.talking.tagArray firstObject] objectForKey:@"name"];
-
+    //    self.tagLabel.text = [[self.talking.tagArray firstObject] objectForKey:@"name"];
+    
 }
 
 -(void)zanAction:(UIButton *)sender
@@ -553,13 +553,13 @@ static NSString * jycellId = @"jycell";
     
     
     UICollectionViewFlowLayout* layout2 = [[UICollectionViewFlowLayout alloc]init];
-//    float width = (self.view.frame.size.width-30)/2;
+    //    float width = (self.view.frame.size.width-30)/2;
     layout2.itemSize = CGSizeMake(whith,whith+5+40+10+10+10+10+40);
     layout2.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     layout2.minimumInteritemSpacing = 10;
     layout2.minimumLineSpacing = 10;
     layout2.scrollDirection = UICollectionViewScrollDirectionVertical;
-
+    
     
     
     self.jingyanView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight) collectionViewLayout:layout2];
@@ -574,48 +574,48 @@ static NSString * jycellId = @"jycell";
     [_jingyanView addHeaderWithTarget:self action:@selector(jyHeaderDo)];
     [_jingyanView addFooterWithTarget:self action:@selector(jyFooterDo)];
     _jingyanView.hidden = YES;
-
-    
-//    self.contentTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
-//    _contentTableView.backgroundColor = [UIColor colorWithWhite:240/255.0f alpha:1];
-//    _contentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-////    _contentTableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
-//    [self.view addSubview:_contentTableView];
-//    _contentTableView.hidden = YES;
-//    
-//    self.tableViewHelper = [[BrowserTableHelper alloc] initWithController:self Tableview:_contentTableView SectionView:nil];
-//    _contentTableView.delegate = self.tableViewHelper;
-//    _contentTableView.dataSource = self.tableViewHelper;
-//    self.tableViewHelper.cellNeedShowPublishTime = NO;
-//    self.tableViewHelper.tableViewType = TableViewTypeTagList;
-    
-//    NSArray * hotArray = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].userID]];
-//    NSDictionary * hotReqDict = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotListReqDict%@",[UserServe sharedUserServe].userID]];
-//    if (hotArray&&hotReqDict) {
-//        self.tableViewHelper.dataArray = [self.tableViewHelper getModelArray:hotArray];
-//        self.tableViewHelper.reqDict = [NSMutableDictionary dictionaryWithDictionary:hotReqDict];
-//        [self.contentTableView reloadData];
-//        
-//    }
-
     
     
-//    NSMutableDictionary* mDict = [NetServer commonDict];
-//    [mDict setObject:@"petalk" forKey:@"command"];
-//    [mDict setObject:@"hotList" forKey:@"options"];
-//    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
-//    [mDict setObject:@"10" forKey:@"pageSize"];
-//    [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
-//    
-//    self.tableViewHelper.reqDict = mDict;
-//    
-//    [self.contentTableView headerBeginRefreshing];
+    //    self.contentTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
+    //    _contentTableView.backgroundColor = [UIColor colorWithWhite:240/255.0f alpha:1];
+    //    _contentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    ////    _contentTableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
+    //    [self.view addSubview:_contentTableView];
+    //    _contentTableView.hidden = YES;
+    //
+    //    self.tableViewHelper = [[BrowserTableHelper alloc] initWithController:self Tableview:_contentTableView SectionView:nil];
+    //    _contentTableView.delegate = self.tableViewHelper;
+    //    _contentTableView.dataSource = self.tableViewHelper;
+    //    self.tableViewHelper.cellNeedShowPublishTime = NO;
+    //    self.tableViewHelper.tableViewType = TableViewTypeTagList;
     
+    //    NSArray * hotArray = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotList%@",[UserServe sharedUserServe].userID]];
+    //    NSDictionary * hotReqDict = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotListReqDict%@",[UserServe sharedUserServe].userID]];
+    //    if (hotArray&&hotReqDict) {
+    //        self.tableViewHelper.dataArray = [self.tableViewHelper getModelArray:hotArray];
+    //        self.tableViewHelper.reqDict = [NSMutableDictionary dictionaryWithDictionary:hotReqDict];
+    //        [self.contentTableView reloadData];
+    //
+    //    }
+    
+    
+    
+    //    NSMutableDictionary* mDict = [NetServer commonDict];
+    //    [mDict setObject:@"petalk" forKey:@"command"];
+    //    [mDict setObject:@"hotList" forKey:@"options"];
+    //    [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
+    //    [mDict setObject:@"10" forKey:@"pageSize"];
+    //    [mDict setObject:[NSString stringWithFormat:@"%d",page] forKey:@"pageIndex"];
+    //
+    //    self.tableViewHelper.reqDict = mDict;
+    //
+    //    [self.contentTableView headerBeginRefreshing];
+    //顶部视图
     [self addTopSelView];
     
     
     [self.hotView headerBeginRefreshing];
-//    [self.tableViewHelper loadFirstDataPageWithDict:mDict];
+    //    [self.tableViewHelper loadFirstDataPageWithDict:mDict];
 }
 
 -(void)addTopSelView
@@ -637,7 +637,7 @@ static NSString * jycellId = @"jycell";
     _ssbtnL = [[UILabel alloc] initWithFrame:CGRectMake(_shuoshuoBtn.frame.origin.x-10, CGRectGetMaxY(_shuoshuoBtn.frame)+5, _shuoshuoBtn.frame.size.width+20, 20)];
     _ssbtnL.textColor = CommonGreenColor;
     _ssbtnL.font = [UIFont systemFontOfSize:12];
-    _ssbtnL.text = @"宠友动态";
+    _ssbtnL.text = @"宠物动态";
     _ssbtnL.textAlignment = NSTextAlignmentCenter;
     [self.topSelV addSubview:_ssbtnL];
     
@@ -650,7 +650,7 @@ static NSString * jycellId = @"jycell";
     _jybtnL = [[UILabel alloc] initWithFrame:CGRectMake(_jingyanBtn.frame.origin.x-10, CGRectGetMaxY(_jingyanBtn.frame)+5, _jingyanBtn.frame.size.width+20, 20)];
     _jybtnL.textColor = [UIColor colorWithRed:150/255.0 green:150/255.0 blue:150/255.0 alpha:1];
     _jybtnL.font = [UIFont systemFontOfSize:12];
-    _jybtnL.text = @"经验分享";
+    _jybtnL.text = @"养宠分享";
     _jybtnL.textAlignment = NSTextAlignmentCenter;
     [self.topSelV addSubview:_jybtnL];
     
@@ -659,7 +659,7 @@ static NSString * jycellId = @"jycell";
     [buttonSel setFrame:CGRectMake(ScreenWidth/2-40, CGRectGetMaxY(bgav.frame), 80, 25)];
     [self.topSelV addSubview:buttonSel];
     [buttonSel addTarget:self action:@selector(showOrHideTopSelV) forControlEvents:UIControlEventTouchUpInside];
-    
+    [self showOrHideTopSelV];
     self.zhiV = [[UIImageView alloc] initWithFrame:CGRectMake(65/2, 5, 15, 5)];
     self.zhiV.image = [UIImage imageNamed:@"xiala@2x"];
     [buttonSel addSubview:self.zhiV];
@@ -683,8 +683,8 @@ static NSString * jycellId = @"jycell";
             self.zhiV.image = [UIImage imageNamed:@"shouqi@2x"];
         }];
     }
-        
-        
+    
+    
 }
 -(void)showShuoShuoTable
 {
@@ -695,7 +695,7 @@ static NSString * jycellId = @"jycell";
     _jybtnL.textColor = [UIColor colorWithRed:150/255.0 green:150/255.0 blue:150/255.0 alpha:1];
     self.hotView.hidden = NO;
     self.jingyanView.hidden = YES;
-    [self showOrHideTopSelV];
+    //[self showOrHideTopSelV];
     
     if (!shuoshuoLoaded) {
         [_hotView headerBeginRefreshing];
@@ -710,7 +710,7 @@ static NSString * jycellId = @"jycell";
     _jybtnL.textColor = CommonGreenColor;
     self.hotView.hidden = YES;
     self.jingyanView.hidden = NO;
-    [self showOrHideTopSelV];
+    //[self showOrHideTopSelV];
     
     if (!jyLoaded) {
         [_jingyanView headerBeginRefreshing];
@@ -719,13 +719,13 @@ static NSString * jycellId = @"jycell";
 -(void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-//    [self.contentTableView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
+    //    [self.contentTableView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
     [self.hotView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
     [self.jingyanView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
 }
 - (void)beginRefreshing
 {
-//    [_hotView headerBeginRefreshing];
+    //    [_hotView headerBeginRefreshing];
     [self.contentTableView headerBeginRefreshing];
 }
 
@@ -799,7 +799,7 @@ static NSString * jycellId = @"jycell";
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:[NSString stringWithFormat:@"%d",jyPage] forKey:@"pageIndex"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       
+        
         
         [_jingyanView headerEndRefreshing];
         [_jingyanView footerEndRefreshing];
@@ -836,9 +836,9 @@ static NSString * jycellId = @"jycell";
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    TalkingBrowse * petalk = _dataArr[indexPath.row];
+    //    TalkingBrowse * petalk = _dataArr[indexPath.row];
     if ([collectionView isEqual:_hotView]) {
-//        static NSString *SectionCellIdentifier = @"HotPetalkCell";
+        //        static NSString *SectionCellIdentifier = @"HotPetalkCell";
         HotPetalkCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:hotcellId forIndexPath:indexPath];
         //    [cell.petalkV layoutSubviewsWithTalking:petalk];
         //    cell.headView.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?imageView2/2/w/50",petalk.petInfo.headImgURL]];
@@ -853,7 +853,7 @@ static NSString * jycellId = @"jycell";
     }
     else
     {
-//        static NSString *SectionCellIdentifier2 = @"JingyanPetalkCell";
+        //        static NSString *SectionCellIdentifier2 = @"JingyanPetalkCell";
         HotJingYanCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:jycellId forIndexPath:indexPath];
         //    [cell.petalkV layoutSubviewsWithTalking:petalk];
         //    cell.headView.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?imageView2/2/w/50",petalk.petInfo.headImgURL]];
@@ -866,7 +866,7 @@ static NSString * jycellId = @"jycell";
         [cell layoutSubviewsManul];
         return cell;
     }
-
+    
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -883,7 +883,7 @@ static NSString * jycellId = @"jycell";
     pv.petAvatarUrlStr = talkingBrowse.petInfo.headImgURL;
     pv.petNickname = talkingBrowse.petInfo.nickname;
     pv.relationShip = talkingBrowse.relationShip;
-   
+    
     [self.navigationController pushViewController:pv animated:YES];
 }
 

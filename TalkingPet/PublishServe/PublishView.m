@@ -142,6 +142,9 @@
 //}
 - (void)dismiss
 {
+    if (self.willDismiss) {
+        self.willDismiss();
+    }
     [RootViewController sharedRootViewController].view.userInteractionEnabled = NO;
     self.userInteractionEnabled = NO;
     [UIView animateWithDuration:0.3
@@ -174,6 +177,9 @@
 }
 - (void)petalkAction
 {
+    if (self.willDismiss) {
+        self.willDismiss();
+    }
     [UIView animateWithDuration:0.2 animations:^{
         petalkB.frame = CGRectInset(petalkB.frame, -10, -10);
         pictureB.frame = CGRectInset(pictureB.frame, 10, 10);
@@ -189,6 +195,9 @@
 }
 - (void)pictureAction
 {
+    if (self.willDismiss) {
+        self.willDismiss();
+    }
     [UIView animateWithDuration:0.2 animations:^{
         pictureB.frame = CGRectInset(pictureB.frame, -10, -10);
         petalkB.frame = CGRectInset(petalkB.frame, 10, 10);
@@ -204,6 +213,9 @@
 }
 - (void)storyAction
 {
+    if (self.willDismiss) {
+        self.willDismiss();
+    }
     [UIView animateWithDuration:0.2 animations:^{
         storyB.frame = CGRectInset(storyB.frame, -10, -10);
         petalkB.frame = CGRectInset(petalkB.frame, 10, 10);

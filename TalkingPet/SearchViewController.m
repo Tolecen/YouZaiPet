@@ -13,7 +13,11 @@
 @end
 
 @implementation SearchViewController
-
+{
+    
+    UIView  * Line;
+    
+}
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,64 +31,64 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self getBackImageView].frame = CGRectOffset([self getBackImageView].frame, 0, navigationBarHeight);
-//    self.navigationController.navigationBarHidden = YES;
+    //    [self getBackImageView].frame = CGRectOffset([self getBackImageView].frame, 0, navigationBarHeight);
+    //    self.navigationController.navigationBarHidden = YES;
     float h = 20;
     if (navigationBarHeight>50) {
         h = 0;
     }
     /*
-    UIView * searchTopbgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 88-h)];
-    [searchTopbgV setBackgroundColor:[UIColor clearColor]];
-//    searchTopbgV.alpha = 0.7;
-    [self.view addSubview:searchTopbgV];
-    
-    UIView * searchTopbgV2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 88-h)];
-    [searchTopbgV2 setBackgroundColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1]];
-//    searchTopbgV2.alpha = 0.7;
-    [searchTopbgV addSubview:searchTopbgV2];
-    
-    
-    self.searchBarBGV = [[UIView alloc] initWithFrame:CGRectMake(10, 88-h-35-15, 223, 35)];
-    self.searchBarBGV.backgroundColor = [UIColor clearColor];
-    [searchTopbgV addSubview:_searchBarBGV];
-    
-    UIImageView * bgImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 223, 35)];
-    [bgImgV setImage:[UIImage imageNamed:@"searchPageToptextBG"]];
-    [_searchBarBGV addSubview:bgImgV];
-    
-    UIImageView * sicon = [[UIImageView alloc] initWithFrame:CGRectMake(6, 10, 15, 15)];
-    [sicon setImage:[UIImage imageNamed:@"sousuo-ico"]];
-    [_searchBarBGV addSubview:sicon];
-    
-    self.searchTF = [[UITextField alloc] initWithFrame:CGRectMake(27, 2.5, 270, 30)];
-    _searchTF.placeholder = @"搜索动态/用户/标签";
-    _searchTF.borderStyle = UITextBorderStyleNone;
-    _searchTF.backgroundColor = [UIColor clearColor];
-    _searchTF.font = [UIFont systemFontOfSize:16];
-    _searchTF.textAlignment = NSTextAlignmentLeft;
-    _searchTF.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    _searchTF.returnKeyType = UIReturnKeySearch;
-    _searchTF.delegate = self;
-    [_searchBarBGV addSubview:_searchTF];
-    self.searchTF.userInteractionEnabled = YES;
-    
-    self.clearTFBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_clearTFBtn setBackgroundImage:[UIImage imageNamed:@"shanchushuruwenzi"] forState:UIControlStateNormal];
-    [_clearTFBtn setFrame:CGRectMake(self.searchBarBGV.frame.size.width-18-5, 8.5, 18, 18)];
-    [_searchBarBGV addSubview:_clearTFBtn];
-    [_clearTFBtn addTarget:self action:@selector(clearBtnDO) forControlEvents:UIControlEventTouchUpInside];
-    _clearTFBtn.hidden = YES;
-    
-    self.cancelSearchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_cancelSearchBtn setTitle:@"取消" forState:UIControlStateNormal];
-    [_cancelSearchBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_cancelSearchBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
-    [_cancelSearchBtn setFrame:CGRectMake(310-62, 88-h-35-15, 62, 35)];
-    [_cancelSearchBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
-    [searchTopbgV addSubview:_cancelSearchBtn];
-    [_cancelSearchBtn addTarget:self action:@selector(cancelSearchBtnDo) forControlEvents:UIControlEventTouchUpInside];
-    _cancelSearchBtn.hidden = YES;
+     UIView * searchTopbgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 88-h)];
+     [searchTopbgV setBackgroundColor:[UIColor clearColor]];
+     //    searchTopbgV.alpha = 0.7;
+     [self.view addSubview:searchTopbgV];
+     
+     UIView * searchTopbgV2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 88-h)];
+     [searchTopbgV2 setBackgroundColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1]];
+     //    searchTopbgV2.alpha = 0.7;
+     [searchTopbgV addSubview:searchTopbgV2];
+     
+     
+     self.searchBarBGV = [[UIView alloc] initWithFrame:CGRectMake(10, 88-h-35-15, 223, 35)];
+     self.searchBarBGV.backgroundColor = [UIColor clearColor];
+     [searchTopbgV addSubview:_searchBarBGV];
+     
+     UIImageView * bgImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 223, 35)];
+     [bgImgV setImage:[UIImage imageNamed:@"searchPageToptextBG"]];
+     [_searchBarBGV addSubview:bgImgV];
+     
+     UIImageView * sicon = [[UIImageView alloc] initWithFrame:CGRectMake(6, 10, 15, 15)];
+     [sicon setImage:[UIImage imageNamed:@"sousuo-ico"]];
+     [_searchBarBGV addSubview:sicon];
+     
+     self.searchTF = [[UITextField alloc] initWithFrame:CGRectMake(27, 2.5, 270, 30)];
+     _searchTF.placeholder = @"搜索动态/用户/标签";
+     _searchTF.borderStyle = UITextBorderStyleNone;
+     _searchTF.backgroundColor = [UIColor clearColor];
+     _searchTF.font = [UIFont systemFontOfSize:16];
+     _searchTF.textAlignment = NSTextAlignmentLeft;
+     _searchTF.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+     _searchTF.returnKeyType = UIReturnKeySearch;
+     _searchTF.delegate = self;
+     [_searchBarBGV addSubview:_searchTF];
+     self.searchTF.userInteractionEnabled = YES;
+     
+     self.clearTFBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+     [_clearTFBtn setBackgroundImage:[UIImage imageNamed:@"shanchushuruwenzi"] forState:UIControlStateNormal];
+     [_clearTFBtn setFrame:CGRectMake(self.searchBarBGV.frame.size.width-18-5, 8.5, 18, 18)];
+     [_searchBarBGV addSubview:_clearTFBtn];
+     [_clearTFBtn addTarget:self action:@selector(clearBtnDO) forControlEvents:UIControlEventTouchUpInside];
+     _clearTFBtn.hidden = YES;
+     
+     self.cancelSearchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+     [_cancelSearchBtn setTitle:@"取消" forState:UIControlStateNormal];
+     [_cancelSearchBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+     [_cancelSearchBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
+     [_cancelSearchBtn setFrame:CGRectMake(310-62, 88-h-35-15, 62, 35)];
+     [_cancelSearchBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
+     [searchTopbgV addSubview:_cancelSearchBtn];
+     [_cancelSearchBtn addTarget:self action:@selector(cancelSearchBtnDo) forControlEvents:UIControlEventTouchUpInside];
+     _cancelSearchBtn.hidden = YES;
      
      */
     
@@ -104,10 +108,12 @@
     UIView * bgv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame)-70, 44)];
     [bgv setBackgroundColor:[UIColor clearColor]];
     
-    self.search = [[UISearchBar alloc] initWithFrame:CGRectMake(5, 0, CGRectGetWidth(self.view.frame)-70, 44)];
-//     if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0){
-//        _search.searchBarStyle = UISearchBarStyleMinimal;
-//    }
+    self.search = [[UISearchBar alloc] initWithFrame:CGRectMake(40, 0, CGRectGetWidth(self.view.frame)-100, 35)];
+    
+    _search.searchBarStyle = UISearchBarStyleDefault;
+    _search.clipsToBounds = YES;
+    _search.layer.cornerRadius = 16;
+    
     _search.autocorrectionType=UITextAutocorrectionTypeNo;
     _search.autocapitalizationType=UITextAutocapitalizationTypeNone;
     if ([_search respondsToSelector:@selector(setBarTintColor:)]) {
@@ -124,46 +130,47 @@
         }
         
         [_rightBtn setTitle:@" 取消" forState:UIControlStateNormal];
-        [_rightBtn setFrame:CGRectMake(5, 0, 60, 44)];
+        [_rightBtn setFrame:CGRectMake(10, 0, 60, 38)];
     }
     else
     {
         _search.tintColor = [UIColor clearColor];
         [[_search.subviews objectAtIndex:0]removeFromSuperview];
         [_rightBtn setTitle:@"取消 " forState:UIControlStateNormal];
-        [_rightBtn setFrame:CGRectMake(0, 0, 60, 44)];
+        [_rightBtn setFrame:CGRectMake(0, 0, 60, 38)];
     }
     _search.delegate = self;
     _search.placeholder = @"搜索动态/用户/标签";
-    
+    //    _search.layer.cornerRadius = 25;
+    //    _search.layer.masksToBounds = YES;
     _search.showsScopeBar = YES;
-//    UITextField *searchField = [_search valueForKey:@"_searchField"];
-//    [searchField setValue:[UIColor colorWithRed:230/255.0f green:230/255.0f blue:230/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
-//    searchField.textColor = [UIColor whiteColor];
-////    [searchField setValue:[UIColor whiteColor] forKeyPath:@"_textLabel.textColor"];
+    //    UITextField *searchField = [_search valueForKey:@"_searchField"];
+    //    [searchField setValue:[UIColor colorWithRed:230/255.0f green:230/255.0f blue:230/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+    //    searchField.textColor = [UIColor whiteColor];
+    ////    [searchField setValue:[UIColor whiteColor] forKeyPath:@"_textLabel.textColor"];
     [bgv addSubview:_search];
-//    [_search setImage:[UIImage imageNamed:@"sousuo-ico"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
-//    [_search setImage:[UIImage imageNamed:@"shanchushuruwenzi"] forSearchBarIcon:UISearchBarIconClear state:UIControlStateNormal];
+    //    [_search setImage:[UIImage imageNamed:@"sousuo-ico"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+    //    [_search setImage:[UIImage imageNamed:@"shanchushuruwenzi"] forSearchBarIcon:UISearchBarIconClear state:UIControlStateNormal];
     
     [self.navigationItem setItemWithCustomView:bgv itemType:left];
     
-
-
+    
+    
     
     segmentIV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
     segmentIV.backgroundColor = [UIColor colorWithWhite:235/255.0f alpha:1];
     [self.view addSubview:segmentIV];
-//    self.scrollBG = [[UIView alloc] initWithFrame:CGRectMake(15, 35, 69.5, 1)];
-//    _scrollBG.backgroundColor = [UIColor whiteColor];
-//    [segmentIV addSubview:_scrollBG];
+    //    self.scrollBG = [[UIView alloc] initWithFrame:CGRectMake(15, 35, 69.5, 1)];
+    //    _scrollBG.backgroundColor = [UIColor whiteColor];
+    //    [segmentIV addSubview:_scrollBG];
     shuoshuoB = [UIButton buttonWithType:UIButtonTypeCustom];
     shuoshuoB.frame = CGRectMake(0, 0, ScreenWidth/3, 30);
-    [shuoshuoB setTitle:@"说说" forState:UIControlStateNormal];
+    [shuoshuoB setTitle:@"动态" forState:UIControlStateNormal];
     [shuoshuoB.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [shuoshuoB setTitleColor:CommonGreenColor forState:UIControlStateNormal];
     shuoshuoB.tag = 1;
-
-//    [shuoshuoB setBackgroundImage:[UIImage imageNamed:@"hot"] forState:UIControlStateNormal];
+    
+    //    [shuoshuoB setBackgroundImage:[UIImage imageNamed:@"hot"] forState:UIControlStateNormal];
     [shuoshuoB addTarget:self action:@selector(searchWithType:) forControlEvents:UIControlEventTouchUpInside];
     [segmentIV addSubview:shuoshuoB];
     tagB = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -172,7 +179,7 @@
     tagB.tag = 2;
     [tagB setTitle:@"标签" forState:UIControlStateNormal];
     [tagB setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
-//    [tagB setBackgroundImage:[UIImage imageNamed:@"square"] forState:UIControlStateNormal];
+    //    [tagB setBackgroundImage:[UIImage imageNamed:@"square"] forState:UIControlStateNormal];
     [tagB addTarget:self action:@selector(searchWithType:) forControlEvents:UIControlEventTouchUpInside];
     [segmentIV addSubview:tagB];
     userB = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -181,10 +188,17 @@
     [userB.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [userB setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
     [userB setTitle:@"用户" forState:UIControlStateNormal];
-//    [userB setBackgroundImage:[UIImage imageNamed:@"care"] forState:UIControlStateNormal];
+    //    [userB setBackgroundImage:[UIImage imageNamed:@"care"] forState:UIControlStateNormal];
     [userB addTarget:self action:@selector(searchWithType:) forControlEvents:UIControlEventTouchUpInside];
     [segmentIV addSubview:userB];
-
+#pragma mark添加横线
+    Line =[[UIView alloc]init];
+    Line.backgroundColor =CommonGreenColor;
+    [segmentIV addSubview:Line];
+    CGFloat buttonW = ScreenWidth /4;
+    
+    Line.frame = CGRectMake(20,segmentIV.frame.size.height-2,buttonW,2);
+    
     
     
     [self.search becomeFirstResponder];
@@ -194,31 +208,31 @@
     
     
     self.resultTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 30, ScreenWidth, self.view.frame.size.height-30-navigationBarHeight)];
-//    _resultTableView.delegate = self;
-//    _resultTableView.dataSource = self;
+    //    _resultTableView.delegate = self;
+    //    _resultTableView.dataSource = self;
     _resultTableView.backgroundView = nil;
     _resultTableView.scrollsToTop = YES;
     _resultTableView.backgroundColor = [UIColor colorWithWhite:240/255.0f alpha:1];
     _resultTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    _resultTableView.rowHeight = 510;
-//    _resultTableView.contentInset = UIEdgeInsetsMake(5, 0, 0, 0);
+    //    _resultTableView.rowHeight = 510;
+    //    _resultTableView.contentInset = UIEdgeInsetsMake(5, 0, 0, 0);
     _resultTableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_resultTableView];
     
-//    g = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 320, 100)];
-//    [g setText:@"暂时没有消息"];
-//    [g setTextAlignment:NSTextAlignmentCenter];
-//    [g setTextColor:[UIColor whiteColor]];
-//    [self.view addSubview:g];
+    //    g = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 320, 100)];
+    //    [g setText:@"暂时没有消息"];
+    //    [g setTextAlignment:NSTextAlignmentCenter];
+    //    [g setTextColor:[UIColor whiteColor]];
+    //    [self.view addSubview:g];
     
     self.shuoshuoTableViewHelper = [[BrowserTableHelper alloc] initWithController:self Tableview:self.resultTableView SectionView:nil];
     self.shuoshuoTableViewHelper.delegate = self;
     self.shuoshuoTableViewHelper.cellNeedShowPublishTime = NO;
-//    self.shuoshuoTableViewHelper.naviH = 0;
+    //    self.shuoshuoTableViewHelper.naviH = 0;
     
     _resultTableView.delegate = self.shuoshuoTableViewHelper;
     _resultTableView.dataSource = self.shuoshuoTableViewHelper;
-//    self.shuoshuoTableViewHelper.tableViewType = TableViewTypeHot;
+    //    self.shuoshuoTableViewHelper.tableViewType = TableViewTypeHot;
     // Do any additional setup after loading the view.
     
     
@@ -332,7 +346,7 @@
             [self.resultTableView headerEndRefreshing];
         }];
     }
-
+    
 }
 - (void)buildViewWithSkintype
 {
@@ -340,28 +354,37 @@
 }
 -(void)searchWithType:(UIButton *)sender
 {
-//    sender.layer.cornerRadius = 5;
-//    sender.layer.masksToBounds = YES;
-//    sender.layer.borderWidth = 1;
-//    sender.layer.borderColor = [[UIColor whiteColor] CGColor];
+    //    sender.layer.cornerRadius = 5;
+    //    sender.layer.masksToBounds = YES;
+    //    sender.layer.borderWidth = 1;
+    //    sender.layer.borderColor = [[UIColor whiteColor] CGColor];
     [sender setTitleColor:CommonGreenColor forState:UIControlStateNormal];
     for (int i = 0; i<3; i++) {
         UIButton * btn = (UIButton *)[segmentIV viewWithTag:(i+1)];
         if (i+1!=sender.tag) {
-//            btn.layer.cornerRadius = 0;
-//            btn.layer.masksToBounds = NO;
-//            btn.layer.borderWidth = 0;
-//            btn.layer.borderColor = [[UIColor whiteColor] CGColor];
+            //            btn.layer.cornerRadius = 0;
+            //            btn.layer.masksToBounds = NO;
+            //            btn.layer.borderWidth = 0;
+            //            btn.layer.borderColor = [[UIColor whiteColor] CGColor];
             [btn setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
+            
+            
+            [UIView animateWithDuration:0.8 animations:^{
+                Line.center = CGPointMake(sender.center.x, sender.center.y+13);
+                
+            }];
+            
         }
     }
     if (searchType!=sender.tag) {
         [self.shuoshuoTableViewHelper stopAudio];
+        
     }
     searchType = (int)sender.tag;
     
     if (!self.search.text.length||self.search.text.length<1) {
         return;
+        
     }
     [self doSearchWithType:searchType];
     
@@ -383,7 +406,7 @@
         [mDict setObject:@"10" forKey:@"pageSize"];
         [mDict setObject:@"1" forKey:@"pageIndex"];
         [mDict setObject:self.search.text forKey:@"keyword"];
-//        [mDict setObject:@"O" forKey:@"type"];
+        //        [mDict setObject:@"O" forKey:@"type"];
         
         [self.shuoshuoTableViewHelper loadFirstDataPageWithDict:mDict];
     }
@@ -413,15 +436,15 @@
             }
             else
                 g.hidden = YES;
-
             
-//            [self cellPlayAni:self.tableV];
+            
+            //            [self cellPlayAni:self.tableV];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            NSLog(@"get hot shuoshuo failed error:%@",error);
-//            [self endHeaderRefreshing:self.tableV];
+            //            NSLog(@"get hot shuoshuo failed error:%@",error);
+            //            [self endHeaderRefreshing:self.tableV];
             [self.resultTableView headerEndRefreshing];
         }];
-
+        
     }
     else if (searchType==3){
         g.hidden = YES;
@@ -441,7 +464,7 @@
         [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
             currentPage++;
             self.userArray = [NSMutableArray arrayWithArray:[[responseObject objectForKey:@"value"] objectForKey:@"list"]];
-//            self.tagArray = [NSMutableArray arrayWithArray:[[responseObject objectForKey:@"value"] objectForKey:@"list"]];
+            //            self.tagArray = [NSMutableArray arrayWithArray:[[responseObject objectForKey:@"value"] objectForKey:@"list"]];
             [self.resultTableView reloadData];
             [self.resultTableView headerEndRefreshing];
             NSLog(@"search tag success:%@",responseObject);
@@ -450,7 +473,7 @@
             }
             else
                 g.hidden = YES;
-
+            
             
             //            [self cellPlayAni:self.tableV];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -468,7 +491,7 @@
     _resultTableView.dataSource = self;
     NSMutableDictionary* mDict = [NetServer commonDict];
     if (searchType==2) {
-//        NSMutableDictionary* mDict = [NetServer commonDict];
+        //        NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"search" forKey:@"command"];
         [mDict setObject:@"tag" forKey:@"options"];
         [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
@@ -486,7 +509,7 @@
     }
     
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        [self.commentArray addObjectsFromArray:[self getModelArray:[responseObject objectForKey:@"value"]]];
+        //        [self.commentArray addObjectsFromArray:[self getModelArray:[responseObject objectForKey:@"value"]]];
         currentPage++;
         if (searchType==2) {
             [self.tagArray addObjectsFromArray:[[responseObject objectForKey:@"value"] objectForKey:@"list"]];
@@ -495,7 +518,7 @@
             }
             else
                 g.hidden = YES;
-
+            
         }
         else if (searchType==3){
             [self.userArray addObjectsFromArray:[[responseObject objectForKey:@"value"] objectForKey:@"list"]];
@@ -504,7 +527,7 @@
             }
             else
                 g.hidden = YES;
-
+            
         }
         
         self.shuoshuoTableViewHelper.isRefreshing = NO;
@@ -522,7 +545,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    self.navigationController.navigationBarHidden = YES;
+    //    self.navigationController.navigationBarHidden = YES;
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -530,7 +553,7 @@
     if (ifcancel) {
         return;
     }
-//    self.navigationController.navigationBarHidden = NO;
+    //    self.navigationController.navigationBarHidden = NO;
 }
 -(void)scrollit
 {
@@ -541,15 +564,15 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (self.categorySeg.selectedSegmentIndex==2) {
-//        PersonProfileViewController * pv = [[PersonProfileViewController alloc] init];
-//        [self.navigationController pushViewController:pv animated:YES];
-//
-//    }
-//    else{
-//        TalkingDetailPageViewController * talkingDV = [[TalkingDetailPageViewController alloc] init];
-//        [self.navigationController pushViewController:talkingDV animated:YES];
-//    }
+    //    if (self.categorySeg.selectedSegmentIndex==2) {
+    //        PersonProfileViewController * pv = [[PersonProfileViewController alloc] init];
+    //        [self.navigationController pushViewController:pv animated:YES];
+    //
+    //    }
+    //    else{
+    //        TalkingDetailPageViewController * talkingDV = [[TalkingDetailPageViewController alloc] init];
+    //        [self.navigationController pushViewController:talkingDV animated:YES];
+    //    }
     
     if (searchType==2) {
         TagTalkListViewController * tagTlistV = [[TagTalkListViewController alloc] init];
@@ -605,12 +628,12 @@
         SearchResultTagTableViewCell*cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];
         if (cell == nil) {
             cell = [[SearchResultTagTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-//            cell.delegate = self;
+            //            cell.delegate = self;
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.tagDict = self.tagArray[indexPathx.row];
-//        cell.publisherAvatarV.placeholderImage = [UIImage imageNamed:@"gougouAvatar.jpeg"];
-//        cell.publisherAvatarV.imageURL = [NSURL URLWithString:@"http://www.qqcan.com/uploads/allimg/c120811/1344A300Z50-3T615.jpg"];
+        //        cell.publisherAvatarV.placeholderImage = [UIImage imageNamed:@"gougouAvatar.jpeg"];
+        //        cell.publisherAvatarV.imageURL = [NSURL URLWithString:@"http://www.qqcan.com/uploads/allimg/c120811/1344A300Z50-3T615.jpg"];
         
         return cell;
     }
@@ -734,8 +757,8 @@
 
 -(void)clearBtnDO
 {
-//    self.searchTF.text = @"";
-//    self.clearTFBtn.hidden = YES;
+    //    self.searchTF.text = @"";
+    //    self.clearTFBtn.hidden = YES;
 }
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
@@ -759,7 +782,7 @@
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-//    [self.searchBarBGV setFrame:CGRectMake(5, 5, 255, 35)];
+    //    [self.searchBarBGV setFrame:CGRectMake(5, 5, 255, 35)];
     self.cancelSearchBtn.hidden = NO;
     [self.searchTF setFrame:CGRectMake(27, 2.5, 225-20, 30)];
     [_clearTFBtn setFrame:CGRectMake(self.searchBarBGV.frame.size.width-18-5, 8.5, 18, 18)];
@@ -792,14 +815,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

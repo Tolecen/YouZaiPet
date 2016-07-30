@@ -19,9 +19,11 @@
 {
     UIButton * photoB;
     UIImageView * tabBar;
+    PublishView * view;
     
     float publishFrameX;
-//    BOOL needNotiNormalChat;
+    //    BOOL needNotiNormalChat
+    UIVisualEffectView *effectView;
     
     UILabel * currentL;
 }
@@ -50,7 +52,7 @@
         [RootViewController sharedRootViewController].sideMenu.panGestureEnabled = NO;
         tabBar.hidden = YES;
     }
-
+    
     
     
 }
@@ -94,14 +96,14 @@
     
     float sep = ((ScreenWidth-40*4)-60)/3.0f;
     
-
+    
     
     
     UIButton * petalkB = [UIButton buttonWithType:UIButtonTypeCustom];
     petalkB.tag = 1;
     [petalkB addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchUpInside];
     petalkB.frame = CGRectMake(30, 0, 40, 40);
-//    petalkB.center = CGPointMake(CGRectGetMaxX(tabBar.bounds)/5, 25);
+    //    petalkB.center = CGPointMake(CGRectGetMaxX(tabBar.bounds)/5, 25);
     [petalkB setBackgroundImage:[UIImage imageNamed:@"petalk-sel"] forState:UIControlStateNormal];
     [tabBar addSubview:petalkB];
     
@@ -117,7 +119,7 @@
     photoB = [UIButton buttonWithType:UIButtonTypeCustom];
     [photoB addTarget:self action:@selector(showPhotograph) forControlEvents:UIControlEventTouchUpInside];
     photoB.frame = CGRectMake(CGRectGetMaxX(petalkB.frame)+sep, 0, 40, 40);
-//    photoB.center = CGPointMake(CGRectGetMidX(tabBar.bounds), 25);
+    //    photoB.center = CGPointMake(CGRectGetMidX(tabBar.bounds), 25);
     [photoB setBackgroundImage:[UIImage imageNamed:@"camera"] forState:UIControlStateNormal];
     photoB.showsTouchWhenHighlighted = YES;
     [tabBar addSubview:photoB];
@@ -137,7 +139,7 @@
     marketB.tag = 2;
     [marketB addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchUpInside];
     marketB.frame = CGRectMake(CGRectGetMaxX(photoB.frame)+sep, 0, 40, 40);
-//    marketB.center = CGPointMake(CGRectGetMaxX(tabBar.bounds)*4/5, 25);
+    //    marketB.center = CGPointMake(CGRectGetMaxX(tabBar.bounds)*4/5, 25);
     [marketB setBackgroundImage:[UIImage imageNamed:@"market-nom"] forState:UIControlStateNormal];
     [tabBar addSubview:marketB];
     
@@ -166,22 +168,38 @@
     myBtnL.tag = 300;
     myBtnL.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
     [tabBar addSubview:myBtnL];
+    //获取通知中心单例对象
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
+    [center addObserver:self selector:@selector(notice:) name:@"123" object:nil];
     
-//    self.menuBarNotiImg = [[UIImageView alloc] initWithFrame:CGRectMake(32, 5, 10, 10)];
-//    [self.menuBarNotiImg setImage:[UIImage imageNamed:@"dotunread"]];
-//    [_menuBar addSubview:self.menuBarNotiImg];
-//    
-//    if ([DatabaseServe needNotiNormalChatInOtherPage]) {
-//        [self addNormalChatNoti];
-//    }
-//    else
-//    {
-//        NSString * unreadCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"needMetionCount%@",[UserServe sharedUserServe].userID]];
-//        if ([unreadCount intValue]<=0) {
-//            [self removeNormalChatNoti];
-//        }
-//        
-//    }
+    //    self.menuBarNotiImg = [[UIImageView alloc] initWithFrame:CGRectMake(32, 5, 10, 10)];
+    //    [self.menuBarNotiImg setImage:[UIImage imageNamed:@"dotunread"]];
+    //    [_menuBar addSubview:self.menuBarNotiImg];
+    //
+    //    if ([DatabaseServe needNotiNormalChatInOtherPage]) {
+    //        [self addNormalChatNoti];
+    //    }
+    //    else
+    //    {
+    //        NSString * unreadCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"needMetionCount%@",[UserServe sharedUserServe].userID]];
+    //        if ([unreadCount intValue]<=0) {
+    //            [self removeNormalChatNoti];
+    //        }
+    //
+    //    }
+}
+-(void)notice:(id)sender
+{
+    
+    NSLog(@"%@",sender);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //
+        [effectView removeFromSuperview];
+        
+    });
+    
+    
 }
 - (void)tabAction:(UIButton*)btn
 {
@@ -193,23 +211,22 @@
             [self transitionFromViewController:_currentC toViewController:_petalkNav duration:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
                 
             } completion:^(BOOL finished) {
-//                if (finished) {
-                    [_currentC willMoveToParentViewController:nil];
-                    [_currentC.view removeFromSuperview];
-                    [btn setBackgroundImage:[UIImage imageNamed:@"petalk-sel"] forState:UIControlStateNormal];
-                    UIButton * button = (UIButton*)[btn.superview viewWithTag:2];
-                    [button setBackgroundImage:[UIImage imageNamed:@"market-nom"] forState:UIControlStateNormal];
-                    UIButton * button2 = (UIButton*)[btn.superview viewWithTag:3];
-                    [button2 setBackgroundImage:[UIImage imageNamed:@"myp-nom"] forState:UIControlStateNormal];
-                    UILabel * l0 = (UILabel*)[btn.superview viewWithTag:100];
-                    l0.textColor = CommonGreenColor;
-                    currentL = l0;
-                    UILabel * l1 = (UILabel*)[btn.superview viewWithTag:200];
-                    l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
-                    UILabel * l2 = (UILabel*)[btn.superview viewWithTag:300];
-                    l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
-                     _currentC = _petalkNav;
-//                }
+                //                if (finished) {
+                [_currentC willMoveToParentViewController:nil];
+                [_currentC.view removeFromSuperview];
+                [btn setBackgroundImage:[UIImage imageNamed:@"petalk-sel"] forState:UIControlStateNormal];
+                UIButton * button = (UIButton*)[btn.superview viewWithTag:2];
+                [button setBackgroundImage:[UIImage imageNamed:@"market-nom"] forState:UIControlStateNormal];
+                UIButton * button2 = (UIButton*)[btn.superview viewWithTag:3];
+                [button2 setBackgroundImage:[UIImage imageNamed:@"myp-nom"] forState:UIControlStateNormal];
+                UILabel * l0 = (UILabel*)[btn.superview viewWithTag:100];
+                l0.textColor = CommonGreenColor;
+                currentL = l0;
+                UILabel * l1 = (UILabel*)[btn.superview viewWithTag:200];
+                l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+                UILabel * l2 = (UILabel*)[btn.superview viewWithTag:300];
+                l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+                _currentC = _petalkNav;
             }];
         }break;
         case 2:{
@@ -219,23 +236,23 @@
             [self transitionFromViewController:_currentC toViewController:_marketNav duration:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
                 
             } completion:^(BOOL finished) {
-//                if (finished) {
-                    [_currentC willMoveToParentViewController:nil];
-                    [_currentC.view removeFromSuperview];
-                    [btn setBackgroundImage:[UIImage imageNamed:@"market-sel"] forState:UIControlStateNormal];
-                    UIButton * button = (UIButton*)[btn.superview viewWithTag:1];
-                    [button setBackgroundImage:[UIImage imageNamed:@"petalk-nom"] forState:UIControlStateNormal];
-                    UIButton * button2 = (UIButton*)[btn.superview viewWithTag:3];
-                    [button2 setBackgroundImage:[UIImage imageNamed:@"myp-nom"] forState:UIControlStateNormal];
-                    UILabel * l1 = (UILabel*)[btn.superview viewWithTag:100];
-                    l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
-                    UILabel * l2 = (UILabel*)[btn.superview viewWithTag:300];
-                    l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
-                    UILabel * l0 = (UILabel*)[btn.superview viewWithTag:200];
-                    l0.textColor = CommonGreenColor;
-                    currentL = l0;
-                     _currentC = _marketNav;
-//                }
+                //                if (finished) {
+                [_currentC willMoveToParentViewController:nil];
+                [_currentC.view removeFromSuperview];
+                [btn setBackgroundImage:[UIImage imageNamed:@"market-sel"] forState:UIControlStateNormal];
+                UIButton * button = (UIButton*)[btn.superview viewWithTag:1];
+                [button setBackgroundImage:[UIImage imageNamed:@"petalk-nom"] forState:UIControlStateNormal];
+                UIButton * button2 = (UIButton*)[btn.superview viewWithTag:3];
+                [button2 setBackgroundImage:[UIImage imageNamed:@"myp-nom"] forState:UIControlStateNormal];
+                UILabel * l1 = (UILabel*)[btn.superview viewWithTag:100];
+                l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+                UILabel * l2 = (UILabel*)[btn.superview viewWithTag:300];
+                l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+                UILabel * l0 = (UILabel*)[btn.superview viewWithTag:200];
+                l0.textColor = CommonGreenColor;
+                currentL = l0;
+                _currentC = _marketNav;
+                //                }
             }];
         }break;
         case 3:{
@@ -245,23 +262,23 @@
             [self transitionFromViewController:_currentC toViewController:_personNav duration:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
                 
             } completion:^(BOOL finished) {
-//                if (finished) {
-                    [_currentC willMoveToParentViewController:nil];
-                    [_currentC.view removeFromSuperview];
-                    [btn setBackgroundImage:[UIImage imageNamed:@"myp-sel"] forState:UIControlStateNormal];
-                    UIButton * button = (UIButton*)[btn.superview viewWithTag:1];
-                    [button setBackgroundImage:[UIImage imageNamed:@"petalk-nom"] forState:UIControlStateNormal];
-                    UIButton * button2 = (UIButton*)[btn.superview viewWithTag:2];
-                    [button2 setBackgroundImage:[UIImage imageNamed:@"market-nom"] forState:UIControlStateNormal];
-                    UILabel * l1 = (UILabel*)[btn.superview viewWithTag:100];
-                    l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
-                    UILabel * l2 = (UILabel*)[btn.superview viewWithTag:200];
-                    l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
-                    UILabel * l0 = (UILabel*)[btn.superview viewWithTag:300];
-                    l0.textColor = CommonGreenColor;
-                    currentL = l0;
-                    _currentC = _personNav;
-//                }
+                //                if (finished) {
+                [_currentC willMoveToParentViewController:nil];
+                [_currentC.view removeFromSuperview];
+                [btn setBackgroundImage:[UIImage imageNamed:@"myp-sel"] forState:UIControlStateNormal];
+                UIButton * button = (UIButton*)[btn.superview viewWithTag:1];
+                [button setBackgroundImage:[UIImage imageNamed:@"petalk-nom"] forState:UIControlStateNormal];
+                UIButton * button2 = (UIButton*)[btn.superview viewWithTag:2];
+                [button2 setBackgroundImage:[UIImage imageNamed:@"market-nom"] forState:UIControlStateNormal];
+                UILabel * l1 = (UILabel*)[btn.superview viewWithTag:100];
+                l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+                UILabel * l2 = (UILabel*)[btn.superview viewWithTag:200];
+                l2.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
+                UILabel * l0 = (UILabel*)[btn.superview viewWithTag:300];
+                l0.textColor = CommonGreenColor;
+                currentL = l0;
+                _currentC = _personNav;
+                //                }
             }];
         }break;
         default:
@@ -274,12 +291,30 @@
         [[RootViewController sharedRootViewController] showLoginViewController];
         return;
     }
-    PublishView * view = [[PublishView alloc] init];
+    view = [[PublishView alloc] init];
     view.publishox = publishFrameX;
     __weak PublishView * weakView = view;
     UILabel * l0 = (UILabel*)[tabBar viewWithTag:400];
     l0.textColor = CommonGreenColor;
-
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+        
+        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+        
+        effectView = [[UIVisualEffectView alloc] initWithEffect:blur];
+        
+        effectView.frame = self.view.bounds;
+        [self.view addSubview:effectView];
+        //设置模糊透明度
+        effectView.alpha = .7f;
+        
+        
+//        [UIView animateWithDuration:0.3 animations:^{
+//            effectView.alpha = .7f;
+//        }];
+    }
+    
+    
+    
     UILabel * l1 = (UILabel*)[tabBar viewWithTag:200];
     l1.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
     UILabel * l2 = (UILabel*)[tabBar viewWithTag:300];
@@ -292,6 +327,11 @@
                 [PublishServer publishPetalkWithTag:nil completion:^{
                     [weakView removeFromSuperview];
                     [self resetColor];
+                    
+                    [effectView removeFromSuperview];
+                    //                }
+                    
+                    
                 }];
             }break;
             case 1:{
@@ -313,6 +353,14 @@
                 break;
         }
     }];
+//    __block UIVisualEffectView * ev = effectView;
+//    view.willDismiss = ^(){
+//        [UIView animateWithDuration:0.3 animations:^{
+//            ev.alpha = .0f;
+//        } completion:^(BOOL finished) {
+//            [ev removeFromSuperview];
+//        }];
+//    };
     
 }
 
@@ -329,6 +377,9 @@
     l3.textColor = [UIColor colorWithWhite:150/255.f alpha:1];
     
     currentL.textColor = CommonGreenColor;
+    
+    [effectView removeFromSuperview];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -344,10 +395,11 @@
             [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];
         }
     }
-//    [self msgNotiReceived];
+    // [self msgNotiReceived];
 }
 - (void)dealloc {
-//    [self configureNotification:NO];
+    //    [self configureNotification:NO];
+    
 }
 
 
@@ -363,14 +415,12 @@
         [[RootViewController sharedRootViewController] showLoginViewController];
         return;
     }
-//    [self removeNormalChatNoti];
+    //    [self removeNormalChatNoti];
     [[RootViewController sharedRootViewController].sideMenu presentLeftMenuViewController];
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
+
+
 //-(void)addNormalChatNoti
 //{
 //    needNotiNormalChat = YES;
@@ -387,21 +437,10 @@
 //    NSString * unreadCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"needMetionCount%@",[UserServe sharedUserServe].userID]];
 //    if ([unreadCount intValue]>0||needNotiNormalChat) {
 //        self.menuBarNotiImg.hidden = NO;
-//        
+//
 //    }
 //    else
 //        self.menuBarNotiImg.hidden = YES;
 //    
 //}
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end
