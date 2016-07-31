@@ -473,6 +473,7 @@
 
 +(NSString *)filterHTML:(NSString *)html
 {
+    [html stringByReplacingOccurrencesOfString:@"&lt;br/&gt;" withString:@"\n"];
     NSScanner * scanner = [NSScanner scannerWithString:html];
     NSString * text = nil;
     //    while([scanner isAtEnd]==NO)
@@ -489,9 +490,9 @@
         //找到标签的起始位置
         [scanner scanUpToString:@"&lt;" intoString:nil];
         //找到标签的结束位置
-        [scanner scanUpToString:@"gt;" intoString:&text];
+        [scanner scanUpToString:@"&gt;" intoString:&text];
         //替换字符
-        html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@gt;",text] withString:@""];
+        html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@&gt;",text] withString:@""];
     }
     //    NSString * regEx = @"&lt;([^>]*)gt;";
     //    html = [html stringByReplacingOccurrencesOfString:regEx withString:@""];

@@ -204,12 +204,12 @@
     _detailModel = detailModel;
     CGFloat height = 0;
     if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0) {
-        height = [detailModel.dogIntro boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.containerView.frame) - 20, CGFLOAT_MAX)
+        height = [[Common filterHTML:detailModel.dogIntro] boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.containerView.frame) - 20, CGFLOAT_MAX)
                                                     options:NSStringDrawingUsesLineFragmentOrigin
                                                  attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:13]}
                                                     context:NULL].size.height;
     } else {
-        height = [detailModel.dogIntro sizeWithFont:[UIFont systemFontOfSize:13]
+        height = [[Common filterHTML:detailModel.dogIntro] sizeWithFont:[UIFont systemFontOfSize:13]
                                   constrainedToSize:CGSizeMake(CGRectGetWidth(self.containerView.frame) - 20, CGFLOAT_MAX)
                                       lineBreakMode:NSLineBreakByWordWrapping].height;
     }
