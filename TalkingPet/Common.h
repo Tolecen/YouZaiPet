@@ -31,4 +31,6 @@
 
 +(void)addCountForCart;
 +(void)clearCartCount;
+
++(NSString *)filterHTML:(NSString *)html;
 @end

@@ -8,7 +8,7 @@
 
 #import "YZQuanSheDetailIntroView.h"
 #import "YZQuanSheDetailIntroCell.h"
-
+#import "Common.h"
 @interface YZQuanSheDetailIntroHeaderView : UIView
 
 @property (nonatomic, strong) YZQuanSheDetailModel *detailModel;
@@ -103,7 +103,7 @@
     self.keeperLb.text = [NSString stringWithFormat:@"主理人 %@", detailModel.shopKeeper];
     self.dogLb.text = [NSString stringWithFormat:@"主营犬 %@", detailModel.shopName];
     self.addressLb.text = [NSString stringWithFormat:@"地    址 %@", detailModel.shopAddress];
-    self.detailLb.text = detailModel.dogIntro;
+    self.detailLb.text = [Common filterHTML:detailModel.dogIntro];
     [self setNeedsUpdateConstraints];
 }
 

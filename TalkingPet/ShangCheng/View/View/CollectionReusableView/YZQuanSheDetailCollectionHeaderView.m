@@ -7,7 +7,7 @@
 //
 
 #import "YZQuanSheDetailCollectionHeaderView.h"
-
+#import "Common.h"
 @interface YZQuanSheDetailCollectionHeaderView()
 
 @property (nonatomic, weak) UILabel *nameLb;
@@ -223,7 +223,7 @@
     _detailModel = detailModel;
     self.nameLb.text = detailModel.shopName;
     self.numberLb.text = [NSString stringWithFormat:@"(%lld)", detailModel.shopNo];
-    self.textView.text = detailModel.dogIntro;
+    self.textView.text = [Common filterHTML:detailModel.dogIntro];
     self.dogCountLb.text = detailModel.sale;
     self.priceRangeLb.text = @"¥10 - ¥10000";
     [self.avatarImageV setImageWithURL:[NSURL URLWithString:detailModel.thumb] placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];

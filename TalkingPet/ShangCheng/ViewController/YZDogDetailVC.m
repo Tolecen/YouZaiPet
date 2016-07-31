@@ -12,6 +12,7 @@
 #import "YZShangChengDogListCell.h"
 #import "YZDogDetailCollectionHeaderView.h"
 #import "YZDetailTextCollectionView.h"
+#import "YZDogDetalMiddleView.h"
 
 #import "YZDetailBottomBar.h"
 #import "NetServer+ShangCheng.h"
@@ -72,6 +73,7 @@
     [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass(UICollectionViewCell.class)];
     [collectionView registerClass:[YZShangChengDogListCell class] forCellWithReuseIdentifier:NSStringFromClass(YZShangChengDogListCell.class)];
     [collectionView registerClass:[YZDogDetailCollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDogDetailCollectionHeaderView.class)];
+    [collectionView registerClass:[YZDogDetalMiddleView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDogDetalMiddleView.class)];
     [collectionView registerClass:[YZDetailTextCollectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDetailTextCollectionView.class)];
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
@@ -131,7 +133,7 @@
                                          weakSelf.items = [NSArray arrayWithArray:items];
                                      }
                                      [weakSelf.collectionView footerEndRefreshing];
-                                     [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+                                     [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
                                  } else {
                                      if (loadMore) {
                                          [weakSelf.collectionView footerEndRefreshing];
@@ -160,11 +162,17 @@
     if (section == 0) {
         return UIEdgeInsetsZero;
     }
+    else if (section==1){
+        return UIEdgeInsetsZero;
+    }
     return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
+        return CGSizeZero;
+    }
+    else if (indexPath.section == 1) {
         return CGSizeZero;
     }
     CGFloat width = (ScreenWidth - 30) / 2;
@@ -175,7 +183,13 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         if (self.detailModel) {
-            return CGSizeMake(ScreenWidth, ScreenWidth + 120);
+            return CGSizeMake(ScreenWidth, ScreenWidth + 190);
+        }
+        return CGSizeZero;
+    }
+    else if (section == 1) {
+        if (self.detailModel) {
+            return CGSizeMake(ScreenWidth, 200);
         }
         return CGSizeZero;
     }
@@ -183,18 +197,25 @@
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (section == 0) {
         return self.detailModel ? 1 : 0;
     }
+    else if (section == 1) {
+        return self.detailModel ? 0: 0;
+    }
     return self.items.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
+        UICollectionViewCell *collectionViewCell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(UICollectionViewCell.class) forIndexPath:indexPath];
+        return collectionViewCell;
+    }
+    else if (indexPath.section == 1) {
         UICollectionViewCell *collectionViewCell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(UICollectionViewCell.class) forIndexPath:indexPath];
         return collectionViewCell;
     }
@@ -210,7 +231,13 @@
             headerView.detailModel = self.detailModel;
             headerView.backgroundColor = [UIColor whiteColor];
             return headerView;
-        } else {
+        }
+        else if (indexPath.section == 1) {
+            YZDogDetalMiddleView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDogDetalMiddleView.class) forIndexPath:indexPath];
+            headerView.detailModel = self.detailModel;
+            headerView.backgroundColor = [UIColor whiteColor];
+            return headerView;
+        }else {
             YZDetailTextCollectionView *reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDetailTextCollectionView.class) forIndexPath:indexPath];
             reusableView.text = @"邻舍狗狗";
             return reusableView;

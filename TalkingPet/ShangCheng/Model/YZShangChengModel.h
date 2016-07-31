@@ -77,6 +77,8 @@
 
 @property (nonatomic, copy) NSString *thumb;
 
+@property (nonatomic, copy) NSString <Optional>*content;
+
 @property (nonatomic, strong) YZQuanSheModel<YZQuanSheModel> *shop;
 
 @property (nonatomic, assign, readonly) YZDogSex sex;
