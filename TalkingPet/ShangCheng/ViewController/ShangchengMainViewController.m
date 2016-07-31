@@ -10,6 +10,7 @@
 #import "YZShangChengDogListVC.h"
 #import "YZShangChengGoodsListVC.h"
 #import "YZShangChengBannerCell.h"
+#import "YZShangChengDogListVC.h"
 
 @interface ShangchengMainViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -27,6 +28,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIImage *image = [UIImage imageNamed:@"sousuo@2x"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *rightMoreItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toSearchPage)];
+    self.navigationItem.rightBarButtonItem = rightMoreItem;
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero];
     tableView.delegate = self;
@@ -42,7 +47,14 @@
         make.edges.mas_equalTo(self.view).insets(UIEdgeInsetsZero);
     }];
 }
-
+-(void)toSearchPage
+{
+    YZShangChengDogListVC  *search =[[YZShangChengDogListVC alloc]init];
+    [self.navigationController pushViewController:search animated:YES];
+    
+    
+    
+}
 #pragma mark -- UITableView
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
