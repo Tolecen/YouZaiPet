@@ -248,7 +248,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 1) {
+    if (indexPath.section == 2) {
         YZDogDetailVC *detailVC = [[YZDogDetailVC alloc] init];
         YZDogModel *dogModel = self.items[indexPath.row];
         detailVC.dogModel = dogModel;
