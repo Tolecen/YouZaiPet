@@ -277,4 +277,54 @@
                                          }];
 }
 
+
++ (void)createOrderNoSuccess:(void (^)(id result))success
+                              failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
+    params[@"uid"] = [UserServe sharedUserServe].userID;
+    //    params[@"order_no"] = orderNo;
+    params[@"source"] = @"app";
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/payment/order",BasePayUrl];
+    NSLog(@"req:%@,path:%@",params,path);
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:params
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
+
+
++ (void)requestPaymentWithGoods:(NSString *)goods AddressId:(NSString *)addressId ChannelStr:(NSString *)channelStr Voucher:(NSString *)voucher success:(void (^)(id result))success
+                    failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
+    params[@"uid"] = [UserServe sharedUserServe].userID;
+    //    params[@"order_no"] = orderNo;
+    params[@"source"] = @"app";
+    params[@"goods"] = goods;
+    params[@"address_id"] = addressId;
+    params[@"channel"] = channelStr;
+    if (voucher) {
+        params[@"voucher"] = voucher;
+    }
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/payment/shopping",BasePayUrl];
+    NSLog(@"req:%@,path:%@",params,path);
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:params
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
+
 @end

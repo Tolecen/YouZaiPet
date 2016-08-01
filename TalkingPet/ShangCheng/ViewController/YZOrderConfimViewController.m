@@ -18,6 +18,7 @@
 #import "AddressManageViewController.h"
 #import "NetServer+Payment.h"
 #import "SVProgressHUD.h"
+#import "Pingpp.h"
 
 @interface YZOrderConfimViewController()<UITableViewDelegate, UITableViewDataSource, YZShoppingCarBottomBarDelegate>
 
@@ -29,6 +30,10 @@
 @property (nonatomic, strong) ReceiptAddress *address;
 
 @property (nonatomic, assign) NSInteger paySelectedIndex;
+
+@property (nonatomic,strong)NSString * goodsString;
+@property (nonatomic,strong)NSString * payChannel;
+@property (nonatomic,strong)NSString * orderNo;
 
 @end
 
@@ -120,7 +125,64 @@
 
 
 - (void)shoppingCarClearPrice {
-    [[YZShoppingCarHelper instanceManager] clearShoppingCar];
+//    [[YZShoppingCarHelper instanceManager] clearShoppingCar];
+//    [self makePaymentInfo];
+    if (!self.address) {
+        [SVProgressHUD showErrorWithStatus:@"请先添加一个收货地址"];
+        return;
+    }
+    [self creatOrderNoWithSuccess:^(id result) {
+        if ([result[@"code"] intValue]==200) {
+            self.orderNo = [result[@"data"] objectForKey:@"order_no"];
+            [self makePaymentInfo];
+        }
+    }];
+}
+
+-(void)creatOrderNoWithSuccess:(void (^)(id result))success
+{
+    [NetServer createOrderNoSuccess:^(id result) {
+        success(result);
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        
+    }];
+}
+
+-(void)makePaymentInfo
+{
+
+    _goodsString = @"[";
+    NSMutableArray * arr = [NSMutableArray array];
+    if (self.orders.count>0) {
+        for (int i = 0; i<self.orders.count; i++) {
+            OrderYZGoodInfo * goodInfo = self.orders[i];
+            _goodsString = [_goodsString stringByAppendingFormat:@"%@\"%@.%@.%@\"%@",i==0?@"":@",",self.orderNo,goodInfo.goodId,goodInfo.total,i==self.orders.count-1?@"]":@""];
+            [arr addObject:[NSString stringWithFormat:@"%@.%@.%@",self.orderNo,goodInfo.goodId,goodInfo.total]];
+        }
+    }
+    _goodsString = [arr JSONRepresentation];
+    NSLog(@"ffffff:%@",_goodsString);
+    [NetServer requestPaymentWithGoods:_goodsString AddressId:self.address.addressID ChannelStr:@"1" Voucher:nil success:^(id result) {
+        
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        
+    }];
+//    [Pingpp createPayment:charge viewController:weakSelf appURLScheme:kUrlScheme withCompletion:^(NSString *result, PingppError *error) {
+//        NSLog(@"completion block: %@", result);
+//        if (error == nil) {
+//            NSLog(@"PingppError is nil");
+//            [self paySuccess];
+//        }
+//        else if ([result isEqualToString:@"cancel"]){
+//            [self payCancel];
+//        }
+//        else {
+//            [self payFailed];
+//            NSLog(@"PingppError: code=%lu msg=%@", (unsigned  long)error.code, [error getMsg]);
+//        }
+//        [SystemServer sharedSystemServer].inPay = NO;
+//        //                [weakSelf showAlertMessage:result];
+//    }];
 }
 
 #pragma mark -- UITableView

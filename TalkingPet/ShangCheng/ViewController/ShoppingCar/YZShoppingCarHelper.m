@@ -264,6 +264,7 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
     orderInfo.thumb = shoppingCarModel.thumb;
     orderInfo.product_name = shoppingCarModel.name;
     orderInfo.shop_name = shoppingCarModel.shopName;
+    orderInfo.goodId = shoppingCarModel.dogId;
     orderInfo.unit_price = [NSString stringWithFormat:@"%lld", shoppingCarModel.sellPrice];
     orderInfo.total = [NSString stringWithFormat:@"%ld", (unsigned long)shoppingCarModel.count];
     return orderInfo;
@@ -274,6 +275,7 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
     orderInfo.thumb = shoppingCarModel.thumb;
     orderInfo.product_name = shoppingCarModel.name;
     orderInfo.shop_name = shoppingCarModel.brandName;
+    orderInfo.goodId = shoppingCarModel.goodsId;
     orderInfo.unit_price = [NSString stringWithFormat:@"%lld", shoppingCarModel.sellPrice];
     orderInfo.total = [NSString stringWithFormat:@"%ld", (unsigned long)shoppingCarModel.count];
     return orderInfo;

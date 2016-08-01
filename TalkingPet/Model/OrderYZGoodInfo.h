@@ -9,6 +9,7 @@
 #import "JSONModel.h"
 
 @interface OrderYZGoodInfo : JSONModel
+@property (nonatomic,retain)NSString<Optional> * goodId;
 @property (nonatomic,retain)NSString<Optional> * thumb;
 @property (nonatomic,retain)NSString<Optional> *product_name;
 @property (nonatomic,retain)NSString<Optional> *order_no;
