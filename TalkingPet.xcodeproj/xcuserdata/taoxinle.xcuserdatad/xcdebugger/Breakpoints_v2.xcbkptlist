@@ -33,6 +33,38 @@
             endingLineNumber = "379"
             landmarkName = "-realLogOut"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SetViewController realLogOut]"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/SetViewController.m"
+                  timestampString = "491712847.184294"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "379"
+                  endingLineNumber = "379"
+                  offsetFromSymbolStart = "907">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__31-[SetViewController realLogOut]_block_invoke"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/SetViewController.m"
+                  timestampString = "491712847.184446"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "379"
+                  endingLineNumber = "379"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -100,7 +132,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/BrowserTableHelper.m"
-                  timestampString = "491478694.59274"
+                  timestampString = "491712847.204488"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "186"
@@ -115,7 +147,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/BrowserTableHelper.m"
-                  timestampString = "491478694.592877"
+                  timestampString = "491712847.20462"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "188"

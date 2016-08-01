@@ -89,8 +89,8 @@
     [self checkNetwork];
     [NetServer getAddressCodeWithsuccess:^(id result) {
         NSLog(@"areas:%@",result);
-        if (result) {
-            NSData * address = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingPrettyPrinted error:nil];
+        if (result && [result[@"code"] intValue]==200) {
+            NSData * address = [NSJSONSerialization dataWithJSONObject:result[@"data"] options:NSJSONWritingPrettyPrinted error:nil];
             [TFileManager writeAddressFile:address];
         }
         
