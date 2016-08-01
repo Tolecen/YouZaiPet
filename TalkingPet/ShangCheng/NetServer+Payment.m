@@ -186,6 +186,28 @@
                                          }];
 }
 
++ (void)setDefaultAddressWithAdressId:(NSString *)addressId
+                          success:(void (^)(id result))success
+                          failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
+    params[@"uid"] = [UserServe sharedUserServe].userID;
+    //    params[@"order_no"] = orderNo;
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/address/set/id/%@",BasePayUrl,addressId];
+    NSLog(@"req:%@,path:%@",params,path);
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:params
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
+
+
 + (void)editAddressWithAdress:(ReceiptAddress *)address
                       success:(void (^)(id result))success
                       failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure

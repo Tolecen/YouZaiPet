@@ -37,6 +37,10 @@ failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
                      success:(void (^)(id result))success
                      failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
++ (void)setDefaultAddressWithAdressId:(NSString *)addressId
+                              success:(void (^)(id result))success
+                              failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
 + (void)editAddressWithAdress:(ReceiptAddress *)address
                      success:(void (^)(id result))success
                      failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
