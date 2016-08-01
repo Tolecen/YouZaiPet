@@ -18,13 +18,13 @@
         // Initialization code
         self.contentView.backgroundColor = [UIColor whiteColor];
         self.backgroundColor = [UIColor whiteColor];
-//        if (type==2) {
-//            UIView * bgv = [[UIView alloc] initWithFrame:CGRectMake(5, 0, 310, 70)];
-//            [bgv setBackgroundColor:[UIColor whiteColor]];
-//            [bgv setAlpha:0.7];
-//            [self.contentView addSubview:bgv];
-//
-//        }
+        //        if (type==2) {
+        //            UIView * bgv = [[UIView alloc] initWithFrame:CGRectMake(5, 0, 310, 70)];
+        //            [bgv setBackgroundColor:[UIColor whiteColor]];
+        //            [bgv setAlpha:0.7];
+        //            [self.contentView addSubview:bgv];
+        //
+        //        }
         self.listType = listType;
         self.commentAvatarV = [[EGOImageButton alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
         [self.commentAvatarV setBackgroundColor:[UIColor grayColor]];
@@ -34,37 +34,37 @@
         self.commentAvatarV.layer.masksToBounds = YES;
         [self.commentAvatarV addTarget:self action:@selector(headBtnClicked) forControlEvents:UIControlEventTouchUpInside];
         
-//        self.darenV = [[UIImageView alloc] initWithFrame:CGRectMake(10+50-17, 10+50-17, 17, 17)];
-//        [self.darenV setImage:[UIImage imageNamed:@"daren"]];
-//        [self.contentView addSubview:self.darenV];
+        //        self.darenV = [[UIImageView alloc] initWithFrame:CGRectMake(10+50-17, 10+50-17, 17, 17)];
+        //        [self.darenV setImage:[UIImage imageNamed:@"daren"]];
+        //        [self.contentView addSubview:self.darenV];
         
         //        UIImageView * avatarbg = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
         //        [avatarbg setImage:[UIImage imageNamed:@"avatarbg1"]];
         //        [self.contentView addSubview:avatarbg];
         
-        self.commentNameL = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, ScreenWidth-70-10-72-5, 20)];
+        self.commentNameL = [[UILabel alloc] initWithFrame:CGRectMake(70, 20, ScreenWidth-70-10-72-5, 20)];
         [self.commentNameL setBackgroundColor:[UIColor clearColor]];
         [self.commentNameL setFont:[UIFont systemFontOfSize:17]];
         [self.contentView addSubview:self.commentNameL];
         
-        self.talkNoL = [[UILabel alloc] initWithFrame:CGRectMake(70, 40, 100, 20)];
-        [self.talkNoL setBackgroundColor:[UIColor clearColor]];
-        self.talkNoL.textColor = [UIColor grayColor];
-        [self.talkNoL setFont:[UIFont systemFontOfSize:14]];
-        [self.talkNoL setText:@"发布:20"];
-        [self.contentView addSubview:self.talkNoL];
-        
-        self.fansNoL = [[UILabel alloc] initWithFrame:CGRectMake(180, 40, 100, 20)];
-        [self.fansNoL setBackgroundColor:[UIColor clearColor]];
-        self.fansNoL.textColor = [UIColor grayColor];
-        [self.fansNoL setFont:[UIFont systemFontOfSize:14]];
-        [self.fansNoL setText:@"粉丝:20"];
-        [self.contentView addSubview:self.fansNoL];
-        
-        self.relationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.relationBtn setFrame:CGRectMake(ScreenWidth-10-72, 23, 72, 24.5)];
-        [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu0"] forState:UIControlStateNormal];
-//        [self.relationBtn setTitle:@"+关注" forState:UIControlStateNormal];
+        //        self.talkNoL = [[UILabel alloc] initWithFrame:CGRectMake(70, 40, 100, 20)];
+        //        [self.talkNoL setBackgroundColor:[UIColor clearColor]];
+        //        self.talkNoL.textColor = [UIColor grayColor];
+        //        [self.talkNoL setFont:[UIFont systemFontOfSize:14]];
+        //        [self.talkNoL setText:@"发布:20"];
+        //        [self.contentView addSubview:self.talkNoL];
+        //
+        //        self.fansNoL = [[UILabel alloc] initWithFrame:CGRectMake(180, 40, 100, 20)];
+        //        [self.fansNoL setBackgroundColor:[UIColor clearColor]];
+        //        self.fansNoL.textColor = [UIColor grayColor];
+        //        [self.fansNoL setFont:[UIFont systemFontOfSize:14]];
+        //        [self.fansNoL setText:@"粉丝:20"];
+        //        [self.contentView addSubview:self.fansNoL];
+        //
+        //        self.relationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        //        [self.relationBtn setFrame:CGRectMake(ScreenWidth-10-72, 23, 72, 24.5)];
+        //        [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu0"] forState:UIControlStateNormal];
+        //        [self.relationBtn setTitle:@"+关注" forState:UIControlStateNormal];
         [self.relationBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
         [self.relationBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
         if (listType==2) {
@@ -93,7 +93,7 @@
     }
     
     self.relationShip = [self.petDict objectForKey:@"rs"];
-//    self.darenV.hidden = [[self.petDict objectForKey:@"star"] isEqualToString:@"1"]?NO:YES;
+    //    self.darenV.hidden = [[self.petDict objectForKey:@"star"] isEqualToString:@"1"]?NO:YES;
     if (self.listType==2) {
         self.relationBtn.hidden = NO;
         [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"removeBlackList"] forState:UIControlStateNormal];
@@ -106,21 +106,21 @@
         [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu0"] forState:UIControlStateNormal];
         [self.relationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
-//        [self.relationBtn setTitle:@"+关注" forState:UIControlStateNormal];
+        //        [self.relationBtn setTitle:@"+关注" forState:UIControlStateNormal];
         
         self.relationBtn.enabled = YES;
     }
     else if ([self.relationShip isEqualToString:@"1"]){
         self.relationBtn.hidden = NO;
         [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu1"] forState:UIControlStateNormal];
-//        [self.relationBtn setTitle:@"已关注" forState:UIControlStateNormal];
+        //        [self.relationBtn setTitle:@"已关注" forState:UIControlStateNormal];
         [self.relationBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         //        self.relationBtn.enabled = NO;
     }
     else if ([self.relationShip isEqualToString:@"2"]){
         self.relationBtn.hidden = NO;
         [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu2"] forState:UIControlStateNormal];
-//        [self.relationBtn setTitle:@"相互关注" forState:UIControlStateNormal];
+        //        [self.relationBtn setTitle:@"相互关注" forState:UIControlStateNormal];
         [self.relationBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         //        self.relationBtn.enabled = NO;
     }
@@ -137,7 +137,7 @@
         _relationBtn.enabled = YES;
     }
     
-//    self.relationBtn.hidden = YES;
+    //    self.relationBtn.hidden = YES;
     
 }
 -(void)headBtnClicked
@@ -187,23 +187,23 @@
             }
             
             if ([[[responseObject objectForKey:@"value"] objectForKey:@"bothway"] isEqualToString:@"false"]) {
-//                [self.relationBtn setTitle:@"已关注" forState:UIControlStateNormal];
+                //                [self.relationBtn setTitle:@"已关注" forState:UIControlStateNormal];
                 [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu1"] forState:UIControlStateNormal];
                 self.relationShip = @"1";
             }
             else{
-//                [self.relationBtn setTitle:@"互相关注" forState:UIControlStateNormal];
+                //                [self.relationBtn setTitle:@"互相关注" forState:UIControlStateNormal];
                 [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu2"] forState:UIControlStateNormal];
                 self.relationShip = @"2";
             }
             
             NSMutableDictionary * fdict = [NSMutableDictionary dictionaryWithDictionary:self.petDict];
             [fdict setObject:self.relationShip forKey:@"rs"];
-//            [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"guanzhued"] forState:UIControlStateNormal];
+            //            [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"guanzhued"] forState:UIControlStateNormal];
             //            [self.relationBtn setTitle:@"已关注" forState:UIControlStateNormal];
             
             
-//            [self.relationBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+            //            [self.relationBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
             //            self.relationBtn.enabled = NO;
             if (_delegate&& [_delegate respondsToSelector:@selector(attentionDelegate:Index:)]) {
                 [_delegate attentionDelegate:fdict Index:self.cellIndex];
@@ -243,7 +243,7 @@
         [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu0"] forState:UIControlStateNormal];
         [self.relationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
-//        [self.relationBtn setTitle:@"+关注" forState:UIControlStateNormal];
+        //        [self.relationBtn setTitle:@"+关注" forState:UIControlStateNormal];
         NSMutableDictionary * fdict = [NSMutableDictionary dictionaryWithDictionary:self.petDict];
         [fdict setObject:@"0" forKey:@"rs"];
         if (_delegate&& [_delegate respondsToSelector:@selector(attentionDelegate:Index:)]) {
