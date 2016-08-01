@@ -19,4 +19,7 @@
 +(BOOL)ifExsitAudio:(NSString *)fileName;
 +(void)deleteSoundCache;
 + (float)allCacheSize;
+
++(void)writeAddressFile:(NSData *)data;
++(NSDictionary *)getAddressDict;
 @end

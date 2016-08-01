@@ -14,6 +14,10 @@
 @property(nonatomic,retain)NSString * phoneNo;
 @property(nonatomic,retain)NSString * province;
 @property(nonatomic,retain)NSString * city;
+@property(nonatomic,retain)NSString * qu;
+@property(nonatomic,retain)NSString * provinceCode;
+@property(nonatomic,retain)NSString * cityCode;
+@property(nonatomic,retain)NSString * quCode;
 @property(nonatomic,retain)NSString * address;
 @property(nonatomic,retain)NSString * zipCode;
 @property(nonatomic,assign)BOOL action;

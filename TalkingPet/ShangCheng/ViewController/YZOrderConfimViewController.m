@@ -16,6 +16,8 @@
 #import "OrderFooterView.h"
 #import "ReceiptAddress.h"
 #import "AddressManageViewController.h"
+#import "NetServer+Payment.h"
+#import "SVProgressHUD.h"
 
 @interface YZOrderConfimViewController()<UITableViewDelegate, UITableViewDataSource, YZShoppingCarBottomBarDelegate>
 
@@ -38,6 +40,33 @@
 
 - (NSString *)title {
     return @"确认订单";
+}
+
+- (void)inner_getDefaultAddress {
+    [SVProgressHUD showWithStatus:@"获取默认收货地址..."];
+    [NetServer fentchDefaultAddressSuccess:^(id result) {
+        [SVProgressHUD dismiss];
+        if ([result[@"code"] intValue]==200) {
+            id dic = result[@"data"];
+            if (![dic isKindOfClass:[NSDictionary class]]) {
+                return;
+            }
+            ReceiptAddress *address = [[ReceiptAddress alloc] init];
+            address.addressID = dic[@"id"];
+            address.receiptName = dic[@"consignee"];
+            address.phoneNo = dic[@"telphone"];
+            address.province = dic[@"area_zh"];
+            address.city = @"";
+            address.address = dic[@"address"];
+            address.zipCode = @"100000";
+            address.action = [dic[@"default"] isEqualToString:@"1"];
+            self.address = address;
+            [_tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        [SVProgressHUD dismiss];
+    }];
 }
 
 - (void)inner_Pop:(id)sender {
@@ -83,7 +112,12 @@
         make.top.left.right.mas_equalTo(self.view);
         make.bottom.mas_equalTo(bottomBar.mas_top);
     }];
+    
+    
+    [self inner_getDefaultAddress];
 }
+
+
 
 - (void)shoppingCarClearPrice {
     [[YZShoppingCarHelper instanceManager] clearShoppingCar];
@@ -105,6 +139,9 @@
             [noAddressCell setOrderConfimAddAddressBlock:^{
                 AddressManageViewController *viewC = [[AddressManageViewController alloc] init];
                 __weak __typeof(viewC) weakViewC = viewC;
+   
+                viewC.finishTitle = @"使用并保存";
+
                 [viewC setUseAddress:^(ReceiptAddress *receiptAddress) {
                     weakSelf.address = receiptAddress;
                     [weakViewC.navigationController popViewControllerAnimated:YES];
@@ -223,6 +260,7 @@
         if (self.address) {
             AddressManageViewController *viewC = [[AddressManageViewController alloc] init];
             __weak __typeof(viewC) weakViewC = viewC;
+            viewC.finishTitle = @"使用并保存";
             WS(weakSelf);
             [viewC setUseAddress:^(ReceiptAddress *receiptAddress) {
                 weakSelf.address = receiptAddress;

@@ -67,7 +67,7 @@
     _address = address;
     self.shouhuoNameL.text = address.receiptName;
     self.shouhuoMobileL.text = address.phoneNo;
-    self.shouhuoAddressL.text = address.address;
+    self.shouhuoAddressL.text = [NSString stringWithFormat:@"%@%@%@",address.province,address.city,address.address];
     [self setNeedsLayout];
 }
 

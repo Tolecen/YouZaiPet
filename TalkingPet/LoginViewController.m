@@ -466,7 +466,7 @@
     [regDict setObject:@"register" forKey:@"options"];
     [regDict setObject:[infoDict objectForKey:@"id"] forKey:@"username"];
     [regDict setObject:[self calPasswordWithUserId:[infoDict objectForKey:@"id"]] forKey:@"password"];
-    [regDict setObject:[infoDict objectForKey:@"name"] forKey:@"nickName"];
+    [regDict setObject:[infoDict objectForKey:@"name"] forKey:@"nickname"];
     [regDict setObject:@"" forKey:@"headPortrait"];
     [regDict setObject:@"" forKey:@"gender"];
     [regDict setObject:@"" forKey:@"type"];

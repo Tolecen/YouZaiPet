@@ -8,7 +8,7 @@
 
 #import "YZQuanSheDetailIntroView.h"
 #import "YZQuanSheDetailIntroCell.h"
-
+#import "Common.h"
 @interface YZQuanSheDetailIntroHeaderView : UIView
 
 @property (nonatomic, strong) YZQuanSheDetailModel *detailModel;
@@ -103,7 +103,7 @@
     self.keeperLb.text = [NSString stringWithFormat:@"主理人 %@", detailModel.shopKeeper];
     self.dogLb.text = [NSString stringWithFormat:@"主营犬 %@", detailModel.shopName];
     self.addressLb.text = [NSString stringWithFormat:@"地    址 %@", detailModel.shopAddress];
-    self.detailLb.text = detailModel.dogIntro;
+    self.detailLb.text = [Common filterHTML:detailModel.dogIntro];
     [self setNeedsUpdateConstraints];
 }
 
@@ -204,12 +204,12 @@
     _detailModel = detailModel;
     CGFloat height = 0;
     if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0) {
-        height = [detailModel.dogIntro boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.containerView.frame) - 20, CGFLOAT_MAX)
+        height = [[Common filterHTML:detailModel.dogIntro] boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.containerView.frame) - 20, CGFLOAT_MAX)
                                                     options:NSStringDrawingUsesLineFragmentOrigin
                                                  attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:13]}
                                                     context:NULL].size.height;
     } else {
-        height = [detailModel.dogIntro sizeWithFont:[UIFont systemFontOfSize:13]
+        height = [[Common filterHTML:detailModel.dogIntro] sizeWithFont:[UIFont systemFontOfSize:13]
                                   constrainedToSize:CGSizeMake(CGRectGetWidth(self.containerView.frame) - 20, CGFLOAT_MAX)
                                       lineBreakMode:NSLineBreakByWordWrapping].height;
     }

@@ -11,4 +11,5 @@
 @interface PublishView : UIView
 @property (nonatomic,assign)float publishox;
 - (void)showWithAction:(void (^)(NSInteger index))action;
+@property (nonatomic,copy)void(^willDismiss) ();
 @end

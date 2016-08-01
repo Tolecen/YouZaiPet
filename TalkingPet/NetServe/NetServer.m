@@ -1149,7 +1149,7 @@ failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
     [mDict setObject:@"message" forKey:@"command"];
     [mDict setObject:@"UMC" forKey:@"options"];
     NSString * petId = [UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"";
-    [mDict setObject:petId forKey:@"petId"];
+    [mDict setObject:petId forKey:@"userId"];
     if ([petId isEqualToString:@""]) {
         return;
     }
@@ -1172,7 +1172,7 @@ failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
         [[NSUserDefaults standardUserDefaults] setObject:allCount forKey:[NSString stringWithFormat:@"haveCount%@",[UserServe sharedUserServe].userID]];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        
+        success(operation,responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];

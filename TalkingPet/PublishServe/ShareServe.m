@@ -17,8 +17,8 @@
      连接新浪微博开放平台应用以使用相关功能，此应用需要引用SinaWeiboConnection.framework
      http://open.weibo.com上注册新浪微博开放平台应用，并将相关信息填写到以下字段
      **/
-    [ShareSDK connectSinaWeiboWithAppKey:@"2378027950"
-                               appSecret:@"0be4e8108ac5abbf01064e82a063a9a6"
+    [ShareSDK connectSinaWeiboWithAppKey:@"1804983872"
+                               appSecret:@"2ebcf3586c64b5bf32dac1d67f1fcdf"
                              redirectUri:@"https://api.weibo.com/oauth2/default.html"];
     /**
      连接QQ应用以使用相关功能，此应用需要引用QQConnection.framework和QQApi.framework库
@@ -28,8 +28,8 @@
                      qqApiInterfaceCls:[QQApiInterface class]
                        tencentOAuthCls:[TencentOAuth class]];
     
-//    [ShareSDK connectQQWithAppId:@"1102327672" qqApiCls:[QQApi class]];
-
+    //    [ShareSDK connectQQWithAppId:@"1102327672" qqApiCls:[QQApi class]];
+    
     /**
      连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
      http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段
@@ -237,16 +237,16 @@
                                                authManagerViewDelegate:nil];
     [ShareSDK getUserInfoWithType:ShareTypeSinaWeibo authOptions:authOptions result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
         NSLog(@"userInfoUid:%@,nickName:%@,error:%@",userInfo.uid,userInfo.nickname,error);
-//        NSMutableDictionary * dict = [NSMutableDictionary dictionary];
-//        [dict setObject:userInfo.uid forKey:@"userId"];
-//        [dict setObject:userInfo.nickname forKey:@"nickname"];
-//        [dict setObject:userInfo.profileImage forKey:@"img"];
-//        [dict setObject:[NSString stringWithFormat:@"%d",userInfo.gender] forKey:@"gender"];
+        //        NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+        //        [dict setObject:userInfo.uid forKey:@"userId"];
+        //        [dict setObject:userInfo.nickname forKey:@"nickname"];
+        //        [dict setObject:userInfo.profileImage forKey:@"img"];
+        //        [dict setObject:[NSString stringWithFormat:@"%d",userInfo.gender] forKey:@"gender"];
         if (userInfo.uid) {
             NSMutableDictionary * dict = [NSMutableDictionary dictionary];
             [dict setObject:[@"sina" stringByAppendingString:userInfo.uid]  forKey:@"id"];
             [dict setObject:userInfo.nickname forKey:@"name"];
-           success(dict);
+            success(dict);
         }
         [SVProgressHUD dismiss];
     }];

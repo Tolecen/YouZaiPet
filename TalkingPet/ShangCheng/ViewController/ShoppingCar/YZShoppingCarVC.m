@@ -12,7 +12,7 @@
 #import "YZShoppingCarHelper.h"
 #import "YZOrderConfimViewController.h"
 #import "SVProgressHUD.h"
-
+#import "Common.h"
 @interface YZShoppingCarVC()<YZShoppingCarBottomBarDelegate>
 
 @property (nonatomic, weak) YZShoppingCarBottomBar  *bottomBar;
@@ -75,6 +75,8 @@
     
     [self.bottomBar resetTotalPrice:[YZShoppingCarHelper instanceManager].totalPrice];
     [self.bottomBar changeSelectBtnState:[YZShoppingCarHelper instanceManager].shoppingCarCheckAllSelected];
+    
+    [Common clearCartCount];
 }
 
 - (void)inner_ChangeShoppingCarItemSelectState:(NSNotification *)notification {

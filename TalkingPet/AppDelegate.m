@@ -15,6 +15,7 @@
 #import "InitializeData.h"
 #import "GTScrollNavigationBar.h"
 #import "Pingpp.h"
+#import "TFileManager.h"
 //#ifndef DevelopModeUU
 //#define QINIUDomain @"images"
 //#else
@@ -32,11 +33,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     canUseActive = NO;
-    [MobClick startWithAppkey:@"540570e8fd98c59af905e7ad" reportPolicy:SEND_ON_EXIT channelId:@""];
+    [MobClick startWithAppkey:@"2f37350b8994" reportPolicy:SEND_ON_EXIT channelId:@""];
     [ShareServe buildShareSDK];
     
     
-//#warning This should be removed in next version
+    //#warning This should be removed in next version
     [DatabaseServe clearDatabase];
     
     
@@ -54,12 +55,12 @@
     if ([UserServe sharedUserServe].userName) {
         NSString * currentChatUser = [[UserServe sharedUserServe].userName stringByAppendingString:[UserServe sharedUserServe].userID];
         [SystemServer sharedSystemServer].currentChatUserId = currentChatUser;
-//        [[SystemServer sharedSystemServer] chatClientAuth];
-//        [self synchronousPetlist];
+        //        [[SystemServer sharedSystemServer] chatClientAuth];
+        //        [self synchronousPetlist];
         [self getCurrentUserInfo];
         [[UserServe sharedUserServe] activityOfCurrentPet];
     }
-   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadUserAPNSToken) name:@"WXRLoginSucceed" object:nil];//当登录用户发生改变时发送向服务端发送APNSToken
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadUserAPNSToken) name:@"WXRLoginSucceed" object:nil];//当登录用户发生改变时发送向服务端发送APNSToken
     
     //推送
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
@@ -86,12 +87,17 @@
     }
     
     [self checkNetwork];
-//    [NetServer getAddressCodeWithsuccess:^(id result) {
-//        NSLog(@"areas:%@",result);
-//    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-//        
-//    }];
-//    [self performSelector:@selector(saaaaa) withObject:nil afterDelay:2];
+    [NetServer getAddressCodeWithsuccess:^(id result) {
+        NSLog(@"areas:%@",result);
+        if (result) {
+            NSData * address = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingPrettyPrinted error:nil];
+            [TFileManager writeAddressFile:address];
+        }
+        
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        
+    }];
+    //    [self performSelector:@selector(saaaaa) withObject:nil afterDelay:2];
     return YES;
 }
 -(void)uploadUserAPNSToken
@@ -125,7 +131,7 @@
     //NSLog(@"%d", tokenStr.length);
     self.devicePushToken = deviceTokenStr;
     [self uploadUserAPNSToken];
-
+    
 }
 
 
@@ -138,7 +144,7 @@
 {
     if (appActive) {
         [NetServer getAllMsgCountSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-           
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
         }];
@@ -152,7 +158,7 @@
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
     NSLog(@"%@,  %d",notification.alertBody, (int)[UIApplication sharedApplication].applicationIconBadgeNumber);
-//    [[RuYiCaiNetworkManager sharedManager] showMessage:notification.alertBody withTitle:nil buttonTitle:notification.alertAction];
+    //    [[RuYiCaiNetworkManager sharedManager] showMessage:notification.alertBody withTitle:nil buttonTitle:notification.alertAction];
 }
 
 - (void)processNotification:(NSDictionary*)dic
@@ -174,18 +180,18 @@
             us.appstoreIsInReview = [[responseObject objectForKey:@"audit"] isEqualToString:@"true"]?YES:NO;
         }
         NSString * openPic = [responseObject objectForKey:@"pic"];
-       
-            NSString *documentsw = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory , NSUserDomainMask, YES) objectAtIndex:0];
-            NSString *openImgDirectory = [documentsw stringByAppendingPathComponent:@"OpenImages"];
-            BOOL isDirss2 = FALSE;
-            BOOL isDirExistss2 = [[NSFileManager defaultManager] fileExistsAtPath:openImgDirectory isDirectory:&isDirss2];
-            
-            if (!(isDirExistss2 && isDirss2))
-            {
-                [[NSFileManager defaultManager] createDirectoryAtPath:openImgDirectory withIntermediateDirectories:YES attributes:nil error:nil];
-            }
         
-         if (openPic&&openPic.length>1) {
+        NSString *documentsw = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory , NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *openImgDirectory = [documentsw stringByAppendingPathComponent:@"OpenImages"];
+        BOOL isDirss2 = FALSE;
+        BOOL isDirExistss2 = [[NSFileManager defaultManager] fileExistsAtPath:openImgDirectory isDirectory:&isDirss2];
+        
+        if (!(isDirExistss2 && isDirss2))
+        {
+            [[NSFileManager defaultManager] createDirectoryAtPath:openImgDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+        }
+        
+        if (openPic&&openPic.length>1) {
             
             NSString * fileName = [[openPic componentsSeparatedByString:@"/"] lastObject];
             
@@ -263,7 +269,7 @@
                 alert.tag = 2;
                 [alert show];
             }
-
+            
         }
         else if(hVFirst==lVFirst&&hVSecond==lVSecond&&hVThird<lVThird){
             if ([dic[@"compulsively"] isEqualToString:@"true"]) {
@@ -279,11 +285,11 @@
                 [alert show];
             }
         }
-
-//        if (![dic[@"vname"] isEqualToString:CurrentVersion]) {
-//   
-//            
-//        }
+        
+        //        if (![dic[@"vname"] isEqualToString:CurrentVersion]) {
+        //
+        //
+        //        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
@@ -331,72 +337,72 @@
 -(void)synchronousPetlist
 {
     /*
-    NSMutableDictionary* mDict = [NetServer commonDict];
-    [mDict setObject:@"pet" forKey:@"command"];
-    [mDict setObject:@"user" forKey:@"options"];
-    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
-    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
-    [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        int d = 0;
-        UserServe * userServe = [UserServe sharedUserServe];
-        NSArray * petlist = responseObject[@"value"];
-        NSMutableArray * petArr = [NSMutableArray array];
-        for (NSDictionary * petDic in petlist) {
-            if ([petDic[@"active"] isEqualToString:@"false"]) {
-                Pet * pet = [[Pet alloc] init];
-                pet.petID = petDic[@"id"];
-                pet.nickname = petDic[@"nickName"];
-                pet.headImgURL = petDic[@"headPortrait"];
-                pet.gender = petDic[@"gender"];
-                pet.breed = petDic[@"type"];
-                pet.region = petDic[@"address"];
-                pet.birthday = [NSDate dateWithTimeIntervalSince1970:[petDic[@"birthday"] doubleValue]/1000];
-                pet.fansNo = (petDic[@"counter"])[@"fans"];
-                pet.attentionNo = (petDic[@"counter"])[@"focus"];
-                pet.issue = (petDic[@"counter"])[@"issue"];
-                pet.relay = (petDic[@"counter"])[@"relay"];
-                pet.comment = (petDic[@"counter"])[@"comment"];
-                pet.favour = (petDic[@"counter"])[@"favour"];
-                pet.grade = [petDic[@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
-                pet.score = petDic[@"score"];
-                pet.coin = petDic[@"coin"];
-                pet.ifDaren = [petDic[@"star"] isEqualToString:@"1"]?YES:NO;
-                [petArr addObject:pet];
-                [DatabaseServe savePet:pet WithUsername:userServe.userName];
-            }else{
-                d = 1;
-                userServe.currentPet = ({
-                    Pet * pet = [[Pet alloc] init];
-                    pet.petID = petDic[@"id"];
-                    pet.nickname = petDic[@"nickName"];
-                    pet.headImgURL = petDic[@"headPortrait"];
-                    pet.gender = petDic[@"gender"];
-                    pet.breed = petDic[@"type"];
-                    pet.region = petDic[@"address"];
-                    pet.birthday = [NSDate dateWithTimeIntervalSince1970:[petDic[@"birthday"] doubleValue]/1000];
-                    pet.fansNo = (petDic[@"counter"])[@"fans"];
-                    pet.attentionNo = (petDic[@"counter"])[@"focus"];
-                    pet.issue = (petDic[@"counter"])[@"issue"];
-                    pet.relay = (petDic[@"counter"])[@"relay"];
-                    pet.comment = (petDic[@"counter"])[@"comment"];
-                    pet.favour = (petDic[@"counter"])[@"favour"];
-                    pet.grade = [petDic[@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
-                    pet.score = petDic[@"score"];
-                    pet.coin = petDic[@"coin"];
-                    pet;
-                });
-            }
-        }
-        if (d==1) {
-            userServe.petArr = petArr;
-            [DatabaseServe activatePet:userServe.currentPet WithUsername:userServe.userName];
-        }
-        else
-        {
-            [self noActivePetThenFail];
-        }
-        
-    } failure:nil];
+     NSMutableDictionary* mDict = [NetServer commonDict];
+     [mDict setObject:@"pet" forKey:@"command"];
+     [mDict setObject:@"user" forKey:@"options"];
+     [mDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
+     [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+     int d = 0;
+     UserServe * userServe = [UserServe sharedUserServe];
+     NSArray * petlist = responseObject[@"value"];
+     NSMutableArray * petArr = [NSMutableArray array];
+     for (NSDictionary * petDic in petlist) {
+     if ([petDic[@"active"] isEqualToString:@"false"]) {
+     Pet * pet = [[Pet alloc] init];
+     pet.petID = petDic[@"id"];
+     pet.nickname = petDic[@"nickName"];
+     pet.headImgURL = petDic[@"headPortrait"];
+     pet.gender = petDic[@"gender"];
+     pet.breed = petDic[@"type"];
+     pet.region = petDic[@"address"];
+     pet.birthday = [NSDate dateWithTimeIntervalSince1970:[petDic[@"birthday"] doubleValue]/1000];
+     pet.fansNo = (petDic[@"counter"])[@"fans"];
+     pet.attentionNo = (petDic[@"counter"])[@"focus"];
+     pet.issue = (petDic[@"counter"])[@"issue"];
+     pet.relay = (petDic[@"counter"])[@"relay"];
+     pet.comment = (petDic[@"counter"])[@"comment"];
+     pet.favour = (petDic[@"counter"])[@"favour"];
+     pet.grade = [petDic[@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
+     pet.score = petDic[@"score"];
+     pet.coin = petDic[@"coin"];
+     pet.ifDaren = [petDic[@"star"] isEqualToString:@"1"]?YES:NO;
+     [petArr addObject:pet];
+     [DatabaseServe savePet:pet WithUsername:userServe.userName];
+     }else{
+     d = 1;
+     userServe.currentPet = ({
+     Pet * pet = [[Pet alloc] init];
+     pet.petID = petDic[@"id"];
+     pet.nickname = petDic[@"nickName"];
+     pet.headImgURL = petDic[@"headPortrait"];
+     pet.gender = petDic[@"gender"];
+     pet.breed = petDic[@"type"];
+     pet.region = petDic[@"address"];
+     pet.birthday = [NSDate dateWithTimeIntervalSince1970:[petDic[@"birthday"] doubleValue]/1000];
+     pet.fansNo = (petDic[@"counter"])[@"fans"];
+     pet.attentionNo = (petDic[@"counter"])[@"focus"];
+     pet.issue = (petDic[@"counter"])[@"issue"];
+     pet.relay = (petDic[@"counter"])[@"relay"];
+     pet.comment = (petDic[@"counter"])[@"comment"];
+     pet.favour = (petDic[@"counter"])[@"favour"];
+     pet.grade = [petDic[@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
+     pet.score = petDic[@"score"];
+     pet.coin = petDic[@"coin"];
+     pet;
+     });
+     }
+     }
+     if (d==1) {
+     userServe.petArr = petArr;
+     [DatabaseServe activatePet:userServe.currentPet WithUsername:userServe.userName];
+     }
+     else
+     {
+     [self noActivePetThenFail];
+     }
+     
+     } failure:nil];
      */
 }
 -(void)noActivePetThenFail
@@ -412,25 +418,25 @@
     [DatabaseServe unActivateUeser];
     [UserServe sharedUserServe].userName = nil;
     [UserServe sharedUserServe].userID = nil;
-//    [UserServe sharedUserServe].petArr = nil;
+    //    [UserServe sharedUserServe].petArr = nil;
     [UserServe sharedUserServe].account = nil;
     //        [SFHFKeychainUtils deleteItemForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
     [[SystemServer sharedSystemServer].chatClient logout];
     [SVProgressHUD showErrorWithStatus:@"获取宠物信息失败，需要重新登录"];
-//    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请重新登录" delegate:self cancelButtonTitle:@"好的，知道了" otherButtonTitles:nil, nil];
-////    alert.tag = 503;
-//    [alert show];
-
+    //    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请重新登录" delegate:self cancelButtonTitle:@"好的，知道了" otherButtonTitles:nil, nil];
+    ////    alert.tag = 503;
+    //    [alert show];
+    
 }
 
 -(void)checkNetwork
 {
-//    NSURL *url = [NSURL URLWithString:@"http://www.chongwushuo.com"];
-//    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-//    [httpClient setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-//        
-//    }];
+    //    NSURL *url = [NSURL URLWithString:@"http://www.chongwushuo.com"];
+    //    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    //    [httpClient setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+    //
+    //    }];
     
     Reachability * reach = [Reachability reachabilityForInternetConnection];
     if (reach.isReachable) {
@@ -514,7 +520,7 @@
                 if (!firstIn) {
                     [SystemServer sharedSystemServer].autoPlay = NO;
                 }
-//                [SystemServer sharedSystemServer].autoPlay = YES;
+                //                [SystemServer sharedSystemServer].autoPlay = YES;
             }
             else if (reachability.currentReachabilityStatus==ReachableViaWWAN){
                 NSLog(@"ReachableViaWWAN2");
@@ -538,14 +544,14 @@
                     [SystemServer sharedSystemServer].autoPlay = NO;
                 }
             }
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_catchStatus" object:@"haveNet" userInfo:nil];
+            //            [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_catchStatus" object:@"haveNet" userInfo:nil];
         });
     };
     
     reach.unreachableBlock = ^(Reachability * reachability)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-             NSLog(@"UNReachable2");
+            NSLog(@"UNReachable2");
             [SystemServer sharedSystemServer].systemNetStatus = SystemNetStatusNotReachable;
         });
     };
@@ -556,7 +562,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0){
-//        [[RootViewController sharedRootViewController].mainVC.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:NO];
+        //        [[RootViewController sharedRootViewController].mainVC.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:NO];
     }
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -564,7 +570,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-//    [self processNotification:[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"type",@"11",@"id", nil]];
+    //    [self processNotification:[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"type",@"11",@"id", nil]];
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -581,10 +587,10 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [SystemServer sharedSystemServer].inPay = NO;
     if (canUseActive) {
-//        [[SystemServer sharedSystemServer] chatClientAuth];
+        //        [[SystemServer sharedSystemServer] chatClientAuth];
     }
     appActive = YES;
-//    [self processNotification:[NSDictionary dictionaryWithObjectsAndKeys:@"7",@"type",@"1",@"id", nil]];
+    //    [self processNotification:[NSDictionary dictionaryWithObjectsAndKeys:@"7",@"type",@"1",@"id", nil]];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
@@ -631,8 +637,8 @@
                 msg = [NSString stringWithFormat:@"result=%@ PingppError: code=%lu msg=%@", result, (unsigned long)error.code, [error getMsg]];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"PaymentResultReceived" object:@"fail" userInfo:nil];
             }
-//            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
-//            [alert show];
+            //            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+            //            [alert show];
         }];
         [SystemServer sharedSystemServer].inPay = NO;
         return  YES;

@@ -24,6 +24,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.imageV = [[EGOImageView alloc] initWithFrame:CGRectMake(5, 5, ScreenWidth-10, (ScreenWidth-10)*0.3)];
+        self.imageV.backgroundColor = [UIColor colorWithR:240 g:240 b:240 alpha:1];
         [self.contentView addSubview:_imageV];
     }
     return self;

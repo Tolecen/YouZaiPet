@@ -97,104 +97,104 @@
     [self.view addSubview:bottomBG];
     [bottomBG setBackgroundColor:[UIColor whiteColor]];
     
-
+    
     UIView * linem = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 1)];
     [linem setBackgroundColor:[UIColor colorWithWhite:230/255.0f alpha:1]];
     [bottomBG addSubview:linem];
     
     
-//    self.forwardBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [self.forwardBtn setFrame:CGRectMake(0, 0, 80, 45)];
-//    [self.forwardBtn setBackgroundColor:[UIColor clearColor]];
-//    [bottomBG addSubview:self.forwardBtn];
-//    [self.forwardBtn addTarget:self action:@selector(forwardItBtn:) forControlEvents:UIControlEventTouchUpInside];
-//    self.forwardBtn.showsTouchWhenHighlighted = YES;
-//    
-//    UIImageView * forwardImgV = [[UIImageView alloc] initWithFrame:CGRectMake(27.5, 2, 25, 25)];
-//    [forwardImgV setImage:[UIImage imageNamed:@"forward-ico"]];
-//    [self.forwardBtn addSubview:forwardImgV];
-//    
-//    self.forwardLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 23, 80, 20)];
-//    [self.forwardLabel setBackgroundColor:[UIColor clearColor]];
-//    [self.forwardLabel setText:@"转发"];
-//    [self.forwardLabel setFont:[UIFont systemFontOfSize:11]];
-//    [self.forwardLabel setTextColor:[UIColor whiteColor]];
-//    [self.forwardLabel setTextAlignment:NSTextAlignmentCenter];
-//    [self.forwardBtn addSubview:self.forwardLabel];
-//    
-//    UIView * line1 = [[UIView alloc] initWithFrame:CGRectMake(80, 10, 1, 25)];
-//    [line1 setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1]];
-//    [bottomBG addSubview:line1];
-//    
-//    self.commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [self.commentBtn setFrame:CGRectMake(80, 0, 80, 45)];
-//    [self.commentBtn setBackgroundColor:[UIColor clearColor]];
-//    [bottomBG addSubview:self.commentBtn];
-//    self.commentBtn.showsTouchWhenHighlighted = YES;
-//    [self.commentBtn addTarget:self action:@selector(commentItBtn:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    UIImageView * commentImgV = [[UIImageView alloc] initWithFrame:CGRectMake(27.5, 4, 25, 25)];
-//    [commentImgV setImage:[UIImage imageNamed:@"comment-ico"]];
-//    [self.commentBtn addSubview:commentImgV];
-//    
-//    self.commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 23, 80, 20)];
-//    [self.commentLabel setBackgroundColor:[UIColor clearColor]];
-//    [self.commentLabel setText:@"评论"];
-//    [self.commentLabel setFont:[UIFont systemFontOfSize:11]];
-//    [self.commentLabel setTextColor:[UIColor whiteColor]];
-//    [self.commentLabel setTextAlignment:NSTextAlignmentCenter];
-//    [self.commentBtn addSubview:self.commentLabel];
-//    
-//    UIView * line2 = [[UIView alloc] initWithFrame:CGRectMake(80*2, 10, 1, 25)];
-//    [line2 setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1]];
-//    [bottomBG addSubview:line2];
-//    
-//    self.favorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [self.favorBtn setFrame:CGRectMake(80*2, 0, 80, 45)];
-//    [self.favorBtn setBackgroundColor:[UIColor clearColor]];
-//    [bottomBG addSubview:self.favorBtn];
-//    self.favorBtn.showsTouchWhenHighlighted = YES;
-//    [self.favorBtn addTarget:self action:@selector(favorThisTalking) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    self.favorImgV = [[UIImageView alloc] initWithFrame:CGRectMake(27.5, 2, 25, 25)];
-//    if (self.talking.ifZan) {
-//        [_favorImgV setImage:[UIImage imageNamed:@"yizan_ico"]];
-//    }
-//    else
-//        [_favorImgV setImage:[UIImage imageNamed:@"step-ico"]];
-//    [self.favorBtn addSubview:_favorImgV];
-//    
-//    self.favorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 23, 80, 20)];
-//    [self.favorLabel setBackgroundColor:[UIColor clearColor]];
-//    [self.favorLabel setText:@"踩一下"];
-//    [self.favorLabel setFont:[UIFont systemFontOfSize:11]];
-//    [self.favorLabel setTextColor:[UIColor whiteColor]];
-//    [self.favorLabel setTextAlignment:NSTextAlignmentCenter];
-//    [self.favorBtn addSubview:self.favorLabel];
-//    
-//    UIView * line3 = [[UIView alloc] initWithFrame:CGRectMake(80*3, 10, 1, 25)];
-//    [line3 setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1]];
-//    [bottomBG addSubview:line3];
-//    
-//    self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [self.shareBtn setFrame:CGRectMake(80*3, 0, 80, 45)];
-//    [self.shareBtn setBackgroundColor:[UIColor clearColor]];
-//    [bottomBG addSubview:self.shareBtn];
-//    [self.shareBtn addTarget:self action:@selector(shareBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-//    self.shareBtn.showsTouchWhenHighlighted = YES;
-//    
-//    
-//    UIImageView * shareImgV = [[UIImageView alloc] initWithFrame:CGRectMake(27.5, 3, 25, 25)];
-//    [shareImgV setImage:[UIImage imageNamed:@"share-ico"]];
-//    [self.shareBtn addSubview:shareImgV];
-//    
-//    self.shareLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 23, 80, 20)];
-//    [self.shareLabel setBackgroundColor:[UIColor clearColor]];
-//    [self.shareLabel setText:@"分享"];
-//    [self.shareLabel setFont:[UIFont systemFontOfSize:11]];
-//    [self.shareLabel setTextColor:[UIColor whiteColor]];
-//    [self.shareLabel setTextAlignment:NSTextAlignmentCenter];
-//    [self.shareBtn addSubview:self.shareLabel];
+    //    self.forwardBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    [self.forwardBtn setFrame:CGRectMake(0, 0, 80, 45)];
+    //    [self.forwardBtn setBackgroundColor:[UIColor clearColor]];
+    //    [bottomBG addSubview:self.forwardBtn];
+    //    [self.forwardBtn addTarget:self action:@selector(forwardItBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //    self.forwardBtn.showsTouchWhenHighlighted = YES;
+    //
+    //    UIImageView * forwardImgV = [[UIImageView alloc] initWithFrame:CGRectMake(27.5, 2, 25, 25)];
+    //    [forwardImgV setImage:[UIImage imageNamed:@"forward-ico"]];
+    //    [self.forwardBtn addSubview:forwardImgV];
+    //
+    //    self.forwardLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 23, 80, 20)];
+    //    [self.forwardLabel setBackgroundColor:[UIColor clearColor]];
+    //    [self.forwardLabel setText:@"转发"];
+    //    [self.forwardLabel setFont:[UIFont systemFontOfSize:11]];
+    //    [self.forwardLabel setTextColor:[UIColor whiteColor]];
+    //    [self.forwardLabel setTextAlignment:NSTextAlignmentCenter];
+    //    [self.forwardBtn addSubview:self.forwardLabel];
+    //
+    //    UIView * line1 = [[UIView alloc] initWithFrame:CGRectMake(80, 10, 1, 25)];
+    //    [line1 setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1]];
+    //    [bottomBG addSubview:line1];
+    //
+    //    self.commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    [self.commentBtn setFrame:CGRectMake(80, 0, 80, 45)];
+    //    [self.commentBtn setBackgroundColor:[UIColor clearColor]];
+    //    [bottomBG addSubview:self.commentBtn];
+    //    self.commentBtn.showsTouchWhenHighlighted = YES;
+    //    [self.commentBtn addTarget:self action:@selector(commentItBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //
+    //    UIImageView * commentImgV = [[UIImageView alloc] initWithFrame:CGRectMake(27.5, 4, 25, 25)];
+    //    [commentImgV setImage:[UIImage imageNamed:@"comment-ico"]];
+    //    [self.commentBtn addSubview:commentImgV];
+    //
+    //    self.commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 23, 80, 20)];
+    //    [self.commentLabel setBackgroundColor:[UIColor clearColor]];
+    //    [self.commentLabel setText:@"评论"];
+    //    [self.commentLabel setFont:[UIFont systemFontOfSize:11]];
+    //    [self.commentLabel setTextColor:[UIColor whiteColor]];
+    //    [self.commentLabel setTextAlignment:NSTextAlignmentCenter];
+    //    [self.commentBtn addSubview:self.commentLabel];
+    //
+    //    UIView * line2 = [[UIView alloc] initWithFrame:CGRectMake(80*2, 10, 1, 25)];
+    //    [line2 setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1]];
+    //    [bottomBG addSubview:line2];
+    //
+    //    self.favorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    [self.favorBtn setFrame:CGRectMake(80*2, 0, 80, 45)];
+    //    [self.favorBtn setBackgroundColor:[UIColor clearColor]];
+    //    [bottomBG addSubview:self.favorBtn];
+    //    self.favorBtn.showsTouchWhenHighlighted = YES;
+    //    [self.favorBtn addTarget:self action:@selector(favorThisTalking) forControlEvents:UIControlEventTouchUpInside];
+    //
+    //    self.favorImgV = [[UIImageView alloc] initWithFrame:CGRectMake(27.5, 2, 25, 25)];
+    //    if (self.talking.ifZan) {
+    //        [_favorImgV setImage:[UIImage imageNamed:@"yizan_ico"]];
+    //    }
+    //    else
+    //        [_favorImgV setImage:[UIImage imageNamed:@"step-ico"]];
+    //    [self.favorBtn addSubview:_favorImgV];
+    //
+    //    self.favorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 23, 80, 20)];
+    //    [self.favorLabel setBackgroundColor:[UIColor clearColor]];
+    //    [self.favorLabel setText:@"踩一下"];
+    //    [self.favorLabel setFont:[UIFont systemFontOfSize:11]];
+    //    [self.favorLabel setTextColor:[UIColor whiteColor]];
+    //    [self.favorLabel setTextAlignment:NSTextAlignmentCenter];
+    //    [self.favorBtn addSubview:self.favorLabel];
+    //
+    //    UIView * line3 = [[UIView alloc] initWithFrame:CGRectMake(80*3, 10, 1, 25)];
+    //    [line3 setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1]];
+    //    [bottomBG addSubview:line3];
+    //
+    //    self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    [self.shareBtn setFrame:CGRectMake(80*3, 0, 80, 45)];
+    //    [self.shareBtn setBackgroundColor:[UIColor clearColor]];
+    //    [bottomBG addSubview:self.shareBtn];
+    //    [self.shareBtn addTarget:self action:@selector(shareBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    //    self.shareBtn.showsTouchWhenHighlighted = YES;
+    //
+    //
+    //    UIImageView * shareImgV = [[UIImageView alloc] initWithFrame:CGRectMake(27.5, 3, 25, 25)];
+    //    [shareImgV setImage:[UIImage imageNamed:@"share-ico"]];
+    //    [self.shareBtn addSubview:shareImgV];
+    //
+    //    self.shareLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 23, 80, 20)];
+    //    [self.shareLabel setBackgroundColor:[UIColor clearColor]];
+    //    [self.shareLabel setText:@"分享"];
+    //    [self.shareLabel setFont:[UIFont systemFontOfSize:11]];
+    //    [self.shareLabel setTextColor:[UIColor whiteColor]];
+    //    [self.shareLabel setTextAlignment:NSTextAlignmentCenter];
+    //    [self.shareBtn addSubview:self.shareLabel];
     
     
     self.commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -273,7 +273,7 @@
         if ([UserServe sharedUserServe].account) {
             [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
         }
-//        [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
+        //        [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
     }
     else
         [_favorImgV setImage:[UIImage imageNamed:@"browser_zan"]];
@@ -309,10 +309,10 @@
     }
     // Do any additional setup after loading the view.
     [self buildViewWithSkintype];
-
     
     
-
+    
+    
 }
 -(void)dealloc
 {
@@ -327,7 +327,7 @@
 - (void)buildViewWithSkintype
 {
     [super buildViewWithSkintype];
-
+    
 }
 -(NSMutableArray *)getModelArray:(NSArray *)array
 {
@@ -338,7 +338,7 @@
         talkingComment.cWidth = [TalkingCommentTableViewCell heightForRowWithComment:talkingComment].width;
         
         [hArray addObject:talkingComment];
-//        [self.commentHeightArray addObject:[NSNumber numberWithFloat:[TalkingCommentTableViewCell heightForRowWithComment:talkingComment]]];
+        //        [self.commentHeightArray addObject:[NSNumber numberWithFloat:[TalkingCommentTableViewCell heightForRowWithComment:talkingComment]]];
     }
     return hArray;
 }
@@ -408,7 +408,7 @@
                 self.canEditComment = YES;
             }
         }
-
+        
         NSLog(@"get shuoshuo content success:%@",responseObject);
         if (self.talking.ifZan) {
             if ([UserServe sharedUserServe].account) {
@@ -426,7 +426,7 @@
             errorAlert.tag = 12;
             [errorAlert show];
         }
-
+        
     }];
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -470,9 +470,9 @@
                 }
                 else
                 {
-//                    [self.talking.showCommentArray insertObject:dc atIndex:0];
+                    //                    [self.talking.showCommentArray insertObject:dc atIndex:0];
                     [self.talking.showCommentArray replaceObjectAtIndex:0 withObject:dc];
-//                    [self.talking.showCommentArray removeLastObject];
+                    //                    [self.talking.showCommentArray removeLastObject];
                 }
                 
             }
@@ -554,7 +554,7 @@
         
         [self.delegate attentionPetWithTalkingBrowse2:self.talking];
     }
-
+    
 }
 -(void)toUserPage:(NSDictionary *)petDict
 {
@@ -576,6 +576,7 @@
     //    [self.contentTableView reloadData];
     
 }
+#pragma mark  分享按钮
 -(void)shareBtnClicked
 {
     ShareSheet * shareSheet = [[ShareSheet alloc]initWithIconArray:@[@"weiChatFriend",@"friendCircle",@"sina",@"qq",@"petaking"] titleArray:@[@"微信好友",@"朋友圈",@"微博",@"QQ",@"友仔"] action:^(NSInteger index) {
@@ -610,6 +611,7 @@
     }];
     [shareSheet show];
 }
+
 -(void)commentItBtn:(UIButton *)sender
 {
     NSString * currentPetId = [UserServe sharedUserServe].userID;
@@ -693,8 +695,10 @@
 }
 -(void)favorBtnClicked:(UIButton *)sender
 {
+    
     self.showFavorList = YES;
     [self getAllFavors:nil];
+    
     [UIView animateWithDuration:0.1 animations:^{
         [self.favorNumBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
         [self.commentNumBtn setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
@@ -836,8 +840,8 @@
                 UIActionSheet * act= [[UIActionSheet alloc] initWithTitle:@"删除这条评论?" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"删除", nil];
                 act.tag = 3;
                 [act showInView:self.view];
-//                self.replyToId = nil;
-//                self.inputView.textView.placeholder = @"";
+                //                self.replyToId = nil;
+                //                self.inputView.textView.placeholder = @"";
             }
             else{
                 [self.inputView showInputViewWithAudioBtn:YES];
@@ -860,7 +864,7 @@
             [pv loadPreviewStoryViewWithDictionary:self.talking];
             [self.navigationController pushViewController:pv animated:YES];
         }
- 
+        
     }
 }
 
@@ -894,6 +898,7 @@
     self.replyToId = petId;
     self.inputView.textView.placeholder = [NSString stringWithFormat:@"回复@%@",nickname];
 }
+#pragma mark 标签相关
 -(void)tagBtnClickedWithTagId:(NSDictionary *)tagId
 {
     TagTalkListViewController * tagTlistV = [[TagTalkListViewController alloc] init];
@@ -903,7 +908,7 @@
     theTag.tagName = [tagId objectForKey:@"name"];
     theTag.backGroundURL = [tagId objectForKey:@"bgUrl"];
     tagTlistV.tag = theTag;
-    [self.navigationController pushViewController:tagTlistV animated:YES];
+    //[self.navigationController pushViewController:tagTlistV animated:YES];
 }
 -(void)petProfileWhoPublishTalkingBrowse:(TalkingBrowse *)talkingBrowse
 {
@@ -1073,7 +1078,7 @@
     NSLog(@"doComment:%@",mDict);
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//        [self successAction];
+        //        [self successAction];
         self.inputView.textView.text = @"";
         
         [self getAllCommentsAndForward:nil];
@@ -1154,7 +1159,7 @@
         [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
         self.talking.ifZan = YES;
         self.favorBtn.enabled = NO;
-//        [self zanMakeBig];
+        //        [self zanMakeBig];
         int n = (int)self.caiNum;
         [self.favorNumBtn setTitle:[NSString stringWithFormat:@"%d踩",n+1] forState:UIControlStateNormal];
         self.caiNum++;
@@ -1175,7 +1180,7 @@
         NSLog(@"doFavor:%@",mDict);
         [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
+            self.favorBtn.enabled = YES;
             NSLog(@"favor success:%@",responseObject);
             if ([responseObject objectForKey:@"message"]) {
                 if([[responseObject objectForKey:@"message"] rangeOfString:@"("].location !=NSNotFound)
@@ -1190,17 +1195,17 @@
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"favor error:%@",error);
+            self.favorBtn.enabled = YES;
             [_favorImgV setImage:[UIImage imageNamed:@"browser_zan"]];
         }];
         
     }
     else
     {
-        
         self.talking.ifZan = NO;
         [_favorImgV setImage:[UIImage imageNamed:@"browser_zan"]];
         int n = self.caiNum;
-        [self.favorNumBtn setTitle:[NSString stringWithFormat:@"%d喜欢",n-1] forState:UIControlStateNormal];
+        [self.favorNumBtn setTitle:[NSString stringWithFormat:@"%d踩",n-1] forState:UIControlStateNormal];
         self.caiNum--;
         NSMutableDictionary* mDict = [NetServer commonDict];
         [mDict setObject:@"interaction" forKey:@"command"];
@@ -1209,12 +1214,12 @@
         [mDict setObject:@"F" forKey:@"type"];
         [mDict setObject:currentPetId forKey:@"userId"];
         
-//        for (int i = 0; i<self.talking.showZanArray.count; i++) {
-//            NSDictionary * dict = self.talking.showZanArray[i];
-//            if ([UserServe sharedUserServe].userID isEqualToString:[dict objectForKey:@"petI"]) {
-//                <#statements#>
-//            }
-//        }
+        //        for (int i = 0; i<self.talking.showZanArray.count; i++) {
+        //            NSDictionary * dict = self.talking.showZanArray[i];
+        //            if ([UserServe sharedUserServe].userID isEqualToString:[dict objectForKey:@"petI"]) {
+        //                <#statements#>
+        //            }
+        //        }
         
         if (_delegate&& [_delegate respondsToSelector:@selector(resetShuoShuoStatus:)]) {
             
@@ -1306,7 +1311,7 @@
 }
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-//    NSLog(@"ssssswwww");
+    //    NSLog(@"ssssswwww");
     [self cellPlayAni:self.contentTableView];
 }
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -1329,7 +1334,7 @@
         self.audioPlayer = nil;
         
     }
-     [self stopPlayTimer];
+    [self stopPlayTimer];
 }
 -(void)cellPlayAni:(UIScrollView *)scrollView
 {
@@ -1348,62 +1353,62 @@
             return;
         }
         [self playOrDownloadForCell:cell PlayBtnClicked:NO];
-//        ;
-//        dispatch_queue_t queue = dispatch_queue_create("com.pet.playAni", NULL);
-//        dispatch_async(queue, ^{
-//            
-//            if ([TFileManager ifExsitFolder:cell.talking.playAnimationImg.fileName]) {
-//                cell.aniImageV.animationImages = [TFileManager getAllImagesWithID:cell.talking.playAnimationImg.fileName];
-//                cell.aniImageV.animationDuration = cell.aniImageV.animationImages.count*0.15;
-//            }
-//            else
-//            {
-//                
-//                [NetServer downloadZipFileWithUrl:cell.talking.playAnimationImg.fileUrlStr ZipName:[NSString stringWithFormat:@"%@.%@",cell.talking.playAnimationImg.fileName,cell.talking.playAnimationImg.fileType] Success:^(NSString *zipfileName) {
-//                    [cell hideLoading];
-//                    cell.aniImageV.animationImages = [TFileManager getAllImagesWithID:cell.talking.playAnimationImg.fileName];
-//                    cell.aniImageV.animationDuration = cell.aniImageV.animationImages.count*0.15;
-//                } failure:^(NSError *error) {
-//                    
-//                }];
-//            }
-//            
-//            NSString *documents = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory , NSUserDomainMask, YES) objectAtIndex:0];
-//            NSString *subdirectory = [documents stringByAppendingPathComponent:@"Audios"];
-//            
-//            //                    NSArray * g = [cell.talking.audioUrl componentsSeparatedByString:@"/"];
-//            NSString *audioPath = [subdirectory stringByAppendingPathComponent:cell.talking.audioName];
-//            
-//            NSFileManager *fm = [NSFileManager defaultManager];
-//            if(![fm fileExistsAtPath:audioPath]){
-//                currentPlayingUrl = cell.talking.audioUrl;
-//                [self getAudioFromNet:cell.talking.audioUrl LocalPath:audioPath Type:1];
-//            }
-//            else{
-//                currentPlayingUrl = cell.talking.audioUrl;
-//                if ([self.audioPlayer isPlaying]) {
-//                    [self.audioPlayer stopAudio];
-//                }
-//                self.audioPlayer = [XHAudioPlayerHelper shareInstance];
-//                [self.audioPlayer setDelegate:self];
-//                [self.audioPlayer managerAudioWithFileName:audioPath toPlay:YES];
-//            }
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                if (![cell.aniImageV isAnimating]) {
-//                    [cell.aniImageV startAnimating];
-//                }
-//                
-//            });
-//        });
+        //        ;
+        //        dispatch_queue_t queue = dispatch_queue_create("com.pet.playAni", NULL);
+        //        dispatch_async(queue, ^{
+        //
+        //            if ([TFileManager ifExsitFolder:cell.talking.playAnimationImg.fileName]) {
+        //                cell.aniImageV.animationImages = [TFileManager getAllImagesWithID:cell.talking.playAnimationImg.fileName];
+        //                cell.aniImageV.animationDuration = cell.aniImageV.animationImages.count*0.15;
+        //            }
+        //            else
+        //            {
+        //
+        //                [NetServer downloadZipFileWithUrl:cell.talking.playAnimationImg.fileUrlStr ZipName:[NSString stringWithFormat:@"%@.%@",cell.talking.playAnimationImg.fileName,cell.talking.playAnimationImg.fileType] Success:^(NSString *zipfileName) {
+        //                    [cell hideLoading];
+        //                    cell.aniImageV.animationImages = [TFileManager getAllImagesWithID:cell.talking.playAnimationImg.fileName];
+        //                    cell.aniImageV.animationDuration = cell.aniImageV.animationImages.count*0.15;
+        //                } failure:^(NSError *error) {
+        //
+        //                }];
+        //            }
+        //
+        //            NSString *documents = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory , NSUserDomainMask, YES) objectAtIndex:0];
+        //            NSString *subdirectory = [documents stringByAppendingPathComponent:@"Audios"];
+        //
+        //            //                    NSArray * g = [cell.talking.audioUrl componentsSeparatedByString:@"/"];
+        //            NSString *audioPath = [subdirectory stringByAppendingPathComponent:cell.talking.audioName];
+        //
+        //            NSFileManager *fm = [NSFileManager defaultManager];
+        //            if(![fm fileExistsAtPath:audioPath]){
+        //                currentPlayingUrl = cell.talking.audioUrl;
+        //                [self getAudioFromNet:cell.talking.audioUrl LocalPath:audioPath Type:1];
+        //            }
+        //            else{
+        //                currentPlayingUrl = cell.talking.audioUrl;
+        //                if ([self.audioPlayer isPlaying]) {
+        //                    [self.audioPlayer stopAudio];
+        //                }
+        //                self.audioPlayer = [XHAudioPlayerHelper shareInstance];
+        //                [self.audioPlayer setDelegate:self];
+        //                [self.audioPlayer managerAudioWithFileName:audioPath toPlay:YES];
+        //            }
+        //
+        //            dispatch_async(dispatch_get_main_queue(), ^{
+        //                if (![cell.aniImageV isAnimating]) {
+        //                    [cell.aniImageV startAnimating];
+        //                }
+        //
+        //            });
+        //        });
         
     }
     else
     {
         [cell.aniImageV stopAnimating];
-//        if (![currentPlayingUrl isEqualToString:cell.talking.audioUrl]) {
-            [self.audioPlayer stopAudio];
-//        }
+        //        if (![currentPlayingUrl isEqualToString:cell.talking.audioUrl]) {
+        [self.audioPlayer stopAudio];
+        //        }
     }
     
     
@@ -1448,23 +1453,23 @@
         }
         
         [cell hideLoading];
- 
-            
-            if (![cell.aniImageV isAnimating]) {
-                [cell.aniImageV startAnimating];
-            }
-            
-            if ([currentPlayingUrl isEqualToString:cell.talking.audioUrl]&&[self.audioPlayer isPlaying]) {
-                return;
-            }
-            else{
-                //                            [self.audioPlayer stopAudio];
-            }
-            currentPlayingUrl = cell.talking.audioUrl;
-            cell.currentPlayingUrl = currentPlayingUrl;
-            self.audioPlayer = [XHAudioPlayerHelper shareInstance];
-            [self.audioPlayer setDelegate:self];
-            [self.audioPlayer managerAudioWithFileName:audioPath toPlay:YES];
+        
+        
+        if (![cell.aniImageV isAnimating]) {
+            [cell.aniImageV startAnimating];
+        }
+        
+        if ([currentPlayingUrl isEqualToString:cell.talking.audioUrl]&&[self.audioPlayer isPlaying]) {
+            return;
+        }
+        else{
+            //                            [self.audioPlayer stopAudio];
+        }
+        currentPlayingUrl = cell.talking.audioUrl;
+        cell.currentPlayingUrl = currentPlayingUrl;
+        self.audioPlayer = [XHAudioPlayerHelper shareInstance];
+        [self.audioPlayer setDelegate:self];
+        [self.audioPlayer managerAudioWithFileName:audioPath toPlay:YES];
         if ([audioDurationTimer isValid]) {
             [audioDurationTimer invalidate];
         }
@@ -1512,22 +1517,22 @@
                         //                                        [self.audioPlayer stopAudio];
                     }
                     
-                  
-                        currentPlayingUrl = cell.talking.audioUrl;
-                        cell.currentPlayingUrl = currentPlayingUrl;
-                        self.audioPlayer = [XHAudioPlayerHelper shareInstance];
-                        [self.audioPlayer setDelegate:self];
-                        [self.audioPlayer managerAudioWithFileName:audioPath toPlay:YES];
+                    
+                    currentPlayingUrl = cell.talking.audioUrl;
+                    cell.currentPlayingUrl = currentPlayingUrl;
+                    self.audioPlayer = [XHAudioPlayerHelper shareInstance];
+                    [self.audioPlayer setDelegate:self];
+                    [self.audioPlayer managerAudioWithFileName:audioPath toPlay:YES];
                     if ([audioDurationTimer isValid]) {
                         [audioDurationTimer invalidate];
                     }
                     audioDurationTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(playTimerDo) userInfo:nil repeats:YES];
                     [audioDurationTimer fire];
-                        //                                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (![cell.aniImageV isAnimating]) {
-                            [cell.aniImageV startAnimating];
-                            
-                        }
+                    //                                    dispatch_async(dispatch_get_main_queue(), ^{
+                    if (![cell.aniImageV isAnimating]) {
+                        [cell.aniImageV startAnimating];
+                        
+                    }
                     
                     
                     //                                    });
@@ -1567,30 +1572,30 @@
                             
                         }
                         
-                            currentPlayingUrl = cell.talking.audioUrl;
-                            cell.currentPlayingUrl = currentPlayingUrl;
-                            self.audioPlayer = [XHAudioPlayerHelper shareInstance];
-                            [self.audioPlayer setDelegate:self];
-                            [self.audioPlayer managerAudioWithFileName:audioPath toPlay:YES];
+                        currentPlayingUrl = cell.talking.audioUrl;
+                        cell.currentPlayingUrl = currentPlayingUrl;
+                        self.audioPlayer = [XHAudioPlayerHelper shareInstance];
+                        [self.audioPlayer setDelegate:self];
+                        [self.audioPlayer managerAudioWithFileName:audioPath toPlay:YES];
                         if ([audioDurationTimer isValid]) {
                             [audioDurationTimer invalidate];
                         }
                         audioDurationTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(playTimerDo) userInfo:nil repeats:YES];
                         [audioDurationTimer fire];
-                            //                                        dispatch_async(dispatch_get_main_queue(), ^{
+                        //                                        dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        if (![cell.aniImageV isAnimating]) {
+                            cell.aniImageV.image = [TFileManager getFristImageWithID:cell.talking.playAnimationImg.fileName];
+                            cell.aniImageV.animationImages = [TFileManager getAllImagesWithID:cell.talking.playAnimationImg.fileName];
+                            cell.aniImageV.animationDuration = cell.aniImageV.animationImages.count*0.15;
+                            cell.aniImageV.transform = CGAffineTransformIdentity;
+                            cell.aniImageV.layer.transform = CATransform3DIdentity;
                             
-                            if (![cell.aniImageV isAnimating]) {
-                                cell.aniImageV.image = [TFileManager getFristImageWithID:cell.talking.playAnimationImg.fileName];
-                                cell.aniImageV.animationImages = [TFileManager getAllImagesWithID:cell.talking.playAnimationImg.fileName];
-                                cell.aniImageV.animationDuration = cell.aniImageV.animationImages.count*0.15;
-                                cell.aniImageV.transform = CGAffineTransformIdentity;
-                                cell.aniImageV.layer.transform = CATransform3DIdentity;
-                                
-                                [cell.aniImageV setFrame:CGRectMake(0, 0, cell.talking.playAnimationImg.width*ScreenWidth, cell.talking.playAnimationImg.height*ScreenWidth)];
-                                cell.aniImageV.center = CGPointMake(cell.talking.playAnimationImg.centerX*ScreenWidth, cell.talking.playAnimationImg.centerY*ScreenWidth);
-                                cell.aniImageV.transform = CGAffineTransformRotate(cell.aniImageV.transform, cell.talking.playAnimationImg.rotationZ);
-                                [cell.aniImageV startAnimating];
-                            }
+                            [cell.aniImageV setFrame:CGRectMake(0, 0, cell.talking.playAnimationImg.width*ScreenWidth, cell.talking.playAnimationImg.height*ScreenWidth)];
+                            cell.aniImageV.center = CGPointMake(cell.talking.playAnimationImg.centerX*ScreenWidth, cell.talking.playAnimationImg.centerY*ScreenWidth);
+                            cell.aniImageV.transform = CGAffineTransformRotate(cell.aniImageV.transform, cell.talking.playAnimationImg.rotationZ);
+                            [cell.aniImageV startAnimating];
+                        }
                         
                         
                         //                                        });
@@ -1712,7 +1717,7 @@
     PreviewStoryViewController * pv = [[PreviewStoryViewController alloc] init];
     [pv loadPreviewStoryViewWithDictionary:talkingBrowse];
     [self.navigationController pushViewController:pv animated:YES];
-//    return;
+    //    return;
 }
 -(void)contentImageVClicked:(UITableViewCell *)cell CellType:(int)cellType
 {
@@ -1725,7 +1730,7 @@
     if ([self.audioPlayer isPlaying]&&[cells.talking.audioUrl isEqualToString:currentPlayingUrl]) {
         [self stopPlayTimer];
         [self.audioPlayer pausePlayingAudio];
-//        [self.audioPlayer stopAudio];
+        //        [self.audioPlayer stopAudio];
         cells.currentPlayingUrl = @"";
         [cells showPlayBtn];
     }
@@ -1733,22 +1738,22 @@
     {
         [cells showLoading];
         [self playOrDownloadForCell:cells PlayBtnClicked:YES];
-//        NSString *documents = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory , NSUserDomainMask, YES) objectAtIndex:0];
-//        NSArray * g = [cells.talking.audioUrl componentsSeparatedByString:@"/"];
-//        NSString *accessorys2 = [[documents stringByAppendingPathComponent:@"Audios"] stringByAppendingPathComponent:[g lastObject]];
-//        if ([self.audioPlayer isPlaying]) {
-//            [self.audioPlayer stopAudio];
-//        }
-//        self.audioPlayer = [XHAudioPlayerHelper shareInstance];
-//        [self.audioPlayer setDelegate:self];
-//        [self.audioPlayer managerAudioWithFileName:accessorys2 toPlay:YES];
-//        //            [cells.aniImageV startAnimating];
-//        
-//        if (![cells.aniImageV isAnimating]) {
-//            cells.aniImageV.animationImages = [TFileManager getAllImagesWithID:cells.talking.playAnimationImg.fileName];
-//            cells.aniImageV.animationDuration = cells.aniImageV.animationImages.count*0.15;
-//            [cells.aniImageV startAnimating];
-//        }
+        //        NSString *documents = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory , NSUserDomainMask, YES) objectAtIndex:0];
+        //        NSArray * g = [cells.talking.audioUrl componentsSeparatedByString:@"/"];
+        //        NSString *accessorys2 = [[documents stringByAppendingPathComponent:@"Audios"] stringByAppendingPathComponent:[g lastObject]];
+        //        if ([self.audioPlayer isPlaying]) {
+        //            [self.audioPlayer stopAudio];
+        //        }
+        //        self.audioPlayer = [XHAudioPlayerHelper shareInstance];
+        //        [self.audioPlayer setDelegate:self];
+        //        [self.audioPlayer managerAudioWithFileName:accessorys2 toPlay:YES];
+        //        //            [cells.aniImageV startAnimating];
+        //
+        //        if (![cells.aniImageV isAnimating]) {
+        //            cells.aniImageV.animationImages = [TFileManager getAllImagesWithID:cells.talking.playAnimationImg.fileName];
+        //            cells.aniImageV.animationDuration = cells.aniImageV.animationImages.count*0.15;
+        //            [cells.aniImageV startAnimating];
+        //        }
         
     }
     
@@ -1778,6 +1783,7 @@
     PersonProfileViewController * pv = [[PersonProfileViewController alloc] init];
     [self.navigationController pushViewController:pv animated:YES];
 }
+#pragma mark 地图相关
 -(void)locationWithTalkingBrowse:(TalkingBrowse *)talkingBrowse
 {
     MapViewController * mapV = [[MapViewController alloc] init];
@@ -1810,15 +1816,15 @@
             [self deleteAShuoShuo];
         }
         if (buttonIndex==1) {
-//            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-//            [self performSelector:@selector(dismissReportHud) withObject:nil afterDelay:1];
+            //            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            //            [self performSelector:@selector(dismissReportHud) withObject:nil afterDelay:1];
             [self reportShuoShuo];
         }
     }
     else if (actionSheet.tag==2){
         if (buttonIndex==0) {
-//            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-//            [self performSelector:@selector(dismissReportHud) withObject:nil afterDelay:1];
+            //            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            //            [self performSelector:@selector(dismissReportHud) withObject:nil afterDelay:1];
             [self reportShuoShuo];
         }
     }
@@ -1826,7 +1832,7 @@
         if (buttonIndex==0) {
             [self deleteAComment];
         }
-
+        
     }
 }
 -(void)reportShuoShuo
@@ -1851,9 +1857,9 @@
 }
 -(void)deleteAShuoShuo
 {
-//    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"接口还不好使呢" delegate:self cancelButtonTitle:@"哦" otherButtonTitles: nil];
-//    [alert show];
-//    return;
+    //    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"接口还不好使呢" delegate:self cancelButtonTitle:@"哦" otherButtonTitles: nil];
+    //    [alert show];
+    //    return;
     [SVProgressHUD showWithStatus:@"删除中..."];
     NSMutableDictionary * hotDic = [NetServer commonDict];
     [hotDic setObject:@"petalk" forKey:@"command"];
@@ -1877,9 +1883,9 @@
 }
 -(void)deleteAComment
 {
-//    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"接口还不好使呢" delegate:self cancelButtonTitle:@"哦" otherButtonTitles: nil];
-//    [alert show];
-//    return;
+    //    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"接口还不好使呢" delegate:self cancelButtonTitle:@"哦" otherButtonTitles: nil];
+    //    [alert show];
+    //    return;
     [self.audioPlayer stopAudio];
     [SVProgressHUD showWithStatus:@"删除中..."];
     NSMutableDictionary * hotDic = [NetServer commonDict];
@@ -1888,7 +1894,7 @@
     [hotDic setObject:self.currentTalkComment.commentId forKey:@"id"];
     [NetServer requestWithParameters:hotDic Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.commentArray removeObjectAtIndex:self.currentTalkCommentIndex];
-//        [self.commentHeightArray removeObjectAtIndex:self.currentTalkCommentIndex];
+        //        [self.commentHeightArray removeObjectAtIndex:self.currentTalkCommentIndex];
         [self.contentTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.currentTalkCommentIndex inSection:1]] withRowAnimation:UITableViewRowAnimationLeft];
         NSLog(@"delete comment success info:%@",responseObject);
         [SVProgressHUD dismiss];
@@ -1937,18 +1943,13 @@
             self.canEditComment = YES;
         }
     }
- 
+    
 }
 -(void)viewDidAppear:(BOOL)animated
 {
     [self cellPlayAni:self.contentTableView];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 -(void)zanMakeBig
 {
@@ -2010,16 +2011,5 @@
         //        [self.delegate attentionPetWithTalkingBrowse:self.talking];
     }];
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

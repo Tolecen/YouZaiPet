@@ -7,7 +7,7 @@
 //
 
 #import "Common.h"
-
+#import "UserServe.h"
 @implementation Common
 
 +(NSString *)getCurrentTime{
@@ -452,4 +452,50 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++(void)addCountForCart
+{
+    NSString * cartCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"cartneedmetioncount%@",[UserServe sharedUserServe].userID]];
+    if (!cartCount) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:[NSString stringWithFormat:@"cartneedmetioncount%@",[UserServe sharedUserServe].userID]];
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",[cartCount intValue]+1] forKey:[NSString stringWithFormat:@"cartneedmetioncount%@",[UserServe sharedUserServe].userID]];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(void)clearCartCount
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:[NSString stringWithFormat:@"cartneedmetioncount%@",[UserServe sharedUserServe].userID]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(NSString *)filterHTML:(NSString *)html
+{
+    [html stringByReplacingOccurrencesOfString:@"&lt;br/&gt;" withString:@"\n"];
+    NSScanner * scanner = [NSScanner scannerWithString:html];
+    NSString * text = nil;
+    //    while([scanner isAtEnd]==NO)
+    //    {
+    //        //找到标签的起始位置
+    //        [scanner scanUpToString:@"<" intoString:nil];
+    //        //找到标签的结束位置
+    //        [scanner scanUpToString:@">" intoString:&text];
+    //        //替换字符
+    //        html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>",text] withString:@""];
+    //    }
+    while([scanner isAtEnd]==NO)
+    {
+        //找到标签的起始位置
+        [scanner scanUpToString:@"&lt;" intoString:nil];
+        //找到标签的结束位置
+        [scanner scanUpToString:@"&gt;" intoString:&text];
+        //替换字符
+        html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@&gt;",text] withString:@""];
+    }
+    //    NSString * regEx = @"&lt;([^>]*)gt;";
+    //    html = [html stringByReplacingOccurrencesOfString:regEx withString:@""];
+    return html;
+}
 @end

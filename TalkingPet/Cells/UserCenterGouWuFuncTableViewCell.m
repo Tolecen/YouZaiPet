@@ -27,6 +27,21 @@
             button.tag = i+1;
             [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
             
+            if (i==0) {
+                self.unreadBgV = [[UIImageView alloc] initWithFrame:CGRectMake(70-26, 0, 26, 16)];
+                [self.unreadBgV setImage:[UIImage imageNamed:@"unreadNumBg"]];
+                [button addSubview:self.unreadBgV];
+                
+                self.unreadLabel = [[UILabel alloc] initWithFrame:CGRectMake(1, 0, 25, 16)];
+                [self.unreadLabel setTextColor:[UIColor whiteColor]];
+                [self.unreadLabel setBackgroundColor:[UIColor clearColor]];
+                [self.unreadLabel setTextAlignment:NSTextAlignmentCenter];
+                self.unreadLabel.adjustsFontSizeToFitWidth = YES;
+                [self.unreadLabel setFont:[UIFont systemFontOfSize:13]];
+                [self.unreadBgV addSubview:self.unreadLabel];
+                self.unreadBgV.hidden = YES;
+            }
+            
             UILabel * cl = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(button.frame), CGRectGetMaxY(button.frame)+10, 70, 20)];
             cl.backgroundColor = [UIColor clearColor];
             cl.textAlignment = NSTextAlignmentCenter;
@@ -38,6 +53,16 @@
         }
     }
     return self;
+}
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    if (self.cartCount>0) {
+        self.unreadBgV.hidden = NO;
+        self.unreadLabel.text = [NSString stringWithFormat:@"%d",self.cartCount];
+    }
+    else
+        self.unreadBgV.hidden = YES;
 }
 -(void)buttonClicked:(UIButton *)sender
 {

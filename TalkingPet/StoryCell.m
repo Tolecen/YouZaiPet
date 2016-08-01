@@ -119,8 +119,8 @@
     contentL.frame= CGRectInset(self.bounds, self.bounds.size.width*15/100, self.bounds.size.height*15/100);
     contentL.textAlignment = NSTextAlignmentLeft;
     contentL.font = [UIFont systemFontOfSize:12];
-    contentL.textColor = [UIColor colorWithWhite:128/255.0 alpha:1];
-    subL.textColor = [UIColor colorWithWhite:128/255.0 alpha:1];
+    contentL.textColor = CommonGreenColor;
+    subL.textColor = CommonGreenColor;
 }
 -(void)layoutWithAddress:(NSString*)address lineFeed:(BOOL)feed time:(NSString*)time
 {
@@ -130,25 +130,25 @@
     textBG.hidden = YES;
     contentL.hidden = NO;
     contentL.text = address;
-    contentL.textAlignment = NSTextAlignmentRight;
+    contentL.textAlignment = NSTextAlignmentCenter;
     subL.hidden = NO;
     subL.text = time;
     imageV.frame=self.bounds;
     textBG.frame=CGRectMake(0, self.bounds.size.height-20, self.bounds.size.width, 20);
     if (feed) {
-        contentL.font = [UIFont systemFontOfSize:16];
+        contentL.font = [UIFont systemFontOfSize:18];
         subL.font = [UIFont systemFontOfSize:22];
         CGSize size = [address sizeWithFont:contentL.font constrainedToSize:CGSizeMake(self.bounds.size.width*8/10, 60) lineBreakMode:NSLineBreakByWordWrapping];
         contentL.frame=CGRectMake(self.bounds.size.width/10, self.bounds.size.height*8/10-size.height, self.bounds.size.width*8/10, size.height);;
         subL.frame = CGRectMake(self.bounds.size.width/10, self.bounds.size.height*3/10, self.bounds.size.width*9/10, 24);
     }else{
-        contentL.frame=CGRectMake(self.bounds.size.width/10, self.bounds.size.height*9/10-20, self.bounds.size.width*8/10, 20);;
+        contentL.frame=CGRectMake(30, self.bounds.size.height/2, self.bounds.size.width-30, 20);;
         subL.frame = CGRectMake(self.bounds.size.width/10, self.bounds.size.height/10, self.bounds.size.width*9/10, 20);
         contentL.font = [UIFont systemFontOfSize:12];
         subL.font = [UIFont systemFontOfSize:12];
     }
-    contentL.textColor = [UIColor orangeColor];
-    subL.textColor = [UIColor orangeColor];
+    contentL.textColor = CommonGreenColor;
+    subL.textColor = CommonGreenColor;
 }
 -(void)layoutBackCover
 {

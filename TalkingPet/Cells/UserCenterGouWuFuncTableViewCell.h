@@ -10,4 +10,7 @@
 
 @interface UserCenterGouWuFuncTableViewCell : UITableViewCell
 @property (nonatomic,copy)void(^buttonClicked) (int index);
+@property (nonatomic,assign)int cartCount;
+@property (nonatomic,strong) UIImageView * unreadBgV;
+@property (nonatomic,strong) UILabel * unreadLabel;
 @end

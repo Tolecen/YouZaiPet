@@ -7,7 +7,7 @@
 //
 
 #import "NetServer.h"
-
+#import "ReceiptAddress.h"
 @interface NetServer (Payment)
 
 + (void)fetchOrderListWithPageIndex:(NSInteger)pageIndex Option:(NSString *)option
@@ -28,5 +28,23 @@
 
 + (void)getAddressCodeWithsuccess:(void (^)(id result))success
 failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)addAddressWithAdress:(ReceiptAddress *)address
+                     success:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)deleteAddressWithAdressId:(NSString *)addressId
+                     success:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)editAddressWithAdress:(ReceiptAddress *)address
+                     success:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)fentchAddressListsuccess:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)fentchDefaultAddressSuccess:(void (^)(id result))success
+                         failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 @end

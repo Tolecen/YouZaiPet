@@ -71,7 +71,7 @@
         return scrollCell;
     }
     YZDogTypeAlphabetModel *dogModel = self.alphabet[indexPath.section - 2][indexPath.row];
-    cell.textLabel.text = dogModel.fullName;
+    cell.textLabel.text = dogModel.typeName;
     cell.textLabel.font = [UIFont systemFontOfSize:12.f];
     cell.textLabel.textColor = [UIColor colorWithRed:(83 / 255.f)
                                                green:(83 / 255.f)

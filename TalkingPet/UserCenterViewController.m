@@ -37,9 +37,9 @@
     if (self) {
         // Initialization code
         self.backgroundColor = [UIColor whiteColor];
-//        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        //        self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
- 
+        
         self.imageV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 12.5, 25, 25)];
         [self.contentView addSubview:_imageV];
         
@@ -89,6 +89,8 @@
 @property (nonatomic,retain) UIImageView * darenV;
 @property (nonatomic,strong)UIButton * loginBtn;
 @property (nonatomic,strong)UIBarButtonItem * msgBtnItem;
+@property (nonatomic,strong)UIImageView * menuBarNotiImg;
+@property (nonatomic,assign)int cartCount;
 
 @property (nonatomic,retain)NewUserViewController * editCurrentPetVC;
 @property (nonatomic,retain)NewUserViewController * addNewPetVC;
@@ -100,7 +102,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"个人中心";
+        //self.title = @"个人中心";
         self.stringArr = @[@"我的等级",@"我的仔币"];
         self.imgArr = @[@"wodedengji@2x",@"wodezaibi@2x"];
         self.hideNaviBg = YES;
@@ -113,9 +115,17 @@
     [self showNaviBg];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self checkNoti];
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+   
     if (![UserServe sharedUserServe].userName) {
         _tableView.hidden = YES;
         _loginBtn.hidden = NO;
@@ -125,6 +135,7 @@
         _tableView.hidden = NO;
         _loginBtn.hidden = YES;
         self.navigationItem.rightBarButtonItem = _msgBtnItem;
+        [self checkCart];
     }
 }
 - (void)viewDidLoad
@@ -132,8 +143,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithR:240 g:240 b:240 alpha:1];
     // Do any additional setup after loading the view.
-//    [self setBackButtonWithTarget:@selector(backAction)];
-//    [self setRightButtonWithName:nil BackgroundImg:@"morebtn" Target:@selector(moreBtnClicked)];
+    //    [self setBackButtonWithTarget:@selector(backAction)];
+    //    [self setRightButtonWithName:nil BackgroundImg:@"morebtn" Target:@selector(moreBtnClicked)];
     
     UIImage *image1 = [UIImage imageNamed:@"shezhi@2x"];
     image1 = [image1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -144,6 +155,10 @@
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     _msgBtnItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toMessageVC:)];
     self.navigationItem.rightBarButtonItem = _msgBtnItem;
+    
+//    self.menuBarNotiImg = [[UIImageView alloc] initWithFrame:CGRectMake(32, 5, 10, 10)];
+//    [self.menuBarNotiImg setImage:[UIImage imageNamed:@"dotunread"]];
+//    [self.navigationItem.rightBarButtonItem addSubview:self.menuBarNotiImg];
     
     bgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, -100, self.view.frame.size.width, 400)];
     [bgV setImage:[UIImage imageNamed:@"usercenter_topBg"]];
@@ -166,16 +181,16 @@
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     [self.view addSubview:_tableView];
-//    _tableView.hidden = YES;
+    //    _tableView.hidden = YES;
     _tableView.backgroundView = nil;
     _tableView.clipsToBounds = YES;
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.backgroundView = nil;
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
-//    _tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
+    //    _tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     _tableView.delegate = self;
     _tableView.dataSource = self;
-//    _tableView.rowHeight = 50;
+    //    _tableView.rowHeight = 50;
     [_tableView addHeaderWithTarget:self action:@selector(getCurrentPetInfo)];
     _tableView.tableHeaderView = ({
         UIView * view  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 300)];
@@ -185,12 +200,12 @@
         whiteV.backgroundColor = [UIColor whiteColor];
         [view addSubview:whiteV];
         
-//        signInB = [UIButton buttonWithType:UIButtonTypeCustom];
-//        signInB.frame = CGRectMake(ScreenWidth-10-48, 10+navigationBarHeight, 46, 20);
-//        signInB.titleLabel.font = [UIFont systemFontOfSize:13];
-//        [signInB addTarget:self action:@selector(currentPetSignIn) forControlEvents:UIControlEventTouchUpInside];
-//        [self buildSignInButtonWithCurrentPetSignatured];
-//        [view addSubview:signInB];
+        //        signInB = [UIButton buttonWithType:UIButtonTypeCustom];
+        //        signInB.frame = CGRectMake(ScreenWidth-10-48, 10+navigationBarHeight, 46, 20);
+        //        signInB.titleLabel.font = [UIFont systemFontOfSize:13];
+        //        [signInB addTarget:self action:@selector(currentPetSignIn) forControlEvents:UIControlEventTouchUpInside];
+        //        [self buildSignInButtonWithCurrentPetSignatured];
+        //        [view addSubview:signInB];
         
         photoIB = [[EGOImageButton alloc] initWithFrame:CGRectMake(view.center.x-37, 120-37, 74, 74)];
         photoIB.placeholderImage = [UIImage imageNamed:@"placeholderHead"];
@@ -201,10 +216,10 @@
         [view addSubview:photoIB];
         [photoIB addTarget:self action:@selector(pushToEditCurrentPetVC) forControlEvents:UIControlEventTouchUpInside];
         
-//        self.darenV = [[UIImageView alloc] initWithFrame:CGRectMake(view.center.x-37+74-20, 23+74-20+navigationBarHeight, 20, 20)];
-//        [self.darenV setImage:[UIImage imageNamed:@"daren"]];
-//        [view addSubview:self.darenV];
-//        self.darenV.hidden = YES;
+        //        self.darenV = [[UIImageView alloc] initWithFrame:CGRectMake(view.center.x-37+74-20, 23+74-20+navigationBarHeight, 20, 20)];
+        //        [self.darenV setImage:[UIImage imageNamed:@"daren"]];
+        //        [view addSubview:self.darenV];
+        //        self.darenV.hidden = YES;
         
         nicknameL = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(photoIB.frame)+8, 300, 20)];
         nicknameL.center = CGPointMake(photoIB.center.x, nicknameL.center.y);
@@ -214,8 +229,8 @@
         nicknameL.textColor = CommonGreenColor;
         [view addSubview:nicknameL];
         
-//        genderIV = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(photoIB.frame)-20, CGRectGetMaxY(photoIB.frame)-20, 20, 20)];
-//        [view addSubview:genderIV];
+        //        genderIV = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(photoIB.frame)-20, CGRectGetMaxY(photoIB.frame)-20, 20, 20)];
+        //        [view addSubview:genderIV];
         
         breedAgeL = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(nicknameL.frame)+5, ScreenWidth, 20)];
         breedAgeL.backgroundColor = [UIColor clearColor];
@@ -229,16 +244,16 @@
         attentionB.titleLabel.font = [UIFont systemFontOfSize:16];
         [attentionB addTarget:self action:@selector(puthAttentionViewCntroller) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:attentionB];
-//        [attentionB setTitleShadowColor:[UIColor colorWithWhite:0.3 alpha:0.6] forState:UIControlStateNormal];
-//        attentionB.titleLabel.shadowOffset = CGSizeMake(1, 1);
+        //        [attentionB setTitleShadowColor:[UIColor colorWithWhite:0.3 alpha:0.6] forState:UIControlStateNormal];
+        //        attentionB.titleLabel.shadowOffset = CGSizeMake(1, 1);
         
         fansB = [UIButton buttonWithType:UIButtonTypeCustom];
         [fansB setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         fansB.titleLabel.font = [UIFont systemFontOfSize:16];
         [fansB addTarget:self action:@selector(puthFansViewCntroller) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:fansB];
-//        [fansB setTitleShadowColor:[UIColor colorWithWhite:0.3 alpha:0.6] forState:UIControlStateNormal];
-//        fansB.titleLabel.shadowOffset = CGSizeMake(1, 1);
+        //        [fansB setTitleShadowColor:[UIColor colorWithWhite:0.3 alpha:0.6] forState:UIControlStateNormal];
+        //        fansB.titleLabel.shadowOffset = CGSizeMake(1, 1);
         
         UILabel * lineL = [[UILabel alloc] initWithFrame:CGRectMake(view.center.x-10, CGRectGetMaxY(breedAgeL.frame)+16, 20, 10)];
         [lineL setText:@"|"];
@@ -275,25 +290,25 @@
         shuoshuoBtn.showsTouchWhenHighlighted = YES;
         
         
-//        forwardBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        forwardBtn.backgroundColor = [UIColor clearColor];
-//        [forwardBtn setFrame:CGRectMake(ScreenWidth/3, view.frame.size.height-55, ScreenWidth/3, 40)];
-//        [view addSubview:forwardBtn];
-//        forwardNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, 20)];
-//        forwardNumL.backgroundColor = [UIColor clearColor];
-//        forwardNumL.textAlignment = NSTextAlignmentCenter;
-//        forwardNumL.font = [UIFont boldSystemFontOfSize:15];
-//        forwardNumL.textColor = [UIColor grayColor];
-//        [forwardBtn addSubview:forwardNumL];
-//        UILabel * forwardL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/3, 20)];
-//        [forwardL setBackgroundColor:[UIColor clearColor]];
-//        forwardL.textAlignment = NSTextAlignmentCenter;
-//        [forwardL setText:@"转发"];
-//        forwardL.font = [UIFont systemFontOfSize:13];
-//        forwardL.textColor = [UIColor lightGrayColor];
-//        [forwardBtn addSubview:forwardL];
-//        [forwardBtn addTarget:self action:@selector(tomyForwardPage) forControlEvents:UIControlEventTouchUpInside];
-//        forwardBtn.showsTouchWhenHighlighted = YES;
+        //        forwardBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        //        forwardBtn.backgroundColor = [UIColor clearColor];
+        //        [forwardBtn setFrame:CGRectMake(ScreenWidth/3, view.frame.size.height-55, ScreenWidth/3, 40)];
+        //        [view addSubview:forwardBtn];
+        //        forwardNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, 20)];
+        //        forwardNumL.backgroundColor = [UIColor clearColor];
+        //        forwardNumL.textAlignment = NSTextAlignmentCenter;
+        //        forwardNumL.font = [UIFont boldSystemFontOfSize:15];
+        //        forwardNumL.textColor = [UIColor grayColor];
+        //        [forwardBtn addSubview:forwardNumL];
+        //        UILabel * forwardL = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, ScreenWidth/3, 20)];
+        //        [forwardL setBackgroundColor:[UIColor clearColor]];
+        //        forwardL.textAlignment = NSTextAlignmentCenter;
+        //        [forwardL setText:@"转发"];
+        //        forwardL.font = [UIFont systemFontOfSize:13];
+        //        forwardL.textColor = [UIColor lightGrayColor];
+        //        [forwardBtn addSubview:forwardL];
+        //        [forwardBtn addTarget:self action:@selector(tomyForwardPage) forControlEvents:UIControlEventTouchUpInside];
+        //        forwardBtn.showsTouchWhenHighlighted = YES;
         
         commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         commentBtn.backgroundColor = [UIColor clearColor];
@@ -358,12 +373,12 @@
 {
     nicknameL.text = [UserServe sharedUserServe].account.nickname;
     photoIB.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
-//    if ([UserServe sharedUserServe].petArr.count>0) {
-//        [moreB setBackgroundImage:[UIImage imageNamed:@"usercenter_changePet"] forState:UIControlStateNormal];
-//    }else
-//    {
-//        [moreB setBackgroundImage:[UIImage imageNamed:@"usercenter_addPet"] forState:UIControlStateNormal];
-//    }
+    //    if ([UserServe sharedUserServe].petArr.count>0) {
+    //        [moreB setBackgroundImage:[UIImage imageNamed:@"usercenter_changePet"] forState:UIControlStateNormal];
+    //    }else
+    //    {
+    //        [moreB setBackgroundImage:[UIImage imageNamed:@"usercenter_addPet"] forState:UIControlStateNormal];
+    //    }
     [attentionB setTitle:[NSString stringWithFormat:@"关注:%@",[UserServe sharedUserServe].account.attentionNo] forState:UIControlStateNormal];
     [fansB setTitle:[NSString stringWithFormat:@"粉丝:%@",[UserServe sharedUserServe].account.fansNo] forState:UIControlStateNormal];
     CGSize attentionSize = [attentionB.titleLabel.text sizeWithFont:attentionB.titleLabel.font constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
@@ -371,22 +386,22 @@
     UIView * view = attentionB.superview;
     attentionB.frame = CGRectMake(view.center.x - attentionSize.width-30, CGRectGetMaxY(breedAgeL.frame)+10, attentionSize.width+20, 20);
     fansB.frame = CGRectMake(view.center.x + 10, CGRectGetMaxY(breedAgeL.frame)+10, fansSize.width+20, 20);
-//    switch ([[UserServe sharedUserServe].account.gender integerValue]) {
-//        case 0:{
-//            genderIV.image = [UIImage imageNamed:@"female_border"];
-//        }break;
-//        case 1:{
-//            genderIV.image = [UIImage imageNamed:@"male_border"];
-//        }break;
-//        default:{
-//            genderIV.image = nil;
-//        }break;
-//    }
-////    self.darenV.hidden = [UserServe sharedUserServe].account.ifDaren?NO:YES;
-//    CGSize k = [nicknameL.text sizeWithFont:nicknameL.font constrainedToSize:CGSizeMake(ScreenWidth-40, nicknameL.frame.size.height)];
-//    [self.darenV setFrame:CGRectMake(ScreenWidth/2-k.width/2-25, nicknameL.frame.origin.y, 20, 20)];
-//    PetCategoryParser * pet = [[PetCategoryParser alloc] init];
-//    breedAgeL.text = [[[pet breedWithIDcode:[[UserServe sharedUserServe].account.breed integerValue]] stringByAppendingString:[NSString stringWithFormat:@"  %@",[Common calAgeWithBirthDate:[NSString stringWithFormat:@"%f",[[UserServe sharedUserServe].account.birthday timeIntervalSince1970]*1000]]]] stringByAppendingString:[NSString stringWithFormat:@"   LV.%d",[[UserServe sharedUserServe].account.grade intValue]]];
+    //    switch ([[UserServe sharedUserServe].account.gender integerValue]) {
+    //        case 0:{
+    //            genderIV.image = [UIImage imageNamed:@"female_border"];
+    //        }break;
+    //        case 1:{
+    //            genderIV.image = [UIImage imageNamed:@"male_border"];
+    //        }break;
+    //        default:{
+    //            genderIV.image = nil;
+    //        }break;
+    //    }
+    ////    self.darenV.hidden = [UserServe sharedUserServe].account.ifDaren?NO:YES;
+    //    CGSize k = [nicknameL.text sizeWithFont:nicknameL.font constrainedToSize:CGSizeMake(ScreenWidth-40, nicknameL.frame.size.height)];
+    //    [self.darenV setFrame:CGRectMake(ScreenWidth/2-k.width/2-25, nicknameL.frame.origin.y, 20, 20)];
+    //    PetCategoryParser * pet = [[PetCategoryParser alloc] init];
+    //    breedAgeL.text = [[[pet breedWithIDcode:[[UserServe sharedUserServe].account.breed integerValue]] stringByAppendingString:[NSString stringWithFormat:@"  %@",[Common calAgeWithBirthDate:[NSString stringWithFormat:@"%f",[[UserServe sharedUserServe].account.birthday timeIntervalSince1970]*1000]]]] stringByAppendingString:[NSString stringWithFormat:@"   LV.%d",[[UserServe sharedUserServe].account.grade intValue]]];
     breedAgeL.text = [NSString stringWithFormat:@" LV.%d",[[UserServe sharedUserServe].account.grade intValue]];
     
     [_tableView reloadData];
@@ -415,6 +430,22 @@
         
     }];
 }
+
+-(void)checkCart
+{
+    if (![UserServe sharedUserServe].userID) {
+        return;
+    }
+    NSString * cartCounts = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"cartneedmetioncount%@",[UserServe sharedUserServe].userID]];
+    if (!cartCounts || [cartCounts intValue]==0) {
+        self.cartCount = 0;
+    }
+    else
+    {
+        self.cartCount = [cartCounts intValue];
+    }
+    [_tableView reloadData];
+}
 #pragma mark -
 - (void)puthAttentionViewCntroller
 {
@@ -432,20 +463,20 @@
 }
 - (void)buildSignInButtonWithCurrentPetSignatured
 {
-//    if ([UserServe sharedUserServe].accountSignatured) {
-////        [signInB setTitle:@"已签到" forState:UIControlStateNormal];
-//        [signInB setBackgroundImage:[UIImage imageNamed:@"usercenter_signedBtn"] forState:UIControlStateNormal];
-//    }else
-//    {
-//        [signInB setBackgroundImage:[UIImage imageNamed:@"usercenter_signBtn"] forState:UIControlStateNormal];
-//    }
+    //    if ([UserServe sharedUserServe].accountSignatured) {
+    ////        [signInB setTitle:@"已签到" forState:UIControlStateNormal];
+    //        [signInB setBackgroundImage:[UIImage imageNamed:@"usercenter_signedBtn"] forState:UIControlStateNormal];
+    //    }else
+    //    {
+    //        [signInB setBackgroundImage:[UIImage imageNamed:@"usercenter_signBtn"] forState:UIControlStateNormal];
+    //    }
     
 }
 - (void)currentPetSignIn
 {
     [PublishServer signInWithNavigationController:self.navigationController completion:^{
-//        [self buildSignInButtonWithCurrentPetSignatured];
-//        [[RootViewController sharedRootViewController].mainVC mainViewNeedSignIn];
+        //        [self buildSignInButtonWithCurrentPetSignatured];
+        //        [[RootViewController sharedRootViewController].mainVC mainViewNeedSignIn];
     }];;
 }
 - (void)pushToEditCurrentPetVC
@@ -461,7 +492,7 @@
     [mDict setObject:@"account" forKey:@"command"];
     [mDict setObject:@"userInfo" forKey:@"options"];
     [mDict setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
-//    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+    //    [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary * dict = [responseObject objectForKey:@"value"];
         [UserServe sharedUserServe].account.fansNo = (dict[@"counter"])[@"fans"];
@@ -474,11 +505,11 @@
         [UserServe sharedUserServe].account.score = dict[@"score"];
         [UserServe sharedUserServe].account.coin = dict[@"coin"];
         [self loadViewContent];
-//        [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
+        //        [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
         
         Account * acc = [[Account alloc]initWithDictionary:dict error:nil];
         [DatabaseServe activateUeserWithAccount:acc];
-//        userServe.account = [DatabaseServe getActionAccount];
+        //        userServe.account = [DatabaseServe getActionAccount];
         
         [self.tableView headerEndRefreshing];
         
@@ -511,11 +542,12 @@
         if (cell == nil) {
             cell = [[UserCenterGouWuFuncTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentCellIdentifier1];
         }
+        cell.cartCount = self.cartCount;
         cell.buttonClicked = ^(int index){
             [self toSomePage:index];
         };
         return cell;
-
+        
     }
     else{
         static NSString *CommentCellIdentifier = @"Cell";
@@ -554,54 +586,54 @@
                 MyCionViewController * myGradeVC = [[MyCionViewController alloc] init];
                 [self.navigationController pushViewController:myGradeVC animated:YES];
             }break;
-//            case 2:{
-//                MyGradeViewController * myGradeVC = [[MyGradeViewController alloc] init];
-//                myGradeVC.title = @"我的积分";
-//                [self.navigationController pushViewController:myGradeVC animated:YES];
-//            }break;
-//            case 3:{
-//                MyOrderViewConyroller * myOrderVC = [[MyOrderViewConyroller alloc] init];
-//                [self.navigationController pushViewController:myOrderVC animated:YES];
-//            }break;
-//            case 4:{
-//                QuanViewController * quanVC = [[QuanViewController alloc] init];
-//                quanVC.pageType = 0;
-//                [self.navigationController pushViewController:quanVC animated:YES];
-//            }break;
+                //            case 2:{
+                //                MyGradeViewController * myGradeVC = [[MyGradeViewController alloc] init];
+                //                myGradeVC.title = @"我的积分";
+                //                [self.navigationController pushViewController:myGradeVC animated:YES];
+                //            }break;
+                //            case 3:{
+                //                MyOrderViewConyroller * myOrderVC = [[MyOrderViewConyroller alloc] init];
+                //                [self.navigationController pushViewController:myOrderVC animated:YES];
+                //            }break;
+                //            case 4:{
+                //                QuanViewController * quanVC = [[QuanViewController alloc] init];
+                //                quanVC.pageType = 0;
+                //                [self.navigationController pushViewController:quanVC animated:YES];
+                //            }break;
             default:
                 break;
         }
     }
-//    if (indexPath.section==1) {
-//        switch (indexPath.row) {
-//            case 0:{
-//                PetalkalkListViewController * tagTlistV = [[PetalkalkListViewController alloc] init];
-//                tagTlistV.title = _stringArr[indexPath.row+2];
-//                tagTlistV.listTyep = PetalkListTyepMyPublish;
-//                [self.navigationController pushViewController:tagTlistV animated:YES];
-//            }break;
-//            case 1:{
-//                PetalkalkListViewController * tagTlistV = [[PetalkalkListViewController alloc] init];
-//                tagTlistV.title = _stringArr[indexPath.row+2];
-//                tagTlistV.listTyep = PetalkListTyepMyForWord;
-//                [self.navigationController pushViewController:tagTlistV animated:YES];
-//            }break;
-//            case 2:{
-//                MyCommentViewController * myCV = [[MyCommentViewController alloc] init];
-//                [self.navigationController pushViewController:myCV animated:YES];
-//                
-//            }break;
-//            case 3:{
-//                PetalkalkListViewController * tagTlistV = [[PetalkalkListViewController alloc] init];
-//                tagTlistV.title = _stringArr[indexPath.row+2];
-//                tagTlistV.listTyep = PetalkListTyepMyZan;
-//                [self.navigationController pushViewController:tagTlistV animated:YES];
-//            }break;
-//            
-//            default:
-//                break;
-//        }
-//    }
+    //    if (indexPath.section==1) {
+    //        switch (indexPath.row) {
+    //            case 0:{
+    //                PetalkalkListViewController * tagTlistV = [[PetalkalkListViewController alloc] init];
+    //                tagTlistV.title = _stringArr[indexPath.row+2];
+    //                tagTlistV.listTyep = PetalkListTyepMyPublish;
+    //                [self.navigationController pushViewController:tagTlistV animated:YES];
+    //            }break;
+    //            case 1:{
+    //                PetalkalkListViewController * tagTlistV = [[PetalkalkListViewController alloc] init];
+    //                tagTlistV.title = _stringArr[indexPath.row+2];
+    //                tagTlistV.listTyep = PetalkListTyepMyForWord;
+    //                [self.navigationController pushViewController:tagTlistV animated:YES];
+    //            }break;
+    //            case 2:{
+    //                MyCommentViewController * myCV = [[MyCommentViewController alloc] init];
+    //                [self.navigationController pushViewController:myCV animated:YES];
+    //
+    //            }break;
+    //            case 3:{
+    //                PetalkalkListViewController * tagTlistV = [[PetalkalkListViewController alloc] init];
+    //                tagTlistV.title = _stringArr[indexPath.row+2];
+    //                tagTlistV.listTyep = PetalkListTyepMyZan;
+    //                [self.navigationController pushViewController:tagTlistV animated:YES];
+    //            }break;
+    //
+    //            default:
+    //                break;
+    //        }
+    //    }
 }
 -(void)toSomePage:(int)index
 {
@@ -621,13 +653,13 @@
         default:
             break;
     }
-
+    
 }
 -(void)toshuoshuoListPage
 {
     MyShuoshuoTimeLineViewController * tagTlistV = [[MyShuoshuoTimeLineViewController alloc] init];
     tagTlistV.title = @"我的发布";
-//    tagTlistV.listTyep = PetalkListTyepMyPublish;
+    //    tagTlistV.listTyep = PetalkListTyepMyPublish;
     [self.navigationController pushViewController:tagTlistV animated:YES];
 }
 -(void)tomyForwardPage
@@ -641,7 +673,7 @@
 {
     MyCommentViewController * myCV = [[MyCommentViewController alloc] init];
     [self.navigationController pushViewController:myCV animated:YES];
-
+    
 }
 -(void)tomyFavorPage
 {
@@ -752,19 +784,19 @@
     [regDict setObject:[UserServe sharedUserServe].userName forKey:@"username"];
     [regDict setObject:[_editCurrentPetVC.nameTF.text CutSpacing] forKey:@"nickname"];
     [regDict setObject:_editCurrentPetVC.avatarUrl forKey:@"head"];
-//    [regDict setObject:_editCurrentPetVC.genderCode forKey:@"gender"];
-//    [regDict setObject:_editCurrentPetVC.breedCode forKey:@"type"];
-//    [regDict setObject:[NSString stringWithFormat:@"%.0f",_editCurrentPetVC.selectedBirthday*1000] forKey:@"birthday"];
-//    [regDict setObject:_editCurrentPetVC.regionTL.text forKey:@"address"];
+    //    [regDict setObject:_editCurrentPetVC.genderCode forKey:@"gender"];
+    //    [regDict setObject:_editCurrentPetVC.breedCode forKey:@"type"];
+    //    [regDict setObject:[NSString stringWithFormat:@"%.0f",_editCurrentPetVC.selectedBirthday*1000] forKey:@"birthday"];
+    //    [regDict setObject:_editCurrentPetVC.regionTL.text forKey:@"address"];
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UserServe sharedUserServe].account = ({
             Account * pet = [UserServe sharedUserServe].account;
             pet.nickname = [_editCurrentPetVC.nameTF.text CutSpacing];
             pet.headImgURL = _editCurrentPetVC.avatarUrl;
-//            pet.gender = _editCurrentPetVC.genderCode;
-//            pet.breed = _editCurrentPetVC.breedCode;
-//            pet.region = _editCurrentPetVC.regionTL.text;
-//            pet.birthday = [NSDate dateWithTimeIntervalSince1970:_editCurrentPetVC.selectedBirthday];
+            //            pet.gender = _editCurrentPetVC.genderCode;
+            //            pet.breed = _editCurrentPetVC.breedCode;
+            //            pet.region = _editCurrentPetVC.regionTL.text;
+            //            pet.birthday = [NSDate dateWithTimeIntervalSince1970:_editCurrentPetVC.selectedBirthday];
             pet;
         });
         [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
@@ -811,8 +843,8 @@
         pet.score = petDic[@"score"];
         pet.coin = petDic[@"coin"];
         pet.ifDaren = [petDic[@"star"] isEqualToString:@"1"]?YES:NO;
-//        [UserServe sharedUserServe].petArr = [NSMutableArray arrayWithArray:[UserServe sharedUserServe].petArr];
-//        [[UserServe sharedUserServe].petArr addObject:pet];
+        //        [UserServe sharedUserServe].petArr = [NSMutableArray arrayWithArray:[UserServe sharedUserServe].petArr];
+        //        [[UserServe sharedUserServe].petArr addObject:pet];
         [DatabaseServe savePet:pet WithUsername:[UserServe sharedUserServe].userName];
         [SVProgressHUD dismiss];
         [self loadViewContent];
@@ -827,9 +859,9 @@
 - (void)showSetViewController
 {
     SetViewController * setVC = [[SetViewController alloc] init];
-
+    
     [self.navigationController pushViewController:setVC animated:YES];
-
+    
 }
 -(void)toMessageVC:(UIButton *)sender
 {
@@ -852,6 +884,34 @@
 -(void)toLogInPage
 {
     [[RootViewController sharedRootViewController] showLoginViewController];
+}
+
+-(void)checkNoti
+{
+    [NetServer getAllMsgCountSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self ifTishi];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+    
+
+}
+-(void)ifTishi
+{
+    NSString * unreadCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"needMetionCount%@",[UserServe sharedUserServe].userID]];
+    if ([unreadCount intValue]>0) {
+        UIImage *image = [UIImage imageNamed:@"xiaoxiunread@2x"];
+        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        _msgBtnItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toMessageVC:)];
+        self.navigationItem.rightBarButtonItem = _msgBtnItem;
+        
+    }
+    else{
+        UIImage *image = [UIImage imageNamed:@"xiaoxi@2x"];
+        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        _msgBtnItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toMessageVC:)];
+        self.navigationItem.rightBarButtonItem = _msgBtnItem;
+    }
 }
 #pragma mark -
 @end

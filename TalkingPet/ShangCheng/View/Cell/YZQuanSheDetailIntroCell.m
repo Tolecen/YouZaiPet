@@ -7,7 +7,7 @@
 //
 
 #import "YZQuanSheDetailIntroCell.h"
-
+#import "Common.h"
 @interface YZQuanSheDetailIntroCell()
 
 @property (nonatomic, weak) UIImageView *thumb;
@@ -109,7 +109,7 @@
     [self.thumb setImageWithURL:[NSURL URLWithString:parents.photos] placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
     self.ckuLb.text = parents.boodNo;
     self.sexLb.text = parents.sex == YZDogSex_Female ? @"妈妈" : @"爸爸";
-    self.introLb.text = parents.details;
+    self.introLb.text = [Common filterHTML:parents.details];
     [self setNeedsUpdateConstraints];
 }
 
