@@ -354,9 +354,9 @@
         view;
     });
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(buildSignInButtonWithCurrentPetSignatured) name:@"WXRUsersignInOrNo" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(buildSignInButtonWithCurrentPetSignatured) name:@"WXRUsersignInOrNo" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadViewContent) name:@"WXRLoginSucceed" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeSuccess:) name:@"WXRExchangeSuccess" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeSuccess:) name:@"WXRExchangeSuccess" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNoti) name:@"SectionmsgNotiReceived" object:nil];
     
     [self loadViewContent];
