@@ -136,6 +136,8 @@
             self.orderNo = [result[@"data"] objectForKey:@"order_no"];
             [self makePaymentInfo];
         }
+        else
+            [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
     }];
 }
 
@@ -144,7 +146,7 @@
     [NetServer createOrderNoSuccess:^(id result) {
         success(result);
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-        
+        [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
     }];
 }
 
@@ -160,9 +162,14 @@
             [arr addObject:[NSString stringWithFormat:@"%@.%@.%@",self.orderNo,goodInfo.goodId,goodInfo.total]];
         }
     }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:@"请先在购物车选择要购买的商品哦"];
+        return;
+    }
     _goodsString = [arr JSONRepresentation];
     NSLog(@"ffffff:%@",_goodsString);
-    [NetServer requestPaymentWithGoods:_goodsString AddressId:self.address.addressID ChannelStr:@"1" Voucher:nil success:^(id result) {
+    [NetServer requestPaymentWithGoods:_goodsString AddressId:self.address.addressID ChannelStr:self.paySelectedIndex==0?@"alipay":@"wx" Voucher:nil success:^(id result) {
         
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         
