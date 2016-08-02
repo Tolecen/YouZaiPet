@@ -17,11 +17,13 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:path]];
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
+    NSLog(@"req:%@,path:%@",parameters,path);
     [httpClient postPath:@"" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         id JSON = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         if (success) {
             success(operation, JSON);
         }
+        NSLog(@"responseData:%@",JSON);
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
@@ -46,7 +48,6 @@
     if (![option isEqualToString:@"allList"]) {
         path = [[NSString alloc] initWithFormat:@"%@/orders/rows/status/%@",BasePayUrl,option];
     }
-    NSLog(@"req:%@,path:%@",params,path);
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -66,7 +67,6 @@
 //    params[@"order_no"] = orderNo;
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/orders/details/order_no/%@",BasePayUrl,orderNo];
-    NSLog(@"req:%@,path:%@",params,path);
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -87,7 +87,6 @@
     //    params[@"order_no"] = orderNo;
     
     NSString *path = goodUrl;
-    NSLog(@"req:%@,path:%@",params,path);
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -108,7 +107,6 @@
     //    params[@"order_no"] = orderNo;
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/orders/cancel/order_no/%@",BasePayUrl,orderNo];
-    NSLog(@"req:%@,path:%@",params,path);
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -127,7 +125,6 @@
     //    params[@"order_no"] = orderNo;
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/address/areas",BasePayUrl];
-    NSLog(@"req:%@,path:%@",params,path);
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -154,7 +151,6 @@
     params[@"default"] = [NSString stringWithFormat:@"%d",address.action];
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/address/add",BasePayUrl];
-    NSLog(@"req:%@,path:%@",params,path);
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -175,7 +171,6 @@
     //    params[@"order_no"] = orderNo;
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/address/dele/id/%@",BasePayUrl,addressId];
-    NSLog(@"req:%@,path:%@",params,path);
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -196,7 +191,6 @@
     //    params[@"order_no"] = orderNo;
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/address/set/id/%@",BasePayUrl,addressId];
-    NSLog(@"req:%@,path:%@",params,path);
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -225,7 +219,6 @@
     params[@"default"] = [NSString stringWithFormat:@"%d",address.action];
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/address/edit/id/%@",BasePayUrl,address.addressID];
-    NSLog(@"req:%@,path:%@",params,path);
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -245,7 +238,6 @@
     //    params[@"order_no"] = orderNo;
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/address/rows",BasePayUrl];
-    NSLog(@"req:%@,path:%@",params,path);
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -266,7 +258,6 @@
     //    params[@"order_no"] = orderNo;
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/address/shopping",BasePayUrl];
-    NSLog(@"req:%@,path:%@",params,path);
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -288,7 +279,6 @@
     params[@"source"] = @"app";
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/payment/order",BasePayUrl];
-    NSLog(@"req:%@,path:%@",params,path);
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -316,7 +306,7 @@
     }
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/payment/shopping",BasePayUrl];
-    NSLog(@"req:%@,path:%@",params,path);
+    
     [NetServer inner_PayServerConfigWithWithPath:path
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
