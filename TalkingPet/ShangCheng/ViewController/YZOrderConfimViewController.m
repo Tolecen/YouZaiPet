@@ -151,12 +151,12 @@
 -(void)makePaymentInfo
 {
 
-    _goodsString = @"[";
+    _goodsString = @"";
     NSMutableArray * arr = [NSMutableArray array];
     if (self.orders.count>0) {
         for (int i = 0; i<self.orders.count; i++) {
             OrderYZGoodInfo * goodInfo = self.orders[i];
-            _goodsString = [_goodsString stringByAppendingFormat:@"%@\"%@.%@.%@\"%@",i==0?@"":@",",self.orderNo,goodInfo.goodId,goodInfo.total,i==self.orders.count-1?@"]":@""];
+//            _goodsString = [_goodsString stringByAppendingFormat:@"%@\"%@.%@.%@\"%@",i==0?@"":@",",self.orderNo,goodInfo.goodId,goodInfo.total,i==self.orders.count-1?@"]":@""];
             [arr addObject:[NSString stringWithFormat:@"%@.%@.%@",self.orderNo,goodInfo.goodId,goodInfo.total]];
         }
     }

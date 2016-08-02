@@ -7963,7 +7963,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "ac5dddff-db6c-4f21-99c3-e33f16375311";
+				PROVISIONING_PROFILE = "04bd8a6e-24ec-4845-9aa9-10f3a3aa7c5e";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -8014,7 +8014,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jitao Hu (YHH5M33KAM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jitao Hu (YHH5M33KAM)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8052,7 +8052,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.youzai.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ac5dddff-db6c-4f21-99c3-e33f16375311";
+				PROVISIONING_PROFILE = "04bd8a6e-24ec-4845-9aa9-10f3a3aa7c5e";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -8063,7 +8063,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jitao Hu (S9QBHC9Y99)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jitao Hu (S9QBHC9Y99)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
