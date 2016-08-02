@@ -20,9 +20,9 @@
     self.title = @"支付成功";
     [self setBackButtonWithTarget:@selector(backBtnDo:)];
     
-    self.successV = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth/2-94, 10, 188, 211)];
+    self.successV = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth/2-100, 60, 200, 100)];
     self.successV.backgroundColor = [UIColor clearColor];
-    [self.successV setImage:[UIImage imageNamed:@"xiaomao"]];
+    [self.successV setImage:[UIImage imageNamed:@"successpage_topimg"]];
     [self.view addSubview:self.successV];
     
     UILabel * sL = [[UILabel alloc] initWithFrame:CGRectMake(10, self.successV.frame.size.height+self.successV.frame.origin.y+30, ScreenWidth-20, 30)];

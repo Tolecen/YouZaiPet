@@ -19,7 +19,7 @@
 #import "NetServer+Payment.h"
 #import "SVProgressHUD.h"
 #import "Pingpp.h"
-
+#import "PaySuccessViewController.h"
 @interface YZOrderConfimViewController()<UITableViewDelegate, UITableViewDataSource, YZShoppingCarBottomBarDelegate>
 
 @property (nonatomic, weak) YZShoppingCarBottomBar  *bottomBar;
@@ -185,6 +185,8 @@
             else
                 [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
         }
+        
+        [self toSuccessPage];
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
     }];
@@ -204,6 +206,24 @@
 //        [SystemServer sharedSystemServer].inPay = NO;
 //        //                [weakSelf showAlertMessage:result];
 //    }];
+}
+
+
+-(void)toSuccessPage
+{
+    
+    PaySuccessViewController * pv = [[PaySuccessViewController alloc] init];
+    pv.price = @"1298元";
+    pv.orderId = @"67890";
+    __block YZOrderConfimViewController * blockSelf = self;
+    pv.back = ^(){
+        [blockSelf.navigationController popToRootViewControllerAnimated:NO];
+    };
+    
+    UINavigationController * ui = [[UINavigationController alloc] initWithRootViewController:pv];
+    [self.navigationController presentViewController:ui animated:YES completion:^{
+        
+    }];
 }
 
 #pragma mark -- UITableView
