@@ -136,8 +136,13 @@
             self.orderNo = [result[@"data"] objectForKey:@"order_no"];
             [self makePaymentInfo];
         }
-        else
-            [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
+        else {
+            if (result[@"message"]) {
+                [SVProgressHUD showErrorWithStatus:result[@"message"]];
+            }
+            else
+                [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
+        }
     }];
 }
 
@@ -170,9 +175,18 @@
     _goodsString = [arr JSONRepresentation];
     NSLog(@"ffffff:%@",_goodsString);
     [NetServer requestPaymentWithGoods:_goodsString AddressId:self.address.addressID ChannelStr:self.paySelectedIndex==0?@"alipay":@"wx" Voucher:nil success:^(id result) {
-        
+        if ([result[@"code"] intValue]==200) {
+           
+        }
+        else {
+            if (result[@"message"]) {
+                [SVProgressHUD showErrorWithStatus:result[@"message"]];
+            }
+            else
+                [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
+        }
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-        
+        [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
     }];
 //    [Pingpp createPayment:charge viewController:weakSelf appURLScheme:kUrlScheme withCompletion:^(NSString *result, PingppError *error) {
 //        NSLog(@"completion block: %@", result);
