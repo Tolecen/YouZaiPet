@@ -309,26 +309,32 @@
     
     self.HeadAddressV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 90)];
     self.HeadAddressV.backgroundColor = [UIColor whiteColor];
+#pragma mark 头部背景新图片
     
+    UIImageView *HeadImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 90)];
+    HeadImageView.image = [UIImage imageNamed:@"bg_order_detail_large.png"];
+    [self.HeadAddressV addSubview:HeadImageView];
     
+#pragma mark 右边地址导航新图标
     UIImageView * imageVq = [[UIImageView alloc] initWithFrame:CGRectMake(10, 32, 19.5, 27.5)];
-    imageVq.image = [UIImage imageNamed:@"defaultAddress"];
+    imageVq.image = [UIImage imageNamed:@"iv_location_large.png"];
+    
     [self.HeadAddressV addSubview:imageVq];
     
-    self.shouhuoNameL = [[UILabel alloc] initWithFrame:CGRectMake(40, 15, 150, 20)];
+    self.shouhuoNameL = [[UILabel alloc] initWithFrame:CGRectMake(40, 50, 150, 20)];
     self.shouhuoNameL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
-    self.shouhuoNameL.font = [UIFont systemFontOfSize:16];
+    self.shouhuoNameL.font = [UIFont systemFontOfSize:14];
     self.shouhuoNameL.text = [@"收货人:" stringByAppendingString:@"收货人"];
     [self.HeadAddressV addSubview:self.shouhuoNameL];
     
-    self.shouhuoMobileL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-110, 10, 100, 20)];
+    self.shouhuoMobileL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-320, 50, 100, 20)];
     self.shouhuoMobileL.textColor = [UIColor colorWithWhite:140/255.0 alpha:1];
     self.shouhuoMobileL.textAlignment = NSTextAlignmentRight;
     self.shouhuoMobileL.font = [UIFont systemFontOfSize:14];
     self.shouhuoMobileL.text = @"15000998877";
     [self.HeadAddressV addSubview:self.shouhuoMobileL];
     
-    self.shouhuoAddressL = [[UILabel alloc] initWithFrame:CGRectMake(40, 40, ScreenWidth-80, 40)];
+    self.shouhuoAddressL = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, ScreenWidth-80, 40)];
     self.shouhuoAddressL.textColor = [UIColor colorWithWhite:140/255.0 alpha:1];
     self.shouhuoAddressL.numberOfLines = 2;
     self.shouhuoAddressL.font = [UIFont systemFontOfSize:14];
@@ -338,21 +344,6 @@
     UIView * gb = [[UIView alloc] initWithFrame:CGRectMake(0, 80, ScreenWidth, 10)];
     gb.backgroundColor = self.view.backgroundColor;
     [self.HeadAddressV addSubview:gb];
-    
-    self.footerV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 90)];
-    self.footerV.backgroundColor = [UIColor whiteColor];
-    
-    self.orderNoL = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, ScreenWidth-40, 20)];
-    self.orderNoL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
-    self.orderNoL.font = [UIFont systemFontOfSize:14];
-    self.orderNoL.text = [NSString stringWithFormat:@"订单编号：%@",self.myOrder.order_no];
-    [self.footerV addSubview:self.orderNoL];
-    
-    self.orderTimeL = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, ScreenWidth-40, 20)];
-    self.orderTimeL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
-    self.orderTimeL.font = [UIFont systemFontOfSize:14];
-    self.orderTimeL.text = [NSString stringWithFormat:@"创建时间：%@",self.myOrder.time];
-    [self.footerV addSubview:self.orderTimeL];
     
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight) style:UITableViewStyleGrouped];
@@ -364,27 +355,27 @@
     [_tableView headerBeginRefreshing];
     
     _tableView.tableHeaderView = self.HeadAddressV;
-    _tableView.tableFooterView = self.footerV;
-//    UIView * whiteView  = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 50 - navigationBarHeight, self.view.frame.size.width, 50)];
-//    whiteView.backgroundColor = [UIColor whiteColor];
-//    liaisonB = [UIButton buttonWithType:UIButtonTypeCustom];
-//    liaisonB.frame = CGRectMake(10, 9, 90, 32);
-//    [liaisonB addTarget:self action:@selector(liaison) forControlEvents:UIControlEventTouchUpInside];
-//    [liaisonB setImage:[UIImage imageNamed:@"liaison"] forState:UIControlStateNormal];
-//    [whiteView addSubview:liaisonB];
-//    cancelB = [UIButton buttonWithType:UIButtonTypeCustom];
-//    cancelB.frame = CGRectMake(ScreenWidth/2-45, 9, 90, 32);
-//    cancelB.hidden = YES;
-//    [cancelB addTarget:self action:@selector(cancelOrder) forControlEvents:UIControlEventTouchUpInside];
-//    [cancelB setImage:[UIImage imageNamed:@"cancelOrder"] forState:UIControlStateNormal];
-//    [whiteView addSubview:cancelB];
-//    payB = [UIButton buttonWithType:UIButtonTypeCustom];
-//    payB.frame = CGRectMake(ScreenWidth-100, 9, 90, 32);
-//    [payB addTarget:self action:@selector(pay) forControlEvents:UIControlEventTouchUpInside];
-//    payB.hidden = YES;
-//    [payB setImage:[UIImage imageNamed:@"pay"] forState:UIControlStateNormal];
-//    [whiteView addSubview:payB];
-//    [self.view addSubview:whiteView];
+    //_tableView.tableFooterView = self.footerV;
+    //    UIView * whiteView  = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 50 - navigationBarHeight, self.view.frame.size.width, 50)];
+    //    whiteView.backgroundColor = [UIColor whiteColor];
+    //    liaisonB = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    liaisonB.frame = CGRectMake(10, 9, 90, 32);
+    //    [liaisonB addTarget:self action:@selector(liaison) forControlEvents:UIControlEventTouchUpInside];
+    //    [liaisonB setImage:[UIImage imageNamed:@"liaison"] forState:UIControlStateNormal];
+    //    [whiteView addSubview:liaisonB];
+    //    cancelB = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    cancelB.frame = CGRectMake(ScreenWidth/2-45, 9, 90, 32);
+    //    cancelB.hidden = YES;
+    //    [cancelB addTarget:self action:@selector(cancelOrder) forControlEvents:UIControlEventTouchUpInside];
+    //    [cancelB setImage:[UIImage imageNamed:@"cancelOrder"] forState:UIControlStateNormal];
+    //    [whiteView addSubview:cancelB];
+    //    payB = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    payB.frame = CGRectMake(ScreenWidth-100, 9, 90, 32);
+    //    [payB addTarget:self action:@selector(pay) forControlEvents:UIControlEventTouchUpInside];
+    //    payB.hidden = YES;
+    //    [payB setImage:[UIImage imageNamed:@"pay"] forState:UIControlStateNormal];
+    //    [whiteView addSubview:payB];
+    //    [self.view addSubview:whiteView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paymentResultReceived:) name:@"PaymentResultReceived" object:nil];
 }
@@ -422,7 +413,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"取消失败，请重试"];
     }];
-
+    
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -436,16 +427,16 @@
 -(void)pay
 {
     if ([_orderMessage[@"state"] intValue]== 2) {
-//        OrderConfirmViewController * vc = [[OrderConfirmViewController alloc] init];
-//        vc.orderDict = _toPayDic;
-//        [self.navigationController pushViewController:vc animated:YES];
+        //        OrderConfirmViewController * vc = [[OrderConfirmViewController alloc] init];
+        //        vc.orderDict = _toPayDic;
+        //        [self.navigationController pushViewController:vc animated:YES];
         [self payThisOrder:self.toPayDic];
     }else if([_orderMessage[@"state"] intValue]== 5)
     {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确认收货吗？一定要确认收到再点击哦" delegate:self cancelButtonTitle:@"不" otherButtonTitles:@"确认收货", nil];
         alert.tag = 90;
         [alert show];
-
+        
     }
 }
 
@@ -490,36 +481,36 @@
         [_tableView headerEndRefreshing];
     }];
     
-//    NSMutableDictionary* usersDict = [NetServer commonDict];
-//    [usersDict setObject:@"order" forKey:@"command"];
-//    [usersDict setObject:@"one" forKey:@"options"];
-//    [usersDict setObject:_orderID forKey:@"id"];
-//    [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSDictionary * dic = responseObject[@"value"];
-//        [_tableView headerEndRefreshing];
-//        self.orderMessage = @{@"state":dic[@"state"],@"stateDesc":dic[@"stateDesc"],@"id":dic[@"id"],@"time":dic[@"confirmTime"]};
-//        self.payMessage = @{@"amount":dic[@"amount"],@"payChannel":dic[@"payChannel"]};
-//        self.productMessage = @{@"cover":[dic[@"orderProducts"] lastObject][@"cover"],@"name":[dic[@"orderProducts"] lastObject][@"name"],@"price":[dic[@"orderProducts"] lastObject][@"price"],@"count":dic[@"productCount"],@"transportationCosts":dic[@"shippingFee"],@"amount":dic[@"amount"]};
-//        if ([dic[@"coupon"] isKindOfClass:[NSDictionary class]]) {
-//            NSMutableDictionary * lDic = [NSMutableDictionary dictionaryWithDictionary:_productMessage];
-//            [lDic setObject:[dic[@"coupon"] objectForKey:@"faceValue"] forKey:@"couponValue"];
-//            self.productMessage = lDic;
-//        }
-//        self.address = ({
-//            ReceiptAddress * address = [[ReceiptAddress alloc] init];
-//            address.receiptName = dic[@"shippingName"];
-//            address.phoneNo = dic[@"shippingMobile"];
-//            address.province = dic[@"shippingProvince"];
-//            address.city = dic[@"shippingCity"];
-//            address.address = dic[@"shippingAddress"];
-//            address.zipCode = dic[@"shippingZipcode"];
-//            address;
-//        });
-//        [_tableView reloadData];
-//        [self loadTooleBarView];
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [_tableView headerEndRefreshing];
-//    }];
+    //    NSMutableDictionary* usersDict = [NetServer commonDict];
+    //    [usersDict setObject:@"order" forKey:@"command"];
+    //    [usersDict setObject:@"one" forKey:@"options"];
+    //    [usersDict setObject:_orderID forKey:@"id"];
+    //    [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //        NSDictionary * dic = responseObject[@"value"];
+    //        [_tableView headerEndRefreshing];
+    //        self.orderMessage = @{@"state":dic[@"state"],@"stateDesc":dic[@"stateDesc"],@"id":dic[@"id"],@"time":dic[@"confirmTime"]};
+    //        self.payMessage = @{@"amount":dic[@"amount"],@"payChannel":dic[@"payChannel"]};
+    //        self.productMessage = @{@"cover":[dic[@"orderProducts"] lastObject][@"cover"],@"name":[dic[@"orderProducts"] lastObject][@"name"],@"price":[dic[@"orderProducts"] lastObject][@"price"],@"count":dic[@"productCount"],@"transportationCosts":dic[@"shippingFee"],@"amount":dic[@"amount"]};
+    //        if ([dic[@"coupon"] isKindOfClass:[NSDictionary class]]) {
+    //            NSMutableDictionary * lDic = [NSMutableDictionary dictionaryWithDictionary:_productMessage];
+    //            [lDic setObject:[dic[@"coupon"] objectForKey:@"faceValue"] forKey:@"couponValue"];
+    //            self.productMessage = lDic;
+    //        }
+    //        self.address = ({
+    //            ReceiptAddress * address = [[ReceiptAddress alloc] init];
+    //            address.receiptName = dic[@"shippingName"];
+    //            address.phoneNo = dic[@"shippingMobile"];
+    //            address.province = dic[@"shippingProvince"];
+    //            address.city = dic[@"shippingCity"];
+    //            address.address = dic[@"shippingAddress"];
+    //            address.zipCode = dic[@"shippingZipcode"];
+    //            address;
+    //        });
+    //        [_tableView reloadData];
+    //        [self loadTooleBarView];
+    //    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //        [_tableView headerEndRefreshing];
+    //    }];
 }
 -(void)buildWithSimpleDic:(NSDictionary*)dic
 {
@@ -550,25 +541,33 @@
 #pragma mark - UITableView
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30.f;
+    return 50.f;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 85.f;
+    return 30.f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    static NSString * header = @"header";
-    OrderHeaderView * view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:header];
-    if (view == nil) {
-        view = [[OrderHeaderView alloc] initWithReuseIdentifier:header];
-    }
-    OrderYZList * listModel = self.myOrder;
-    view.timeL.text = listModel.time;
-    view.statusL.text = listModel.pay_status_zh;
-    return view;
+    self.footerV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
+    self.footerV.backgroundColor = [UIColor whiteColor];
+    
+    self.orderNoL = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, ScreenWidth-40, 20)];
+    self.orderNoL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
+    self.orderNoL.font = [UIFont systemFontOfSize:14];
+    self.orderNoL.text = [NSString stringWithFormat:@"订单编号：%@",self.myOrder.order_no];
+    [self.footerV addSubview:self.orderNoL];
+    
+    self.orderTimeL = [[UILabel alloc] initWithFrame:CGRectMake(270, 20, ScreenWidth-40, 20)];
+    self.orderTimeL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
+    self.orderTimeL.font = [UIFont systemFontOfSize:14];
+    self.orderTimeL.text = [NSString stringWithFormat:@"%@",self.myOrder.time];
+    [self.footerV addSubview:self.orderTimeL];
+    [tableView addSubview:self.footerV];
+    return self.footerV;
+    
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
@@ -625,14 +624,14 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    return 90;
+    
+    return 100;
 }
 
 
 -(void)payThisOrder:(NSDictionary *)dict
 {
-//    tmpDict = dict;
+    //    tmpDict = dict;
     [SVProgressHUD showWithStatus:@"请求支付信息..."];
     NSMutableDictionary* usersDict = [NetServer commonDict];
     [usersDict setObject:@"order" forKey:@"command"];
@@ -730,7 +729,7 @@
     __block OrderDetailViewController * blockSelf = self;
     pv.back = ^(){
         //        [blockSelf.navigationController popViewControllerAnimated:NO];
-//        [blockSelf getFristList];
+        //        [blockSelf getFristList];
         [blockSelf loadOrderWithOrderID];
     };
     
@@ -765,7 +764,7 @@
             self.myOrder.post_status = @"2";
             [_tableView reloadData];
         } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-             [SVProgressHUD showErrorWithStatus:@"确认收货失败"];
+            [SVProgressHUD showErrorWithStatus:@"确认收货失败"];
         }];
     }
 }

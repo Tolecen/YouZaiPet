@@ -14,17 +14,6 @@
 #import "NetServer+Payment.h"
 #import "FWAlertHelper.h"
 @class WXRAddressCell;
-//@protocol WXRAddressCellDelegate <NSObject>
-//
-//@optional
-//#pragma mark编辑地址
-//-(void)editAddress:(NSInteger)index;
-//#pragma Mark 删除地址
-//- (void)addressCellDelete:(WXRAddressCell *)addressCell;
-//
-//
-//
-//@end
 @interface WXRAddressCell : UITableViewCell
 
 {
@@ -36,7 +25,6 @@
     
 }
 @property (nonatomic,assign)NSInteger index;
-//@property (nonatomic,assign)id <WXRAddressCellDelegate> delegate;
 -(void)buildWithReceiptAddress:(ReceiptAddress*)address;
 @property(nonatomic,strong)ReceiptAddress *addrss;
 @property (nonatomic,copy)void(^deleteButtonClicked) (NSString * addressId);
@@ -77,10 +65,11 @@
 #pragma mark 编辑按钮
         UIButton * editB = [UIButton buttonWithType:UIButtonTypeCustom];
         [editB setImage:[UIImage imageNamed:@"bianji@2x"] forState:UIControlStateNormal];
-        editB.frame = CGRectMake(ScreenWidth-72, 70, 30, 30);
+        editB.frame = CGRectMake(ScreenWidth-150, 70, 70, 30);
         [editB addTarget:self action:@selector(editSelectedAddress) forControlEvents:UIControlEventTouchUpInside];
-//        editB.backgroundColor =[UIColor redColor];
-        //[editB  setTitle:@"编辑" forState:UIControlStateNormal];
+        [editB  setTitle:@"编辑" forState:UIControlStateNormal];
+        [editB setTitleColor:[UIColor colorWithR:167/255.0 g:187/255.0 b:159/255.0 alpha:1] forState:UIControlStateNormal];
+        editB.titleLabel.font = [UIFont systemFontOfSize:12];
         [self.contentView addSubview:editB];
 #pragma mark 删除按钮
         
@@ -88,20 +77,15 @@
         [ detelB  setImage:[UIImage imageNamed:@"shanchu@2x"] forState:UIControlStateNormal];
         detelB .frame = CGRectMake(ScreenWidth-42, 70, 30, 30);
         [ detelB  addTarget:self action:@selector(deSelectedAddress) forControlEvents:UIControlEventTouchUpInside];
-//        detelB .backgroundColor =[UIColor blackColor];
-        //[editB  setTitle:@"编辑" forState:UIControlStateNormal];
+        
         [self.contentView addSubview:detelB ];
         
         
 #pragma mark 默认按钮
         
         defalutB = [UIButton buttonWithType:UIButtonTypeCustom];
-        [defalutB setBackgroundImage:[UIImage imageNamed:@"weixuanzhong2@2x"] forState:UIControlStateNormal];
-        
-        defalutB.frame = CGRectMake(ScreenWidth-370, 70, 22, 22);
+        defalutB.frame = CGRectMake(0, 70, 80, 22);
         [defalutB addTarget:self action:@selector( defalutBSelectedAddress) forControlEvents:UIControlEventTouchUpInside];
-//        defalutB .backgroundColor =[UIColor greenColor];
-        //[editB  setTitle:@"编辑" forState:UIControlStateNormal];
         [self.contentView addSubview:defalutB];
         
         
@@ -131,11 +115,7 @@
         }
     } cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     
-//    if ([self.delegate respondsToSelector:@selector(addressCellDelete:)]) {
-//        
-//        [self.delegate addressCellDelete:self];
-//        
-//    }
+    
 }
 
 
@@ -146,9 +126,6 @@
     if (self.editButtonClicked) {
         self.editButtonClicked(self.addrss);
     }
-//    if (_delegate && [_delegate respondsToSelector:@selector(editAddress:)]) {
-//        [_delegate editAddress:_index];
-//    }
 }
 -(void)layoutSubviews
 {
@@ -158,12 +135,21 @@
 {
     self.addrss = address;
     if (address.action) {
-//        addressView.image = [UIImage imageNamed:@"defaultAddress"];
-        [defalutB setBackgroundImage:[UIImage imageNamed:@"moren@2x"] forState:UIControlStateNormal];
+        //        addressView.image = [UIImage imageNamed:@"defaultAddress"];
+        [defalutB setImage:[UIImage imageNamed:@"moren@2x"] forState:UIControlStateNormal];
+        [defalutB setTitle:@"设为默认" forState:UIControlStateNormal];
+        defalutB.titleLabel.font = [UIFont systemFontOfSize:12];
+        [defalutB setTitleColor:CommonGreenColor forState:UIControlStateNormal];
+        
     }else
     {
-//        addressView.image = [UIImage imageNamed:@"commonAddress"];
-        [defalutB setBackgroundImage:[UIImage imageNamed:@"weixuanzhong2@2x"] forState:UIControlStateNormal];
+        //        addressView.image = [UIImage imageNamed:@"commonAddress"];
+        [defalutB setImage:[UIImage imageNamed:@"weixuanzhong2@2x"] forState:UIControlStateNormal];
+        [defalutB setTitle:@"设为默认" forState:UIControlStateNormal];
+        defalutB.titleLabel.font = [UIFont systemFontOfSize:12];
+        
+        [defalutB setTitleColor:[UIColor colorWithR:167/255.0 g:187/255.0 b:159/255.0 alpha:1] forState:UIControlStateNormal];
+        
     }
     nameL.text = [@"" stringByAppendingString:address.receiptName];
     phoneL.text = address.phoneNo;
@@ -219,7 +205,7 @@
 {
     __block NSMutableArray * blockArr = _addressArr;
     __block UITableView * blockView = _tableView;
-//    [SVProgressHUD showWithStatus:@"正在获取收货地址"];
+    //    [SVProgressHUD showWithStatus:@"正在获取收货地址"];
     //    NSMutableDictionary* usersDict = [NetServer commonDict];
     //    [usersDict setObject:@"shippingAddress" forKey:@"command"];
     //    [usersDict setObject:@"list" forKey:@"options"];

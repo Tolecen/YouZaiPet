@@ -1128,11 +1128,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/AddressManageViewController.m"
-            timestampString = "491747060.47845"
+            timestampString = "491955573.844363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "473"
-            endingLineNumber = "473"
+            startingLineNumber = "459"
+            endingLineNumber = "459"
             landmarkName = "-editAddress:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1176,11 +1176,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/AddressManageViewController.m"
-            timestampString = "491746224.828932"
+            timestampString = "491955573.844363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "-loadAddressList"
             landmarkType = "5">
             <Locations>
