@@ -27,6 +27,8 @@
                                                green:(243 / 255.f)
                                                 blue:(243 / 255.f)
                                                alpha:1.f];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         UIView *containerView = [[UIView alloc] init];
         containerView.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:containerView];

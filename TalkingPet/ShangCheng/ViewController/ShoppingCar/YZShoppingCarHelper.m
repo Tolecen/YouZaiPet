@@ -186,7 +186,9 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
 }
 
 - (void)updateShoppingCarGoodsCountWithModel:(YZShangChengModel *)model {
-    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.goodsShangPinCache]
+                                              forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheGoodsKey]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)updateShoppingCarModelSelectStateWithModel:(YZShangChengModel *)model {

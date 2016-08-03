@@ -7,8 +7,10 @@
 //
 
 #import "YZShoppingCarGoodsCell.h"
+#import "YZShoppingCarHelper.h"
+#import "SVProgressHUD.h"
 
-@interface YZShoppingCarGoodsCell()
+@interface YZShoppingCarGoodsCell()<UITextFieldDelegate>
 
 @property (nonatomic, weak) UILabel *titleLb;
 
@@ -74,6 +76,7 @@
     textField.textColor = [UIColor colorWithHexCode:@"333333"];
     textField.font = [UIFont systemFontOfSize:12];
     textField.backgroundColor = [UIColor whiteColor];
+    textField.delegate = self;
     [superView addSubview:textField];
     self.textField = textField;
     
@@ -115,14 +118,72 @@
     } else {
         self.minusBtn.enabled = NO;
     }
+    if (detailModel.count < 101) {
+        self.plusBtn.enabled = YES;
+    } else {
+        self.plusBtn.enabled = NO;
+    }
     [self setNeedsUpdateConstraints];
 }
 
 - (void)inner_MinusOrAdd:(UIButton *)sender {
     if ([sender isEqual:self.minusBtn]) {
-        
+        if (self.detailModel.count > 1) {
+            self.plusBtn.enabled = YES;
+            self.detailModel.count -= 1;
+            if (self.detailModel.count == 1) {
+                self.minusBtn.enabled = NO;
+            } else {
+                self.minusBtn.enabled = YES;
+            }
+            [[YZShoppingCarHelper instanceManager] updateShoppingCarGoodsCountWithModel:self.detailModel];
+            self.textField.text = [NSString stringWithFormat:@"%ld", (long)self.detailModel.count];
+        } else {
+            self.minusBtn.enabled = NO;
+            self.plusBtn.enabled = YES;
+        }
     } else {
-        
+        if (self.detailModel.count < 101) {
+            self.minusBtn.enabled = YES;
+            self.detailModel.count += 1;
+            if (self.detailModel.count == 100) {
+                self.plusBtn.enabled = NO;
+            } else {
+                self.plusBtn.enabled = YES;
+            }
+            [[YZShoppingCarHelper instanceManager] updateShoppingCarGoodsCountWithModel:self.detailModel];
+            self.textField.text = [NSString stringWithFormat:@"%ld", (long)self.detailModel.count];
+        } else {
+            self.minusBtn.enabled = YES;
+            self.plusBtn.enabled = NO;
+        }
+    }
+    if (self.detailModel.selected) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kShoppingCarCalcutePriceNotification
+                                                            object:nil];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    NSInteger number = [textField.text integerValue];
+    if (number <= 1) {
+        number = 1;
+        self.plusBtn.enabled = YES;
+        self.minusBtn.enabled = NO;
+    } else if (number >= 100) {
+        number = 100;
+        self.minusBtn.enabled = YES;
+        self.plusBtn.enabled = NO;
+    } else {
+        self.plusBtn.enabled = YES;
+        self.minusBtn.enabled = YES;
+    }
+    self.detailModel.count = number;
+    textField.text = [NSString stringWithFormat:@"%ld", (long)self.detailModel.count];
+    [[YZShoppingCarHelper instanceManager] updateShoppingCarGoodsCountWithModel:self.detailModel];
+    if (self.detailModel.selected) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kShoppingCarCalcutePriceNotification
+                                                            object:nil];
     }
 }
 
