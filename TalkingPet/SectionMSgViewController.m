@@ -18,7 +18,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
         self.title = @"我的消息";
         needNotiNormalChat = YES;
     }
@@ -35,8 +34,10 @@
     self.msgTableV.scrollEnabled = NO;
     self.msgTableV.backgroundColor = [UIColor colorWithR:239 g:239 b:239 alpha:1];
     self.msgTableV.backgroundView = nil;
-    self.msgTableV.rowHeight = 70;
-    self.msgTableV.showsVerticalScrollIndicator = NO;
+    self.msgTableV.rowHeight = 50;
+    //self.msgTableV.showsVerticalScrollIndicator = NO;
+    self.msgTableV.cellLayoutMarginsFollowReadableWidth = NO;
+    
     [self.view addSubview:self.msgTableV];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SectionmsgNotiReceived) name:@"SectionmsgNotiReceived" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(normalChatMsgReceived:) name:@"NormalChatMsgReceived" object:nil];
@@ -380,6 +381,22 @@
         [self.msgTableV reloadData];
     }];
 }
+#pragma mark显示完全分割线
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [cell  setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+    
+    
+}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 3;
@@ -567,39 +584,15 @@
     [[RootViewController sharedRootViewController].sideMenu hideMenuViewController];
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section==0)
-    {
-        return 0;
-    }
-    else if (section==1)
-    {
-        
-        return 0;
-    }
-    
-    return 50;
-}
-
 
 -(void)back
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
+
+
+
 
 @end

@@ -315,11 +315,18 @@
     HeadImageView.image = [UIImage imageNamed:@"bg_order_detail_large.png"];
     [self.HeadAddressV addSubview:HeadImageView];
     
-#pragma mark 右边地址导航新图标
+#pragma mark 左边地址导航新图标
     UIImageView * imageVq = [[UIImageView alloc] initWithFrame:CGRectMake(10, 32, 19.5, 27.5)];
     imageVq.image = [UIImage imageNamed:@"iv_location_large.png"];
     
     [self.HeadAddressV addSubview:imageVq];
+#pragma mark右边指示按钮
+    
+    UIImageView * rightVq = [[UIImageView alloc] initWithFrame:CGRectMake(380, 32, 19.5, 27.5)];
+    rightVq .image = [UIImage imageNamed:@"iv_arrow_right.png"];
+    rightVq.backgroundColor =[UIColor redColor];
+    
+    [self.HeadAddressV addSubview:rightVq ];
     
     self.shouhuoNameL = [[UILabel alloc] initWithFrame:CGRectMake(40, 50, 150, 20)];
     self.shouhuoNameL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
@@ -355,6 +362,7 @@
     [_tableView headerBeginRefreshing];
     
     _tableView.tableHeaderView = self.HeadAddressV;
+    
     //_tableView.tableFooterView = self.footerV;
     //    UIView * whiteView  = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 50 - navigationBarHeight, self.view.frame.size.width, 50)];
     //    whiteView.backgroundColor = [UIColor whiteColor];
@@ -563,7 +571,12 @@
     self.orderTimeL = [[UILabel alloc] initWithFrame:CGRectMake(270, 20, ScreenWidth-40, 20)];
     self.orderTimeL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
     self.orderTimeL.font = [UIFont systemFontOfSize:14];
-    self.orderTimeL.text = [NSString stringWithFormat:@"%@",self.myOrder.time];
+    NSString *dingdanString = [NSString stringWithFormat:@"%@",self.myOrder.time];
+    
+    NSRange start =[dingdanString rangeOfString:@"-"];
+    NSRange end =[dingdanString rangeOfString:@":"];
+    NSString  *b =[dingdanString substringWithRange:NSMakeRange(start.location+1, end.location-2)];
+    self.orderTimeL.text =b;
     [self.footerV addSubview:self.orderTimeL];
     [tableView addSubview:self.footerV];
     return self.footerV;

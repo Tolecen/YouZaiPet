@@ -82,7 +82,7 @@
                 [button setTitleColor:CommonGreenColor forState:UIControlStateNormal];
             }break;
             case 1:{
-                [button setTitle:@"待支付" forState:UIControlStateNormal];
+                [button setTitle:@"待付款" forState:UIControlStateNormal];
                 
             }break;
             case 2:{
@@ -92,7 +92,7 @@
                 [button setTitle:@"待收货" forState:UIControlStateNormal];
             }break;
             default:{
-                [button setTitle:@"已完成" forState:UIControlStateNormal];
+                [button setTitle:@"待评价" forState:UIControlStateNormal];
             }break;
         }
     }
@@ -152,46 +152,46 @@
 }
 -(void)getFristList
 {
-
+    
     [NetServer fetchOrderListWithPageIndex:1 Option:option  success:^(id result) {
         NSLog(@"orderList:%@",result);
         if ([result[@"code"] intValue] == 200) {
             self.orderArr = [self getModelArray:result[@"data"][@"list"]];
             [_tableView reloadData];
         }
-       
+        
         [_tableView headerEndRefreshing];
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         
     }];
     
-//    NSMutableDictionary* usersDict = [NetServer commonDict];
-//    [usersDict setObject:@"order" forKey:@"command"];
-//    [usersDict setObject:option forKey:@"options"];
-//    [usersDict setObject:@"10" forKey:@"pageSize"];
-//    [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        [_tableView headerEndRefreshing];
-//        [_orderArr removeAllObjects];
-//        [_orderArr addObjectsFromArray:responseObject[@"value"]];
-//        [_tableView reloadData];
-//        if (!_orderArr.count) {
-//            if (!blankPage) {
-//                __weak UINavigationController * weakNav = self.navigationController;
-//                blankPage = [[BlankPageView alloc] initWithImage];
-//                [blankPage showWithView:self.view image:[UIImage imageNamed:@"order_without"] buttonImage:[UIImage imageNamed:@"order_toShop"] action:^{
-//                    [weakNav popToRootViewControllerAnimated:YES];
-//                }];
-//            }
-//        }
-//        else if(blankPage){
-//            [blankPage removeFromSuperview];
-//            blankPage = nil;
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [_tableView headerEndRefreshing];
-//        [_orderArr removeAllObjects];
-//        [_tableView reloadData];
-//    }];
+    //    NSMutableDictionary* usersDict = [NetServer commonDict];
+    //    [usersDict setObject:@"order" forKey:@"command"];
+    //    [usersDict setObject:option forKey:@"options"];
+    //    [usersDict setObject:@"10" forKey:@"pageSize"];
+    //    [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //        [_tableView headerEndRefreshing];
+    //        [_orderArr removeAllObjects];
+    //        [_orderArr addObjectsFromArray:responseObject[@"value"]];
+    //        [_tableView reloadData];
+    //        if (!_orderArr.count) {
+    //            if (!blankPage) {
+    //                __weak UINavigationController * weakNav = self.navigationController;
+    //                blankPage = [[BlankPageView alloc] initWithImage];
+    //                [blankPage showWithView:self.view image:[UIImage imageNamed:@"order_without"] buttonImage:[UIImage imageNamed:@"order_toShop"] action:^{
+    //                    [weakNav popToRootViewControllerAnimated:YES];
+    //                }];
+    //            }
+    //        }
+    //        else if(blankPage){
+    //            [blankPage removeFromSuperview];
+    //            blankPage = nil;
+    //        }
+    //    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //        [_tableView headerEndRefreshing];
+    //        [_orderArr removeAllObjects];
+    //        [_tableView reloadData];
+    //    }];
 }
 
 -(NSMutableArray *)getModelArray:(NSArray *)array
@@ -206,7 +206,7 @@
         for (int j = 0; j<listModel.goods.count; j++) {
             NSDictionary * gd = listModel.goods[j];
             OrderYZGoodInfo * goodModel = [[OrderYZGoodInfo alloc] initWithDictionary:gd error:nil];
- 
+            
             listModel.total_money = goodModel.real_amount;
             listModel.shippingfee = goodModel.real_shipping;
             if (goodModel.confirmUrl && goodModel.confirmUrl.length>1) {
@@ -288,26 +288,48 @@
         view = [[OrderHeaderView alloc] initWithReuseIdentifier:header];
     }
     OrderYZList * listModel = self.orderArr[section];
-    view.timeL.text = listModel.time;
+    NSString  *currentDateStr =listModel.time;
+    NSRange start =[currentDateStr rangeOfString:@"-"];
+    NSRange end =[currentDateStr rangeOfString:@":"];
+    NSString  *b =[currentDateStr substringWithRange:NSMakeRange(start.location+1, end.location-2)];
+    view.timeL.text =b;
     view.statusL.text = listModel.pay_status_zh;
+    
     return view;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-
+    
     static NSString * header = @"footer";
     OrderFooterView * view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:header];
     if (view == nil) {
         view = [[OrderFooterView alloc] initWithReuseIdentifier:header WithButton:NO];
+        //按钮
+        UIButton*button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(ScreenWidth, 0, 60, 40);
+        
+        button.tag = 12;
+        [button addTarget:self action:@selector(expandSection:) forControlEvents:UIControlEventTouchUpInside];
+        button.backgroundColor =[UIColor blackColor];
+        
+        [view addSubview:button];
     }
+    
+    //显示数据
+    UIButton *button = (UIButton *)[view viewWithTag:12];
+    [button setTitle:@"删除订单" forState:UIControlStateNormal];
+    
+    
+    
     OrderYZList * listModel = self.orderArr[section];
     view.desL.text = [NSString stringWithFormat:@"共 %@ 件 合计：￥%@（含运费 ￥%@）",listModel.total_amount,listModel.total_money,listModel.shippingfee];
     return view;
-
+    
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    return _orderArr.count;
+    //    return _orderArr.count;
     return self.orderArr.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -318,8 +340,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"tableViewCell";
-//    __weak MyOrderViewConyroller * blockSelf = self;
-//    __weak NSString * bolckOption = option;
+    //    __weak MyOrderViewConyroller * blockSelf = self;
+    //    __weak NSString * bolckOption = option;
     OrderListSingleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];
     if (cell == nil) {
         cell = [[OrderListSingleCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
@@ -329,26 +351,26 @@
     OrderYZList * listModel = self.orderArr[indexPath.section];
     cell.goodInfo = listModel.goods[indexPath.row];
     
-//    NSDictionary * dic = _orderArr[indexPath.section];
-//    [cell bulidCellWithDictionary:dic];
-//    cell.liaisonAction = ^(){
-//        ChatDetailViewController * chatDV = [[ChatDetailViewController alloc] init];
-//        Pet * theP = [[Pet alloc] init];
-//        theP.petID = @"44239";
-//        chatDV.thePet = theP;
-//        [blockSelf.navigationController pushViewController:chatDV animated:YES];
-//    };
-//    cell.payAction = ^(){
-//        if ([bolckOption isEqual:@"toPayList"]) {
-//            [blockSelf payThisOrder:dic];
-////            OrderConfirmViewController * vc = [[OrderConfirmViewController alloc] init];
-////            vc.orderDict = dic;
-////            [blockSelf.navigationController pushViewController:vc animated:YES];
-//        }else
-//        {
-//            [blockSelf receipt:dic];
-//        }
-//    };
+    //    NSDictionary * dic = _orderArr[indexPath.section];
+    //    [cell bulidCellWithDictionary:dic];
+    //    cell.liaisonAction = ^(){
+    //        ChatDetailViewController * chatDV = [[ChatDetailViewController alloc] init];
+    //        Pet * theP = [[Pet alloc] init];
+    //        theP.petID = @"44239";
+    //        chatDV.thePet = theP;
+    //        [blockSelf.navigationController pushViewController:chatDV animated:YES];
+    //    };
+    //    cell.payAction = ^(){
+    //        if ([bolckOption isEqual:@"toPayList"]) {
+    //            [blockSelf payThisOrder:dic];
+    ////            OrderConfirmViewController * vc = [[OrderConfirmViewController alloc] init];
+    ////            vc.orderDict = dic;
+    ////            [blockSelf.navigationController pushViewController:vc animated:YES];
+    //        }else
+    //        {
+    //            [blockSelf receipt:dic];
+    //        }
+    //    };
     return cell;
 }
 -(void)payThisOrder:(NSDictionary *)dict
@@ -365,7 +387,7 @@
         [usersDict setObject:[[dict objectForKey:@"coupon"] objectForKey:@"id"]forKey:@"couponId"];
     }
     [usersDict setObject:[dict objectForKey:@"payChannel"] forKey:@"payChannel"];
-
+    
     if ([dict objectForKey:@"note"]) {
         [usersDict setObject:[dict objectForKey:@"note"] forKey:@"note"];
     }
@@ -408,8 +430,8 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"请求有点问题，稍后再试吧"];
     }];
-
-
+    
+    
 }
 -(void)paymentResultReceived:(NSNotification *)noti
 {
@@ -440,7 +462,7 @@
 -(void)payCancel
 {
     [SVProgressHUD showErrorWithStatus:@"支付已取消"];
-//    [self.navigationController popViewControllerAnimated:NO];
+    //    [self.navigationController popViewControllerAnimated:NO];
     //    [self toSuccessPage];
 }
 -(void)toSuccessPage
@@ -451,7 +473,7 @@
     pv.orderId = [tmpDict objectForKey:@"id"];
     __block MyOrderViewConyroller * blockSelf = self;
     pv.back = ^(){
-//        [blockSelf.navigationController popViewControllerAnimated:NO];
+        //        [blockSelf.navigationController popViewControllerAnimated:NO];
         [blockSelf getFristList];
     };
     
@@ -481,18 +503,18 @@
     OrderYZList * listModel = self.orderArr[indexPath.section];
     OrderDetailViewController * orderVC = [[OrderDetailViewController alloc] init];
     orderVC.myOrder = listModel;
-//    orderVC.orderID = _orderArr[indexPath.section][@"id"];
-//    [orderVC buildWithSimpleDic:_orderArr[indexPath.section]];
-//    __weak NSMutableArray * weakArr = _orderArr;
-//    __weak MyOrderViewConyroller * weakSelf = self;
-//    orderVC.deleteThisOrder =^(){
-//        [weakArr removeObjectAtIndex:indexPath.section];
-//        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-//        [self.navigationController popToViewController:weakSelf animated:YES];
-//    };
-//    orderVC.actionOrder = ^(){
-//        [self getFristList];
-//    };
+    //    orderVC.orderID = _orderArr[indexPath.section][@"id"];
+    //    [orderVC buildWithSimpleDic:_orderArr[indexPath.section]];
+    //    __weak NSMutableArray * weakArr = _orderArr;
+    //    __weak MyOrderViewConyroller * weakSelf = self;
+    //    orderVC.deleteThisOrder =^(){
+    //        [weakArr removeObjectAtIndex:indexPath.section];
+    //        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+    //        [self.navigationController popToViewController:weakSelf animated:YES];
+    //    };
+    //    orderVC.actionOrder = ^(){
+    //        [self getFristList];
+    //    };
     [self.navigationController pushViewController:orderVC animated:YES];
 }
 @end
