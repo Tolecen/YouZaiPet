@@ -322,10 +322,8 @@
     [self.HeadAddressV addSubview:imageVq];
 #pragma mark右边指示按钮
     
-    UIImageView * rightVq = [[UIImageView alloc] initWithFrame:CGRectMake(380, 32, 19.5, 27.5)];
+    UIImageView * rightVq = [[UIImageView alloc] initWithFrame:CGRectMake(340, 32, 19.5, 27.5)];
     rightVq .image = [UIImage imageNamed:@"iv_arrow_right.png"];
-    rightVq.backgroundColor =[UIColor redColor];
-    
     [self.HeadAddressV addSubview:rightVq ];
     
     self.shouhuoNameL = [[UILabel alloc] initWithFrame:CGRectMake(40, 50, 150, 20)];
@@ -334,7 +332,7 @@
     self.shouhuoNameL.text = [@"收货人:" stringByAppendingString:@"收货人"];
     [self.HeadAddressV addSubview:self.shouhuoNameL];
     
-    self.shouhuoMobileL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-320, 50, 100, 20)];
+    self.shouhuoMobileL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-200, 50, 100, 20)];
     self.shouhuoMobileL.textColor = [UIColor colorWithWhite:140/255.0 alpha:1];
     self.shouhuoMobileL.textAlignment = NSTextAlignmentRight;
     self.shouhuoMobileL.font = [UIFont systemFontOfSize:14];

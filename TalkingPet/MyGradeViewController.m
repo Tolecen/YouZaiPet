@@ -34,18 +34,16 @@
 {
     [super viewDidLoad];
     [self setBackButtonWithTarget:@selector(back)];
-//    self.view.backgroundColor = [UIColor grayColor];
-    
-    UIImageView * bgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, -50,  self.view.frame.size.width, self.view.frame.size.width*0.57)];
-    [bgV setImage:[UIImage imageNamed:@"otherUsercenter_topbg"]];
-    [self.view addSubview:bgV];
-    
+#pragma mark右边圆角问号
     UIButton*ruleB = [UIButton buttonWithType:UIButtonTypeCustom];
-    ruleB.frame = CGRectMake(ScreenWidth-65, 10, 60, 20);
-    ruleB.titleLabel.font = [UIFont systemFontOfSize:11];
+    ruleB.frame = CGRectMake(ScreenWidth-40, 10, 20, 20);
+    ruleB.titleLabel.font = [UIFont systemFontOfSize:10];
+    [ruleB setTitle:@"?" forState:UIControlStateNormal];
+    [ruleB setTintColor:[UIColor whiteColor]];
+    ruleB.layer.cornerRadius = 10;
+    ruleB.layer.masksToBounds =YES;
     [ruleB addTarget:self action:@selector(showGradeRule) forControlEvents:UIControlEventTouchUpInside];
-    [ruleB setBackgroundImage:[UIImage imageNamed:@"usercenter_scorerule"] forState:UIControlStateNormal];
-//    [ruleB setTitle:@"积分规则" forState:UIControlStateNormal];
+    ruleB.backgroundColor =[UIColor grayColor];
     [self.view addSubview:ruleB];
     
     UIImageView * avatarbg = [[UIImageView alloc] initWithFrame:CGRectMake(9, 9,  82, 72)];
@@ -53,104 +51,70 @@
     avatarbg.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:avatarbg];
     
-    EGOImageView*photoIB = [[EGOImageView alloc] initWithFrame:CGRectMake(20, 20, 60, 60)];
-    photoIB.placeholderImage = [UIImage imageNamed:@"placeholderHead"];
-    photoIB.layer.masksToBounds=YES;
-    photoIB.layer.cornerRadius = 30;
-    photoIB.imageURL = [NSURL URLWithString:[UserServe sharedUserServe].account.headImgURL];
-    [self.view addSubview:photoIB];
-    
-    UILabel*nicknameL = [[UILabel alloc] initWithFrame:CGRectMake(110, 30, 170, 20)];
-    nicknameL.backgroundColor = [UIColor clearColor];
-//    nicknameL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
-//    nicknameL.shadowOffset = CGSizeMake(2, 2);
-    nicknameL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
-    nicknameL.text = [UserServe sharedUserServe].account.nickname;
-    [self.view addSubview:nicknameL];
-    
-    UIImageView*genderIV = [[UIImageView alloc] initWithFrame:CGRectMake(85, 30, 20, 20)];
-    switch ([[UserServe sharedUserServe].account.gender integerValue]) {
-        case 0:{
-            genderIV.image = [UIImage imageNamed:@"female"];
-        }break;
-        case 1:{
-            genderIV.image = [UIImage imageNamed:@"male"];
-        }break;
-        default:{
-            genderIV.image = nil;
-            nicknameL.frame = CGRectMake(85, 30, 170, 20);
-        }break;
-    }
-    [self.view addSubview:genderIV];
-    
-    UILabel*scoreL = [[UILabel alloc] initWithFrame:CGRectMake(85, 55, 60, 20)];
+#pragma mark积分相关
+    UILabel*scoreL = [[UILabel alloc] initWithFrame:CGRectMake(120, 130, 60, 20)];
     scoreL.backgroundColor = [UIColor clearColor];
     scoreL.font = [UIFont systemFontOfSize:14];
     scoreL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
-//    scoreL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
-//    scoreL.shadowOffset = CGSizeMake(2, 2);
-    scoreL.text = [NSString stringWithFormat:@"积分:%@",[UserServe sharedUserServe].account.score];
+    scoreL.text = [NSString stringWithFormat:@"积分 %@",[UserServe sharedUserServe].account.score];
     [self.view addSubview:scoreL];
     
-    CGSize zs = [scoreL.text sizeWithFont:scoreL.font constrainedToSize:CGSizeMake(200, 20) lineBreakMode:NSLineBreakByCharWrapping];
+    CGSize zs = [scoreL.text sizeWithFont:scoreL.font constrainedToSize:CGSizeMake(100, 20) lineBreakMode:NSLineBreakByCharWrapping];
     
-    [scoreL setFrame:CGRectMake(85, 55, zs.width, 20)];
+    [scoreL setFrame:CGRectMake(140, 90, zs.width, 20)];
+    
+#pragma mark默认上方等级图标
+    UIButton *LVIV = [[UIButton alloc]initWithFrame:CGRectMake(50+zs.width+5, 40, 100, 30)];
     
     
-    UIImageView * LVIV= [[UIImageView alloc] initWithFrame:CGRectMake(85+zs.width+5, 58, 15, 15)];
-    LVIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"LV%d",(int)[[UserServe sharedUserServe].account.grade integerValue]]];
+    [LVIV setTitleColor:CommonGreenColor forState:UIControlStateNormal];
+    [LVIV setTitle:[NSString stringWithFormat:@"LV%d",(int)[[UserServe sharedUserServe].account.grade integerValue]]forState:UIControlStateNormal];
+    LVIV.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.view addSubview:LVIV];
+    LVIV.layer.borderColor = CommonGreenColor.CGColor;
+    LVIV.layer.borderWidth = 1.f;
+    LVIV.layer.cornerRadius = CGRectGetHeight(LVIV.frame) / 2;
+    LVIV.layer.masksToBounds = YES;
     
-    UILabel * LVL = [[UILabel alloc] initWithFrame:CGRectMake(85+zs.width+5+15, 55, 60, 20)];
-    LVL.backgroundColor = [UIColor clearColor];
-    LVL.font = [UIFont systemFontOfSize:14];
-    LVL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
-//    LVL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
-//    LVL.shadowOffset = CGSizeMake(2, 2);
-    LVL.text = [NSString stringWithFormat:@"等级:%d",(int)[[UserServe sharedUserServe].account.grade integerValue]];
-    [self.view addSubview:LVL];
-    
-    UILabel * gradeL = [[UILabel alloc] initWithFrame:CGRectMake(30, 82, 30, 20)];
+#pragma mark左边默认等级
+    UILabel * gradeL = [[UILabel alloc] initWithFrame:CGRectMake(10, 115, 30, 20)];
     gradeL.backgroundColor = [UIColor clearColor];
-    gradeL.font = [UIFont systemFontOfSize:12];
+    gradeL.font = [UIFont systemFontOfSize:14];
     gradeL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
-//    gradeL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
-//    gradeL.shadowOffset = CGSizeMake(2, 2);
     gradeL.text = [NSString stringWithFormat:@"LV.%d",(int)[[UserServe sharedUserServe].account.grade integerValue]];
     [self.view addSubview:gradeL];
-    
-    UILabel * nextGradeL = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width-85, 82, 30, 20)];
+#pragma marak右边等级
+    UILabel * nextGradeL = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width-30, 115, 30, 20)];
     nextGradeL.backgroundColor = [UIColor clearColor];
-    nextGradeL.font = [UIFont systemFontOfSize:12];
+    nextGradeL.font = [UIFont systemFontOfSize:14];
     nextGradeL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
-//    nextGradeL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
-//    nextGradeL.shadowOffset = CGSizeMake(2, 2);
     nextGradeL.text = [NSString stringWithFormat:@"LV.%d",(int)[[UserServe sharedUserServe].account.grade integerValue]+1];
     [self.view addSubview:nextGradeL];
-    
-    UIView*gradeBV = [[UIView alloc] initWithFrame:CGRectMake(60, 85, self.view.frame.size.width-150, 15)];
+#pragma mark整个进度条背景颜色
+    UIView*gradeBV = [[UIView alloc] initWithFrame:CGRectMake(40, 120, self.view.frame.size.width-80, 10)];
     [self.view addSubview:gradeBV];
-    gradeBV.backgroundColor = [UIColor whiteColor];
+    gradeBV.backgroundColor = [UIColor grayColor];
     gradeBV.layer.masksToBounds=YES;
-    gradeBV.layer.cornerRadius = 7.5;
+    gradeBV.layer.cornerRadius = 5;
     gradeBV.layer.borderWidth=0.5f;
     gradeBV.layer.borderColor=[UIColor whiteColor].CGColor;
-    
-    gradeV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 15)];
+#pragma makr选中进度条颜色
+    gradeV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 10)];
     [gradeBV addSubview:gradeV];
-    gradeV.backgroundColor = [UIColor colorWithRed:179/255.0 green:176/255.0 blue:251/255.0 alpha:1];
-    upL = [[UILabel  alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-150, 15)];
+    gradeV.backgroundColor = CommonGreenColor;
+#pragma mark 升级还需要
+    upL = [[UILabel  alloc] initWithFrame:CGRectMake(0, 130, self.view.frame.size.width-50, 35)];
     upL.font = [UIFont systemFontOfSize:12];
     upL.textAlignment = NSTextAlignmentCenter;
-    upL.textColor = [UIColor colorWithWhite:140/255.0 alpha:1];
-    [gradeBV addSubview:upL];
-    upL.backgroundColor = [UIColor clearColor];
     
+    [self.view addSubview:upL];
+    upL.backgroundColor = [UIColor clearColor];
+#pragma mark表的相关操作
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(5, self.view.frame.size.width*0.57-40, self.view.frame.size.width-10, self.view.frame.size.height - navigationBarHeight-(self.view.frame.size.width*0.57-40+5)) style:UITableViewStylePlain];
-//    _tableView.layer.masksToBounds = YES;
-//    _tableView.layer.cornerRadius = 5;
+    //    _tableView.layer.masksToBounds = YES;
+    //    _tableView.layer.cornerRadius = 5;
     [self.view addSubview:_tableView];
-//    _tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
+    //    _tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     _tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     [_tableView addFooterWithTarget:self action:@selector(getGradeDetail)];
     _tableView.delegate = self;
@@ -178,7 +142,7 @@
             NSDictionary * dic = ruleArr[[[UserServe sharedUserServe].account.grade integerValue]];
             float sc = [[UserServe sharedUserServe].account.score floatValue]/[dic[@"scoreMax"] floatValue];
             gradeV.frame = CGRectMake(0, 0, (self.view.frame.size.width-150)*sc, 15);
-            upL.text = [NSString stringWithFormat:@"升级还需积分:%d",[dic[@"scoreMax"] intValue]-[[UserServe sharedUserServe].account.score intValue]+1];
+            upL.text = [NSString stringWithFormat:@"还需%d积分升级",[dic[@"scoreMax"] intValue]-[[UserServe sharedUserServe].account.score intValue]+1];
         }else
         {
             gradeV.frame = CGRectMake(0, 0, 170, 15);
@@ -204,7 +168,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [_tableView footerEndRefreshing];
     }];
-
+    
 }
 - (void)showGradeRule
 {
@@ -221,25 +185,12 @@
 {
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
     view.backgroundColor = [UIColor whiteColor];
-    UILabel * a = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, (ScreenWidth-20)/3, 20)];
-    a.backgroundColor = [UIColor clearColor];
-    a.font = [UIFont systemFontOfSize:15];
-    a.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
-    a.text = @"日期";
-    [view addSubview:a];
-    UILabel * b = [[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth-20)/3, 5, (ScreenWidth-20)/3, 20)];
-    b.backgroundColor = [UIColor clearColor];
-    b.textAlignment = NSTextAlignmentCenter;
-    b.font = [UIFont systemFontOfSize:15];
-    b.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
-    b.text = @"操作";
-    [view addSubview:b];
-    UILabel * c = [[UILabel alloc] initWithFrame:CGRectMake(((ScreenWidth-20)/3)*2, 5, (ScreenWidth-20)/3, 20)];
+    UILabel * c = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, (ScreenWidth-20)/3, 20)];
     c.backgroundColor = [UIColor clearColor];
     c.textAlignment = NSTextAlignmentRight;
     c.font = [UIFont systemFontOfSize:15];
     c.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
-    c.text = @"积分";
+    c.text = @"积分日志";
     [view addSubview:c];
     UIView * lineV = [[UIView alloc] initWithFrame:CGRectMake(5, 29, ScreenWidth-20, 1)];
     lineV.backgroundColor = [UIColor colorWithWhite:230/255.0f alpha:1];
@@ -263,7 +214,7 @@
     }
     NSDictionary * dic = _dataArr[indexPath.row];
     cell.moneL.text = dic[@"memo"];
-    cell.numberL.text = [NSString stringWithFormat:@"%d",[dic[@"amount"] integerValue]*[dic[@"blsign"] integerValue]];
+    cell.numberL.text = [NSString stringWithFormat:@"%ld",[dic[@"amount"] integerValue]*[dic[@"blsign"] integerValue]];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];

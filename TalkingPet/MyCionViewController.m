@@ -37,14 +37,17 @@
     UIImageView * bgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, -80,  self.view.frame.size.width, self.view.frame.size.width*0.57)];
     [bgV setImage:[UIImage imageNamed:@"otherUsercenter_topbg"]];
     [self.view addSubview:bgV];
-
+    
     
     UIButton*ruleB = [UIButton buttonWithType:UIButtonTypeCustom];
-    ruleB.frame = CGRectMake(ScreenWidth-65, 10, 60, 20);
+    ruleB.frame = CGRectMake(ScreenWidth-65, 10, 20, 20);
     ruleB.titleLabel.font = [UIFont systemFontOfSize:11];
     [ruleB addTarget:self action:@selector(showCionRule) forControlEvents:UIControlEventTouchUpInside];
-    [ruleB setBackgroundImage:[UIImage imageNamed:@"usercenter_pearule"] forState:UIControlStateNormal];
-//    [ruleB setTitle:@"宠豆规则" forState:UIControlStateNormal];
+    [ruleB setTitle:@"?" forState:UIControlStateNormal];
+    ruleB.layer.cornerRadius =10;
+    ruleB.layer.masksToBounds = YES;
+    [ruleB setTintColor:[UIColor whiteColor]];
+    ruleB.backgroundColor =[UIColor grayColor];
     [self.view addSubview:ruleB];
     
     UIImageView * avatarbg = [[UIImageView alloc] initWithFrame:CGRectMake(9, 9,  82, 72)];
@@ -61,8 +64,8 @@
     
     UILabel*nicknameL = [[UILabel alloc] initWithFrame:CGRectMake(110, 30, 170, 20)];
     nicknameL.backgroundColor = [UIColor clearColor];
-//    nicknameL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
-//    nicknameL.shadowOffset = CGSizeMake(2, 2);
+    //    nicknameL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
+    //    nicknameL.shadowOffset = CGSizeMake(2, 2);
     nicknameL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
     nicknameL.text = [UserServe sharedUserServe].account.nickname;
     [self.view addSubview:nicknameL];
@@ -86,16 +89,16 @@
     cionL.backgroundColor = [UIColor clearColor];
     cionL.font = [UIFont systemFontOfSize:14];
     cionL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
-//    cionL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
-//    cionL.shadowOffset = CGSizeMake(2, 2);
+    //    cionL.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.6];
+    //    cionL.shadowOffset = CGSizeMake(2, 2);
     cionL.text = [NSString stringWithFormat:@"仔币:%@",[UserServe sharedUserServe].account.coin];
     [self.view addSubview:cionL];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(5, self.view.frame.size.width*0.57-60, self.view.frame.size.width-10, self.view.frame.size.height - navigationBarHeight-(self.view.frame.size.width*0.57-60+5)) style:UITableViewStylePlain];
-//    _tableView.layer.masksToBounds = YES;
-//    _tableView.layer.cornerRadius = 5;
+    //    _tableView.layer.masksToBounds = YES;
+    //    _tableView.layer.cornerRadius = 5;
     [self.view addSubview:_tableView];
-//    _tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
+    //    _tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     _tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     [_tableView addFooterWithTarget:self action:@selector(getCionDetail)];
     _tableView.delegate = self;
@@ -189,7 +192,7 @@
     }
     NSDictionary * dic = _dataArr[indexPath.row];
     cell.moneL.text = dic[@"memo"];
-    cell.numberL.text = [NSString stringWithFormat:@"%d",[dic[@"amount"] integerValue]*[dic[@"blsign"] integerValue]];
+    cell.numberL.text = [NSString stringWithFormat:@"%d",[dic[@"amount"] intValue]*[dic[@"blsign"] intValue]];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
@@ -198,13 +201,13 @@
     return cell;
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -17,7 +17,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
         self.title = @"播放设置";
     }
     return self;
@@ -50,7 +49,7 @@
     _settingTableView.delegate = self;
     _settingTableView.dataSource = self;
     _settingTableView.scrollEnabled = NO;
-//    _settingTableView.backgroundView = uu;
+    _settingTableView.backgroundView = uu;
     _settingTableView.backgroundColor = [UIColor whiteColor];
     _settingTableView.rowHeight = 45;
     _settingTableView.contentInset = UIEdgeInsetsMake(0, 0, 59, 0);
@@ -64,7 +63,7 @@
 - (void)buildViewWithSkintype
 {
     [super buildViewWithSkintype];
-
+    
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 {
@@ -81,10 +80,13 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    //改变右边选择按钮的颜色
+    cell.tintColor =CommonGreenColor;
     if (indexPath.row==0) {
         cell.textLabel.text = @"仅在WIFI下自动播放";
         if (self.playMode==PlayOnlyInWIFI) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            
         }
         else
         {
@@ -153,13 +155,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

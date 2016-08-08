@@ -1266,6 +1266,7 @@
 		97F930AE1978F0290026BCFA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F930AD1978F0290026BCFA /* QuartzCore.framework */; };
 		97F930B11978F11C0026BCFA /* shanchushuruwenzi.png in Resources */ = {isa = PBXBuildFile; fileRef = 97F930AF1978F11C0026BCFA /* shanchushuruwenzi.png */; };
 		97F930B519790B850026BCFA /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F930B419790B850026BCFA /* SearchViewController.m */; };
+		D81E1E071D58232600C77812 /* CreatTagview.m in Sources */ = {isa = PBXBuildFile; fileRef = D81E1E061D58232600C77812 /* CreatTagview.m */; };
 		D81FB0BF1D488A1E00D7A566 /* OrderYZList.m in Sources */ = {isa = PBXBuildFile; fileRef = D81FB0BE1D488A1E00D7A566 /* OrderYZList.m */; };
 		D81FB0C21D488AF400D7A566 /* OrderYZGoodInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D81FB0C11D488AF400D7A566 /* OrderYZGoodInfo.m */; };
 		D81FB0C51D48A26B00D7A566 /* OrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D81FB0C41D48A26B00D7A566 /* OrderHeaderView.m */; };
@@ -3209,6 +3210,8 @@
 		97F930AF1978F11C0026BCFA /* shanchushuruwenzi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shanchushuruwenzi.png; sourceTree = "<group>"; };
 		97F930B319790B850026BCFA /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		97F930B419790B850026BCFA /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		D81E1E051D58232600C77812 /* CreatTagview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatTagview.h; sourceTree = "<group>"; };
+		D81E1E061D58232600C77812 /* CreatTagview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatTagview.m; sourceTree = "<group>"; };
 		D81FB0BD1D488A1E00D7A566 /* OrderYZList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderYZList.h; sourceTree = "<group>"; };
 		D81FB0BE1D488A1E00D7A566 /* OrderYZList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderYZList.m; sourceTree = "<group>"; };
 		D81FB0C01D488AF400D7A566 /* OrderYZGoodInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderYZGoodInfo.h; sourceTree = "<group>"; };
@@ -4315,6 +4318,8 @@
 				72A2E5E519C7E11F00A98BF1 /* SelectImageViewController.h */,
 				72A2E5E619C7E11F00A98BF1 /* SelectImageViewController.m */,
 				723F04051A89E265008E2D19 /* SelectTagDelegate.h */,
+				D81E1E051D58232600C77812 /* CreatTagview.h */,
+				D81E1E061D58232600C77812 /* CreatTagview.m */,
 				7256D2601A85E69200FCD43A /* TagViewController.h */,
 				7256D2611A85E69200FCD43A /* TagViewController.m */,
 				7271BACC1A88995200942209 /* MoreTagViewController.h */,
@@ -7816,6 +7821,7 @@
 				9793B9721AC509760092CB21 /* HuDongListTableViewCell.m in Sources */,
 				2E40FF7E1D49E728007A4E44 /* YZOrderConfimNoAddressCell.m in Sources */,
 				97DF53561A51402F002E4EDB /* ChatViewController.m in Sources */,
+				D81E1E071D58232600C77812 /* CreatTagview.m in Sources */,
 				97F7D3FB197E3AB7008D458A /* UIDevice+IdentifierAddition.m in Sources */,
 				72831D0C196A714000B9CA4C /* Pet.m in Sources */,
 				72831CD9196A3FE200B9CA4C /* MagicalRecord+ErrorHandling.m in Sources */,

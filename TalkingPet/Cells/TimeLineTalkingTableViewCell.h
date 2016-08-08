@@ -49,6 +49,11 @@
 @property (nonatomic,strong) UILabel * shareLabel;
 @property (nonatomic,strong) UIImageView * favorImgV;
 @property (nonatomic,assign) NSInteger lastIndex;
+
+@property (nonatomic,strong) UILabel * zanL;
+@property (nonatomic,strong) UILabel * commentL;
+
+
 @property (nonatomic,strong) StoryCellView * storyView;
 @property (nonatomic,assign) TalkingBrowse * talking;
 @property (nonatomic,assign) id<TalkingTableViewCellDelegate> delegate;

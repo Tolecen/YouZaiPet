@@ -81,31 +81,31 @@
         self.showTheHead = showHead;
         self.contentView.backgroundColor = [UIColor clearColor];
         self.backgroundColor = [UIColor clearColor];
-        self.dotImageV = [[UIImageView alloc] initWithFrame:CGRectMake(showHead?30:18, 0, 10, 10)];
-        [self.dotImageV setImage:[UIImage imageNamed:@"timeLine_dot"]];
-        [self.contentView addSubview:self.dotImageV];
+//        self.dotImageV = [[UIImageView alloc] initWithFrame:CGRectMake(showHead?30:18, 0, 10, 10)];
+//        [self.dotImageV setImage:[UIImage imageNamed:@"timeLine_dot"]];
+//        [self.contentView addSubview:self.dotImageV];
         
-        self.underDotLineV = [[UIView alloc] initWithFrame:CGRectMake(showHead?35:23, 11, 1, 100)];
-        [self.underDotLineV setBackgroundColor:[UIColor colorWithWhite:200/255.0f alpha:1]];
-        [self.contentView addSubview:self.underDotLineV];
-        
-
-        
-        self.leftLineV = [[UIView alloc] initWithFrame:CGRectMake(44, 0, 1, 100)];
-        [self.leftLineV setBackgroundColor:[UIColor colorWithWhite:200/255.0f alpha:1]];
-        [self.contentView addSubview:self.leftLineV];
-        
-        self.bottomLineV = [[UIView alloc] initWithFrame:CGRectMake(45, 0, ScreenWidth-45-10, 1)];
-        [self.bottomLineV setBackgroundColor:[UIColor colorWithWhite:200/255.0f alpha:1]];
-        [self.contentView addSubview:self.bottomLineV];
+//        self.underDotLineV = [[UIView alloc] initWithFrame:CGRectMake(showHead?35:23, 11, 1, 100)];
+//        [self.underDotLineV setBackgroundColor:[UIColor colorWithWhite:200/255.0f alpha:1]];
+//        [self.contentView addSubview:self.underDotLineV];
         
 
         
-        self.rightLineV = [[UIView alloc] initWithFrame:CGRectMake(ScreenWidth-10, 0, 1, 100)];
-        [self.rightLineV setBackgroundColor:[UIColor colorWithWhite:200/255.0f alpha:1]];
-        [self.contentView addSubview:self.rightLineV];
+//        self.leftLineV = [[UIView alloc] initWithFrame:CGRectMake(44, 0, 1, 100)];
+//        [self.leftLineV setBackgroundColor:[UIColor colorWithWhite:200/255.0f alpha:1]];
+//        [self.contentView addSubview:self.leftLineV];
         
-        self.contentImageV = [[EGOImageButton alloc] initWithFrame:CGRectMake(45, 0, ScreenWidth-45-10,ScreenWidth-45-10)];
+//        self.bottomLineV = [[UIView alloc] initWithFrame:CGRectMake(45, 0, ScreenWidth-45-10, 1)];
+//        [self.bottomLineV setBackgroundColor:[UIColor colorWithWhite:200/255.0f alpha:1]];
+//        [self.contentView addSubview:self.bottomLineV];
+        
+
+        
+//        self.rightLineV = [[UIView alloc] initWithFrame:CGRectMake(ScreenWidth-10, 0, 1, 100)];
+//        [self.rightLineV setBackgroundColor:[UIColor colorWithWhite:200/255.0f alpha:1]];
+//        [self.contentView addSubview:self.rightLineV];
+        
+        self.contentImageV = [[EGOImageButton alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenWidth)];
         [self.contentImageV setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1]];
         [self.contentView addSubview:self.contentImageV];
         self.contentImageV.userInteractionEnabled = NO;
@@ -113,7 +113,7 @@
         self.contentImageV.clipsToBounds = YES;
         
         
-        self.storyView = [[StoryCellView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth-45-10, ScreenWidth-45-10)];
+        self.storyView = [[StoryCellView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth)];
         self.storyView.backgroundColor = [UIColor whiteColor];
         [self.contentImageV addSubview:self.storyView];
         self.storyView.hidden = YES;
@@ -127,20 +127,20 @@
         self.contentTypeImgV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 42, 30)];
         [self.contentImageV addSubview:self.contentTypeImgV];
         
-        self.topLineV = [[UIView alloc] initWithFrame:CGRectMake(45, 0, ScreenWidth-45-10, 1)];
-        [self.topLineV setBackgroundColor:[UIColor colorWithWhite:200/255.0f alpha:1]];
-        [self.contentView addSubview:self.topLineV];
+//        self.topLineV = [[UIView alloc] initWithFrame:CGRectMake(45, 0, ScreenWidth-45-10, 1)];
+//        [self.topLineV setBackgroundColor:[UIColor colorWithWhite:200/255.0f alpha:1]];
+//        [self.contentView addSubview:self.topLineV];
         
-        self.bigZanImageV = [[UIImageView alloc] initWithFrame:CGRectMake(self.contentImageV.frame.size.width-10-70, self.contentImageV.frame.size.height-70-10, 70, 70)];
-        [self.bigZanImageV setImage:[UIImage imageNamed:@"newHaveZanBig"]];
-        [self.contentImageV addSubview:self.bigZanImageV];
-        self.bigZanImageV.hidden = YES;
+//        self.bigZanImageV = [[UIImageView alloc] initWithFrame:CGRectMake(self.contentImageV.frame.size.width-10-70, self.contentImageV.frame.size.height-70-10, 70, 70)];
+//        [self.bigZanImageV setImage:[UIImage imageNamed:@"newHaveZanBig"]];
+//        [self.contentImageV addSubview:self.bigZanImageV];
+//        self.bigZanImageV.hidden = YES;
         
         self.aniImageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 120, 120)];
         self.aniImageV.backgroundColor = [UIColor clearColor];
         [self.contentImageV addSubview:self.aniImageV];
         
-        self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(45+5, ScreenWidth-45-10+5, ScreenWidth-45-10-10, 60)];
+        self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, ScreenWidth+5, ScreenWidth-10, 60)];
         [self.contentLabel setBackgroundColor:[UIColor clearColor]];
         self.contentLabel.numberOfLines = 0;
         [self.contentLabel setFont:[UIFont systemFontOfSize:15]];
@@ -150,48 +150,90 @@
         [self.contentView addSubview:self.contentLabel];
         
         
-        self.tagView = [[UIView alloc] initWithFrame:CGRectMake(45+5, 370, ScreenWidth-45-10-10, 20)];
+        self.tagView = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.contentLabel.frame), ScreenWidth-20, 20)];
         self.tagView.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.tagView];
         
+        
+//        self.tagButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        self.tagButton.frame = CGRectMake(10, CGRectGetMaxY(self.desL.frame)+6, frame.size.width-20, 14);
+//        self.tagButton.backgroundColor = [UIColor clearColor];
+//        [self.contentView addSubview:self.tagButton];
+        
+        UIImageView * tagimgv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 2, 10, 10)];
+        tagimgv.image = [UIImage imageNamed:@"biaoqian@2x"];
+        [self.tagView addSubview:tagimgv];
+        
+        self.tagLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, ScreenWidth-20-20, 14)];
+        self.tagLabel.backgroundColor = [UIColor clearColor];
+        self.tagLabel.textColor = [UIColor colorWithR:200 g:200 b:200 alpha:1];
+        self.tagLabel.font = [UIFont systemFontOfSize:10];
+        self.tagLabel.text = @"萌宠大比拼";
+        [self.tagView addSubview:self.tagLabel];
+        
+        UIImageView * zanimgv = [[UIImageView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.tagView.frame)+12, 10, 10)];
+        zanimgv.image = [UIImage imageNamed:@"zan@2x"];
+        [self.contentView addSubview:zanimgv];
+        
+        self.zanL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(zanimgv.frame)+5, CGRectGetMaxY(self.tagView.frame)+10, 30, 14)];
+        self.zanL.backgroundColor = [UIColor clearColor];
+        self.zanL.textColor = [UIColor colorWithR:200 g:200 b:200 alpha:1];
+        self.zanL.font = [UIFont systemFontOfSize:11];
+        self.zanL.text = @"120";
+        self.zanL.adjustsFontSizeToFitWidth = YES;
+        [self.contentView addSubview:self.zanL];
+        
+        UIImageView * cimgv = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.zanL.frame), CGRectGetMaxY(self.tagView.frame)+12, 10, 10)];
+        cimgv.image = [UIImage imageNamed:@"pinglun@2x"];
+        [self.contentView addSubview:cimgv];
+        
+        self.commentL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(cimgv.frame)+5, CGRectGetMaxY(self.tagView.frame)+10, 30, 14)];
+        self.commentL.backgroundColor = [UIColor clearColor];
+        self.commentL.textColor = [UIColor colorWithR:200 g:200 b:200 alpha:1];
+        self.commentL.font = [UIFont systemFontOfSize:11];
+        self.commentL.text = @"23";
+        self.commentL.adjustsFontSizeToFitWidth = YES;
+        [self.contentView addSubview:self.commentL];
+
+        
         //        for (int i = 0; i<5; i++) {
-        UIButton * tB = [UIButton buttonWithType:UIButtonTypeCustom];
-        tB.tag = 900;
-        [tB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [tB.titleLabel setFont:[UIFont systemFontOfSize:12]];
-        [tB setFrame:CGRectMake(10, 370, 80, 20)];
-        [tB setTitleEdgeInsets:UIEdgeInsetsMake(1, 15, 0, 0)];
-        [tB setBackgroundColor:[UIColor colorWithRed:99/255.0f green:203/255.0f blue:175/255.f alpha:0.8]];
-        tB.layer.cornerRadius = 8;
-        tB.layer.masksToBounds = YES;
-        [tB addTarget:self action:@selector(tagBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [self.tagView addSubview:tB];
-        tB.hidden = YES;
-        UIImageView * timg = [[UIImageView alloc] initWithFrame:CGRectMake(6, 4, 14, 12)];
-        [timg setImage:[UIImage imageNamed:@"tagImg"]];
-        [tB addSubview:timg];
+//        UIButton * tB = [UIButton buttonWithType:UIButtonTypeCustom];
+//        tB.tag = 900;
+//        [tB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [tB.titleLabel setFont:[UIFont systemFontOfSize:12]];
+//        [tB setFrame:CGRectMake(10, 370, 80, 20)];
+//        [tB setTitleEdgeInsets:UIEdgeInsetsMake(1, 15, 0, 0)];
+//        [tB setBackgroundColor:[UIColor colorWithRed:99/255.0f green:203/255.0f blue:175/255.f alpha:0.8]];
+//        tB.layer.cornerRadius = 8;
+//        tB.layer.masksToBounds = YES;
+//        [tB addTarget:self action:@selector(tagBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.tagView addSubview:tB];
+//        tB.hidden = YES;
+//        UIImageView * timg = [[UIImageView alloc] initWithFrame:CGRectMake(6, 4, 14, 12)];
+//        [timg setImage:[UIImage imageNamed:@"tagImg"]];
+//        [tB addSubview:timg];
 
         //        }
         
         
-        self.locationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.locationBtn setFrame:CGRectMake(310-87-5, 370, 82, 20)];
-        [self.contentView addSubview:self.locationBtn];
-        [self.locationBtn setBackgroundColor:[UIColor colorWithRed:99/255.0f green:203/255.0f blue:175/255.f alpha:0.8]];
-        self.locationBtn.layer.cornerRadius = 5;
-        self.locationBtn.layer.masksToBounds = YES;
-        [_locationBtn addTarget:self action:@selector(locationAction) forControlEvents:UIControlEventTouchUpInside];
-        
-        self.locationImgV = [[UIImageView alloc] initWithFrame:CGRectMake(8, 2, 7, 11)];
-        [self.locationImgV setImage:[UIImage imageNamed:@"dingwei-xiao"]];
-        [self.locationBtn addSubview:self.locationImgV];
-        
-        self.locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(22, 0, 55, 20)];
-        [self.locationLabel setBackgroundColor:[UIColor clearColor]];
-        [self.locationLabel setText:@"北京 朝阳"];
-        [self.locationLabel setFont:[UIFont systemFontOfSize:11]];
-        [self.locationLabel setTextColor:[UIColor whiteColor]];
-        [self.locationBtn addSubview:self.locationLabel];
+//        self.locationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [self.locationBtn setFrame:CGRectMake(310-87-5, 370, 82, 20)];
+//        [self.contentView addSubview:self.locationBtn];
+//        [self.locationBtn setBackgroundColor:[UIColor colorWithRed:99/255.0f green:203/255.0f blue:175/255.f alpha:0.8]];
+//        self.locationBtn.layer.cornerRadius = 5;
+//        self.locationBtn.layer.masksToBounds = YES;
+//        [_locationBtn addTarget:self action:@selector(locationAction) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        self.locationImgV = [[UIImageView alloc] initWithFrame:CGRectMake(8, 2, 7, 11)];
+//        [self.locationImgV setImage:[UIImage imageNamed:@"dingwei-xiao"]];
+//        [self.locationBtn addSubview:self.locationImgV];
+//        
+//        self.locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(22, 0, 55, 20)];
+//        [self.locationLabel setBackgroundColor:[UIColor clearColor]];
+//        [self.locationLabel setText:@"北京 朝阳"];
+//        [self.locationLabel setFont:[UIFont systemFontOfSize:11]];
+//        [self.locationLabel setTextColor:[UIColor whiteColor]];
+//        [self.locationBtn addSubview:self.locationLabel];
         
         self.bottomBG = [[UIView alloc] initWithFrame:CGRectMake(0, 370+30+50+5, ScreenWidth-45-10, 30)];
         [_bottomBG setBackgroundColor:[UIColor clearColor]];
@@ -375,7 +417,7 @@
     [self.contentImageV setImageURL:[NSURL URLWithString:[self.talking.imgUrl stringByAppendingString:@"?imageView2/2/w/400"]]];
     [self.underDotLineV setFrame:CGRectMake(self.showTheHead?35:23, 10, 1, self.talking.rowHeight-10)];
     [self.contentLabel setText:self.talking.descriptionContent];
-    [self.contentLabel setFrame:CGRectMake(45+5, ScreenWidth-45-10+5, ScreenWidth-45-10-10, forwardedNameSize.height)];
+    [self.contentLabel setFrame:CGRectMake(5, ScreenWidth+5, ScreenWidth-10, forwardedNameSize.height)];
     
     if ([self.talking.location.address isEqualToString:@""]||[self.talking.location.address isEqualToString:@" "]) {
         self.locationBtn.hidden = YES;
@@ -432,7 +474,7 @@
 //        UIImage * tagImage = [[UIImage imageNamed:@"tagBlueBG"]
 //                              stretchableImageWithLeftCapWidth:20 topCapHeight:10];
 //        [tB setBackgroundImage:tagImage forState:UIControlStateNormal];
-        [self.tagView setFrame:CGRectMake(self.tagView.frame.origin.x, self.locationBtn.hidden?self.contentLabel.frame.origin.y+self.contentLabel.frame.size.height+5:self.locationBtn.frame.origin.y+15+10, ScreenWidth-45-10-10, 20)];
+//        [self.tagView setFrame:CGRectMake(self.tagView.frame.origin.x, self.locationBtn.hidden?self.contentLabel.frame.origin.y+self.contentLabel.frame.size.height+5:self.locationBtn.frame.origin.y+15+10, ScreenWidth-45-10-10, 20)];
 
     }
     
