@@ -52,6 +52,12 @@
 
 @property (nonatomic,strong) UILabel * zanL;
 @property (nonatomic,strong) UILabel * commentL;
+@property (nonatomic,strong) UIView * hudongView;
+
+@property (nonatomic,strong) UIView * grayBG;
+
+@property (nonatomic,strong) UIView * audioLengthView;
+@property (nonatomic,strong) UILabel * audioL;
 
 
 @property (nonatomic,strong) StoryCellView * storyView;

@@ -32,19 +32,20 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.contentView.backgroundColor = [UIColor whiteColor];
+        self.contentView.backgroundColor = [UIColor colorWithR:240 g:240 b:240 alpha:1];
         self.commentAvatarV = [[EGOImageButton alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
         [self.commentAvatarV setBackgroundColor:[UIColor grayColor]];
 //        [self.commentAvatarV setImage:[UIImage imageNamed:@"gougouAvatar.jpeg"]];
         [self.commentAvatarV setBackgroundImage:[UIImage imageNamed:@"placeholderHead.png"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.commentAvatarV];
         [self.commentAvatarV addTarget:self action:@selector(publisherAction) forControlEvents:UIControlEventTouchUpInside];
+        self.commentAvatarV.layer.cornerRadius = 25;
+        self.commentAvatarV.layer.masksToBounds = YES;
         
         
-        
-        UIImageView * avatarbg = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
-        [avatarbg setImage:[UIImage imageNamed:@"avatarbg2"]];
-        [self.contentView addSubview:avatarbg];
+//        UIImageView * avatarbg = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
+//        [avatarbg setImage:[UIImage imageNamed:@"avatarbg2"]];
+//        [self.contentView addSubview:avatarbg];
         
         self.commentNameL = [[UILabel alloc] initWithFrame:CGRectMake(70, 15, 200, 20)];
         [self.commentNameL setBackgroundColor:[UIColor clearColor]];

@@ -16,61 +16,60 @@
 {
     CGFloat cellHeight = 0;
     
-    CGSize forwardedNameSize = [theTalking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(cellType==0?(ScreenWidth-45-10-10):(ScreenWidth-20), 100)];
+    CGSize forwardedNameSize = [theTalking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(cellType==0?(ScreenWidth-10):(ScreenWidth-10), 100)];
     if ([theTalking.descriptionContent isEqualToString:@""]) {
         forwardedNameSize.height = 0;
-        cellHeight = (cellType==0?(ScreenWidth-45-10):(ScreenWidth+60+5))+5;
+        cellHeight = (cellType==0?(ScreenWidth+85):(ScreenWidth+85+60+5));
     }
     else
-        cellHeight = (cellType==0?(ScreenWidth-45-10):(ScreenWidth+60+5))+5+forwardedNameSize.height;
+        cellHeight = (cellType==0?(ScreenWidth+85):(ScreenWidth+85+60+5))+forwardedNameSize.height;
     
-    if ([theTalking.location.address isEqualToString:@""]||[theTalking.location.address isEqualToString:@" "]) {
-    }
-    else{
-        CGPoint lastPoint;
-        CGSize sz = [theTalking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(MAXFLOAT, 100) lineBreakMode:NSLineBreakByCharWrapping];
-        
-        CGSize linesSz = [theTalking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(cellType==0?(ScreenWidth-45-10-10):(ScreenWidth-20), MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
-        if((sz.width > linesSz.width && linesSz.height > 20)||(sz.width > linesSz.width && linesSz.height > 40))//判断是否折行
-        {
-            lastPoint = CGPointMake(45+5 + (int)sz.width % (int)linesSz.width,linesSz.height - 15+(cellType==0?(ScreenWidth-45-10+5):(ScreenWidth+60+5)));
-        }
-        else
-        {
-            lastPoint = CGPointMake(45+5 + sz.width, linesSz.height - 15+(cellType==0?(ScreenWidth-45-10+5):(ScreenWidth+60+5)));
-            if (lastPoint.y<(cellType==0?(ScreenWidth-45-10+5):(ScreenWidth+60+5))) {
-                cellHeight = cellHeight+15;
-            }
-            
-        }
-
-        CGSize locationSize = [theTalking.location.address sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(120, 20)];
-        if (lastPoint.x+5+22+locationSize.width+8>(ScreenWidth-15)) {
-            cellHeight = cellHeight+5+15;
-        }
-        else
-        {
-            
-        }
-
-    }
-
-    if (theTalking.tagArray.count==0) {
-        //        self.tagView.hidden = YES;
-        
-    }
-    else
-    {
-        cellHeight = cellHeight +10+20;
-        
-    }
-        cellHeight = cellHeight+5+30;
-        cellHeight = cellHeight+5;
+//    if ([theTalking.location.address isEqualToString:@""]||[theTalking.location.address isEqualToString:@" "]) {
+//    }
+//    else{
+//        CGPoint lastPoint;
+//        CGSize sz = [theTalking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(MAXFLOAT, 100) lineBreakMode:NSLineBreakByCharWrapping];
+//        
+//        CGSize linesSz = [theTalking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(cellType==0?(ScreenWidth-10):(ScreenWidth-20), MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
+//        if((sz.width > linesSz.width && linesSz.height > 20)||(sz.width > linesSz.width && linesSz.height > 40))//判断是否折行
+//        {
+//            lastPoint = CGPointMake(45+5 + (int)sz.width % (int)linesSz.width,linesSz.height - 15+(cellType==0?(ScreenWidth+5):(ScreenWidth+60+5)));
+//        }
+//        else
+//        {
+//            lastPoint = CGPointMake(45+5 + sz.width, linesSz.height - 15+(cellType==0?(ScreenWidth+5):(ScreenWidth+60+5)));
+//            if (lastPoint.y<(cellType==0?(ScreenWidth+5):(ScreenWidth+60+5))) {
+//                cellHeight = cellHeight+15;
+//            }
+//            
+//        }
+//
+//        CGSize locationSize = [theTalking.location.address sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(120, 20)];
+//        if (lastPoint.x+5+22+locationSize.width+8>(ScreenWidth-15)) {
+//            cellHeight = cellHeight+5+15;
+//        }
+//        else
+//        {
+//            
+//        }
+//
+//    }
+//
+//    if (theTalking.tagArray.count==0) {
+//        //        self.tagView.hidden = YES;
+//        
+//    }
+//    else
+//    {
+//        cellHeight = cellHeight +10+20;
+//        
+//    }
+//        cellHeight = cellHeight+5+30;
+//        cellHeight = cellHeight+5;
     if (theTalking.ifForward) {
-        CGSize forwardNameSize = [theTalking.forwardInfo.forwardDescription sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(cellType==0?(ScreenWidth-45-10):(ScreenWidth-20), 100)];
-        cellHeight = cellHeight+20+forwardNameSize.height+5;
+        cellHeight = cellHeight+60;
     }
-    return cellHeight+20;
+    return cellHeight;
 }
 
 
@@ -113,10 +112,10 @@
         self.contentImageV.clipsToBounds = YES;
         
         
-        self.storyView = [[StoryCellView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth)];
-        self.storyView.backgroundColor = [UIColor whiteColor];
-        [self.contentImageV addSubview:self.storyView];
-        self.storyView.hidden = YES;
+//        self.storyView = [[StoryCellView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth)];
+//        self.storyView.backgroundColor = [UIColor clearColor];
+//        [self.contentImageV addSubview:self.storyView];
+//        self.storyView.hidden = YES;
 //        self.storyView.userInteractionEnabled = YES;
 //        //        [self.storyView addTarget:self action:@selector(storyClicked) forControlEvents:UIControlEventTouchUpInside];
 //        
@@ -124,8 +123,28 @@
 //        [self.storyView addGestureRecognizer:tap];
         
         
-        self.contentTypeImgV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 42, 30)];
+        self.contentTypeImgV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 43, 25)];
         [self.contentImageV addSubview:self.contentTypeImgV];
+        
+        self.audioLengthView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 50, 20)];
+        self.audioLengthView.backgroundColor = CommonGreenColor;
+        self.audioLengthView.layer.cornerRadius = 7;
+        self.audioLengthView.layer.masksToBounds = YES;
+        [self.contentView addSubview:self.audioLengthView];
+        
+        UIImageView * p = [[UIImageView alloc] initWithFrame:CGRectMake(8, 5, 7, 10)];
+        p.image = [UIImage imageNamed:@"bofang@2x"];
+        [self.audioLengthView addSubview:p];
+        
+        self.audioL = [[UILabel alloc] initWithFrame:CGRectMake(50-5-30, 0, 30, self.audioLengthView.frame.size.height)];
+        _audioL.backgroundColor = [UIColor clearColor];
+        _audioL.font = [UIFont systemFontOfSize:10];
+        _audioL.textColor = [UIColor whiteColor];
+        _audioL.textAlignment = NSTextAlignmentRight;
+        [self.audioLengthView addSubview:_audioL];
+        _audioL.text = @"";
+        _audioL.adjustsFontSizeToFitWidth = YES;
+
         
 //        self.topLineV = [[UIView alloc] initWithFrame:CGRectMake(45, 0, ScreenWidth-45-10, 1)];
 //        [self.topLineV setBackgroundColor:[UIColor colorWithWhite:200/255.0f alpha:1]];
@@ -141,13 +160,17 @@
         [self.contentImageV addSubview:self.aniImageV];
         
         self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, ScreenWidth+5, ScreenWidth-10, 60)];
-        [self.contentLabel setBackgroundColor:[UIColor clearColor]];
+        [self.contentLabel setBackgroundColor:[UIColor whiteColor]];
         self.contentLabel.numberOfLines = 0;
         [self.contentLabel setFont:[UIFont systemFontOfSize:15]];
         [self.contentLabel setTextColor:[UIColor colorWithWhite:100/255.0f alpha:1]];
         [self.contentLabel setLineBreakMode:NSLineBreakByCharWrapping];
         [self.contentLabel setText:@"阿斯顿金卡数据的拉伸的就看见克拉斯贷记卡数据"];
         [self.contentView addSubview:self.contentLabel];
+        
+        self.grayBG = [[UIView alloc] initWithFrame:CGRectMake(0,  CGRectGetMaxY(self.contentLabel.frame)+10, ScreenWidth, 20)];
+        self.grayBG.backgroundColor = [UIColor colorWithR:240 g:240 b:240 alpha:1];
+        [self.contentView addSubview:self.grayBG];
         
         
         self.tagView = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.contentLabel.frame), ScreenWidth-20, 20)];
@@ -171,29 +194,33 @@
         self.tagLabel.text = @"萌宠大比拼";
         [self.tagView addSubview:self.tagLabel];
         
-        UIImageView * zanimgv = [[UIImageView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.tagView.frame)+12, 10, 10)];
-        zanimgv.image = [UIImage imageNamed:@"zan@2x"];
-        [self.contentView addSubview:zanimgv];
+        self.hudongView = [[UIView alloc] initWithFrame:CGRectMake(0,  CGRectGetMaxY(self.tagView.frame)+10, ScreenWidth, 20)];
+        self.hudongView.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:self.hudongView];
         
-        self.zanL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(zanimgv.frame)+5, CGRectGetMaxY(self.tagView.frame)+10, 30, 14)];
+        UIImageView * zanimgv = [[UIImageView alloc] initWithFrame:CGRectMake(10, 2, 10, 10)];
+        zanimgv.image = [UIImage imageNamed:@"zan@2x"];
+        [self.hudongView addSubview:zanimgv];
+        
+        self.zanL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(zanimgv.frame)+5, 0, 30, 14)];
         self.zanL.backgroundColor = [UIColor clearColor];
         self.zanL.textColor = [UIColor colorWithR:200 g:200 b:200 alpha:1];
         self.zanL.font = [UIFont systemFontOfSize:11];
         self.zanL.text = @"120";
         self.zanL.adjustsFontSizeToFitWidth = YES;
-        [self.contentView addSubview:self.zanL];
+        [self.hudongView addSubview:self.zanL];
         
-        UIImageView * cimgv = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.zanL.frame), CGRectGetMaxY(self.tagView.frame)+12, 10, 10)];
+        UIImageView * cimgv = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.zanL.frame), 2, 10, 10)];
         cimgv.image = [UIImage imageNamed:@"pinglun@2x"];
-        [self.contentView addSubview:cimgv];
+        [self.hudongView addSubview:cimgv];
         
-        self.commentL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(cimgv.frame)+5, CGRectGetMaxY(self.tagView.frame)+10, 30, 14)];
+        self.commentL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(cimgv.frame)+5, 0, 30, 14)];
         self.commentL.backgroundColor = [UIColor clearColor];
         self.commentL.textColor = [UIColor colorWithR:200 g:200 b:200 alpha:1];
         self.commentL.font = [UIFont systemFontOfSize:11];
         self.commentL.text = @"23";
         self.commentL.adjustsFontSizeToFitWidth = YES;
-        [self.contentView addSubview:self.commentL];
+        [self.hudongView addSubview:self.commentL];
 
         
         //        for (int i = 0; i<5; i++) {
@@ -235,12 +262,12 @@
 //        [self.locationLabel setTextColor:[UIColor whiteColor]];
 //        [self.locationBtn addSubview:self.locationLabel];
         
-        self.bottomBG = [[UIView alloc] initWithFrame:CGRectMake(0, 370+30+50+5, ScreenWidth-45-10, 30)];
+        self.bottomBG = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tagView.frame), ScreenWidth, 30)];
         [_bottomBG setBackgroundColor:[UIColor clearColor]];
         [self.contentView addSubview:_bottomBG];
         
         self.favorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.favorBtn setFrame:CGRectMake(45+(ScreenWidth-45-10-30*3-30*3), 0, 60, 30)];
+        [self.favorBtn setFrame:CGRectMake(ScreenWidth-90, 0, 30, 30)];
         [self.favorBtn setBackgroundColor:[UIColor clearColor]];
         [_bottomBG addSubview:self.favorBtn];
         self.favorBtn.showsTouchWhenHighlighted = YES;
@@ -251,73 +278,85 @@
         [self.favorBtn addSubview:_favorImgV];
         [self.favorImgV setImage:[UIImage imageNamed:@"browser_zan"]];
         
-        self.favorLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 5, 30, 20)];
-        [self.favorLabel setBackgroundColor:[UIColor clearColor]];
-        [self.favorLabel setText:@"31"];
-        [self.favorLabel setFont:[UIFont systemFontOfSize:13]];
-        //            [self.favorLabel setTextColor:[UIColor whiteColor]];
-        [self.favorLabel setTextAlignment:NSTextAlignmentCenter];
-        [self.favorBtn addSubview:self.favorLabel];
-        [self.favorLabel setTextColor:[UIColor colorWithWhite:100/255.0f alpha:1]];
-        [self.favorLabel setAdjustsFontSizeToFitWidth:YES];
+//        self.favorLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 5, 30, 20)];
+//        [self.favorLabel setBackgroundColor:[UIColor clearColor]];
+//        [self.favorLabel setText:@"31"];
+//        [self.favorLabel setFont:[UIFont systemFontOfSize:13]];
+//        //            [self.favorLabel setTextColor:[UIColor whiteColor]];
+//        [self.favorLabel setTextAlignment:NSTextAlignmentCenter];
+//        [self.favorBtn addSubview:self.favorLabel];
+//        [self.favorLabel setTextColor:[UIColor colorWithWhite:100/255.0f alpha:1]];
+//        [self.favorLabel setAdjustsFontSizeToFitWidth:YES];
         
         
         
-        self.commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.commentBtn setFrame:CGRectMake(self.favorBtn.frame.origin.x+60, 0, 60, 30)];
-        [self.commentBtn setBackgroundColor:[UIColor clearColor]];
-        [_bottomBG addSubview:self.commentBtn];
-        self.commentBtn.showsTouchWhenHighlighted = YES;
-        [_commentBtn addTarget:self action:@selector(commentAction) forControlEvents:UIControlEventTouchUpInside];
-        
-        UIImageView * commentImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        //            [commentImgV setImage:[UIImage imageNamed:@"comment-ico"]];
-        [self.commentBtn addSubview:commentImgV];
-        [commentImgV setImage:[UIImage imageNamed:@"browser_comment"]];
-        
-        self.commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 5, 30, 20)];
-        [self.commentLabel setBackgroundColor:[UIColor clearColor]];
-        [self.commentLabel setText:@"121"];
-        [self.commentLabel setFont:[UIFont systemFontOfSize:13]];
-        //            [self.commentLabel setTextColor:[UIColor whiteColor]];
-        [self.commentLabel setTextAlignment:NSTextAlignmentCenter];
-        [self.commentBtn addSubview:self.commentLabel];
-        [self.commentLabel setTextColor:[UIColor colorWithWhite:100/255.0f alpha:1]];
-        [self.commentLabel setAdjustsFontSizeToFitWidth:YES];
-        
+//        self.commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [self.commentBtn setFrame:CGRectMake(self.favorBtn.frame.origin.x+60, 0, 60, 30)];
+//        [self.commentBtn setBackgroundColor:[UIColor clearColor]];
+//        [_bottomBG addSubview:self.commentBtn];
+//        self.commentBtn.showsTouchWhenHighlighted = YES;
+//        [_commentBtn addTarget:self action:@selector(commentAction) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        UIImageView * commentImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+//        //            [commentImgV setImage:[UIImage imageNamed:@"comment-ico"]];
+//        [self.commentBtn addSubview:commentImgV];
+//        [commentImgV setImage:[UIImage imageNamed:@"browser_comment"]];
+//        
+//        self.commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 5, 30, 20)];
+//        [self.commentLabel setBackgroundColor:[UIColor clearColor]];
+//        [self.commentLabel setText:@"121"];
+//        [self.commentLabel setFont:[UIFont systemFontOfSize:13]];
+//        //            [self.commentLabel setTextColor:[UIColor whiteColor]];
+//        [self.commentLabel setTextAlignment:NSTextAlignmentCenter];
+//        [self.commentBtn addSubview:self.commentLabel];
+//        [self.commentLabel setTextColor:[UIColor colorWithWhite:100/255.0f alpha:1]];
+//        [self.commentLabel setAdjustsFontSizeToFitWidth:YES];
+//        
         self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.shareBtn setFrame:CGRectMake(self.commentBtn.frame.origin.x+60, 0, 60, 30)];
+        [self.shareBtn setFrame:CGRectMake(ScreenWidth-50, 0, 30, 30)];
         [self.shareBtn setBackgroundColor:[UIColor clearColor]];
+        [self.shareBtn setTitle:@"● ● ●" forState:UIControlStateNormal];
+        self.shareBtn.titleLabel.font = [UIFont systemFontOfSize:8];
+        [self.shareBtn setTitleColor:[UIColor colorWithR:100 g:100 b:100 alpha:1] forState:UIControlStateNormal];
         [_bottomBG addSubview:self.shareBtn];
         self.shareBtn.showsTouchWhenHighlighted = YES;
         [_shareBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
+//
+//        UIImageView * shareImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+//        //            [shareImgV setImage:[UIImage imageNamed:@"share-ico"]];
+//        [self.shareBtn addSubview:shareImgV];
+//        [shareImgV setImage:[UIImage imageNamed:@"browser_forward"]];
+//        
+//        self.shareLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 5, 30, 20)];
+//        [self.shareLabel setBackgroundColor:[UIColor clearColor]];
+//        [self.shareLabel setText:@"98"];
+//        [self.shareLabel setFont:[UIFont systemFontOfSize:13]];
+//        //            [self.shareLabel setTextColor:[UIColor whiteColor]];
+//        [self.shareLabel setTextAlignment:NSTextAlignmentCenter];
+//        [self.shareBtn addSubview:self.shareLabel];
+//        [self.shareLabel setTextColor:[UIColor colorWithWhite:100/255.0f alpha:1]];
+//        [self.shareLabel setAdjustsFontSizeToFitWidth:YES];
         
-        UIImageView * shareImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        //            [shareImgV setImage:[UIImage imageNamed:@"share-ico"]];
-        [self.shareBtn addSubview:shareImgV];
-        [shareImgV setImage:[UIImage imageNamed:@"browser_forward"]];
-        
-        self.shareLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 5, 30, 20)];
-        [self.shareLabel setBackgroundColor:[UIColor clearColor]];
-        [self.shareLabel setText:@"98"];
-        [self.shareLabel setFont:[UIFont systemFontOfSize:13]];
-        //            [self.shareLabel setTextColor:[UIColor whiteColor]];
-        [self.shareLabel setTextAlignment:NSTextAlignmentCenter];
-        [self.shareBtn addSubview:self.shareLabel];
-        [self.shareLabel setTextColor:[UIColor colorWithWhite:100/255.0f alpha:1]];
-        [self.shareLabel setAdjustsFontSizeToFitWidth:YES];
-        
-        self.forwardView = [[UIView alloc] initWithFrame:CGRectMake(45, 0, ScreenWidth-45-10,60)];
-        self.forwardView.backgroundColor = [UIColor clearColor];
+        self.forwardView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,60)];
+        self.forwardView.backgroundColor = [UIColor colorWithR:240 g:240 b:240 alpha:1];
         [self.contentView addSubview:self.forwardView];
-        UILabel * hg = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
+        
+        self.forwardContentL = [[UILabel alloc] initWithFrame:CGRectMake(5, 10, ScreenWidth-10, 20)];
+        self.forwardContentL.backgroundColor = [UIColor clearColor];
+        self.forwardContentL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
+        self.forwardContentL.numberOfLines = 1;
+//        self.forwardContentL.lineBreakMode = NSLineBreakByCharWrapping;
+        self.forwardContentL.font = [UIFont systemFontOfSize:13];
+        [self.forwardView addSubview:self.forwardContentL];
+        
+        UILabel * hg = [[UILabel alloc] initWithFrame:CGRectMake(5, 35, 40, 20)];
         [hg setBackgroundColor:[UIColor clearColor]];
         hg.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
         hg.font = [UIFont boldSystemFontOfSize:13];
         hg.text = @"转自:";
         [self.forwardView addSubview:hg];
         
-        self.forwardNameL = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, ScreenWidth-45-10-30, 20)];
+        self.forwardNameL = [[UILabel alloc] initWithFrame:CGRectMake(35, 35, ScreenWidth-30, 20)];
         self.forwardNameL.backgroundColor = [UIColor clearColor];
         self.forwardNameL.textColor = [UIColor colorWithRed:182/255.0 green:178/255.0 blue:251/255.0 alpha:1];
         self.forwardNameL.font = [UIFont boldSystemFontOfSize:13];
@@ -327,16 +366,10 @@
         UITapGestureRecognizer * tapw = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(publisherAction)];
         [self.forwardNameL addGestureRecognizer:tapw];
         
-        self.forwardContentL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth-45-10, 20)];
-        self.forwardContentL.backgroundColor = [UIColor clearColor];
-        self.forwardContentL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
-        self.forwardContentL.numberOfLines = 0;
-        self.forwardContentL.lineBreakMode = NSLineBreakByCharWrapping;
-        self.forwardContentL.font = [UIFont systemFontOfSize:13];
-        [self.forwardView addSubview:self.forwardContentL];
+
         
-        self.lastbottomLineV = [[UIView alloc] initWithFrame:CGRectMake(36, 0, ScreenWidth-45-10, 1)];
-        [self.lastbottomLineV setBackgroundColor:[UIColor colorWithWhite:200/255.0f alpha:1]];
+        self.lastbottomLineV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
+        [self.lastbottomLineV setBackgroundColor:[UIColor colorWithWhite:240/255.0f alpha:1]];
         [self.contentView addSubview:self.lastbottomLineV];
         
     }
@@ -346,7 +379,7 @@
 {
     [super layoutSubviews];
     
-    CGSize forwardedNameSize = [self.talking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(ScreenWidth-45-10-10, 100)];
+    CGSize forwardedNameSize = [self.talking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(ScreenWidth-10, 100)];
     if ([self.talking.descriptionContent isEqualToString:@""]) {
         forwardedNameSize.height = 0;
     }
@@ -367,19 +400,27 @@
         [self.contentTypeImgV setImage:[UIImage imageNamed:@"browser_typePic"]];
         [_dotImageV setImage:[UIImage imageNamed:@"timeLine_dot"]];
         self.contentImageV.userInteractionEnabled = NO;
+        self.audioLengthView.hidden = YES;
+        self.contentTypeImgV.hidden = NO;
     }
     else if ([self.talking.theModel isEqualToString:@"2"]){
         self.aniImageV.hidden = YES;
-        self.storyView.hidden = NO;
+        self.storyView.hidden = YES;
         [self.contentTypeImgV setImage:[UIImage imageNamed:@"browser_typeStory"]];
-        [self.storyView.storyImageV1 setImageURL:[NSURL URLWithString:[self.talking.imgUrl stringByAppendingString:@"?imageView2/2/w/400"]]];
-        [self.storyView.storyTimeL setText:[Common DynamicCurrentTime:[Common getCurrentTime] AndMessageTime:self.talking.publishTime]];
-        [self.storyView.storyTitleL setText:self.talking.descriptionContent];
+        self.audioLengthView.hidden = YES;
+        self.contentTypeImgV.hidden = NO;
+//        [self.storyView.storyImageV1 setImageURL:[NSURL URLWithString:[self.talking.imgUrl stringByAppendingString:@"?imageView2/2/w/400"]]];
+//        [self.storyView.storyTimeL setText:[Common DynamicCurrentTime:[Common getCurrentTime] AndMessageTime:self.talking.publishTime]];
+//        [self.storyView.storyTitleL setText:self.talking.descriptionContent];
     }
 
     else if([self.talking.theModel isEqualToString:@"0"]){
         self.storyView.hidden = YES;
         self.contentImageV.userInteractionEnabled = NO;
+        
+        self.audioLengthView.hidden = NO;
+        self.contentTypeImgV.hidden = YES;
+        self.audioL.text = [NSString stringWithFormat:@"%@\"",self.talking.audioDuration];
         [self.contentTypeImgV setImage:[UIImage imageNamed:@"browser_typeShuoshuo"]];
         [_dotImageV setImage:[UIImage imageNamed:@"timeLine_dot"]];
         if ([TFileManager ifExsitFolder:self.talking.playAnimationImg.fileName]) {
@@ -401,7 +442,7 @@
         
         
         
-        if ([self.contentImageV ifExsitUrl:[NSURL URLWithString:[self.talking.imgUrl stringByAppendingString:@"?imageView2/2/w/400"]]]) {
+        if ([self.contentImageV ifExsitUrl:[NSURL URLWithString:[self.talking.imgUrl stringByAppendingString:@"?imageView2/1/w/400/h/400"]]]) {
             self.aniImageV.hidden = NO;
             
         }
@@ -414,46 +455,46 @@
     //    self.forwardLabel.text = self.talking.forwardNum;
     self.commentLabel.text = [self.talking.commentNum intValue]>0?self.talking.commentNum:@"评论";
     self.shareLabel.text = ([self.talking.shareNum intValue]+[self.talking.forwardNum intValue])>0?[NSString stringWithFormat:@"%d",[self.talking.shareNum intValue]+[self.talking.forwardNum intValue]]:@"分享";
-    [self.contentImageV setImageURL:[NSURL URLWithString:[self.talking.imgUrl stringByAppendingString:@"?imageView2/2/w/400"]]];
+    [self.contentImageV setImageURL:[NSURL URLWithString:[self.talking.imgUrl stringByAppendingString:@"?imageView2/1/w/400/h/400"]]];
     [self.underDotLineV setFrame:CGRectMake(self.showTheHead?35:23, 10, 1, self.talking.rowHeight-10)];
     [self.contentLabel setText:self.talking.descriptionContent];
     [self.contentLabel setFrame:CGRectMake(5, ScreenWidth+5, ScreenWidth-10, forwardedNameSize.height)];
     
-    if ([self.talking.location.address isEqualToString:@""]||[self.talking.location.address isEqualToString:@" "]) {
-        self.locationBtn.hidden = YES;
-    }
-    else{
-        CGPoint lastPoint;
-        CGSize sz = [self.talking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(MAXFLOAT, 100) lineBreakMode:NSLineBreakByCharWrapping];
-        
-        CGSize linesSz = [self.talking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(ScreenWidth-45-10-10, MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
-        if((sz.width > linesSz.width && linesSz.height > 20)||(sz.width > linesSz.width && linesSz.height > 40))//判断是否折行
-        {
-            lastPoint = CGPointMake(self.contentLabel.frame.origin.x + (int)sz.width % (int)linesSz.width,linesSz.height - 15+self.contentLabel.frame.origin.y);
-        }
-        else
-        {
-            lastPoint = CGPointMake(self.contentLabel.frame.origin.x + sz.width, linesSz.height - 15+self.contentLabel.frame.origin.y);
-            if (lastPoint.y<ScreenWidth-45-10+5) {
-                lastPoint.y = ScreenWidth-45-10+5;
-            }
-        }
-        
-        self.locationBtn.hidden = NO;
-//        UIImage * dwbgImage = [[UIImage imageNamed:@"addressBG"]
-//                               stretchableImageWithLeftCapWidth:5 topCapHeight:5];
-//        [self.locationBtn setBackgroundImage:dwbgImage forState:UIControlStateNormal];
-        CGSize locationSize = [self.talking.location.address sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(120, 20)];
-        if (lastPoint.x+5+22+locationSize.width+8>ScreenWidth-15) {
-            [self.locationBtn setFrame:CGRectMake(self.contentLabel.frame.origin.x, forwardedNameSize.height+self.contentLabel.frame.origin.y+5, 22+locationSize.width+8, 15)];
-        }
-        else
-            //            [self.locationBtn setFrame:CGRectMake(10, 60+300+5+forwardedNameSize.height+5, 22+locationSize.width+8, 20)];
-            [self.locationBtn setFrame:CGRectMake(lastPoint.x+5, lastPoint.y, 22+locationSize.width+8, 15)];
-        [self.locationLabel setFrame:CGRectMake(self.locationLabel.frame.origin.x, self.locationLabel.frame.origin.y, locationSize.width, 15)];
-        [self.locationLabel setText:self.talking.location.address];
-    }
-    
+//    if ([self.talking.location.address isEqualToString:@""]||[self.talking.location.address isEqualToString:@" "]) {
+//        self.locationBtn.hidden = YES;
+//    }
+//    else{
+//        CGPoint lastPoint;
+//        CGSize sz = [self.talking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(MAXFLOAT, 100) lineBreakMode:NSLineBreakByCharWrapping];
+//        
+//        CGSize linesSz = [self.talking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(ScreenWidth-10, MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
+//        if((sz.width > linesSz.width && linesSz.height > 20)||(sz.width > linesSz.width && linesSz.height > 40))//判断是否折行
+//        {
+//            lastPoint = CGPointMake(self.contentLabel.frame.origin.x + (int)sz.width % (int)linesSz.width,linesSz.height - 15+self.contentLabel.frame.origin.y);
+//        }
+//        else
+//        {
+//            lastPoint = CGPointMake(self.contentLabel.frame.origin.x + sz.width, linesSz.height - 15+self.contentLabel.frame.origin.y);
+//            if (lastPoint.y<ScreenWidth-45-10+5) {
+//                lastPoint.y = ScreenWidth-45-10+5;
+//            }
+//        }
+//        
+//        self.locationBtn.hidden = NO;
+////        UIImage * dwbgImage = [[UIImage imageNamed:@"addressBG"]
+////                               stretchableImageWithLeftCapWidth:5 topCapHeight:5];
+////        [self.locationBtn setBackgroundImage:dwbgImage forState:UIControlStateNormal];
+//        CGSize locationSize = [self.talking.location.address sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(120, 20)];
+//        if (lastPoint.x+5+22+locationSize.width+8>ScreenWidth-15) {
+//            [self.locationBtn setFrame:CGRectMake(self.contentLabel.frame.origin.x, forwardedNameSize.height+self.contentLabel.frame.origin.y+5, 22+locationSize.width+8, 15)];
+//        }
+//        else
+//            //            [self.locationBtn setFrame:CGRectMake(10, 60+300+5+forwardedNameSize.height+5, 22+locationSize.width+8, 20)];
+//            [self.locationBtn setFrame:CGRectMake(lastPoint.x+5, lastPoint.y, 22+locationSize.width+8, 15)];
+//        [self.locationLabel setFrame:CGRectMake(self.locationLabel.frame.origin.x, self.locationLabel.frame.origin.y, locationSize.width, 15)];
+//        [self.locationLabel setText:self.talking.location.address];
+//    }
+//    
     
     if (self.talking.tagArray.count==0) {
         self.tagView.hidden = YES;
@@ -492,26 +533,42 @@
         [self.bottomBG setFrame:CGRectMake(0, self.tagView.frame.origin.y+self.tagView.frame.size.height+5, ScreenWidth, 30)];
     }
     
-    [self.bottomLineV setFrame:CGRectMake(45, self.bottomBG.frame.origin.y+self.bottomBG.frame.size.height+5, ScreenWidth-45-10, 1)];
-    [self.leftLineV setFrame:CGRectMake(44, 0, 1, self.bottomBG.frame.origin.y+self.bottomBG.frame.size.height+6)];
-    [self.rightLineV setFrame:CGRectMake(ScreenWidth-10, 0, 1, self.bottomBG.frame.origin.y+self.bottomBG.frame.size.height+6)];
+//    [self.bottomLineV setFrame:CGRectMake(45, self.bottomBG.frame.origin.y+self.bottomBG.frame.size.height+5, ScreenWidth-45-10, 1)];
+//    [self.leftLineV setFrame:CGRectMake(44, 0, 1, self.bottomBG.frame.origin.y+self.bottomBG.frame.size.height+6)];
+//    [self.rightLineV setFrame:CGRectMake(ScreenWidth-10, 0, 1, self.bottomBG.frame.origin.y+self.bottomBG.frame.size.height+6)];
     
     if (self.talking.ifForward) {
+        
         self.forwardView.hidden = NO;
-        [self.forwardView setFrame:CGRectMake(45, self.bottomLineV.frame.origin.y+6, ScreenWidth-45-10,60)];
+//        [self.forwardView setFrame:CGRectMake(45, self.bottomLineV.frame.origin.y+6, ScreenWidth-45-10,60)];
         self.forwardNameL.text = self.talking.petInfo.nickname;
-        CGSize forwardNameSize = [self.talking.forwardInfo.forwardDescription sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(ScreenWidth-45-10, 100)];
-        [self.forwardContentL setFrame:CGRectMake(0, 20, ScreenWidth-45-10, forwardNameSize.height)];
+//        CGSize forwardNameSize = [self.talking.forwardInfo.forwardDescription sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(ScreenWidth-10, 100)];
+//        [self.forwardContentL setFrame:CGRectMake(0, 20, ScreenWidth-45-10, forwardNameSize.height)];
         self.forwardContentL.text = self.talking.forwardInfo.forwardDescription;
-        [self.forwardView setFrame:CGRectMake(45, self.bottomLineV.frame.origin.y+6, ScreenWidth-45-10,20+forwardNameSize.height)];
-        [self.lastbottomLineV setFrame:CGRectMake(self.lastbottomLineV.frame.origin.x, self.forwardView.frame.origin.y+self.forwardView.frame.size.height+5, ScreenWidth-45-10, 1)];
-        self.lastbottomLineV.hidden = NO;
+        [self.forwardView setFrame:CGRectMake(0, self.contentLabel.frame.size.height>5 ? CGRectGetMaxY(self.contentLabel.frame)+10 : CGRectGetMaxY(self.contentLabel.frame), ScreenWidth,60)];
+//        [self.lastbottomLineV setFrame:CGRectMake(self.lastbottomLineV.frame.origin.x, self.forwardView.frame.origin.y+self.forwardView.frame.size.height+5, ScreenWidth-45-10, 1)];
+//        self.lastbottomLineV.hidden = NO;
     }
     else
     {
+      
         self.forwardView.hidden = YES;
-        self.lastbottomLineV.hidden = YES;
+//        self.lastbottomLineV.hidden = YES;
     }
+    
+    [self.tagView setFrame:CGRectMake(10, self.talking.ifForward ? CGRectGetMaxY(self.forwardView.frame)+10 : CGRectGetMaxY(self.contentLabel.frame)+10, ScreenWidth-20, 20)];
+    [self.hudongView setFrame:CGRectMake(0,  CGRectGetMaxY(self.tagView.frame)+10, ScreenWidth, 20)];
+    [self.bottomBG setFrame:CGRectMake(0, CGRectGetMaxY(self.tagView.frame), ScreenWidth, 30)];
+    
+    if (self.talking.ifForward) {
+        self.grayBG.hidden = NO;
+        [self.grayBG setFrame:CGRectMake(0,  CGRectGetMinY(self.forwardView.frame), ScreenWidth, CGRectGetMaxY(self.bottomBG.frame)-CGRectGetMinY(self.forwardView.frame))];
+    }
+    else
+        self.grayBG.hidden = YES;
+    
+    [self.lastbottomLineV setFrame:CGRectMake(0, CGRectGetMaxY(self.bottomBG.frame)+10, ScreenWidth, 10)];
+    
 
     
 }

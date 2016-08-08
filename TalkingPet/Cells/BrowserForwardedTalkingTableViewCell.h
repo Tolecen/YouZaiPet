@@ -68,6 +68,10 @@ typedef enum {
 @property (nonatomic,assign) float firstRowHeight;
 @property (nonatomic,strong) UIView * progressView;
 
+@property (nonatomic,strong) UILabel * zanL;
+@property (nonatomic,strong) UILabel * commentL;
+@property (nonatomic,strong) UIView * hudongView;
+
 
 @property (nonatomic,assign) NSInteger cellIndex;
 
@@ -109,6 +113,9 @@ typedef enum {
 @property (nonatomic,strong) UIImageView * contentTypeImgV;
 
 @property (nonatomic,strong) UIImageView * darenV;
+
+@property (nonatomic,strong) UIView * audioLengthView;
+@property (nonatomic,strong) UILabel * audioL;
 
 @property (nonatomic,strong) StoryCellView * storyView;
 @property (nonatomic,strong) UILabel * storyTimeL;

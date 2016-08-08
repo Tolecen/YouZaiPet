@@ -710,7 +710,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section==1) {
-        return 40;
+        return 0;
     }
     else
         return 0;
@@ -719,7 +719,7 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section==1) {
-        return self.sectionBtnView;
+        return nil;
     }
     else
         return nil;

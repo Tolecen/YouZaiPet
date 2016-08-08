@@ -24,46 +24,46 @@
         cellHeight = (cellType==0?(ScreenWidth+60+5):(ScreenWidth+60+5))+5+forwardedNameSize.height;
     
     
-    if ([theTalking.location.address isEqualToString:@""]||[theTalking.location.address isEqualToString:@" "]) {
-    }
-    else{
-        CGPoint lastPoint;
-        CGSize sz = [theTalking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(MAXFLOAT, 100) lineBreakMode:NSLineBreakByCharWrapping];
-        
-        CGSize linesSz = [theTalking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(cellType==0?(ScreenWidth-20):(ScreenWidth-20), MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
-        if((sz.width > linesSz.width && linesSz.height > 20)||(sz.width > linesSz.width && linesSz.height > 40))//判断是否折行
-        {
-            lastPoint = CGPointMake(10 + (int)sz.width % (int)linesSz.width,linesSz.height - 15+(cellType==0?(ScreenWidth+60+5):(ScreenWidth+60+5)));
-        }
-        else
-        {
-            lastPoint = CGPointMake(10 + sz.width, linesSz.height - 15+(cellType==0?(ScreenWidth+60+5):(ScreenWidth+60+5)));
-            if (lastPoint.y<(cellType==0?(ScreenWidth+60+5):(ScreenWidth+60+5))) {
-                cellHeight = cellHeight+15;
-            }
-            
-        }
-        //            if (lastPoint.y>40) {
-        //                lastPoint = CGPointMake(280 , 30);
-        //                if (_article.isTop || _article.isEute) {
-        //                    lastPoint = CGPointMake(250 , 30);
-        //                }
-        //            }
-        
-        
-        CGSize locationSize = [theTalking.location.address sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(120, 20)];
-        if (lastPoint.x+5+22+locationSize.width+8>(ScreenWidth-10)) {
-            cellHeight = cellHeight+5+15;
-            //            [self.locationBtn setFrame:CGRectMake(self.contentLabel.frame.origin.x, forwardedNameSize.height+self.contentLabel.frame.origin.y+5, 22+locationSize.width+8, 15)];
-        }
-        else
-        {
-            
-        }
-        //            [self.locationBtn setFrame:CGRectMake(10, 60+300+5+forwardedNameSize.height+5, 22+locationSize.width+8, 20)];
-        //            [self.locationBtn setFrame:CGRectMake(lastPoint.x+5, lastPoint.y, 22+locationSize.width+8, 15)];
-        //        [self.locationLabel setFrame:CGRectMake(self.locationLabel.frame.origin.x, self.locationLabel.frame.origin.y, locationSize.width, 15)];
-    }
+//    if ([theTalking.location.address isEqualToString:@""]||[theTalking.location.address isEqualToString:@" "]) {
+//    }
+//    else{
+//        CGPoint lastPoint;
+//        CGSize sz = [theTalking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(MAXFLOAT, 100) lineBreakMode:NSLineBreakByCharWrapping];
+//        
+//        CGSize linesSz = [theTalking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(cellType==0?(ScreenWidth-20):(ScreenWidth-20), MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
+//        if((sz.width > linesSz.width && linesSz.height > 20)||(sz.width > linesSz.width && linesSz.height > 40))//判断是否折行
+//        {
+//            lastPoint = CGPointMake(10 + (int)sz.width % (int)linesSz.width,linesSz.height - 15+(cellType==0?(ScreenWidth+60+5):(ScreenWidth+60+5)));
+//        }
+//        else
+//        {
+//            lastPoint = CGPointMake(10 + sz.width, linesSz.height - 15+(cellType==0?(ScreenWidth+60+5):(ScreenWidth+60+5)));
+//            if (lastPoint.y<(cellType==0?(ScreenWidth+60+5):(ScreenWidth+60+5))) {
+//                cellHeight = cellHeight+15;
+//            }
+//            
+//        }
+//        //            if (lastPoint.y>40) {
+//        //                lastPoint = CGPointMake(280 , 30);
+//        //                if (_article.isTop || _article.isEute) {
+//        //                    lastPoint = CGPointMake(250 , 30);
+//        //                }
+//        //            }
+//        
+//        
+//        CGSize locationSize = [theTalking.location.address sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(120, 20)];
+//        if (lastPoint.x+5+22+locationSize.width+8>(ScreenWidth-10)) {
+//            cellHeight = cellHeight+5+15;
+//            //            [self.locationBtn setFrame:CGRectMake(self.contentLabel.frame.origin.x, forwardedNameSize.height+self.contentLabel.frame.origin.y+5, 22+locationSize.width+8, 15)];
+//        }
+//        else
+//        {
+//            
+//        }
+//        //            [self.locationBtn setFrame:CGRectMake(10, 60+300+5+forwardedNameSize.height+5, 22+locationSize.width+8, 20)];
+//        //            [self.locationBtn setFrame:CGRectMake(lastPoint.x+5, lastPoint.y, 22+locationSize.width+8, 15)];
+//        //        [self.locationLabel setFrame:CGRectMake(self.locationLabel.frame.origin.x, self.locationLabel.frame.origin.y, locationSize.width, 15)];
+//    }
     
     
     if (theTalking.tagArray.count==0) {
@@ -141,7 +141,7 @@
         cellHeight = cellHeight;
 //    }
 //    NSLog(@"hhheight:%f",cellHeight);
-    return cellHeight;
+    return cellHeight+25;
 }
 -(void)dealloc
 {
@@ -241,7 +241,27 @@
         
         self.storyView.hidden = YES;
         
-        self.contentTypeImgV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 60, 42, 30)];
+        self.audioLengthView = [[UIView alloc] initWithFrame:CGRectMake(10, 70, 50, 20)];
+        self.audioLengthView.backgroundColor = CommonGreenColor;
+        self.audioLengthView.layer.cornerRadius = 7;
+        self.audioLengthView.layer.masksToBounds = YES;
+        [self.contentView addSubview:self.audioLengthView];
+        
+        UIImageView * p = [[UIImageView alloc] initWithFrame:CGRectMake(8, 5, 7, 10)];
+        p.image = [UIImage imageNamed:@"bofang@2x"];
+        [self.audioLengthView addSubview:p];
+        
+        self.audioL = [[UILabel alloc] initWithFrame:CGRectMake(50-5-30, 0, 30, self.audioLengthView.frame.size.height)];
+        _audioL.backgroundColor = [UIColor clearColor];
+        _audioL.font = [UIFont systemFontOfSize:10];
+        _audioL.textColor = [UIColor whiteColor];
+        _audioL.textAlignment = NSTextAlignmentRight;
+        [self.audioLengthView addSubview:_audioL];
+        _audioL.text = @"";
+        _audioL.adjustsFontSizeToFitWidth = YES;
+
+        
+        self.contentTypeImgV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 70, 43, 25)];
         [self.contentTextBgV addSubview:self.contentTypeImgV];
         
         self.progressView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenWidth+60-2, ScreenWidth, 2)];
@@ -267,26 +287,38 @@
         [self.contentTextBgV addSubview:self.contentLabel];
         
         
-        self.tagView = [[UIView alloc] initWithFrame:CGRectMake(5, 370, 300, 20)];
+        self.tagView = [[UIView alloc] initWithFrame:CGRectMake(10, 370, ScreenWidth-20, 20)];
         self.tagView.backgroundColor = [UIColor clearColor];
         [self.contentTextBgV addSubview:self.tagView];
         
+        UIImageView * tagimgv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 2, 16, 16)];
+        tagimgv.image = [UIImage imageNamed:@"biaoqian@2x"];
+        [self.tagView addSubview:tagimgv];
+        
+        self.tagLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, ScreenWidth-20-20, 20)];
+        self.tagLabel.backgroundColor = [UIColor clearColor];
+        self.tagLabel.textColor = [UIColor colorWithR:200 g:200 b:200 alpha:1];
+        self.tagLabel.font = [UIFont systemFontOfSize:12];
+        self.tagLabel.text = @"萌宠大比拼";
+        [self.tagView addSubview:self.tagLabel];
+
+        
 //        for (int i = 0; i<5; i++) {
-            UIButton * tB = [UIButton buttonWithType:UIButtonTypeCustom];
-            tB.tag = 900;
-            [tB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [tB.titleLabel setFont:[UIFont systemFontOfSize:12]];
-        [tB setTitleEdgeInsets:UIEdgeInsetsMake(1, 15, 0, 0)];
-            [tB setFrame:CGRectMake(10, 370, 80, 20)];
-            [tB addTarget:self action:@selector(tagBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-            [self.tagView addSubview:tB];
-        [tB setBackgroundColor:[UIColor colorWithRed:99/255.0f green:203/255.0f blue:175/255.f alpha:0.8]];
-        tB.layer.cornerRadius = 8;
-        tB.layer.masksToBounds = YES;
-            tB.hidden = YES;
-        UIImageView * timg = [[UIImageView alloc] initWithFrame:CGRectMake(6, 4, 14, 12)];
-        [timg setImage:[UIImage imageNamed:@"tagImg"]];
-        [tB addSubview:timg];
+//            UIButton * tB = [UIButton buttonWithType:UIButtonTypeCustom];
+//            tB.tag = 900;
+//            [tB setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//            [tB.titleLabel setFont:[UIFont systemFontOfSize:12]];
+//        [tB setTitleEdgeInsets:UIEdgeInsetsMake(1, 15, 0, 0)];
+//            [tB setFrame:CGRectMake(10, 370, 80, 20)];
+//            [tB addTarget:self action:@selector(tagBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//            [self.tagView addSubview:tB];
+//        [tB setBackgroundColor:[UIColor colorWithRed:99/255.0f green:203/255.0f blue:175/255.f alpha:0.8]];
+//        tB.layer.cornerRadius = 8;
+//        tB.layer.masksToBounds = YES;
+//            tB.hidden = YES;
+//        UIImageView * timg = [[UIImageView alloc] initWithFrame:CGRectMake(6, 4, 14, 12)];
+//        [timg setImage:[UIImage imageNamed:@"tagImg"]];
+//        [tB addSubview:timg];
 //        }
         
         
@@ -558,9 +590,42 @@
             [self.contentImgV setFrame:CGRectMake(0, 60, ScreenWidth, ScreenWidth)];
 //            self.contentLabel.textColor = [UIColor blackColor];
             [self.contentLabel setFrame:CGRectMake(10, ScreenWidth+20, 300, 60)];
-            [self.tagView setFrame:CGRectMake(5, 370, 300, 20)];
+            [self.tagView setFrame:CGRectMake(10, 370, ScreenWidth-20, 20)];
             [self.publishTime setTextColor:[UIColor grayColor]];
             [self.relationBtn setFrame:CGRectMake(310-72-10, 370+40, 72, 24.5)];
+            
+            
+            
+            self.hudongView = [[UIView alloc] initWithFrame:CGRectMake(0,  CGRectGetMaxY(self.tagView.frame)+10, ScreenWidth, 20)];
+            self.hudongView.backgroundColor = [UIColor clearColor];
+            [self.contentView addSubview:self.hudongView];
+            
+            UIImageView * zanimgv = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth-20-100, 2, 15, 15)];
+            zanimgv.image = [UIImage imageNamed:@"zan@2x"];
+            [self.hudongView addSubview:zanimgv];
+            zanimgv.alpha = 0.7;
+            
+            self.zanL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(zanimgv.frame)+5, 0, 30, 20)];
+            self.zanL.backgroundColor = [UIColor clearColor];
+            self.zanL.textColor = [UIColor colorWithR:200 g:200 b:200 alpha:1];
+            self.zanL.font = [UIFont systemFontOfSize:12];
+            self.zanL.text = @"120";
+            self.zanL.adjustsFontSizeToFitWidth = YES;
+            [self.hudongView addSubview:self.zanL];
+            
+            UIImageView * cimgv = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.zanL.frame), 2, 15, 15)];
+            cimgv.image = [UIImage imageNamed:@"pinglun@2x"];
+            [self.hudongView addSubview:cimgv];
+            cimgv.alpha = 0.7;
+            
+            self.commentL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(cimgv.frame)+5, 0, 30, 20)];
+            self.commentL.backgroundColor = [UIColor clearColor];
+            self.commentL.textColor = [UIColor colorWithR:200 g:200 b:200 alpha:1];
+            self.commentL.font = [UIFont systemFontOfSize:12];
+            self.commentL.text = @"23";
+            self.commentL.adjustsFontSizeToFitWidth = YES;
+            [self.hudongView addSubview:self.commentL];
+
         }
 //        self.sepLineV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth-20, 1)];
 //        [self.sepLineV setBackgroundColor:[UIColor colorWithWhite:220/255.0f alpha:1]];
@@ -615,36 +680,36 @@
         
         [self.contentLabel setFrame:CGRectMake(10, 60+ScreenWidth+5, ScreenWidth-20, forwardedNameSize.height)];
         
-        if ([self.talking.location.address isEqualToString:@""]||[self.talking.location.address isEqualToString:@" "]) {
+//        if ([self.talking.location.address isEqualToString:@""]||[self.talking.location.address isEqualToString:@" "]) {
             self.locationBtn.hidden = YES;
-        }
-        else{
-            CGPoint lastPoint;
-            CGSize sz = [self.talking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(MAXFLOAT, 100) lineBreakMode:NSLineBreakByCharWrapping];
-            
-            CGSize linesSz = [self.talking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(ScreenWidth-20, MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
-            if((sz.width > linesSz.width && linesSz.height > 20)||(sz.width > linesSz.width && linesSz.height > 40))//判断是否折行
-            {
-                lastPoint = CGPointMake(self.contentLabel.frame.origin.x + (int)sz.width % (int)linesSz.width,linesSz.height - 15+self.contentLabel.frame.origin.y);
-            }
-            else
-            {
-                lastPoint = CGPointMake(self.contentLabel.frame.origin.x + sz.width, linesSz.height - 15+self.contentLabel.frame.origin.y);
-                if (lastPoint.y<60+ScreenWidth+5) {
-                    lastPoint.y = 60+ScreenWidth+5;
-                }
-            }
-            
-            self.locationBtn.hidden = NO;
-            CGSize locationSize = [self.talking.location.address sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(120, 20)];
-            if (lastPoint.x+5+22+locationSize.width+8>ScreenWidth-10) {
-                [self.locationBtn setFrame:CGRectMake(self.contentLabel.frame.origin.x, forwardedNameSize.height+self.contentLabel.frame.origin.y+5, 22+locationSize.width+8, 15)];
-            }
-            else
-                //            [self.locationBtn setFrame:CGRectMake(10, 60+300+5+forwardedNameSize.height+5, 22+locationSize.width+8, 20)];
-                [self.locationBtn setFrame:CGRectMake(lastPoint.x+5, lastPoint.y, 22+locationSize.width+8, 15)];
-            [self.locationLabel setFrame:CGRectMake(self.locationLabel.frame.origin.x, self.locationLabel.frame.origin.y, locationSize.width, 15)];
-        }
+//        }
+//        else{
+//            CGPoint lastPoint;
+//            CGSize sz = [self.talking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(MAXFLOAT, 100) lineBreakMode:NSLineBreakByCharWrapping];
+//            
+//            CGSize linesSz = [self.talking.descriptionContent sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(ScreenWidth-20, MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
+//            if((sz.width > linesSz.width && linesSz.height > 20)||(sz.width > linesSz.width && linesSz.height > 40))//判断是否折行
+//            {
+//                lastPoint = CGPointMake(self.contentLabel.frame.origin.x + (int)sz.width % (int)linesSz.width,linesSz.height - 15+self.contentLabel.frame.origin.y);
+//            }
+//            else
+//            {
+//                lastPoint = CGPointMake(self.contentLabel.frame.origin.x + sz.width, linesSz.height - 15+self.contentLabel.frame.origin.y);
+//                if (lastPoint.y<60+ScreenWidth+5) {
+//                    lastPoint.y = 60+ScreenWidth+5;
+//                }
+//            }
+//            
+//            self.locationBtn.hidden = NO;
+//            CGSize locationSize = [self.talking.location.address sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(120, 20)];
+//            if (lastPoint.x+5+22+locationSize.width+8>ScreenWidth-10) {
+//                [self.locationBtn setFrame:CGRectMake(self.contentLabel.frame.origin.x, forwardedNameSize.height+self.contentLabel.frame.origin.y+5, 22+locationSize.width+8, 15)];
+//            }
+//            else
+//                //            [self.locationBtn setFrame:CGRectMake(10, 60+300+5+forwardedNameSize.height+5, 22+locationSize.width+8, 20)];
+//                [self.locationBtn setFrame:CGRectMake(lastPoint.x+5, lastPoint.y, 22+locationSize.width+8, 15)];
+//            [self.locationLabel setFrame:CGRectMake(self.locationLabel.frame.origin.x, self.locationLabel.frame.origin.y, locationSize.width, 15)];
+//        }
         
         
         if (self.talking.tagArray.count==0) {
@@ -653,6 +718,7 @@
         else
         {
             self.tagView.hidden = NO;
+            self.tagLabel.text = [self.talking.tagArray[0] objectForKey:@"name"];
 //            float w = 5.0f;
 //            int h = 0;
 //            for (int i = 0; i<5; i++) {
@@ -884,6 +950,8 @@
         [self.contentImgV setImageURL:[NSURL URLWithString:[self.talking.imgUrl stringByAppendingString:@"?imageView2/2/w/600"]]];
         self.aniImageV.hidden = YES;
         self.loadingBGV.hidden = YES;
+        self.audioLengthView.hidden = YES;
+        self.contentTypeImgV.hidden = NO;
         [self.contentTypeImgV setImage:[UIImage imageNamed:@"browser_typePic"]];
         self.contentImgV.userInteractionEnabled = NO;
         self.storyView.userInteractionEnabled = NO;
@@ -894,6 +962,8 @@
         self.storyView.userInteractionEnabled = YES;
         self.loadingBGV.hidden = YES;
         self.aniImageV.hidden = YES;
+        self.audioLengthView.hidden = YES;
+        self.contentTypeImgV.hidden = NO;
         [self.contentTypeImgV setImage:[UIImage imageNamed:@"browser_typeStory"]];
         [self.storyView.storyImageV1 setImageURL:[NSURL URLWithString:[self.talking.imgUrl stringByAppendingString:@"?imageView2/2/w/600"]]];
         [self.storyView.storyTimeL setText:self.publishTime.text];
@@ -904,7 +974,9 @@
         [self.contentImgV setImageURL:[NSURL URLWithString:[self.talking.imgUrl stringByAppendingString:@"?imageView2/2/w/600"]]];
         self.contentImgV.userInteractionEnabled = YES;
         self.storyView.userInteractionEnabled = NO;
-        [self.contentTypeImgV setImage:[UIImage imageNamed:@"browser_typeShuoshuo"]];
+        self.audioLengthView.hidden = NO;
+        self.contentTypeImgV.hidden = YES;
+        self.audioL.text = [NSString stringWithFormat:@"%@\"",self.talking.audioDuration];
         if ([TFileManager ifExsitFolder:self.talking.playAnimationImg.fileName]) {
             self.aniImageV.image = [TFileManager getFristImageWithID:self.talking.playAnimationImg.fileName];
             self.aniImageV.hidden = NO;
@@ -1072,6 +1144,9 @@
     
     
 
+    [self.hudongView setFrame:CGRectMake(0,  CGRectGetMaxY(self.tagView.frame)+10, ScreenWidth, 20)];
+    self.commentL.text = self.talking.commentNum;
+    self.zanL.text = self.talking.favorNum;
     
     [self.sepLineV setFrame:CGRectMake(0, self.contentTextBgV.frame.size.height-1, ScreenWidth, 1)];
 //    if ([self.aniImageV isAnimating]) {

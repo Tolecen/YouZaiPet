@@ -341,7 +341,7 @@
         return 60;
     }
     else
-        return 50;
+        return 0;
     
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

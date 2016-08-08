@@ -19,6 +19,7 @@
 @property (nonatomic,strong) UILabel * publisherNameL;
 @property (nonatomic,strong) UIImageView * genderImageV;
 @property (nonatomic,strong) UILabel * nameL;
+@property (nonatomic,strong) UILabel * gradeL;
 @property (nonatomic,strong) UIImageView * timeBgV;
 @property (nonatomic,strong) UILabel * timeL;
 @property (nonatomic,strong) UILabel * browserNumL;
