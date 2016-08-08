@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class OrderYZList;
 @interface OrderHeaderView : UITableViewHeaderFooterView
 @property (nonatomic,retain)UILabel * timeL;
 @property (nonatomic,strong)UILabel * statusL;
+@property(nonatomic,strong)OrderYZList  *YZList;
 @end

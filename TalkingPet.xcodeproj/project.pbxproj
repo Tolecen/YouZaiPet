@@ -1190,6 +1190,7 @@
 		979C5AF61AF9AB52000DF115 /* NSData-AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 979C5AF31AF9AB52000DF115 /* NSData-AES.m */; };
 		979C5AF71AF9AB52000DF115 /* rijndael.c in Sources */ = {isa = PBXBuildFile; fileRef = 979C5AF41AF9AB52000DF115 /* rijndael.c */; };
 		979F13211D4440F000D6F561 /* iconabout.png in Resources */ = {isa = PBXBuildFile; fileRef = 979F13201D4440F000D6F561 /* iconabout.png */; };
+		97A2CFA51D58B088000429FC /* NSDate+XMGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2CFA21D58B088000429FC /* NSDate+XMGExtension.m */; };
 		97A6856419F8A1C9006BA3F9 /* SectionMSgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A6856319F8A1C9006BA3F9 /* SectionMSgViewController.m */; };
 		97A6856719F8A36A006BA3F9 /* ITTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A6856619F8A36A006BA3F9 /* ITTableViewCell.m */; };
 		97AA6C1E1AB8170800ED5F39 /* banner_button_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 97AA6C1D1AB8170800ED5F39 /* banner_button_close.png */; };
@@ -3095,6 +3096,8 @@
 		979C5AF41AF9AB52000DF115 /* rijndael.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rijndael.c; sourceTree = "<group>"; };
 		979C5AF51AF9AB52000DF115 /* rijndael.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rijndael.h; sourceTree = "<group>"; };
 		979F13201D4440F000D6F561 /* iconabout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iconabout.png; path = Image/iconabout.png; sourceTree = "<group>"; };
+		97A2CFA11D58B088000429FC /* NSDate+XMGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+XMGExtension.h"; sourceTree = "<group>"; };
+		97A2CFA21D58B088000429FC /* NSDate+XMGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+XMGExtension.m"; sourceTree = "<group>"; };
 		97A6856219F8A1C9006BA3F9 /* SectionMSgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionMSgViewController.h; sourceTree = "<group>"; };
 		97A6856319F8A1C9006BA3F9 /* SectionMSgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionMSgViewController.m; sourceTree = "<group>"; };
 		97A6856519F8A36A006BA3F9 /* ITTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTableViewCell.h; sourceTree = "<group>"; };
@@ -4460,6 +4463,8 @@
 				72D5A37A1B315D9900126284 /* WXROrderCell.m */,
 				724FD34E1B26E4D000D215A3 /* MyOrderViewConyroller.h */,
 				724FD34F1B26E4D000D215A3 /* MyOrderViewConyroller.m */,
+				97A2CFA11D58B088000429FC /* NSDate+XMGExtension.h */,
+				97A2CFA21D58B088000429FC /* NSDate+XMGExtension.m */,
 				72D54CEC1B29697100B59A84 /* OrderDetailViewController.h */,
 				72D54CED1B29697100B59A84 /* OrderDetailViewController.m */,
 				976B9D2B1A89E2F90078338F /* ChangePetViewController.h */,
@@ -7512,6 +7517,7 @@
 				97472E57196FBB5500592FB7 /* AnimationImg.m in Sources */,
 				72D5D5091B02018C007195B0 /* CustomizeViewController.m in Sources */,
 				2E40FF841D49F365007A4E44 /* YZOrderConfimModeCell.m in Sources */,
+				97A2CFA51D58B088000429FC /* NSDate+XMGExtension.m in Sources */,
 				974203E91A5B8E7C0064BB4F /* ChatManager.m in Sources */,
 				06C1D6721D31E0DC00AD5DA4 /* NSString+UnsignedLongLongValue.m in Sources */,
 				975C17A71B2A7DC2009A4280 /* GoodsDetailTableViewHelper.m in Sources */,

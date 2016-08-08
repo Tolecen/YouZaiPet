@@ -7,6 +7,7 @@
 //
 
 #import "OrderHeaderView.h"
+#import "OrderYZList.h"
 
 @implementation OrderHeaderView
 
@@ -19,7 +20,8 @@
         _timeL.backgroundColor = [UIColor clearColor];
         _timeL.adjustsFontSizeToFitWidth = YES;
         _timeL.textColor = [UIColor colorWithWhite:120/255.0 alpha:1];
-        _timeL.text = @"2016-07-22";
+        _timeL.text =_YZList.time;
+        
         _timeL.font = [UIFont systemFontOfSize:14];
         
         self.statusL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-10-160, 0, 160, 30)];
@@ -35,7 +37,5 @@
     }
     return self;
 }
-
-
 
 @end

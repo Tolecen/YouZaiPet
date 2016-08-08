@@ -19,6 +19,7 @@
 #import "OrderYZGoodInfo.h"
 #import "OrderHeaderView.h"
 #import "OrderFooterView.h"
+#import "NSDate+XMGExtension.h"
 
 
 @interface MyOrderViewConyroller ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
@@ -106,7 +107,7 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     option = @"allList";
     [_tableView addHeaderWithTarget:self action:@selector(getFristList)];
-    [_tableView addFooterWithTarget:self action:@selector(getOtherlist)];
+    [_tableView addFooterWithTarget:self action:@selector(getFristList)];
     [_tableView headerBeginRefreshing];
     
     
@@ -158,9 +159,11 @@
         if ([result[@"code"] intValue] == 200) {
             self.orderArr = [self getModelArray:result[@"data"][@"list"]];
             [_tableView reloadData];
+            
         }
         
         [_tableView headerEndRefreshing];
+        [SVProgressHUD dismissWithError:@"订单信息已经全部加载完毕" afterDelay:2];
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         
     }];
@@ -235,6 +238,9 @@
     [usersDict setObject:@"10" forKey:@"pageSize"];
     [usersDict setObject:[_orderArr lastObject][@"id"] forKey:@"id"];
     [NetServer requestWithParameters:usersDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        
         [_tableView footerEndRefreshing];
         [_orderArr addObjectsFromArray:responseObject[@"value"]];
         [_tableView reloadData];
@@ -289,10 +295,8 @@
     }
     OrderYZList * listModel = self.orderArr[section];
     NSString  *currentDateStr =listModel.time;
-    NSRange start =[currentDateStr rangeOfString:@"-"];
-    NSRange end =[currentDateStr rangeOfString:@":"];
-    NSString  *b =[currentDateStr substringWithRange:NSMakeRange(start.location+1, end.location-2)];
-    view.timeL.text =b;
+    
+    view.timeL.text =currentDateStr;
     view.statusL.text = listModel.pay_status_zh;
     
     return view;
@@ -304,20 +308,8 @@
     OrderFooterView * view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:header];
     if (view == nil) {
         view = [[OrderFooterView alloc] initWithReuseIdentifier:header WithButton:NO];
-        //按钮
-        UIButton*button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(ScreenWidth, 0, 60, 40);
-        
-        button.tag = 12;
-        [button addTarget:self action:@selector(expandSection:) forControlEvents:UIControlEventTouchUpInside];
-        button.backgroundColor =[UIColor blackColor];
-        
-        [view addSubview:button];
     }
     
-    //显示数据
-    UIButton *button = (UIButton *)[view viewWithTag:12];
-    [button setTitle:@"删除订单" forState:UIControlStateNormal];
     
     
     

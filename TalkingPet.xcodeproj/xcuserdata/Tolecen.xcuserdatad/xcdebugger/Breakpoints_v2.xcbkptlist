@@ -784,11 +784,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/MyOrderViewConyroller.m"
-            timestampString = "492013704.609319"
+            timestampString = "492351854.924341"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "430"
-            endingLineNumber = "430"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
             landmarkName = "-payThisOrder:"
             landmarkType = "5">
             <Locations>
@@ -862,11 +862,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/MyOrderViewConyroller.m"
-            timestampString = "492013704.609319"
+            timestampString = "492351854.924341"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "435"
-            endingLineNumber = "435"
+            startingLineNumber = "427"
+            endingLineNumber = "427"
             landmarkName = "-payThisOrder:"
             landmarkType = "5">
          </BreakpointContent>
@@ -984,102 +984,6 @@
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TalkingPet/UserCenterViewController.m"
-            timestampString = "491587204.647929"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "791"
-            endingLineNumber = "791"
-            landmarkName = "-saveEditCurrentPet"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[UserCenterViewController saveEditCurrentPet]"
-                  moduleName = "TalkingPet"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Tolecen/Projects/YouZaiPet/TalkingPet/UserCenterViewController.m"
-                  timestampString = "491752283.670467"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "792"
-                  endingLineNumber = "792"
-                  offsetFromSymbolStart = "786">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__46-[UserCenterViewController saveEditCurrentPet]_block_invoke"
-                  moduleName = "TalkingPet"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Tolecen/Projects/YouZaiPet/TalkingPet/UserCenterViewController.m"
-                  timestampString = "491752283.670603"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "792"
-                  endingLineNumber = "792"
-                  offsetFromSymbolStart = "19">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TalkingPet/UserCenterViewController.m"
-            timestampString = "491587204.647929"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "792"
-            endingLineNumber = "792"
-            landmarkName = "-saveEditCurrentPet"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[UserCenterViewController saveEditCurrentPet]"
-                  moduleName = "TalkingPet"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Tolecen/Projects/YouZaiPet/TalkingPet/UserCenterViewController.m"
-                  timestampString = "491752283.671414"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "792"
-                  endingLineNumber = "792"
-                  offsetFromSymbolStart = "786">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__46-[UserCenterViewController saveEditCurrentPet]_block_invoke"
-                  moduleName = "TalkingPet"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Tolecen/Projects/YouZaiPet/TalkingPet/UserCenterViewController.m"
-                  timestampString = "491752283.671553"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "792"
-                  endingLineNumber = "792"
-                  offsetFromSymbolStart = "19">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
@@ -1160,13 +1064,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/UserCenterViewController.m"
-            timestampString = "491587204.647929"
+            timestampString = "492351854.924341"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "902"
-            endingLineNumber = "902"
-            landmarkName = "-ifTishi"
-            landmarkType = "5">
+            startingLineNumber = "967"
+            endingLineNumber = "967"
+            landmarkName = "@implementation UserCenterViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
