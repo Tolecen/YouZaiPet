@@ -57,6 +57,8 @@
 @property (strong,nonatomic) UIView *clearView;
 @property (assign,nonatomic) float viewH;
 @property (assign,nonatomic) float naviH;
+@property (nonatomic,strong)UIButton * favorBtn;
+@property (nonatomic,strong)UIButton * shareBtn;
 @property (assign,nonatomic) BOOL isVisible;
 @property (weak,nonatomic) UIView *baseView;
 @property (nonatomic, weak) id <MessageInputViewDelegate> delegate;
@@ -67,5 +69,8 @@
 -(void)setTextPlaceHolder:(NSString *)placeHolder;
 -(void)showInputViewWithAudioBtn:(BOOL)haveAudioBtn;
 -(void)dismissInputView;
+
+@property (nonatomic,copy)void(^favorBtnClicked) (UIButton * sender);
+@property (nonatomic,copy)void(^shareBtnClicked) (UIButton * sender);
 
 @end

@@ -18,7 +18,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setFrame:CGRectMake(0, theTye==2?(theView.frame.size.height-100):(theView.frame.size.height), ScreenWidth, 50)];
+        [self setFrame:CGRectMake(0, theTye==2?(theView.frame.size.height-100):(theView.frame.size.height-110), ScreenWidth, 50)];
         self.pageType = (theTye==3?2:theTye);
         if (theTye==2||theTye==3) {
             textMaxLength = 500;
@@ -33,7 +33,7 @@
         
         self.baseView = theView;
         
-        self.textView = [[HPGrowingTextView alloc] initWithFrame:CGRectMake(theTye==3?10:40, 7, ScreenWidth-(theTye==3?50:80), 35)];
+        self.textView = [[HPGrowingTextView alloc] initWithFrame:CGRectMake(theTye==3?10:40, 7, ScreenWidth-(theTye==3?50:120), 35)];
         self.textView.isScrollable = NO;
         self.textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
         
@@ -56,7 +56,7 @@
         UIImage *rawEntryBackground = [UIImage imageNamed:@"chat_input.png"];
         UIImage *entryBackground = [rawEntryBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
         self.entryImageView = [[UIImageView alloc] initWithImage:entryBackground];
-        self.entryImageView.frame = CGRectMake(theTye==3?10:40, 7, ScreenWidth-(theTye==3?50:80), 35);
+        self.entryImageView.frame = CGRectMake(theTye==3?10:40, 7, ScreenWidth-(theTye==3?50:120), 35);
         self.entryImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         
         UIImage *rawBackground = [UIImage imageNamed:@"inputbg.png"];
@@ -73,11 +73,23 @@
         [self addSubview:self.entryImageView];
         [self addSubview:self.textView];
         
-        self.emojiBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.emojiBtn setFrame:CGRectMake(ScreenWidth-45, self.frame.size.height-12-36, 45, 45)];
-        [self.emojiBtn setImage:[UIImage imageNamed:@"emoji.png"] forState:UIControlStateNormal];
-        [self addSubview:self.emojiBtn];
-        [self.emojiBtn addTarget:self action:@selector(emojiBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//        self.emojiBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [self.emojiBtn setFrame:CGRectMake(ScreenWidth-45, self.frame.size.height-12-36, 45, 45)];
+//        [self.emojiBtn setImage:[UIImage imageNamed:@"emoji.png"] forState:UIControlStateNormal];
+//        [self addSubview:self.emojiBtn];
+//        [self.emojiBtn addTarget:self action:@selector(emojiBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.favorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.favorBtn setFrame:CGRectMake(ScreenWidth-80, self.frame.size.height-12-36, 45, 45)];
+        [self.favorBtn setImage:[UIImage imageNamed:@"keyboard_favor.png"] forState:UIControlStateNormal];
+        [self addSubview:self.favorBtn];
+        [self.favorBtn addTarget:self action:@selector(favorClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.shareBtn setFrame:CGRectMake(ScreenWidth-45, self.frame.size.height-12-36, 45, 45)];
+        [self.shareBtn setImage:[UIImage imageNamed:@"keyboard_share.png"] forState:UIControlStateNormal];
+        [self addSubview:self.shareBtn];
+        [self.shareBtn addTarget:self action:@selector(shareClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         
         if (theTye!=3) {
@@ -89,7 +101,7 @@
             
             self.audioRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             //[UIButton buttonWithType:UIButtonTypeCustom];
-            [self.audioRecordBtn setFrame:CGRectMake(40, self.frame.size.height-43, ScreenWidth-80, 35)];
+            [self.audioRecordBtn setFrame:CGRectMake(40, self.frame.size.height-43, ScreenWidth-120, 35)];
             [self.audioRecordBtn setBackgroundImage:[UIImage imageNamed:@"recordB"] forState:UIControlStateNormal];
             //    [audioRecordBtn setTitle:@"按住说话" forState:UIControlStateNormal];
             [self addSubview:self.audioRecordBtn];
@@ -132,6 +144,19 @@
     }
     return self;
 }
+
+-(void)favorClicked:(UIButton *)sender
+{
+    if (self.favorBtnClicked) {
+        self.favorBtnClicked(sender);
+    }
+}
+-(void)shareClicked:(UIButton *)sender
+{
+    if (self.shareBtnClicked) {
+        self.shareBtnClicked(sender);
+    }
+}
 -(void)setTextPlaceHolder:(NSString *)placeHolder
 {
     self.textView.placeholder = placeHolder;
@@ -140,16 +165,16 @@
 {
     if(haveAudioBtn){
         self.audioBtn.hidden = NO;
-        [self.textView setFrame:CGRectMake(40, 7, ScreenWidth-80, self.textView.frame.size.height)];
-        self.entryImageView.frame = CGRectMake(40, 7, ScreenWidth-80, self.textView.frame.size.height);
-        [self.audioRecordBtn setFrame:CGRectMake(40, 7, ScreenWidth-80, 35)];
+        [self.textView setFrame:CGRectMake(40, 7, ScreenWidth-120, self.textView.frame.size.height)];
+        self.entryImageView.frame = CGRectMake(40, 7, ScreenWidth-120, self.textView.frame.size.height);
+        [self.audioRecordBtn setFrame:CGRectMake(40, 7, ScreenWidth-120, 35)];
     }
     else
     {
         self.audioBtn.hidden = YES;
-        [self.textView setFrame:CGRectMake(10, 7, ScreenWidth-50, self.textView.frame.size.height)];
-        self.entryImageView.frame = CGRectMake(10, 7,ScreenWidth-50, self.textView.frame.size.height);
-        [self.audioRecordBtn setFrame:CGRectMake(10, 7, ScreenWidth-50, 35)];
+        [self.textView setFrame:CGRectMake(10, 7, ScreenWidth-90, self.textView.frame.size.height)];
+        self.entryImageView.frame = CGRectMake(10, 7,ScreenWidth-90, self.textView.frame.size.height);
+        [self.audioRecordBtn setFrame:CGRectMake(10, 7, ScreenWidth-90, 35)];
         
     }
     self.isVisible = YES;
@@ -191,7 +216,7 @@
     if(ifAudio){
         [UIView animateWithDuration:0.2 animations:^{
             [self.theEmojiView setFrame:CGRectMake(0, self.baseView.frame.size.height, ScreenWidth, 213)];
-            [self setFrame:CGRectMake(0, self.pageType!=2 ? self.baseView.frame.size.height:(self.baseView.frame.size.height-50), ScreenWidth, self.frame.size.height)];
+            [self setFrame:CGRectMake(0, self.pageType!=2 ? (self.baseView.frame.size.height-50):(self.baseView.frame.size.height-50), ScreenWidth, self.frame.size.height)];
         } completion:^(BOOL finished) {
             self.theEmojiView.hidden = YES;
         }];
@@ -199,7 +224,7 @@
     else{
         [UIView animateWithDuration:0.2 animations:^{
             [self.theEmojiView setFrame:CGRectMake(0, self.baseView.frame.size.height, ScreenWidth, 213)];
-            [self setFrame:CGRectMake(0, self.pageType!=2 ? self.baseView.frame.size.height:(self.baseView.frame.size.height-(self.frame.size.height)), ScreenWidth, self.frame.size.height)];
+            [self setFrame:CGRectMake(0, self.pageType!=2 ? (self.baseView.frame.size.height-50):(self.baseView.frame.size.height-(self.frame.size.height)), ScreenWidth, self.frame.size.height)];
             ifEmoji = NO;
             self.theEmojiView.hidden = YES;
             [self.emojiBtn setImage:[UIImage imageNamed:@"emoji.png"] forState:UIControlStateNormal];
