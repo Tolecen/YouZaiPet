@@ -10,6 +10,7 @@
 #import "ReceiptAddress.h"
 #import "SVProgressHUD.h"
 #import "TFileManager.h"
+#import "IdentifyingString.h"
 
 @interface OneViewCell : UITableViewCell
 {
@@ -94,7 +95,7 @@
     
     self.provinceArray = [NSMutableArray array];
     
-    self.titleArr = @[@"收货人:",@"联系电话:",@"所在区域:",@"详细地址:",@"设为默认收货地址:"];
+    self.titleArr = @[@"收货人:",@"联系电话:",@"所在区域:",@"详细地址:",@"身份证",@"设为默认收货地址:"];
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 10, self.view.frame.size.width, self.view.frame.size.height-navigationBarHeight-10-self.view.frame.size.width*98/750)];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -172,6 +173,12 @@
     if (_address.address.length<=0) {
         [SVProgressHUD showErrorWithStatus:@"请输入详细地址"];
         return;
+    }
+    if (_address.cardId.length>0) {
+        if (![IdentifyingString checkUserIdCard:_address.cardId]) {
+            [SVProgressHUD showErrorWithStatus:@"请输入正确的身份证"];
+            return;
+        }
     }
     if (_finish) {
         _finish(_address);
@@ -269,6 +276,23 @@
             [cell buildView:textV];
         }break;
         case 4:{
+            UITextField * textF = [[UITextField alloc] init];
+            textF.tag = 104;
+            textF.keyboardType = UIKeyboardTypeNumberPad;
+            textF.inputAccessoryView =({
+                UIToolbar* toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
+                toolbar.tintColor = [UIColor blackColor];
+                UIBarButtonItem*rb = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(cityFinishSelected)];
+                rb.tintColor = [UIColor blackColor];
+                toolbar.items = @[rb];
+                toolbar;
+            });
+            textF.delegate = self;
+            textF.text = [self transStarOfIdCard];
+            textF.frame = CGRectMake(100, 10, 200, 20);
+            [cell buildView:textF];
+        }break;
+        case 5:{
             UISwitch * defalut = [[UISwitch alloc] initWithFrame:CGRectMake(ScreenWidth-100, 6, 100, 28)];
             defalut.on = _address.action;
             [defalut addTarget:self action:@selector(setDefalutAddress:) forControlEvents:UIControlEventValueChanged];
@@ -287,6 +311,14 @@
     }
     return 40;
 }
+
+-(NSString *)transStarOfIdCard
+{
+    if (self.address.cardId && self.address.cardId.length>0) {
+        return [self.address.cardId stringByReplacingCharactersInRange:NSMakeRange(3, self.address.cardId.length-6) withString:@"**********"];
+    }
+    return @"";
+}
 #pragma mark -
 #pragma mark - UITextField
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -304,7 +336,7 @@
             _address.phoneNo = textField.text;
         }break;
         case 104:{
-            _address.zipCode = textField.text;
+            _address.cardId = textField.text;
         }break;
         default:
             break;

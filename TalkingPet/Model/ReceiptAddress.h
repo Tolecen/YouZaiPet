@@ -20,5 +20,6 @@
 @property(nonatomic,retain)NSString * quCode;
 @property(nonatomic,retain)NSString * address;
 @property(nonatomic,retain)NSString * zipCode;
+@property(nonatomic,retain)NSString * cardId;
 @property(nonatomic,assign)BOOL action;
 @end

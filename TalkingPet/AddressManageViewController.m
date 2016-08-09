@@ -244,7 +244,10 @@
                 address.province = dic[@"area_zh"];
                 address.city = @"";
                 address.address = dic[@"address"];
-                address.zipCode = @"100000";
+                if (dic[@"card_id"]) {
+                    address.cardId = dic[@"card_id"];
+                }
+                
                 address.action = [dic[@"is_default"] isEqualToString:@"1"];
                 [blockArr addObject:address];
             }

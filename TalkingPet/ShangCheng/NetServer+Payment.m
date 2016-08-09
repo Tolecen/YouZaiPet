@@ -149,6 +149,9 @@
     params[@"area"] = address.quCode;
     params[@"telphone"] = address.phoneNo;
     params[@"default"] = [NSString stringWithFormat:@"%d",address.action];
+    if (address.cardId>0) {
+        params[@"card_id"] = address.cardId;
+    }
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/address/add",BasePayUrl];
     [NetServer inner_PayServerConfigWithWithPath:path
@@ -217,6 +220,9 @@
     params[@"area"] = address.quCode;
     params[@"telphone"] = address.phoneNo;
     params[@"default"] = [NSString stringWithFormat:@"%d",address.action];
+    if (address.cardId>0) {
+        params[@"card_id"] = address.cardId;
+    }
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/address/edit/id/%@",BasePayUrl,address.addressID];
     [NetServer inner_PayServerConfigWithWithPath:path
