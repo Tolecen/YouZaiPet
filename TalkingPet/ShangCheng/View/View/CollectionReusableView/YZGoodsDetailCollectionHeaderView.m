@@ -113,6 +113,10 @@
         imageV.backgroundColor = [UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1];
         imageV.frame = CGRectMake(0, 0, ScreenWidth, ScreenWidth);
     }
+    if (self.detailModel.images && self.detailModel.images.count > 0) {
+        YZDogImage *imageModel = self.detailModel.images[index];
+        [imageV setImageURL:[NSURL URLWithString:imageModel.url]];
+    }
     return imageV;
 }
 

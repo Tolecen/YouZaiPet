@@ -56,4 +56,7 @@ failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 + (void)requestPaymentWithGoods:(NSString *)goods AddressId:(NSString *)addressId ChannelStr:(NSString *)channelStr Voucher:(NSString *)voucher success:(void (^)(id result))success
                         failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)getMarketDetailsuccess:(void (^)(id result))success
+                       failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 @end

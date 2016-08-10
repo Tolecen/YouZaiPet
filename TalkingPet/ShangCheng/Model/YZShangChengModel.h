@@ -158,7 +158,7 @@
 @end
 
 @interface YZGoodsDetailModel : YZGoodsModel
-
+@property (nonatomic, copy) NSArray<YZDogImage> *images;
 @end
 
 #pragma mark -- 购物车对象

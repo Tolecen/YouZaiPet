@@ -12,6 +12,9 @@
 #import "YZShangChengBannerCell.h"
 #import "YZShangChengDogListVC.h"
 
+#import "MarketDetailVC.h"
+
+
 @interface ShangchengMainViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) UITableView *tableView;
@@ -28,6 +31,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.hidesBottomBarWhenPushed=YES;
+    
+    
+    
     UIImage *image = [UIImage imageNamed:@"sousuo@2x"];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *rightMoreItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toSearchPage)];
@@ -83,18 +91,38 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
+//专题页面跳转
+
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
+        
+        
         YZShangChengDogListVC *listVC = [[YZShangChengDogListVC alloc] init];
         [self.navigationController pushViewController:listVC animated:YES];
-    } else {
+    }
+    else if (indexPath.section==1)
+    {
+        MarketDetailVC *markDetailVC=[[MarketDetailVC alloc] init];
+        [self.navigationController pushViewController:markDetailVC animated:YES];
+        
+    }
+    
+    else {
         YZShangChengGoodsListVC *listVC = [[YZShangChengGoodsListVC alloc] init];
         [self.navigationController pushViewController:listVC animated:YES];
+        
+        
+        
+        
+        
     }
 }
 
+
+//ios 6 以后几乎不用这个方法
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
