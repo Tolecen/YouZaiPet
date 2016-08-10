@@ -172,11 +172,28 @@
         [SVProgressHUD showErrorWithStatus:@"请先在购物车选择要购买的商品哦"];
         return;
     }
-    _goodsString = [arr JSONRepresentation];
+//    _goodsString = [arr JSONRepresentation];
     NSLog(@"ffffff:%@",_goodsString);
-    [NetServer requestPaymentWithGoods:_goodsString AddressId:self.address.addressID ChannelStr:self.paySelectedIndex==0?@"alipay":@"wx" Voucher:nil success:^(id result) {
+    [NetServer requestPaymentWithGoods:arr AddressId:self.address.addressID ChannelStr:self.paySelectedIndex==0?@"alipay":@"wx" Voucher:nil success:^(id result) {
         if ([result[@"code"] intValue]==200) {
-           
+            [Pingpp createPayment:[result[@"data"] JSONRepresentation] viewController:self appURLScheme:kUrlScheme withCompletion:^(NSString *result, PingppError *error) {
+                NSLog(@"completion block: %@", result);
+                if (error == nil) {
+                    NSLog(@"PingppError is nil");
+//                    [self paySuccess];
+                     [self toSuccessPage];
+                }
+                else if ([result isEqualToString:@"cancel"]){
+//                    [self payCancel];
+                }
+                else {
+//                    [self payFailed];
+                    NSLog(@"PingppError: code=%lu msg=%@", (unsigned  long)error.code, [error getMsg]);
+                }
+                [SystemServer sharedSystemServer].inPay = NO;
+                //                [weakSelf showAlertMessage:result];
+            }];
+
         }
         else {
             if (result[@"message"]) {
@@ -186,26 +203,10 @@
                 [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
         }
         
-        [self toSuccessPage];
+       
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
     }];
-//    [Pingpp createPayment:charge viewController:weakSelf appURLScheme:kUrlScheme withCompletion:^(NSString *result, PingppError *error) {
-//        NSLog(@"completion block: %@", result);
-//        if (error == nil) {
-//            NSLog(@"PingppError is nil");
-//            [self paySuccess];
-//        }
-//        else if ([result isEqualToString:@"cancel"]){
-//            [self payCancel];
-//        }
-//        else {
-//            [self payFailed];
-//            NSLog(@"PingppError: code=%lu msg=%@", (unsigned  long)error.code, [error getMsg]);
-//        }
-//        [SystemServer sharedSystemServer].inPay = NO;
-//        //                [weakSelf showAlertMessage:result];
-//    }];
 }
 
 

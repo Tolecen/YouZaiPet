@@ -12,19 +12,19 @@
 @implementation ShareServe
 +(void)buildShareSDK
 {
-    [ShareSDK registerApp:@"2f37350b8994"];
+    [ShareSDK registerApp:@"15deb35757d84"];
     /**
      连接新浪微博开放平台应用以使用相关功能，此应用需要引用SinaWeiboConnection.framework
      http://open.weibo.com上注册新浪微博开放平台应用，并将相关信息填写到以下字段
      **/
-    [ShareSDK connectSinaWeiboWithAppKey:@"1804983872"
-                               appSecret:@"2ebcf3586c64b5bf32dac1d67f1fcdf"
+    [ShareSDK connectSinaWeiboWithAppKey:@"2654596377"
+                               appSecret:@"4a1737d880470268ed0bb50faf37fe05"
                              redirectUri:@"https://api.weibo.com/oauth2/default.html"];
     /**
      连接QQ应用以使用相关功能，此应用需要引用QQConnection.framework和QQApi.framework库
      http://mobile.qq.com/api/上注册应用，并将相关信息填写到以下字段
      **/
-    [ShareSDK connectQQWithQZoneAppKey:@"1102327672"
+    [ShareSDK connectQQWithQZoneAppKey:@"1105514767"
                      qqApiInterfaceCls:[QQApiInterface class]
                        tencentOAuthCls:[TencentOAuth class]];
     
@@ -34,7 +34,7 @@
      连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
      http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段
      **/
-    [ShareSDK connectWeChatWithAppId:@"wxb62f795f2bc6b770" wechatCls:[WXApi class]];
+    [ShareSDK connectWeChatWithAppId:@"wx7bbb7978950d96a1" wechatCls:[WXApi class]];
 }
 +(void)authSineWithSucceed:(void (^)(BOOL state))success
 {

@@ -571,10 +571,10 @@
     self.orderTimeL.font = [UIFont systemFontOfSize:14];
     NSString *dingdanString = [NSString stringWithFormat:@"%@",self.myOrder.time];
     
-    NSRange start =[dingdanString rangeOfString:@"-"];
-    NSRange end =[dingdanString rangeOfString:@":"];
-    NSString  *b =[dingdanString substringWithRange:NSMakeRange(start.location+1, end.location-2)];
-    self.orderTimeL.text =b;
+//    NSRange start =[dingdanString rangeOfString:@"-"];
+//    NSRange end =[dingdanString rangeOfString:@":"];
+//    NSString  *b =[dingdanString substringWithRange:NSMakeRange(start.location+1, end.location-2)];
+    self.orderTimeL.text =dingdanString;
     [self.footerV addSubview:self.orderTimeL];
     [tableView addSubview:self.footerV];
     return self.footerV;
