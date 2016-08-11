@@ -18,7 +18,7 @@
                             success:(void (^)(id result))success
                             failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
-+ (void)confirmReceviedGoodWithGoodUrl:(NSString *)goodUrl
++ (void)confirmReceviedGoodWithGoodUrl:(NSString *)goodUrl paras:(NSArray *)paras
                                success:(void (^)(id result))success
                                failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 

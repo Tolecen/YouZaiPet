@@ -53,7 +53,7 @@
         [self.contentView addSubview:self.moneyL];
         self.moneyL.text = @"￥10000";
         
-        self.amountL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-20-120, 50, 120, 20)];
+        self.amountL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-20-120, 40, 120, 20)];
         self.amountL.font = [UIFont systemFontOfSize:13];
         self.amountL.numberOfLines = 1;
         self.amountL.textAlignment = NSTextAlignmentRight;
@@ -62,10 +62,26 @@
         self.amountL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
         [self.contentView addSubview:self.amountL];
         self.amountL.text = @"x 1";
+        
+//        self.btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [self.btn1 setFrame:CGRectMake(ScreenWidth-10-70, 70, 70, 20)];
+//        self.btn1.layer.cornerRadius = 3;
+//        self.btn1.layer.borderWidth = 1;
+//        self.btn1.layer.borderColor = [[UIColor colorWithWhite:180/255.f alpha:1] CGColor];
+//        self.btn1.layer.masksToBounds = YES;
+//        [self.contentView addSubview:self.btn1];
+//        [self.btn1 setTitle:@"确认收货" forState:UIControlStateNormal];
+//        self.btn1.titleLabel.font = [UIFont systemFontOfSize:12];
+//        [self.btn1 setTitleColor:[UIColor colorWithWhite:180/255.f alpha:1] forState:UIControlStateNormal];
+//        [self.btn1 addTarget:self action:@selector(conformShouhuo:) forControlEvents:UIControlEventTouchUpInside];
 
         
     }
     return self;
+}
+-(void)conformShouhuo:(UIButton *)sender
+{
+    
 }
 -(void)layoutSubviews
 {

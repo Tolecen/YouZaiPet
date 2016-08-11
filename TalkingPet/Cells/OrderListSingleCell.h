@@ -17,5 +17,6 @@
 @property (nonatomic,strong)UILabel * moneyL;
 @property (nonatomic,strong)UILabel * amountL;
 @property (nonatomic,strong)OrderYZGoodInfo * goodInfo;
+@property (nonatomic,strong)UIButton * btn1;
 
 @end

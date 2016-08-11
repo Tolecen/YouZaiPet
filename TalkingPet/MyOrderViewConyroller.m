@@ -215,6 +215,9 @@
             if (goodModel.confirmUrl && goodModel.confirmUrl.length>1) {
                 listModel.confirmUrl = goodModel.confirmUrl;
             }
+            if (goodModel.model && goodModel.model.length>1) {
+                listModel.model = goodModel.model;
+            }
             
             
             amount = amount+[goodModel.total intValue];

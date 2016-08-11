@@ -1194,6 +1194,10 @@
 		97A2CFA81D58C381000429FC /* keyboard_favor.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A2CFA71D58C381000429FC /* keyboard_favor.png */; };
 		97A2CFAA1D58C43E000429FC /* keyboard_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A2CFA91D58C43E000429FC /* keyboard_share.png */; };
 		97A2CFAC1D58C4F5000429FC /* keyboard_favored.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A2CFAB1D58C4F5000429FC /* keyboard_favored.png */; };
+		97A2CFB01D5D2CB1000429FC /* confirmdog1.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A2CFAD1D5D2CB1000429FC /* confirmdog1.png */; };
+		97A2CFB11D5D2CB1000429FC /* confirmdog2.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A2CFAE1D5D2CB1000429FC /* confirmdog2.png */; };
+		97A2CFB21D5D2CB1000429FC /* confirmdog3.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A2CFAF1D5D2CB1000429FC /* confirmdog3.png */; };
+		97A2CFB51D5D2CF9000429FC /* ConfirmDogReceivedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2CFB41D5D2CF9000429FC /* ConfirmDogReceivedVC.m */; };
 		97A6856419F8A1C9006BA3F9 /* SectionMSgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A6856319F8A1C9006BA3F9 /* SectionMSgViewController.m */; };
 		97A6856719F8A36A006BA3F9 /* ITTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A6856619F8A36A006BA3F9 /* ITTableViewCell.m */; };
 		97AA6C1E1AB8170800ED5F39 /* banner_button_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 97AA6C1D1AB8170800ED5F39 /* banner_button_close.png */; };
@@ -3126,6 +3130,11 @@
 		97A2CFA71D58C381000429FC /* keyboard_favor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard_favor.png; sourceTree = "<group>"; };
 		97A2CFA91D58C43E000429FC /* keyboard_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard_share.png; sourceTree = "<group>"; };
 		97A2CFAB1D58C4F5000429FC /* keyboard_favored.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard_favored.png; sourceTree = "<group>"; };
+		97A2CFAD1D5D2CB1000429FC /* confirmdog1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confirmdog1.png; sourceTree = "<group>"; };
+		97A2CFAE1D5D2CB1000429FC /* confirmdog2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confirmdog2.png; sourceTree = "<group>"; };
+		97A2CFAF1D5D2CB1000429FC /* confirmdog3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confirmdog3.png; sourceTree = "<group>"; };
+		97A2CFB31D5D2CF9000429FC /* ConfirmDogReceivedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmDogReceivedVC.h; sourceTree = "<group>"; };
+		97A2CFB41D5D2CF9000429FC /* ConfirmDogReceivedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmDogReceivedVC.m; sourceTree = "<group>"; };
 		97A6856219F8A1C9006BA3F9 /* SectionMSgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionMSgViewController.h; sourceTree = "<group>"; };
 		97A6856319F8A1C9006BA3F9 /* SectionMSgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionMSgViewController.m; sourceTree = "<group>"; };
 		97A6856519F8A36A006BA3F9 /* ITTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTableViewCell.h; sourceTree = "<group>"; };
@@ -4544,6 +4553,8 @@
 				97A2CFA21D58B088000429FC /* NSDate+XMGExtension.m */,
 				72D54CEC1B29697100B59A84 /* OrderDetailViewController.h */,
 				72D54CED1B29697100B59A84 /* OrderDetailViewController.m */,
+				97A2CFB31D5D2CF9000429FC /* ConfirmDogReceivedVC.h */,
+				97A2CFB41D5D2CF9000429FC /* ConfirmDogReceivedVC.m */,
 				976B9D2B1A89E2F90078338F /* ChangePetViewController.h */,
 				976B9D2C1A89E2F90078338F /* ChangePetViewController.m */,
 				72C642E61A3FC99300995D46 /* DetailTableViewCell.h */,
@@ -5275,6 +5286,9 @@
 				72C649AF1A1AFB2700E9CB60 /* female_border.png */,
 				9763A5511A3979E2004E6B6D /* signCount.png */,
 				729F49031A383F4E00AB0372 /* signIn.png */,
+				97A2CFAD1D5D2CB1000429FC /* confirmdog1.png */,
+				97A2CFAE1D5D2CB1000429FC /* confirmdog2.png */,
+				97A2CFAF1D5D2CB1000429FC /* confirmdog3.png */,
 				7271971D1A4117B8001868C5 /* mainViewSignIn.png */,
 				72015A641A39353000453ACF /* add.png */,
 				72015A651A39353000453ACF /* more.png */,
@@ -7016,6 +7030,7 @@
 				1573B15B1B83707900D768D0 /* order_without@2x.png in Resources */,
 				72FADA661A2DD592003670D0 /* praise_5.png in Resources */,
 				726185251B2EC1D100715A73 /* editAddress.png in Resources */,
+				97A2CFB01D5D2CB1000429FC /* confirmdog1.png in Resources */,
 				D860FDE41D334EC300487E2D /* gouwuche@3x.png in Resources */,
 				72FADA641A2DD592003670D0 /* praise_3.png in Resources */,
 				D860FE4D1D33C2B300487E2D /* jingyanfenxiang-bianji@3x.png in Resources */,
@@ -7165,6 +7180,7 @@
 				72FADA621A2DD592003670D0 /* selected_pass.png in Resources */,
 				9791E8F01A6E2F9300893E17 /* removeBlackList.png in Resources */,
 				7200B9F41A8300F0008630D9 /* Sound1.png in Resources */,
+				97A2CFB21D5D2CB1000429FC /* confirmdog3.png in Resources */,
 				72015A671A39353000453ACF /* more.png in Resources */,
 				7229EE0C1A8C43C400EFB444 /* 22007.png in Resources */,
 				721DF93E1B679A6A0006A256 /* guide_con_5@2x.png in Resources */,
@@ -7240,6 +7256,7 @@
 				9764DD5D1B6389210065A9D2 /* postcard_p.png in Resources */,
 				9776D59B1A83798C00A3F191 /* LV2.png in Resources */,
 				D860FE641D33C2B300487E2D /* tupianwenzi-bianji@2x.png in Resources */,
+				97A2CFB11D5D2CB1000429FC /* confirmdog2.png in Resources */,
 				721DF9301B679A6A0006A256 /* guide_img_5@2x.png in Resources */,
 				720A7B4C1B1EF4BD00268A42 /* section_NO_7.png in Resources */,
 				9776D5A71A837DCE00A3F191 /* usercenter_scorerule.png in Resources */,
@@ -7679,6 +7696,7 @@
 				723DA50D19F6119D002E162C /* InitializeData.m in Sources */,
 				726F2FC61B4E715B007A7668 /* T&AEditViewController.m in Sources */,
 				06BC28D01D1E6BE3003AC9A3 /* YZShangChengGoodsListVC.m in Sources */,
+				97A2CFB51D5D2CF9000429FC /* ConfirmDogReceivedVC.m in Sources */,
 				971D8CD71975086C00C4C580 /* FavorListTableViewCell.m in Sources */,
 				0696313E1D1D995E00AF6B6D /* YZShangChengKindScrollCell.m in Sources */,
 				2E40FF811D49EF19007A4E44 /* YZOrderConfimAddressCell.m in Sources */,

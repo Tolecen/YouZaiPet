@@ -19,4 +19,5 @@
 @property (nonatomic,retain)NSString<Optional> * shippingfee;
 @property (nonatomic,retain)NSArray<Optional> * goods;
 @property (nonatomic,retain)NSString<Optional> * confirmUrl;
+@property (nonatomic,retain)NSString<Optional> *model;
 @end

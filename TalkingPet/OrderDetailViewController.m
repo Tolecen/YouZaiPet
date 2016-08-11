@@ -566,7 +566,8 @@
     self.orderNoL.text = [NSString stringWithFormat:@"订单编号：%@",self.myOrder.order_no];
     [self.footerV addSubview:self.orderNoL];
     
-    self.orderTimeL = [[UILabel alloc] initWithFrame:CGRectMake(270, 20, ScreenWidth-40, 20)];
+    self.orderTimeL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-130, 20, 120, 20)];
+    self.orderTimeL.textAlignment = NSTextAlignmentRight;
     self.orderTimeL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
     self.orderTimeL.font = [UIFont systemFontOfSize:14];
     NSString *dingdanString = [NSString stringWithFormat:@"%@",self.myOrder.time];
@@ -769,15 +770,34 @@
         if (!self.myOrder.confirmUrl) {
             return;
         }
-        [SVProgressHUD showWithStatus:@"确认中..."];
-        [NetServer confirmReceviedGoodWithGoodUrl:self.myOrder.confirmUrl success:^(id result) {
-            [SVProgressHUD showSuccessWithStatus:@"确认收货成功"];
-            self.myOrder.post_status = @"2";
-            [_tableView reloadData];
-        } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-            [SVProgressHUD showErrorWithStatus:@"确认收货失败"];
-        }];
+        if (![self.myOrder.model isEqualToString:@"Dog"]) {
+            [SVProgressHUD showWithStatus:@"确认中..."];
+            [NetServer confirmReceviedGoodWithGoodUrl:self.myOrder.confirmUrl paras:nil success:^(id result) {
+                [SVProgressHUD showSuccessWithStatus:@"确认收货成功"];
+                self.myOrder.post_status = @"2";
+                [_tableView reloadData];
+            } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+                [SVProgressHUD showErrorWithStatus:@"确认收货失败"];
+            }];
+        }
+        else
+        {
+            ConfirmDogReceivedVC * cd = [[ConfirmDogReceivedVC alloc] init];
+            cd.myOrder = self.myOrder;
+            cd.back = ^()
+            {
+                [self confirmSuccess];
+            };
+            [self.navigationController pushViewController:cd animated:YES];
+        }
+
     }
+}
+
+-(void)confirmSuccess
+{
+    self.myOrder.post_status = @"2";
+    [_tableView reloadData];
 }
 
 @end

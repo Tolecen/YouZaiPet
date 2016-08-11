@@ -19,4 +19,5 @@
 @property (nonatomic,retain)NSString<Optional> *real_amount;
 @property (nonatomic,retain)NSString<Optional> *real_shipping;
 @property (nonatomic,retain)NSString<Optional> *confirmUrl;
+@property (nonatomic,retain)NSString<Optional> *model;
 @end

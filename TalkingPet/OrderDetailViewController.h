@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 #import "OrderYZList.h"
 #import "OrderYZGoodInfo.h"
+#import "ConfirmDogReceivedVC.h"
 @interface OrderDetailViewController : BaseViewController<UIAlertViewDelegate>
 @property (nonatomic,retain)NSString * orderID;
 @property (nonatomic,copy)void(^ deleteThisOrder)();

@@ -78,13 +78,21 @@
 }
 
 
-+ (void)confirmReceviedGoodWithGoodUrl:(NSString *)goodUrl
++ (void)confirmReceviedGoodWithGoodUrl:(NSString *)goodUrl paras:(NSArray *)paras
                             success:(void (^)(id))success
                             failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
     params[@"uid"] = [UserServe sharedUserServe].userID;
     //    params[@"order_no"] = orderNo;
+    
+    if (paras) {
+        params[@"front"] = paras[0];
+        params[@"back"] = paras[1];
+
+        params[@"picked_up"] = paras[2];
+
+    }
     
     NSString *path = goodUrl;
     [NetServer inner_PayServerConfigWithWithPath:path
