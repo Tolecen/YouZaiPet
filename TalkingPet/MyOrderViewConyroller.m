@@ -163,7 +163,7 @@
         }
         
         [_tableView headerEndRefreshing];
-        [SVProgressHUD dismissWithError:@"订单信息已经全部加载完毕" afterDelay:2];
+//        [SVProgressHUD dismissWithError:@"订单信息已经全部加载完毕" afterDelay:2];
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         
     }];
