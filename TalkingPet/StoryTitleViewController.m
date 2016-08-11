@@ -26,7 +26,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
         self.title = @"故事标题";
         self.story = [[StoryPublish alloc] init];
     }
@@ -39,18 +38,18 @@
     [self setBackButtonWithTarget:@selector(back)];
     [self setRightButtonWithName:@"下一步" BackgroundImg:nil Target:@selector(selectImage)];
     self.view.backgroundColor = [UIColor colorWithWhite:238/255.0 alpha:1];
-//    UIImageView * bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 70, self.view.frame.size.width, self.view.frame.size.height-70-navigationBarHeight)];
-//    [self.view addSubview:bg];
-//    bg.image = [UIImage imageNamed:@"story_preview_bg"];
-//    UIImageView * defaultCover = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, self.view.frame.size.width-20, self.view.frame.size.width-20)];
-//    [bg addSubview:defaultCover];
-//    defaultCover.image = [UIImage imageNamed:@"story_preview_defaultCover"];
+    UIImageView * bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 70, self.view.frame.size.width, self.view.frame.size.height-70-navigationBarHeight)];
+    [self.view addSubview:bg];
+    bg.image = [UIImage imageNamed:@"story_preview_bg"];
+    UIImageView * defaultCover = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, self.view.frame.size.width-20, self.view.frame.size.width-20)];
+    [bg addSubview:defaultCover];
+    defaultCover.image = [UIImage imageNamed:@"story_preview_defaultCover"];
     titleView = [[UITextView alloc] initWithFrame:CGRectMake(10, 20, self.view.frame.size.width-10, 30)];
     titleView.backgroundColor = [UIColor clearColor];
-//    titleView.layer.borderWidth = 1;
+    //    titleView.layer.borderWidth = 1;
     titleView.delegate = self;
     titleView.returnKeyType = UIReturnKeyDone;
-//    titleView.layer.borderColor = [UIColor colorWithWhite:200/255.0 alpha:1].CGColor;
+    //    titleView.layer.borderColor = [UIColor colorWithWhite:200/255.0 alpha:1].CGColor;
     [self.view addSubview: titleView];
     
     placeholderL = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 150, 20)];

@@ -94,9 +94,9 @@
     [self.view addSubview:self.bigZanImageV];
     self.bigZanImageV.hidden = YES;
     
-//    bottomBG = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-45-navigationBarHeight, ScreenWidth, 45)];
-//    [self.view addSubview:bottomBG];
-//    [bottomBG setBackgroundColor:[UIColor whiteColor]];
+    //    bottomBG = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-45-navigationBarHeight, ScreenWidth, 45)];
+    //    [self.view addSubview:bottomBG];
+    //    [bottomBG setBackgroundColor:[UIColor whiteColor]];
     
     
     UIView * linem = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 1)];
@@ -270,7 +270,7 @@
     [shareImgV setImage:[UIImage imageNamed:@"browser_forward"]];
     [self.shareLabel setTextColor:[UIColor colorWithWhite:140/255.0f alpha:1]];
     
- 
+    
     
     __block TalkingDetailPageViewController * weakSelf = self;
     self.inputView = [[InputView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-navigationBarHeight-50, 320, 50) BaseView:self.view Type:1];
@@ -286,12 +286,12 @@
     {
         [weakSelf shareBtnClicked];
     };
-
+    
     if (self.talking.ifZan) {
         if ([UserServe sharedUserServe].account) {
             [self.inputView.favorBtn setImage:[UIImage imageNamed:@"keyboard_favored"] forState:UIControlStateNormal];
         }
-        //        [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
+        [_favorImgV setImage:[UIImage imageNamed:@"browser_zanned"]];
     }
     else
         [self.inputView.favorBtn setImage:[UIImage imageNamed:@"keyboard_favor"] forState:UIControlStateNormal];
@@ -1167,7 +1167,7 @@
         return;
     }
     if (!self.talking.ifZan) {
-         [self.inputView.favorBtn setImage:[UIImage imageNamed:@"keyboard_favored"] forState:UIControlStateNormal];
+        [self.inputView.favorBtn setImage:[UIImage imageNamed:@"keyboard_favored"] forState:UIControlStateNormal];
         self.talking.ifZan = YES;
         self.favorBtn.enabled = NO;
         //        [self zanMakeBig];
@@ -1214,7 +1214,7 @@
     else
     {
         self.talking.ifZan = NO;
-         [self.inputView.favorBtn setImage:[UIImage imageNamed:@"keyboard_favor"] forState:UIControlStateNormal];
+        [self.inputView.favorBtn setImage:[UIImage imageNamed:@"keyboard_favor"] forState:UIControlStateNormal];
         int n = self.caiNum;
         [self.favorNumBtn setTitle:[NSString stringWithFormat:@"%d踩",n-1] forState:UIControlStateNormal];
         self.caiNum--;
@@ -1267,8 +1267,8 @@
         }
         return;
     }
-
-   if (self.commentStyle == commentStyleForward){
+    
+    if (self.commentStyle == commentStyleForward){
         [self doingSth];
         [SVProgressHUD showWithStatus:@"正在转发..."];
         [self forwardThisTalkingWithMsg:text];

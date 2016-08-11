@@ -36,14 +36,13 @@
     [self setBackButtonWithTarget:@selector(back)];
 #pragma mark右边圆角问号
     UIButton*ruleB = [UIButton buttonWithType:UIButtonTypeCustom];
-    ruleB.frame = CGRectMake(ScreenWidth-40, 10, 20, 20);
+    ruleB.frame = CGRectMake(ScreenWidth-28, 10, 20, 20);
     ruleB.titleLabel.font = [UIFont systemFontOfSize:10];
     [ruleB setTitle:@"?" forState:UIControlStateNormal];
     [ruleB setTintColor:[UIColor whiteColor]];
     ruleB.layer.cornerRadius = 10;
     ruleB.layer.masksToBounds =YES;
-    [ruleB addTarget:self action:@selector(showGradeRule) forControlEvents:UIControlEventTouchUpInside];
-    ruleB.backgroundColor =[UIColor grayColor];
+    ruleB.backgroundColor =[UIColor colorWithR:164 g:164 b:164 alpha:1];
     [self.view addSubview:ruleB];
     
     UIImageView * avatarbg = [[UIImageView alloc] initWithFrame:CGRectMake(9, 9,  82, 72)];
@@ -52,7 +51,7 @@
     [self.view addSubview:avatarbg];
     
 #pragma mark积分相关
-    UILabel*scoreL = [[UILabel alloc] initWithFrame:CGRectMake(120, 130, 60, 20)];
+    UILabel*scoreL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-100, 80, 60, 20)];
     scoreL.backgroundColor = [UIColor clearColor];
     scoreL.font = [UIFont systemFontOfSize:14];
     scoreL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
@@ -61,10 +60,10 @@
     
     CGSize zs = [scoreL.text sizeWithFont:scoreL.font constrainedToSize:CGSizeMake(100, 20) lineBreakMode:NSLineBreakByCharWrapping];
     
-    [scoreL setFrame:CGRectMake(140, 90, zs.width, 20)];
+    [scoreL setFrame:CGRectMake(50+zs.width+30, navigationBarHeight+10, zs.width, 20)];
     
 #pragma mark默认上方等级图标
-    UIButton *LVIV = [[UIButton alloc]initWithFrame:CGRectMake(50+zs.width+5, 40, 100, 30)];
+    UIButton *LVIV = [[UIButton alloc]initWithFrame:CGRectMake(50+zs.width+5, navigationBarHeight-30, 100, 30)];
     
     
     [LVIV setTitleColor:CommonGreenColor forState:UIControlStateNormal];
@@ -77,21 +76,21 @@
     LVIV.layer.masksToBounds = YES;
     
 #pragma mark左边默认等级
-    UILabel * gradeL = [[UILabel alloc] initWithFrame:CGRectMake(10, 115, 30, 20)];
+    UILabel * gradeL = [[UILabel alloc] initWithFrame:CGRectMake(10,scoreL.frame.origin.y+30, 30, 8)];
     gradeL.backgroundColor = [UIColor clearColor];
     gradeL.font = [UIFont systemFontOfSize:14];
     gradeL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
     gradeL.text = [NSString stringWithFormat:@"LV.%d",(int)[[UserServe sharedUserServe].account.grade integerValue]];
     [self.view addSubview:gradeL];
 #pragma marak右边等级
-    UILabel * nextGradeL = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width-30, 115, 30, 20)];
+    UILabel * nextGradeL = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width-30,scoreL.frame.origin.y+28, 30, 8)];
     nextGradeL.backgroundColor = [UIColor clearColor];
     nextGradeL.font = [UIFont systemFontOfSize:14];
     nextGradeL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
     nextGradeL.text = [NSString stringWithFormat:@"LV.%d",(int)[[UserServe sharedUserServe].account.grade integerValue]+1];
     [self.view addSubview:nextGradeL];
 #pragma mark整个进度条背景颜色
-    UIView*gradeBV = [[UIView alloc] initWithFrame:CGRectMake(40, 120, self.view.frame.size.width-80, 10)];
+    UIView*gradeBV = [[UIView alloc] initWithFrame:CGRectMake(40, scoreL.frame.origin.y+28, self.view.frame.size.width-80, 8)];
     [self.view addSubview:gradeBV];
     gradeBV.backgroundColor = [UIColor grayColor];
     gradeBV.layer.masksToBounds=YES;
@@ -103,7 +102,7 @@
     [gradeBV addSubview:gradeV];
     gradeV.backgroundColor = CommonGreenColor;
 #pragma mark 升级还需要
-    upL = [[UILabel  alloc] initWithFrame:CGRectMake(0, 130, self.view.frame.size.width-50, 35)];
+    upL = [[UILabel  alloc] initWithFrame:CGRectMake(0, gradeBV.frame.origin.y+10, self.view.frame.size.width-50, 35)];
     upL.font = [UIFont systemFontOfSize:12];
     upL.textAlignment = NSTextAlignmentCenter;
     
@@ -170,13 +169,13 @@
     }];
     
 }
-- (void)showGradeRule
-{
-    WebContentViewController * vb = [[WebContentViewController alloc] init];
-    vb.urlStr =[@"http://mp.weixin.qq.com/s?__biz=MjM5MDM1ODExMQ==&mid=202669793&idx=1&sn=c9f5d37b4dbbb73c1455e4f502324aa9#rd" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    vb.title = @"积分规则";
-    [self.navigationController pushViewController:vb animated:YES];
-}
+//- (void)showGradeRule
+//{
+//    WebContentViewController * vb = [[WebContentViewController alloc] init];
+//    vb.urlStr =[@"http://mp.weixin.qq.com/s?__biz=MjM5MDM1ODExMQ==&mid=202669793&idx=1&sn=c9f5d37b4dbbb73c1455e4f502324aa9#rd" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    vb.title = @"积分规则";
+//    [self.navigationController pushViewController:vb animated:YES];
+//}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 30;

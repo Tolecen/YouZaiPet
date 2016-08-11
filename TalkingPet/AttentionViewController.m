@@ -21,6 +21,8 @@
 @implementation AttentionViewController
 -(void)viewDidLoad
 {
+    
+    NSLog(@"23333333444444444");
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds];
     _tableView.backgroundView = nil;
     _tableView.backgroundColor = [UIColor whiteColor];
@@ -51,9 +53,9 @@
         self.attentionTableViewHelper.footerCanRefresh = NO;
         if (!blankPage) {
             blankPage = [[BlankPageView alloc] initWithNoImage];
-//            [blankPage showWithView:self.view image:[UIImage imageNamed:@"attention_login"] buttonImage:[UIImage imageNamed:@"attention_unLogin"] action:^{
-//                [[RootViewController sharedRootViewController] showLoginViewController];
-//            }];
+            //            [blankPage showWithView:self.view image:[UIImage imageNamed:@"attention_login"] buttonImage:[UIImage imageNamed:@"attention_unLogin"] action:^{
+            //                [[RootViewController sharedRootViewController] showLoginViewController];
+            //            }];
             
             [blankPage showWithWithView:self.view Title:@"立即登录" action:^{
                 [[RootViewController sharedRootViewController] showLoginViewController];
@@ -85,19 +87,19 @@
 }
 -(void)attentionNoContent:(BOOL)have
 {
-//    if (!have) {
-//        self.tableView.hidden = YES;
-//        self.attentionTableViewHelper.headerCanRefresh = NO;
-//        self.attentionTableViewHelper.footerCanRefresh = NO;
-//    }
-//    else{
-        self.tableView.hidden = NO;
-        self.attentionTableViewHelper.headerCanRefresh = YES;
-        self.attentionTableViewHelper.footerCanRefresh = YES;
-        if (blankPage) {
-            [blankPage removeFromSuperview];
-            blankPage = nil;
-        }
-//    }
+    //    if (!have) {
+    //        self.tableView.hidden = YES;
+    //        self.attentionTableViewHelper.headerCanRefresh = NO;
+    //        self.attentionTableViewHelper.footerCanRefresh = NO;
+    //    }
+    //    else{
+    self.tableView.hidden = NO;
+    self.attentionTableViewHelper.headerCanRefresh = YES;
+    self.attentionTableViewHelper.footerCanRefresh = YES;
+    if (blankPage) {
+        [blankPage removeFromSuperview];
+        blankPage = nil;
+    }
+    //    }
 }
 @end
