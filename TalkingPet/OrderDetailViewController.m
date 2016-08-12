@@ -406,7 +406,7 @@
 }
 -(void)sureTodeleteOrder
 {
-    [SVProgressHUD showWithStatus:@"正在取消订单.."];
+    [SVProgressHUD showWithStatus:@"正在删除订单.."];
     NSMutableDictionary* usersDict = [NetServer commonDict];
     [usersDict setObject:@"order" forKey:@"command"];
     [usersDict setObject:@"cancelOrder" forKey:@"options"];
@@ -594,7 +594,7 @@
     if ([self.myOrder.pay_status isEqualToString:@"0"]) {
         view.btn1.hidden = NO;
         view.btn2.hidden = NO;
-        [view.btn1 setTitle:@"取消订单" forState:UIControlStateNormal];
+        [view.btn1 setTitle:@"删除订单" forState:UIControlStateNormal];
         [view.btn2 setTitle:@"立刻付款" forState:UIControlStateNormal];
     }
     else if([self.myOrder.post_status isEqualToString:@"1"])
@@ -753,14 +753,17 @@
 
 -(void)buttonAction:(NSString *)title
 {
-    if ([title isEqualToString:@"取消订单"]) {
+    if ([title isEqualToString:@"删除订单"]) {
         [SVProgressHUD showWithStatus:@"取消中..."];
-        [NetServer cancelOrderWithOrderNo:self.myOrder.order_no success:^(id result) {
-            [SVProgressHUD showSuccessWithStatus:@"取消订单成功"];
-            self.myOrder.pay_status = @"2";
-            [_tableView reloadData];
+        [NetServer deleteOrderWithOrderNo:self.myOrder.order_no success:^(id result) {
+            [SVProgressHUD showSuccessWithStatus:@"删除订单成功"];
+            if (self.deleteThisOrder) {
+                self.deleteThisOrder();
+            }
+//            self.myOrder.pay_status = @"2";
+//            [_tableView reloadData];
         } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-            [SVProgressHUD showErrorWithStatus:@"取消订单失败"];
+            [SVProgressHUD showErrorWithStatus:@"删除订单失败"];
         }];
     }
     else if ([title isEqualToString:@"立刻付款"]){

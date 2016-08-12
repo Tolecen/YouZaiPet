@@ -498,6 +498,9 @@
     OrderYZList * listModel = self.orderArr[indexPath.section];
     OrderDetailViewController * orderVC = [[OrderDetailViewController alloc] init];
     orderVC.myOrder = listModel;
+    orderVC.deleteThisOrder = ^(){
+        [_tableView headerBeginRefreshing];
+    };
     //    orderVC.orderID = _orderArr[indexPath.section][@"id"];
     //    [orderVC buildWithSimpleDic:_orderArr[indexPath.section]];
     //    __weak NSMutableArray * weakArr = _orderArr;

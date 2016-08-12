@@ -593,22 +593,22 @@
     ShareSheet * shareSheet = [[ShareSheet alloc]initWithIconArray:@[@"weiChatFriend",@"friendCircle",@"sina",@"qq",@"petaking"] titleArray:@[@"微信好友",@"朋友圈",@"微博",@"QQ",@"友仔"] action:^(NSInteger index) {
         switch (index) {
             case 0:{
-                [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"听%@的宠物说",_talking.petInfo.nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",_talking.petInfo.nickname,_talking.descriptionContent] imageUrl:_talking.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_talking.theID] Succeed:^{
+                [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"看%@的动态",_talking.petInfo.nickname] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",_talking.petInfo.nickname,_talking.descriptionContent] imageUrl:_talking.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_talking.theID] Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:_talking.theID];
                 }];
             }break;
             case 1:{
-                [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"听%@的宠物说",_talking.petInfo.nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",_talking.petInfo.nickname,_talking.descriptionContent] imageUrl:_talking.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_talking.theID] Succeed:^{
+                [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"看%@的动态",_talking.petInfo.nickname] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",_talking.petInfo.nickname,_talking.descriptionContent] imageUrl:_talking.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_talking.theID] Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:_talking.theID];
                 }];
             }break;
             case 2:{
-                [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"%@%@",_talking.petInfo.nickname,_talking.descriptionContent,SHAREBASEURL,_talking.theID] imageUrl:_talking.thumbImgUrl Succeed:^{
+                [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"%@%@",_talking.petInfo.nickname,_talking.descriptionContent,SHAREBASEURL,_talking.theID] imageUrl:_talking.thumbImgUrl Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:_talking.theID];
                 }];
             }break;
             case 3:{
-                [ShareServe shareToQQWithTitle:[NSString stringWithFormat:@"听%@的宠物说",_talking.petInfo.nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",_talking.petInfo.nickname,_talking.descriptionContent] imageUrl:_talking.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_talking.theID] Succeed:^{
+                [ShareServe shareToQQWithTitle:[NSString stringWithFormat:@"看%@的动态",_talking.petInfo.nickname] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",_talking.petInfo.nickname,_talking.descriptionContent] imageUrl:_talking.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_talking.theID] Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:_talking.theID];
                 }];
             }break;
@@ -1172,6 +1172,8 @@
         self.favorBtn.enabled = NO;
         //        [self zanMakeBig];
         int n = (int)self.caiNum;
+        self.talking.favorNum = [NSString stringWithFormat:@"%d",[self.talking.favorNum intValue]+1];
+        [self.contentTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
         [self.favorNumBtn setTitle:[NSString stringWithFormat:@"%d踩",n+1] forState:UIControlStateNormal];
         self.caiNum++;
         NSMutableDictionary* mDict = [NetServer commonDict];
@@ -1215,7 +1217,9 @@
     {
         self.talking.ifZan = NO;
         [self.inputView.favorBtn setImage:[UIImage imageNamed:@"keyboard_favor"] forState:UIControlStateNormal];
-        int n = self.caiNum;
+        int n = (int)self.caiNum;
+        self.talking.favorNum = [NSString stringWithFormat:@"%d",([self.talking.favorNum intValue]-1)>=0?([self.talking.favorNum intValue]-1):0];
+        [self.contentTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
         [self.favorNumBtn setTitle:[NSString stringWithFormat:@"%d踩",n-1] forState:UIControlStateNormal];
         self.caiNum--;
         NSMutableDictionary* mDict = [NetServer commonDict];
@@ -1811,11 +1815,11 @@
 {
     UIActionSheet * act;
     if ([self.talking.petInfo.petID isEqualToString:[UserServe sharedUserServe].userID]) {
-        act= [[UIActionSheet alloc] initWithTitle:@"更多操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"删除这条宠物说",@"举报这条宠物说", nil];
+        act= [[UIActionSheet alloc] initWithTitle:@"更多操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"删除这条动态",@"举报这条动态", nil];
         act.tag = 1;
     }
     else{
-        act= [[UIActionSheet alloc] initWithTitle:@"更多操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"举报这条宠物说", nil];
+        act= [[UIActionSheet alloc] initWithTitle:@"更多操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"举报这条动态", nil];
         act.tag = 2;
     }
     [act showInView:self.view];
@@ -1888,7 +1892,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"delete shuoshuo failed info:%@",error);
         [SVProgressHUD dismiss];
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"宠物说删除失败，一会儿再试试吧" delegate:nil cancelButtonTitle:@"哦" otherButtonTitles: nil];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"动态删除失败，一会儿再试试吧" delegate:nil cancelButtonTitle:@"哦" otherButtonTitles: nil];
         [alert show];
         
     }];

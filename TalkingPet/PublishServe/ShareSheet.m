@@ -332,7 +332,7 @@
         }];
     }else
     {
-        [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"听%@的宠物说",_nickName] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",_nickName,_descriptionContent] imageUrl:_thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_petalkId] Succeed:^{
+        [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"看%@的动态",_nickName] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",_nickName,_descriptionContent] imageUrl:_thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_petalkId] Succeed:^{
             [ShareServe shareNumberUpWithPetalkId:_petalkId];
         }];
     }
@@ -345,7 +345,7 @@
             _success();
         }];
     }else{
-        [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"听%@的宠物说",_nickName] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",_nickName,_descriptionContent] imageUrl:_thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_petalkId] Succeed:^{
+        [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"看%@的动态",_nickName] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",_nickName,_descriptionContent] imageUrl:_thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_petalkId] Succeed:^{
             [ShareServe shareNumberUpWithPetalkId:_petalkId];
         }];
     }
@@ -358,7 +358,7 @@
             _success();
         }];
     }else{
-        [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"%@%@",_nickName,_descriptionContent,SHAREBASEURL,_petalkId] imageUrl:_thumbnail Succeed:^{
+        [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"%@%@",_nickName,_descriptionContent,SHAREBASEURL,_petalkId] imageUrl:_thumbnail Succeed:^{
             [ShareServe shareNumberUpWithPetalkId:_petalkId];
         }];
     }
@@ -371,7 +371,7 @@
             _success();
         }];
     }else{
-        [ShareServe shareToQQWithTitle:[NSString stringWithFormat:@"听%@的宠物说",_nickName] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",_nickName,_descriptionContent] imageUrl:_thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_petalkId] Succeed:^{
+        [ShareServe shareToQQWithTitle:[NSString stringWithFormat:@"看%@的动态",_nickName] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",_nickName,_descriptionContent] imageUrl:_thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",_petalkId] Succeed:^{
             [ShareServe shareNumberUpWithPetalkId:_petalkId]; 
         }];
     }

@@ -25,7 +25,9 @@
 + (void)cancelOrderWithOrderNo:(NSString *)orderNo
                        success:(void (^)(id result))success
                        failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
-
++ (void)deleteOrderWithOrderNo:(NSString *)orderNo
+                       success:(void (^)(id result))success
+                       failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 + (void)getAddressCodeWithsuccess:(void (^)(id result))success
 failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 

@@ -45,7 +45,7 @@
             self.btn1.layer.borderColor = [[UIColor colorWithWhite:180/255.f alpha:1] CGColor];
             self.btn1.layer.masksToBounds = YES;
             [self.contentView addSubview:self.btn1];
-            [self.btn1 setTitle:@"取消订单" forState:UIControlStateNormal];
+            [self.btn1 setTitle:@"删除订单" forState:UIControlStateNormal];
             self.btn1.titleLabel.font = [UIFont systemFontOfSize:12];
             [self.btn1 setTitleColor:[UIColor colorWithWhite:180/255.f alpha:1] forState:UIControlStateNormal];
             [self.btn1 addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];

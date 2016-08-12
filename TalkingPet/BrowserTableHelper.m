@@ -1395,22 +1395,22 @@
     ShareSheet * shareSheet = [[ShareSheet alloc]initWithIconArray:@[@"weiChatFriend",@"friendCircle",@"sina",@"qq",@"petaking"] titleArray:@[@"微信好友",@"朋友圈",@"微博",@"QQ",@"友仔"] action:^(NSInteger index) {
         switch (index) {
             case 0:{
-                [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"听%@的宠物说",talkingBrowse.petInfo.nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent] imageUrl:talkingBrowse.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",talkingBrowse.theID] Succeed:^{
+                [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"看%@的动态",talkingBrowse.petInfo.nickname] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent] imageUrl:talkingBrowse.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",talkingBrowse.theID] Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:talkingBrowse.theID];
                 }];
             }break;
             case 1:{
-                [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"听%@的宠物说",talkingBrowse.petInfo.nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent] imageUrl:talkingBrowse.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",talkingBrowse.theID] Succeed:^{
+                [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"看%@的动态",talkingBrowse.petInfo.nickname] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent] imageUrl:talkingBrowse.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",talkingBrowse.theID] Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:talkingBrowse.theID];
                 }];
             }break;
             case 2:{
-                [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"%@%@",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent,SHAREBASEURL,talkingBrowse.theID] imageUrl:talkingBrowse.thumbImgUrl Succeed:^{
+                [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"%@%@",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent,SHAREBASEURL,talkingBrowse.theID] imageUrl:talkingBrowse.thumbImgUrl Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:talkingBrowse.theID];
                 }];
             }break;
             case 3:{
-                [ShareServe shareToQQWithTitle:[NSString stringWithFormat:@"听%@的宠物说",talkingBrowse.petInfo.nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent] imageUrl:talkingBrowse.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",talkingBrowse.theID] Succeed:^{
+                [ShareServe shareToQQWithTitle:[NSString stringWithFormat:@"看%@的动态",talkingBrowse.petInfo.nickname] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent] imageUrl:talkingBrowse.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",talkingBrowse.theID] Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:talkingBrowse.theID];
                 }];
             }break;
@@ -1518,7 +1518,7 @@
 {
     [[NSUserDefaults standardUserDefaults] setObject:@"onlywifi" forKey:@"playmodeofaudio"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    UIAlertView * alerty = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您可以在下面选择您需要的宠物说播放模式，如果以后需要修改，可以到“设置-播放设置”再次修改" delegate:self cancelButtonTitle:@"以后再说" otherButtonTitles:@"仅在WIFI下自动播放",@"始终自动播放",@"禁止自动播放", nil];
+    UIAlertView * alerty = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您可以在下面选择您需要的动态播放模式，如果以后需要修改，可以到“设置-播放设置”再次修改" delegate:self cancelButtonTitle:@"以后再说" otherButtonTitles:@"仅在WIFI下自动播放",@"始终自动播放",@"禁止自动播放", nil];
     alerty.tag = 100;
     [alerty show];
    

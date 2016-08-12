@@ -511,7 +511,7 @@
         CGSize tagSize = [[self.talking.tagArray[0] objectForKey:@"name"] sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(120, 20)];
 
         [tB setFrame:CGRectMake(5, 0, tagSize.width+30, 20)];
-
+        self.tagLabel.text = [self.talking.tagArray[0] objectForKey:@"name"];
 //        UIImage * tagImage = [[UIImage imageNamed:@"tagBlueBG"]
 //                              stretchableImageWithLeftCapWidth:20 topCapHeight:10];
 //        [tB setBackgroundImage:tagImage forState:UIControlStateNormal];

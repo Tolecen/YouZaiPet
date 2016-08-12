@@ -27,7 +27,7 @@
     [self setBackButtonWithTarget:@selector(inner_Pop:)];
     self.view.backgroundColor = [UIColor colorWithR:240 g:240 b:240 alpha:1];
     
-    self.topv = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 60)];
+    self.topv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 60)];
     self.topv.backgroundColor = [UIColor colorWithR:255 g:188 b:167 alpha:1];
     
     UILabel * hhh = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth-20, 40)];
@@ -40,13 +40,13 @@
     [self.topv addSubview:hhh];
     
     
-    self.bottv = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 130)];
+    self.bottv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 130)];
     self.bottv.backgroundColor = self.view.backgroundColor;
     
    
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - navigationBarHeight-40) style:UITableViewStylePlain];
-    
+    _tableView.backgroundColor = [UIColor clearColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
@@ -84,14 +84,14 @@
     [self.btn2 setBackgroundImage:[UIImage imageNamed:@"confirmdog2"] forState:UIControlStateNormal];
     self.btn2.tag = 2;
     [self.bottv addSubview:self.btn2];
-    [self.btn1 addTarget:self action:@selector(selectPic:) forControlEvents:UIControlEventTouchUpInside];
+    [self.btn2 addTarget:self action:@selector(selectPic:) forControlEvents:UIControlEventTouchUpInside];
     
     self.btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.btn3 setFrame:CGRectMake(20+90*2+sep*2, 40, 90, 90)];
     [self.btn3 setBackgroundImage:[UIImage imageNamed:@"confirmdog3"] forState:UIControlStateNormal];
     self.btn3.tag = 3;
     [self.bottv addSubview:self.btn3];
-    [self.btn1 addTarget:self action:@selector(selectPic:) forControlEvents:UIControlEventTouchUpInside];
+    [self.btn3 addTarget:self action:@selector(selectPic:) forControlEvents:UIControlEventTouchUpInside];
 
 
     

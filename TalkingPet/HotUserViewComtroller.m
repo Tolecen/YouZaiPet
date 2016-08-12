@@ -114,7 +114,7 @@
     titleL.textAlignment = NSTextAlignmentCenter;
     titleL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
     titleL.font = [UIFont systemFontOfSize:16];
-    titleL.text = @"关注热门宠友,和他们一起玩转宠物说";
+    titleL.text = @"关注热门宠友,和他们一起玩转友仔";
     
     UICollectionViewFlowLayout* sectionlayout = [[UICollectionViewFlowLayout alloc]init];
     sectionlayout.itemSize = CGSizeMake(95,120);

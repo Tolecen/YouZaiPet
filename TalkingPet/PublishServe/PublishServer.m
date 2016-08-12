@@ -322,12 +322,12 @@ static PublishServer* publishServer;
                 NSString * thumbnail = [[responseObject objectForKey:@"value"] objectForKey:@"thumbUrl"];
                 NSString * content = [[responseObject objectForKey:@"value"] objectForKey:@"description"];
                 if (sys.autoFriendCircle) {
-                    [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"听%@的宠物说",nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",nickname,content] imageUrl:thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",petalkID] Succeed:^{
+                    [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"看%@的动态",nickname] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",nickname,content] imageUrl:thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",petalkID] Succeed:^{
                         [ShareServe shareNumberUpWithPetalkId:petalkID];
                     }];
                 }
                 if (sys.autoSinaWeiBo) {
-                    [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"%@%@",nickname,content,SHAREBASEURL,petalkID] imageUrl:thumbnail Succeed:^{
+                    [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"%@%@",nickname,content,SHAREBASEURL,petalkID] imageUrl:thumbnail Succeed:^{
                         [ShareServe shareNumberUpWithPetalkId:petalkID];
                     }];
                 }
@@ -664,12 +664,12 @@ static PublishServer* publishServer;
             NSString * thumbnail = [[responseObject objectForKey:@"value"] objectForKey:@"thumbUrl"];
             NSString * content = [[responseObject objectForKey:@"value"] objectForKey:@"description"];
             if (sys.autoFriendCircle) {
-                [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"听%@的宠物说",nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",nickname,content] imageUrl:thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",petalkID] Succeed:^{
+                [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"看%@的动态",nickname] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",nickname,content] imageUrl:thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",petalkID] Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:petalkID];
                 }];
             }
             if (sys.autoSinaWeiBo) {
-                [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"%@%@",nickname,content,SHAREBASEURL,petalkID] imageUrl:thumbnail Succeed:^{
+                [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"%@%@",nickname,content,SHAREBASEURL,petalkID] imageUrl:thumbnail Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:petalkID];
                 }];
             }

@@ -1318,22 +1318,22 @@
     ShareSheet * shareSheet = [[ShareSheet alloc]initWithIconArray:@[@"weiChatFriend",@"friendCircle",@"sina",@"qq",@"petaking"] titleArray:@[@"微信好友",@"朋友圈",@"微博",@"QQ",@"宠物说"] action:^(NSInteger index) {
         switch (index) {
             case 0:{
-                [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"听%@的宠物说",talkingBrowse.petInfo.nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent] imageUrl:talkingBrowse.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",talkingBrowse.theID] Succeed:^{
+                [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"看%@的动态",talkingBrowse.petInfo.nickname] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent] imageUrl:talkingBrowse.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",talkingBrowse.theID] Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:talkingBrowse.theID];
                 }];
             }break;
             case 1:{
-                [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"听%@的宠物说",talkingBrowse.petInfo.nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent] imageUrl:talkingBrowse.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",talkingBrowse.theID] Succeed:^{
+                [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"看%@的动态",talkingBrowse.petInfo.nickname] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent] imageUrl:talkingBrowse.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",talkingBrowse.theID] Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:talkingBrowse.theID];
                 }];
             }break;
             case 2:{
-                [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"%@%@",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent,SHAREBASEURL,talkingBrowse.theID] imageUrl:talkingBrowse.thumbImgUrl Succeed:^{
+                [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"%@%@",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent,SHAREBASEURL,talkingBrowse.theID] imageUrl:talkingBrowse.thumbImgUrl Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:talkingBrowse.theID];
                 }];
             }break;
             case 3:{
-                [ShareServe shareToQQWithTitle:[NSString stringWithFormat:@"听%@的宠物说",talkingBrowse.petInfo.nickname] Content:[NSString stringWithFormat:@"听,爱宠有话说。分享自%@的宠物说:\"%@\"",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent] imageUrl:talkingBrowse.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",talkingBrowse.theID] Succeed:^{
+                [ShareServe shareToQQWithTitle:[NSString stringWithFormat:@"看%@的动态",talkingBrowse.petInfo.nickname] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",talkingBrowse.petInfo.nickname,talkingBrowse.descriptionContent] imageUrl:talkingBrowse.thumbImgUrl webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",talkingBrowse.theID] Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:talkingBrowse.theID];
                 }];
             }break;
