@@ -40,7 +40,7 @@
     
     
     UIButton*ruleB = [UIButton buttonWithType:UIButtonTypeCustom];
-    ruleB.frame = CGRectMake(ScreenWidth-65, 10, 20, 20);
+    ruleB.frame = CGRectMake(ScreenWidth-30, 20, 20, 20);
     ruleB.titleLabel.font = [UIFont systemFontOfSize:11];
     [ruleB addTarget:self action:@selector(showCionRule) forControlEvents:UIControlEventTouchUpInside];
     [ruleB setTitle:@"?" forState:UIControlStateNormal];

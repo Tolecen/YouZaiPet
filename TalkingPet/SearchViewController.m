@@ -606,10 +606,10 @@
             disNum = 5;
         float h = (ScreenWidth-30-(disNum-1)*10)/disNum;
         
-        return 43+h+10;
+        return 30+h+10;
     }
     else
-        return 70;
+        return 60;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -633,7 +633,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.tagDict = self.tagArray[indexPathx.row];
         //        cell.publisherAvatarV.placeholderImage = [UIImage imageNamed:@"gougouAvatar.jpeg"];
-        //        cell.publisherAvatarV.imageURL = [NSURL URLWithString:@"http://www.qqcan.com/uploads/allimg/c120811/1344A300Z50-3T615.jpg"];
+        cell. timg.imageURL = [NSURL URLWithString:@"http://www.qqcan.com/uploads/allimg/c120811/1344A300Z50-3T615.jpg"];
         
         return cell;
     }

@@ -1198,6 +1198,11 @@
 		97A2CFB11D5D2CB1000429FC /* confirmdog2.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A2CFAE1D5D2CB1000429FC /* confirmdog2.png */; };
 		97A2CFB21D5D2CB1000429FC /* confirmdog3.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A2CFAF1D5D2CB1000429FC /* confirmdog3.png */; };
 		97A2CFB51D5D2CF9000429FC /* ConfirmDogReceivedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2CFB41D5D2CF9000429FC /* ConfirmDogReceivedVC.m */; };
+		97A2CFB81D5E1021000429FC /* GoodsSearchHeadV.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2CFB71D5E1021000429FC /* GoodsSearchHeadV.m */; };
+		97A2CFBB1D5E10BB000429FC /* MarketGoodsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2CFBA1D5E10BB000429FC /* MarketGoodsListVC.m */; };
+		97A2CFBE1D5E110C000429FC /* MarkSearchDetialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2CFBD1D5E110C000429FC /* MarkSearchDetialVC.m */; };
+		97A2CFC11D5E1682000429FC /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A2CFBF1D5E1682000429FC /* 1.png */; };
+		97A2CFC21D5E1682000429FC /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 97A2CFC01D5E1682000429FC /* 2.png */; };
 		97A6856419F8A1C9006BA3F9 /* SectionMSgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A6856319F8A1C9006BA3F9 /* SectionMSgViewController.m */; };
 		97A6856719F8A36A006BA3F9 /* ITTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A6856619F8A36A006BA3F9 /* ITTableViewCell.m */; };
 		97AA6C1E1AB8170800ED5F39 /* banner_button_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 97AA6C1D1AB8170800ED5F39 /* banner_button_close.png */; };
@@ -3135,6 +3140,14 @@
 		97A2CFAF1D5D2CB1000429FC /* confirmdog3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confirmdog3.png; sourceTree = "<group>"; };
 		97A2CFB31D5D2CF9000429FC /* ConfirmDogReceivedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmDogReceivedVC.h; sourceTree = "<group>"; };
 		97A2CFB41D5D2CF9000429FC /* ConfirmDogReceivedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmDogReceivedVC.m; sourceTree = "<group>"; };
+		97A2CFB61D5E1021000429FC /* GoodsSearchHeadV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsSearchHeadV.h; sourceTree = "<group>"; };
+		97A2CFB71D5E1021000429FC /* GoodsSearchHeadV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsSearchHeadV.m; sourceTree = "<group>"; };
+		97A2CFB91D5E10BB000429FC /* MarketGoodsListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketGoodsListVC.h; sourceTree = "<group>"; };
+		97A2CFBA1D5E10BB000429FC /* MarketGoodsListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketGoodsListVC.m; sourceTree = "<group>"; };
+		97A2CFBC1D5E110C000429FC /* MarkSearchDetialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkSearchDetialVC.h; sourceTree = "<group>"; };
+		97A2CFBD1D5E110C000429FC /* MarkSearchDetialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkSearchDetialVC.m; sourceTree = "<group>"; };
+		97A2CFBF1D5E1682000429FC /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		97A2CFC01D5E1682000429FC /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		97A6856219F8A1C9006BA3F9 /* SectionMSgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionMSgViewController.h; sourceTree = "<group>"; };
 		97A6856319F8A1C9006BA3F9 /* SectionMSgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionMSgViewController.m; sourceTree = "<group>"; };
 		97A6856519F8A36A006BA3F9 /* ITTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTableViewCell.h; sourceTree = "<group>"; };
@@ -5286,6 +5299,8 @@
 				72C649AF1A1AFB2700E9CB60 /* female_border.png */,
 				9763A5511A3979E2004E6B6D /* signCount.png */,
 				729F49031A383F4E00AB0372 /* signIn.png */,
+				97A2CFBF1D5E1682000429FC /* 1.png */,
+				97A2CFC01D5E1682000429FC /* 2.png */,
 				97A2CFAD1D5D2CB1000429FC /* confirmdog1.png */,
 				97A2CFAE1D5D2CB1000429FC /* confirmdog2.png */,
 				97A2CFAF1D5D2CB1000429FC /* confirmdog3.png */,
@@ -6596,6 +6611,8 @@
 		D87E2CB91D5AC3A000A50131 /* MarketDetailVC */ = {
 			isa = PBXGroup;
 			children = (
+				97A2CFB61D5E1021000429FC /* GoodsSearchHeadV.h */,
+				97A2CFB71D5E1021000429FC /* GoodsSearchHeadV.m */,
 				D87E2CBA1D5AC3A000A50131 /* CommodityModel.h */,
 				D87E2CBB1D5AC3A000A50131 /* CommodityModel.m */,
 				D87E2CBC1D5AC3A000A50131 /* MarketCollectionViewCell.h */,
@@ -6606,6 +6623,10 @@
 				D87E2CC11D5AC3A000A50131 /* MarketDetailHeadView.m */,
 				D87E2CC21D5AC3A000A50131 /* MarketDetailModel.h */,
 				D87E2CC31D5AC3A000A50131 /* MarketDetailModel.m */,
+				97A2CFB91D5E10BB000429FC /* MarketGoodsListVC.h */,
+				97A2CFBA1D5E10BB000429FC /* MarketGoodsListVC.m */,
+				97A2CFBC1D5E110C000429FC /* MarkSearchDetialVC.h */,
+				97A2CFBD1D5E110C000429FC /* MarkSearchDetialVC.m */,
 				D87E2CC41D5AC3A000A50131 /* MarketDetailVC.h */,
 				D87E2CC51D5AC3A000A50131 /* MarketDetailVC.m */,
 			);
@@ -7447,6 +7468,7 @@
 				D860FE661D33C2B300487E2D /* tupianyuyin@2x.png in Resources */,
 				724759551A3A867300189AEA /* samplebg.png in Resources */,
 				72B8CB1C1B61EB42000B03DE /* usercenter_scoreIcon.png in Resources */,
+				97A2CFC11D5E1682000429FC /* 1.png in Resources */,
 				974FA74919A498C50002867A /* yizan_ico.png in Resources */,
 				7229EE241A8C43C400EFB444 /* 90058.png in Resources */,
 				7228BD44196B8D99005502CE /* close_cha@2x.png in Resources */,
@@ -7528,6 +7550,7 @@
 				97972A0B1B2582A600BA05BD /* zhifangfangshi.png in Resources */,
 				971DC9521A8B663B004EF774 /* guanzhuNotLogin.png in Resources */,
 				150EFAC41B84676B003729A8 /* attention_login@2x.png in Resources */,
+				97A2CFC21D5E1682000429FC /* 2.png in Resources */,
 				720A7B4D1B1EF4BD00268A42 /* section_NO_9.png in Resources */,
 				72DDF3601B034FA700A59A66 /* search.png in Resources */,
 				D860FE761D33C2B300487E2D /* yangchongfenxiang-on@2x.png in Resources */,
@@ -7609,6 +7632,7 @@
 				724765F21A6CAA2E0038525A /* PagedFlowView.m in Sources */,
 				9763A5651A398762004E6B6D /* TouchPropagatedScrollView.m in Sources */,
 				72831CDA196A3FE200B9CA4C /* MagicalRecord+iCloud.m in Sources */,
+				97A2CFBB1D5E10BB000429FC /* MarketGoodsListVC.m in Sources */,
 				725C1901196D832400B2F150 /* Recorder.m in Sources */,
 				724FD3501B26E4D000D215A3 /* MyOrderViewConyroller.m in Sources */,
 				06A5DBB91D2CD196002A5159 /* JSONKeyMapper.m in Sources */,
@@ -7796,6 +7820,7 @@
 				9793DA8E1B184D2E0030CBB5 /* ClothDetailViewController.m in Sources */,
 				97BC6AA81B6716AD00028EED /* PromptView.m in Sources */,
 				72831CC5196A3FE200B9CA4C /* MagicalImportFunctions.m in Sources */,
+				97A2CFBE1D5E110C000429FC /* MarkSearchDetialVC.m in Sources */,
 				974203B11A5B80590064BB4F /* EmsgClient.m in Sources */,
 				97F363041980E29A0023D008 /* mztools.c in Sources */,
 				729EEDF21977C9EC000AFF58 /* EGOImageView.m in Sources */,
@@ -7886,6 +7911,7 @@
 				066B84BB1D1BBF52003AAD64 /* MASViewConstraint.m in Sources */,
 				977D9A0519B5996F00C0B8C9 /* OHASMarkupParserBase.m in Sources */,
 				72831CD1196A3FE200B9CA4C /* NSManagedObjectContext+MagicalObserving.m in Sources */,
+				97A2CFB81D5E1021000429FC /* GoodsSearchHeadV.m in Sources */,
 				063E29F01D21288300C3FD3F /* YZShoppingCarPageVC.m in Sources */,
 				7228BCAC196B87ED005502CE /* FIRFilter.cpp in Sources */,
 				9718A6DD1AB138A500C9DE27 /* MyTaskViewController.m in Sources */,

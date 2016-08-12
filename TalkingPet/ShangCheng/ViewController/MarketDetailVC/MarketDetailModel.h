@@ -13,7 +13,8 @@
 @property (nonatomic, copy) NSString *title;//描述
 @property (nonatomic, copy) NSString *subtitle;//商品id
 @property (nonatomic, copy) NSString *thumb;//背景图片
-@property (nonatomic,copy)NSArray *items;//展示的商品
+@property (nonatomic, copy) NSArray *items;//展示的商品
+@property (nonatomic, copy) NSString *link;//展示的商品请求数据连接
 
 +(NSArray *)infoModelWith:(NSDictionary *)dict;
 

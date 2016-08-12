@@ -13,6 +13,10 @@
 #import "MarketDetailModel.h"
 #import "YZGoodsDetailVC.h"
 #import "CommodityModel.h"
+
+#import "MarketGoodsListVC.h"
+#import "MarkSearchDetialVC.h"
+
 @interface MarketDetailVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic ,strong)UITableView *detailTableV;
@@ -25,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.title=@"优质宠物粮";
     
     self.navigationController.automaticallyAdjustsScrollViewInsets=YES;
@@ -41,7 +45,7 @@
 {
     
     __weak MarketDetailVC * weakSelf = self;
-
+    
     
     [NetServer getMarketDetailsuccess:^(id result) {
         
@@ -58,7 +62,7 @@
         
         
     }];
-
+    
     
     
     
@@ -74,14 +78,7 @@
     UIBarButtonItem *rightMoreItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toSearchGoods)];
     self.navigationItem.rightBarButtonItem = rightMoreItem;
     
-    UIImage *image1 = [UIImage imageNamed:@"shangcheng_back_icon@2x"];
-    image1 = [image1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:image1 style:UIBarButtonItemStyleDone target:self action:@selector(toBack)];
-    self.navigationItem.leftBarButtonItem = leftItem;
-    
-    
-    
-    
+    [self setBackButtonWithTarget:@selector(toBack)];
     
     self.detailTableV=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
     
@@ -91,13 +88,14 @@
     _headView=[[MarketDetailHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 150)];
     self.detailTableV.tableHeaderView=_headView;
     __weak MarketDetailVC * weakSelf = self;
-
-    self.headView.block=^(){
     
+    self.headView.block=^(){
+        
         NSLog(@"头部视图点击事件");
         YZGoodsDetailVC *detailVC = [[YZGoodsDetailVC alloc] init];
-        detailVC.goodsId = weakSelf.hotsell.gid;
-        detailVC.goodsName = weakSelf.hotsell.gid;
+        //        detailVC.link = weakSelf.hotsell.link;
+        detailVC.goodsId=weakSelf.hotsell.gid;
+        detailVC.goodsId=weakSelf.hotsell.name;
         detailVC.hideNaviBg = YES;
         [weakSelf.navigationController pushViewController:detailVC animated:YES];
     };
@@ -107,14 +105,13 @@
 }
 -(void)toSearchGoods
 {
-    NSLog(@"搜索预留接口");
+    MarkSearchDetialVC *vc=[[MarkSearchDetialVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 -(void)toBack
 {
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -140,7 +137,7 @@
     cell.model=_dataArr[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     __weak MarketDetailVC * weakSelf = self;
-
+    
     cell.block=^(CommodityModel *model)
     {
         if (model) {
@@ -149,12 +146,12 @@
             detailVC.goodsName = model.name;
             detailVC.hideNaviBg = YES;
             [weakSelf.navigationController pushViewController:detailVC animated:YES];
-
+            
         }
-        else
-        {
-            NSLog(@"加载更多数据");
-        }
+        //        else
+        //        {
+        //            NSLog(@"加载更多数据");
+        //        }
     };
     cell.backgroundColor=[UIColor whiteColor];
     return cell;
@@ -167,7 +164,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"专题cell点击事件-----");
+    NSLog(@"专题cell点击事件，加载更多数据-----");
+    
+    MarketGoodsListVC *marketVC=[[MarketGoodsListVC alloc] init];
+    marketVC.link=[self.dataArr[indexPath.row] link];
+    [self.navigationController pushViewController:marketVC animated:YES];
+    
 }
 
 
@@ -179,17 +181,12 @@
         return headView;;
     }
     return nil;
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section==0) {
-        return 0;
-
-    }
     return  0;
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -199,17 +196,17 @@
     
     
     
-
+    
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -81,6 +81,48 @@
             make.left.mas_equalTo(self).mas_offset(10);
             make.right.mas_equalTo(self).mas_offset(-10);
         }];
+        
+        NSArray * xcImagvArr = [NSArray arrayWithObjects:@"1",@"2", nil];
+        NSArray * xcTitleArr = [NSArray arrayWithObjects:@"正品保障",@"一线品牌", nil];
+        
+        for (int i = 0; i<2; i++) {
+            UIView * xcView = [[UIView alloc] initWithFrame:CGRectZero];
+            [self addSubview:xcView];
+            UIImageView * aimgv = [[UIImageView alloc] initWithFrame:CGRectZero];
+            aimgv.image = [UIImage imageNamed:xcImagvArr[i]];
+            [xcView addSubview:aimgv];
+            UILabel * tL = [[UILabel alloc] initWithFrame:CGRectZero];
+            tL.backgroundColor = [UIColor clearColor];
+            tL.font = [UIFont systemFontOfSize:10];
+            tL.textColor = CommonGreenColor;
+            tL.adjustsFontSizeToFitWidth = YES;
+            [xcView addSubview:tL];
+            tL.text = [xcTitleArr objectAtIndex:i];
+            
+            [xcView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.priceLb).mas_offset(50*(i+1)+70*i);
+                make.top.mas_equalTo(contentLb.mas_bottom).mas_offset(0);
+                make.height.mas_equalTo(20);
+                make.width.mas_equalTo(80);
+            }];
+            
+            [aimgv mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(2);
+                make.left.mas_equalTo(0);
+                make.height.mas_equalTo(16);
+                make.width.mas_equalTo(16);
+            }];
+            
+            [tL mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(0);
+                make.left.mas_equalTo(aimgv.mas_right).mas_offset(4);
+                make.height.mas_equalTo(20);
+                make.width.mas_equalTo(60);
+            }];
+        }
+        
+        
+        
     }
     return self;
 }

@@ -27,15 +27,12 @@
         [self.tagBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
         [self.tagBtn setFrame:CGRectMake(15, 15, 80, 20)];
         [self.contentView addSubview:self.tagBtn];
-
-        [self.tagBtn  setTitleEdgeInsets:UIEdgeInsetsMake(1, 15, 0, 0)];
-        [self.tagBtn  setBackgroundColor:[UIColor colorWithRed:182/255.0 green:178/255.0 blue:251/255.0 alpha:1]];
-        self.tagBtn .layer.cornerRadius = 8;
-        self.tagBtn .layer.masksToBounds = YES;
         
-        UIImageView * timg = [[UIImageView alloc] initWithFrame:CGRectMake(6, 4, 14, 12)];
-        [timg setImage:[UIImage imageNamed:@"tagImg"]];
-        [self.tagBtn addSubview:timg];
+        [self.tagBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _timg = [[ EGOImageView  alloc]initWithFrame:CGRectMake(10, 25, 30, 20)];
+        _timg.backgroundColor =[UIColor redColor];
+        [_timg setImage:[UIImage imageNamed:@"tagImg"]];
+        [self.contentView addSubview:_timg];
         if (ScreenWidth<=320) {
             self.disNum = 4;
         }
@@ -58,7 +55,7 @@
     [self.tagBtn setTitle:[self.tagDict objectForKey:@"name"] forState:UIControlStateNormal];
     
     CGSize tagSize = [[self.tagDict objectForKey:@"name"]sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(120, 20)];
-    [self.tagBtn setFrame:CGRectMake(15, 15, tagSize.width+30, 20)];
+    [self.tagBtn setFrame:CGRectMake(40, 25, tagSize.width+30, 20)];
     
     NSArray * listArray = [self.tagDict objectForKey:@"petalks"];
     if (listArray.count<=0) {
@@ -74,8 +71,8 @@
     }
     
     
-
-
+    
+    
 }
 - (void)awakeFromNib
 {
@@ -85,7 +82,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

@@ -14,5 +14,5 @@
 @property (nonatomic,assign) int disNum;
 @property (nonatomic,strong)UIImageView * bgImg;
 @property (nonatomic,assign) float h;
-//@property (nonatomic,strong) EGOImageView * imagev1;
+@property (nonatomic,strong) EGOImageView * timg;
 @end

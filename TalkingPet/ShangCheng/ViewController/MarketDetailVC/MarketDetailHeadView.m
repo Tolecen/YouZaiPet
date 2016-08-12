@@ -26,8 +26,7 @@
         
         CGFloat with=150;
         _bgimg=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dog_placeholder"]];
-        _bgimg.frame=CGRectMake(10, 10, with, frame.size.height-20);
-//        _bgimg.backgroundColor=[UIColor blueColor];
+        _bgimg.frame=CGRectMake(20, 20, with-40, frame.size.height-40);
         
         
         [self addSubview:_bgimg];
@@ -39,13 +38,13 @@
         
         
         UIButton *bgbtn=[UIButton buttonWithType:UIButtonTypeSystem];
-        bgbtn.frame=CGRectMake(0, 0, 50, 50);
+        bgbtn.frame=CGRectMake(10, 10, 50, 50);
         bgbtn.layer.masksToBounds=YES;
         bgbtn.layer.cornerRadius=25;
         [bgbtn setTitle:@"热销" forState:UIControlStateNormal];
         [bgbtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         bgbtn.backgroundColor=[UIColor colorWithRed:255/255.0 green:205/255.0 blue:51/255.0 alpha:1];
-        [_bgimg addSubview:bgbtn];
+        [self addSubview:bgbtn];
         
         
         
@@ -53,14 +52,14 @@
         
         
         _titileL=[[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_bgimg.frame)+20, 15, ScreenWidth-190, 20)];
-
+        
         _titileL.text=@"网红汪都在吃的宠物粮";
         [self addSubview:_titileL];
         
         _subtitleL=[[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_bgimg.frame)+20, 35, ScreenWidth-190, 40)];
         _subtitleL.adjustsFontSizeToFitWidth=YES;
         _subtitleL.text=@"Natural Balance 美国雪山 L.I.D抗郭明系列 3 KG";
-
+        
         _subtitleL.numberOfLines=2;
         _subtitleL.textColor=[UIColor lightGrayColor];
         _subtitleL.font=[UIFont systemFontOfSize:10];
@@ -76,7 +75,7 @@
         
         self.price=[[UILabel alloc] initWithFrame:CGRectMake(_subtitleL.center.x+40, 80, 50, 20)];
         [self addSubview:_price];
-
+        
         
         
         
@@ -91,7 +90,7 @@
         self.turePrice.textColor=[UIColor redColor];
         self.turePrice.font=[UIFont systemFontOfSize:18];
         [self addSubview:_turePrice];
-
+        
         
         
         
@@ -129,11 +128,11 @@
     NSString *oldPrice=[NSString stringWithFormat:@"￥%lld",model.sell_price];
     NSAttributedString *attrStr =
     [[NSAttributedString alloc]initWithString:oldPrice
-                                  attributes:
-  @{NSFontAttributeName:[UIFont systemFontOfSize:10.f],
-    NSForegroundColorAttributeName:[UIColor lightGrayColor],
-    NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle|NSUnderlinePatternSolid),
-    NSStrikethroughColorAttributeName:[UIColor lightGrayColor]}];
+                                   attributes:
+     @{NSFontAttributeName:[UIFont systemFontOfSize:10.f],
+       NSForegroundColorAttributeName:[UIColor lightGrayColor],
+       NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle|NSUnderlinePatternSolid),
+       NSStrikethroughColorAttributeName:[UIColor lightGrayColor]}];
     [self.price setAttributedText:attrStr];
     
     
@@ -157,7 +156,7 @@
     
     
     
-    [self.bgimg sd_setImageWithURL:[NSURL URLWithString:model.thumb] placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];    
+    [self.bgimg sd_setImageWithURL:[NSURL URLWithString:model.thumb] placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
     
     _btn.hidden=NO;
     

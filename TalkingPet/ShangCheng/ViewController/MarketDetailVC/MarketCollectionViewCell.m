@@ -20,6 +20,7 @@
 @end
 @implementation MarketCollectionViewCell
 - (instancetype)initWithFrame:(CGRect)frame {
+    
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
         
@@ -27,7 +28,7 @@
         self.labe.font=[UIFont systemFontOfSize:15];
         self.labe.center=CGPointMake(frame.size.width/2, frame.size.height/2);
         self.labe.text=@"加载更多";
-        
+        self.labe.textAlignment=NSTextAlignmentCenter;
         self.labe.hidden=YES;
         [self addSubview:self.labe];
         
@@ -42,7 +43,7 @@
         
         cardView.layer.borderColor=[UIColor colorWithRed:240/250.0 green:240/250.0 blue:240/250.0 alpha:1].CGColor;
         [self.contentView addSubview:cardView];
-
+        
         [cardView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(self.contentView).insets(UIEdgeInsetsZero);
         }];
@@ -122,6 +123,8 @@
     
     [self.thumbImageV sd_setImageWithURL:[NSURL URLWithString:model.thumb]placeholderImage:[UIImage imageNamed:@"dog_goods_placeholder"]];
     self.titleLb.text=model.subname;
+    //    self.brandLb.text=model.addtime;
+    
     switch (model.sale_flag) {
         case 0:
             self.priceLb.text=[NSString stringWithFormat:@"￥%lld",model.sell_price];
@@ -135,6 +138,12 @@
         case 3:
             self.priceLb.text=[NSString stringWithFormat:@"￥%lld",model.sell_price-model.special_price];
             break;
+            
+            
+            
+            
+            
+            
         default:
             break;
     }
@@ -142,7 +151,7 @@
 -(void)hiedenLabel
 {
     self.labe.hidden=NO;
-
+    
 }
 
 @end

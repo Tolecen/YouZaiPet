@@ -58,7 +58,7 @@
                                            alpha:1.f];
         [self addSubview:nameLb];
         self.nameLb = nameLb;
-
+        
         UIImageView *sexImageV = [[UIImageView alloc] init];
         sexImageV.image = [UIImage imageNamed:@"female_icon"];
         [self addSubview:sexImageV];
@@ -67,13 +67,13 @@
         UILabel *dogTypeLb = [[UILabel alloc] initWithFrame:CGRectZero];
         dogTypeLb.font = [UIFont systemFontOfSize:14];
         dogTypeLb.textColor = [UIColor colorWithRed:(102 / 255.f)
-                                           green:(102 / 255.f)
-                                            blue:(102 / 255.f)
-                                           alpha:1.f];
+                                              green:(102 / 255.f)
+                                               blue:(102 / 255.f)
+                                              alpha:1.f];
         [self addSubview:dogTypeLb];
         self.dogTypeLb = dogTypeLb;
-
-
+        
+        
         UILabel *daysNumberLb = [[UILabel alloc] initWithFrame:CGRectZero];
         daysNumberLb.font = [UIFont systemFontOfSize:10.f];
         daysNumberLb.textColor = [UIColor colorWithRed:(181 / 255.f)
@@ -82,7 +82,7 @@
                                                  alpha:1.f];
         [self addSubview:daysNumberLb];
         self.daysNumberLb = daysNumberLb;
-
+        
         UILabel *priceLb = [[UILabel alloc] initWithFrame:CGRectZero];
         priceLb.font = [UIFont systemFontOfSize:16];
         priceLb.adjustsFontSizeToFitWidth = YES;
@@ -105,7 +105,7 @@
         birthdayLb.adjustsFontSizeToFitWidth = YES;
         [self addSubview:birthdayLb];
         self.birthdayLb = birthdayLb;
-
+        
         [flowView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.mas_equalTo(self).mas_offset(0);
             make.width.height.mas_equalTo(ScreenWidth);
@@ -152,10 +152,10 @@
             make.top.mas_equalTo(sexImageV.mas_centerY).mas_offset(0);
         }];
         
-        NSArray * xcImagvArr = [NSArray arrayWithObjects:@"baozhangqi",@"yimiao",@"chunzhong", nil];
-        NSArray * xcTitleArr = [NSArray arrayWithObjects:@"质保15天",@"疫苗3针",@"纯种犬保障", nil];
+        NSArray * xcImagvArr = [NSArray arrayWithObjects:@"baozhangqi",@"yimiao", nil];
+        NSArray * xcTitleArr = [NSArray arrayWithObjects:@"质保15天",@"疫苗3针", nil];
         
-        for (int i = 0; i<3; i++) {
+        for (int i = 0; i<2; i++) {
             UIView * xcView = [[UIView alloc] initWithFrame:CGRectZero];
             [self addSubview:xcView];
             UIImageView * aimgv = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -206,7 +206,7 @@
         [self.baozhangView addSubview:lineV];
         
         NSArray * xcImagvArr2 = [NSArray arrayWithObjects:@"goutiaojian",@"goutiaojian",@"goutiaojian", nil];
-        NSArray * xcTitleArr2 = [NSArray arrayWithObjects:@"支付安全",@"运输风险保障",@"饲养指导", nil];
+        NSArray * xcTitleArr2 = [NSArray arrayWithObjects:@"企业认证 担保交易",@"专车送狗上门",@"免费行业咨询", nil];
         
         [lineV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(0);
@@ -261,7 +261,7 @@
                 make.width.mas_equalTo(60);
             }];
         }
-
+        
         
     }
     return self;
@@ -277,14 +277,14 @@
     self.dogTypeLb.text = detailModel.productType.typeName;
     self.birthdayLb.text = detailModel.birthdayString;
     self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:detailModel.sellPrice]];
-
+    
     NSString *daysNumberString = [NSString stringWithFormat:@"降临地球 %ld 天", (unsigned long)detailModel.birtydayDays];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:daysNumberString];
     [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.f], NSForegroundColorAttributeName: self.daysNumberLb.textColor} range:NSMakeRange(0, 4)];
     [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.f], NSForegroundColorAttributeName: CommonGreenColor} range:NSMakeRange(4, daysNumberString.length - 5)];
     [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.f], NSForegroundColorAttributeName: self.daysNumberLb.textColor} range:NSMakeRange(daysNumberString.length - 1, 1)];
     self.daysNumberLb.attributedText = attr;
-
+    
     if (self.detailModel.images && self.detailModel.images.count > 1) {
         self.flowView.pageControl.numberOfPages = self.detailModel.images.count;
         self.flowView.pageControl.hidden = NO;

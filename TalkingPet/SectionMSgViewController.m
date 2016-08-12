@@ -37,6 +37,7 @@
     self.msgTableV.rowHeight = 50;
     //self.msgTableV.showsVerticalScrollIndicator = NO;
     self.msgTableV.cellLayoutMarginsFollowReadableWidth = NO;
+    self.msgTableV.separatorStyle =    UITableViewCellSeparatorStyleNone;
     
     [self.view addSubview:self.msgTableV];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SectionmsgNotiReceived) name:@"SectionmsgNotiReceived" object:nil];
@@ -519,7 +520,7 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         else{
-            msgV.title = @"喜欢";
+            msgV.title = @"被喜欢";
             msgV.msgType = MsgTypeF;
             NSString * unreadCount = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"needMetionCountF%@",[UserServe sharedUserServe].userID]];
             if ([unreadCount intValue]>0) {
@@ -562,6 +563,7 @@
     //        return;
     //    }
     else{
+        
         msgV.title = @"通知";
         
         msgV.msgType = MsgTypeSys;
