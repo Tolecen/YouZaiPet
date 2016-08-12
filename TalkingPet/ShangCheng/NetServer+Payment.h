@@ -61,4 +61,6 @@ failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 + (void)getMarketDetailsuccess:(void (^)(id result))success
                        failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
++ (void)getMarketDetailGoodsWithlink:(NSString *)link success:(void (^)(id result))success
+                             failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 @end

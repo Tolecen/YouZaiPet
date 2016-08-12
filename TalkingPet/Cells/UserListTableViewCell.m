@@ -44,15 +44,16 @@
         
         self.commentNameL = [[UILabel alloc] initWithFrame:CGRectMake(70, 20, ScreenWidth-70-10-72-5, 20)];
         [self.commentNameL setBackgroundColor:[UIColor clearColor]];
-        [self.commentNameL setFont:[UIFont systemFontOfSize:17]];
+        self.commentNameL.textColor = [UIColor colorWithR:120 g:120 b:120 alpha:1];
+        [self.commentNameL setFont:[UIFont systemFontOfSize:15]];
         [self.contentView addSubview:self.commentNameL];
         
-        //        self.talkNoL = [[UILabel alloc] initWithFrame:CGRectMake(70, 40, 100, 20)];
-        //        [self.talkNoL setBackgroundColor:[UIColor clearColor]];
-        //        self.talkNoL.textColor = [UIColor grayColor];
-        //        [self.talkNoL setFont:[UIFont systemFontOfSize:14]];
-        //        [self.talkNoL setText:@"发布:20"];
-        //        [self.contentView addSubview:self.talkNoL];
+                self.talkNoL = [[UILabel alloc] initWithFrame:CGRectMake(70, 40, 100, 20)];
+                [self.talkNoL setBackgroundColor:[UIColor clearColor]];
+                self.talkNoL.textColor = [UIColor grayColor];
+                [self.talkNoL setFont:[UIFont systemFontOfSize:14]];
+                [self.talkNoL setText:@"LV.0"];
+                [self.contentView addSubview:self.talkNoL];
         //
         //        self.fansNoL = [[UILabel alloc] initWithFrame:CGRectMake(180, 40, 100, 20)];
         //        [self.fansNoL setBackgroundColor:[UIColor clearColor]];
@@ -61,10 +62,10 @@
         //        [self.fansNoL setText:@"粉丝:20"];
         //        [self.contentView addSubview:self.fansNoL];
         //
-        //        self.relationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        //        [self.relationBtn setFrame:CGRectMake(ScreenWidth-10-72, 23, 72, 24.5)];
-        //        [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu0"] forState:UIControlStateNormal];
-        //        [self.relationBtn setTitle:@"+关注" forState:UIControlStateNormal];
+                self.relationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                [self.relationBtn setFrame:CGRectMake(ScreenWidth-10-72, 23, 72, 24.5)];
+                [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu0"] forState:UIControlStateNormal];
+//                [self.relationBtn setTitle:@"+关注" forState:UIControlStateNormal];
         [self.relationBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
         [self.relationBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
         if (listType==2) {
@@ -87,10 +88,12 @@
     [super layoutSubviews];
     self.commentNameL.text = [self.petDict objectForKey:@"nickname"];
     self.commentAvatarV.imageURL = [NSURL URLWithString:[[self.petDict objectForKey:@"head"] stringByAppendingString:@"?imageView2/2/w/80"]];
-    if ([[self.petDict objectForKey:@"counter"] isKindOfClass:[NSDictionary class]]) {
-        self.talkNoL.text = [NSString stringWithFormat:@"发布:%@",[[self.petDict objectForKey:@"counter"] objectForKey:@"issue"]];
-        self.fansNoL.text = [NSString stringWithFormat:@"粉丝:%@",[[self.petDict objectForKey:@"counter"] objectForKey:@"fans"]];
-    }
+//    if ([[self.petDict objectForKey:@"counter"] isKindOfClass:[NSDictionary class]]) {
+//        self.talkNoL.text = [NSString stringWithFormat:@"发布:%@",[[self.petDict objectForKey:@"counter"] objectForKey:@"issue"]];
+//        self.fansNoL.text = [NSString stringWithFormat:@"粉丝:%@",[[self.petDict objectForKey:@"counter"] objectForKey:@"fans"]];
+//    }
+
+    self.talkNoL.text = [NSString stringWithFormat:@"LV.%d",self.petDict[@"grade"]?[[self.petDict[@"grade"] stringByReplacingOccurrencesOfString:@"DJ" withString:@""] intValue]:0];
     
     self.relationShip = [self.petDict objectForKey:@"rs"];
     //    self.darenV.hidden = [[self.petDict objectForKey:@"star"] isEqualToString:@"1"]?NO:YES;

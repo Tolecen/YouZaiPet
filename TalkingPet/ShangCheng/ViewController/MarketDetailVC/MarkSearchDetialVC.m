@@ -89,23 +89,23 @@
 -(void)loadData
 {
     __weak MarkSearchDetialVC *weakself=self;
-//    [NetServer getMarketDetailGoodsWithlink:self.link success:^(id result) {
-//        NSDictionary *dic=(NSDictionary*)result;
-//        NSMutableArray *mArr=[NSMutableArray array];
-//        for (NSDictionary *cdict in dic[@"data"]) {
-//            CommodityModel *cdmodel=[[CommodityModel alloc] init];
-//            [cdmodel setValuesForKeysWithDictionary:cdict];
-//            [mArr addObject:cdmodel];
-//        }
-//        weakself.items=mArr;
-//        [weakself sorteditemWithindex:0];
-//        weakself.titleArr=[weakself sorttitleArr];
-//        [weakself.faceCollectionV reloadData];
-//        [weakself.collectionView reloadData];
-//        
-//    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-//        
-//    }];
+    [NetServer getMarketDetailGoodsWithlink:self.link success:^(id result) {
+        NSDictionary *dic=(NSDictionary*)result;
+        NSMutableArray *mArr=[NSMutableArray array];
+        for (NSDictionary *cdict in dic[@"data"]) {
+            CommodityModel *cdmodel=[[CommodityModel alloc] init];
+            [cdmodel setValuesForKeysWithDictionary:cdict];
+            [mArr addObject:cdmodel];
+        }
+        weakself.items=mArr;
+        [weakself sorteditemWithindex:0];
+        weakself.titleArr=[weakself sorttitleArr];
+        [weakself.faceCollectionV reloadData];
+        [weakself.collectionView reloadData];
+        
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        
+    }];
 }
 
 -(NSArray *)sorttitleArr
@@ -261,33 +261,33 @@
     
     __weak MarkSearchDetialVC *weakself=self;
     
-//    [NetServer getMarketDetailGoodsWithlink:self.link success:^(id result) {
-//        NSDictionary *dic=(NSDictionary*)result;
-//        NSMutableArray *mArr=[NSMutableArray array];
-//        for (NSDictionary *cdict in dic[@"data"]) {
-//            CommodityModel *cdmodel=[[CommodityModel alloc] init];
-//            [cdmodel setValuesForKeysWithDictionary:cdict];
-//            [mArr addObject:cdmodel];
-//        }
-//        
-//        self.items=mArr;
-//        
-//        if (refresh) {
-//            [weakself.collectionView headerEndRefreshing];
-//        } else {
-//            [weakself.collectionView footerEndRefreshing];
-//        }
-//        
-//        [weakself sorteditemWithindex:0];
-//        [weakself.collectionView reloadData];
-//        
-//    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-//        if (refresh) {
-//            [weakself.collectionView headerEndRefreshing];
-//        } else {
-//            [weakself.collectionView footerEndRefreshing];
-//        }
-//    }];
+    [NetServer getMarketDetailGoodsWithlink:self.link success:^(id result) {
+        NSDictionary *dic=(NSDictionary*)result;
+        NSMutableArray *mArr=[NSMutableArray array];
+        for (NSDictionary *cdict in dic[@"data"]) {
+            CommodityModel *cdmodel=[[CommodityModel alloc] init];
+            [cdmodel setValuesForKeysWithDictionary:cdict];
+            [mArr addObject:cdmodel];
+        }
+        
+        self.items=mArr;
+        
+        if (refresh) {
+            [weakself.collectionView headerEndRefreshing];
+        } else {
+            [weakself.collectionView footerEndRefreshing];
+        }
+        
+        [weakself sorteditemWithindex:0];
+        [weakself.collectionView reloadData];
+        
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        if (refresh) {
+            [weakself.collectionView headerEndRefreshing];
+        } else {
+            [weakself.collectionView footerEndRefreshing];
+        }
+    }];
     
     
     
