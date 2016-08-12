@@ -25,8 +25,7 @@
 @property (nonatomic, weak) YZShoppingCarBottomBar  *bottomBar;
 @property (nonatomic, weak) UITableView *tableView;
 
-@property (nonatomic, copy) NSArray *orders;
-@property (nonatomic, assign) NSInteger orderCount;
+
 @property (nonatomic, strong) ReceiptAddress *address;
 
 @property (nonatomic, assign) NSInteger paySelectedIndex;
@@ -83,9 +82,13 @@
     [self setBackButtonWithTarget:@selector(inner_Pop:)];
     self.paySelectedIndex = 0;
     
-    NSInteger count = 0;
-    self.orders = [[YZShoppingCarHelper instanceManager] orderMergeSelectDogsAndGoodsWithCount:&count];
-    self.orderCount = count;
+    
+    if (!self.orders) {
+        NSInteger count = 0;
+        self.orders = [[YZShoppingCarHelper instanceManager] orderMergeSelectDogsAndGoodsWithCount:&count];
+        self.orderCount = count;
+    }
+    
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     tableView.delegate = self;

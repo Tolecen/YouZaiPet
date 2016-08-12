@@ -248,7 +248,7 @@
     
     [SVProgressHUD showWithStatus:@"授权中..."];
     if (!_tencentOAuth) {
-        _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"1102327672"  andDelegate:self];
+        _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"1105514767"  andDelegate:self];
         //        _tencentOAuth.localAppId = @"QQ41B42F78";
     }
     
@@ -325,7 +325,7 @@
 -(void)getWXTokenByCode:(NSString *)oauthCode
 {
     [SVProgressHUD showWithStatus:@"授权中..."];
-    NSString * reqPath = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxb62f795f2bc6b770&secret=dda1c576f7eb296d7a62eb0a4cc7ed2c&code=%@&grant_type=authorization_code",oauthCode];
+    NSString * reqPath = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx7bbb7978950d96a1&secret=c2f03d85fe947d7f921c1ff4edd53dc5&code=%@&grant_type=authorization_code",oauthCode];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:reqPath]];
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     [httpClient getPath:@"" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -405,9 +405,10 @@
 -(void)checkUsernameWithDict:(NSDictionary *)infoDict
 {
     NSMutableDictionary * regDict = [NetServer commonDict];
-    [regDict setObject:@"account" forKey:@"command"];
-    [regDict setObject:[infoDict objectForKey:@"id"] forKey:@"loginName"];
-    [regDict setObject:@"checkLoginName"forKey:@"options"];
+        [regDict setObject:@"account" forKey:@"command"];
+    [regDict setObject:[infoDict objectForKey:@"id"] forKey:@"username"];
+    [regDict setObject:@"checkUsername"forKey:@"options"];
+    
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"register success info:%@",responseObject);
         if([[responseObject objectForKey:@"value"] isEqualToString:@"false"])
@@ -427,7 +428,7 @@
             [self.navigationController pushViewController:newUserVC animated:YES];
             newUserVC.username = [infoDict objectForKey:@"id"];
             newUserVC.password = [self calPasswordWithUserId:[infoDict objectForKey:@"id"]];
-            newUserVC.nickname = [[infoDict objectForKey:@"name"] stringByAppendingString:@"的宝贝"];
+            newUserVC.nickname = [infoDict objectForKey:@"name"];
             if ([[infoDict objectForKey:@"id"] hasPrefix:@"sina"]) {
                 newUserVC.userPlatform = @"sina";
             }

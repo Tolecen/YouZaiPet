@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface YZOrderConfimViewController : BaseViewController
-
+@property (nonatomic, copy) NSArray *orders;
+@property (nonatomic, assign) NSInteger orderCount;
 @end

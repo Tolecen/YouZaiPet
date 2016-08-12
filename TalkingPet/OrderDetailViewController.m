@@ -16,7 +16,7 @@
 #import "OrderHeaderView.h"
 #import "OrderFooterView.h"
 #import "NetServer+Payment.h"
-
+#import "YZOrderConfimViewController.h"
 @interface WXRLabelsCell : UITableViewCell
 {
     UILabel * label1;
@@ -764,7 +764,10 @@
         }];
     }
     else if ([title isEqualToString:@"立刻付款"]){
-        
+        YZOrderConfimViewController *viewC = [[YZOrderConfimViewController alloc] init];
+        viewC.orders = self.myOrder.goods;
+        viewC.orderCount = [self.myOrder.total_amount integerValue];
+        [self.navigationController pushViewController:viewC animated:YES];
     }
     else if ([title isEqualToString:@"确认收货"]){
         if (!self.myOrder.confirmUrl) {
