@@ -18,7 +18,8 @@
 @interface ConfirmDogReceivedVC : BaseViewController<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic,strong)OrderYZList * myOrder;
 @property (nonatomic,strong)UITableView * tableView;
-
+@property (nonatomic,strong)UIView * lk;
+@property (nonatomic,strong)UIView * lk2;
 @property (nonatomic,strong)UIView * footerV;
 @property (nonatomic,strong)UILabel * orderNoL;
 @property (nonatomic,strong)UILabel * orderTimeL;

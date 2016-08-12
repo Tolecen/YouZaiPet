@@ -9,83 +9,78 @@
 #import "ConfirmDogReceivedVC.h"
 #import "SVProgressHUD.h"
 @implementation ConfirmDogReceivedVC
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title = @"确认收货";
-    }
-    return self;
-}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+     self.title = @"确认收货";
+    [self setBackButtonWithTarget:@selector(inner_Pop:)];
     self.view.backgroundColor = [UIColor colorWithR:240 g:240 b:240 alpha:1];
     
-    UIView * lk = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 60)];
-    lk.backgroundColor = [UIColor colorWithR:255 g:188 b:167 alpha:1];
+    self.lk = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 60)];
+    self.lk.backgroundColor = [UIColor colorWithR:255 g:188 b:167 alpha:1];
     
-    UILabel * hhh = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth, 40)];
+    UILabel * hhh = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth-20, 40)];
     hhh.backgroundColor = [UIColor clearColor];
     hhh.textColor = [UIColor whiteColor];
     hhh.font = [UIFont systemFontOfSize:14];
     hhh.numberOfLines = 2;
     hhh.lineBreakMode = NSLineBreakByCharWrapping;
     hhh.text = @"上传照片提交成功后，犬舍会在24小时内确认狗狗信息。\n信息核对成功后即可开启相对应质保哦~";
-    [lk addSubview:hhh];
+    [self.lk addSubview:hhh];
     
     
-    UIView * lk2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 130)];
-    lk2.backgroundColor = self.view.backgroundColor;
+    self.lk2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 130)];
+    self.lk2.backgroundColor = self.view.backgroundColor;
     
     UILabel * hhh2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 120, 20)];
     hhh2.backgroundColor = [UIColor clearColor];
     hhh2.textColor = [UIColor lightGrayColor];
     hhh2.font = [UIFont systemFontOfSize:14];
     hhh2.text = @"上传狗狗照片";
-    [lk2 addSubview:hhh2];
+    [self.lk2 addSubview:hhh2];
     
     UILabel * hhh3 = [[UILabel alloc] initWithFrame:CGRectMake(130, 10, 200, 20)];
     hhh3.backgroundColor = [UIColor clearColor];
     hhh3.textColor = [UIColor orangeColor];
     hhh3.font = [UIFont systemFontOfSize:12];
     hhh3.text = @"请按要求上传高清的狗狗相片哦~";
-    [lk2 addSubview:hhh3];
+    [self.lk2 addSubview:hhh3];
     
     float sep = (ScreenWidth-40-270)/2;
     self.btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.btn1 setFrame:CGRectMake(20, 40, 90, 90)];
     [self.btn1 setBackgroundImage:[UIImage imageNamed:@"confirmdog1"] forState:UIControlStateNormal];
     self.btn1.tag = 1;
-    [lk2 addSubview:self.btn1];
+    [self.lk2 addSubview:self.btn1];
     [self.btn1 addTarget:self action:@selector(selectPic:) forControlEvents:UIControlEventTouchUpInside];
     
     self.btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.btn2 setFrame:CGRectMake(20+90+sep, 40, 90, 90)];
     [self.btn2 setBackgroundImage:[UIImage imageNamed:@"confirmdog2"] forState:UIControlStateNormal];
     self.btn2.tag = 2;
-    [lk2 addSubview:self.btn2];
+    [self.lk2 addSubview:self.btn2];
     [self.btn1 addTarget:self action:@selector(selectPic:) forControlEvents:UIControlEventTouchUpInside];
     
     self.btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.btn3 setFrame:CGRectMake(20+90*2+sep*2, 40, 90, 90)];
     [self.btn3 setBackgroundImage:[UIImage imageNamed:@"confirmdog3"] forState:UIControlStateNormal];
     self.btn3.tag = 3;
-    [lk2 addSubview:self.btn3];
+    [self.lk2 addSubview:self.btn3];
     [self.btn1 addTarget:self action:@selector(selectPic:) forControlEvents:UIControlEventTouchUpInside];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight-40) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - navigationBarHeight-40) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
-    
-    _tableView.tableHeaderView = lk;
-    _tableView.tableFooterView = lk2;
+    _tableView.tableHeaderView = self.lk;
+    _tableView.tableFooterView = self.lk2;
+
     
     UIButton * submitBtn= [UIButton buttonWithType:UIButtonTypeCustom];
-    [submitBtn setFrame:CGRectMake(0, ScreenHeight-40 , ScreenWidth, 40)];
+    [submitBtn setFrame:CGRectMake(0, ScreenHeight-40-navigationBarHeight , ScreenWidth, 40)];
     [submitBtn setBackgroundColor:CommonGreenColor];
     [submitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [submitBtn setTitle:@"提交" forState:UIControlStateNormal];
@@ -95,6 +90,16 @@
     
 
 
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+}
+
+-(void)inner_Pop:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)submitInfo:(UIButton *)sender
