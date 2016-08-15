@@ -36,9 +36,9 @@
 
 @property (nonatomic,assign)NSInteger pageIndex;// 页数下标@
 
-@property (nonatomic ,copy)NSString *searchString;//搜索文字
+@property (nonatomic ,copy)NSString * searchString;//搜索文字
 
-@property (nonatomic ,copy)NSString *conditionStr;//排序条件
+@property (nonatomic ,copy)NSString * conditionStr;//排序条件
 
 @property (nonatomic,assign)NSInteger tot;//总条数
 @property (nonatomic,assign)NSInteger typeid;//分类
@@ -92,10 +92,10 @@
     [parameters setObject:@"goods" forKey:@"skey"];
     [parameters setObject:@"20" forKey:@"psize"];
     [parameters setObject:@(self.pageIndex) forKey:@"p"];
-    [parameters setObject:self.tot==NSIntegerMax?@0:@(self.tot) forKey:@"tot"];
+    [parameters setObject:@(self.tot) forKey:@"tot"];
     [parameters setObject:@(self.typeid) forKey:@"type"];
-    [parameters setObject:self.conditionStr?self.conditionStr:@"time_desc" forKey:@"orderby"];
-    [parameters setObject:self.searchString?self.searchString:@"" forKey:@"keywords"];
+    [parameters setObject:_isLatest?@"sales_desc":@"time_desc" forKey:@"orderby"];
+    [parameters setObject:[self.searchString length]>0?self.searchString:@"" forKey:@"keywords"];
     __weak MarkSearchDetialVC *weakself=self;
     [NetServer getDogGoodsDetailInfoWithParameters:parameters success:^(id responseObject) {
         NSLog(@"json=======%@",responseObject);
@@ -180,18 +180,17 @@
     _headerView.block=^(NSInteger index)
     {
         
-        [weakself sorteditemWithindex:index];
+        [weakself loaddataWithindex:index];
         [weakself.collectionView reloadData];
         
     };
     
     [self.view addSubview:_headerView];
     
-    
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 10.f;
     flowLayout.minimumLineSpacing = 10.f;
-    UIEdgeInsets sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    UIEdgeInsets sectionInset = UIEdgeInsetsMake(1, 10, 1, 10);
     flowLayout.sectionInset = sectionInset;
     CGFloat width = ([UIScreen mainScreen].bounds.size.width - sectionInset.left - sectionInset.right - 10) / 2;
     flowLayout.itemSize = CGSizeMake(width,
@@ -219,29 +218,27 @@
 }
 
 
--(void)sorteditemWithindex:(NSInteger)index
+-(void)loaddataWithindex:(NSInteger)index
 {
     switch (index) {
-        case 0:
-            if (_isLatest) {
-                break;
-            }
+        case 0:{
+            
             _isLatest=YES;
             self.tot=0;
             self.pageIndex=0;
             self.conditionStr=@"time_desc";
-            [self inner_PostWithPageIndex:1 refresh:YES];
+            [self inner_PostWithPageIndex:0 refresh:YES];
             break;
+        }
         case 1:
-            if (_isLatest==NO) {
-                break;
-            }
+        {
             self.pageIndex=0;
             self.tot=0;
             _isLatest=NO;
             self.conditionStr=@"sales_desc";
-            [self inner_PostWithPageIndex:1 refresh:YES];
+            [self inner_PostWithPageIndex:0 refresh:YES];
             break;
+        }
         case 2:
             [self dropIsShow];
             break;
@@ -269,7 +266,6 @@
             _isDrop=!_isDrop;
         }];
     }
-    
 }
 
 
@@ -290,7 +286,7 @@
 #pragma mark -- Refresh
 
 - (void)inner_Refresh:(id)sender {
-    [self inner_PostWithPageIndex:1 refresh:YES];
+    [self inner_PostWithPageIndex:0 refresh:YES];
 }
 - (void)inner_LoadMore:(id)sender {
     [self inner_PostWithPageIndex:self.pageIndex refresh:NO];
@@ -302,60 +298,69 @@
     if (refresh) {
         [self.collectionView footerEndRefreshing];
         self.pageIndex=0;
+        self.tot=0;
     } else {
         [self.collectionView headerEndRefreshing];
     }
-    
-    __weak MarkSearchDetialVC *weakself=self;
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:[NetServer commonDict]];
     [parameters setObject:@"goods" forKey:@"skey"];
     [parameters setObject:@"20" forKey:@"psize"];
     [parameters setObject:@(self.pageIndex) forKey:@"p"];
-    [parameters setObject:self.tot==NSIntegerMax?@0:@(self.tot) forKey:@"tot"];
+    [parameters setObject:@(self.tot) forKey:@"tot"];
     [parameters setObject:@(self.typeid) forKey:@"type"];
-    [parameters setObject:self.conditionStr?self.conditionStr:@"time_desc" forKey:@"orderby"];
-    [parameters setObject:self.searchString?self.searchString:@"" forKey:@"keywords"];
+    [parameters setObject:_isLatest?@"sales_desc":@"time_desc" forKey:@"orderby"];
+    [parameters setObject:[self.searchString length]>0?self.searchString:@"" forKey:@"keywords"];
+    __weak MarkSearchDetialVC *weakself=self;
     [NetServer getDogGoodsDetailInfoWithParameters:parameters success:^(id responseObject) {
-        
+        NSLog(@"json=======%@",responseObject);
+        NSLog(@"message========%@",responseObject[@"message"]);
         NSDictionary *dic=(NSDictionary*)responseObject;
         NSMutableArray *mArr=[NSMutableArray array];
-        if (pageIndex==0) {
-            weakself.tot=0;
-        }
-        else{
+        
+        for (NSString *skey in dic[@"data"]) {
+            if ([skey isEqualToString:@"list"]) {
+                for (NSDictionary *cdict in dic[@"data"][@"list"]) {
+                    CommodityModel *cdmodel=[[CommodityModel alloc] init];
+                    [cdmodel setValuesForKeysWithDictionary:cdict];
+                    [mArr addObject:cdmodel];
+                }
+                weakself.tot=[dic[@"data"][@"tot"] integerValue];
+                weakself.items=[mArr copy];
+                weakself.pageIndex+=1;
+                if (refresh) {
+                    weakself.items = [NSArray arrayWithArray:mArr];
+                    [weakself.collectionView headerEndRefreshing];
+                } else {
+                    weakself.items = [[NSArray arrayWithArray:weakself.items] arrayByAddingObjectsFromArray:mArr];
+                    [weakself.collectionView footerEndRefreshing];
+                }
+            }
             
         }
         
-        
-        for (NSDictionary *cdict in dic[@"data"][@"list"]) {
-            CommodityModel *cdmodel=[[CommodityModel alloc] init];
-            [cdmodel setValuesForKeysWithDictionary:cdict];
-            [mArr addObject:cdmodel];
-        }
-        weakself.tot=[dic[@"data"][@"tot"] integerValue];
-        weakself.items=[mArr copy];
-        self.pageIndex+=1;
-        
-        
-        if (refresh) {
-            weakself.items = [NSArray arrayWithArray:mArr];
-            [weakself.collectionView headerEndRefreshing];
-        } else {
-            weakself.items = [[NSArray arrayWithArray:weakself.items] arrayByAddingObjectsFromArray:mArr];
-            [weakself.collectionView footerEndRefreshing];
+        if(mArr==nil)
+        {
+            weakself.items=nil;
+            if (refresh) {
+                
+                [weakself.collectionView headerEndRefreshing];
+            } else {
+                
+                [weakself.collectionView footerEndRefreshing];
+            }
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"未检索到相关产品信息" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+            [alert show];
+            
+            
+            [weakself.collectionView reloadData];
         }
         
-        [weakself.collectionView reloadData];
+        [self.collectionView reloadData];
         
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         
-        if (refresh) {
-            [weakself.collectionView headerEndRefreshing];
-        } else {
-            [weakself.collectionView footerEndRefreshing];
-        }
     }];
-    [self.collectionView headerEndRefreshing];
+    
 }
 
 #pragma mark -- UICollectionView
@@ -442,7 +447,7 @@
         self.tot=0;
         _isLatest=NO;
         self.pageIndex=0;
-        [self inner_PostWithPageIndex:1 refresh:YES];
+        [self inner_PostWithPageIndex:0 refresh:YES];
         [self.faceCollectionV reloadData];
         [self.collectionView reloadData];
     }
@@ -483,11 +488,11 @@
         }
         else
         {
-            self.typeid=0;
+            self.typeid=[self.titleArr[_index][@"id"] integerValue];
         }
         self.pageIndex=0;
         self.tot=0;
-        [self inner_PostWithPageIndex:1 refresh:YES];
+        [self inner_PostWithPageIndex:0 refresh:YES];
         [self.collectionView reloadData];
         [searchBar resignFirstResponder];
     }
