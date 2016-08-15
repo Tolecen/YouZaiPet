@@ -24,7 +24,7 @@
 #import "SetViewController.h"
 #import "SectionMSgViewController.h"
 #import "YZShoppingCarVC.h"
-
+#import "NetServer+Payment.h"
 @interface UserCenterCell : UITableViewCell
 @property (nonatomic,retain)UIImageView * imageV;
 @property (nonatomic,retain)UILabel * textL;
@@ -82,6 +82,8 @@
     UIButton * commentBtn;
     UILabel * caiNumL;
     UIButton * caiBtn;
+    
+    
 }
 @property(nonatomic,retain)UITableView * tableView;
 @property(nonatomic,retain)NSArray * stringArr;
@@ -91,6 +93,7 @@
 @property (nonatomic,strong)UIBarButtonItem * msgBtnItem;
 @property (nonatomic,strong)UIImageView * menuBarNotiImg;
 @property (nonatomic,assign)int cartCount;
+@property (nonatomic,assign)int orderCount;
 
 @property (nonatomic,retain)NewUserViewController * editCurrentPetVC;
 @property (nonatomic,retain)NewUserViewController * addNewPetVC;
@@ -119,6 +122,7 @@
 {
     [super viewDidAppear:animated];
     [self checkNoti];
+    [self getUnpaidOrder];
     
 }
 
@@ -544,6 +548,7 @@
             cell = [[UserCenterGouWuFuncTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentCellIdentifier1];
         }
         cell.cartCount = self.cartCount;
+        cell.orderCount = self.orderCount;
         cell.buttonClicked = ^(int index){
             [self toSomePage:index];
         };
@@ -913,6 +918,24 @@
         _msgBtnItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(toMessageVC:)];
         self.navigationItem.rightBarButtonItem = _msgBtnItem;
     }
+}
+
+-(void)getUnpaidOrder
+{
+    [NetServer fetchOrderListWithPageIndex:1 Option:@"unpaid"  success:^(id result) {
+        NSLog(@"orderList:%@",result);
+        if ([result[@"code"] intValue] == 200) {
+            self.orderCount = (int)[result[@"data"][@"list"] count];
+            [_tableView reloadData];
+            
+        }
+        
+        [_tableView headerEndRefreshing];
+        //        [SVProgressHUD dismissWithError:@"订单信息已经全部加载完毕" afterDelay:2];
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        
+    }];
+    
 }
 #pragma mark -
 @end

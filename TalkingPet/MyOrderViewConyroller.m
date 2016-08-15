@@ -20,7 +20,7 @@
 #import "OrderHeaderView.h"
 #import "OrderFooterView.h"
 #import "NSDate+XMGExtension.h"
-
+#import "YZOrderConfimViewController.h"
 
 @interface MyOrderViewConyroller ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 {
@@ -218,6 +218,9 @@
             if (goodModel.model && goodModel.model.length>1) {
                 listModel.model = goodModel.model;
             }
+            if (goodModel.post_status) {
+                listModel.post_status = goodModel.post_status;
+            }
             
             
             amount = amount+[goodModel.total intValue];
@@ -286,7 +289,23 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 45.f;
+    OrderYZList * listModel = self.orderArr[section];
+
+    
+    
+    if ([listModel.pay_status isEqualToString:@"0"]) {
+        return 85.f;
+    }
+    else if([listModel.post_status isEqualToString:@"1"])
+    {
+        return 85.f;
+    }
+    else
+    {
+        return 45.f;
+    }
+
+    return 85.f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -310,7 +329,7 @@
     static NSString * header = @"footer";
     OrderFooterView * view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:header];
     if (view == nil) {
-        view = [[OrderFooterView alloc] initWithReuseIdentifier:header WithButton:NO];
+        view = [[OrderFooterView alloc] initWithReuseIdentifier:header WithButton:YES];
     }
     
     
@@ -318,6 +337,29 @@
     
     OrderYZList * listModel = self.orderArr[section];
     view.desL.text = [NSString stringWithFormat:@"共 %@ 件 合计：￥%@（含运费 ￥%@）",listModel.total_amount,listModel.total_money,listModel.shippingfee];
+    
+    
+    if ([listModel.pay_status isEqualToString:@"0"]) {
+        view.btn1.hidden = NO;
+        view.btn2.hidden = NO;
+        [view.btn1 setTitle:@"删除订单" forState:UIControlStateNormal];
+        [view.btn2 setTitle:@"立刻付款" forState:UIControlStateNormal];
+    }
+    else if([listModel.post_status isEqualToString:@"1"])
+    {
+        view.btn1.hidden = YES;
+        view.btn2.hidden = NO;
+        [view.btn2 setTitle:@"确认收货" forState:UIControlStateNormal];
+    }
+    else
+    {
+        view.btn1.hidden = YES;
+        view.btn2.hidden = YES;
+    }
+    view.buttonClicked = ^(NSString * title){
+        [self buttonAction:title order:listModel];
+    };
+
     return view;
     
 }
@@ -515,4 +557,59 @@
     //    };
     [self.navigationController pushViewController:orderVC animated:YES];
 }
+
+-(void)buttonAction:(NSString *)title order:(OrderYZList *)order
+{
+    if ([title isEqualToString:@"删除订单"]) {
+        [SVProgressHUD showWithStatus:@"删除中..."];
+        [NetServer deleteOrderWithOrderNo:order.order_no success:^(id result) {
+            [SVProgressHUD showSuccessWithStatus:@"删除订单成功"];
+            [_tableView headerBeginRefreshing];
+            //            self.myOrder.pay_status = @"2";
+            //            [_tableView reloadData];
+        } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+            [SVProgressHUD showErrorWithStatus:@"删除订单失败"];
+        }];
+    }
+    else if ([title isEqualToString:@"立刻付款"]){
+        YZOrderConfimViewController *viewC = [[YZOrderConfimViewController alloc] init];
+        viewC.orders = order.goods;
+        viewC.orderCount = [order.total_amount integerValue];
+        [self.navigationController pushViewController:viewC animated:YES];
+    }
+    else if ([title isEqualToString:@"确认收货"]){
+        if (!order.confirmUrl) {
+            return;
+        }
+        if (![order.model isEqualToString:@"Dog"]) {
+            [SVProgressHUD showWithStatus:@"确认中..."];
+            [NetServer confirmReceviedGoodWithGoodUrl:order.confirmUrl paras:nil success:^(id result) {
+                [SVProgressHUD showSuccessWithStatus:@"确认收货成功"];
+                order.post_status = @"2";
+                [_tableView reloadData];
+            } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+                [SVProgressHUD showErrorWithStatus:@"确认收货失败"];
+            }];
+        }
+        else
+        {
+            ConfirmDogReceivedVC * cd = [[ConfirmDogReceivedVC alloc] init];
+            cd.myOrder = order;
+            cd.back = ^()
+            {
+                [self confirmSuccess];
+            };
+            [self.navigationController pushViewController:cd animated:YES];
+        }
+        
+    }
+}
+
+-(void)confirmSuccess
+{
+    [_tableView headerBeginRefreshing];
+}
+
+
+
 @end

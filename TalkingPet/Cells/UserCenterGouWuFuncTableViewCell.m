@@ -41,6 +41,21 @@
                 [self.unreadBgV addSubview:self.unreadLabel];
                 self.unreadBgV.hidden = YES;
             }
+            else if (i==2){
+                self.unreadBgVOrder = [[UIImageView alloc] initWithFrame:CGRectMake(70-26, 0, 26, 16)];
+                [self.unreadBgVOrder setImage:[UIImage imageNamed:@"unreadNumBg"]];
+                [button addSubview:self.unreadBgVOrder];
+                
+                self.unreadLabelOrder = [[UILabel alloc] initWithFrame:CGRectMake(1, 0, 25, 16)];
+                [self.unreadLabelOrder setTextColor:[UIColor whiteColor]];
+                [self.unreadLabelOrder setBackgroundColor:[UIColor clearColor]];
+                [self.unreadLabelOrder setTextAlignment:NSTextAlignmentCenter];
+                self.unreadLabelOrder.adjustsFontSizeToFitWidth = YES;
+                [self.unreadLabelOrder setFont:[UIFont systemFontOfSize:13]];
+                [self.unreadBgVOrder addSubview:self.unreadLabelOrder];
+                self.unreadBgV.hidden = YES;
+
+            }
             
             UILabel * cl = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(button.frame), CGRectGetMaxY(button.frame)+10, 70, 20)];
             cl.backgroundColor = [UIColor clearColor];
@@ -63,6 +78,13 @@
     }
     else
         self.unreadBgV.hidden = YES;
+    
+    if (self.orderCount>0) {
+        self.unreadBgVOrder.hidden = NO;
+        self.unreadLabelOrder.text = [NSString stringWithFormat:@"%d",self.orderCount];
+    }
+    else
+        self.unreadBgVOrder.hidden = YES;
 }
 -(void)buttonClicked:(UIButton *)sender
 {

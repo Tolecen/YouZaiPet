@@ -754,7 +754,7 @@
 -(void)buttonAction:(NSString *)title
 {
     if ([title isEqualToString:@"删除订单"]) {
-        [SVProgressHUD showWithStatus:@"取消中..."];
+        [SVProgressHUD showWithStatus:@"删除中..."];
         [NetServer deleteOrderWithOrderNo:self.myOrder.order_no success:^(id result) {
             [SVProgressHUD showSuccessWithStatus:@"删除订单成功"];
             if (self.deleteThisOrder) {
