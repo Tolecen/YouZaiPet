@@ -27,6 +27,9 @@
 @property (nonatomic,strong) UIImageView * playRecordImgV;
 @property (nonatomic,strong) UILabel * recordDurationLabel;
 
+@property (nonatomic,strong) UIView * audioLengthView;
+@property (nonatomic,strong) UILabel * audioL;
+
 @property (nonatomic,assign) BOOL needShowSepLine;
 @property (nonatomic,strong) UIView * sepLine;
 

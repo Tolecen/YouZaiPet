@@ -976,7 +976,7 @@
         self.storyView.userInteractionEnabled = NO;
         self.audioLengthView.hidden = NO;
         self.contentTypeImgV.hidden = YES;
-        self.audioL.text = [NSString stringWithFormat:@"%@\"",self.talking.audioDuration];
+        self.audioL.text = [NSString stringWithFormat:@"%.1f\"",[self.talking.audioDuration floatValue]];
         if ([TFileManager ifExsitFolder:self.talking.playAnimationImg.fileName]) {
             self.aniImageV.image = [TFileManager getFristImageWithID:self.talking.playAnimationImg.fileName];
             self.aniImageV.hidden = NO;
