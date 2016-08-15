@@ -8266,7 +8266,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "ac5dddff-db6c-4f21-99c3-e33f16375311";
+				PROVISIONING_PROFILE = "db2a22fa-c066-44bd-99d1-fbedb0ae6725";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";
@@ -8365,7 +8365,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.youzai.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ac5dddff-db6c-4f21-99c3-e33f16375311";
+				PROVISIONING_PROFILE = "db2a22fa-c066-44bd-99d1-fbedb0ae6725";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};

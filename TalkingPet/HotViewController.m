@@ -387,7 +387,7 @@
 -(void)layoutSubviewsManul
 {
     //    [super layoutSubviews];
-    [self.imageV setImageWithURL:[NSURL URLWithString:self.talking.thumbImgUrl]];
+    [self.imageV setImageWithURL:[NSURL URLWithString:[self.talking.thumbImgUrl stringByAppendingString:@"?imageView2/1/w/400/h/400"]]];
     self.nameL.text = self.talking.petInfo.nickname;
     self.desL.text = self.talking.descriptionContent;
     self.gradeL.text = [NSString stringWithFormat:@"LV.%@",self.talking.petInfo.grade];
@@ -871,7 +871,12 @@ static NSString * jycellId = @"jycell";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     TalkingDetailPageViewController * talkingDV = [[TalkingDetailPageViewController alloc] init];
-    talkingDV.talking = _dataArr[indexPath.row];
+    if (listType==1) {
+        talkingDV.talking = _dataArr[indexPath.row];
+    }
+    else
+        talkingDV.talking = _jyArray[indexPath.row];
+    
     
     [self.parentViewController.navigationController pushViewController:talkingDV animated:YES];
 }

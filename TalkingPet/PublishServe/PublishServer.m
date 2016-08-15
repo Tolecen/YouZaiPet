@@ -322,12 +322,12 @@ static PublishServer* publishServer;
                 NSString * thumbnail = [[responseObject objectForKey:@"value"] objectForKey:@"thumbUrl"];
                 NSString * content = [[responseObject objectForKey:@"value"] objectForKey:@"description"];
                 if (sys.autoFriendCircle) {
-                    [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"看%@的动态",nickname] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",nickname,content] imageUrl:thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",petalkID] Succeed:^{
+                    [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"快看我发的故事"] Content:[NSString stringWithFormat:@"分享自我的友仔故事:\"%@\"",content] imageUrl:thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",petalkID] Succeed:^{
                         [ShareServe shareNumberUpWithPetalkId:petalkID];
                     }];
                 }
                 if (sys.autoSinaWeiBo) {
-                    [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"%@%@",nickname,content,SHAREBASEURL,petalkID] imageUrl:thumbnail Succeed:^{
+                    [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"分享自我的友仔故事:\"%@\"%@%@",content,SHAREBASEURL,petalkID] imageUrl:thumbnail Succeed:^{
                         [ShareServe shareNumberUpWithPetalkId:petalkID];
                     }];
                 }
@@ -660,16 +660,16 @@ static PublishServer* publishServer;
             }
             SystemServer * sys = [SystemServer sharedSystemServer];
             NSString * petalkID = [[responseObject objectForKey:@"value"] objectForKey:@"petalkId"];
-            NSString * nickname = [[responseObject objectForKey:@"value"] objectForKey:@"petNickName"];
+//            NSString * nickname = [[responseObject objectForKey:@"value"] objectForKey:@"petNickName"];
             NSString * thumbnail = [[responseObject objectForKey:@"value"] objectForKey:@"thumbUrl"];
             NSString * content = [[responseObject objectForKey:@"value"] objectForKey:@"description"];
             if (sys.autoFriendCircle) {
-                [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"看%@的动态",nickname] Content:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"",nickname,content] imageUrl:thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",petalkID] Succeed:^{
+                [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"快来看我发的动态"] Content:[NSString stringWithFormat:@"分享自我的的友仔动态:\"%@\"",content] imageUrl:thumbnail webUrl:[NSString stringWithFormat:SHAREBASEURL@"%@",petalkID] Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:petalkID];
                 }];
             }
             if (sys.autoSinaWeiBo) {
-                [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"分享自%@的友仔动态:\"%@\"%@%@",nickname,content,SHAREBASEURL,petalkID] imageUrl:thumbnail Succeed:^{
+                [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"分享自我的友仔动态:\"%@\"%@%@",content,SHAREBASEURL,petalkID] imageUrl:thumbnail Succeed:^{
                     [ShareServe shareNumberUpWithPetalkId:petalkID];
                 }];
             }
