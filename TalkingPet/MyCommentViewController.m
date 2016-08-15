@@ -39,6 +39,7 @@
 @property (nonatomic,strong) UIButton * deleteCommentBtn;
 @property (nonatomic,strong) UIImageView * playRecordImgV;
 @property (nonatomic,strong) UILabel * recordDurationLabel;
+@property (nonatomic,strong) UILabel * audioL;
 @property (nonatomic,assign) NSInteger cellIndex;
 @property (nonatomic,strong) EGOImageView * thumbImageV;
 @property (nonatomic,strong) UIView * bgImageV;
@@ -87,23 +88,45 @@
         [self.commentL setBackgroundColor:[UIColor clearColor]];
 //        self.commentL.delegate = self;
         
-        self.playRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.playRecordBtn setFrame:CGRectMake(70, 39, 86, 22)];
-        [self.playRecordBtn setBackgroundImage:[UIImage imageNamed:@"shengyin_bg"] forState:UIControlStateNormal];
-        [self.contentView addSubview:self.playRecordBtn];
-        [self.playRecordBtn addTarget:self action:@selector(playRecordBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//        self.playRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [self.playRecordBtn setFrame:CGRectMake(70, 39, 86, 22)];
+//        [self.playRecordBtn setBackgroundImage:[UIImage imageNamed:@"shengyin_bg"] forState:UIControlStateNormal];
+//        [self.contentView addSubview:self.playRecordBtn];
+//        [self.playRecordBtn addTarget:self action:@selector(playRecordBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         self.playRecordImgV = [[UIImageView alloc] initWithFrame:CGRectMake(65, 5, 10, 11)];
         [self.playRecordImgV setImage:[UIImage imageNamed:@"shengyin3"]];
         [self.playRecordBtn addSubview:self.playRecordImgV];
         
-        self.recordDurationLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 1, 40, 20)];
-        [self.recordDurationLabel setBackgroundColor:[UIColor clearColor]];
-        [self.recordDurationLabel setFont:[UIFont systemFontOfSize:14]];
-        [self.recordDurationLabel setText:@"6s"];
-        [self.recordDurationLabel setAdjustsFontSizeToFitWidth:YES];
-        [self.recordDurationLabel setTextColor:[UIColor grayColor]];
-        [self.playRecordBtn addSubview:self.recordDurationLabel];
+//        self.recordDurationLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 1, 40, 20)];
+//        [self.recordDurationLabel setBackgroundColor:[UIColor clearColor]];
+//        [self.recordDurationLabel setFont:[UIFont systemFontOfSize:14]];
+//        [self.recordDurationLabel setText:@"6s"];
+//        [self.recordDurationLabel setAdjustsFontSizeToFitWidth:YES];
+//        [self.recordDurationLabel setTextColor:[UIColor grayColor]];
+//        [self.playRecordBtn addSubview:self.recordDurationLabel];
+        
+        self.playRecordBtn = [[UIButton alloc] initWithFrame:CGRectMake(70, 40, 60, 20)];
+        self.playRecordBtn.backgroundColor = CommonGreenColor;
+        self.playRecordBtn.layer.cornerRadius = 7;
+        self.playRecordBtn.layer.masksToBounds = YES;
+        [self.contentView addSubview:self.playRecordBtn];
+        [self.playRecordBtn addTarget:self action:@selector(playRecordBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIImageView * p = [[UIImageView alloc] initWithFrame:CGRectMake(8, 5, 7, 10)];
+        p.image = [UIImage imageNamed:@"bofang@2x"];
+        [self.playRecordBtn addSubview:p];
+        
+        self.audioL = [[UILabel alloc] initWithFrame:CGRectMake(60-5-30, 0, 30, self.playRecordBtn.frame.size.height)];
+        _audioL.backgroundColor = [UIColor clearColor];
+        _audioL.font = [UIFont systemFontOfSize:10];
+        _audioL.textColor = [UIColor whiteColor];
+        _audioL.textAlignment = NSTextAlignmentRight;
+        [self.playRecordBtn addSubview:_audioL];
+        _audioL.text = @"";
+        _audioL.adjustsFontSizeToFitWidth = YES;
+        
+        self.playRecordImgV.alpha = 0;
         
         self.thumbImageV = [[EGOImageView alloc] initWithFrame:CGRectMake(ScreenWidth-15-40, 15, 40, 40)];
         self.thumbImageV.backgroundColor = [UIColor grayColor];
@@ -165,7 +188,7 @@
         //            self.commentL.hidden = NO;
         //            [self.commentL setFrame:CGRectMake(self.commentL.frame.origin.x, self.commentL.frame.origin.y, commentSize.width, 20)];
         //        self.commentL.backgroundColor = [UIColor redColor];
-        [self.playRecordBtn setFrame:CGRectMake(self.commentL.frame.origin.x, self.commentL.frame.origin.y+commentSize.height+5, 86, 22)];
+        [self.playRecordBtn setFrame:CGRectMake(self.commentL.frame.origin.x, self.commentL.frame.origin.y+commentSize.height+5, 60, 20)];
         //        }
         //        else {
         ////            self.commentL.hidden = YES;
@@ -173,7 +196,7 @@
         //        }
         [self.timeL setFrame:CGRectMake(15, self.commentL.frame.origin.y+25+22+5, 120, 20)];
         self.playRecordBtn.hidden = NO;
-        self.recordDurationLabel.text = [self.talkingComment.audioDuration stringByAppendingString:@"s"];
+        self.audioL.text = [self.talkingComment.audioDuration stringByAppendingString:@"\""];
         
         //        [self.bgImageV setFrame:CGRectMake(5, 5, 310, self.timeL.frame.origin.y+20+13)];
     }

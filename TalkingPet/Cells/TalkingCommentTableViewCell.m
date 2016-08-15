@@ -82,10 +82,11 @@
 //        [self.contentView addSubview:self.playRecordBtn];
 //        [self.playRecordBtn addTarget:self action:@selector(playRecordBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 //        
-//        self.playRecordImgV = [[UIImageView alloc] initWithFrame:CGRectMake(65, 5, 10, 11)];
-//        [self.playRecordImgV setImage:[UIImage imageNamed:@"shengyin3"]];
-//        [self.playRecordBtn addSubview:self.playRecordImgV];
-//        
+        self.playRecordImgV = [[UIImageView alloc] initWithFrame:CGRectMake(65, 5, 10, 11)];
+        [self.playRecordImgV setImage:[UIImage imageNamed:@"shengyin3"]];
+        [self.playRecordBtn addSubview:self.playRecordImgV];
+        
+//
 //        self.recordDurationLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 1, 40, 20)];
 //        [self.recordDurationLabel setBackgroundColor:[UIColor clearColor]];
 //        [self.recordDurationLabel setFont:[UIFont systemFontOfSize:14]];
@@ -114,6 +115,8 @@
         [self.playRecordBtn addSubview:_audioL];
         _audioL.text = @"";
         _audioL.adjustsFontSizeToFitWidth = YES;
+        
+        self.playRecordImgV.alpha = 0;
 
         
         self.commentTimeL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-10-120, 15, 120, 20)];
