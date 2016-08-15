@@ -83,11 +83,7 @@
     self.paySelectedIndex = 0;
     
     
-    if (!self.orders) {
-        NSInteger count = 0;
-        self.orders = [[YZShoppingCarHelper instanceManager] orderMergeSelectDogsAndGoodsWithCount:&count];
-        self.orderCount = count;
-    }
+
     
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -109,7 +105,18 @@
     bottomBar.delegate = self;
     [self.view addSubview:bottomBar];
     self.bottomBar = bottomBar;
-    [self.bottomBar resetTotalPrice:[YZShoppingCarHelper instanceManager].totalPrice];
+    
+    if (!self.orders) {
+        NSInteger count = 0;
+        self.orders = [[YZShoppingCarHelper instanceManager] orderMergeSelectDogsAndGoodsWithCount:&count];
+        self.orderCount = count;
+        [self.bottomBar resetTotalPrice:[YZShoppingCarHelper instanceManager].totalPrice];
+    }
+    else
+    {
+        [self.bottomBar resetTotalPrice:self.totalPrice];
+    }
+    
 
     [bottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.mas_equalTo(self.view).mas_offset(0);

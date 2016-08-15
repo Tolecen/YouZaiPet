@@ -18,7 +18,6 @@
 
 #import "NetServer+ShangCheng.h"
 
-
 @interface MarketGoodsListVC ()<UICollectionViewDataSource, UICollectionViewDelegate,UISearchBarDelegate>
 
 
@@ -34,6 +33,8 @@
 
 @property (nonatomic ,copy)NSArray *dataArr;
 @property (nonatomic ,assign)NSInteger index;
+@property (nonatomic ,assign)BOOL isLatest;
+
 
 
 @end
@@ -60,14 +61,14 @@
     UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(inner_Pop:)];
     cancel.tintColor=[UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = cancel;
-
+    
     UICollectionViewFlowLayout* faceLayout = [[UICollectionViewFlowLayout alloc]init];
     //    faceLayout.itemSize = CGSizeMake((self.view.frame.size.width-21)/2,40);
-    faceLayout.sectionInset = UIEdgeInsetsMake(1, 5, 1, 5);
-    faceLayout.minimumInteritemSpacing = 1;
-    faceLayout.minimumLineSpacing = 5;
+    faceLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    faceLayout.minimumInteritemSpacing = 10;
+    faceLayout.minimumLineSpacing = 10;
     faceLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    CGRect faceframe=CGRectMake(0, 30, ScreenWidth, 30);
+    CGRect faceframe=CGRectMake(0, 30, ScreenWidth, 0);
     _faceCollectionV = [[UICollectionView alloc] initWithFrame:faceframe collectionViewLayout:faceLayout];
     _faceCollectionV.delegate = self;
     _faceCollectionV.dataSource = self;
@@ -76,7 +77,6 @@
     _faceCollectionV.showsHorizontalScrollIndicator = NO;
     _faceCollectionV.showsVerticalScrollIndicator=NO;
     [_faceCollectionV registerClass:[TagCell class] forCellWithReuseIdentifier:@"CollectionViewCell2"];
-//    _faceCollectionV.hidden=YES;
     _faceCollectionV.tag=1101;
     
 }
@@ -85,9 +85,33 @@
 -(void)cancelClick
 {
     self.items=[self.dataArr copy];
+    if (self.index!=NSIntegerMax) {
+        NSMutableArray * subArr=[NSMutableArray array];
+        for (CommodityModel *obj in self.items) {
+            if ([obj.typeName isEqualToString: _titleArr[self.index]]) {
+                [subArr addObject:obj];
+            }
+        }
+        self.items=subArr;
+    }
+    
+    
+    [self sortdata];
     [self.collectionView reloadData];
 }
 
+
+-(void)sortdata
+{
+    if (_isLatest) {
+        
+        self.items=[[self.items sortedArrayUsingSelector:@selector(compareModelUseTime:)] copy];
+    }
+    else
+    {
+        self.items=[[self.items sortedArrayUsingSelector:@selector(compareModelSales:)] copy];
+    }
+}
 
 -(void)loadData
 {
@@ -119,12 +143,11 @@
     NSMutableArray *mTitleArr=[NSMutableArray array];
     mTitleArr=[self.titleArr mutableCopy];
     for (CommodityModel *obj in self.items) {
-        [mTitleArr addObject:[obj.name copy]];
+        [mTitleArr addObject:[obj.typeName copy]];
     }
     NSSet *set = [NSSet setWithArray:mTitleArr];
     NSArray *arr=[set allObjects];
     return arr;
-
 }
 
 
@@ -146,15 +169,15 @@
 {
     [self.navigationController.navigationItem setHidesBackButton:YES];
     [self.navigationItem setHidesBackButton:YES];
-//    self.navigationController.navigationItem.backBarButtonItem
+    //    self.navigationController.navigationItem.backBarButtonItem
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self setBackButtonWithTarget:@selector(inner_Pop:)];
-    
+    //    [self setBackButtonWithTarget:@selector(inner_Pop:)];
+    self.isLatest=YES;
     
     [self creatUI];
     [self loadData];
@@ -169,11 +192,11 @@
     {
         [weakself sorteditemWithindex:index];
         [weakself.collectionView reloadData];
-
+        
     };
     
     [self.view addSubview:_headerView];
-
+    
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 10.f;
@@ -184,9 +207,9 @@
     flowLayout.itemSize = CGSizeMake(width,
                                      width / 5 * 6);
     
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 60, ScreenWidth, ScreenHeight-64-60)
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30)
                                                           collectionViewLayout:flowLayout];
-
+    
     collectionView.delegate = self;
     collectionView.dataSource = self;
     collectionView.backgroundColor = [UIColor colorWithRed:.9
@@ -201,44 +224,54 @@
     _collectionView.tag=1102;
     
     [collectionView addHeaderWithTarget:self action:@selector(inner_Refresh:)];
+    
+    
+    
+    
 }
 
 -(void)sorteditemWithindex:(NSInteger)index
 {
-
     switch (index) {
         case 0:
-            self.items=[[self.items sortedArrayUsingSelector:@selector(compareModelUseTime:)] copy];
-            
+            _isLatest=YES;
+            [self sortdata];
             break;
         case 1:
-            self.items=[[self.items sortedArrayUsingSelector:@selector(compareModelSales:)] copy];
+            _isLatest=NO;
+            [self sortdata];
             break;
         case 2:
-            
-            if (!_isDrop) {
-                [UIView animateWithDuration:0.3 animations:^{
-                    self.faceCollectionV.frame=CGRectMake(0, 30, ScreenWidth, 0);
-                    self.collectionView.frame=CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30);
-                } completion:^(BOOL finished) {
-                    _isDrop=!_isDrop;
-                }];
-            }
-            else
-            {
-                [UIView animateWithDuration:0.3 animations:^{
-                    self.faceCollectionV.frame=CGRectMake(0, 30, ScreenWidth, 30);
-                    self.collectionView.frame=CGRectMake(0, 60, ScreenWidth, ScreenHeight-64-60);
-                } completion:^(BOOL finished) {
-                    _isDrop=!_isDrop;
-                }];
-            }
-            
+            [self dropIsShow];
             break;
         default:
             break;
     }
 }
+
+
+-(void)dropIsShow
+{
+    if (_isDrop) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.faceCollectionV.frame=CGRectMake(0, 30, ScreenWidth, 0);
+            self.collectionView.frame=CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30);
+        } completion:^(BOOL finished) {
+            _isDrop=!_isDrop;
+        }];
+    }
+    else
+    {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.faceCollectionV.frame=CGRectMake(0, 30, ScreenWidth, 30);
+            self.collectionView.frame=CGRectMake(0, 60, ScreenWidth, ScreenHeight-64-60);
+        } completion:^(BOOL finished) {
+            _isDrop=!_isDrop;
+        }];
+    }
+    
+}
+
 
 -(void)foldView
 {
@@ -288,7 +321,7 @@
         } else {
             [weakself.collectionView footerEndRefreshing];
         }
-
+        [weakself sortdata];
         [weakself sorteditemWithindex:0];
         [weakself.collectionView reloadData];
         
@@ -336,18 +369,16 @@
         if (indexPath.row==self.index) {
             cell.selected=YES;
         }
-        
-        
         return cell;
     }
     
-   
+    
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (collectionView.tag==1102) {
-
-    return self.items.count;
+        
+        return self.items.count;
     }
     else
     {
@@ -363,47 +394,42 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if (collectionView.tag==1102) {
-
-    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    YZGoodsDetailVC *detailVC = [[YZGoodsDetailVC alloc] init];
-    CommodityModel *goodsModel = self.items[indexPath.row];
-    detailVC.goodsId = goodsModel.gid;
-    detailVC.goodsName = goodsModel.name;
-    detailVC.hideNaviBg = YES;
-    [self.navigationController pushViewController:detailVC animated:YES];
+        
+        [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+        
+        
+        
+        
+        YZGoodsDetailVC *detailVC = [[YZGoodsDetailVC alloc] init];
+        CommodityModel *goodsModel = self.items[indexPath.row];
+        detailVC.goodsId = goodsModel.gid;
+        detailVC.goodsName = goodsModel.name;
+        detailVC.hideNaviBg = YES;
+        [self.navigationController pushViewController:detailVC animated:YES];
     }
     else{
         NSLog(@"分类选择处理");
-        self.index=indexPath.row;
-        NSMutableArray * arr=[NSMutableArray array];
-        for (CommodityModel *obj in self.items) {
-            if ([obj.name isEqualToString: _titleArr[indexPath.row]]) {
-                [arr addObject:obj];
-            }
+        
+        if (self.index==indexPath.row) {
+            self.index=NSIntegerMax;
+            self.items=self.dataArr;
         }
-        self.items=arr;
+        else
+        {
+            self.index=indexPath.row;
+            
+            NSMutableArray * arr=[NSMutableArray array];
+            for (CommodityModel *obj in self.dataArr) {
+                if ([obj.typeName isEqualToString: _titleArr[indexPath.row]]) {
+                    [arr addObject:obj];
+                }
+            }
+            self.items=arr;
+            
+        }
+        [self sortdata];
+        [self.faceCollectionV reloadData];
         [self.collectionView reloadData];
-    }
-}
-
-// 设置是否允许取消选中
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
--(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *cell=[collectionView cellForItemAtIndexPath:indexPath];
-    
-    for (UIView *view in [cell.contentView subviews])
-    {
-        if ([view.class isSubclassOfClass:[UILabel class]]) {
-            if ([view.class isSubclassOfClass:[UILabel class]]) {
-                UILabel *label=(UILabel *)view;
-                label.textColor=CommonGreenColor;
-                label.backgroundColor=[UIColor clearColor];
-            }
-        }
-    
     }
 }
 
@@ -420,30 +446,51 @@
         CGFloat width = (ScreenWidth - 30) / 2;
         return CGSizeMake(width, width / 5 * 6);
     }
-
+    
 }
 
 
 
 #pragma mark -- UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-//    点击搜索按钮事件处理
-    NSMutableArray *arr=[NSMutableArray array];
-    for (CommodityModel *model in self.items) {
-        if ([model.subname rangeOfString:self.searchString].length) {
-            [arr addObject:model];
+    //    点击搜索按钮事件处理
+    
+    if(self.searchString.length>0){
+        
+        NSMutableArray *arr=[NSMutableArray array];
+        for (CommodityModel *model in self.items) {
+            if ([model.subname rangeOfString:self.searchString].length) {
+                [arr addObject:model];
+            }
         }
+        if (self.index==NSIntegerMax) {
+            self.items =arr;
+        }
+        else
+        {
+            NSMutableArray * subArr=[NSMutableArray array];
+            for (CommodityModel *obj in arr) {
+                if ([obj.typeName isEqualToString: _titleArr[self.index]]) {
+                    [subArr addObject:obj];
+                }
+            }
+            self.items=subArr;
+        }
+        [self sortdata];
+        [self.collectionView reloadData];
+        [searchBar resignFirstResponder];
     }
-    self.items=arr;
-    [self.collectionView reloadData];
-    [searchBar resignFirstResponder];
+    else
+    {
+        [self cancelClick];
+    }
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     
     self.searchString=searchText;
-
+    
 }
 
 
@@ -454,7 +501,8 @@
     }
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
     
 }
 
@@ -467,7 +515,7 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
     [self.searchBar resignFirstResponder];
-
+    
 }
 
 
@@ -481,13 +529,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

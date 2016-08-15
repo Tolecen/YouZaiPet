@@ -575,6 +575,7 @@
         YZOrderConfimViewController *viewC = [[YZOrderConfimViewController alloc] init];
         viewC.orders = order.goods;
         viewC.orderCount = [order.total_amount integerValue];
+        viewC.totalPrice = [order.total_money integerValue];
         [self.navigationController pushViewController:viewC animated:YES];
     }
     else if ([title isEqualToString:@"确认收货"]){

@@ -37,7 +37,7 @@
         _btn_w=0.0;
         
         
-
+        
         NSArray *titleArray =@[@"最新发布",@"最高人气",@"产品分类"];
         if (titleArray.count<MAX_TitleNumInWindow+1) {
             _btn_w=frame.size.width/titleArray.count;
@@ -134,10 +134,7 @@
     {
         _selectLine.hidden=YES;
     }
-    else
-    {
-        _selectLine.hidden=NO;
-    }
+    
     [UIView animateWithDuration:.2 animations:^{
         
         CGRect rect = [btn.currentTitle boundingRectWithSize:CGSizeMake(320, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:13]} context:nil];
@@ -148,6 +145,13 @@
         CGFloat centerY=_selectLine.center.y;
         _selectLine.center=CGPointMake(btn.center.x, centerY);
     } completion:^(BOOL finished) {
+        if(btn.tag!=[[_btns lastObject] tag])
+        {
+            _selectLine.hidden=NO;
+        }
+        
+        
+        
         
     }];
     

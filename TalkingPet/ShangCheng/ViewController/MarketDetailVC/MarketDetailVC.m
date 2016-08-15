@@ -169,7 +169,6 @@
     MarketGoodsListVC *marketVC=[[MarketGoodsListVC alloc] init];
     marketVC.link=[self.dataArr[indexPath.row] link];
     [self.navigationController pushViewController:marketVC animated:YES];
-    
 }
 
 

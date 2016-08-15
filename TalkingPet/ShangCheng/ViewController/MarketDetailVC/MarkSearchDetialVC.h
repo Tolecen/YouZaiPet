@@ -9,6 +9,5 @@
 #import "BaseViewController.h"
 
 @interface MarkSearchDetialVC : BaseViewController
-@property (nonatomic, copy) NSString *link;//展示的商品请求数据连接
 @property(nonatomic,copy)NSArray *titleArr;
 @end

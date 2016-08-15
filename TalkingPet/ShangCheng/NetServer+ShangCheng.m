@@ -205,9 +205,9 @@
     [NetServer requestWithParameters:parameters
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  NSArray *value = responseObject[@"value"];
-                                 JSONModelError *error = nil;
+                                 YZShangChengModel *error = nil;
                                  NSArray *responseItems = [YZGoodsModel arrayOfModelsFromDictionaries:value
-                                                                                              error:&error];
+                                                                                                error:&error];
                                  if (responseItems && responseItems.count > 0) {
                                      NSInteger newPageIndex = pageIndex + 1;
                                      success(responseItems, newPageIndex);
@@ -245,9 +245,10 @@
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:[NetServer commonDict]];
     parameters[@"command"] = @"mall";
     parameters[@"options"] = @"shopSearch";
-    parameters[@"shopName"] = shopName;
+    parameters[@"kewords"] = shopName;
     parameters[@"pageIndex"] = @(pageIndex);
     parameters[@"pageSize"] = @(20);
+    
     [NetServer requestWithParameters:parameters
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  NSArray *value = responseObject[@"value"];
@@ -264,5 +265,58 @@
                                  failure(error, operation);
                              }];
 }
+
+
++ (void)getDogGoodsDetailInfoWithParameters:(NSDictionary *)parameters
+                                    success:(void(^)(id responseObject))success
+                                    failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure
+{
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/market/search",BasePayUrl];
+    
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:path]];
+    [httpClient setParameterEncoding:AFJSONParameterEncoding];
+    NSLog(@"req:%@,path:%@",parameters,path);
+    [httpClient getPath:@"" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        id JSON = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        if (success) {
+            success(JSON);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            failure(error, operation);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+    
+}
++ (void)getDogGoodsDetailTagSuccess:(void(^)(id responseObject))success
+                            failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure
+{
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/market/categories/flag/goods",BasePayUrl];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:path]];
+    [httpClient setParameterEncoding:AFJSONParameterEncoding];
+    [httpClient getPath:@"" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        id JSON = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        if (success) {
+            success(JSON);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            failure(error, operation);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+    
+}
+
 
 @end

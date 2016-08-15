@@ -55,4 +55,14 @@
                               success:(void(^)(NSArray *items, NSInteger nextPageIndex))success
                               failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
+//商品搜索
+
++ (void)getDogGoodsDetailInfoWithParameters:(NSDictionary *)parameters
+                                    success:(void(^)(id responseObject))success
+                                    failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
+//分类标签获取
++ (void)getDogGoodsDetailTagSuccess:(void(^)(id responseObject))success
+                            failure:(void(^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
 @end
