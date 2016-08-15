@@ -18,6 +18,7 @@ typedef enum UserListType{
     UILabel * g;
 }
 @property (nonatomic,assign) NSString * petID;
+@property (nonatomic,assign) NSString * countNum;
 @property (nonatomic,assign) BOOL shouldSelectChatUser;
 @property (nonatomic,assign) UserListType listType;
 @end

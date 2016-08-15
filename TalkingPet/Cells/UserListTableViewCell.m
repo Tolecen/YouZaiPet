@@ -67,7 +67,7 @@
                 [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu0"] forState:UIControlStateNormal];
 //                [self.relationBtn setTitle:@"+关注" forState:UIControlStateNormal];
         [self.relationBtn setTitleColor:[UIColor colorWithRed:0.235 green:0.776 blue:1 alpha:1] forState:UIControlStateNormal];
-        [self.relationBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [self.relationBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
         if (listType==2) {
             [self.relationBtn addTarget:self action:@selector(removeFromBlackList) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -99,32 +99,36 @@
     //    self.darenV.hidden = [[self.petDict objectForKey:@"star"] isEqualToString:@"1"]?NO:YES;
     if (self.listType==2) {
         self.relationBtn.hidden = NO;
+         [self.relationBtn setFrame:CGRectMake(ScreenWidth-10-72, 23, 72, 24.5)];
+        [self.relationBtn setTitle:@"" forState:UIControlStateNormal];
         [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"removeBlackList"] forState:UIControlStateNormal];
         return;
     }
     
     if ([self.relationShip isEqualToString:@"0"]) {
         self.relationBtn.hidden = NO;
+         [self.relationBtn setFrame:CGRectMake(ScreenWidth-10-50, 23, 50, 25)];
+        [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"newguanzhu"] forState:UIControlStateNormal];
+        [self.relationBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
         
-        [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu0"] forState:UIControlStateNormal];
-        [self.relationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        
-        //        [self.relationBtn setTitle:@"+关注" forState:UIControlStateNormal];
+        [self.relationBtn setTitle:@"关注" forState:UIControlStateNormal];
         
         self.relationBtn.enabled = YES;
     }
     else if ([self.relationShip isEqualToString:@"1"]){
         self.relationBtn.hidden = NO;
-        [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu1"] forState:UIControlStateNormal];
-        //        [self.relationBtn setTitle:@"已关注" forState:UIControlStateNormal];
+        [self.relationBtn setFrame:CGRectMake(ScreenWidth-10-61, 23, 61, 25)];
+        [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"newyiguanzhu"] forState:UIControlStateNormal];
+        [self.relationBtn setTitle:@"已关注" forState:UIControlStateNormal];
         [self.relationBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         //        self.relationBtn.enabled = NO;
     }
     else if ([self.relationShip isEqualToString:@"2"]){
         self.relationBtn.hidden = NO;
-        [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"userlistguanzhu2"] forState:UIControlStateNormal];
-        //        [self.relationBtn setTitle:@"相互关注" forState:UIControlStateNormal];
-        [self.relationBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [self.relationBtn setFrame:CGRectMake(ScreenWidth-10-66, 23, 66, 25)];
+        [self.relationBtn setBackgroundImage:[UIImage imageNamed:@"newhuxiangguanzhu"] forState:UIControlStateNormal];
+         [self.relationBtn setTitle:@"相互关注" forState:UIControlStateNormal];
+        [self.relationBtn setTitleColor:[UIColor colorWithR:108 g:208 b:242 alpha:1] forState:UIControlStateNormal];
         //        self.relationBtn.enabled = NO;
     }
     else

@@ -33,6 +33,38 @@
             endingLineNumber = "379"
             landmarkName = "-realLogOut"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SetViewController realLogOut]"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/SetViewController.m"
+                  timestampString = "492940136.006129"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "379"
+                  endingLineNumber = "379"
+                  offsetFromSymbolStart = "907">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__31-[SetViewController realLogOut]_block_invoke"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/SetViewController.m"
+                  timestampString = "492940136.006261"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "379"
+                  endingLineNumber = "379"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -100,7 +132,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/BrowserTableHelper.m"
-                  timestampString = "492933896.35131"
+                  timestampString = "492940136.008583"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "186"
@@ -115,7 +147,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/BrowserTableHelper.m"
-                  timestampString = "492933896.35145"
+                  timestampString = "492940136.008716"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "188"
@@ -260,7 +292,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/ShangCheng/NetServer+Payment.m"
-                  timestampString = "492933896.356413"
+                  timestampString = "492940136.012971"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "319"
@@ -275,7 +307,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/ShangCheng/NetServer+Payment.m"
-                  timestampString = "492933896.356553"
+                  timestampString = "492940136.01311"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "319"
@@ -290,7 +322,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/ShangCheng/NetServer+Payment.m"
-                  timestampString = "492933896.356674"
+                  timestampString = "492940136.013234"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "319"
@@ -361,6 +393,86 @@
             startingLineNumber = "245"
             endingLineNumber = "245"
             landmarkName = "+getCurrentUserInfoWithPlatformSinaSuccess:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TalkingPet/LoginViewController.m"
+            timestampString = "492934407.529388"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "412"
+            endingLineNumber = "412"
+            landmarkName = "-checkUsernameWithDict:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[LoginViewController checkUsernameWithDict:]"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/LoginViewController.m"
+                  timestampString = "492940136.015577"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "412"
+                  endingLineNumber = "412"
+                  offsetFromSymbolStart = "276">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__45-[LoginViewController checkUsernameWithDict:]_block_invoke"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/LoginViewController.m"
+                  timestampString = "492940136.015706"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "413"
+                  endingLineNumber = "413"
+                  offsetFromSymbolStart = "79">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TalkingPet/OpenSource/StyledPageControl/StyledPageControl.m"
+            timestampString = "492940429.727783"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
+            landmarkName = "-drawRect:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TalkingPet/OpenSource/StyledPageControl/StyledPageControl.m"
+            timestampString = "492941309.373657"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "330"
+            endingLineNumber = "330"
+            landmarkName = "-drawRect:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

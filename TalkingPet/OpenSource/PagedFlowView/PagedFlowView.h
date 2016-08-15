@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "StyledPageControl.h"
 @protocol PagedFlowViewDataSource;
 @protocol PagedFlowViewDelegate;
 
@@ -47,7 +47,7 @@ typedef enum{
     NSRange              _visibleRange;
     NSMutableArray      *_reusableCells;//如果以后需要支持reuseIdentifier，这边就得使用字典类型了
 
-    UIPageControl       *pageControl; //可以是自己自定义的PageControl
+    StyledPageControl      *pageControl; //可以是自己自定义的PageControl
     
     //如果希望非当前页的大小或者透明度发生变化可以设置这两个值
     CGFloat _minimumPageAlpha;
@@ -60,7 +60,7 @@ typedef enum{
 
 @property(nonatomic,assign)   id <PagedFlowViewDataSource> dataSource;
 @property(nonatomic,assign)   id <PagedFlowViewDelegate>   delegate;
-@property(nonatomic,retain)    UIPageControl       *pageControl;
+@property(nonatomic,retain)    StyledPageControl       *pageControl;
 @property (nonatomic, assign) CGFloat minimumPageAlpha;
 @property (nonatomic, assign) CGFloat minimumPageScale;
 @property (nonatomic, assign) PagedFlowViewOrientation orientation;

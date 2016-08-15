@@ -43,6 +43,15 @@
     if (self.listType == UserListBlackList) {
         self.title = @"黑名单";
     }
+    if (self.countNum) {
+        if (self.listType == UserListTypeAttention) {
+            self.title = @"我的关注";
+        }
+        if (self.listType == UserListTypeFans) {
+            self.title = @"我的粉丝";
+        }
+        self.title = [self.title stringByAppendingFormat:@"(%@)",self.countNum];
+    }
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setBackButtonWithTarget:@selector(back)];

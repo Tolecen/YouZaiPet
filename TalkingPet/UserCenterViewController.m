@@ -456,6 +456,7 @@
 {
     UserListViewController * attentionV = [[UserListViewController alloc] init];
     attentionV.listType = UserListTypeAttention;
+    attentionV.countNum = [UserServe sharedUserServe].account.attentionNo;
     attentionV.petID =[UserServe sharedUserServe].userID;
     [self.navigationController pushViewController:attentionV animated:YES];
 }
@@ -463,6 +464,7 @@
 {
     UserListViewController * fansV = [[UserListViewController alloc] init];
     fansV.listType = UserListTypeFans;
+    fansV.countNum = [UserServe sharedUserServe].account.fansNo;
     fansV.petID = [UserServe sharedUserServe].userID;
     [self.navigationController pushViewController:fansV animated:YES];
 }

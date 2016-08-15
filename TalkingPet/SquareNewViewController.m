@@ -16,6 +16,7 @@
 #import "RootViewController.h"
 #import "InteractionBarViewController.h"
 #import "SquareListViewController.h"
+#import "StyledPageControl.h"
 @interface TextCell2 : UICollectionViewCell
 @property (nonatomic,retain) UILabel * label;
 @end
@@ -46,6 +47,8 @@
 @property (nonatomic,strong)NSArray * topAdArray;
 @property (nonatomic,retain)NSDictionary * todayTopicDic;
 @property (nonatomic,retain)NSMutableArray * gudinggcArray;//友仔固定6个频道
+
+@property (nonatomic) StyledPageControl *pageControl;
 @end
 
 @implementation SquareNewViewController
@@ -93,11 +96,24 @@
     flowView.delegate = self;
     flowView.dataSource = self;
     [_sameView addSubview:flowView];
-    UIPageControl * page = [[UIPageControl alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.width)/2-20, self.view.frame.size.width, 20)];
-    page.currentPageIndicatorTintColor = [UIColor colorWithRed:135/255.0 green:130/255.0 blue:250/255.0 alpha:1];
-    page.pageIndicatorTintColor = [UIColor colorWithWhite:200/255.0 alpha:1];
-    flowView.pageControl = page;
-    [flowView addSubview:page];
+//    UIPageControl * page = [[UIPageControl alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.width)/2-20, self.view.frame.size.width, 20)];
+//    page.currentPageIndicatorTintColor = [UIColor colorWithRed:135/255.0 green:130/255.0 blue:250/255.0 alpha:1];
+//    page.pageIndicatorTintColor = [UIColor colorWithWhite:200/255.0 alpha:1];
+//    flowView.pageControl = page;
+//    [flowView addSubview:page];
+    
+    _pageControl = [[StyledPageControl alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.width)/2-18, self.view.frame.size.width, 18)];
+//    [_pageControl setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [_pageControl setPageControlStyle:PageControlStyleThumb];
+    [_pageControl setGapWidth:12];
+    [_pageControl setDiameter:6];
+    [_pageControl setThumbImage:[UIImage imageNamed:@"pagecontrol-thumb-normal.png"]];
+    [_pageControl setSelectedThumbImage:[UIImage imageNamed:@"pagecontrol-thumb-selected.png"]];
+    [flowView addSubview:_pageControl];
+    flowView.pageControl = _pageControl;
+
+
+  
     
     [self addGuangChangView];
     
