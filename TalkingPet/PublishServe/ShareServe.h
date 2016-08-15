@@ -18,7 +18,7 @@
 #define INTERACTIONBASEURL @"http://www.chongwushuo.com/h5/topic/index.html?id=%@"
 #define ONETOPICBASEURL @"http://www.chongwushuo.com/h5/oneTopic/index.html?id=%@"
 #else
-#define SHAREBASEURL @"http://testwww.chongwushuo.com/h5/index.html?petakeID="
+#define SHAREBASEURL @"http://testapi.buybestpet.com/h5/index.html?petakeID="
 #define GOODSBASEURL @"http://testwww.chongwushuo.com/h5/goods/%@.html"
 #define INTERACTIONBASEURL @"http://testwww.chongwushuo.com/h5/topic/index.html?id=%@"
 #define ONETOPICBASEURL @"http://testwww.chongwushuo.com/h5/oneTopic/index.html?id=%@"
