@@ -164,7 +164,7 @@
     [self.imageV setImageWithURL:[NSURL URLWithString:self.talking.thumbImgUrl]];
     self.nameL.text = self.talking.petInfo.nickname;
     self.desL.text = self.talking.descriptionContent;
-    self.gradeL.text = [NSString stringWithFormat:@"LV.%@",self.talking.petInfo.grade];
+    self.gradeL.text = [NSString stringWithFormat:@"LV.%@",self.talking.petInfo.grade?self.talking.petInfo.grade:@"0"];
     [self.headView setImageURL:[NSURL URLWithString:[self.talking.petInfo.headImgURL stringByAppendingString:@"?imageView2/2/w/60"]]];
     
     self.zanL.text = self.talking.favorNum;
@@ -300,11 +300,15 @@
         self.imageV.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
         [self.contentView addSubview:self.imageV];
         
+        UIImageView * jbiaoqian = [[UIImageView alloc] initWithFrame:CGRectMake(frame.size.width-28, frame.size.width-28, 23, 23)];
+        [jbiaoqian setImage:[UIImage imageNamed:@"jingyanbiaoqian"]];
+        [self.contentView addSubview:jbiaoqian];
+        
         
         
         self.desL = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.imageV.frame)+5, frame.size.width-20, 40)];
         self.desL.backgroundColor = [UIColor clearColor];
-        self.desL.textColor = [UIColor colorWithR:150 g:150 b:150 alpha:1];
+        self.desL.textColor = CommonGreenColor;
         self.desL.font = [UIFont systemFontOfSize:13];
         self.desL.numberOfLines = 2;
         self.desL.lineBreakMode = NSLineBreakByCharWrapping;
@@ -389,8 +393,8 @@
     //    [super layoutSubviews];
     [self.imageV setImageWithURL:[NSURL URLWithString:[self.talking.thumbImgUrl stringByAppendingString:@"?imageView2/1/w/400/h/400"]]];
     self.nameL.text = self.talking.petInfo.nickname;
-    self.desL.text = self.talking.descriptionContent;
-    self.gradeL.text = [NSString stringWithFormat:@"LV.%@",self.talking.petInfo.grade];
+    self.desL.text = [@"  " stringByAppendingString:self.talking.descriptionContent];
+    self.gradeL.text = [NSString stringWithFormat:@"LV.%@",self.talking.petInfo.grade?self.talking.petInfo.grade:@"0"];
     [self.headView setImageURL:[NSURL URLWithString:[self.talking.petInfo.headImgURL stringByAppendingString:@"?imageView2/2/w/60"]]];
     
     self.zanL.text = self.talking.favorNum;
