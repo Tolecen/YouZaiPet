@@ -14,7 +14,7 @@
 #import "CommodityModel.h"
 #import "GoodsSearchHeadV.h"
 #import "TagCell.h"
-
+#import "YZShangChengGoodsListCell.h"
 
 #import "NetServer+ShangCheng.h"
 
@@ -43,6 +43,10 @@
 @property (nonatomic,assign)NSInteger tot;//总条数
 @property (nonatomic,assign)NSInteger typeid;//分类
 
+@property (nonatomic ,strong)UILabel *tooltip;
+
+
+
 @end
 
 @implementation MarkSearchDetialVC
@@ -62,10 +66,10 @@
     UICollectionViewFlowLayout* faceLayout = [[UICollectionViewFlowLayout alloc]init];
     //    faceLayout.itemSize = CGSizeMake((self.view.frame.size.width-21)/2,40);
     faceLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-    faceLayout.minimumInteritemSpacing = 10;
+    faceLayout.minimumInteritemSpacing = 5;
     faceLayout.minimumLineSpacing = 10;
     faceLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    CGRect faceframe=CGRectMake(0, 30, ScreenWidth, 0);
+    CGRect faceframe=CGRectMake(0, 40, ScreenWidth, 0);
     _faceCollectionV = [[UICollectionView alloc] initWithFrame:faceframe collectionViewLayout:faceLayout];
     _faceCollectionV.delegate = self;
     _faceCollectionV.dataSource = self;
@@ -81,42 +85,12 @@
 
 -(void)cancelClick
 {
-    [self loadData];
+    self.tot=0;
+    self.pageIndex=0;
+    self.typeid=0;
+    [self.collectionView headerBeginRefreshing];
     [self.collectionView reloadData];
 }
-
-
--(void)loadData
-{
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:[NetServer commonDict]];
-    [parameters setObject:@"goods" forKey:@"skey"];
-    [parameters setObject:@"20" forKey:@"psize"];
-    [parameters setObject:@(self.pageIndex) forKey:@"p"];
-    [parameters setObject:@(self.tot) forKey:@"tot"];
-    [parameters setObject:@(self.typeid) forKey:@"type"];
-    [parameters setObject:_isLatest?@"sales_desc":@"time_desc" forKey:@"orderby"];
-    [parameters setObject:[self.searchString length]>0?self.searchString:@"" forKey:@"keywords"];
-    __weak MarkSearchDetialVC *weakself=self;
-    [NetServer getDogGoodsDetailInfoWithParameters:parameters success:^(id responseObject) {
-        NSLog(@"json=======%@",responseObject);
-        NSLog(@"message========%@",responseObject[@"message"]);
-        NSDictionary *dic=(NSDictionary*)responseObject;
-        NSMutableArray *mArr=[NSMutableArray array];
-        for (NSDictionary *cdict in dic[@"data"][@"list"]) {
-            CommodityModel *cdmodel=[[CommodityModel alloc] init];
-            [cdmodel setValuesForKeysWithDictionary:cdict];
-            [mArr addObject:cdmodel];
-        }
-        
-        weakself.tot=[dic[@"data"][@"tot"] integerValue];
-        weakself.items=[mArr copy];
-        [self.collectionView reloadData];
-        
-    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-        
-    }];
-}
-
 - (void)dealloc {
     NSLog(@"dealloc:[%@]", self);
     _items = nil;
@@ -145,15 +119,23 @@
         for (NSString *key in dic[@"data"]) {
             [mArr addObject:dic[@"data"][key]];
         }
-        self.titleArr=mArr;
         
+        for (int i=0; i<mArr.count; i++) {
+            if ([mArr[i][@"id" ] integerValue]==0) {
+                
+                if (i==0) {
+                    break;
+                }
+                
+                [mArr exchangeObjectAtIndex:i withObjectAtIndex:0];
+                break ;
+            }
+        }
+        self.titleArr=[mArr copy];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        
         [defaults setObject:[self.titleArr copy] forKey:@"titleArr"];
         [defaults synchronize];
-        
         [self.faceCollectionV reloadData];
-        NSLog(@"Tag==========%@",responseObject);
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
     }];
 }
@@ -162,12 +144,13 @@
     [super viewDidLoad];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSArray *titleArr = [defaults objectForKey:@"titleArr"];
+    
     if (titleArr) {
         self.titleArr=titleArr;
     }
+    
     self.isLatest=YES;
     [self creatUI];
-    [self loadData];
     [self reloadTag];
     
     self.index=NSIntegerMax;
@@ -175,7 +158,7 @@
     self.pageIndex=0;
     self.typeid=0;
     self.conditionStr=@"time_desc";
-    _headerView =[[GoodsSearchHeadV alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+    _headerView =[[GoodsSearchHeadV alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
     __weak MarkSearchDetialVC * weakself=self;
     _headerView.block=^(NSInteger index)
     {
@@ -190,14 +173,14 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 10.f;
     flowLayout.minimumLineSpacing = 10.f;
-    UIEdgeInsets sectionInset = UIEdgeInsetsMake(1, 10, 1, 10);
+    UIEdgeInsets sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     flowLayout.sectionInset = sectionInset;
     CGFloat width = ([UIScreen mainScreen].bounds.size.width - sectionInset.left - sectionInset.right - 10) / 2;
     flowLayout.itemSize = CGSizeMake(width,
                                      width / 5 * 6);
     
     
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30)
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 40, ScreenWidth, ScreenHeight-64-40)
                                                           collectionViewLayout:flowLayout];
     
     collectionView.delegate = self;
@@ -208,13 +191,24 @@
                                                      alpha:1.f];
     [collectionView registerClass:[MarketCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass(self.class)];
     
+    [collectionView registerClass:[YZShangChengGoodsListCell class] forCellWithReuseIdentifier:NSStringFromClass(self.class)];
+    
     [self.view addSubview:collectionView];
     
     self.collectionView = collectionView;
     _collectionView.tag=1202;
     
+    self.tooltip=[[UILabel alloc] initWithFrame:CGRectMake(0, collectionView.frame.size.height/3, ScreenWidth, 40)];
+    self.tooltip.backgroundColor=[UIColor clearColor];
+    self.tooltip.text=@"未检索到相关的产品";
+    self.tooltip.textAlignment=NSTextAlignmentCenter;
+    self.tooltip.textColor=[UIColor colorWithRed:188/255.f green:188/255.f blue:188/255.f alpha:1.00];
+    self.tooltip.hidden=YES;
+    [collectionView addSubview:self.tooltip];
+    
     [collectionView addHeaderWithTarget:self action:@selector(inner_Refresh:)];
     [collectionView addFooterWithTarget:self action:@selector(inner_LoadMore:)];
+    [collectionView headerBeginRefreshing];
 }
 
 
@@ -227,7 +221,7 @@
             self.tot=0;
             self.pageIndex=0;
             self.conditionStr=@"time_desc";
-            [self inner_PostWithPageIndex:0 refresh:YES];
+            [self.collectionView headerBeginRefreshing];
             break;
         }
         case 1:
@@ -236,7 +230,7 @@
             self.tot=0;
             _isLatest=NO;
             self.conditionStr=@"sales_desc";
-            [self inner_PostWithPageIndex:0 refresh:YES];
+            [self.collectionView headerBeginRefreshing];
             break;
         }
         case 2:
@@ -251,8 +245,8 @@
 {
     if (_isDrop) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.faceCollectionV.frame=CGRectMake(0, 30, ScreenWidth, 0);
-            self.collectionView.frame=CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30);
+            self.faceCollectionV.frame=CGRectMake(0, 40, ScreenWidth, 0);
+            self.collectionView.frame=CGRectMake(0, 40, ScreenWidth, ScreenHeight-64-40);
         } completion:^(BOOL finished) {
             _isDrop=!_isDrop;
         }];
@@ -260,25 +254,12 @@
     else
     {
         [UIView animateWithDuration:0.3 animations:^{
-            self.faceCollectionV.frame=CGRectMake(0, 30, ScreenWidth, 30);
-            self.collectionView.frame=CGRectMake(0, 60, ScreenWidth, ScreenHeight-64-60);
+            self.faceCollectionV.frame=CGRectMake(0, 40, ScreenWidth, 50);
+            self.collectionView.frame=CGRectMake(0, 90, ScreenWidth, ScreenHeight-64-90);
         } completion:^(BOOL finished) {
             _isDrop=!_isDrop;
         }];
     }
-}
-
-
--(void)foldView
-{
-    self.faceCollectionV.frame=CGRectMake(0, 30, ScreenWidth, 0);
-    self.collectionView.frame=CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30);
-}
-
--(void)dropView
-{
-    self.faceCollectionV.frame=CGRectMake(0, 30, ScreenWidth, 30);
-    self.collectionView.frame=CGRectMake(0, 60, ScreenWidth, ScreenHeight-64-60);
 }
 
 
@@ -295,6 +276,10 @@
 #pragma mark--刷新&加载
 - (void)inner_PostWithPageIndex:(NSInteger)pageIndex
                         refresh:(BOOL)refresh {
+    
+    self.tooltip.hidden=YES;
+    
+    
     if (refresh) {
         [self.collectionView footerEndRefreshing];
         self.pageIndex=0;
@@ -314,6 +299,18 @@
     [NetServer getDogGoodsDetailInfoWithParameters:parameters success:^(id responseObject) {
         NSLog(@"json=======%@",responseObject);
         NSLog(@"message========%@",responseObject[@"message"]);
+        
+        if (self.pageIndex*20-self.tot>=20) {
+            
+            if (refresh) {
+                
+                [weakself.collectionView headerEndRefreshing];
+            } else {
+                
+                [weakself.collectionView footerEndRefreshing];
+            }
+            return ;
+        }
         NSDictionary *dic=(NSDictionary*)responseObject;
         NSMutableArray *mArr=[NSMutableArray array];
         
@@ -335,11 +332,11 @@
                     [weakself.collectionView footerEndRefreshing];
                 }
             }
-            
         }
         
-        if(mArr==nil)
+        if(mArr.count==0)
         {
+            NSLog(@"----------------------------------------");
             weakself.items=nil;
             if (refresh) {
                 
@@ -348,9 +345,11 @@
                 
                 [weakself.collectionView footerEndRefreshing];
             }
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"未检索到相关产品信息" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-            [alert show];
             
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                self.tooltip.hidden=NO;
+            });
             
             [weakself.collectionView reloadData];
         }
@@ -368,9 +367,15 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView.tag==1202) {
         
-        MarketCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.class) forIndexPath:indexPath];
-        cell.model = self.items[indexPath.row];
+        
+        YZShangChengGoodsListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.class) forIndexPath:indexPath];
+        cell.goods = [CommodityModel replaceCommodityModelToYZGoodsModel:self.items[indexPath.row]];
         return cell;
+        
+        
+        //        MarketCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.class) forIndexPath:indexPath];
+        //        cell.model = self.items[indexPath.row];
+        //        return cell;
     }
     else
     {
@@ -437,7 +442,6 @@
         if (self.index==indexPath.row) {
             self.index=NSIntegerMax;
             self.typeid=0;
-            
         }
         else
         {
@@ -447,7 +451,7 @@
         self.tot=0;
         _isLatest=NO;
         self.pageIndex=0;
-        [self inner_PostWithPageIndex:0 refresh:YES];
+        [self.collectionView headerBeginRefreshing];
         [self.faceCollectionV reloadData];
         [self.collectionView reloadData];
     }
@@ -459,7 +463,7 @@
     if (collectionView.tag==1201) {
         CGSize size;
         size = [self.titleArr[indexPath.row][@"typename"] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]}];
-        return CGSizeMake(size.width+20,25);
+        return CGSizeMake(size.width+20,30);
     }
     else
     {
@@ -492,8 +496,7 @@
         }
         self.pageIndex=0;
         self.tot=0;
-        [self inner_PostWithPageIndex:0 refresh:YES];
-        [self.collectionView reloadData];
+        [self.collectionView headerBeginRefreshing];
         [searchBar resignFirstResponder];
     }
     else
@@ -526,7 +529,8 @@
     return YES;
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
     
     [self.searchBar resignFirstResponder];
     

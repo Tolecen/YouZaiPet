@@ -28,7 +28,7 @@
 @property (nonatomic ,copy) NSString *content;//不知道什么鬼
 
 
--(YZGoodsModel*)replaceCommodityModelToYZGoodsModel:(CommodityModel*)model;
++(YZGoodsModel*)replaceCommodityModelToYZGoodsModel:(CommodityModel*)model;
 
 //用添加时间来排序
 -(NSComparisonResult)compareModelUseTime:(CommodityModel

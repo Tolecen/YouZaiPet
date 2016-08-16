@@ -14,7 +14,7 @@
 #import "CommodityModel.h"
 #import "GoodsSearchHeadV.h"
 #import "TagCell.h"
-
+#import "YZShangChengGoodsListCell.h"
 
 #import "NetServer+ShangCheng.h"
 
@@ -68,7 +68,7 @@
     faceLayout.minimumInteritemSpacing = 10;
     faceLayout.minimumLineSpacing = 10;
     faceLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    CGRect faceframe=CGRectMake(0, 30, ScreenWidth, 0);
+    CGRect faceframe=CGRectMake(0, 40, ScreenWidth, 0);
     _faceCollectionV = [[UICollectionView alloc] initWithFrame:faceframe collectionViewLayout:faceLayout];
     _faceCollectionV.delegate = self;
     _faceCollectionV.dataSource = self;
@@ -184,7 +184,7 @@
     
     self.index=NSIntegerMax;
     
-    _headerView =[[GoodsSearchHeadV alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+    _headerView =[[GoodsSearchHeadV alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
     
     
     __weak MarketGoodsListVC * weakself=self;
@@ -207,7 +207,7 @@
     flowLayout.itemSize = CGSizeMake(width,
                                      width / 5 * 6);
     
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30)
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 40, ScreenWidth, ScreenHeight-64-40)
                                                           collectionViewLayout:flowLayout];
     
     collectionView.delegate = self;
@@ -217,6 +217,9 @@
                                                       blue:.9
                                                      alpha:1.f];
     [collectionView registerClass:[MarketCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass(self.class)];
+    [collectionView registerClass:[YZShangChengGoodsListCell class] forCellWithReuseIdentifier:NSStringFromClass(self.class)];
+    
+    
     
     [self.view addSubview:collectionView];
     
@@ -224,11 +227,16 @@
     _collectionView.tag=1102;
     
     [collectionView addHeaderWithTarget:self action:@selector(inner_Refresh:)];
+    [collectionView headerBeginRefreshing];
     
     
     
     
 }
+
+
+
+
 
 -(void)sorteditemWithindex:(NSInteger)index
 {
@@ -254,8 +262,8 @@
 {
     if (_isDrop) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.faceCollectionV.frame=CGRectMake(0, 30, ScreenWidth, 0);
-            self.collectionView.frame=CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30);
+            self.faceCollectionV.frame=CGRectMake(0, 40, ScreenWidth, 0);
+            self.collectionView.frame=CGRectMake(0, 40, ScreenWidth, ScreenHeight-64-40);
         } completion:^(BOOL finished) {
             _isDrop=!_isDrop;
         }];
@@ -263,27 +271,13 @@
     else
     {
         [UIView animateWithDuration:0.3 animations:^{
-            self.faceCollectionV.frame=CGRectMake(0, 30, ScreenWidth, 30);
-            self.collectionView.frame=CGRectMake(0, 60, ScreenWidth, ScreenHeight-64-60);
+            self.faceCollectionV.frame=CGRectMake(0, 40, ScreenWidth, 50);
+            self.collectionView.frame=CGRectMake(0, 90, ScreenWidth, ScreenHeight-64-90);
         } completion:^(BOOL finished) {
             _isDrop=!_isDrop;
         }];
     }
     
-}
-
-
--(void)foldView
-{
-    self.faceCollectionV.frame=CGRectMake(0, 30, ScreenWidth, 0);
-    self.collectionView.frame=CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30);
-    
-}
-
--(void)dropView
-{
-    self.faceCollectionV.frame=CGRectMake(0, 30, ScreenWidth, 30);
-    self.collectionView.frame=CGRectMake(0, 60, ScreenWidth, ScreenHeight-64-60);
 }
 
 
@@ -293,6 +287,10 @@
 - (void)inner_Refresh:(id)sender {
     [self inner_PostWithPageIndex:1 refresh:YES];
 }
+
+
+
+
 
 #pragma mark--刷新&加载
 - (void)inner_PostWithPageIndex:(NSInteger)pageIndex
@@ -340,9 +338,16 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView.tag==1102) {
-        MarketCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.class) forIndexPath:indexPath];
-        cell.model = self.items[indexPath.row];
+        
+        
+        YZShangChengGoodsListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.class) forIndexPath:indexPath];
+        cell.goods = [CommodityModel replaceCommodityModelToYZGoodsModel:self.items[indexPath.row]];
         return cell;
+        
+        
+        //        MarketCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(self.class) forIndexPath:indexPath];
+        //        cell.model = self.items[indexPath.row];
+        //        return cell;
     }
     else
     {
@@ -439,7 +444,7 @@
     if (collectionView.tag==1101) {
         CGSize size;
         size = [self.titleArr[indexPath.row] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]}];
-        return CGSizeMake(size.width+1,25);
+        return CGSizeMake(size.width+1,30);
     }
     else
     {

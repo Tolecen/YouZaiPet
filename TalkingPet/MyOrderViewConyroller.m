@@ -44,7 +44,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"订单管理";
+        self.title = @"我的订单";
         self.orderArr = [NSMutableArray array];
     }
     return self;
@@ -55,27 +55,22 @@
     self.view.backgroundColor = [UIColor colorWithWhite:240/255.0f alpha:1];
     [self setBackButtonWithTarget:@selector(back)];
     
-    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
     headerView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:headerView];
     
-    lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 29, self.view.frame.size.width/5, 1)];
+    lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 40, self.view.frame.size.width/5, 2)];
     lineView.backgroundColor = CommonGreenColor;
     [headerView addSubview:lineView];
     
     for (int i = 0; i<5; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(self.view.frame.size.width*i/5, 0, self.view.frame.size.width/5, 30);
-        button.titleLabel.font = [UIFont systemFontOfSize:12];
+        button.frame = CGRectMake(self.view.frame.size.width*i/5, 0, self.view.frame.size.width/5, headerView.frame.size.height);
+        button.titleLabel.font = [UIFont systemFontOfSize:15];
         [button setTitleColor:[UIColor colorWithWhite:100/255.0 alpha:1] forState:UIControlStateNormal];
         [headerView addSubview:button];
         [button addTarget:self action:@selector(changeOrderType:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = i+100;
-        if (i>0) {
-            UIView * a = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width*i/5, 10, 1, 10)];
-            a.backgroundColor = [UIColor colorWithWhite:240/255.0f alpha:1];
-            [headerView addSubview:a];
-        }
         switch (i) {
             case 0:{
                 [button setTitle:@"全部" forState:UIControlStateNormal];
@@ -99,7 +94,7 @@
     }
     
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 30, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight - 30) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 43, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight - 43) style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
@@ -160,10 +155,14 @@
             self.orderArr = [self getModelArray:result[@"data"][@"list"]];
             [_tableView reloadData];
             
+            
         }
         
+        //        [SVProgressHUD dismissWithError:@"订单信息已经全部加载完毕" afterDelay:2];
+        [_tableView footerEndRefreshing];
         [_tableView headerEndRefreshing];
-//        [SVProgressHUD dismissWithError:@"订单信息已经全部加载完毕" afterDelay:2];
+        
+        
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         
     }];
@@ -290,7 +289,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     OrderYZList * listModel = self.orderArr[section];
-
+    
     
     
     if ([listModel.pay_status isEqualToString:@"0"]) {
@@ -304,7 +303,7 @@
     {
         return 45.f;
     }
-
+    
     return 85.f;
 }
 
@@ -359,7 +358,7 @@
     view.buttonClicked = ^(NSString * title){
         [self buttonAction:title order:listModel];
     };
-
+    
     return view;
     
 }

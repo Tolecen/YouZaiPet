@@ -34,8 +34,8 @@
         self.title = @"设置";
         self.sectionFirstArray = [NSArray arrayWithObjects:@"关于友仔", nil];
         self.sectionFirstArray_2 = [NSArray arrayWithObjects:@"草稿箱", nil];
-
-//        self.sectionFirstArraytwo = [NSArray arrayWithObjects:@"播放设置",@"个性化皮肤", nil];
+        
+        //        self.sectionFirstArraytwo = [NSArray arrayWithObjects:@"播放设置",@"个性化皮肤", nil];
         self.sectionSecondArray = [NSArray arrayWithObjects:@"播放设置", nil];
         self.sectionSecondArrayA = [NSArray arrayWithObjects:@"播放设置",@"图片设置", nil];
         self.sectionSecondArrayB = [NSArray arrayWithObjects:@"播放设置", nil];
@@ -60,13 +60,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view. backgroundColor=[UIColor colorWithR:234 g:234 b:234 alpha:1];
     // Do any additional setup after loading the view.
     UIView * uu = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, self.view.frame.size.height-navigationBarHeight-5)];
     [uu setBackgroundColor:[UIColor whiteColor]];
     [uu setAlpha:0.8];
     
     [self setBackButtonWithTarget:@selector(backAction)];
-
+    
     self.settingTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight) style:UITableViewStyleGrouped];
     _settingTableView.delegate = self;
     _settingTableView.dataSource = self;
@@ -75,8 +76,9 @@
     _settingTableView.rowHeight = 45;
     _settingTableView.contentInset = UIEdgeInsetsMake(0, 0, 59, 0);
     _settingTableView.showsVerticalScrollIndicator = NO;
+    _settingTableView.scrollEnabled = NO;
     [self.view addSubview:_settingTableView];
-    [self buildViewWithSkintype];
+    
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -165,8 +167,8 @@
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             }
-    //        cell.backgroundColor = [UIColor whiteColor];
-    //        cell.contentView.backgroundColor = [UIColor whiteColor];
+            //        cell.backgroundColor = [UIColor whiteColor];
+            //        cell.contentView.backgroundColor = [UIColor whiteColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text = [[self.allArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
             cell.textLabel.backgroundColor = [UIColor clearColor];
@@ -179,11 +181,11 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section==0&&indexPath.row==0) {
-//        WelcomeViewController * welcomeVC = [[WelcomeViewController alloc] init];
-//        welcomeVC.needCloseBn = YES;
-//        [self addChildViewController:welcomeVC];
-//        [welcomeVC.view setFrame:self.view.bounds];
-//        [self.view addSubview:welcomeVC.view];
+        //        WelcomeViewController * welcomeVC = [[WelcomeViewController alloc] init];
+        //        welcomeVC.needCloseBn = YES;
+        //        [self addChildViewController:welcomeVC];
+        //        [welcomeVC.view setFrame:self.view.bounds];
+        //        [self.view addSubview:welcomeVC.view];
         
         CheckUpdateViewController * updataVC = [[CheckUpdateViewController alloc] init];
         [self.navigationController pushViewController:updataVC animated:YES];
@@ -262,63 +264,63 @@
     
     
     /*
-    if (indexPath.section==0&&indexPath.row==1) {
-        WebContentViewController * vb = [[WebContentViewController alloc] init];
-        vb.urlStr =[@"http://mp.weixin.qq.com/s?__biz=MjM5MDM1ODExMQ==&mid=200867907&idx=1&sn=7119893f3ed7c8615b074347a56c9519#rd" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//        vb.url = [NSURL URLWithString:[@"http://mp.weixin.qq.com/s?__biz=MjM5MDM1ODExMQ==&mid=200867907&idx=1&sn=7119893f3ed7c8615b074347a56c9519#rd" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        vb.title = @"宠物说小帮手";
-        [self.navigationController pushViewController:vb animated:YES];
-    }
-    if (indexPath.section==1&&indexPath.row==0) {
-        PlaySettingViewController * vc = [[PlaySettingViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    if (indexPath.section==1&&indexPath.row==1) {
-        if (ifHasLogin) {
-            ChatSettingViewController * cv = [[ChatSettingViewController alloc] init];
-            cv.title = @"私信设置";
-            [self.navigationController pushViewController:cv animated:YES];
-        }
-        else{
-            ChangeSkinViewController * vc = [[ChangeSkinViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-    }
-    if (indexPath.section==1&&indexPath.row==2) {
-        ChangeSkinViewController * vc = [[ChangeSkinViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    if (indexPath.section==2&&indexPath.row==0) {
-        CheckUpdateViewController * updataVC = [[CheckUpdateViewController alloc] init];
-        [self.navigationController pushViewController:updataVC animated:YES];
-    }
-    if (indexPath.section==2&&indexPath.row==1) {
-        OpinionViewController * opinionVC = [[OpinionViewController alloc] init];
-        [self.navigationController pushViewController:opinionVC animated:YES];
-    }
-    if (indexPath.section==2&&indexPath.row==2) {
-        [self evaluate];
-    }
-    if (indexPath.section==2&&indexPath.row==3) {
-        [self cleanUpCache];
-    }
-    if (self.sectionForthArray.count==1&&indexPath.section==3) {
-//        NSString * uName = [UserServe sharedUserServe].userName;
-        if (ifHasLogin) {
-            [self doLogOut];
-        }
-        else
-            [self showLoginView];
-    }
-    else if (self.sectionForthArray.count==2&&indexPath.section==3) {
-        if (indexPath.row==1) {
-            [self doLogOut];
-        }
-        if (indexPath.row==0) {
-            ChangePasswordViewController * changeVC = [[ChangePasswordViewController alloc] init];
-            [self.navigationController pushViewController:changeVC animated:YES];
-        }
-    }
+     if (indexPath.section==0&&indexPath.row==1) {
+     WebContentViewController * vb = [[WebContentViewController alloc] init];
+     vb.urlStr =[@"http://mp.weixin.qq.com/s?__biz=MjM5MDM1ODExMQ==&mid=200867907&idx=1&sn=7119893f3ed7c8615b074347a56c9519#rd" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+     //        vb.url = [NSURL URLWithString:[@"http://mp.weixin.qq.com/s?__biz=MjM5MDM1ODExMQ==&mid=200867907&idx=1&sn=7119893f3ed7c8615b074347a56c9519#rd" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+     vb.title = @"宠物说小帮手";
+     [self.navigationController pushViewController:vb animated:YES];
+     }
+     if (indexPath.section==1&&indexPath.row==0) {
+     PlaySettingViewController * vc = [[PlaySettingViewController alloc] init];
+     [self.navigationController pushViewController:vc animated:YES];
+     }
+     if (indexPath.section==1&&indexPath.row==1) {
+     if (ifHasLogin) {
+     ChatSettingViewController * cv = [[ChatSettingViewController alloc] init];
+     cv.title = @"私信设置";
+     [self.navigationController pushViewController:cv animated:YES];
+     }
+     else{
+     ChangeSkinViewController * vc = [[ChangeSkinViewController alloc] init];
+     [self.navigationController pushViewController:vc animated:YES];
+     }
+     }
+     if (indexPath.section==1&&indexPath.row==2) {
+     ChangeSkinViewController * vc = [[ChangeSkinViewController alloc] init];
+     [self.navigationController pushViewController:vc animated:YES];
+     }
+     if (indexPath.section==2&&indexPath.row==0) {
+     CheckUpdateViewController * updataVC = [[CheckUpdateViewController alloc] init];
+     [self.navigationController pushViewController:updataVC animated:YES];
+     }
+     if (indexPath.section==2&&indexPath.row==1) {
+     OpinionViewController * opinionVC = [[OpinionViewController alloc] init];
+     [self.navigationController pushViewController:opinionVC animated:YES];
+     }
+     if (indexPath.section==2&&indexPath.row==2) {
+     [self evaluate];
+     }
+     if (indexPath.section==2&&indexPath.row==3) {
+     [self cleanUpCache];
+     }
+     if (self.sectionForthArray.count==1&&indexPath.section==3) {
+     //        NSString * uName = [UserServe sharedUserServe].userName;
+     if (ifHasLogin) {
+     [self doLogOut];
+     }
+     else
+     [self showLoginView];
+     }
+     else if (self.sectionForthArray.count==2&&indexPath.section==3) {
+     if (indexPath.row==1) {
+     [self doLogOut];
+     }
+     if (indexPath.row==0) {
+     ChangePasswordViewController * changeVC = [[ChangePasswordViewController alloc] init];
+     [self.navigationController pushViewController:changeVC animated:YES];
+     }
+     }
      */
 }
 -(void)refreshLogStatus
@@ -391,17 +393,17 @@
         [DatabaseServe unActivateUeser];
         [UserServe sharedUserServe].userName = nil;
         [UserServe sharedUserServe].userID = nil;
-//        [UserServe sharedUserServe].petArr = nil;
+        //        [UserServe sharedUserServe].petArr = nil;
         [UserServe sharedUserServe].account = nil;
-//        [SFHFKeychainUtils deleteItemForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];
+        //        [SFHFKeychainUtils deleteItemForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
         [self refreshLogStatus];
-//        [[SystemServer sharedSystemServer].chatClient logout];
+        //        [[SystemServer sharedSystemServer].chatClient logout];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"网络不好，退出失败哦"];
         loggingOut = NO;
     }];
-
+    
 }
 -(void)draftsButtonAction
 {
@@ -428,7 +430,7 @@
         dispatch_sync(dispatch_get_main_queue(), ^{
             [SVProgressHUD showSuccessWithStatus:@"清理成功"];
             cacheSize = 0;
-//            [_settingTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:2]] withRowAnimation:UITableViewRowAnimationNone];
+            //            [_settingTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:2]] withRowAnimation:UITableViewRowAnimationNone];
             [self.settingTableView reloadData];
         });
     });
@@ -437,35 +439,25 @@
 {
     NSString *evaluateString = [NSString stringWithFormat:@"https://itunes.apple.com/app/id914242691"];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:evaluateString]];
-//初始化控制器
-//    [SVProgressHUD showWithStatus:@"加载页面"];
-//    SKStoreProductViewController *storeProductViewContorller = [[SKStoreProductViewController alloc] init];
-//    storeProductViewContorller.delegate = self;
-//    [storeProductViewContorller loadProductWithParameters:
-//     @{SKStoreProductParameterITunesItemIdentifier : @"914242691"} completionBlock:^(BOOL result, NSError *error) {
-//        [SVProgressHUD dismiss];
-//         if(error){
-//             [SVProgressHUD showErrorWithStatus:@"加载失败"];
-//         }else{
-//             [self presentViewController:storeProductViewContorller animated:YES completion:nil
-//              ];
-//         }
-//     }];
+    //初始化控制器
+    //    [SVProgressHUD showWithStatus:@"加载页面"];
+    //    SKStoreProductViewController *storeProductViewContorller = [[SKStoreProductViewController alloc] init];
+    //    storeProductViewContorller.delegate = self;
+    //    [storeProductViewContorller loadProductWithParameters:
+    //     @{SKStoreProductParameterITunesItemIdentifier : @"914242691"} completionBlock:^(BOOL result, NSError *error) {
+    //        [SVProgressHUD dismiss];
+    //         if(error){
+    //             [SVProgressHUD showErrorWithStatus:@"加载失败"];
+    //         }else{
+    //             [self presentViewController:storeProductViewContorller animated:YES completion:nil
+    //              ];
+    //         }
+    //     }];
 }
 
 //取消按钮监听
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

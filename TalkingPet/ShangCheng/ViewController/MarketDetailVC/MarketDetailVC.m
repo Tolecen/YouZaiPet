@@ -16,6 +16,9 @@
 
 #import "MarketGoodsListVC.h"
 #import "MarkSearchDetialVC.h"
+#import "MJRefresh.h"
+
+
 
 @interface MarketDetailVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -34,19 +37,15 @@
     
     self.navigationController.automaticallyAdjustsScrollViewInsets=YES;
     self.view.backgroundColor=[UIColor whiteColor];
-    
     [self creatUI];
-    [self reloadData];
 }
 
 
 
--(void)reloadData
+-(void)loadData
 {
     
     __weak MarketDetailVC * weakSelf = self;
-    
-    
     [NetServer getMarketDetailsuccess:^(id result) {
         
         NSDictionary *resultdict=(NSDictionary*)result;
@@ -54,12 +53,11 @@
         [weakSelf.hotsell setValuesForKeysWithDictionary:resultdict[@"data"][@"hotsell"]];
         weakSelf.dataArr=[MarketDetailModel infoModelWith:resultdict];
         weakSelf.headView.model=weakSelf.hotsell;
+        [weakSelf.detailTableV headerEndRefreshing];
         [weakSelf.detailTableV reloadData];
         
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-        
-        
-        
+        [weakSelf.detailTableV headerEndRefreshing];
         
     }];
     
@@ -84,6 +82,7 @@
     
     self.detailTableV.delegate=self;
     self.detailTableV.dataSource=self;
+    
     [self.detailTableV registerClass:[MarketDetailCell class] forCellReuseIdentifier:@"MarketDetailCell"];
     _headView=[[MarketDetailHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 150)];
     self.detailTableV.tableHeaderView=_headView;
@@ -101,6 +100,9 @@
     };
     _headView.model=self.hotsell;
     [self.view addSubview:self.detailTableV];
+    
+    [self.detailTableV addHeaderWithTarget:self action:@selector(loadData)];
+    [self.detailTableV headerBeginRefreshing];
     
 }
 -(void)toSearchGoods

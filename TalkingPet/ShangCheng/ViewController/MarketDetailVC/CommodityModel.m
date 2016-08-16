@@ -19,16 +19,20 @@
     }
     
 }
--(YZGoodsModel*)replaceCommodityModelToYZGoodsModel:(CommodityModel*)model
++(YZGoodsModel*)replaceCommodityModelToYZGoodsModel:(CommodityModel*)model
 {
     YZGoodsModel *yzModel=[[YZGoodsModel alloc] init];
     
+    yzModel.goodsId=model.gid;
+    yzModel.name=model.name;
     
+    yzModel.sellPrice=model.sell_price;
+    yzModel.thumb=model.thumb;
+    yzModel.createTime=@([model.addtime intValue]);
+    yzModel.content=model.content;
+    yzModel.brand.brandId=model.shop_name;
     
-    
-    
-    
-    return yzModel;
+    return [yzModel copy];
     
     
 }

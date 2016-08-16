@@ -105,7 +105,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        //self.title = @"个人中心";
+        
+        
+        
         self.stringArr = @[@"我的等级",@"我的仔币"];
         self.imgArr = @[@"wodedengji@2x",@"wodezaibi@2x"];
         self.hideNaviBg = YES;
@@ -123,7 +125,6 @@
     [super viewDidAppear:animated];
     [self checkNoti];
     [self getUnpaidOrder];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -133,14 +134,19 @@
     if (![UserServe sharedUserServe].userName) {
         _tableView.hidden = YES;
         _loginBtn.hidden = NO;
+        self.title = @"个人中心";
         self.navigationItem.rightBarButtonItem = nil;
     }
     else{
         _tableView.hidden = NO;
         _loginBtn.hidden = YES;
+        self.title =@"";
+        
         self.navigationItem.rightBarButtonItem = _msgBtnItem;
         [self checkCart];
     }
+    
+    
 }
 - (void)viewDidLoad
 {
@@ -891,6 +897,7 @@
 }
 -(void)toLogInPage
 {
+    
     [[RootViewController sharedRootViewController] showLoginViewController];
 }
 
