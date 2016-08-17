@@ -17,9 +17,11 @@
         //        self.backgroundColor = [UIColor colorWithWhite:245/255.f alpha:1];
         //        self.contentView.backgroundColor = [UIColor colorWithWhite:245/255.f alpha:1];
         
-        UIView * bgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 1)];
-        bgV.backgroundColor = [UIColor colorWithWhite:245/255.f alpha:1];
-        [self.contentView addSubview:bgV];
+        haveBtn = NO;
+        
+        _bgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 1)];
+        _bgV.backgroundColor = [UIColor colorWithWhite:245/255.f alpha:1];
+        [self.contentView addSubview:_bgV];
         
         self.desL = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, ScreenWidth-20, 30)];
         [self.contentView addSubview:_desL];
@@ -31,7 +33,7 @@
         _desL.text = @"共1件 合计：￥11000（含运费 ￥0.00）";
         _desL.font = [UIFont systemFontOfSize:13];
         
-        [bgV setFrame:CGRectMake(0, 35, ScreenWidth, 10)];
+        [_bgV setFrame:CGRectMake(0, 35, ScreenWidth, 10)];
         
         if (haveBtn) {
             UIView * linev = [[UIView alloc] initWithFrame:CGRectMake(10, 34, ScreenWidth-20, 1)];
@@ -64,11 +66,23 @@
             [self.btn2 addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
             
             
-            [bgV setFrame:CGRectMake(0, 75, ScreenWidth, 10)];
+            [_bgV setFrame:CGRectMake(0, 75, ScreenWidth, 10)];
+            haveBtn = YES;
         }
         
     }
     return self;
+}
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    if (self.haveBtn) {
+        [_bgV setFrame:CGRectMake(0, 75, ScreenWidth, 10)];
+    }
+    else
+        [_bgV setFrame:CGRectMake(0, 35, ScreenWidth, 10)];
 }
 
 -(void)btnClicked:(UIButton *)btn

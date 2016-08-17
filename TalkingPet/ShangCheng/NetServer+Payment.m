@@ -302,6 +302,26 @@
 }
 
 
++ (void)getKuaJingGoodsSuccess:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
+    params[@"uid"] = [UserServe sharedUserServe].userID;
+    //    params[@"order_no"] = orderNo;
+    params[@"source"] = @"app";
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/payment/mustcardid",BasePayUrl];
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:params
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
+
 + (void)createOrderNoSuccess:(void (^)(id result))success
                               failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
 {

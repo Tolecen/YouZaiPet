@@ -21,6 +21,9 @@
 #import "Pingpp.h"
 #import "PaySuccessViewController.h"
 @interface YZOrderConfimViewController()<UITableViewDelegate, UITableViewDataSource, YZShoppingCarBottomBarDelegate>
+{
+    BOOL haveKuajing;
+}
 
 @property (nonatomic, weak) YZShoppingCarBottomBar  *bottomBar;
 @property (nonatomic, weak) UITableView *tableView;
@@ -33,6 +36,8 @@
 @property (nonatomic,strong)NSString * goodsString;
 @property (nonatomic,strong)NSString * payChannel;
 @property (nonatomic,strong)NSString * orderNo;
+
+@property (nonatomic,strong)UIView * topv;
 
 @end
 
@@ -63,6 +68,10 @@
             address.city = @"";
             address.address = dic[@"address"];
             address.zipCode = @"100000";
+            if (dic[@"address"]) {
+                address.cardId = dic[@"address"];
+            }
+            
             address.action = [dic[@"default"] isEqualToString:@"1"];
             self.address = address;
             [_tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
@@ -83,7 +92,17 @@
     self.paySelectedIndex = 0;
     
     
-
+    self.topv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 60)];
+    self.topv.backgroundColor = [UIColor colorWithR:252 g:241 b:219 alpha:1];
+    
+    UILabel * hhh = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth-20, 40)];
+    hhh.backgroundColor = [UIColor clearColor];
+    hhh.textColor = [UIColor colorWithR:226 g:163 b:135 alpha:1];
+    hhh.font = [UIFont systemFontOfSize:14];
+    hhh.numberOfLines = 2;
+    hhh.lineBreakMode = NSLineBreakByCharWrapping;
+    hhh.text = @"根据国家相关法律规定，您购买的商品需要填写身份证信息。";
+    [self.topv addSubview:hhh];
     
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -130,15 +149,41 @@
     
     
     [self inner_getDefaultAddress];
+    
+    [self getJingwaiGoods];
 }
 
-
+-(void)getJingwaiGoods
+{
+    [NetServer getKuaJingGoodsSuccess:^(id result) {
+        if ([result[@"code"] intValue]==200) {
+            NSArray * h = result[@"data"];
+            for (int i = 0; i<self.orders.count; i++) {
+                OrderYZGoodInfo * goodInfo = self.orders[i];
+                for (int j = 0; j<h.count; j++) {
+                    NSString * sid = [h[j] objectForKey:@"id"];
+                    if ([sid isEqualToString:goodInfo.shop_id]) {
+                        self.tableView.tableHeaderView = self.topv;
+                        haveKuajing = YES;
+                        break;
+                    }
+                }
+            }
+        }
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        
+    }];
+}
 
 - (void)shoppingCarClearPrice {
 //    [[YZShoppingCarHelper instanceManager] clearShoppingCar];
 //    [self makePaymentInfo];
     if (!self.address) {
         [SVProgressHUD showErrorWithStatus:@"请先添加一个收货地址"];
+        return;
+    }
+    if (haveKuajing && (!self.address.cardId || self.address.cardId.length<1)) {
+        [SVProgressHUD showErrorWithStatus:@"根据国家相关法律规定，您购买的商品需要填写身份证信息。"];
         return;
     }
     [self creatOrderNoWithSuccess:^(id result) {

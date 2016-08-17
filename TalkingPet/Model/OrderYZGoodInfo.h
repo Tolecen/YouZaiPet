@@ -14,6 +14,7 @@
 @property (nonatomic,retain)NSString<Optional> *product_name;
 @property (nonatomic,retain)NSString<Optional> *order_no;
 @property (nonatomic,retain)NSString<Optional> *shop_name;
+@property (nonatomic,retain)NSString<Optional> *shop_id;
 @property (nonatomic,retain)NSString<Optional> *unit_price;
 @property (nonatomic,retain)NSString<Optional> *total;
 @property (nonatomic,retain)NSString<Optional> *real_amount;
