@@ -60,6 +60,8 @@
     BOOL canSwitch;
     
     NSDictionary * addressDict;
+    
+    int cTag;
 }
 @property (nonatomic,retain)NSArray * titleArr;
 @property (nonatomic,retain)ReceiptAddress * address;
@@ -188,11 +190,16 @@
 {
     _address.action = swh.on;
 }
--(void)cityFinishSelected
+-(void)cityFinishSelected:(UIBarButtonItem *)btn
 {
+    cTag = (int)btn.tag;
     for (OneViewCell * cell in _tableView.visibleCells) {
         [cell.view resignFirstResponder];
     }
+    if (cTag==2) {
+        cityL.text = [NSString stringWithFormat:@"%@%@%@",_address.province,_address.city,_address.qu];
+    }
+
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -231,7 +238,8 @@
             textF.inputAccessoryView =({
                 UIToolbar* toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
                 toolbar.tintColor = [UIColor blackColor];
-                UIBarButtonItem*rb = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(cityFinishSelected)];
+                UIBarButtonItem*rb = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(cityFinishSelected:)];
+                rb.tag = 1;
                 rb.tintColor = [UIColor blackColor];
                 toolbar.items = @[rb];
                 toolbar;
@@ -249,7 +257,8 @@
             cityL.inputAccessoryView =({
                 UIToolbar* toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
                 toolbar.tintColor = [UIColor blackColor];
-                UIBarButtonItem*rb = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(cityFinishSelected)];
+                UIBarButtonItem*rb = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(cityFinishSelected:)];
+                rb.tag = 2;
                 rb.tintColor = [UIColor blackColor];
                 toolbar.items = @[rb];
                 toolbar;
@@ -282,7 +291,8 @@
             textF.inputAccessoryView =({
                 UIToolbar* toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
                 toolbar.tintColor = [UIColor blackColor];
-                UIBarButtonItem*rb = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(cityFinishSelected)];
+                UIBarButtonItem*rb = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(cityFinishSelected:)];
+                rb.tag=3;
                 rb.tintColor = [UIColor blackColor];
                 toolbar.items = @[rb];
                 toolbar;
@@ -352,7 +362,7 @@
             _address.cityCode = [self.cityArray[0] lastObject];
             _address.qu = [self.quArray[0] firstObject];
             _address.quCode = [self.quArray[0] lastObject];
-            cityL.text = [NSString stringWithFormat:@"%@%@%@",_address.province,_address.city,_address.qu];
+//            cityL.text = [NSString stringWithFormat:@"%@%@%@",_address.province,_address.city,_address.qu];
         }
     }
 }
@@ -368,6 +378,7 @@
 }
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
+
     _address.address = textView.text;
 }
 #pragma mark -
@@ -439,6 +450,6 @@
         _address.qu = [self.quArray[row] firstObject];
         _address.quCode = [self.quArray[row] lastObject];
     }
-    cityL.text = [NSString stringWithFormat:@"%@%@%@",_address.province,_address.city,_address.qu];
+
 }
 @end

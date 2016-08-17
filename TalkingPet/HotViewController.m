@@ -279,6 +279,7 @@
 @property (nonatomic,retain)UIButton *zanButton;
 @property (nonatomic,retain)UILabel * nameL;
 @property (nonatomic,retain)UILabel *gradeL;
+@property (nonatomic,assign)float myWidth;
 
 
 
@@ -304,9 +305,13 @@
         [jbiaoqian setImage:[UIImage imageNamed:@"jingyanbiaoqian"]];
         [self.contentView addSubview:jbiaoqian];
         
+        UIImageView * sa = [[UIImageView alloc] initWithFrame:CGRectMake(5, CGRectGetMaxY(self.imageV.frame)+7, 14, 14)];
+        [sa setImage:[UIImage imageNamed:@"jingyantextheader"]];
+        [self.contentView addSubview:sa];
         
+        self.myWidth = frame.size.width;
         
-        self.desL = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.imageV.frame)+5, frame.size.width-20, 40)];
+        self.desL = [[UILabel alloc] initWithFrame:CGRectMake(25, CGRectGetMaxY(self.imageV.frame)+5, frame.size.width-35, 40)];
         self.desL.backgroundColor = [UIColor clearColor];
         self.desL.textColor = CommonGreenColor;
         self.desL.font = [UIFont systemFontOfSize:13];
@@ -344,6 +349,7 @@
         UIImageView * zanimgv = [[UIImageView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.gradeL.frame)+12, 10, 10)];
         zanimgv.image = [UIImage imageNamed:@"zan@2x"];
         [self.contentView addSubview:zanimgv];
+        zanimgv.alpha = 0.6;
         
         self.zanL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(zanimgv.frame)+5, CGRectGetMaxY(self.gradeL.frame)+10, 30, 14)];
         self.zanL.backgroundColor = [UIColor clearColor];
@@ -356,6 +362,7 @@
         UIImageView * cimgv = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.zanL.frame), CGRectGetMaxY(self.gradeL.frame)+12, 10, 10)];
         cimgv.image = [UIImage imageNamed:@"pinglun@2x"];
         [self.contentView addSubview:cimgv];
+        cimgv.alpha = 0.6;
         
         self.commentL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(cimgv.frame)+5, CGRectGetMaxY(self.gradeL.frame)+10, 30, 14)];
         self.commentL.backgroundColor = [UIColor clearColor];
@@ -368,6 +375,7 @@
         UIImageView * limgv = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commentL.frame), CGRectGetMaxY(self.gradeL.frame)+12, 10, 10)];
         limgv.image = [UIImage imageNamed:@"liulanliang-hui@2x"];
         [self.contentView addSubview:limgv];
+        limgv.alpha = 0.6;
         
         self.liulanL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(limgv.frame)+5, CGRectGetMaxY(self.gradeL.frame)+10, 30, 14)];
         self.liulanL.backgroundColor = [UIColor clearColor];
@@ -393,7 +401,9 @@
     //    [super layoutSubviews];
     [self.imageV setImageWithURL:[NSURL URLWithString:[self.talking.thumbImgUrl stringByAppendingString:@"?imageView2/1/w/400/h/400"]]];
     self.nameL.text = self.talking.petInfo.nickname;
-    self.desL.text = [@"  " stringByAppendingString:self.talking.descriptionContent];
+    self.desL.text = self.talking.descriptionContent;
+    CGRect u = [self.desL.text boundingRectWithSize:CGSizeMake(self.myWidth-35, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.desL.font} context:nil];
+    [self.desL setFrame:CGRectMake(self.desL.frame.origin.x, self.desL.frame.origin.y, u.size.width, u.size.height)];
     self.gradeL.text = [NSString stringWithFormat:@"LV.%@",self.talking.petInfo.grade?self.talking.petInfo.grade:@"0"];
     [self.headView setImageURL:[NSURL URLWithString:[self.talking.petInfo.headImgURL stringByAppendingString:@"?imageView2/2/w/60"]]];
     

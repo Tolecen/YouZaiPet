@@ -22,6 +22,10 @@
 {
     float cacheSize;
 }
+
+@property(nonatomic,copy)NSArray *dataArrA;
+@property(nonatomic,copy)NSArray *dataArrB;
+
 @end
 
 @implementation SetViewController
@@ -32,19 +36,10 @@
     if (self) {
         // Custom initialization
         self.title = @"设置";
-        self.sectionFirstArray = [NSArray arrayWithObjects:@"关于友仔", nil];
-        self.sectionFirstArray_2 = [NSArray arrayWithObjects:@"草稿箱", nil];
         
-        //        self.sectionFirstArraytwo = [NSArray arrayWithObjects:@"播放设置",@"个性化皮肤", nil];
-        self.sectionSecondArray = [NSArray arrayWithObjects:@"播放设置", nil];
-        self.sectionSecondArrayA = [NSArray arrayWithObjects:@"播放设置",@"图片设置", nil];
-        self.sectionSecondArrayB = [NSArray arrayWithObjects:@"播放设置", nil];
-        self.sectionThirdArray = [NSArray arrayWithObjects:@"意见反馈",@"清理缓存", nil];
-        self.sectionForthArrayA = [NSArray arrayWithObjects:@"修改密码",@"退出登录", nil];
-        self.sectionForthArrayB = [NSArray arrayWithObjects:@"登录", nil];
-        self.allArrayA = [NSArray arrayWithObjects:self.sectionFirstArray,self.sectionFirstArray_2,self.sectionSecondArray,self.sectionThirdArray,self.sectionForthArrayA, nil];
-        self.allArrayB = [NSArray arrayWithObjects:self.sectionFirstArray,self.sectionFirstArray_2,self.sectionSecondArray,self.sectionThirdArray,self.sectionForthArrayB, nil];
+        self.dataArrA=@[@[@"关于友仔",@"草稿箱",],@[@"播放设置",@"图片设置",@"意见反馈",@"清理缓存"],@[@"修改密码"],@[@"退出登录"]];
         
+        self.dataArrB=@[@[@"关于友仔"],@[@"播放设置",@"图片设置",@"意见反馈",@"清理缓存"],@[@"登录"]];
         loggingOut = NO;
     }
     return self;
@@ -60,25 +55,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view. backgroundColor=[UIColor colorWithR:234 g:234 b:234 alpha:1];
-    // Do any additional setup after loading the view.
-    UIView * uu = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, self.view.frame.size.height-navigationBarHeight-5)];
-    [uu setBackgroundColor:[UIColor whiteColor]];
-    [uu setAlpha:0.8];
     
+    self.view.backgroundColor=[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
+    
+    // Do any additional setup after loading the view.
     [self setBackButtonWithTarget:@selector(backAction)];
     
     self.settingTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight) style:UITableViewStyleGrouped];
     _settingTableView.delegate = self;
     _settingTableView.dataSource = self;
-    _settingTableView.backgroundView = uu;
+    _settingTableView.backgroundColor=[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
     _settingTableView.backgroundColor = [UIColor clearColor];
     _settingTableView.rowHeight = 45;
     _settingTableView.contentInset = UIEdgeInsetsMake(0, 0, 59, 0);
     _settingTableView.showsVerticalScrollIndicator = NO;
-    _settingTableView.scrollEnabled = NO;
+    _settingTableView.separatorInset=UIEdgeInsetsMake(0,0.1, 0, 0.1);
+    _settingTableView.separatorStyle=UITableViewCellSeparatorStyleSingleLineEtched;
     [self.view addSubview:_settingTableView];
-    
+    [self buildViewWithSkintype];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -87,9 +81,10 @@
     dispatch_async(queue, ^{
         cacheSize = [TFileManager allCacheSize];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_settingTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:ifHasLogin?3:2]] withRowAnimation:UITableViewRowAnimationNone];
+            [_settingTableView reloadData];
         });
     });
+    
 }
 - (void)backAction
 {
@@ -97,17 +92,30 @@
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 {
-    return self.allArray.count;
+    if (ifHasLogin) {
+        return  [self.dataArrA count];
+    }
+    else
+    {
+        return  [self.dataArrB count];
+    }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self.allArray objectAtIndex:section] count];
+    if (ifHasLogin) {
+        return  [self.dataArrA[section] count];
+    }
+    else
+    {
+        return  [self.dataArrB[section] count];
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (ifHasLogin) {
-        if (indexPath.section == 3 && indexPath.row == 1) {
+        if (indexPath.section == 1 && indexPath.row == 3) {
             static NSString *identifier = @"Cell";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier ];
             UILabel * label = (UILabel *)[cell viewWithTag:100];
@@ -118,12 +126,44 @@
                 label.textColor = [UIColor grayColor];
                 [cell addSubview:label];
                 label.textAlignment = NSTextAlignmentRight;
+                
+                UILabel *label2=[[UILabel alloc] initWithFrame:CGRectMake(0, 44, ScreenWidth, 1)];
+                label2.backgroundColor=[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
+                [cell addSubview:label2];
             }
             cell.backgroundColor = [UIColor whiteColor];
             cell.contentView.backgroundColor = [UIColor whiteColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textLabel.text = [[self.allArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+            cell.separatorInset = UIEdgeInsetsMake(0,0.1, 0, 0.1);
+            cell.textLabel.text = self.dataArrA[indexPath.section][indexPath.row];
+            cell.textLabel.textColor=[UIColor colorWithR:150 g:150 b:150 alpha:1];
             label.text = [NSString stringWithFormat:@"%.2fM",cacheSize];
+            return cell;
+        }
+        else if (indexPath.section==3)
+        {
+            static NSString *cellIdentifier = @"settingCell1";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];
+            
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                UILabel *label1=[[UILabel alloc] initWithFrame:CGRectMake(30, 0, ScreenWidth-60, cell.frame.size.height)];
+                [cell addSubview:label1];
+                label1.text=self.dataArrA[indexPath.section][indexPath.row];
+                label1.textAlignment=NSTextAlignmentCenter;
+                label1.tag=200;
+                label1.backgroundColor=[UIColor colorWithRed:0.99 green:0.35 blue:0.26 alpha:1.00];
+                label1.textColor=[UIColor colorWithRed:0.98 green:0.95 blue:0.95 alpha:1.00];
+                label1.layer.masksToBounds=YES;
+                label1.layer.cornerRadius=5;
+                
+            }
+            
+            UILabel *label1= [cell viewWithTag:200];
+            label1.textColor=[UIColor colorWithRed:0.98 green:0.95 blue:0.95 alpha:1.00];
+            label1.text=self.dataArrA[indexPath.section][indexPath.row];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.backgroundColor = [UIColor clearColor];
             return cell;
         }
         else
@@ -132,17 +172,21 @@
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                UILabel *label2=[[UILabel alloc] initWithFrame:CGRectMake(0, 44, ScreenWidth, 1)];
+                label2.backgroundColor=[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
+                [cell addSubview:label2];
             }
-            //        cell.backgroundColor = [UIColor whiteColor];
-            //        cell.contentView.backgroundColor = [UIColor whiteColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textLabel.text = [[self.allArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+            cell.textLabel.text = self.dataArrA[indexPath.section][indexPath.row];
             cell.textLabel.backgroundColor = [UIColor clearColor];
+            cell.textLabel.textColor=[UIColor colorWithR:150 g:150 b:150 alpha:1];
+            
             return cell;
         }
     }
     else{
-        if (indexPath.section == 2 && indexPath.row == 1) {
+        
+        if (indexPath.section == 1 && indexPath.row == 3) {
             static NSString *identifier = @"Cell";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier ];
             UILabel * label = (UILabel *)[cell viewWithTag:100];
@@ -153,25 +197,60 @@
                 label.textColor = [UIColor grayColor];
                 [cell addSubview:label];
                 label.textAlignment = NSTextAlignmentRight;
+                
+                UILabel *label2=[[UILabel alloc] initWithFrame:CGRectMake(0, 44, ScreenWidth, 1)];
+                label2.backgroundColor=[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
+                [cell addSubview:label2];
             }
             cell.backgroundColor = [UIColor whiteColor];
             cell.contentView.backgroundColor = [UIColor whiteColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textLabel.text = [[self.allArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+            cell.textLabel.text = self.dataArrB[indexPath.section][indexPath.row];
             label.text = [NSString stringWithFormat:@"%.2fM",cacheSize];
+            cell.textLabel.textColor=[UIColor colorWithR:150 g:150 b:150 alpha:1];
+            
             return cell;
-        }else
+        }
+        else if (indexPath.section==2)
+        {
+            static NSString *cellIdentifier = @"settingCell1";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];
+            
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                UILabel *label1=[[UILabel alloc] initWithFrame:CGRectMake(30, 0, ScreenWidth-60, cell.frame.size.height)];
+                
+                label1.tag=200;
+                label1.text=self.dataArrB[indexPath.section][indexPath.row];
+                label1.backgroundColor=[UIColor colorWithRed:0.99 green:0.35 blue:0.26 alpha:1.00];
+                label1.textAlignment=NSTextAlignmentCenter;
+                label1.layer.masksToBounds=YES;
+                label1.layer.cornerRadius=5;
+                [cell addSubview:label1];
+                
+            }
+            UILabel *label1= [cell viewWithTag:200];
+            label1.text=self.dataArrB[indexPath.section][indexPath.row];
+            label1.textColor=[UIColor colorWithRed:0.98 green:0.95 blue:0.95 alpha:1.00];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.backgroundColor = [UIColor clearColor];
+            return cell;
+        }
+        else
         {
             static NSString *cellIdentifier = @"settingCell";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                UILabel *label2=[[UILabel alloc] initWithFrame:CGRectMake(0, 44, ScreenWidth, 1)];
+                label2.backgroundColor=[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
+                [cell addSubview:label2];
             }
-            //        cell.backgroundColor = [UIColor whiteColor];
-            //        cell.contentView.backgroundColor = [UIColor whiteColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textLabel.text = [[self.allArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+            cell.textLabel.text = self.dataArrB[indexPath.section][indexPath.row];
             cell.textLabel.backgroundColor = [UIColor clearColor];
+            cell.textLabel.textColor=[UIColor colorWithR:150 g:150 b:150 alpha:1];
+            
             return cell;
         }
     }
@@ -181,148 +260,75 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section==0&&indexPath.row==0) {
-        //        WelcomeViewController * welcomeVC = [[WelcomeViewController alloc] init];
-        //        welcomeVC.needCloseBn = YES;
-        //        [self addChildViewController:welcomeVC];
-        //        [welcomeVC.view setFrame:self.view.bounds];
-        //        [self.view addSubview:welcomeVC.view];
-        
+        //关于友仔
         CheckUpdateViewController * updataVC = [[CheckUpdateViewController alloc] init];
         [self.navigationController pushViewController:updataVC animated:YES];
     }
-    
-    if (ifHasLogin) {
-        if(indexPath.section==1){
-            [self draftsButtonAction];
+    else if(indexPath.section==0&&indexPath.row==1)
+    {
+        //草稿箱
+        [self draftsButtonAction];
+        
+    }
+    if(indexPath.section==1)
+    {
+        if (indexPath.row==0) {
+            //播放设置
+            PlaySettingViewController * vc = [[PlaySettingViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            
         }
-        else if (indexPath.section==2){
-            if (indexPath.row==0) {
-                PlaySettingViewController * vc = [[PlaySettingViewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-            else if (indexPath.row==1){
-                PicSaveSettingViewController * picSet = [[PicSaveSettingViewController alloc] init];
-                picSet.title = @"图片保存设置";
-                [self.navigationController pushViewController:picSet animated:YES];
-            }
-            else if (indexPath.row==2){
-                ChatSettingViewController * cv = [[ChatSettingViewController alloc] init];
-                cv.title = @"私信设置";
-                [self.navigationController pushViewController:cv animated:YES];
-            }
+        else if (indexPath.row==1)
+        {
+            //图片设置
+            PicSaveSettingViewController * picSet = [[PicSaveSettingViewController alloc] init];
+            picSet.title = @"图片保存设置";
+            [self.navigationController pushViewController:picSet animated:YES];
         }
-        else if (indexPath.section==3){
-            if (indexPath.row==0) {
-                OpinionViewController * opinionVC = [[OpinionViewController alloc] init];
-                [self.navigationController pushViewController:opinionVC animated:YES];
-            }
-            else if (indexPath.row==1){
-                [self cleanUpCache];
-            }
+        else if (indexPath.row==2)
+        {
+            //意见反馈
+            OpinionViewController * opinionVC = [[OpinionViewController alloc] init];
+            [self.navigationController pushViewController:opinionVC animated:YES];
         }
-        else if (indexPath.section==4){
-            if (self.sectionForthArray.count==1&&indexPath.section==4) {
-                //        NSString * uName = [UserServe sharedUserServe].userName;
-                if (ifHasLogin) {
-                    [self doLogOut];
-                }
-                else
-                    [self showLoginView];
-            }
-            else if (self.sectionForthArray.count==2&&indexPath.section==4) {
-                if (indexPath.row==1) {
-                    [self doLogOut];
-                }
-                if (indexPath.row==0) {
-                    ChangePasswordViewController * changeVC = [[ChangePasswordViewController alloc] init];
-                    [self.navigationController pushViewController:changeVC animated:YES];
-                }
-            }
+        else if (indexPath.row==3)
+        {
+            //清理缓存
+            [self cleanUpCache];
         }
     }
-    else
+    if(ifHasLogin)
     {
-        if(indexPath.section==1){
-            if (indexPath.row==0) {
-                PlaySettingViewController * vc = [[PlaySettingViewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
+        if (indexPath.section==2) {
+            //清理缓存
+            [self cleanUpCache];
         }
-        else if (indexPath.section==2){
-            if (indexPath.row==0) {
-                OpinionViewController * opinionVC = [[OpinionViewController alloc] init];
-                [self.navigationController pushViewController:opinionVC animated:YES];
-            }
-            else if (indexPath.row==1){
-                [self cleanUpCache];
-            }
+        else if (indexPath.section==3) {
+            //退出登录
+            [self doLogOut];
         }
-        else if (indexPath.section==3){
+    }else
+    {
+        if (indexPath.section==2) {
+            //登录
             [self showLoginView];
         }
     }
-    
-    
-    /*
-     if (indexPath.section==0&&indexPath.row==1) {
-     WebContentViewController * vb = [[WebContentViewController alloc] init];
-     vb.urlStr =[@"http://mp.weixin.qq.com/s?__biz=MjM5MDM1ODExMQ==&mid=200867907&idx=1&sn=7119893f3ed7c8615b074347a56c9519#rd" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-     //        vb.url = [NSURL URLWithString:[@"http://mp.weixin.qq.com/s?__biz=MjM5MDM1ODExMQ==&mid=200867907&idx=1&sn=7119893f3ed7c8615b074347a56c9519#rd" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-     vb.title = @"宠物说小帮手";
-     [self.navigationController pushViewController:vb animated:YES];
-     }
-     if (indexPath.section==1&&indexPath.row==0) {
-     PlaySettingViewController * vc = [[PlaySettingViewController alloc] init];
-     [self.navigationController pushViewController:vc animated:YES];
-     }
-     if (indexPath.section==1&&indexPath.row==1) {
-     if (ifHasLogin) {
-     ChatSettingViewController * cv = [[ChatSettingViewController alloc] init];
-     cv.title = @"私信设置";
-     [self.navigationController pushViewController:cv animated:YES];
-     }
-     else{
-     ChangeSkinViewController * vc = [[ChangeSkinViewController alloc] init];
-     [self.navigationController pushViewController:vc animated:YES];
-     }
-     }
-     if (indexPath.section==1&&indexPath.row==2) {
-     ChangeSkinViewController * vc = [[ChangeSkinViewController alloc] init];
-     [self.navigationController pushViewController:vc animated:YES];
-     }
-     if (indexPath.section==2&&indexPath.row==0) {
-     CheckUpdateViewController * updataVC = [[CheckUpdateViewController alloc] init];
-     [self.navigationController pushViewController:updataVC animated:YES];
-     }
-     if (indexPath.section==2&&indexPath.row==1) {
-     OpinionViewController * opinionVC = [[OpinionViewController alloc] init];
-     [self.navigationController pushViewController:opinionVC animated:YES];
-     }
-     if (indexPath.section==2&&indexPath.row==2) {
-     [self evaluate];
-     }
-     if (indexPath.section==2&&indexPath.row==3) {
-     [self cleanUpCache];
-     }
-     if (self.sectionForthArray.count==1&&indexPath.section==3) {
-     //        NSString * uName = [UserServe sharedUserServe].userName;
-     if (ifHasLogin) {
-     [self doLogOut];
-     }
-     else
-     [self showLoginView];
-     }
-     else if (self.sectionForthArray.count==2&&indexPath.section==3) {
-     if (indexPath.row==1) {
-     [self doLogOut];
-     }
-     if (indexPath.row==0) {
-     ChangePasswordViewController * changeVC = [[ChangePasswordViewController alloc] init];
-     [self.navigationController pushViewController:changeVC animated:YES];
-     }
-     }
-     */
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.1;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 20;
+}
+
+
+
+
+
 -(void)refreshLogStatus
 {
     NSString * uName = [UserServe sharedUserServe].userName;
@@ -366,6 +372,9 @@
         [self realLogOut];
     }
 }
+
+
+
 -(void)realLogOut
 {
     if (loggingOut||![UserServe sharedUserServe].userID) {
@@ -459,5 +468,15 @@
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
