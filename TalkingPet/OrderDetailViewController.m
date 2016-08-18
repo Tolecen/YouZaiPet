@@ -584,7 +584,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     
-    static NSString * header = @"footer";
+    static NSString * header = @"footer22";
     OrderFooterView * view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:header];
     if (view == nil) {
         view = [[OrderFooterView alloc] initWithReuseIdentifier:header WithButton:YES];
