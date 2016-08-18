@@ -221,6 +221,9 @@
                 listModel.post_status = goodModel.post_status;
             }
             
+            if (gd[@"field_id"]) {
+                goodModel.goodId = gd[@"field_id"];
+            }
             
             amount = amount+[goodModel.total intValue];
             

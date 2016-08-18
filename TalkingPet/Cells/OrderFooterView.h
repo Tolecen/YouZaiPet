@@ -12,7 +12,7 @@
 @property (nonatomic,retain)UILabel * desL;
 @property (nonatomic,strong)UIButton * btn1;
 @property (nonatomic,strong)UIButton * btn2;
-@property (nonatomic,assign)BOOL haveBtn;
+@property (nonatomic,assign)BOOL haveTheBtn;
 @property (nonatomic,strong)UIView * bgV;
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier WithButton:(BOOL)haveBtn;
 @property (nonatomic,copy)void(^buttonClicked) (NSString * title);

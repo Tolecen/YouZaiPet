@@ -100,7 +100,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/BrowserTableHelper.m"
-                  timestampString = "493199471.367517"
+                  timestampString = "493201161.547318"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "186"
@@ -115,7 +115,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/BrowserTableHelper.m"
-                  timestampString = "493199471.36768"
+                  timestampString = "493201161.547456"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "188"
@@ -212,12 +212,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/ShangCheng/ViewController/YZOrderConfimViewController.m"
-            timestampString = "492657094.648175"
+            timestampString = "493200820.420371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "-makePaymentInfo"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "-getJingwaiGoods"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -260,7 +260,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/ShangCheng/NetServer+Payment.m"
-                  timestampString = "493199471.371957"
+                  timestampString = "493201161.552793"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "319"
@@ -275,7 +275,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/ShangCheng/NetServer+Payment.m"
-                  timestampString = "493199471.372091"
+                  timestampString = "493201161.552944"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "319"
@@ -290,7 +290,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/ShangCheng/NetServer+Payment.m"
-                  timestampString = "493199471.372221"
+                  timestampString = "493201161.553085"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "319"
@@ -387,7 +387,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/LoginViewController.m"
-                  timestampString = "493199471.374719"
+                  timestampString = "493201161.556349"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "412"
@@ -402,7 +402,7 @@
                   moduleName = "TalkingPet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/LoginViewController.m"
-                  timestampString = "493199471.374864"
+                  timestampString = "493201161.556527"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "413"
@@ -450,13 +450,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TalkingPet/OrderDetailViewController.m"
-            timestampString = "493199471.215107"
+            filePath = "TalkingPet/ShangCheng/ViewController/YZOrderConfimViewController.m"
+            timestampString = "493200846.68019"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "594"
-            endingLineNumber = "594"
-            landmarkName = "-tableView:viewForFooterInSection:"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "-shoppingCarClearPrice"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -466,14 +466,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TalkingPet/OrderDetailViewController.m"
-            timestampString = "493199502.173752"
+            filePath = "TalkingPet/ShangCheng/ViewController/YZOrderConfimViewController.m"
+            timestampString = "493200859.6293"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "597"
-            endingLineNumber = "597"
-            landmarkName = "-tableView:viewForFooterInSection:"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
+            landmarkName = "-makePaymentInfo"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[YZOrderConfimViewController makePaymentInfo]"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/ShangCheng/ViewController/YZOrderConfimViewController.m"
+                  timestampString = "493201161.5593"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "238"
+                  endingLineNumber = "238"
+                  offsetFromSymbolStart = "751">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__46-[YZOrderConfimViewController makePaymentInfo]_block_invoke"
+                  moduleName = "TalkingPet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taoxinle/Projects/YouZaiPet/TalkingPet/ShangCheng/ViewController/YZOrderConfimViewController.m"
+                  timestampString = "493201161.55944"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "239"
+                  endingLineNumber = "239"
+                  offsetFromSymbolStart = "54">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -482,29 +514,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TalkingPet/OrderDetailViewController.m"
-            timestampString = "493199536.124077"
+            filePath = "TalkingPet/MyOrderViewConyroller.m"
+            timestampString = "493201257.938286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "602"
-            endingLineNumber = "602"
-            landmarkName = "-tableView:viewForFooterInSection:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TalkingPet/OrderDetailViewController.m"
-            timestampString = "493199537.836362"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "608"
-            endingLineNumber = "608"
-            landmarkName = "-tableView:viewForFooterInSection:"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "-getModelArray:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

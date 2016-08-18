@@ -769,6 +769,7 @@
     else if ([title isEqualToString:@"立刻付款"]){
         YZOrderConfimViewController *viewC = [[YZOrderConfimViewController alloc] init];
         viewC.orders = self.myOrder.goods;
+        viewC.pOrderNo = self.myOrder.order_no;
         viewC.orderCount = [self.myOrder.total_amount integerValue];
         viewC.totalPrice = [self.myOrder.total_money integerValue];
         [self.navigationController pushViewController:viewC animated:YES];

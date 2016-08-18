@@ -133,6 +133,7 @@
     }
     else
     {
+        self.orderNo = self.pOrderNo;
         [self.bottomBar resetTotalPrice:self.totalPrice];
     }
     
@@ -186,19 +187,24 @@
         [SVProgressHUD showErrorWithStatus:@"根据国家相关法律规定，您购买的商品需要填写身份证信息。"];
         return;
     }
-    [self creatOrderNoWithSuccess:^(id result) {
-        if ([result[@"code"] intValue]==200) {
-            self.orderNo = [result[@"data"] objectForKey:@"order_no"];
-            [self makePaymentInfo];
-        }
-        else {
-            if (result[@"message"]) {
-                [SVProgressHUD showErrorWithStatus:result[@"message"]];
+    if (self.orderNo) {
+        [self makePaymentInfo];
+    }
+    else{
+        [self creatOrderNoWithSuccess:^(id result) {
+            if ([result[@"code"] intValue]==200) {
+                self.orderNo = [result[@"data"] objectForKey:@"order_no"];
+                [self makePaymentInfo];
             }
-            else
-                [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
-        }
-    }];
+            else {
+                if (result[@"message"]) {
+                    [SVProgressHUD showErrorWithStatus:result[@"message"]];
+                }
+                else
+                    [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
+            }
+        }];
+    }
 }
 
 -(void)creatOrderNoWithSuccess:(void (^)(id result))success

@@ -10,6 +10,7 @@
 
 @interface YZOrderConfimViewController : BaseViewController
 @property (nonatomic, copy) NSArray *orders;
+@property (nonatomic,strong)NSString * pOrderNo;
 @property (nonatomic, assign) NSInteger orderCount;
 @property (nonatomic, assign) NSInteger totalPrice;
 @end
