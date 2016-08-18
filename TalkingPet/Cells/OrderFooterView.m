@@ -16,7 +16,6 @@
         
         //        self.backgroundColor = [UIColor colorWithWhite:245/255.f alpha:1];
         //        self.contentView.backgroundColor = [UIColor colorWithWhite:245/255.f alpha:1];
-        
         self.haveTheBtn = NO;
         
         _bgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 1)];
@@ -67,13 +66,14 @@
             
             
             [_bgV setFrame:CGRectMake(0, 75, ScreenWidth, 10)];
+            
             self.haveTheBtn = YES;
+            
         }
         
     }
     return self;
 }
-
 -(void)layoutSubviews
 {
     [super layoutSubviews];
@@ -84,6 +84,7 @@
     else
         [_bgV setFrame:CGRectMake(0, 35, ScreenWidth, 10)];
 }
+
 
 -(void)btnClicked:(UIButton *)btn
 {

@@ -36,50 +36,56 @@
         
         
         
-        self.bgImgV=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 160)];
+        self.bgImgV=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 170)];
         //        self.bgImgV.image= [UIImage imageNamed:@"tuangou"];
         [self.contentView addSubview:self.bgImgV];
-        
         //背景层上半透明的遮盖层
-        UIView *translucentV=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bgImgV.frame.size.width*0.8, self.bgImgV.frame.size.height*0.6)];
-        translucentV.alpha=0.4;
-        translucentV.center=CGPointMake(ScreenWidth/2, 80);
+        UIView *translucentV=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bgImgV.frame.size.width-152, self.bgImgV.frame.size.height-60)];
+        translucentV.alpha=0.6;
+        translucentV.center=CGPointMake(ScreenWidth/2, 85);
         translucentV.backgroundColor=[UIColor whiteColor];
         [self.bgImgV addSubview: translucentV];
         
         
-        self.titleL=[[UILabel alloc] initWithFrame:CGRectMake(0, 20, 250, 30)];
-        self.titleL.font=[UIFont systemFontOfSize:20];
-        
-        self.titleL.center=CGPointMake(translucentV.frame.size.width/2, self.titleL.center.y);
-        
-        
+        self.titleL=[[UILabel alloc] initWithFrame:CGRectMake(0, 57, 250, 15)];
+        self.titleL.font=[UIFont boldSystemFontOfSize:15];
+        self.titleL.center=CGPointMake(ScreenWidth/2, self.titleL.center.y);
+        self.titleL.textColor=[UIColor colorWithRed:0.40 green:0.40 blue:0.40 alpha:1.00];
         self.titleL.textAlignment=NSTextAlignmentCenter;
+        [self.bgImgV addSubview:self.titleL];
         
         
         
-        [translucentV addSubview:self.titleL];
         
-        self.subtitleL=[[UILabel alloc] initWithFrame:CGRectMake(0, 50, 250, 30)];
-        self.subtitleL.font=[UIFont systemFontOfSize:15];
-        self.subtitleL.center=CGPointMake(translucentV.frame.size.width/2, self.subtitleL.center.y);
+        UILabel *label1=[[UILabel alloc] initWithFrame:CGRectMake(0, 82, 50, 1)];
+        label1.backgroundColor=[UIColor lightGrayColor];
+        label1.center=CGPointMake(ScreenWidth/2, 82.5f);
+        label1.alpha=0.5f;
+        [self.bgImgV addSubview:label1];
+        
+        
+        
+        
+        self.subtitleL=[[UILabel alloc] initWithFrame:CGRectMake(0, 99, 250, 12)];
+        self.subtitleL.font=[UIFont systemFontOfSize:12];
+        self.subtitleL.center=CGPointMake(ScreenWidth/2, self.subtitleL.center.y);
         self.subtitleL.textAlignment=NSTextAlignmentCenter;
-        
-        [translucentV addSubview:self.subtitleL];
+        self.subtitleL.textColor=[UIColor colorWithRed:0.40 green:0.40 blue:0.40 alpha:1.00];
+        [self.bgImgV addSubview:self.subtitleL];
         
         UICollectionViewFlowLayout *cLayout=[[UICollectionViewFlowLayout alloc] init];
         
         cLayout.minimumInteritemSpacing = 1;
         cLayout.minimumLineSpacing = 5;
         
-        UIEdgeInsets sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
+        UIEdgeInsets sectionInset = UIEdgeInsetsMake(7.5, 5, 7.5, 5);
         cLayout.sectionInset = sectionInset;
         //        CGFloat width = (ScreenWidth-20-15)/4;
-        cLayout.itemSize = CGSizeMake(70,
-                                      100);
+        cLayout.itemSize = CGSizeMake(85,
+                                      125);
         cLayout.scrollDirection=UICollectionViewScrollDirectionHorizontal;
         
-        self.collectionView=[[UICollectionView alloc] initWithFrame:CGRectMake(0, 160, ScreenWidth, 120) collectionViewLayout:cLayout];
+        self.collectionView=[[UICollectionView alloc] initWithFrame:CGRectMake(0, 170, ScreenWidth, 140) collectionViewLayout:cLayout];
         self.collectionView.delegate=self;
         self.collectionView.dataSource=self;
         self.collectionView.backgroundColor=[UIColor whiteColor];

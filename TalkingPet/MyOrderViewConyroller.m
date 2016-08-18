@@ -31,6 +31,7 @@
     NSDictionary * tmpDict;
     
     BlankPageView * blankPage;
+    UIButton * button;
 }
 @property (nonatomic,retain)NSMutableArray * orderArr;
 @property (nonatomic,retain)UITableView * tableView;
@@ -64,7 +65,7 @@
     [headerView addSubview:lineView];
     
     for (int i = 0; i<5; i++) {
-        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(self.view.frame.size.width*i/5, 0, self.view.frame.size.width/5, headerView.frame.size.height);
         button.titleLabel.font = [UIFont systemFontOfSize:15];
         [button setTitleColor:[UIColor colorWithWhite:100/255.0 alpha:1] forState:UIControlStateNormal];
@@ -158,7 +159,7 @@
             
         }
         
-        //        [SVProgressHUD dismissWithError:@"订单信息已经全部加载完毕" afterDelay:2];
+        //[SVProgressHUD dismissWithError:@"订单信息已经全部加载完毕" afterDelay:2];
         [_tableView footerEndRefreshing];
         [_tableView headerEndRefreshing];
         
@@ -302,10 +303,12 @@
     {
         return 85.f;
     }
-    else
+    else if([listModel.post_status isEqualToString:@"0"])
     {
-        return 45.f;
+        return 85.f;
     }
+    
+    
     
     return 85.f;
 }
@@ -321,8 +324,40 @@
     NSString  *currentDateStr =listModel.time;
     
     view.timeL.text =currentDateStr;
-    view.statusL.text = listModel.pay_status_zh;
     
+    
+    switch (currentButton.tag-100) {
+        case 0:{
+            view.statusL.text = listModel.pay_status_zh;
+            
+        }break;
+        case 1:{
+            view.statusL.text = @"等待买家付款";
+            [view.statusL setTextColor:CommonGreenColor];
+            
+        }break;
+        case 2:{
+            view.statusL.text = @"等待发货";
+            [view.statusL setTextColor:CommonGreenColor];
+            
+            
+        }break;
+        case 3:{
+            view.statusL.text = @"付款成功";
+            [view.statusL setTextColor:CommonGreenColor];
+            
+        }break;
+        case 4:{
+            view.statusL.text = @"待评价";
+            [view.statusL setTextColor:CommonGreenColor];
+            
+        default:
+            break;
+        }
+            
+            
+            
+    }
     return view;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -344,21 +379,63 @@
     if ([listModel.pay_status isEqualToString:@"0"]) {
         view.btn1.hidden = NO;
         view.btn2.hidden = NO;
-        [view.btn1 setTitle:@"删除订单" forState:UIControlStateNormal];
+        [view.btn1 setTitle:@"取消订单" forState:UIControlStateNormal];
         [view.btn2 setTitle:@"立刻付款" forState:UIControlStateNormal];
     }
+    
+    
+    
     else if([listModel.post_status isEqualToString:@"1"])
     {
         view.btn1.hidden = YES;
         view.btn2.hidden = NO;
         [view.btn2 setTitle:@"确认收货" forState:UIControlStateNormal];
+        
+        
+        
     }
-    else
+    else if([listModel.post_status isEqualToString:@"0"])
     {
         view.btn1.hidden = YES;
-        view.btn2.hidden = YES;
+        view.btn2.hidden = NO;
+        [view.btn2 setTitle:@"取消订单" forState:UIControlStateNormal];
+        
     }
-    view.buttonClicked = ^(NSString * title){
+    
+    
+    else if([listModel.post_status isEqualToString:@"2"]||[listModel.post_status isEqualToString:@"3"])
+    {
+        view.btn1.hidden = NO;
+        view.btn2.hidden = NO;
+        [view.btn1 setTitle:@"删除订单" forState:UIControlStateNormal];
+        [view.btn2 setTitle:@"追加评论" forState:UIControlStateNormal];
+        
+    }
+    
+//    if( [option isEqual:@"allList"])
+//    {
+//        
+//        view.btn1.hidden = YES;
+//        view.btn2.hidden = NO;
+//        [view.btn2 setTitle:@"删除订单" forState:UIControlStateNormal];
+//        
+//        
+//        if([listModel.post_status isEqualToString:@"2"]||[listModel.post_status isEqualToString:@"3"])
+//        {
+//            
+//            view.btn1.hidden = NO;
+//            view.btn2.hidden = NO;
+//            [view.btn1 setTitle:@"删除订单" forState:UIControlStateNormal];
+//            [view.btn2 setTitle:@"追加评论" forState:UIControlStateNormal];
+//            
+//            
+//            
+//        }
+//        
+//    }
+    
+    view.buttonClicked = ^(NSString * title)
+    {
         [self buttonAction:title order:listModel];
     };
     
@@ -567,12 +644,36 @@
         [NetServer deleteOrderWithOrderNo:order.order_no success:^(id result) {
             [SVProgressHUD showSuccessWithStatus:@"删除订单成功"];
             [_tableView headerBeginRefreshing];
-            //            self.myOrder.pay_status = @"2";
-            //            [_tableView reloadData];
+            [_tableView reloadData];
         } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
             [SVProgressHUD showErrorWithStatus:@"删除订单失败"];
         }];
     }
+    
+    else if ([title isEqualToString:@"追加评论"])
+    {        [SVProgressHUD showErrorWithStatus:@"功能关闭，有待更新" duration:1];
+        
+        
+    }
+    else if ([title isEqualToString:@"取消订单"])
+    {
+        [SVProgressHUD showWithStatus:@"正在取消订单"];
+        
+        [NetServer  cancelOrderWithOrderNo:order.order_no  success:^(id result) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"取消订单成功"];
+            [_tableView headerBeginRefreshing];
+            [_tableView reloadData];
+            
+            
+        } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+            [SVProgressHUD showErrorWithStatus:@"订单取消失败"];    }];
+        
+        
+        
+        
+    }
+    
     else if ([title isEqualToString:@"立刻付款"]){
         YZOrderConfimViewController *viewC = [[YZOrderConfimViewController alloc] init];
         viewC.orders = order.goods;
@@ -581,6 +682,7 @@
         [self.navigationController pushViewController:viewC animated:YES];
     }
     else if ([title isEqualToString:@"确认收货"]){
+        [SVProgressHUD setStatus:@"正在查询详情请稍后"];
         if (!order.confirmUrl) {
             return;
         }
@@ -604,6 +706,11 @@
             };
             [self.navigationController pushViewController:cd animated:YES];
         }
+        
+        
+        
+        
+        
         
     }
 }

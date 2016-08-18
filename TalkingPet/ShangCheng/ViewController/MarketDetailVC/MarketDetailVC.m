@@ -79,6 +79,8 @@
     [self setBackButtonWithTarget:@selector(toBack)];
     
     self.detailTableV=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
+    self.detailTableV.separatorStyle=UITableViewCellSeparatorStyleNone;
+    self.detailTableV.showsVerticalScrollIndicator=NO;
     
     self.detailTableV.delegate=self;
     self.detailTableV.dataSource=self;
@@ -92,7 +94,6 @@
         
         NSLog(@"头部视图点击事件");
         YZGoodsDetailVC *detailVC = [[YZGoodsDetailVC alloc] init];
-        //        detailVC.link = weakSelf.hotsell.link;
         detailVC.goodsId=weakSelf.hotsell.gid;
         detailVC.goodsId=weakSelf.hotsell.name;
         detailVC.hideNaviBg = YES;
@@ -150,10 +151,7 @@
             [weakSelf.navigationController pushViewController:detailVC animated:YES];
             
         }
-        //        else
-        //        {
-        //            NSLog(@"加载更多数据");
-        //        }
+        
     };
     cell.backgroundColor=[UIColor whiteColor];
     return cell;
@@ -161,7 +159,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 280;
+    return 310;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

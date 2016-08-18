@@ -51,12 +51,12 @@
         
         
         
-        _titileL=[[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_bgimg.frame)+20, 15, ScreenWidth-190, 20)];
-        
-        _titileL.text=@"网红汪都在吃的宠物粮";
+        _titileL=[[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_bgimg.frame)+40, 25, ScreenWidth-CGRectGetMaxX(_bgimg.frame)-50, 13)];
+        _titileL.font=[UIFont boldSystemFontOfSize:13];
+        _titileL.textColor=[UIColor colorWithRed:0.35 green:0.35 blue:0.35 alpha:1.00];
         [self addSubview:_titileL];
         
-        _subtitleL=[[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_bgimg.frame)+20, 35, ScreenWidth-190, 40)];
+        _subtitleL=[[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_bgimg.frame)+40, 35, ScreenWidth-190, 40)];
         _subtitleL.adjustsFontSizeToFitWidth=YES;
         _subtitleL.text=@"Natural Balance 美国雪山 L.I.D抗郭明系列 3 KG";
         
@@ -66,27 +66,27 @@
         [self addSubview:_subtitleL];
         
         
-        UILabel *titll1=[[UILabel alloc] initWithFrame:CGRectMake(_subtitleL.center.x, 80, 40, 20)];
+        UILabel *titll1=[[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-100, 80, 40, 20)];
         titll1.text=@"市场价：";
         titll1.textColor=[UIColor lightGrayColor];
         titll1.font=[UIFont systemFontOfSize:10];
         [self addSubview:titll1];
         
         
-        self.price=[[UILabel alloc] initWithFrame:CGRectMake(_subtitleL.center.x+40, 80, 50, 20)];
+        self.price=[[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-50-10, 80, 50, 20)];
         [self addSubview:_price];
         
         
         
         
         
-        UILabel *titll2=[[UILabel alloc] initWithFrame:CGRectMake(_subtitleL.center.x-20, 110, 40, 20)];
+        UILabel *titll2=[[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-120, 110, 40, 20)];
         titll2.text=@"友仔价：";
         titll2.textColor=[UIColor lightGrayColor];
         titll2.font=[UIFont systemFontOfSize:10];
         [self addSubview:titll2];
         
-        self.turePrice=[[UILabel alloc] initWithFrame:CGRectMake(_subtitleL.center.x+20, 105, 70, 20)];
+        self.turePrice=[[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-70-10, 108, 70, 20)];
         self.turePrice.textColor=[UIColor redColor];
         self.turePrice.font=[UIFont systemFontOfSize:18];
         [self addSubview:_turePrice];

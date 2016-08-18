@@ -40,10 +40,10 @@
     params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
     params[@"uid"] = [UserServe sharedUserServe].userID;
     
-//    params[@"uid"] = @"333";
-//    params[@"get"] = @"";
+    //    params[@"uid"] = @"333";
+    //    params[@"get"] = @"";
     
-
+    
     NSString *path = [[NSString alloc] initWithFormat:@"%@/orders/rows",BasePayUrl];
     if (![option isEqualToString:@"allList"]) {
         path = [[NSString alloc] initWithFormat:@"%@/orders/rows/status/%@",BasePayUrl,option];
@@ -64,7 +64,7 @@
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
     params[@"uid"] = [UserServe sharedUserServe].userID;
-//    params[@"order_no"] = orderNo;
+    //    params[@"order_no"] = orderNo;
     
     NSString *path = [[NSString alloc] initWithFormat:@"%@/orders/details/order_no/%@",BasePayUrl,orderNo];
     [NetServer inner_PayServerConfigWithWithPath:path
@@ -79,8 +79,8 @@
 
 
 + (void)confirmReceviedGoodWithGoodUrl:(NSString *)goodUrl paras:(NSArray *)paras
-                            success:(void (^)(id))success
-                            failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
+                               success:(void (^)(id))success
+                               failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
     params[@"uid"] = [UserServe sharedUserServe].userID;
@@ -89,9 +89,9 @@
     if (paras) {
         params[@"front"] = paras[0];
         params[@"back"] = paras[1];
-
+        
         params[@"picked_up"] = paras[2];
-
+        
     }
     
     NSString *path = goodUrl;
@@ -107,8 +107,8 @@
 
 
 + (void)cancelOrderWithOrderNo:(NSString *)orderNo
-                            success:(void (^)(id))success
-                            failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
+                       success:(void (^)(id))success
+                       failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
     params[@"uid"] = [UserServe sharedUserServe].userID;
@@ -124,6 +124,27 @@
                                              failure(error,operation);
                                          }];
 }
+
+//取消订单
++ (void)cancleOrderWithOrderNo:(NSString *)orderNo
+                       success:(void (^)(id))success
+                       failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
+    params[@"uid"] = [UserServe sharedUserServe].userID;
+    //params[@"order_no"] = orderNo;
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/orders/cancell/order_no/%@",BasePayUrl,orderNo];
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:params
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
+
 
 + (void)deleteOrderWithOrderNo:(NSString *)orderNo
                        success:(void (^)(id))success
@@ -145,7 +166,7 @@
 }
 
 + (void)getAddressCodeWithsuccess:(void (^)(id))success
-                       failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
+                          failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
     params[@"uid"] = [UserServe sharedUserServe].userID;
@@ -163,8 +184,8 @@
 }
 
 + (void)addAddressWithAdress:(ReceiptAddress *)address
-                       success:(void (^)(id))success
-                       failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
+                     success:(void (^)(id))success
+                     failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
     params[@"uid"] = [UserServe sharedUserServe].userID;
@@ -212,8 +233,8 @@
 }
 
 + (void)setDefaultAddressWithAdressId:(NSString *)addressId
-                          success:(void (^)(id result))success
-                          failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+                              success:(void (^)(id result))success
+                              failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
@@ -279,7 +300,7 @@
                                          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                              failure(error,operation);
                                          }];
-
+    
 }
 
 + (void)fentchDefaultAddressSuccess:(void (^)(id result))success
@@ -303,7 +324,7 @@
 
 
 + (void)getKuaJingGoodsSuccess:(void (^)(id result))success
-                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+                       failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
@@ -323,7 +344,7 @@
 }
 
 + (void)createOrderNoSuccess:(void (^)(id result))success
-                              failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
@@ -344,7 +365,7 @@
 
 
 + (void)requestPaymentWithGoods:(NSArray *)array AddressId:(NSString *)addressId ChannelStr:(NSString *)channelStr Voucher:(NSString *)voucher success:(void (^)(id result))success
-                    failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+                        failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
@@ -378,9 +399,9 @@
 //    params[@"uid"] = [UserServe sharedUserServe].userID;
 //    NSString *path = [[NSString alloc] initWithFormat:@"%@/guider/rows",BasePayUrl];
 //    params[@"source"] = @"app";
-//    
-//    
-//    
+//
+//
+//
 //    [NetServer inner_PayServerConfigWithWithPath:path
 //                                      parameters:params
 //                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -389,9 +410,9 @@
 //                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //                                             failure(error,operation);
 //                                         }];
-//    
-//    
-//    
+//
+//
+//
 //}
 
 //商城专题页面

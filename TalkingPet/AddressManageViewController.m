@@ -40,24 +40,20 @@
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-#pragma Mark 地址图片
-        
-        //        addressView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 19.5, 27.5)];
-        //        [self.contentView addSubview:addressView];
 #pragma mark 姓名
         nameL = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 160, 20)];
-        nameL.font = [UIFont systemFontOfSize:14];
+        nameL.font = [UIFont systemFontOfSize:12];
         nameL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
         [self.contentView addSubview:nameL];
 #pragma mark 电话号码
-        phoneL = [[UILabel alloc] initWithFrame:CGRectMake(260, 10, 130, 20)];
-        phoneL.font = [UIFont systemFontOfSize:14];
+        phoneL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-nameL.frame.size.width/2-10, 10, ScreenWidth-nameL.frame.size.width, 20)];
+        phoneL.font = [UIFont systemFontOfSize:12];
         
         phoneL.textColor = [UIColor colorWithWhite:140/255.0 alpha:1];
         [self.contentView addSubview:phoneL];
 #pragma mark 地址管理
-        addressL = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, 240, 40)];
-        addressL.font = [UIFont systemFontOfSize:14];
+        addressL = [[UILabel alloc] initWithFrame:CGRectMake(10, nameL.frame.origin.y+25, 240, 20)];
+        addressL.font = [UIFont systemFontOfSize:12];
         addressL.textColor = [UIColor colorWithWhite:140/255.0 alpha:1];
         addressL.numberOfLines = 0;
         [self.contentView addSubview:addressL];
@@ -65,17 +61,17 @@
 #pragma mark 编辑按钮
         UIButton * editB = [UIButton buttonWithType:UIButtonTypeCustom];
         [editB setImage:[UIImage imageNamed:@"bianji@2x"] forState:UIControlStateNormal];
-        editB.frame = CGRectMake(ScreenWidth-150, 70, 70, 30);
+        editB.frame = CGRectMake(ScreenWidth-90, 70, 70, 30);
         [editB addTarget:self action:@selector(editSelectedAddress) forControlEvents:UIControlEventTouchUpInside];
         [editB  setTitle:@"编辑" forState:UIControlStateNormal];
         [editB setTitleColor:[UIColor colorWithR:167/255.0 g:187/255.0 b:159/255.0 alpha:1] forState:UIControlStateNormal];
-        editB.titleLabel.font = [UIFont systemFontOfSize:12];
+        editB.titleLabel.font = [UIFont systemFontOfSize:9];
         [self.contentView addSubview:editB];
 #pragma mark 删除按钮
         
         UIButton * detelB = [UIButton buttonWithType:UIButtonTypeCustom];
         [ detelB  setImage:[UIImage imageNamed:@"shanchu@2x"] forState:UIControlStateNormal];
-        detelB .frame = CGRectMake(ScreenWidth-42, 70, 30, 30);
+        detelB .frame = CGRectMake(ScreenWidth-35, 70, 30, 30);
         [ detelB  addTarget:self action:@selector(deSelectedAddress) forControlEvents:UIControlEventTouchUpInside];
         
         [self.contentView addSubview:detelB ];
@@ -84,7 +80,7 @@
 #pragma mark 默认按钮
         
         defalutB = [UIButton buttonWithType:UIButtonTypeCustom];
-        defalutB.frame = CGRectMake(0, 70, 80, 22);
+        defalutB.frame = CGRectMake(0, addressL.frame.origin.y+40, 80, 22);
         [defalutB addTarget:self action:@selector( defalutBSelectedAddress) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:defalutB];
         
@@ -146,7 +142,7 @@
         //        addressView.image = [UIImage imageNamed:@"commonAddress"];
         [defalutB setImage:[UIImage imageNamed:@"weixuanzhong2@2x"] forState:UIControlStateNormal];
         [defalutB setTitle:@"设为默认" forState:UIControlStateNormal];
-        defalutB.titleLabel.font = [UIFont systemFontOfSize:12];
+        defalutB.titleLabel.font = [UIFont systemFontOfSize:9];
         
         [defalutB setTitleColor:[UIColor colorWithR:167/255.0 g:187/255.0 b:159/255.0 alpha:1] forState:UIControlStateNormal];
         
@@ -354,6 +350,9 @@
     WXRAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];
     if (cell == nil) {
         cell = [[WXRAddressCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        UILabel *label2=[[UILabel alloc] initWithFrame:CGRectMake(0, navigationBarHeight+5, ScreenWidth, 1)];
+        label2.backgroundColor=[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
+        [cell addSubview:label2];
     }
     [cell buildWithReceiptAddress:_addressArr[indexPath.section]];
     cell.deleteButtonClicked = ^(NSString * addressId){
