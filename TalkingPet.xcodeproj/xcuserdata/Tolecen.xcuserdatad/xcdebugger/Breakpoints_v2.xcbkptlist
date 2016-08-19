@@ -954,11 +954,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/UserCenterViewController.m"
-            timestampString = "493050212.316444"
+            timestampString = "493300548.626741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "974"
-            endingLineNumber = "974"
+            startingLineNumber = "984"
+            endingLineNumber = "984"
             landmarkName = "@implementation UserCenterViewController"
             landmarkType = "3">
          </BreakpointContent>

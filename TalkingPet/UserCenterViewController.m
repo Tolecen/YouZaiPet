@@ -25,6 +25,7 @@
 #import "SectionMSgViewController.h"
 #import "YZShoppingCarVC.h"
 #import "NetServer+Payment.h"
+#import "YZShoppingCarHelper.h"
 @interface UserCenterCell : UITableViewCell
 @property (nonatomic,retain)UIImageView * imageV;
 @property (nonatomic,retain)UILabel * textL;
@@ -447,14 +448,23 @@
     if (![UserServe sharedUserServe].userID) {
         return;
     }
-    NSString * cartCounts = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"cartneedmetioncount%@",[UserServe sharedUserServe].userID]];
-    if (!cartCounts || [cartCounts intValue]==0) {
-        self.cartCount = 0;
+    self.cartCount = 0;
+    if ([YZShoppingCarHelper instanceManager].dogShangPinCache) {
+        self.cartCount = self.cartCount+(int)([YZShoppingCarHelper instanceManager].dogShangPinCache.count);
+        
     }
-    else
-    {
-        self.cartCount = [cartCounts intValue];
+    if ([YZShoppingCarHelper instanceManager].goodsShangPinCache) {
+        self.cartCount = self.cartCount+(int)([YZShoppingCarHelper instanceManager].goodsShangPinCache.count);
+        
     }
+//    NSString * cartCounts = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"cartneedmetioncount%@",[UserServe sharedUserServe].userID]];
+//    if (!cartCounts || [cartCounts intValue]==0) {
+//        self.cartCount = 0;
+//    }
+//    else
+//    {
+//        self.cartCount = [cartCounts intValue];
+//    }
     [_tableView reloadData];
 }
 #pragma mark -
