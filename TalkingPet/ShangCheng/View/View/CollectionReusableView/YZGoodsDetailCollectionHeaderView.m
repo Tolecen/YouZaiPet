@@ -132,8 +132,8 @@
         return;
     }
     _detailModel = detailModel;
-    self.titleLb.text = detailModel.name;
-    self.contentLb.text = detailModel.content;
+    self.titleLb.text = [Common filterHTML:detailModel.name];
+    self.contentLb.text = [Common filterHTML:detailModel.content];
     if (!detailModel.content || detailModel.content.length == 0) {
         [self.priceLb mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.contentLb.mas_bottom).mas_offset(0);

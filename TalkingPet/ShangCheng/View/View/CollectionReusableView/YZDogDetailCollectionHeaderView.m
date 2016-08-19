@@ -272,7 +272,7 @@
         return;
     }
     _detailModel = detailModel;
-    self.nameLb.text = detailModel.name;
+    self.nameLb.text = [Common filterHTML:detailModel.name];
     self.sexImageV.image = (detailModel.sex == YZDogSex_Female) ? [UIImage imageNamed:@"female_icon"] : [UIImage imageNamed:@"male_icon"];
     self.dogTypeLb.text = detailModel.productType.typeName;
     self.birthdayLb.text = detailModel.birthdayString;

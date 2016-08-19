@@ -45,7 +45,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+     
     [self setBackButtonWithTarget:@selector(backBtnDo:)];
     [self setRightButtonWithName:nil BackgroundImg:@"morebtn" Target:@selector(moreBtnClicked)];
     self.sectionBtnView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];

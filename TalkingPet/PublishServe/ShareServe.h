@@ -14,11 +14,13 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #ifndef DevelopModeUU
 #define SHAREBASEURL @"http://www.chongwushuo.com/h5/index.html?petakeID="
+#define SHAREGOODSBASEURL @"http://www.buybestpet.com/index.php/Home/Sale/product/gid/"
 #define GOODSBASEURL @"http://www.chongwushuo.com/h5/goods/%@.html"
 #define INTERACTIONBASEURL @"http://www.chongwushuo.com/h5/topic/index.html?id=%@"
 #define ONETOPICBASEURL @"http://www.chongwushuo.com/h5/oneTopic/index.html?id=%@"
 #else
 #define SHAREBASEURL @"http://testapi.buybestpet.com/h5/index.html?petakeID="
+#define SHAREGOODSBASEURL @"http://www.buybestpet.com/index.php/Home/Sale/product/gid/"
 #define GOODSBASEURL @"http://testwww.chongwushuo.com/h5/goods/%@.html"
 #define INTERACTIONBASEURL @"http://testwww.chongwushuo.com/h5/topic/index.html?id=%@"
 #define ONETOPICBASEURL @"http://testwww.chongwushuo.com/h5/oneTopic/index.html?id=%@"

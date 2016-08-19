@@ -124,7 +124,7 @@
     [self.thumbImageV setImageWithURL:[NSURL URLWithString:goods.thumb]
                      placeholderImage:[UIImage imageNamed:@"dog_goods_placeholder"]];
     
-    self.titleLb.text = goods.name;
+    self.titleLb.text = [Common filterHTML:goods.name];
     self.brandLb.text = goods.brand.brand;
     self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:goods.sellPrice]];
     [self setNeedsUpdateConstraints];

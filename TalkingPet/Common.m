@@ -473,7 +473,8 @@
 
 +(NSString *)filterHTML:(NSString *)html
 {
-    [html stringByReplacingOccurrencesOfString:@"&lt;br/&gt;" withString:@"\n"];
+    html = [html stringByReplacingOccurrencesOfString:@"&lt;br/&gt;" withString:@"\n"];
+    html = [html stringByReplacingOccurrencesOfString:@"<br/>" withString:@"\n"];
     NSScanner * scanner = [NSScanner scannerWithString:html];
     NSString * text = nil;
     //    while([scanner isAtEnd]==NO)

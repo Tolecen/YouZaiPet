@@ -51,6 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setAnotherBackButtonWithTarget:@selector(inner_Pop:)];
+    [self setRightButtonWithName:nil BackgroundImg:@"goods_more" Target:@selector(moreBtnClicked)];
     
     self.cache = [[NSMutableDictionary alloc] init];
     
@@ -297,6 +298,45 @@
         return NO;
     }
     return YES;
+}
+
+-(void)moreBtnClicked
+{
+    if (!self.detailModel) {
+        return;
+    }
+    NSString * goodsName = [Common filterHTML:self.detailModel.name];
+    NSString * content = [Common filterHTML:self.detailModel.content];
+    ShareSheet * shareSheet = [[ShareSheet alloc]initWithIconArray:@[@"weiChatFriend",@"friendCircle",@"sina",@"qq"] titleArray:@[@"微信好友",@"朋友圈",@"微博",@"QQ"] action:^(NSInteger index) {
+        switch (index) {
+            case 0:{
+                [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"%@",goodsName] Content:[NSString stringWithFormat:@"%@",content] imageUrl:self.detailModel.thumb webUrl:[NSString stringWithFormat:SHAREGOODSBASEURL@"%@",self.detailModel.goodsId] Succeed:^{
+                    
+                }];
+            }break;
+            case 1:{
+                [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"%@",goodsName] Content:[NSString stringWithFormat:@"%@",content] imageUrl:self.detailModel.thumb webUrl:[NSString stringWithFormat:SHAREGOODSBASEURL@"%@",self.detailModel.goodsId] Succeed:^{
+                   
+                }];
+            }break;
+            case 2:{
+                [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"%@,%@,%@",goodsName,content,[NSString stringWithFormat:SHAREGOODSBASEURL@"%@",self.detailModel.goodsId]] imageUrl:self.detailModel.thumb Succeed:^{
+                   
+                }];
+            }break;
+            case 3:{
+                [ShareServe shareToQQWithTitle:[NSString stringWithFormat:@"%@",goodsName] Content:[NSString stringWithFormat:@"%@",content] imageUrl:self.detailModel.thumb webUrl:[NSString stringWithFormat:SHAREGOODSBASEURL@"%@",self.detailModel.goodsId] Succeed:^{
+                    
+                }];
+            }break;
+
+            default:
+                break;
+        }
+        
+    }];
+    [shareSheet show];
+
 }
 
 @end

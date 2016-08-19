@@ -25,6 +25,7 @@
     #import "UIColor+HexString.h"
     #import "UINavigationController+Autorotate.h"
     #import "Masonry.h"
+    #import "Common.h"
 
     #define DevelopModeUU  @"0"
     #define Channel  @"1001"

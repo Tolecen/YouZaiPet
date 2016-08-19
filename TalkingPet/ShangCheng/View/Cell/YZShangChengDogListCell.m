@@ -164,7 +164,7 @@
     [self.thumbImageV setImageWithURL:[NSURL URLWithString:dogModel.thumb]
                      placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
     
-    self.nameLb.text = dogModel.name;
+    self.nameLb.text = [Common filterHTML:dogModel.name];
     self.sexImageV.image = (dogModel.sex == YZDogSex_Female) ? [UIImage imageNamed:@"female_icon"] : [UIImage imageNamed:@"male_icon"];
     self.birthdayLb.text = dogModel.birthdayString;
     self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:dogModel.sellPrice]];

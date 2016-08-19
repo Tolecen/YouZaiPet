@@ -1410,6 +1410,7 @@
 		D87E2CFD1D5AC3E400A50131 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D87E2CED1D5AC3E400A50131 /* UIView+WebCacheOperation.m */; };
 		D8B781811D1B776C005555DD /* myp-nom.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B7817F1D1B776C005555DD /* myp-nom.png */; };
 		D8B781821D1B776C005555DD /* myp-sel.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B781801D1B776C005555DD /* myp-sel.png */; };
+		D8F4D3FD1D66B98400FF1C5D /* goods_more.png in Resources */ = {isa = PBXBuildFile; fileRef = D8F4D3FC1D66B98400FF1C5D /* goods_more.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -3435,6 +3436,7 @@
 		D87E2CED1D5AC3E400A50131 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		D8B7817F1D1B776C005555DD /* myp-nom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myp-nom.png"; sourceTree = "<group>"; };
 		D8B781801D1B776C005555DD /* myp-sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myp-sel.png"; sourceTree = "<group>"; };
+		D8F4D3FC1D66B98400FF1C5D /* goods_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goods_more.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -5224,6 +5226,7 @@
 				97F930AF1978F11C0026BCFA /* shanchushuruwenzi.png */,
 				970C810C19FE2E5100CD5411 /* sousuo-ico2.png */,
 				97EBBBF41ADCFE3900EBE61C /* backButton_shadow.png */,
+				D8F4D3FC1D66B98400FF1C5D /* goods_more.png */,
 				975358761ABC0A7A00A70B16 /* backButtonanother.png */,
 				970C810A19FE2E0F00CD5411 /* sousuo-ico.png */,
 				7200CA091AB293B700B6E219 /* backButton.png */,
@@ -7369,6 +7372,7 @@
 				D857E4981D34B71100A69699 /* chongyoudongtai-off@2x.png in Resources */,
 				7229EE141A8C43C400EFB444 /* 31025.png in Resources */,
 				97972A111B2588A900BA05BD /* weixin.png in Resources */,
+				D8F4D3FD1D66B98400FF1C5D /* goods_more.png in Resources */,
 				72A5770B1AA943C900249355 /* republish.png in Resources */,
 				972F389F19765B2800952DC9 /* qqqqq_06.png in Resources */,
 				7269D1B21A8C552200CDA305 /* filter5.png in Resources */,
