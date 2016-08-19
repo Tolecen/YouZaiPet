@@ -61,7 +61,7 @@
 + (void)fetchUpaidedCountersuccess:(void (^)(id))success
                             failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
+    params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];
     params[@"uid"] = [UserServe sharedUserServe].userID;
     
     //    params[@"uid"] = @"333";
