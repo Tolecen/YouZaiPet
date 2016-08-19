@@ -281,6 +281,9 @@
 @property (nonatomic,retain)UILabel *gradeL;
 @property (nonatomic,assign)float myWidth;
 
+@property (nonatomic,strong)UIView * sNumBG;
+@property (nonatomic,strong)UILabel * sNumL;
+
 
 
 @property (nonatomic,copy)void(^HeadTapped) (TalkingBrowse *talkingBrowse);
@@ -300,6 +303,22 @@
         self.imageV = [[EGOImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.width)];
         self.imageV.backgroundColor = [UIColor colorWithR:245 g:245 b:245 alpha:1];
         [self.contentView addSubview:self.imageV];
+        
+        self.sNumBG = [[UIView alloc] initWithFrame:CGRectMake(frame.size.width-5-25, 5, 25, 15)];
+        self.sNumBG.backgroundColor = [UIColor blackColor];
+        self.sNumBG.alpha = 0.5;
+        self.sNumBG.layer.cornerRadius = 6;
+        self.sNumBG.layer.masksToBounds = YES;
+        [self.contentView addSubview:self.sNumBG];
+        
+        self.sNumL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.sNumBG.frame.size.width, self.sNumBG.frame.size.height)];
+        self.sNumL.backgroundColor = [UIColor clearColor];
+        self.sNumL.textAlignment = NSTextAlignmentCenter;
+        self.sNumL.textColor = [UIColor whiteColor];
+        self.sNumL.font = [UIFont systemFontOfSize:10];
+        self.sNumL.text = @"0";
+        [self.sNumBG addSubview:self.sNumL];
+        self.sNumL.adjustsFontSizeToFitWidth = YES;
         
         UIImageView * jbiaoqian = [[UIImageView alloc] initWithFrame:CGRectMake(frame.size.width-28, frame.size.width-28, 23, 23)];
         [jbiaoqian setImage:[UIImage imageNamed:@"jingyanbiaoqian"]];
@@ -406,6 +425,8 @@
     [self.desL setFrame:CGRectMake(self.desL.frame.origin.x, self.desL.frame.origin.y, u.size.width, u.size.height)];
     self.gradeL.text = [NSString stringWithFormat:@"LV.%@",self.talking.petInfo.grade?self.talking.petInfo.grade:@"0"];
     [self.headView setImageURL:[NSURL URLWithString:[self.talking.petInfo.headImgURL stringByAppendingString:@"?imageView2/2/w/60"]]];
+    
+    self.sNumL.text = [NSString stringWithFormat:@"%d",(int)self.talking.storyDict.count];
     
     self.zanL.text = self.talking.favorNum;
     self.commentL.text = self.talking.commentNum;

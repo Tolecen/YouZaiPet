@@ -237,6 +237,8 @@
     if (!self.userPlatform) {
         [regDict setObject:self.username forKey:@"mobile"];
     }
+//    else
+//        [regDict setObject:@"100000000" forKey:@"mobile"];
     [regDict setObject:self.userPlatform?self.userPlatform:@"0" forKey:@"source"];
     [regDict setObject:[self.nameTF.text CutSpacing] forKey:@"nickname"];
     [regDict setObject:self.avatarUrl forKey:@"head"];
