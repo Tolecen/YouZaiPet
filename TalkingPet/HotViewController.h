@@ -10,6 +10,9 @@
 #import "BaseViewController.h"
 #import "BrowserTableHelper.h"
 @interface HotViewController : BaseViewController
+{
+    BOOL firstIn;
+}
 @property (nonatomic,retain)UICollectionView * hotView;
 @property (nonatomic,retain)UICollectionView * jingyanView;
 @property (nonatomic, strong)UITableView * contentTableView;

@@ -532,6 +532,8 @@ static NSString * jycellId = @"jycell";
     
     listType = 1;
     
+    self.view.backgroundColor = [UIColor colorWithWhite:238/255.0 alpha:1];
+    
     NSArray * baseArr = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"hotListShuoShuo%@",[UserServe sharedUserServe].userID]];
     self.dataArr = [NSMutableArray array];
     for (NSDictionary * dic in baseArr) {
@@ -680,11 +682,14 @@ static NSString * jycellId = @"jycell";
     self.zhiV.userInteractionEnabled = NO;
     
 }
+
 -(void)showOrHideTopSelV
 {
     if (self.topSelV.frame.origin.y==0) {
         [UIView animateWithDuration:0.3 animations:^{
             [self.topSelV setFrame:CGRectMake(0, -70, ScreenWidth, 100)];
+            [self.hotView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
+            [self.jingyanView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
         } completion:^(BOOL finished) {
             self.zhiV.image = [UIImage imageNamed:@"xiala@2x"];
         }];
@@ -693,6 +698,8 @@ static NSString * jycellId = @"jycell";
     else if(self.topSelV.frame.origin.y==-70){
         [UIView animateWithDuration:0.3 animations:^{
             [self.topSelV setFrame:CGRectMake(0, 0, ScreenWidth, 100)];
+            [self.hotView setFrame:CGRectMake(0, 70, ScreenWidth, self.view.frame.size.height-navigationBarHeight-70)];
+            [self.jingyanView setFrame:CGRectMake(0, 70, ScreenWidth, self.view.frame.size.height-navigationBarHeight-70)];
         } completion:^(BOOL finished) {
             self.zhiV.image = [UIImage imageNamed:@"shouqi@2x"];
         }];
@@ -734,8 +741,12 @@ static NSString * jycellId = @"jycell";
 {
     [super viewWillLayoutSubviews];
     //    [self.contentTableView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
-    [self.hotView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
-    [self.jingyanView setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
+    if (!firstIn) {
+        [self.hotView setFrame:CGRectMake(0, 70, ScreenWidth, self.view.frame.size.height-navigationBarHeight-70)];
+        [self.jingyanView setFrame:CGRectMake(0, 70, ScreenWidth, self.view.frame.size.height-navigationBarHeight-70)];
+        firstIn = YES;
+    }
+
 }
 - (void)beginRefreshing
 {
@@ -908,13 +919,13 @@ static NSString * jycellId = @"jycell";
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    if (self.topSelV.frame.origin.y==0) {
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.topSelV setFrame:CGRectMake(0, -70, ScreenWidth, 100)];
-        } completion:^(BOOL finished) {
-            self.zhiV.image = [UIImage imageNamed:@"xiala@2x"];
-        }];
-        
-    }
+//    if (self.topSelV.frame.origin.y==0) {
+//        [UIView animateWithDuration:0.3 animations:^{
+//            [self.topSelV setFrame:CGRectMake(0, -70, ScreenWidth, 100)];
+//        } completion:^(BOOL finished) {
+//            self.zhiV.image = [UIImage imageNamed:@"xiala@2x"];
+//        }];
+//        
+//    }
 }
 @end
