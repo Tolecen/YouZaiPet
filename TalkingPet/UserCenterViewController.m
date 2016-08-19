@@ -931,10 +931,10 @@
 
 -(void)getUnpaidOrder
 {
-    [NetServer fetchOrderListWithPageIndex:1 Option:@"unpaid"  success:^(id result) {
+    [NetServer fetchUpaidedCountersuccess:^(id result) {
         NSLog(@"orderList:%@",result);
         if ([result[@"code"] intValue] == 200) {
-            self.orderCount = (int)[result[@"data"][@"list"] count];
+            self.orderCount = [result[@"data"][@"total"] intValue];
             [_tableView reloadData];
             
         }

@@ -52,12 +52,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/ShangCheng/NetServer+Payment.m"
-            timestampString = "491811791.726089"
+            timestampString = "493293787.047793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "+deleteOrderWithOrderNo:success:failure:"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "+cancleOrderWithOrderNo:success:failure:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -68,12 +68,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/ShangCheng/NetServer+Payment.m"
-            timestampString = "491811791.726089"
+            timestampString = "493293787.047793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
-            landmarkName = "+deleteOrderWithOrderNo:success:failure:"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "+cancleOrderWithOrderNo:success:failure:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -228,12 +228,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/ShangCheng/NetServer+Payment.m"
-            timestampString = "492488464.520656"
+            timestampString = "493293787.047793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
-            landmarkName = "+getKuaJingGoodsSuccess:failure:"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
+            landmarkName = "+fentchDefaultAddressSuccess:failure:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -244,12 +244,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/ShangCheng/NetServer+Payment.m"
-            timestampString = "492488511.432604"
+            timestampString = "493293787.047793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
-            landmarkName = "+getKuaJingGoodsSuccess:failure:"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
+            landmarkName = "+fentchDefaultAddressSuccess:failure:"
             landmarkType = "5">
             <Locations>
                <Location
@@ -307,12 +307,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TalkingPet/ShangCheng/NetServer+Payment.m"
-            timestampString = "492488512.92878"
+            timestampString = "493293787.047793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
-            landmarkName = "+getKuaJingGoodsSuccess:failure:"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
+            landmarkName = "+fentchDefaultAddressSuccess:failure:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

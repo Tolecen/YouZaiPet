@@ -58,6 +58,28 @@
                                          }];
 }
 
++ (void)fetchUpaidedCountersuccess:(void (^)(id))success
+                            failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
+    params[@"uid"] = [UserServe sharedUserServe].userID;
+    
+    //    params[@"uid"] = @"333";
+    //    params[@"get"] = @"";
+    
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/counter/orders",BasePayUrl];
+
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:params
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
+
 + (void)fetchOrderDetailWithOrderNo:(NSString *)orderNo
                             success:(void (^)(id))success
                             failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {

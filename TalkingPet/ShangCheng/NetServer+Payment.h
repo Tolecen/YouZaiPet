@@ -66,4 +66,7 @@ failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
                        failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 + (void)getMarketDetailGoodsWithlink:(NSString *)link success:(void (^)(id result))success
                              failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)fetchUpaidedCountersuccess:(void (^)(id result))success
+                           failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure;
 @end
