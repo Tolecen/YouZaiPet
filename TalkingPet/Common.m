@@ -497,6 +497,18 @@
     }
     //    NSString * regEx = @"&lt;([^>]*)gt;";
     //    html = [html stringByReplacingOccurrencesOfString:regEx withString:@""];
+//    NSMutableString *mStr=[NSMutableString stringWithString:html];
+//    while ([mStr rangeOfString:@"&amp;"].length||[mStr rangeOfString:@"nbsp;"].length) {
+//        
+//        NSLog(@"======================存在");
+//        
+//        [mStr replaceCharactersInRange:[mStr rangeOfString:@"&amp;"] withString:@""];
+//        [mStr replaceCharactersInRange:[mStr rangeOfString:@"nbsp;"] withString:@""];
+//        
+//    }
+
+    html = [html stringByReplacingOccurrencesOfString:@"&amp;" withString:@""];
+    html = [html stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""];
     return html;
 }
 @end

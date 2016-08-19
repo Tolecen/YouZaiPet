@@ -242,13 +242,14 @@
     //    html = [html stringByReplacingOccurrencesOfString:regEx withString:@""];
     
     NSMutableString *mStr=[NSMutableString stringWithString:html];
-    
-    //    while ([mStr rangeOfString:@"&amp；&nbsp；"].length) {
-    //
-    //        NSLog(@"======================存在");
-    //
-    //        [mStr replaceCharactersInRange:[mStr rangeOfString:@"&amp；&nbsp；"] withString:@""];
-    //    }
+    while ([mStr rangeOfString:@"&amp;"].length||[mStr rangeOfString:@"nbsp;"].length) {
+        
+        NSLog(@"======================存在");
+        
+        [mStr replaceCharactersInRange:[mStr rangeOfString:@"&amp;"] withString:@""];
+        [mStr replaceCharactersInRange:[mStr rangeOfString:@"nbsp;"] withString:@""];
+        
+    }
     return mStr;
     
     
