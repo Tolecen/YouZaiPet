@@ -307,6 +307,9 @@
     }
     NSString * goodsName = [Common filterHTML:self.detailModel.name];
     NSString * content = [Common filterHTML:self.detailModel.content];
+    if (!content || content.length<1) {
+        content = @" ";
+    }
     ShareSheet * shareSheet = [[ShareSheet alloc]initWithIconArray:@[@"weiChatFriend",@"friendCircle",@"sina",@"qq"] titleArray:@[@"微信好友",@"朋友圈",@"微博",@"QQ"] action:^(NSInteger index) {
         switch (index) {
             case 0:{

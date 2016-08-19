@@ -317,25 +317,28 @@
     }
     NSString * goodsName = [Common filterHTML:self.detailModel.name];
     NSString * content = [Common filterHTML:self.detailModel.content];
+    if (!content || content.length<1) {
+        content = @" ";
+    }
     ShareSheet * shareSheet = [[ShareSheet alloc]initWithIconArray:@[@"weiChatFriend",@"friendCircle",@"sina",@"qq"] titleArray:@[@"微信好友",@"朋友圈",@"微博",@"QQ"] action:^(NSInteger index) {
         switch (index) {
             case 0:{
-                [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"%@",goodsName] Content:[NSString stringWithFormat:@"%@",content] imageUrl:self.detailModel.thumb webUrl:[NSString stringWithFormat:SHAREGOODSBASEURL@"%@",self.detailModel.dogId] Succeed:^{
+                [ShareServe shareToWeixiFriendWithTitle:[NSString stringWithFormat:@"%@",goodsName] Content:[NSString stringWithFormat:@"%@",content] imageUrl:self.detailModel.thumb webUrl:[NSString stringWithFormat:SHAREDOGSBASEURL@"%@",self.detailModel.dogId] Succeed:^{
                     
                 }];
             }break;
             case 1:{
-                [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"%@",goodsName] Content:[NSString stringWithFormat:@"%@",content] imageUrl:self.detailModel.thumb webUrl:[NSString stringWithFormat:SHAREGOODSBASEURL@"%@",self.detailModel.dogId] Succeed:^{
+                [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"%@",goodsName] Content:[NSString stringWithFormat:@"%@",content] imageUrl:self.detailModel.thumb webUrl:[NSString stringWithFormat:SHAREDOGSBASEURL@"%@",self.detailModel.dogId] Succeed:^{
                     
                 }];
             }break;
             case 2:{
-                [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"%@,%@,%@",goodsName,content,[NSString stringWithFormat:SHAREGOODSBASEURL@"%@",self.detailModel.dogId]] imageUrl:self.detailModel.thumb Succeed:^{
+                [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"%@,%@,%@",goodsName,content,[NSString stringWithFormat:SHAREDOGSBASEURL@"%@",self.detailModel.dogId]] imageUrl:self.detailModel.thumb Succeed:^{
                     
                 }];
             }break;
             case 3:{
-                [ShareServe shareToQQWithTitle:[NSString stringWithFormat:@"%@",goodsName] Content:[NSString stringWithFormat:@"%@",content] imageUrl:self.detailModel.thumb webUrl:[NSString stringWithFormat:SHAREGOODSBASEURL@"%@",self.detailModel.dogId] Succeed:^{
+                [ShareServe shareToQQWithTitle:[NSString stringWithFormat:@"%@",goodsName] Content:[NSString stringWithFormat:@"%@",content] imageUrl:self.detailModel.thumb webUrl:[NSString stringWithFormat:SHAREDOGSBASEURL@"%@",self.detailModel.dogId] Succeed:^{
                     
                 }];
             }break;
