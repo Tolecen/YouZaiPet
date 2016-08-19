@@ -13,7 +13,7 @@
 @property (nonatomic,strong)UIButton * mfBtn;
 @property (nonatomic,strong)UIButton * aboutQuansheBtn;
 @property (nonatomic,strong)UIView * lineV;
-@property (nonatomic,strong)UILabel * introL;
+@property (nonatomic,strong)UITextView * introL;
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)UILabel * quansheIntroL;
 
@@ -23,12 +23,17 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
         
+        
+        
+        
+        
+        
         UIView * tv = [[UIView alloc] initWithFrame:CGRectZero];
         
         tv.backgroundColor = [UIColor colorWithRed:.9
-                                                         green:.9
-                                                          blue:.9
-                                                         alpha:1.f];
+                                             green:.9
+                                              blue:.9
+                                             alpha:1.f];
         [self addSubview:tv];
         
         self.aboutDogBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -98,8 +103,8 @@
         }];
         
         [self.lineV mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.mas_equalTo((ScreenWidth/3)*2);
-//            make.top.mas_equalTo(0);
+            //            make.left.mas_equalTo((ScreenWidth/3)*2);
+            //            make.top.mas_equalTo(0);
             make.height.mas_equalTo(2);
             make.width.mas_equalTo(ScreenWidth/3-20);
             make.top.mas_equalTo(48);
@@ -116,16 +121,19 @@
         }];
         
         
-        self.introL = [[UILabel alloc] initWithFrame:CGRectZero];
+        
+        
+        
+        
+        self.introL = [[UITextView alloc] initWithFrame:CGRectZero];
         self.introL.backgroundColor = [UIColor clearColor];
         self.introL.font = [UIFont systemFontOfSize:12];
         self.introL.textColor = [UIColor lightGrayColor];
-        self.introL.numberOfLines = 0;
-        self.introL.lineBreakMode = NSLineBreakByClipping;
+        self.introL.editable=NO;
         [self addSubview:self.introL];
         
         [self.introL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(130);
+            make.height.mas_equalTo(170);
             make.width.mas_equalTo(ScreenWidth-20);
             make.top.mas_equalTo(self.aboutDogBtn.mas_bottom).mas_offset(10);
             make.left.mas_equalTo(10);
@@ -142,12 +150,11 @@
         _tableView.hidden = YES;
         
         [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(150);
+            make.height.mas_equalTo(200);
             make.width.mas_equalTo(ScreenWidth);
             make.top.mas_equalTo(self.aboutDogBtn.mas_bottom).mas_offset(0);
             make.left.mas_equalTo(0);
         }];
-
     }
     return self;
 }
@@ -161,7 +168,6 @@
         [self.aboutDogBtn setTitleColor:CommonGreenColor forState:UIControlStateNormal];
         [self.aboutQuansheBtn setTitleColor:[UIColor colorWithR:150 g:150 b:150 alpha:1] forState:UIControlStateNormal];
         [self.mfBtn setTitleColor:[UIColor colorWithR:150 g:150 b:150 alpha:1] forState:UIControlStateNormal];
-        
         self.introL.text = [self filterHTML:self.detailModel.content];
         self.introL.hidden = NO;
         _tableView.hidden = YES;
@@ -191,7 +197,7 @@
 -(void)setDetailModel:(YZDogDetailModel *)dogModel
 {
     _detailModel = dogModel;
-    self.introL.text = [self filterHTML:dogModel.content];
+    self.introL.text = [Common filterHTML:dogModel.content];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -201,7 +207,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    
     return 2;
 }
 
@@ -209,15 +215,15 @@
 {
     NSScanner * scanner = [NSScanner scannerWithString:html];
     NSString * text = nil;
-//    while([scanner isAtEnd]==NO)
-//    {
-//        //找到标签的起始位置
-//        [scanner scanUpToString:@"<" intoString:nil];
-//        //找到标签的结束位置
-//        [scanner scanUpToString:@">" intoString:&text];
-//        //替换字符
-//        html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>",text] withString:@""];
-//    }
+    //    while([scanner isAtEnd]==NO)
+    //    {
+    //        //找到标签的起始位置
+    //        [scanner scanUpToString:@"<" intoString:nil];
+    //        //找到标签的结束位置
+    //        [scanner scanUpToString:@">" intoString:&text];
+    //        //替换字符
+    //        html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>",text] withString:@""];
+    //    }
     while([scanner isAtEnd]==NO)
     {
         //找到标签的起始位置
@@ -226,9 +232,25 @@
         [scanner scanUpToString:@"gt;" intoString:&text];
         //替换字符
         html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@gt;",text] withString:@""];
+        
+        //        html = [html stringByReplacingOccurrencesOfString:@"&amp;" withString:@""];
+        //
+        //        html = [html stringByReplacingOccurrencesOfString:@"&nbsp" withString:@""];
+        
     }
-//    NSString * regEx = @"&lt;([^>]*)gt;";
-//    html = [html stringByReplacingOccurrencesOfString:regEx withString:@""];
-    return html;
+    //    NSString * regEx = @"&lt;([^>]*)gt;";
+    //    html = [html stringByReplacingOccurrencesOfString:regEx withString:@""];
+    
+    NSMutableString *mStr=[NSMutableString stringWithString:html];
+    
+    //    while ([mStr rangeOfString:@"&amp；&nbsp；"].length) {
+    //
+    //        NSLog(@"======================存在");
+    //
+    //        [mStr replaceCharactersInRange:[mStr rangeOfString:@"&amp；&nbsp；"] withString:@""];
+    //    }
+    return mStr;
+    
+    
 }
 @end

@@ -58,11 +58,11 @@
     
     UIView * bgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height - navigationBarHeight)];
     [bgV setBackgroundColor:[UIColor clearColor]];
-
+    
     UIView * uu = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-navigationBarHeight)];
     [uu setBackgroundColor:[UIColor whiteColor]];
-//    uu.layer.cornerRadius = 8;
-//    uu.layer.masksToBounds = YES;
+    //    uu.layer.cornerRadius = 8;
+    //    uu.layer.masksToBounds = YES;
     [uu setAlpha:0.7];
     [bgV addSubview:uu];
     self.tableView = [[UITableView alloc] init];
@@ -94,7 +94,7 @@
         if ([_mSearchBar respondsToSelector:@selector(setBarTintColor:)]) {
             _mSearchBar.barTintColor = [UIColor colorWithWhite:230/255.0f alpha:1];
         }else{
-            _mSearchBar.tintColor = [UIColor colorWithWhite:230/255.0f alpha:1];    
+            _mSearchBar.tintColor = [UIColor colorWithWhite:230/255.0f alpha:1];
         }
         [self.mSearchBar setPlaceholder:@"搜索用户"];
         _tableView.tableHeaderView =_mSearchBar;
@@ -135,21 +135,23 @@
             [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }
-
+    
     [mDict setObject:[NSString stringWithFormat:@"%d",currentPage] forKey:@"pageIndex"];
     [mDict setObject:@"20" forKey:@"pageSize"];
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         currentPage++;
         if (self.listType==UserListBlackList) {
             [self.userListArr addObjectsFromArray:responseObject[@"value"]];
+            
         }
-        else
-            [self.userListArr addObjectsFromArray:[responseObject[@"value"] objectForKey:@"list"]];
+        
         [self.tableView footerEndRefreshing];
         [_tableView reloadData];
+        [SVProgressHUD dismissWithError:@"数据加载完毕" afterDelay:1];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.tableView footerEndRefreshing];
-
+        
     }];
 }
 - (void)didReceiveMemoryWarning
@@ -170,7 +172,7 @@
         [mDict setObject:@"findFocus" forKey:@"options"];
         [mDict setObject:self.petID forKey:@"userId"];
         if ([UserServe sharedUserServe].userID) {
-//            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+            //            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }
     if (self.listType == UserListTypeFans) {
@@ -178,7 +180,7 @@
         [mDict setObject:@"findFans" forKey:@"options"];
         [mDict setObject:self.petID forKey:@"userId"];
         if ([UserServe sharedUserServe].userID) {
-//            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+            //            [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }
     if (self.listType == UserListBlackList) {
@@ -189,7 +191,7 @@
             [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
         }
     }
-
+    
     [mDict setObject:@"1" forKey:@"pageIndex"];
     [mDict setObject:@"20" forKey:@"pageSize"];
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -232,7 +234,7 @@
         [self.navigationController pushViewController:chatDV animated:YES];
         return;
     }
-     PersonProfileViewController * pv = [[PersonProfileViewController alloc] init];
+    PersonProfileViewController * pv = [[PersonProfileViewController alloc] init];
     if ([tableView isEqual:_tableView]) {
         pv.petId = (_userListArr[indexPath.row])[@"id"];
         pv.petAvatarUrlStr = (_userListArr[indexPath.row])[@"headPortrait"];
@@ -329,7 +331,7 @@
     [mDict setObject:@"findFocus" forKey:@"options"];
     [mDict setObject:self.petID forKey:@"userId"];
     if ([UserServe sharedUserServe].userID) {
-//        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+        //        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     }
     [mDict setObject:searchBar.text forKey:@"keyword"];
     [mDict setObject:@"1" forKey:@"pageIndex"];
@@ -355,25 +357,25 @@
     [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     [mDict setObject:[dict objectForKey:@"id"] forKey:@"userId"];
     [NetServer requestWithParameters:mDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
+        
         [SVProgressHUD showSuccessWithStatus:@"已从黑名单移除"];
         [self.userListArr removeObjectAtIndex:cellIndex];
         [self.tableView reloadData];
         [DatabaseServe removePetFromChatBlackList:[dict objectForKey:@"id"]];
     }
-     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         
-     }];
+                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 
+                             }];
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

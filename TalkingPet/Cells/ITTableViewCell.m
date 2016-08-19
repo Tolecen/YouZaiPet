@@ -20,12 +20,12 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.contentView.backgroundColor = [UIColor clearColor];
-        self.imageV = [[UIImageView alloc] initWithFrame:CGRectMake(15, 25, 25, 25)];
+        self.imageV = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 25, 25)];
         [self.contentView addSubview:self.imageV];
         
-        self.desLabel = [[UILabel alloc] initWithFrame:CGRectMake(55,25, 260, 20)];
+        self.desLabel = [[UILabel alloc] initWithFrame:CGRectMake(55,15, 260, 20)];
         self.desLabel.backgroundColor = [UIColor clearColor];
-        self.desLabel.font = [UIFont boldSystemFontOfSize:14];
+        self.desLabel.font = [UIFont boldSystemFontOfSize:12];
         self.desLabel.textColor = [UIColor colorWithR:120 g:120 b:120 alpha:1];
         [self.contentView addSubview:self.desLabel];
         

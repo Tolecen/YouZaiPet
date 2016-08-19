@@ -70,12 +70,14 @@
             make.centerY.mas_equalTo(nameLb).mas_offset(0);
         }];
         
+        
+        
         UIButton *enterBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [enterBtn setTitle:@"进入犬舍" forState:UIControlStateNormal];
         enterBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
         [enterBtn addTarget:self action:@selector(inner_EnterQuanShe:) forControlEvents:UIControlEventTouchUpInside];
         [enterBtn setTitleColor:CommonGreenColor
-                          forState:UIControlStateNormal];
+                       forState:UIControlStateNormal];
         [enterBtn sizeToFit];
         enterBtn.layer.cornerRadius = CGRectGetHeight(enterBtn.frame) / 2;
         enterBtn.layer.borderColor = CommonGreenColor.CGColor;
@@ -139,9 +141,10 @@
     self.sellIntroLb.text = @"售出N只";
     [self setNeedsUpdateConstraints];
 }
-
-- (void)inner_EnterQuanShe:(UIButton *)sender {
-    
+-(void)inner_EnterQuanShe:(UIButton *)btn
+{
+    self.block();
 }
+
 
 @end

@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "YZShangChengModel.h"
 
+typedef void(^QSBlock)();
 @interface YZQuanSheSearchListCell : UICollectionViewCell
 
 @property (nonatomic, strong) YZQuanSheModel *quanSheModel;
+
+@property(nonatomic,copy)QSBlock block;
 
 @end

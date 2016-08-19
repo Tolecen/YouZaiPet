@@ -374,9 +374,30 @@
     
     OrderYZList * listModel = self.orderArr[section];
     view.desL.text = [NSString stringWithFormat:@"共 %@ 件 合计：￥%@（含运费 ￥%@）",listModel.total_amount,listModel.total_money,listModel.shippingfee];
+    if( [option isEqual:@"allList"])
+    {
+        
+        view.btn1.hidden = YES;
+        view.btn2.hidden = NO;
+        [view.btn2 setTitle:@"删除订单" forState:UIControlStateNormal];
+        
+        
+        if([listModel.post_status isEqualToString:@"2"]||[listModel.post_status isEqualToString:@"3"])
+        {
+            
+            view.btn1.hidden = NO;
+            view.btn2.hidden = NO;
+            [view.btn1 setTitle:@"删除订单" forState:UIControlStateNormal];
+            [view.btn2 setTitle:@"追加评论" forState:UIControlStateNormal];
+            
+            
+            
+        }
+        
+    }
     
     
-    if ([listModel.pay_status isEqualToString:@"0"]) {
+    else  if ([listModel.pay_status isEqualToString:@"0"]) {
         view.btn1.hidden = NO;
         view.btn2.hidden = NO;
         [view.btn1 setTitle:@"取消订单" forState:UIControlStateNormal];
@@ -412,27 +433,6 @@
         
     }
     
-//    if( [option isEqual:@"allList"])
-//    {
-//        
-//        view.btn1.hidden = YES;
-//        view.btn2.hidden = NO;
-//        [view.btn2 setTitle:@"删除订单" forState:UIControlStateNormal];
-//        
-//        
-//        if([listModel.post_status isEqualToString:@"2"]||[listModel.post_status isEqualToString:@"3"])
-//        {
-//            
-//            view.btn1.hidden = NO;
-//            view.btn2.hidden = NO;
-//            [view.btn1 setTitle:@"删除订单" forState:UIControlStateNormal];
-//            [view.btn2 setTitle:@"追加评论" forState:UIControlStateNormal];
-//            
-//            
-//            
-//        }
-//        
-//    }
     
     view.buttonClicked = ^(NSString * title)
     {

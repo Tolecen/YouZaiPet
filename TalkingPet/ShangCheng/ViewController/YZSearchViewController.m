@@ -15,7 +15,7 @@
 #import "YZGoodsDetailVC.h"
 #import "YZDogDetailVC.h"
 #import "MLKMenuPopover.h"
-
+#import "YZQuanSheDetailViewController.h"
 @interface YZSearchViewController()<UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, MLKMenuPopoverDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, assign) YZShangChengType searchType;
@@ -79,13 +79,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
+    
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
     searchBar.placeholder = @"请输入狗狗种类/犬舍名称";
     [self.navigationItem setTitleView:searchBar];
     self.searchBar = searchBar;
-
+    
     self.searchType = YZShangChengType_Dog;
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [searchBtn setTitle:@"狗狗" forState:UIControlStateNormal];
@@ -125,7 +125,7 @@
                                                      alpha:1.f];
     [collectionView registerClass:[YZQuanSheSearchListCell class] forCellWithReuseIdentifier:NSStringFromClass(YZQuanSheSearchListCell.class)];
     [collectionView registerClass:[YZShangChengDogListCell class] forCellWithReuseIdentifier:NSStringFromClass(YZShangChengDogListCell.class)];
-
+    
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
     
@@ -233,6 +233,22 @@
         return dogCell;
     } else if ([searchModel isKindOfClass:[YZQuanSheModel class]]) {
         quanSheCell.quanSheModel = searchModel;
+        
+        
+        __weak YZSearchViewController *weakself=self;
+        quanSheCell.block=^()
+        {
+            YZQuanSheDetailViewController *detailVC = [[YZQuanSheDetailViewController alloc] init];
+            YZQuanSheModel *goodsModel = searchModel;
+            detailVC.quanSheId = goodsModel.shopId;
+            detailVC.quanSheName = goodsModel.shopName;
+            detailVC.hideNaviBg = NO;
+            [weakself.navigationController pushViewController:detailVC animated:YES];
+        };
+        
+        
+        
+        
         return quanSheCell;
     }
     return nil;
@@ -250,12 +266,12 @@
         detailVC.dogModel = searchModel;
         detailVC.hideNaviBg = YES;
         [self.navigationController pushViewController:detailVC animated:YES];
-    } else if ([searchModel isKindOfClass:[YZGoodsModel class]]) {
-        YZGoodsDetailVC *detailVC = [[YZGoodsDetailVC alloc] init];
-        YZGoodsModel *goodsModel = searchModel;
-        detailVC.goodsId = goodsModel.goodsId;
-        detailVC.goodsName = goodsModel.brand.brand;
-        detailVC.hideNaviBg = YES;
+    } else if ([searchModel isKindOfClass:[YZQuanSheModel class]]) {
+        YZQuanSheDetailViewController *detailVC = [[YZQuanSheDetailViewController alloc] init];
+        YZQuanSheModel *goodsModel = searchModel;
+        detailVC.quanSheId = goodsModel.shopId;
+        detailVC.quanSheName = goodsModel.shopName;
+        detailVC.hideNaviBg = NO;
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }

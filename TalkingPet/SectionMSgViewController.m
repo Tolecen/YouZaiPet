@@ -34,8 +34,8 @@
     self.msgTableV.scrollEnabled = NO;
     self.msgTableV.backgroundColor = [UIColor colorWithR:239 g:239 b:239 alpha:1];
     self.msgTableV.backgroundView = nil;
-    self.msgTableV.rowHeight = 50;
-    //self.msgTableV.showsVerticalScrollIndicator = NO;
+    self.msgTableV.rowHeight = 45;
+    self.msgTableV.showsVerticalScrollIndicator = NO;
     self.msgTableV.cellLayoutMarginsFollowReadableWidth = NO;
     self.msgTableV.separatorStyle =    UITableViewCellSeparatorStyleNone;
     
@@ -382,21 +382,7 @@
         [self.msgTableV reloadData];
     }];
 }
-#pragma mark显示完全分割线
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
-    {
-        [cell  setSeparatorInset:UIEdgeInsetsZero];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
-    {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-    
-    
-    
-}
+
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -422,6 +408,9 @@
         cell = [[ITTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
         for (UIView * view in cell.subviews) {
             view.backgroundColor = [UIColor whiteColor];
+            UILabel *label2=[[UILabel alloc] initWithFrame:CGRectMake(0, cell.frame.origin.y, ScreenWidth, 1)];
+            label2.backgroundColor=[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
+            [cell addSubview:label2];
             
             
         }
@@ -585,7 +574,6 @@
     [navigationController pushViewController:msgV animated:YES];
     [[RootViewController sharedRootViewController].sideMenu hideMenuViewController];
 }
-
 
 -(void)back
 {
