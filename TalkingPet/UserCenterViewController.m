@@ -423,13 +423,6 @@
     commentNumL.text = [UserServe sharedUserServe].account.comment;
     caiNumL.text = [UserServe sharedUserServe].account.favour;
     
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"UserCenterScorePrompt"]) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"UserCenterScorePrompt"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        PromptView * p = [[PromptView alloc] initWithPoint:CGPointMake(70, self.tableView.tableHeaderView.frame.size.height+120+10) image:[UIImage imageNamed:@"score_prompt"] arrowDirection:1];
-        [self.view addSubview:p];
-        [p show];
-    }
 }
 - (void)actionPetSynchronous
 {
