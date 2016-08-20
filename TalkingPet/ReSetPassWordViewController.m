@@ -8,7 +8,7 @@
 
 #import "ReSetPassWordViewController.h"
 #import "SVProgressHUD.h"
-
+#import "NetServer+Payment.h"
 @interface ReSetPassWordViewController ()
 {
     UIButton * nextB;
@@ -112,18 +112,29 @@
         [SVProgressHUD showErrorWithStatus:@"请确保两次输入的密码一致"];
         return;
     }
-    NSMutableDictionary * regDict = [NetServer commonDict];
-    [regDict setObject:@"account" forKey:@"command"];
-    [regDict setObject:@"restPw"forKey:@"options"];
-    [regDict setObject:self.passwordTF.text forKey:@"password"];
-    [regDict setObject:_phoneNo forKey:@"username"];
-    [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        [SVProgressHUD showSuccessWithStatus:@"修改成功"];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:error.domain delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-        
+//    NSMutableDictionary * regDict = [NetServer commonDict];
+//    [regDict setObject:@"account" forKey:@"command"];
+//    [regDict setObject:@"restPw"forKey:@"options"];
+//    [regDict setObject:self.passwordTF.text forKey:@"password"];
+//    [regDict setObject:_phoneNo forKey:@"username"];
+//    [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//        [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:error.domain delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
+//        [alert show];
+//        
+//    }];
+    
+    [NetServer resetPWD:self.passwordTF.text uname:_phoneNo Success:^(id result) {
+        if ([result[@"code"] intValue]==200) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            [SVProgressHUD showSuccessWithStatus:@"重置成功"];
+        }
+        else
+            [SVProgressHUD showErrorWithStatus:@"重置失败"];
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        [SVProgressHUD showErrorWithStatus:@"重置失败"];
     }];
 }
 /*

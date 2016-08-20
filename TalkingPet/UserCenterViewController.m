@@ -812,6 +812,8 @@
     //    [regDict setObject:_editCurrentPetVC.breedCode forKey:@"type"];
     //    [regDict setObject:[NSString stringWithFormat:@"%.0f",_editCurrentPetVC.selectedBirthday*1000] forKey:@"birthday"];
     //    [regDict setObject:_editCurrentPetVC.regionTL.text forKey:@"address"];
+    
+    /*
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UserServe sharedUserServe].account = ({
             Account * pet = [UserServe sharedUserServe].account;
@@ -832,6 +834,28 @@
         NSLog(@"register failed info:%@",error);
         [SVProgressHUD dismiss];
         [_editCurrentPetVC showAlertWithMessage:error.domain];
+    }];
+     */
+    
+    
+    [NetServer updateUserInfoHead:_editCurrentPetVC.avatarUrl nickname:[_editCurrentPetVC.nameTF.text CutSpacing] Success:^(id result) {
+        if ([result[@"code"] intValue]==200) {
+            [UserServe sharedUserServe].account = ({
+                Account * pet = [UserServe sharedUserServe].account;
+                pet.nickname = [_editCurrentPetVC.nameTF.text CutSpacing];
+                pet.headImgURL = _editCurrentPetVC.avatarUrl;
+                pet;
+            });
+            [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];
+            
+            [SVProgressHUD dismiss];
+            [self loadViewContent];
+            [_editCurrentPetVC back];
+        }
+        else
+            [SVProgressHUD showErrorWithStatus:@"修改失败"];
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        [SVProgressHUD showErrorWithStatus:@"修改失败"];
     }];
 }
 - (void)saveEditNewPet

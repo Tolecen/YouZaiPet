@@ -69,4 +69,11 @@ failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 + (void)fetchUpaidedCountersuccess:(void (^)(id result))success
                            failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure;
+
++ (void)regUserNewMethodDict:(NSDictionary *)dict Success:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
++ (void)updateUserInfoHead:(NSString *)head nickname:(NSString *)nickname Success:(void (^)(id result))success
+                   failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
++ (void)resetPWD:(NSString *)pwd uname:(NSString *)uname Success:(void (^)(id result))success
+         failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 @end

@@ -52,13 +52,13 @@
 //        user.passWord = account.password;
         user.userID = account.userID;
         user.nickname = account.nickname;
-        user.fansNo = account.fansNo;
-        user.attentionNo = account.attentionNo;
+        user.fansNo = account.fansNo?account.fansNo:@"0";
+        user.attentionNo = account.attentionNo?account.attentionNo:@"0";
         user.headImgURL = account.headImgURL;
-        user.issue = account.issue;
-        user.relay = account.relay;
-        user.comment = account.comment;
-        user.favour = account.favour;
+        user.issue = account.issue?account.issue:@"0";
+        user.relay = account.relay?account.relay:@"0";
+        user.comment = account.comment?account.comment:@"0";
+        user.favour = account.favour?account.favour:@"0";
         if ([account.grade hasPrefix:@"DJ"]) {
             user.grade = [account.grade stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
         }
@@ -77,13 +77,13 @@
             user.userName = account.username;
             
             user.nickname = account.nickname;
-            user.fansNo = account.fansNo;
-            user.attentionNo = account.attentionNo;
+            user.fansNo = account.fansNo?account.fansNo:@"0";
+            user.attentionNo = account.attentionNo?account.attentionNo:@"0";
             user.headImgURL = account.headImgURL;
-            user.issue = account.issue;
-            user.relay = account.relay;
-            user.comment = account.comment;
-            user.favour = account.favour;
+            user.issue = account.issue?account.issue:@"0";
+            user.relay = account.relay?account.relay:@"0";
+            user.comment = account.comment?account.comment:@"0";
+            user.favour = account.favour?account.favour:@"0";
             if ([account.grade hasPrefix:@"DJ"]) {
                 user.grade = [account.grade stringByReplacingOccurrencesOfString:@"DJ" withString:@""];
             }

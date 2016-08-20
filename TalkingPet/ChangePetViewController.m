@@ -261,13 +261,13 @@
     [regDict setObject:_editCurrentPetVC.regionTL.text forKey:@"address"];
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [UserServe sharedUserServe].account = ({
-            Pet * pet = [UserServe sharedUserServe].account;
+            Account * pet = [UserServe sharedUserServe].account;
             pet.nickname = [_editCurrentPetVC.nameTF.text CutSpacing];
             pet.headImgURL = _editCurrentPetVC.avatarUrl;
-            pet.gender = _editCurrentPetVC.genderCode;
-            pet.breed = _editCurrentPetVC.breedCode;
-            pet.region = _editCurrentPetVC.regionTL.text;
-            pet.birthday = [NSDate dateWithTimeIntervalSince1970:_editCurrentPetVC.selectedBirthday];
+//            pet.gender = _editCurrentPetVC.genderCode;
+//            pet.breed = _editCurrentPetVC.breedCode;
+//            pet.region = _editCurrentPetVC.regionTL.text;
+//            pet.birthday = [NSDate dateWithTimeIntervalSince1970:_editCurrentPetVC.selectedBirthday];
             pet;
         });
         [DatabaseServe activatePet:[UserServe sharedUserServe].account WithUsername:[UserServe sharedUserServe].userName];

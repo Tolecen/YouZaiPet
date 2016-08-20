@@ -385,6 +385,61 @@
                                          }];
 }
 
++ (void)regUserNewMethodDict:(NSDictionary *)dict Success:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+{
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/member/register",BasePayUrl];
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:dict
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
+
++ (void)resetPWD:(NSString *)pwd uname:(NSString *)uname Success:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+{
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/member/resetpwd",BasePayUrl];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    params[@"username"] = uname;
+    params[@"password"] = pwd;
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:params
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
+
++ (void)updateUserInfoHead:(NSString *)head nickname:(NSString *)nickname Success:(void (^)(id result))success
+         failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+{
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/member/updateInfo",BasePayUrl];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    params[@"nickname"] = nickname;
+    params[@"head"] = head;
+    params[@"uid"] = [UserServe sharedUserServe].userID;
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:params
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
+
+
 
 + (void)requestPaymentWithGoods:(NSArray *)array AddressId:(NSString *)addressId ChannelStr:(NSString *)channelStr Voucher:(NSString *)voucher success:(void (^)(id result))success
                         failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure

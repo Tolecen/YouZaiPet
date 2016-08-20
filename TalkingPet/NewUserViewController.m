@@ -12,6 +12,7 @@
 #import "EGOImageButton.h"
 #import "RootViewController.h"
 #import "AddressManageViewController.h"
+#import "NetServer+Payment.h"
 
 @interface NewUserViewController ()
 
@@ -234,7 +235,7 @@
     [regDict setObject:@"register" forKey:@"options"];
     [regDict setObject:self.username forKey:@"username"];
     [regDict setObject:self.password forKey:@"password"];
-    if (!self.userPlatform) {
+    if ([self.userPlatform isEqualToString:@"0"]) {
         [regDict setObject:self.username forKey:@"mobile"];
     }
 //    else
@@ -246,6 +247,11 @@
     [regDict setObject:@"0" forKey:@"type"];
 //    [regDict setObject:[NSString stringWithFormat:@"%.0f",_selectedBirthday*1000] forKey:@"birthday"];
 //    [regDict setObject:self.regionTL.text forKey:@"address"];
+    
+    
+    
+    
+    /*
     [NetServer requestWithParameters:regDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSDictionary * petDic = ((responseObject[@"value"])[@"petList"])[0];
         UserServe * userServe = [UserServe sharedUserServe];
@@ -278,7 +284,75 @@
         [self showAlertWithMessage:error.domain];
 
     }];
+     */
+    
+    
+    [NetServer regUserNewMethodDict:regDict Success:^(id result) {
+        if ([result[@"code"] intValue]==200) {
+            [self login];
+        }
+        else
+            [SVProgressHUD showErrorWithStatus:@"注册失败"];
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        [SVProgressHUD showErrorWithStatus:@"注册失败"];
+    }];
 }
+
+- (void)login
+{
+
+//    [SVProgressHUD showWithStatus:@"登录中..."];
+    NSMutableDictionary * regDict = [NetServer commonDict];
+    [regDict setObject:@"login" forKey:@"command"];
+    [regDict setObject:@"login" forKey:@"options"];
+    [regDict setObject:self.username forKey:@"username"];
+    [regDict setObject:self.password forKey:@"password"];
+    
+    [NetServer requestWithParameters:regDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        UserServe * userServe = [UserServe sharedUserServe];
+        [SystemServer sharedSystemServer].metionTokenOutTime = NO;
+        userServe.userName = self.username;
+        userServe.userID = (responseObject[@"value"])[@"id"];
+        //        NSArray * petlist = (responseObject[@"value"])[@"petList"];
+        
+        [SFHFKeychainUtils storeUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,userServe.userID] andPassword:(responseObject[@"value"])[@"sessionToken"] forServiceName:CHONGWUSHUOTOKENSTORESERVICE updateExisting:YES error:nil];
+        [SFHFKeychainUtils storeUsername:[NSString stringWithFormat:@"%@%@SKey",DomainName,userServe.userID] andPassword:(responseObject[@"value"])[@"sessionKey"] forServiceName:CHONGWUSHUOTOKENSTORESERVICE updateExisting:YES error:nil];
+        
+        
+        
+        
+        
+        Account * acc = [[Account alloc]initWithDictionary:responseObject[@"value"] error:nil];
+        //        acc.username = _usernameTF.text;
+        //        acc.userID = userServe.userID;
+        //        acc.password = _passwordTF.text;
+        
+        //        userServe.action = [[NSNumber alloc] initWithBool:YES];
+        //        userServe.daren = [NSNumber numberWithBool:pet.ifDaren];
+        //        use.owner = username;
+        //        petE.petID = pet.petID;
+        
+        //        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+        
+        
+        
+        [DatabaseServe activateUeserWithAccount:acc];
+        userServe.account = [DatabaseServe getActionAccount];
+        //        [DatabaseServe activatePet:userServe.currentPet WithUsername:acc.username];
+        [SVProgressHUD dismiss];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WXRLoginSucceed" object:self userInfo:nil];
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"register failed info:%@",error);
+        NSInteger sCode = [error code];
+        [SVProgressHUD dismiss];
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"提示" message:sCode==-1001?@"您的网络可能不太好哦":error.domain delegate:self cancelButtonTitle:@"知道啦" otherButtonTitles: nil];
+        [alert show];
+    }];
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

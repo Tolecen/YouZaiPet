@@ -37,7 +37,7 @@
         // Custom initialization
         self.title = @"设置";
         
-        self.dataArrA=@[@[@"关于友仔",@"草稿箱",],@[@"播放设置",@"图片设置",@"意见反馈",@"清理缓存"],@[@"修改密码"],@[@"退出登录"]];
+        self.dataArrA=@[@[@"关于友仔",@"草稿箱",],@[@"播放设置",@"图片设置",@"意见反馈",@"清理缓存"],@[@"退出登录"]];
         
         self.dataArrB=@[@[@"关于友仔"],@[@"播放设置",@"图片设置",@"意见反馈",@"清理缓存"],@[@"登录"]];
         loggingOut = NO;
@@ -140,7 +140,7 @@
             label.text = [NSString stringWithFormat:@"%.2fM",cacheSize];
             return cell;
         }
-        else if (indexPath.section==3)
+        else if (indexPath.section==2)
         {
             static NSString *cellIdentifier = @"settingCell1";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier ];
@@ -299,11 +299,11 @@
     }
     if(ifHasLogin)
     {
-        if (indexPath.section==2) {
+        if (indexPath.section==1) {
             //清理缓存
-            [self cleanUpCache];
+//            [self cleanUpCache];
         }
-        else if (indexPath.section==3) {
+        else if (indexPath.section==2) {
             //退出登录
             [self doLogOut];
         }
