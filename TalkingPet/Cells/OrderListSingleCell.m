@@ -88,8 +88,8 @@
     [super layoutSubviews];
     if (self.goodInfo) {
         [self.goodPicV setImageURL:[NSURL URLWithString:self.goodInfo.thumb]];
-        self.goodNameL.text = self.goodInfo.product_name;
-        self.goodDesL.text = self.goodInfo.shop_name;
+        self.goodNameL.text = [Common filterHTML:self.goodInfo.product_name];
+        self.goodDesL.text = [Common filterHTML:self.goodInfo.shop_name];
         self.moneyL.text = [NSString stringWithFormat:@"￥%@",self.goodInfo.unit_price];
         self.amountL.text = [NSString stringWithFormat:@"x %@",self.goodInfo.total];
     }

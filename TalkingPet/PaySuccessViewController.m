@@ -41,18 +41,18 @@
     [self.view addSubview:h];
     h.text = [NSString stringWithFormat:@"支付金额：%@",self.price];
     
-    UIButton * toOrderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [toOrderBtn setFrame:CGRectMake(ScreenWidth/2-50, h.frame.origin.y+h.frame.size.height+20, 100, 35)];
-    toOrderBtn.backgroundColor = [UIColor clearColor];
-    toOrderBtn.layer.cornerRadius = 5;
-    toOrderBtn.layer.borderColor = [[UIColor colorWithWhite:160/255.0f alpha:1] CGColor];
-    toOrderBtn.layer.borderWidth = 1;
-    toOrderBtn.layer.masksToBounds = YES;
-    [toOrderBtn setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
-    [toOrderBtn setTitle:@"查看订单" forState:UIControlStateNormal];
-    toOrderBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-    [self.view addSubview:toOrderBtn];
-    [toOrderBtn addTarget:self action:@selector(toOrderDetailPage) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton * toOrderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [toOrderBtn setFrame:CGRectMake(ScreenWidth/2-50, h.frame.origin.y+h.frame.size.height+20, 100, 35)];
+//    toOrderBtn.backgroundColor = [UIColor clearColor];
+//    toOrderBtn.layer.cornerRadius = 5;
+//    toOrderBtn.layer.borderColor = [[UIColor colorWithWhite:160/255.0f alpha:1] CGColor];
+//    toOrderBtn.layer.borderWidth = 1;
+//    toOrderBtn.layer.masksToBounds = YES;
+//    [toOrderBtn setTitleColor:[UIColor colorWithWhite:140/255.0f alpha:1] forState:UIControlStateNormal];
+//    [toOrderBtn setTitle:@"查看订单" forState:UIControlStateNormal];
+//    toOrderBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+//    [self.view addSubview:toOrderBtn];
+//    [toOrderBtn addTarget:self action:@selector(toOrderDetailPage) forControlEvents:UIControlEventTouchUpInside];
     // Do any additional setup after loading the view.
 }
 -(void)toOrderDetailPage

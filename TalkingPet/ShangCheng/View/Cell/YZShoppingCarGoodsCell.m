@@ -109,7 +109,7 @@
     _detailModel = detailModel;
     self.selectBtn.selected = detailModel.selected;
     YZShoppingCarGoodsModel *goodsModel = (YZShoppingCarGoodsModel *)detailModel;
-    self.titleLb.text = goodsModel.name;
+    self.titleLb.text = [Common filterHTML:goodsModel.name];
     [self.thumbImageV setImageWithURL:[NSURL URLWithString:goodsModel.thumb] placeholderImage:[UIImage imageNamed:@"dog_goods_placeholder"]];
     self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:goodsModel.sellPrice]];
     self.textField.text = [NSString stringWithFormat:@"%ld", (long)detailModel.count];

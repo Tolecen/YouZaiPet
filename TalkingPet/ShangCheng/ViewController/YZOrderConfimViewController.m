@@ -44,6 +44,7 @@
 @implementation YZOrderConfimViewController
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     _address = nil;
 }
 
@@ -129,6 +130,7 @@
         NSInteger count = 0;
         self.orders = [[YZShoppingCarHelper instanceManager] orderMergeSelectDogsAndGoodsWithCount:&count];
         self.orderCount = count;
+        self.totalPrice = [YZShoppingCarHelper instanceManager].totalPrice;
         [self.bottomBar resetTotalPrice:[YZShoppingCarHelper instanceManager].totalPrice];
     }
     else
@@ -152,6 +154,23 @@
     [self inner_getDefaultAddress];
     
     [self getJingwaiGoods];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paymentResultReceived:) name:@"PaymentResultReceived" object:nil];
+}
+
+-(void)paymentResultReceived:(NSNotification *)noti
+{
+    NSString * result = noti.object;
+    if ([result isEqualToString:@"success"]) {
+        [self toSuccessPage];
+    }
+    else if ([result isEqualToString:@"cancel"]){
+        [self payCancel];
+    }
+    else
+    {
+        [self payFailed];
+    }
 }
 
 -(void)getJingwaiGoods
@@ -237,6 +256,7 @@
     NSLog(@"ffffff:%@",_goodsString);
     [NetServer requestPaymentWithGoods:arr AddressId:self.address.addressID ChannelStr:self.paySelectedIndex==0?@"alipay":@"wx" Voucher:nil success:^(id result) {
         if ([result[@"code"] intValue]==200) {
+            [SystemServer sharedSystemServer].inPay = YES;
             [Pingpp createPayment:[result[@"data"] JSONRepresentation] viewController:self appURLScheme:kUrlScheme withCompletion:^(NSString *result, PingppError *error) {
                 NSLog(@"completion block: %@", result);
                 if (error == nil) {
@@ -245,10 +265,10 @@
                      [self toSuccessPage];
                 }
                 else if ([result isEqualToString:@"cancel"]){
-//                    [self payCancel];
+                    [self payCancel];
                 }
                 else {
-//                    [self payFailed];
+                    [self payFailed];
                     NSLog(@"PingppError: code=%lu msg=%@", (unsigned  long)error.code, [error getMsg]);
                 }
                 [SystemServer sharedSystemServer].inPay = NO;
@@ -270,13 +290,27 @@
     }];
 }
 
+-(void)payCancel
+{
+    [SVProgressHUD showErrorWithStatus:@"支付已取消"];
+    [self.navigationController popViewControllerAnimated:NO];
+    //    [self toSuccessPage];
+}
+
+-(void)payFailed
+{
+    [SVProgressHUD showErrorWithStatus:@"支付遇到了一点问题，请稍后再试"];
+//    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"支付失败，接下来您要？" delegate:self cancelButtonTitle:@"暂不支付" otherButtonTitles:@"重新支付",@"修改支付方式", nil];
+//    alert.tag = 100;
+//    [alert show];
+}
 
 -(void)toSuccessPage
 {
     
     PaySuccessViewController * pv = [[PaySuccessViewController alloc] init];
-    pv.price = @"1298元";
-    pv.orderId = @"67890";
+    pv.price = [NSString stringWithFormat:@"共%d元",(int)self.totalPrice];
+    pv.orderId = self.orderNo;
     __block YZOrderConfimViewController * blockSelf = self;
     pv.back = ^(){
         [blockSelf.navigationController popToRootViewControllerAnimated:NO];
