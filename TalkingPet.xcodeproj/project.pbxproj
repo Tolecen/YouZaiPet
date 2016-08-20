@@ -769,6 +769,10 @@
 		9700C6ED1AB2BEFF00930D3D /* list_ranking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9700C6E41AB2BEFF00930D3D /* list_ranking@2x.png */; };
 		9700C6EE1AB2BEFF00930D3D /* raffleing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9700C6E51AB2BEFF00930D3D /* raffleing@2x.png */; };
 		9700C6EF1AB2BEFF00930D3D /* win@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9700C6E61AB2BEFF00930D3D /* win@2x.png */; };
+		97084C561D687DD400CB1927 /* Default-414w-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97084C521D687DD400CB1927 /* Default-414w-736h@3x.png */; };
+		97084C571D687DD400CB1927 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97084C531D687DD400CB1927 /* Default@2x.png */; };
+		97084C581D687DD400CB1927 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97084C541D687DD400CB1927 /* Default-568h@2x.png */; };
+		97084C591D687DD400CB1927 /* Default-375w-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97084C551D687DD400CB1927 /* Default-375w-667h@2x.png */; };
 		97097D0A1A88F4C8000CF090 /* package_statusbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 97097D091A88F4C8000CF090 /* package_statusbg.png */; };
 		97097D0C1A88F4DE000CF090 /* package_getBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 97097D0B1A88F4DE000CF090 /* package_getBtn.png */; };
 		9709D97B198B43B70066421C /* UploadTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9709D97A198B43B70066421C /* UploadTaskTableViewCell.m */; };
@@ -2521,6 +2525,10 @@
 		9700C6E41AB2BEFF00930D3D /* list_ranking@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_ranking@2x.png"; sourceTree = "<group>"; };
 		9700C6E51AB2BEFF00930D3D /* raffleing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "raffleing@2x.png"; sourceTree = "<group>"; };
 		9700C6E61AB2BEFF00930D3D /* win@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "win@2x.png"; sourceTree = "<group>"; };
+		97084C521D687DD400CB1927 /* Default-414w-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-414w-736h@3x.png"; sourceTree = "<group>"; };
+		97084C531D687DD400CB1927 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		97084C541D687DD400CB1927 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		97084C551D687DD400CB1927 /* Default-375w-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-375w-667h@2x.png"; sourceTree = "<group>"; };
 		97097D091A88F4C8000CF090 /* package_statusbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = package_statusbg.png; sourceTree = "<group>"; };
 		97097D0B1A88F4DE000CF090 /* package_getBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = package_getBtn.png; sourceTree = "<group>"; };
 		9709D979198B43B70066421C /* UploadTaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadTaskTableViewCell.h; sourceTree = "<group>"; };
@@ -4702,6 +4710,10 @@
 			isa = PBXGroup;
 			children = (
 				979F13201D4440F000D6F561 /* iconabout.png */,
+				97084C521D687DD400CB1927 /* Default-414w-736h@3x.png */,
+				97084C531D687DD400CB1927 /* Default@2x.png */,
+				97084C541D687DD400CB1927 /* Default-568h@2x.png */,
+				97084C551D687DD400CB1927 /* Default-375w-667h@2x.png */,
 				7269D1BF1A8CAD8600CDA305 /* huakangwawa.TTF */,
 				72831C3B196A34B700B9CA4C /* TalkingPet-Info.plist */,
 				72831C3C196A34B700B9CA4C /* InfoPlist.strings */,
@@ -6955,6 +6967,7 @@
 				9700C6EE1AB2BEFF00930D3D /* raffleing@2x.png in Resources */,
 				727E7FDA1B54B6D400A91886 /* story_recorder_progress@2x.png in Resources */,
 				72BDE3511AB813BA0034DC4A /* list_image2@2x.png in Resources */,
+				97084C581D687DD400CB1927 /* Default-568h@2x.png in Resources */,
 				9747D3A31A887C3500F13345 /* hotuser_bottom.png in Resources */,
 				9700C6EF1AB2BEFF00930D3D /* win@2x.png in Resources */,
 				D860FE501D33C2B300487E2D /* pinglun@2x.png in Resources */,
@@ -7088,6 +7101,7 @@
 				976356041B5B3718006C3B3D /* onlineconsult.png in Resources */,
 				97721C53199B167800EC3A4A /* shengyin_bg.png in Resources */,
 				976D998F1B68D11E0091E497 /* market-nom.png in Resources */,
+				97084C591D687DD400CB1927 /* Default-375w-667h@2x.png in Resources */,
 				7260E14E1B4BF0810067FAA0 /* PublishPicture.png in Resources */,
 				1595E5611B905E7300C1A770 /* story_audio_play3.png in Resources */,
 				7291E73C19B95F1E001219DD /* addAttention.png in Resources */,
@@ -7307,6 +7321,7 @@
 				726F2FB01B4E4E88007A7668 /* addStoryItem.png in Resources */,
 				72015A701A393BE000453ACF /* myScore.png in Resources */,
 				97E242CF1B03393C0066881E /* postcard_icon.png in Resources */,
+				97084C561D687DD400CB1927 /* Default-414w-736h@3x.png in Resources */,
 				72A9E1FF1A8EF42600DEFB25 /* 90167.png in Resources */,
 				728985B419AD8464008027EC /* login_normal.png in Resources */,
 				9776D5A11A83798C00A3F191 /* LV8.png in Resources */,
@@ -7399,6 +7414,7 @@
 				9715A0A21B0B29D50099637A /* customize_pac.png in Resources */,
 				97735F061ABA63A400C05FAC /* list_title_top3@2x.png in Resources */,
 				72B8CB211B61ECB6000B03DE /* usercenter_signedBtn.png in Resources */,
+				97084C571D687DD400CB1927 /* Default@2x.png in Resources */,
 				D860FE511D33C2B300487E2D /* pinglun@3x.png in Resources */,
 				72C649B11A1AFB2700E9CB60 /* female_border.png in Resources */,
 				720A171D1995CE58008192E1 /* play_click.png in Resources */,
@@ -8247,7 +8263,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
@@ -8286,7 +8302,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-ObjC";
@@ -8322,7 +8338,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "TalkingPet/TalkingPet-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TalkingPet/OpenSource",
@@ -8371,7 +8387,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "TalkingPet/TalkingPet-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TalkingPet/OpenSource",

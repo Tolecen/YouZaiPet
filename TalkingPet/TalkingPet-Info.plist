@@ -65,6 +65,7 @@
 		<string>mqqopensdkapiV3</string>
 		<string>sinaweibosso</string>
 		<string>weibosdk2.5</string>
+		<string>alipay</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
