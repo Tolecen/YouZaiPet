@@ -61,7 +61,7 @@
     #define BasePayUrl  @"http://faces.buybestpet.com"
     #endif
 
-    #define kUrlScheme     @"wxb62f795f2bc6b770"
+    #define kUrlScheme     @"wx7bbb7978950d96a1"
 
     #define ContentImageWidthType1  ScreenWidth-45-10
     #define RandomColor [UIColor colorWithRed:((arc4random() % 255) / 255.f) \
