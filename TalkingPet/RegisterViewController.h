@@ -10,7 +10,7 @@
 #import "IdentifyingString.h"
 #import "SVProgressHUD.h"
 #import "WebContentViewController.h"
-#define IFNeedVerifyCode  @"0"
+#define IFNeedVerifyCode  @"1"
 
 @protocol AttributedLabelDelegate <NSObject>
 @optional
