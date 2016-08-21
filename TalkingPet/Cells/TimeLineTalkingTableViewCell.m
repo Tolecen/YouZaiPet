@@ -451,9 +451,9 @@
     }
     self.bigZanImageV.hidden = YES;
     self.favorBtn.enabled = YES;
-    self.favorLabel.text = [self.talking.favorNum intValue]>0?self.talking.favorNum:@"喜欢";
+    self.zanL.text = self.talking.favorNum;
     //    self.forwardLabel.text = self.talking.forwardNum;
-    self.commentLabel.text = [self.talking.commentNum intValue]>0?self.talking.commentNum:@"评论";
+    self.commentL.text =self.talking.commentNum;
     self.shareLabel.text = ([self.talking.shareNum intValue]+[self.talking.forwardNum intValue])>0?[NSString stringWithFormat:@"%d",[self.talking.shareNum intValue]+[self.talking.forwardNum intValue]]:@"分享";
     [self.contentImageV setImageURL:[NSURL URLWithString:[self.talking.imgUrl stringByAppendingString:@"?imageView2/1/w/400/h/400"]]];
     [self.underDotLineV setFrame:CGRectMake(self.showTheHead?35:23, 10, 1, self.talking.rowHeight-10)];
