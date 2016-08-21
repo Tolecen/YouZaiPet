@@ -49,7 +49,7 @@
     #define BaseQiNiuDownloadURL @"http://images.buybestpet.com/"
     #define QINIUDomain @"images"
     #define DomainName @"youzai"
-    #define BasePayUrl  @"http://faces.buybestpet.com/server"
+    #define BasePayUrl  @"http://faces.buybestpet.com"
     #else
     #define BaseURL @"http://testapi.buybestpet.com/bbp-api/servlet?isCompress=0&isEncrypt=0"
     #define BaseUrlO @"http://testapi.buybestpet.com/bbp-api/servlet?isEncrypt=0&isCompress=0&sToken="
