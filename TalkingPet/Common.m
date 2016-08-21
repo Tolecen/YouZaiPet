@@ -508,7 +508,7 @@
 //    }
 
     html = [html stringByReplacingOccurrencesOfString:@"&amp;" withString:@""];
-    html = [html stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""];
+    html = [html stringByReplacingOccurrencesOfString:@"nbsp;" withString:@""];
     return html;
 }
 @end

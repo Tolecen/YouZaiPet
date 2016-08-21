@@ -258,11 +258,13 @@
 #pragma mark --
 
 - (void)shareAction {
-    [YZShangChengShareHelper shareWithScene:YZShangChengType_Goods
-                                     target:self
-                                      model:nil
-                                    success:nil
-                                    failure:nil];
+//    [YZShangChengShareHelper shareWithScene:YZShangChengType_Goods
+//                                     target:self
+//                                      model:nil
+//                                    success:nil
+//                                    failure:nil];
+    
+    [self moreBtnClicked];
 }
 
 - (void)clearPriceAction {

@@ -132,7 +132,7 @@
     
     
     self.timeL.text = [Common getExDateStringWithTimestamp:self.timeStr];
-    self.gradeL.text = [NSString stringWithFormat:@"LV.%@",self.petInfo.grade];
+    self.gradeL.text = [NSString stringWithFormat:@"LV.%@",(self.petInfo.grade&&self.petInfo.grade.length>0)?self.petInfo.grade:@"0"];
 //    CGSize forwardedNameSize = [self.timeL.text sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(120,20)];
 //    UIImage * fg = [UIImage imageNamed:@"timeLine_timeBgV"];
 //    [fg resizableImageWithCapInsets:UIEdgeInsetsMake(5, 20, 5, 5.95) resizingMode:UIImageResizingModeStretch];

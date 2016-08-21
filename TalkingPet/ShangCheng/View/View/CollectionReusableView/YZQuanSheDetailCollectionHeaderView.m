@@ -224,8 +224,8 @@
     self.nameLb.text = detailModel.shopName;
     self.numberLb.text = [NSString stringWithFormat:@"(%lld)", detailModel.shopNo];
     self.textView.text = [Common filterHTML:detailModel.dogIntro];
-    self.dogCountLb.text = detailModel.sale;
-    self.priceRangeLb.text = @"¥10 - ¥10000";
+    self.dogCountLb.text = detailModel.sellCount;
+    self.priceRangeLb.text = [NSString stringWithFormat:@"¥%@ - ¥%@",detailModel.minPrice,detailModel.maxPrice];
     [self.avatarImageV setImageWithURL:[NSURL URLWithString:detailModel.thumb] placeholderImage:[UIImage imageNamed:@"dog_placeholder"]];
     [self setNeedsUpdateConstraints];
 }

@@ -115,6 +115,9 @@
 @property (nonatomic, assign) long long shopNo;
 
 @property (nonatomic, copy) NSString *sale;//销售数量
+@property (nonatomic, copy) NSString *sellCount;//在售数量
+@property (nonatomic, copy) NSString *maxPrice;
+@property (nonatomic, copy) NSString *minPrice;
 @property (nonatomic, copy) NSString *shopKeeper;//主理人
 
 @end
