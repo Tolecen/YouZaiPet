@@ -13,7 +13,7 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #ifndef DevelopModeUU
-#define SHAREBASEURL @"http://www.chongwushuo.com/h5/index.html?petakeID="
+#define SHAREBASEURL @"http://api.buybestpet.com/h5/index.html?petakeID="
 #define SHAREGOODSBASEURL @"http://www.buybestpet.com/index.php/Home/Sale/product/gid/"
 #define SHAREDOGSBASEURL @"http://www.buybestpet.com/index.php/Home/Index/goodsDetail/id/"
 #define GOODSBASEURL @"http://www.chongwushuo.com/h5/goods/%@.html"
