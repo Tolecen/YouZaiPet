@@ -23,7 +23,7 @@
     if (self) {
         // Custom initialization
         self.title = @"关于我们";
-        self.titleArray = [NSArray arrayWithObjects:@"友仔小助手",@"支持我们，给好评", nil];
+        self.titleArray = [NSArray arrayWithObjects:@"支持我们，给好评", nil];
         
     }
     return self;
@@ -83,7 +83,7 @@
     [bgIV addSubview:statementL];
     
     UIButton * userB = [UIButton buttonWithType:UIButtonTypeCustom];
-    userB.frame = CGRectMake(ScreenWidth/2-120-5, bgIV.frame.size.height-150, 120, 30);
+    userB.frame = CGRectMake(ScreenWidth/2-60, bgIV.frame.size.height-150, 120, 30);
     [userB setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     userB.titleLabel.font = [UIFont systemFontOfSize:16];
     [userB setTitle:@"用户协议" forState:UIControlStateNormal];
@@ -95,16 +95,16 @@
     userB.layer.shadowColor = [[UIColor grayColor] CGColor];
     
     
-    UIButton * openB = [UIButton buttonWithType:UIButtonTypeCustom];
-    openB.frame = CGRectMake(ScreenWidth/2+5, bgIV.frame.size.height-150, 120, 30);
-    [openB setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    openB.titleLabel.font = [UIFont systemFontOfSize:16];
-    [openB setTitle:@"开源组件许可" forState:UIControlStateNormal];
-    [openB addTarget:self action:@selector(openSourcePermissionPage) forControlEvents:UIControlEventTouchUpInside];
-    [bgIV addSubview:openB];
-    openB.layer.cornerRadius = 5;
-    openB.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    openB.layer.borderWidth = 1;
+//    UIButton * openB = [UIButton buttonWithType:UIButtonTypeCustom];
+//    openB.frame = CGRectMake(ScreenWidth/2+5, bgIV.frame.size.height-150, 120, 30);
+//    [openB setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    openB.titleLabel.font = [UIFont systemFontOfSize:16];
+//    [openB setTitle:@"开源组件许可" forState:UIControlStateNormal];
+//    [openB addTarget:self action:@selector(openSourcePermissionPage) forControlEvents:UIControlEventTouchUpInside];
+//    [bgIV addSubview:openB];
+//    openB.layer.cornerRadius = 5;
+//    openB.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+//    openB.layer.borderWidth = 1;
     
 //    UILabel * addressL = [[UILabel alloc] initWithFrame:CGRectMake(0, bgIV.frame.size.height-100, bgIV.frame.size.width, 20)];
 //    addressL.font = [UIFont systemFontOfSize:12];
@@ -158,14 +158,14 @@
 //        [welcomeVC.view setFrame:self.view.bounds];
 //        [self.view addSubview:welcomeVC.view];
 //    }
-    if (indexPath.row==0){
-        WebContentViewController * vb = [[WebContentViewController alloc] init];
-        vb.urlStr =[@"http://mp.weixin.qq.com/s?__biz=MjM5MDM1ODExMQ==&mid=200867907&idx=1&sn=7119893f3ed7c8615b074347a56c9519#rd" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        vb.title = @"友仔小帮手";
-        [self.navigationController pushViewController:vb animated:YES];
-    }
-    else if (indexPath.row==1){
-        NSString *evaluateString = [NSString stringWithFormat:@"https://itunes.apple.com/app/id914242691"];
+//    if (indexPath.row==0){
+//        WebContentViewController * vb = [[WebContentViewController alloc] init];
+//        vb.urlStr =[@"http://mp.weixin.qq.com/s?__biz=MjM5MDM1ODExMQ==&mid=200867907&idx=1&sn=7119893f3ed7c8615b074347a56c9519#rd" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        vb.title = @"友仔小帮手";
+//        [self.navigationController pushViewController:vb animated:YES];
+//    }
+     if (indexPath.row==0){
+        NSString *evaluateString = [NSString stringWithFormat:@"https://itunes.apple.com/us/app/you-zi/id1137536950?l=zh&ls=1&mt=8"];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:evaluateString]];
     }
     else if (indexPath.row==3){
@@ -327,7 +327,7 @@
 {
 //    [self backBtnDo];
     if (buttonIndex == 1) {
-        NSString *evaluateString = [NSString stringWithFormat:@"https://itunes.apple.com/app/id914242691"];
+        NSString *evaluateString = [NSString stringWithFormat:@"https://itunes.apple.com/us/app/you-zi/id1137536950?l=zh&ls=1&mt=8"];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:evaluateString]];
     }
 }

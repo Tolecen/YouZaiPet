@@ -446,7 +446,7 @@
 }
 - (void)evaluate
 {
-    NSString *evaluateString = [NSString stringWithFormat:@"https://itunes.apple.com/app/id914242691"];
+    NSString *evaluateString = [NSString stringWithFormat:@"https://itunes.apple.com/us/app/you-zi/id1137536950?l=zh&ls=1&mt=8"];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:evaluateString]];
     //初始化控制器
     //    [SVProgressHUD showWithStatus:@"加载页面"];
