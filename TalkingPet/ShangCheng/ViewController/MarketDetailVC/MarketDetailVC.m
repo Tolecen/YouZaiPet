@@ -95,7 +95,7 @@
         NSLog(@"头部视图点击事件");
         YZGoodsDetailVC *detailVC = [[YZGoodsDetailVC alloc] init];
         detailVC.goodsId=weakSelf.hotsell.gid;
-        detailVC.goodsId=weakSelf.hotsell.name;
+        detailVC.goodsName=weakSelf.hotsell.name;
         detailVC.hideNaviBg = YES;
         [weakSelf.navigationController pushViewController:detailVC animated:YES];
     };
