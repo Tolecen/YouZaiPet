@@ -20,6 +20,7 @@
 #import "YZShoppingCarVC.h"
 #import "SVProgressHUD.h"
 #import "RootViewController.h"
+#import "NetServer+Payment.h"
 
 @interface YZGoodsDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YZDetailBottomBarDelegate>
 
@@ -271,12 +272,24 @@
     if (![self inner_AlreadyLogin]) {
         return;
     }
-    [[YZShoppingCarHelper instanceManager] addShoppingCarWithScene:YZShangChengType_Goods
-                                                             model:self.detailModel
-                                                        clearPrice:YES];
-    YZShoppingCarVC *shoppingCarVC = [[YZShoppingCarVC alloc] init];
-    shoppingCarVC.selectedIndex = 1;
-    [self.navigationController pushViewController:shoppingCarVC animated:YES];
+    [SVProgressHUD showWithStatus:@"添加到购物车..."];
+    [NetServer addToCartwithId:self.detailModel.goodsId Success:^(id result) {
+        if ([result[@"code"] intValue]==200) {
+            [SVProgressHUD dismiss];
+            YZShoppingCarVC *shoppingCarVC = [[YZShoppingCarVC alloc] init];
+            shoppingCarVC.selectedIndex = 1;
+            [self.navigationController pushViewController:shoppingCarVC animated:YES];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
+        }
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
+    }];
+
+
+
 }
 
 - (void)addShoppingCarAction {
@@ -286,11 +299,23 @@
     if (!self.detailModel) {
         return;
     }
-    [[YZShoppingCarHelper instanceManager] addShoppingCarWithScene:YZShangChengType_Goods
-                                                             model:self.detailModel
-                                                        clearPrice:NO];
     
-    [SVProgressHUD showSuccessWithStatus:@"已添加到购物车"];
+    [SVProgressHUD showWithStatus:@"添加到购物车..."];
+    [NetServer addToCartwithId:self.detailModel.goodsId Success:^(id result) {
+        if ([result[@"code"] intValue]==200) {
+            [[YZShoppingCarHelper instanceManager] addShoppingCarWithScene:YZShangChengType_Goods
+                                                                     model:self.detailModel
+                                                                clearPrice:NO];
+            [SVProgressHUD showSuccessWithStatus:@"已添加到购物车"];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
+        }
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
+    }];
+
 }
 
 - (BOOL)inner_AlreadyLogin {

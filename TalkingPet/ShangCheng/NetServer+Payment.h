@@ -69,6 +69,8 @@ failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 + (void)fetchUpaidedCountersuccess:(void (^)(id result))success
                            failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure;
++ (void)fetchCartCountersuccess:(void (^)(id result))success
+                        failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 
 + (void)regUserNewMethodDict:(NSDictionary *)dict Success:(void (^)(id result))success
                      failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
@@ -76,4 +78,14 @@ failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
                    failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
 + (void)resetPWD:(NSString *)pwd uname:(NSString *)uname Success:(void (^)(id result))success
          failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)fetchCartListSuccess:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)addToCartwithId:(NSString *)goodId Success:(void (^)(id result))success
+                failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
++ (void)deleteFromCartwithId:(NSString *)goodId Success:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure;
+
 @end

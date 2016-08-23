@@ -8,8 +8,8 @@
 
 #import "YZShoppingDogVC.h"
 #import "YZShoppingCarDogCell.h"
-
-
+#import "NetServer+Payment.h"
+#import "SVProgressHUD.h"
 @implementation YZShoppingDogVC
 
 - (Class)registerCellClass {
@@ -35,10 +35,22 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     YZShoppingCarModel *shoppingCarModel = [YZShoppingCarHelper instanceManager].dogShangPinCache[indexPath.row];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [[YZShoppingCarHelper instanceManager] removeShoppingCarItemWithScene:YZShangChengType_Dog
-                                                                        model:shoppingCarModel];
+        [SVProgressHUD showWithStatus:@"删除中..."];
+        [NetServer deleteFromCartwithId:shoppingCarModel.shoppingCarFlag Success:^(id result) {
+            if ([result[@"code"] intValue]==200) {
+                [SVProgressHUD dismiss];
+                [[YZShoppingCarHelper instanceManager] removeShoppingCarItemWithScene:YZShangChengType_Dog
+                                                                                model:shoppingCarModel];
+                [self.tableView reloadData];
+            }
+            else
+                [SVProgressHUD showErrorWithStatus:@"删除失败，请重试"];
+        } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+            [SVProgressHUD showErrorWithStatus:@"删除失败，请重试"];
+        }];
+        
     }
-    [self.tableView reloadData];
+    
     if (shoppingCarModel.selected) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kShoppingCarCalcutePriceNotification object:nil];
     }

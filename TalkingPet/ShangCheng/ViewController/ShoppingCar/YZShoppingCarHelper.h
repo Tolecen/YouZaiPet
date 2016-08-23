@@ -18,6 +18,8 @@ extern NSString *const kShoppingCarCalcutePriceNotification;
 @property (nonatomic, strong, readonly) NSMutableArray *dogShangPinCache;
 @property (nonatomic, strong, readonly) NSMutableArray *goodsShangPinCache;
 
+@property (nonatomic, strong) NSMutableArray *goodsnArray;
+
 @property (nonatomic, assign, readonly) long long totalPrice;
 @property (nonatomic, assign) BOOL shoppingCarCheckAllSelected;
 
@@ -58,5 +60,9 @@ extern NSString *const kShoppingCarCalcutePriceNotification;
  用户切换更新购物车
  */
 - (void)updateCurrentUserShoppingCar;
+
+-(void)removeAllFromCart;
+- (void)addShoppingCarWithDict:(NSDictionary *)dict
+                    clearPrice:(BOOL)clearPrice;
 
 @end

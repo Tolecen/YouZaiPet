@@ -399,6 +399,8 @@
         }
         [SFHFKeychainUtils deleteItemForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];
         [SFHFKeychainUtils deleteItemForUsername:[NSString stringWithFormat:@"%@%@SKey",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];
+        [SFHFKeychainUtils deleteItemForUsername:[NSString stringWithFormat:@"%@%@SToken",@"chongwushuotest",[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];
+        [SFHFKeychainUtils deleteItemForUsername:[NSString stringWithFormat:@"%@%@SKey",@"chongwushuotest",[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];
         [DatabaseServe unActivateUeser];
         [UserServe sharedUserServe].userName = nil;
         [UserServe sharedUserServe].userID = nil;

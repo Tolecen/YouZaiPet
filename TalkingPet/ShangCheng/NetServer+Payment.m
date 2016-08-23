@@ -80,6 +80,28 @@
                                          }];
 }
 
++ (void)fetchCartCountersuccess:(void (^)(id))success
+                           failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];
+    params[@"uid"] = [UserServe sharedUserServe].userID;
+    
+    //    params[@"uid"] = @"333";
+    //    params[@"get"] = @"";
+    
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/counter/carts",BasePayUrl];
+    
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:params
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
+
 + (void)fetchOrderDetailWithOrderNo:(NSString *)orderNo
                             success:(void (^)(id))success
                             failure:(void (^)(NSError *, AFHTTPRequestOperation *))failure {
@@ -530,5 +552,65 @@
                                          }];
 }
 
++ (void)fetchCartListSuccess:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
+    params[@"uid"] = [UserServe sharedUserServe].userID;
+    //    params[@"order_no"] = orderNo;
+    params[@"source"] = @"app";
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/cart/rows",BasePayUrl];
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:params
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
+
+
++ (void)addToCartwithId:(NSString *)goodId Success:(void (^)(id result))success
+                     failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
+    params[@"uid"] = [UserServe sharedUserServe].userID;
+    //    params[@"order_no"] = orderNo;
+    params[@"source"] = @"app";
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/cart/add/id/%@",BasePayUrl,goodId];
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:params
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
+
++ (void)deleteFromCartwithId:(NSString *)goodId Success:(void (^)(id result))success
+                failure:(void (^)(NSError *error, AFHTTPRequestOperation *operation))failure
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"token"] = [SFHFKeychainUtils getPasswordForUsername:[NSString stringWithFormat:@"%@%@SToken",DomainName,[UserServe sharedUserServe].userID] andServiceName:CHONGWUSHUOTOKENSTORESERVICE error:nil];;
+    params[@"uid"] = [UserServe sharedUserServe].userID;
+    //    params[@"order_no"] = orderNo;
+    params[@"source"] = @"app";
+    
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/cart/dele/id/%@",BasePayUrl,goodId];
+    [NetServer inner_PayServerConfigWithWithPath:path
+                                      parameters:params
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                             success(responseObject);
+                                         }
+                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             failure(error,operation);
+                                         }];
+}
 
 @end

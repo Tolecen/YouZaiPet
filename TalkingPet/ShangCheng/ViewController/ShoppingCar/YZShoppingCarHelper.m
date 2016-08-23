@@ -86,6 +86,116 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
     return NO;
 }
 
+- (void)addShoppingCarWithDict:(NSDictionary *)dict
+                     clearPrice:(BOOL)clearPrice {
+    NSString * cartId = [NSString stringWithFormat:@"%@",dict[@"id"]];
+    if ([[dict objectForKey:@"model"] isEqualToString:@"Dog"]) {
+        YZDogModel *dogModel = [[YZDogModel alloc] init];
+        dogModel.dogId = [NSString stringWithFormat:@"%@",dict[@"gid"]];
+        if (!dogModel.dogId || dogModel.dogId.length == 0) {
+            return;
+        }
+        BOOL checkContains = [self inner_CheckShoppingCarContainsItem:dogModel.dogId];
+        if (checkContains) {
+            if (clearPrice) {
+                [self.dogShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarDogModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([shoppingCarModel.dogId isEqualToString:dogModel.dogId]) {
+                        shoppingCarModel.selected = YES;
+                        *stop = YES;
+                    }
+                }];
+                [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dogShangPinCache]
+                                                          forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheDogKey]];
+            }
+        } else {
+            YZShoppingCarDogModel *shoppingCarModel = [[YZShoppingCarDogModel alloc] init];
+            shoppingCarModel.shoppingCarFlag = dogModel.dogId;
+            shoppingCarModel.count = 1;
+            shoppingCarModel.name = [dict objectForKey:@"name"];
+            shoppingCarModel.dogId = dogModel.dogId;
+            shoppingCarModel.sex = [[NSString stringWithFormat:@"%@",[dict objectForKey:@"sex"]] intValue]==0?YZDogSex_Male:YZDogSex_Female;
+            shoppingCarModel.sellPrice = [[dict objectForKey:@"sell_price"] longLongValue];
+            shoppingCarModel.thumb = [dict objectForKey:@"thumb"];
+            shoppingCarModel.birtydayDays = [[NSString stringWithFormat:@"%@",[[dict objectForKey:@"days"] objectForKey:@"age"]] integerValue];
+            shoppingCarModel.birthdayString = [dict objectForKey:@"birthday"];
+            shoppingCarModel.shopId = [NSString stringWithFormat:@"%@",[dict objectForKey:@"shop_id"]];
+            shoppingCarModel.shopNo = [[NSString stringWithFormat:@"%@",[dict objectForKey:@"shop_no"]] longLongValue];
+            shoppingCarModel.shopThumb = [dict objectForKey:@"shop_thumb"];
+            shoppingCarModel.shopName = [dict objectForKey:@"shop_name"];
+            if (clearPrice) {
+                shoppingCarModel.selected = YES;
+            }
+            
+            [self.dogShangPinCache addObject:shoppingCarModel];
+            [self.shoppingCarContainsIds addObject:dogModel.dogId];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dogShangPinCache]
+                                                      forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheDogKey]];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.shoppingCarContainsIds]
+                                                      forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheContainsIdKey]];
+            
+            
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+//            [Common addCountForCart];
+        }
+    } else  {
+        YZGoodsDetailModel *goodsModel = [[YZGoodsDetailModel alloc] init];
+        goodsModel.goodsId = [NSString stringWithFormat:@"%@",dict[@"gid"]];
+        if (!goodsModel.goodsId || goodsModel.goodsId.length == 0) {
+            return;
+        }
+        BOOL checkContains = [self inner_CheckShoppingCarContainsItem:goodsModel.goodsId];
+        if (checkContains) {
+            if (clearPrice) {
+                [self.goodsShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarGoodsModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([shoppingCarModel.goodsId isEqualToString:goodsModel.goodsId]) {
+                        shoppingCarModel.count = shoppingCarModel.count+1;
+                        shoppingCarModel.selected = YES;
+                        *stop = YES;
+                    }
+                }];
+                [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.goodsShangPinCache]
+                                                          forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheGoodsKey]];
+            }
+            else
+            {
+                [self.goodsShangPinCache enumerateObjectsUsingBlock:^(YZShoppingCarGoodsModel *shoppingCarModel, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([shoppingCarModel.goodsId isEqualToString:goodsModel.goodsId]) {
+                        shoppingCarModel.count = shoppingCarModel.count+1;
+                        *stop = YES;
+                    }
+                }];
+                [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.goodsShangPinCache]
+                                                          forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheGoodsKey]];
+            }
+        } else {
+            YZShoppingCarGoodsModel *shoppingCarModel = [[YZShoppingCarGoodsModel alloc] init];
+            shoppingCarModel.shoppingCarFlag = goodsModel.goodsId;
+            shoppingCarModel.count = 1;
+            shoppingCarModel.name = [dict objectForKey:@"name"];
+            shoppingCarModel.goodsId = goodsModel.goodsId;
+            shoppingCarModel.sellPrice = [[dict objectForKey:@"sell_price"] longLongValue];
+            shoppingCarModel.thumb = [dict objectForKey:@"thumb"];
+            shoppingCarModel.brandName = [dict objectForKey:@"shop_name"];
+            if (clearPrice) {
+                shoppingCarModel.selected = YES;
+            }
+            [self.goodsShangPinCache addObject:shoppingCarModel];
+            [self.shoppingCarContainsIds addObject:goodsModel.goodsId];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.goodsShangPinCache]
+                                                      forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheGoodsKey]];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.shoppingCarContainsIds]
+                                                      forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheContainsIdKey]];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+//            [Common addCountForCart];
+        }
+    }
+}
+
+
 - (void)addShoppingCarWithScene:(YZShangChengType)scene
                           model:(YZShangChengModel *)model
                      clearPrice:(BOOL)clearPrice {
@@ -136,7 +246,7 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
             
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            [Common addCountForCart];
+//            [Common addCountForCart];
         }
     } else if (scene == YZShangChengType_Goods) {
         YZGoodsDetailModel *goodsModel = (YZGoodsDetailModel *)model;
@@ -176,7 +286,7 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
                                                       forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheContainsIdKey]];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            [Common addCountForCart];
+//            [Common addCountForCart];
         }
     }
 }
@@ -220,6 +330,21 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
                                                   forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheContainsIdKey]];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+}
+
+-(void)removeAllFromCart
+{
+    [self.shoppingCarContainsIds removeAllObjects];
+    [self.dogShangPinCache removeAllObjects];
+    [self.goodsShangPinCache removeAllObjects];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dogShangPinCache]
+                                              forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheDogKey]];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.goodsShangPinCache]
+                                              forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheGoodsKey]];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.shoppingCarContainsIds]
+                                              forKey:[self inner_CacheUserDefaultKeyWithRelativeKey:kShoppingCarCacheContainsIdKey]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 - (void)shoppingCarSelectedAllWithSelectedState:(BOOL)selected {

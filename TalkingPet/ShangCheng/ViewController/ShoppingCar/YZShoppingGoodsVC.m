@@ -8,7 +8,9 @@
 
 #import "YZShoppingGoodsVC.h"
 #import "YZShoppingCarGoodsCell.h"
-
+#import "NetServer+Payment.h"
+#import "SVProgressHUD.h"
+#import "YZShangChengModel.h"
 @interface YZShoppingGoodsVC()
 
 @property (nonatomic, strong) UIToolbar *toolbar;
@@ -82,10 +84,42 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     YZShoppingCarModel *shoppingCarModel = [YZShoppingCarHelper instanceManager].goodsShangPinCache[indexPath.row];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [SVProgressHUD showWithStatus:@"删除中..."];
+        NSMutableArray * ty = [NSMutableArray arrayWithArray:[YZShoppingCarHelper instanceManager].goodsnArray];
+        for (int i = 0; i<ty.count; i++) {
+            NSDictionary * dict = ty[i];
+            if ([[NSString stringWithFormat:@"%@",[dict objectForKey:@"gid"]] isEqualToString:shoppingCarModel.shoppingCarFlag]) {
+                [NetServer deleteFromCartwithId:[NSString stringWithFormat:@"%@",[dict objectForKey:@"id"]] Success:^(id result) {
+                    if ([result[@"code"] intValue]==200) {
+                        [SVProgressHUD dismiss];
+                        
+                    }
+                    else
+                        [SVProgressHUD showErrorWithStatus:@"删除失败，请重试"];
+                } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+                    [SVProgressHUD showErrorWithStatus:@"删除失败，请重试"];
+                }];
+            }
+        }
         [[YZShoppingCarHelper instanceManager] removeShoppingCarItemWithScene:YZShangChengType_Goods
                                                                         model:shoppingCarModel];
+        [self.tableView reloadData];
+//        [NetServer deleteFromCartwithId:shoppingCarModel.shoppingCarFlag Success:^(id result) {
+//            if ([result[@"code"] intValue]==200) {
+//                [SVProgressHUD dismiss];
+//                [[YZShoppingCarHelper instanceManager] removeShoppingCarItemWithScene:YZShangChengType_Goods
+//                                                                                model:shoppingCarModel];
+//                [self.tableView reloadData];
+//            }
+//            else
+//                [SVProgressHUD showErrorWithStatus:@"删除失败，请重试"];
+//        } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+//            [SVProgressHUD showErrorWithStatus:@"删除失败，请重试"];
+//        }];
+
+        
     }
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
     if (shoppingCarModel.selected) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kShoppingCarCalcutePriceNotification object:nil];
     }

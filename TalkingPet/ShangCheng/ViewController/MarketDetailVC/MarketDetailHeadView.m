@@ -137,17 +137,55 @@
     
     
     switch (model.sale_flag) {
-        case 0:
-            self.turePrice.text=[NSString stringWithFormat:@"￥%lld",model.sell_price];
+        case 0:{
+            
+            NSMutableAttributedString * AttributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"￥%lld",model.sell_price]];
+            
+            [AttributedStr addAttribute:NSFontAttributeName
+             
+                                  value:[UIFont systemFontOfSize:10.0]
+             
+                                  range:NSMakeRange(0, 1)];
+            self.turePrice.attributedText=AttributedStr;
+        }
             break;
-        case 1:
-            self.turePrice.text=[NSString stringWithFormat:@"￥%lld",model.special_price];
+        case 1:{
+            NSMutableAttributedString * AttributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"￥%lld",model.special_price]];
+            
+            [AttributedStr addAttribute:NSFontAttributeName
+             
+                                  value:[UIFont systemFontOfSize:10.0]
+             
+                                  range:NSMakeRange(0, 1)];
+            self.turePrice.attributedText=AttributedStr;
+            
+        }
             break;
         case 2:
-            self.turePrice.text=[NSString stringWithFormat:@"￥%lld",model.special_price];
+        {
+            NSMutableAttributedString * AttributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"￥%lld",model.special_price]];
+            
+            [AttributedStr addAttribute:NSFontAttributeName
+             
+                                  value:[UIFont systemFontOfSize:10.0]
+             
+                                  range:NSMakeRange(0, 1)];
+            self.turePrice.attributedText=AttributedStr;
+            
+        }
             break;
         case 3:
-            self.turePrice.text=[NSString stringWithFormat:@"￥%lld",model.sell_price-model.special_price];
+        {
+            NSMutableAttributedString * AttributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"￥%lld",model.sell_price-model.special_price]];
+            
+            [AttributedStr addAttribute:NSFontAttributeName
+             
+                                  value:[UIFont systemFontOfSize:10.0]
+             
+                                  range:NSMakeRange(0, 1)];
+            self.turePrice.attributedText=AttributedStr;
+            
+        }
             break;
         default:
             break;
