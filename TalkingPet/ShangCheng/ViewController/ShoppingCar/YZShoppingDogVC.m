@@ -66,7 +66,7 @@
                 } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
                     [SVProgressHUD showErrorWithStatus:@"删除失败，请重试"];
                 }];
-                break;
+               
             }
         }
         

@@ -30,10 +30,56 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden=YES;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden=NO;
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setBackButtonWithTarget:@selector(back)];
+    //    self.view.backgroundColor=[UIColor orangeColor];
+    self.view.backgroundColor=[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
+#pragma mark假导航栏
+    
+    UIView *navView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
+    navView.backgroundColor=[UIColor colorWithRed:0.39 green:0.80 blue:0.69 alpha:1.00];
+    [self.view addSubview:navView];
+    
+    UIButton * BackButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    BackButton.frame = CGRectMake(16.0, 26.0, 65, 32);
+    [BackButton setImage:[UIImage imageNamed:@"backButton"] forState:UIControlStateNormal];
+    [BackButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [navView addSubview:BackButton];
+    
+    UILabel *titleL=[[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth-100)/2, 34, 100, 20)];
+    titleL.font=[UIFont boldSystemFontOfSize:20];
+    titleL.text=@"我的等级";
+    titleL.textAlignment=NSTextAlignmentCenter;
+    titleL.textColor=[UIColor whiteColor];
+    [navView addSubview:titleL];
+    
+    UILabel *linview=[[UILabel alloc] initWithFrame:CGRectMake(0, 63, ScreenWidth, 1)];
+    linview.backgroundColor=[UIColor lightGrayColor];
+    linview.alpha=0.6;
+    [navView addSubview:linview];
+    
+    
+#pragma mark --下面的空间的背景层
+    
+    
+    UIView *bgView=[[UIView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, 165)];
+    bgView.backgroundColor=[UIColor whiteColor];
+    
+    [self.view addSubview:bgView];
+    
 #pragma mark右边圆角问号
     UIButton*ruleB = [UIButton buttonWithType:UIButtonTypeCustom];
     ruleB.frame = CGRectMake(ScreenWidth-28, 10, 20, 20);
@@ -43,32 +89,34 @@
     ruleB.layer.cornerRadius = 10;
     ruleB.layer.masksToBounds =YES;
     ruleB.backgroundColor =[UIColor colorWithR:164 g:164 b:164 alpha:1];
-    [self.view addSubview:ruleB];
+    [bgView addSubview:ruleB];
     
 #pragma mark默认上方等级图标
-    UIButton *LVIV = [[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth/2-50, navigationBarHeight-20, 100, 30)];
+    UIButton *LVIV = [[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth/2-50, 36, 100, 30)];
     [LVIV setTitleColor:CommonGreenColor forState:UIControlStateNormal];
     [LVIV setTitle:[NSString stringWithFormat:@"LV%d",(int)[[UserServe sharedUserServe].account.grade integerValue]]forState:UIControlStateNormal];
     LVIV.titleLabel.font = [UIFont systemFontOfSize:14];
-    [self.view addSubview:LVIV];
+    [bgView addSubview:LVIV];
     LVIV.layer.borderColor = CommonGreenColor.CGColor;
     LVIV.layer.borderWidth = 1.f;
     LVIV.layer.cornerRadius = CGRectGetHeight(LVIV.frame) / 2;
     LVIV.layer.masksToBounds = YES;
     
 #pragma mark积分相关
-    UILabel*scoreL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-100, 80, 60, 20)];
+    UILabel*scoreL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-100, 86, 60, 20)];
     scoreL.backgroundColor = [UIColor clearColor];
     scoreL.font = [UIFont systemFontOfSize:14];
     scoreL.textColor = [UIColor colorWithWhite:120/255.0f alpha:1];
     scoreL.text = [NSString stringWithFormat:@"积分 %@",[UserServe sharedUserServe].account.score];
-    [self.view addSubview:scoreL];
+    [bgView addSubview:scoreL];
     CGSize zs = [scoreL.text sizeWithFont:scoreL.font constrainedToSize:CGSizeMake(100, 20) lineBreakMode:NSLineBreakByCharWrapping];
     
     [scoreL setFrame:CGRectMake(ScreenWidth/2-30, navigationBarHeight+30, zs.width, 20)];
+    
+    
 #pragma mark整个进度条背景颜色
-    UIView*gradeBV = [[UIView alloc] initWithFrame:CGRectMake(40, scoreL.frame.origin.y+28, self.view.frame.size.width-80, 6)];
-    [self.view addSubview:gradeBV];
+    UIView*gradeBV = [[UIView alloc] initWithFrame:CGRectMake(40, 126, ScreenWidth-80, 6)];
+    [bgView addSubview:gradeBV];
     gradeBV.backgroundColor =  [UIColor colorWithRed:214/255.0 green:214/255.0 blue:214/255.0  alpha:1];
     gradeBV.layer.masksToBounds=YES;
     gradeBV.layer.cornerRadius = 5;
@@ -80,30 +128,36 @@
     gradeV.backgroundColor = CommonGreenColor;
     
 #pragma mark左边默认等级
-    UILabel * gradeL = [[UILabel alloc] initWithFrame:CGRectMake(10,scoreL.frame.origin.y+25, 30, 10)];
+    
+    UILabel * gradeL = [[UILabel alloc] initWithFrame:CGRectMake(10,126, 30, 10)];
     gradeL.backgroundColor = [UIColor clearColor];
     gradeL.font = [UIFont systemFontOfSize:14];
     gradeL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
     gradeL.text = [NSString stringWithFormat:@"LV.%d",(int)[[UserServe sharedUserServe].account.grade integerValue]];
-    [self.view addSubview:gradeL];
+    [bgView addSubview:gradeL];
+    
 #pragma marak右边等级
-    UILabel * nextGradeL = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width-30-5,scoreL.frame.origin.y+25, 30, 10)];
+    UILabel * nextGradeL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-30-5,126, 30, 10)];
     nextGradeL.backgroundColor = [UIColor clearColor];
     nextGradeL.font = [UIFont systemFontOfSize:14];
     nextGradeL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
     nextGradeL.text = [NSString stringWithFormat:@"LV.%d",(int)[[UserServe sharedUserServe].account.grade integerValue]+1];
-    [self.view addSubview:nextGradeL];
-#pragma mark 升级还需要
-    upL = [[UILabel  alloc] initWithFrame:CGRectMake(ScreenWidth-gradeBV.frame.size.width-20-20, gradeBV.frame.origin.y+10, self.view.frame.size.width-50-5, 10)];
-    upL.font = [UIFont systemFontOfSize:12];
-    upL.textAlignment = NSTextAlignmentCenter;
+    [bgView addSubview:nextGradeL];
     
-    [self.view addSubview:upL];
+#pragma mark 升级还需要
+    upL = [[UILabel  alloc] initWithFrame:CGRectMake(55/2, 139, ScreenWidth-55, 10)];
+    upL.font = [UIFont systemFontOfSize:12];
+    upL.textColor = [UIColor colorWithWhite:140/255.0f alpha:1];
+    
+    upL.textAlignment = NSTextAlignmentCenter;
+    [bgView addSubview:upL];
     upL.backgroundColor = [UIColor clearColor];
+    
 #pragma mark表的相关操作
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(5, self.view.frame.size.width*0.57-40, self.view.frame.size.width-10, self.view.frame.size.height - navigationBarHeight-(self.view.frame.size.width*0.57-40)) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 249, self.view.frame.size.width, ScreenHeight-249) style:UITableViewStyleGrouped];
     //    _tableView.layer.masksToBounds = YES;
     //    _tableView.layer.cornerRadius = 5;
+    self.tableView.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:_tableView];
     //    _tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     _tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
@@ -121,6 +175,7 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (void)getGradeRule
 {
     NSMutableDictionary* mDict = [NetServer commonDict];
@@ -142,6 +197,8 @@
         
     }];
 }
+
+
 - (void)getGradeDetail
 {
     NSMutableDictionary* mDict = [NetServer commonDict];

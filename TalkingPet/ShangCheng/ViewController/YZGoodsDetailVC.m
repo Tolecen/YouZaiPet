@@ -17,7 +17,6 @@
 #import "MJRefresh.h"
 #import "YZShangChengShareHelper.h"
 #import "YZShoppingCarHelper.h"
-#import "YZShoppingCarVC.h"
 #import "SVProgressHUD.h"
 #import "RootViewController.h"
 #import "NetServer+Payment.h"
@@ -33,6 +32,11 @@
 @property (nonatomic, assign) NSInteger pageIndex;
 
 @property (nonatomic, strong) NSMutableDictionary *cache;
+
+@property (nonatomic, strong) UIButton *btn;
+@property (nonatomic, strong) UIView *sanjiaoView;
+
+@property (nonatomic, assign)BOOL isShow;
 
 @end
 
@@ -59,7 +63,7 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 10.f;
     flowLayout.minimumLineSpacing = 10.f;
-
+    
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,
                                                                                           0,
                                                                                           ScreenWidth,
@@ -83,6 +87,35 @@
         make.left.top.right.mas_equalTo(self.view).mas_offset(0);
         make.bottom.mas_equalTo(self.view).mas_offset(-50);
     }];
+    
+#pragma mark--进入购物车按钮（在下方工具栏更改工程量太大 so....）
+    UIView *sanjiaoView=[[UIView alloc] initWithFrame:CGRectMake((ScreenWidth-10)/2, ScreenHeight-65, 10, 10)];
+    
+    sanjiaoView.backgroundColor=[UIColor colorWithRed:0.40 green:0.79 blue:0.69 alpha:1.00];
+    
+    sanjiaoView.transform=CGAffineTransformMakeRotation(M_PI/4);
+    self.sanjiaoView=sanjiaoView;
+    self.sanjiaoView.hidden=YES;
+    [self.view addSubview:self.sanjiaoView];
+    
+    UIButton *btn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btn.frame=CGRectMake(ScreenWidth/3, ScreenHeight-90, ScreenWidth
+                         /3, 30);
+    [btn setTitle:@"去狗窝结算" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    btn.backgroundColor=[UIColor colorWithRed:0.40 green:0.79 blue:0.69 alpha:1.00];
+    btn.layer.masksToBounds=YES;
+    btn.layer.cornerRadius=15;
+    self.btn=btn;
+    self.btn.hidden=YES;
+    [self.view addSubview:self.btn];
+    
+    
+    
+    
+    
+    
     
     YZDetailBottomBar *bottomBar = [[YZDetailBottomBar alloc] initWithFrame:CGRectZero type:YZShangChengType_Goods];
     bottomBar.delegate = self;
@@ -259,15 +292,35 @@
 #pragma mark --
 
 - (void)shareAction {
-//    [YZShangChengShareHelper shareWithScene:YZShangChengType_Goods
-//                                     target:self
-//                                      model:nil
-//                                    success:nil
-//                                    failure:nil];
+    //    [YZShangChengShareHelper shareWithScene:YZShangChengType_Goods
+    //                                     target:self
+    //                                      model:nil
+    //                                    success:nil
+    //                                    failure:nil];
     
     [self moreBtnClicked];
 }
+-(void)btnClick
+{
+    if (![self inner_AlreadyLogin]) {
+        return;
+    }
+ 
+    YZShoppingCarVC *shoppingCarVC = [[YZShoppingCarVC alloc] init];
+    shoppingCarVC.selectedIndex = 1;
+    [self.navigationController pushViewController:shoppingCarVC animated:YES];
+}
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    if (_isShow) {
+        self.btn.hidden=YES;
+        self.sanjiaoView.hidden=YES;
+        _isShow=!_isShow;
+    }
+}
+
+#pragma  mark -- 清算按钮代理事件
 - (void)clearPriceAction {
     if (![self inner_AlreadyLogin]) {
         return;
@@ -288,10 +341,8 @@
         [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
     }];
 
-
-
 }
-
+#pragma  mark -- 放入狗窝
 - (void)addShoppingCarAction {
     if (![self inner_AlreadyLogin]) {
         return;
@@ -299,7 +350,6 @@
     if (!self.detailModel) {
         return;
     }
-    
     [SVProgressHUD showWithStatus:@"添加到购物车..."];
     [NetServer addToCartwithId:self.detailModel.goodsId Success:^(id result) {
         if ([result[@"code"] intValue]==200) {
@@ -307,6 +357,17 @@
                                                                      model:self.detailModel
                                                                 clearPrice:NO];
             [SVProgressHUD showSuccessWithStatus:@"已添加到购物车"];
+            if(_isShow)
+            {
+                self.btn.hidden=YES;
+                self.sanjiaoView.hidden=YES;
+            }else
+            {
+                [SVProgressHUD showSuccessWithStatus:@"已添加到购物车"];
+                self.btn.hidden=NO;
+                self.sanjiaoView.hidden=NO;
+            }
+            _isShow=!_isShow;
         }
         else
         {
@@ -315,7 +376,14 @@
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
     }];
-
+    
+    
+    
+    
+   
+    
+    
+    
 }
 
 - (BOOL)inner_AlreadyLogin {
@@ -346,12 +414,12 @@
             }break;
             case 1:{
                 [ShareServe shareToFriendCircleWithTitle:[NSString stringWithFormat:@"%@",goodsName] Content:[NSString stringWithFormat:@"%@",content] imageUrl:self.detailModel.thumb webUrl:[NSString stringWithFormat:SHAREGOODSBASEURL@"%@",self.detailModel.goodsId] Succeed:^{
-                   
+                    
                 }];
             }break;
             case 2:{
                 [ShareServe shareToSineWithContent:[NSString stringWithFormat:@"%@,%@,%@",goodsName,content,[NSString stringWithFormat:SHAREGOODSBASEURL@"%@",self.detailModel.goodsId]] imageUrl:self.detailModel.thumb Succeed:^{
-                   
+                    
                 }];
             }break;
             case 3:{
@@ -359,14 +427,14 @@
                     
                 }];
             }break;
-
+                
             default:
                 break;
         }
         
     }];
     [shareSheet show];
-
+    
 }
 
 @end
