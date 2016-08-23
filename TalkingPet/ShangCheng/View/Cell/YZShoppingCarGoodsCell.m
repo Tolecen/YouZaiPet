@@ -46,7 +46,7 @@
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(superView).mas_offset(10);
         make.left.mas_equalTo(self.thumbImageV.mas_right).mas_equalTo(5);
-        make.right.mas_equalTo(superView).mas_equalTo(-5);
+        make.width.lessThanOrEqualTo(@150);
         make.height.mas_equalTo(ceil(titleLb.font.lineHeight) * 2 + 2);
     }];
     
