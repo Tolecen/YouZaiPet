@@ -36,18 +36,39 @@
     YZShoppingCarModel *shoppingCarModel = [YZShoppingCarHelper instanceManager].dogShangPinCache[indexPath.row];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [SVProgressHUD showWithStatus:@"删除中..."];
-        [NetServer deleteFromCartwithId:shoppingCarModel.shoppingCarFlag Success:^(id result) {
-            if ([result[@"code"] intValue]==200) {
-                [SVProgressHUD dismiss];
-                [[YZShoppingCarHelper instanceManager] removeShoppingCarItemWithScene:YZShangChengType_Dog
-                                                                                model:shoppingCarModel];
-                [self.tableView reloadData];
+//        [NetServer deleteFromCartwithId:shoppingCarModel.shoppingCarFlag Success:^(id result) {
+//            if ([result[@"code"] intValue]==200) {
+//                [SVProgressHUD dismiss];
+//                [[YZShoppingCarHelper instanceManager] removeShoppingCarItemWithScene:YZShangChengType_Dog
+//                                                                                model:shoppingCarModel];
+//                [self.tableView reloadData];
+//            }
+//            else
+//                [SVProgressHUD showErrorWithStatus:@"删除失败，请重试"];
+//        } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+//            [SVProgressHUD showErrorWithStatus:@"删除失败，请重试"];
+//        }];
+        
+        
+        NSMutableArray * ty = [NSMutableArray arrayWithArray:[YZShoppingCarHelper instanceManager].goodsnArray];
+        for (int i = 0; i<ty.count; i++) {
+            NSDictionary * dict = ty[i];
+            if ([[NSString stringWithFormat:@"%@",[dict objectForKey:@"gid"]] isEqualToString:shoppingCarModel.shoppingCarFlag]) {
+                [NetServer deleteFromCartwithId:[NSString stringWithFormat:@"%@",[dict objectForKey:@"id"]] Success:^(id result) {
+                    if ([result[@"code"] intValue]==200) {
+                        [SVProgressHUD dismiss];
+                        [[YZShoppingCarHelper instanceManager] removeShoppingCarItemWithScene:YZShangChengType_Dog
+                                                                                        model:shoppingCarModel];
+                        [self.tableView reloadData];
+                    }
+                    else
+                        [SVProgressHUD showErrorWithStatus:@"删除失败，请重试"];
+                } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+                    [SVProgressHUD showErrorWithStatus:@"删除失败，请重试"];
+                }];
+                break;
             }
-            else
-                [SVProgressHUD showErrorWithStatus:@"删除失败，请重试"];
-        } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
-            [SVProgressHUD showErrorWithStatus:@"删除失败，请重试"];
-        }];
+        }
         
     }
     
