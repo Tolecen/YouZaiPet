@@ -30,7 +30,10 @@
     yzModel.thumb=model.thumb;
     yzModel.createTime=@([model.addtime intValue]);
     yzModel.content=model.content;
-    yzModel.brand.brandId=model.shop_name;
+    
+    YZBrandModel * yzbrand=[[YZBrandModel alloc] init];
+    yzbrand.brand=model.shop_name;
+    yzModel.brand=yzbrand;
     
     return [yzModel copy];
     

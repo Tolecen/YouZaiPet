@@ -13,9 +13,11 @@
 #import "YZOrderConfimViewController.h"
 #import "SVProgressHUD.h"
 #import "Common.h"
+#import "NetServer+Payment.h"
 @interface YZShoppingCarVC()<YZShoppingCarBottomBarDelegate>
 
 @property (nonatomic, weak) YZShoppingCarBottomBar  *bottomBar;
+@property (nonatomic,strong)NSMutableArray * goodsArray;
 
 @end
 
@@ -47,36 +49,12 @@
                                                  name:kShoppingCarCalcutePriceNotification
                                                object:nil];
     
-    UIView *containerView = [[UIView alloc] init];
-    [self.view addSubview:containerView];
-    [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(self.view).mas_offset(0);
-        make.bottom.mas_equalTo(self.view).mas_offset(-44);
-    }];
     
-    YZShoppingCarPageVC *pageVC = [[YZShoppingCarPageVC alloc] init];
-    pageVC.selectIndex = self.selectedIndex;
-    [self addChildViewController:pageVC];
-    [containerView addSubview:pageVC.view];
-    [pageVC didMoveToParentViewController:self];
-    [pageVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(containerView).insets(UIEdgeInsetsZero);
-    }];
+   
     
-    YZShoppingCarBottomBar *bottomBar = [[YZShoppingCarBottomBar alloc] initWithStyle:YZShoppingCarBottomBarStyle_ShoppingCar];
-    bottomBar.delegate = self;
-    [self.view addSubview:bottomBar];
-    self.bottomBar = bottomBar;
+
     
-    [bottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.mas_equalTo(self.view).mas_offset(0);
-        make.height.mas_equalTo(44);
-    }];
-    
-    [self.bottomBar resetTotalPrice:[YZShoppingCarHelper instanceManager].totalPrice];
-    [self.bottomBar changeSelectBtnState:[YZShoppingCarHelper instanceManager].shoppingCarCheckAllSelected];
-    
-    [Common clearCartCount];
+    [self getMyCartList];
 }
 
 - (void)inner_ChangeShoppingCarItemSelectState:(NSNotification *)notification {
@@ -114,6 +92,58 @@
     }
     YZOrderConfimViewController *viewC = [[YZOrderConfimViewController alloc] init];
     [self.navigationController pushViewController:viewC animated:YES];
+}
+
+-(void)getMyCartList
+{
+    [NetServer fetchCartListSuccess:^(id result) {
+        if ([result[@"code"] intValue]==200) {
+            [[YZShoppingCarHelper instanceManager] removeAllFromCart];
+            NSArray * array = [result objectForKey:@"data"];
+            self.goodsArray = [NSMutableArray arrayWithArray:array];
+            for (int i = 0; i<array.count; i++) {
+                NSDictionary * dict = [array objectAtIndex:i];
+                [[YZShoppingCarHelper instanceManager] addShoppingCarWithDict:dict
+                                                                   clearPrice:NO];
+            }
+            
+            [YZShoppingCarHelper instanceManager].goodsnArray = self.goodsArray;
+            
+            UIView *containerView = [[UIView alloc] init];
+            [self.view addSubview:containerView];
+            [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.left.right.mas_equalTo(self.view).mas_offset(0);
+                make.bottom.mas_equalTo(self.view).mas_offset(-44);
+            }];
+
+            
+            YZShoppingCarPageVC *pageVC = [[YZShoppingCarPageVC alloc] init];
+            pageVC.selectIndex = self.selectedIndex;
+            
+            [self addChildViewController:pageVC];
+            [containerView addSubview:pageVC.view];
+            [pageVC didMoveToParentViewController:self];
+            [pageVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(containerView).insets(UIEdgeInsetsZero);
+            }];
+            
+            YZShoppingCarBottomBar *bottomBar = [[YZShoppingCarBottomBar alloc] initWithStyle:YZShoppingCarBottomBarStyle_ShoppingCar];
+            bottomBar.delegate = self;
+            [self.view addSubview:bottomBar];
+            self.bottomBar = bottomBar;
+            
+            [bottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.left.right.mas_equalTo(self.view).mas_offset(0);
+                make.height.mas_equalTo(44);
+            }];
+            
+            [self.bottomBar resetTotalPrice:[YZShoppingCarHelper instanceManager].totalPrice];
+            [self.bottomBar changeSelectBtnState:[YZShoppingCarHelper instanceManager].shoppingCarCheckAllSelected];
+        }
+        
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        
+    }];
 }
 
 @end

@@ -9,5 +9,5 @@
 #import "WMPageController.h"
 
 @interface YZShoppingCarPageVC : WMPageController
-
+@property (nonatomic,strong)NSMutableArray * goodsArray;
 @end

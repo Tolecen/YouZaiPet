@@ -30,18 +30,22 @@
                                                object:nil];
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero];
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    [tableView registerClass:[self registerCellClass] forCellReuseIdentifier:NSStringFromClass([self registerCellClass])];
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableView.tableFooterView = [[UIView alloc] init];
-    tableView.backgroundColor = [UIColor commonGrayColor];
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view).insets(UIEdgeInsetsZero);
     }];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [tableView registerClass:[self registerCellClass] forCellReuseIdentifier:NSStringFromClass([self registerCellClass])];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.tableFooterView = [[UIView alloc] init];
+    tableView.backgroundColor = [UIColor commonGrayColor];
+    
+    
+    
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

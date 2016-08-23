@@ -442,14 +442,14 @@
         return;
     }
     self.cartCount = 0;
-    if ([YZShoppingCarHelper instanceManager].dogShangPinCache) {
-        self.cartCount = self.cartCount+(int)([YZShoppingCarHelper instanceManager].dogShangPinCache.count);
-        
-    }
-    if ([YZShoppingCarHelper instanceManager].goodsShangPinCache) {
-        self.cartCount = self.cartCount+(int)([YZShoppingCarHelper instanceManager].goodsShangPinCache.count);
-        
-    }
+//    if ([YZShoppingCarHelper instanceManager].dogShangPinCache) {
+//        self.cartCount = self.cartCount+(int)([YZShoppingCarHelper instanceManager].dogShangPinCache.count);
+//        
+//    }
+//    if ([YZShoppingCarHelper instanceManager].goodsShangPinCache) {
+//        self.cartCount = self.cartCount+(int)([YZShoppingCarHelper instanceManager].goodsShangPinCache.count);
+//        
+//    }
 //    NSString * cartCounts = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"cartneedmetioncount%@",[UserServe sharedUserServe].userID]];
 //    if (!cartCounts || [cartCounts intValue]==0) {
 //        self.cartCount = 0;
@@ -458,7 +458,17 @@
 //    {
 //        self.cartCount = [cartCounts intValue];
 //    }
-    [_tableView reloadData];
+    [NetServer fetchCartCountersuccess:^(id result) {
+        if ([result[@"code"] intValue] == 200) {
+            self.cartCount = [result[@"data"][@"total"] intValue];
+            [_tableView reloadData];
+            
+        }
+
+    } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
+        
+    }];
+
 }
 #pragma mark -
 - (void)puthAttentionViewCntroller
@@ -966,7 +976,7 @@
             
         }
         
-        [_tableView headerEndRefreshing];
+//        [_tableView headerEndRefreshing];
         //        [SVProgressHUD dismissWithError:@"订单信息已经全部加载完毕" afterDelay:2];
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         

@@ -9,5 +9,5 @@
 #import "YZShoppingPageContainerVC.h"
 
 @interface YZShoppingGoodsVC : YZShoppingPageContainerVC
-
+@property (nonatomic,strong)NSMutableArray * goodsArray;
 @end
