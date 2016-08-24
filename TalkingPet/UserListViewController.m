@@ -17,6 +17,7 @@
 @property (nonatomic,retain)UISearchBar * mSearchBar;
 @property (nonatomic,retain)UISearchDisplayController * searchController;
 @property (nonatomic,retain)NSArray * searchArr;
+
 @end
 
 @implementation UserListViewController
@@ -56,26 +57,27 @@
     // Do any additional setup after loading the view.
     [self setBackButtonWithTarget:@selector(back)];
     
-    UIView * bgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height - navigationBarHeight)];
+    UIView * bgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height - navigationBarHeight)];
     [bgV setBackgroundColor:[UIColor clearColor]];
     
-    UIView * uu = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-navigationBarHeight)];
+    UIView * uu = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-navigationBarHeight)];
     [uu setBackgroundColor:[UIColor whiteColor]];
-    //    uu.layer.cornerRadius = 8;
-    //    uu.layer.masksToBounds = YES;
+    uu.layer.cornerRadius = 8;
+    uu.layer.masksToBounds = YES;
     [uu setAlpha:0.7];
     [bgV addSubview:uu];
+    
     self.tableView = [[UITableView alloc] init];
     _tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight);
-    _tableView.backgroundView = bgV;
+    _tableView.backgroundView=bgV;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_tableView];
     _tableView.rowHeight = 70;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     
-    g = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 320, 100)];
+    g = [[UILabel alloc] initWithFrame:CGRectMake(0, ScreenHeight/2-108, ScreenWidth, 100)];
     [g setText:@"这里空空的呀"];
     [g setBackgroundColor:[UIColor clearColor]];
     [g setTextAlignment:NSTextAlignmentCenter];
@@ -100,11 +102,11 @@
         _tableView.tableHeaderView =_mSearchBar;
         self.mSearchBar.delegate = self;
         [self.mSearchBar sizeToFit];
-        self.searchController =[[UISearchDisplayController alloc] initWithSearchBar:self.mSearchBar contentsController:self];
-        self.searchController.searchResultsDelegate= self;
-        self.searchController.searchResultsDataSource = self;
-        self.searchController.searchResultsTableView.rowHeight = 70;
-        self.searchController.delegate = self;
+        //        self.searchController =[[UISearchDisplayController alloc] initWithSearchBar:self.mSearchBar contentsController:self];
+        //        self.searchController.searchResultsDelegate= self;
+        //        self.searchController.searchResultsDataSource = self;
+        //        self.searchController.searchResultsTableView.rowHeight = 70;
+        //        self.searchController.delegate = self;
     }
 }
 - (void)tableViewFooterRereshing:(UITableView *)tableView
@@ -323,6 +325,22 @@
     [self.userListArr replaceObjectAtIndex:index withObject:dict];
     [self.tableView reloadData];
 }
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *) searchBar
+{
+    UITextField *searchBarTextField = nil;
+    NSArray *views = ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) ? searchBar.subviews : [[searchBar.subviews objectAtIndex:0] subviews];
+    for (UIView *subview in views)
+    {
+        if ([subview isKindOfClass:[UITextField class]])
+        {
+            searchBarTextField = (UITextField *)subview;
+            break;
+        }
+    }
+    searchBarTextField.enablesReturnKeyAutomatically = NO;
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [SVProgressHUD showWithStatus:@"搜索中"];
@@ -337,9 +355,22 @@
     [mDict setObject:@"1" forKey:@"pageIndex"];
     [mDict setObject:@"20" forKey:@"pageSize"];
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.searchArr = [NSMutableArray arrayWithArray:responseObject[@"value"]];
-        [_searchController.searchResultsTableView reloadData];
+        NSLog(@"arr=========%@",responseObject[@"value"]);
+        self.userListArr = [NSMutableArray arrayWithArray:responseObject[@"value"]];
+        if(self.userListArr.count==0)
+        {
+            g.text=@"暂无搜索结果";
+            g.textColor=[UIColor colorWithRed:0.52 green:0.52 blue:0.52 alpha:1.00];
+            g.hidden=NO;
+        }else
+        {
+            g.hidden=YES;
+        }
+        [_tableView reloadData];
         [SVProgressHUD dismiss];
+        
+        
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
     }];

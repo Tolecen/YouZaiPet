@@ -72,13 +72,13 @@
         // Initialization code
         self.backgroundColor = [UIColor whiteColor];
         
-//        self.bgImageV = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 310, 63)];
-//        self.bgImageV.backgroundColor = [UIColor whiteColor];
-//        self.bgImageV.alpha = 0.3;
-//        [self.contentView addSubview:self.bgImageV];
+        //        self.bgImageV = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 310, 63)];
+        //        self.bgImageV.backgroundColor = [UIColor whiteColor];
+        //        self.bgImageV.alpha = 0.3;
+        //        [self.contentView addSubview:self.bgImageV];
         
         self.commentL = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, 240, 20)];
-//        self.commentL.linkUnderlineStyle = kCTUnderlineStyleNone;
+        //        self.commentL.linkUnderlineStyle = kCTUnderlineStyleNone;
         [self.commentL setFont:[UIFont systemFontOfSize:14]];
         self.commentL.numberOfLines = 0;
         [self.commentL setLineBreakMode:NSLineBreakByWordWrapping];
@@ -86,25 +86,25 @@
         _commentL.text = @"评论@Gay哎呦，不错";
         [self.contentView addSubview:_commentL];
         [self.commentL setBackgroundColor:[UIColor clearColor]];
-//        self.commentL.delegate = self;
+        //        self.commentL.delegate = self;
         
-//        self.playRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [self.playRecordBtn setFrame:CGRectMake(70, 39, 86, 22)];
-//        [self.playRecordBtn setBackgroundImage:[UIImage imageNamed:@"shengyin_bg"] forState:UIControlStateNormal];
-//        [self.contentView addSubview:self.playRecordBtn];
-//        [self.playRecordBtn addTarget:self action:@selector(playRecordBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        //        self.playRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        //        [self.playRecordBtn setFrame:CGRectMake(70, 39, 86, 22)];
+        //        [self.playRecordBtn setBackgroundImage:[UIImage imageNamed:@"shengyin_bg"] forState:UIControlStateNormal];
+        //        [self.contentView addSubview:self.playRecordBtn];
+        //        [self.playRecordBtn addTarget:self action:@selector(playRecordBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         self.playRecordImgV = [[UIImageView alloc] initWithFrame:CGRectMake(65, 5, 10, 11)];
         [self.playRecordImgV setImage:[UIImage imageNamed:@"shengyin3"]];
         [self.playRecordBtn addSubview:self.playRecordImgV];
         
-//        self.recordDurationLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 1, 40, 20)];
-//        [self.recordDurationLabel setBackgroundColor:[UIColor clearColor]];
-//        [self.recordDurationLabel setFont:[UIFont systemFontOfSize:14]];
-//        [self.recordDurationLabel setText:@"6s"];
-//        [self.recordDurationLabel setAdjustsFontSizeToFitWidth:YES];
-//        [self.recordDurationLabel setTextColor:[UIColor grayColor]];
-//        [self.playRecordBtn addSubview:self.recordDurationLabel];
+        //        self.recordDurationLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 1, 40, 20)];
+        //        [self.recordDurationLabel setBackgroundColor:[UIColor clearColor]];
+        //        [self.recordDurationLabel setFont:[UIFont systemFontOfSize:14]];
+        //        [self.recordDurationLabel setText:@"6s"];
+        //        [self.recordDurationLabel setAdjustsFontSizeToFitWidth:YES];
+        //        [self.recordDurationLabel setTextColor:[UIColor grayColor]];
+        //        [self.playRecordBtn addSubview:self.recordDurationLabel];
         
         self.playRecordBtn = [[UIButton alloc] initWithFrame:CGRectMake(70, 40, 60, 20)];
         self.playRecordBtn.backgroundColor = CommonGreenColor;
@@ -143,7 +143,18 @@
         self.deleteCommentBtn.frame = CGRectMake(110, 45, 11, 13);
         [self.deleteCommentBtn setBackgroundImage:[UIImage imageNamed:@"delete_normal"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.deleteCommentBtn];
-        [self.deleteCommentBtn addTarget:self action:@selector(deleteComment) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *button=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+        button.frame = CGRectMake(55, 25, 46, 33);
+        [self.contentView addSubview:button];
+        [button addTarget:self action:@selector(deleteComment) forControlEvents:UIControlEventTouchUpInside];
+        button.backgroundColor=[UIColor clearColor];
+        
+        
+        
+        
+        
+        
         
         //        UIView * lineV = [[UIView alloc] initWithFrame:CGRectMake(0, 69, 320, 1)];
         //        lineV.backgroundColor = [UIColor colorWithRed:202/255.0 green:202/255.0 blue:202/255.0 alpha:1];
@@ -182,7 +193,7 @@
     //    NSLog(@"content222:%@,hhhhhhh22222:%f",self.commentL.text,commentSize.height);
     [self.commentL setFrame:CGRectMake(self.commentL.frame.origin.x, self.commentL.frame.origin.y, commentSize.width, commentSize.height)];
     self.commentL.text = self.talkingComment.content;
-//    self.commentL.backgroundColor = [UIColor redColor];
+    //    self.commentL.backgroundColor = [UIColor redColor];
     if ([self.talkingComment.contentType isEqualToString:@"AUDIO"]) {
         //        if (self.talkingComment.haveAimPet) {
         //            self.commentL.hidden = NO;
@@ -208,7 +219,7 @@
         self.playRecordBtn.hidden = YES;
     }
     [self.deleteCommentBtn setFrame:CGRectMake(15+timeSize.width+10, self.timeL.frame.origin.y+4, 11, 13)];
-//    [self.bgImageV setFrame:CGRectMake(5, 5, ScreenWidth-10, self.timeL.frame.origin.y+20+3)];
+    //    [self.bgImageV setFrame:CGRectMake(5, 5, ScreenWidth-10, self.timeL.frame.origin.y+20+3)];
     
     [lineV setFrame:CGRectMake(10, 5+self.timeL.frame.origin.y+20+3-1, ScreenWidth-10, 1)];
     
@@ -290,8 +301,8 @@
     [self buildViewWithSkintype];
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
-//    _tableView.backgroundColor = [UIColor colorWithWhite:240/255.0f alpha:1];
-//    _tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+    //    _tableView.backgroundColor = [UIColor colorWithWhite:240/255.0f alpha:1];
+    //    _tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
     _tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -300,20 +311,20 @@
     [_tableView addFooterWithTarget:self action:@selector(loadMore)];
     [_tableView headerBeginRefreshing];
     
-// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
 }
 -(void)getMyComment
 {
-
+    
     _tableView.delegate = self;
     _tableView.dataSource = self;
     NSMutableDictionary* mDict = [NetServer commonDict];
     [mDict setObject:@"petalk" forKey:@"command"];
     [mDict setObject:@"userList" forKey:@"options"];
     [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
-//    if ([UserServe sharedUserServe].userID) {
-//        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
-//    }
+    //    if ([UserServe sharedUserServe].userID) {
+    //        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+    //    }
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:@"C" forKey:@"type"];
     
@@ -354,7 +365,7 @@
     [mDict setObject:@"userList" forKey:@"options"];
     [mDict setObject:[UserServe sharedUserServe].userID?[UserServe sharedUserServe].userID:@"" forKey:@"userId"];
     if ([UserServe sharedUserServe].userID) {
-//        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+        //        [mDict setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     }
     [mDict setObject:@"10" forKey:@"pageSize"];
     [mDict setObject:@"C" forKey:@"type"];
@@ -363,13 +374,13 @@
     
     [NetServer requestWithParameters:mDict Controller:self success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.commentArray addObjectsFromArray:[self getModelArray:[responseObject objectForKey:@"value"]]];
-//        self.tableviewHelpeer.isRefreshing = NO;
+        //        self.tableviewHelpeer.isRefreshing = NO;
         [self.tableView footerEndRefreshing];
         [_tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"get hot shuoshuo failed error:%@",error);
-//        self.tableviewHelpeer.isRefreshing = NO;
+        //        self.tableviewHelpeer.isRefreshing = NO;
         [self.tableView footerEndRefreshing];
         //        [self endHeaderRefreshing:self.tableV];
     }];
@@ -394,22 +405,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        static NSString *CommentCellIdentifier = @"CommentCell";
-        CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier ];
-        if (cell == nil) {
-            cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CommentCellIdentifier];
-            cell.delegate = self;
-        }
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.cellIndex = indexPath.row;
-        cell.talkingComment = self.commentArray[indexPath.row];
-        return cell;
-
+    static NSString *CommentCellIdentifier = @"CommentCell";
+    CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier ];
+    if (cell == nil) {
+        cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CommentCellIdentifier];
+        cell.delegate = self;
+    }
+    //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.cellIndex = indexPath.row;
+    cell.talkingComment = self.commentArray[indexPath.row];
+    return cell;
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-        return [CommentCell heightForRowWithComment:self.commentArray[indexPath.row]];
+    
+    return [CommentCell heightForRowWithComment:self.commentArray[indexPath.row]];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -458,7 +469,7 @@
         [self.tableView reloadData];
         NSLog(@"delete comment success info:%@",responseObject);
         [self.audioPlayer stopAudio];
-//        [self getCountNum];
+        //        [self getCountNum];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"delete comment failed info:%@",error);
     }];
@@ -602,13 +613,13 @@
     self.audioPlayer.delegate = nil;
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
