@@ -114,7 +114,21 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
             shoppingCarModel.name = [dict objectForKey:@"name"];
             shoppingCarModel.dogId = dogModel.dogId;
             shoppingCarModel.sex = [[NSString stringWithFormat:@"%@",[dict objectForKey:@"sex"]] intValue]==0?YZDogSex_Male:YZDogSex_Female;
-            shoppingCarModel.sellPrice = [[dict objectForKey:@"sell_price"] longLongValue];
+            NSString * saleFlag = [NSString stringWithFormat:@"%@",[dict objectForKey:@"sale_flag"]];
+            if ([saleFlag intValue]==0) {
+                shoppingCarModel.sellPrice = [[dict objectForKey:@"sell_price"] longLongValue];
+            }
+            else if ([saleFlag intValue]==1) {
+                shoppingCarModel.sellPrice = [[dict objectForKey:@"special_price"] longLongValue];
+            }
+            else if ([saleFlag intValue]==2) {
+                shoppingCarModel.sellPrice = [[dict objectForKey:@"special_price"] longLongValue];
+            }
+            else if ([saleFlag intValue]==3) {
+                shoppingCarModel.sellPrice = [[dict objectForKey:@"sell_price"] longLongValue]-[[dict objectForKey:@"special_price"] longLongValue];
+            }
+
+//            shoppingCarModel.sellPrice = [[dict objectForKey:@"sell_price"] longLongValue];
             shoppingCarModel.thumb = [dict objectForKey:@"thumb"];
             shoppingCarModel.birtydayDays = [[NSString stringWithFormat:@"%@",[[dict objectForKey:@"days"] objectForKey:@"age"]] integerValue];
             shoppingCarModel.birthdayString = [dict objectForKey:@"birthday"];
@@ -175,7 +189,19 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
             shoppingCarModel.count = 1;
             shoppingCarModel.name = [dict objectForKey:@"name"];
             shoppingCarModel.goodsId = goodsModel.goodsId;
-            shoppingCarModel.sellPrice = [[dict objectForKey:@"sell_price"] longLongValue];
+            NSString * saleFlag = [NSString stringWithFormat:@"%@",[dict objectForKey:@"sale_flag"]];
+            if ([saleFlag intValue]==0) {
+                shoppingCarModel.sellPrice = [[dict objectForKey:@"sell_price"] longLongValue];
+            }
+            else if ([saleFlag intValue]==1) {
+                shoppingCarModel.sellPrice = [[dict objectForKey:@"special_price"] longLongValue];
+            }
+            else if ([saleFlag intValue]==2) {
+                shoppingCarModel.sellPrice = [[dict objectForKey:@"special_price"] longLongValue];
+            }
+            else if ([saleFlag intValue]==3) {
+                shoppingCarModel.sellPrice = [[dict objectForKey:@"sell_price"] longLongValue]-[[dict objectForKey:@"special_price"] longLongValue];
+            }
             shoppingCarModel.thumb = [dict objectForKey:@"thumb"];
             shoppingCarModel.brandName = [dict objectForKey:@"shop_name"];
             if (clearPrice) {
