@@ -8,10 +8,10 @@
 
 #import "MyShuoshuoTimeLineViewController.h"
 #import "GTScrollNavigationBar.h"
-#import "BlankPageView.h"
+//#import "BlankPageView.h"
 @interface MyShuoshuoTimeLineViewController ()
 {
-    BlankPageView * blankPage;
+    UIView * blankPage;
 }
 @end
 
@@ -34,7 +34,7 @@
     [hotDic setObject:@"petalk" forKey:@"command"];
     [hotDic setObject:@"userList" forKey:@"options"];
     [hotDic setObject:@"10" forKey:@"pageSize"];
-//    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
+    //    [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"currPetId"];
     [hotDic setObject:[UserServe sharedUserServe].userID forKey:@"userId"];
     [hotDic setObject:@"O" forKey:@"type"];
     
@@ -47,11 +47,33 @@
 {
     if (!not.userInfo) {
         if (!blankPage) {
-            __weak UINavigationController * weakNav = self.navigationController;
-            blankPage = [[BlankPageView alloc] initWithImage];
-            [blankPage showWithView:self.view image:[UIImage imageNamed:@"myComment_without"] buttonImage:[UIImage imageNamed:@"myComment_toCom"] action:^{
-                [weakNav popToRootViewControllerAnimated:YES];
-            }];
+            blankPage = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64)];
+            blankPage.backgroundColor=[UIColor whiteColor];
+            [self.view addSubview:blankPage];
+            
+            UIImageView *imgV=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dongtai@2x"]];
+            
+            imgV.frame=CGRectMake((ScreenWidth-85.2)/2, 172, 85.2, 69);
+            [blankPage addSubview:imgV];
+            
+            UILabel *lab=[[UILabel alloc] initWithFrame:CGRectMake(0, 261, ScreenWidth, 20)];
+            lab.text=@"您还没有发布动态";
+            lab.textColor=[UIColor colorWithRed:102/255.f green:102/255.f blue:102/255.f alpha:0.50];
+            lab.textAlignment=NSTextAlignmentCenter;
+            [blankPage addSubview:lab];
+            
+            
+            UIButton *btn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+            btn.frame=CGRectMake((ScreenWidth-99)/2, 306, 99, 38);
+            [btn setTitle:@"立即发布" forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor colorWithRed:0.39 green:0.80 blue:0.69 alpha:1.00] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(gofabuClick) forControlEvents:UIControlEventTouchUpInside];
+            btn.layer.masksToBounds=YES;
+            btn.layer.cornerRadius=5;
+            btn.layer.borderWidth=1;
+            btn.layer.borderColor=[UIColor colorWithRed:0.39 green:0.80 blue:0.69 alpha:1.00].CGColor;
+            btn.backgroundColor=[UIColor whiteColor];
+            [blankPage addSubview:btn];
         }
     }
     else if(blankPage){
@@ -59,6 +81,13 @@
         blankPage = nil;
     }
 }
+//发布跳转方法
+-(void)gofabuClick
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+
 -(void)backBtnDo:(UIButton *)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -69,13 +98,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

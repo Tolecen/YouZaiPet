@@ -276,7 +276,7 @@
 @interface MyCommentViewController ()<UITableViewDataSource,UITableViewDelegate,TalkingTableViewCellDelegate>
 {
     CommentCell * tempCommentCell;
-    BlankPageView * blankPage;
+    UIView * blankPage;
 }
 @property (nonatomic,strong) UITableView * tableView;
 @property (nonatomic,strong) NSMutableArray * commentArray;
@@ -334,11 +334,16 @@
         [self.tableView headerEndRefreshing];
         if (!_commentArray.count) {
             if (!blankPage) {
-                __weak UINavigationController * weakNav = self.navigationController;
-                blankPage = [[BlankPageView alloc] initWithImage];
-                [blankPage showWithView:self.view image:[UIImage imageNamed:@"myComment_without"] buttonImage:[UIImage imageNamed:@"myComment_toCom"] action:^{
-                    [weakNav popToRootViewControllerAnimated:YES];
-                }];
+                blankPage = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64)];
+                blankPage.backgroundColor=[UIColor whiteColor];
+                [self.view addSubview:blankPage];
+                
+                UILabel *lab=[[UILabel alloc] initWithFrame:CGRectMake(0, 261, ScreenWidth, 20)];
+                lab.text=@"您还没有发布评论";
+                lab.textColor=[UIColor colorWithRed:102/255.f green:102/255.f blue:102/255.f alpha:0.50];
+                lab.textAlignment=NSTextAlignmentCenter;
+                [blankPage addSubview:lab];
+                
             }
         }
         else if(blankPage){
@@ -351,6 +356,11 @@
         //        [self endHeaderRefreshing:self.tableV];
     }];
     
+}
+//发布跳转方法
+-(void)gofabuClick
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 -(void)loadMore
 {
