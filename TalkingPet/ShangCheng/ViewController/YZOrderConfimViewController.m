@@ -49,7 +49,9 @@
 }
 
 - (NSString *)title {
+    
     return @"确认订单";
+    
 }
 
 - (void)inner_getDefaultAddress {
@@ -115,9 +117,9 @@
     [tableView registerClass:[YZOrderConfimNoAddressCell class] forCellReuseIdentifier:NSStringFromClass(YZOrderConfimNoAddressCell.class)];
     [tableView registerClass:[YZOrderConfimAddressCell class] forCellReuseIdentifier:NSStringFromClass(YZOrderConfimAddressCell.class)];
     [tableView registerClass:[YZOrderConfimModeCell class] forCellReuseIdentifier:NSStringFromClass(YZOrderConfimModeCell.class)];
-
+    
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass(UITableViewCell.class)];
-
+    
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
@@ -139,7 +141,7 @@
         [self.bottomBar resetTotalPrice:self.totalPrice];
     }
     
-
+    
     [bottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.mas_equalTo(self.view).mas_offset(0);
         make.height.mas_equalTo(44);
@@ -196,8 +198,8 @@
 }
 
 - (void)shoppingCarClearPrice {
-//    [[YZShoppingCarHelper instanceManager] clearShoppingCar];
-//    [self makePaymentInfo];
+    //    [[YZShoppingCarHelper instanceManager] clearShoppingCar];
+    //    [self makePaymentInfo];
     if (!self.address) {
         [SVProgressHUD showErrorWithStatus:@"请先添加一个收货地址"];
         return;
@@ -237,13 +239,13 @@
 
 -(void)makePaymentInfo
 {
-
+    
     _goodsString = @"";
     NSMutableArray * arr = [NSMutableArray array];
     if (self.orders.count>0) {
         for (int i = 0; i<self.orders.count; i++) {
             OrderYZGoodInfo * goodInfo = self.orders[i];
-//            _goodsString = [_goodsString stringByAppendingFormat:@"%@\"%@.%@.%@\"%@",i==0?@"":@",",self.orderNo,goodInfo.goodId,goodInfo.total,i==self.orders.count-1?@"]":@""];
+            //            _goodsString = [_goodsString stringByAppendingFormat:@"%@\"%@.%@.%@\"%@",i==0?@"":@",",self.orderNo,goodInfo.goodId,goodInfo.total,i==self.orders.count-1?@"]":@""];
             [arr addObject:[NSString stringWithFormat:@"%@.%@.%@",self.orderNo,goodInfo.goodId,goodInfo.total]];
         }
     }
@@ -252,7 +254,7 @@
         [SVProgressHUD showErrorWithStatus:@"请先在购物车选择要购买的商品哦"];
         return;
     }
-//    _goodsString = [arr JSONRepresentation];
+    //    _goodsString = [arr JSONRepresentation];
     NSLog(@"ffffff:%@",_goodsString);
     [NetServer requestPaymentWithGoods:arr AddressId:self.address.addressID ChannelStr:self.paySelectedIndex==0?@"alipay":@"wx" Voucher:nil success:^(id result) {
         if ([result[@"code"] intValue]==200) {
@@ -261,8 +263,8 @@
                 NSLog(@"completion block: %@", result);
                 if (error == nil) {
                     NSLog(@"PingppError is nil");
-//                    [self paySuccess];
-                     [self toSuccessPage];
+                    //                    [self paySuccess];
+                    [self toSuccessPage];
                 }
                 else if ([result isEqualToString:@"cancel"]){
                     [self payCancel];
@@ -274,7 +276,7 @@
                 [SystemServer sharedSystemServer].inPay = NO;
                 //                [weakSelf showAlertMessage:result];
             }];
-
+            
         }
         else {
             if (result[@"message"]) {
@@ -284,7 +286,7 @@
                 [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
         }
         
-       
+        
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         [SVProgressHUD showErrorWithStatus:@"订单创建失败，请稍后再试"];
     }];
@@ -300,9 +302,9 @@
 -(void)payFailed
 {
     [SVProgressHUD showErrorWithStatus:@"支付遇到了一点问题，请稍后再试"];
-//    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"支付失败，接下来您要？" delegate:self cancelButtonTitle:@"暂不支付" otherButtonTitles:@"重新支付",@"修改支付方式", nil];
-//    alert.tag = 100;
-//    [alert show];
+    //    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"支付失败，接下来您要？" delegate:self cancelButtonTitle:@"暂不支付" otherButtonTitles:@"重新支付",@"修改支付方式", nil];
+    //    alert.tag = 100;
+    //    [alert show];
 }
 
 -(void)toSuccessPage
@@ -338,9 +340,9 @@
             [noAddressCell setOrderConfimAddAddressBlock:^{
                 AddressManageViewController *viewC = [[AddressManageViewController alloc] init];
                 __weak __typeof(viewC) weakViewC = viewC;
-   
+                
                 viewC.finishTitle = @"使用并保存";
-
+                
                 [viewC setUseAddress:^(ReceiptAddress *receiptAddress) {
                     weakSelf.address = receiptAddress;
                     [weakViewC.navigationController popViewControllerAnimated:YES];
@@ -426,12 +428,14 @@
     return nil;
 }
 
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (self.address) {
             return 100.f;
         }
-        return 64.f;
+        return 100.f;
     }
     if (indexPath.section == 1) {
         return 90.f;

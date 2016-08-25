@@ -26,36 +26,50 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        UIImageView * imageVq = [[UIImageView alloc] initWithFrame:CGRectMake(10, 32, 19.5, 27.5)];
-        imageVq.image = [UIImage imageNamed:@"defaultAddress"];
+        UIImageView *bgimg =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 90)];
+        [bgimg setImage:[UIImage imageNamed:@"bg_order_detail_large"]];
+        
+        [self.contentView addSubview:bgimg];
+        
+        UIImageView * imageB = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth-30, 40, 12, 17)];
+        imageB.image = [UIImage imageNamed:@"iv_arrow_right"];
+        [self.contentView addSubview:imageB];
+        
+        
+        
+        UIImageView * imageVq = [[UIImageView alloc] initWithFrame:CGRectMake(10, 35, 19.5, 27.5)];
+        imageVq.image = [UIImage imageNamed:@"iv_location_large"];
         [self.contentView addSubview:imageVq];
         
-        UILabel *shouhuoNameL = [[UILabel alloc] initWithFrame:CGRectMake(40, 15, 150, 20)];
+        UILabel *shouhuoNameL = [[UILabel alloc] initWithFrame:CGRectMake(40, 55, 150, 20)];
         shouhuoNameL.textColor = [UIColor colorWithWhite:100/255.0 alpha:1];
         shouhuoNameL.font = [UIFont systemFontOfSize:16];
         shouhuoNameL.text = [@"收货人:" stringByAppendingString:@"收货人"];
-        [self.contentView addSubview:shouhuoNameL];
+        shouhuoNameL.textColor=[UIColor whiteColor];
+        [bgimg addSubview:shouhuoNameL];
         self.shouhuoNameL = shouhuoNameL;
         
-        UILabel *shouhuoMobileL = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-110, 10, 100, 20)];
+        UILabel *shouhuoMobileL = [[UILabel alloc] initWithFrame:CGRectMake(70, 55, 130, 20)];
         shouhuoMobileL.textColor = [UIColor colorWithWhite:140/255.0 alpha:1];
         shouhuoMobileL.textAlignment = NSTextAlignmentRight;
-        shouhuoMobileL.font = [UIFont systemFontOfSize:14];
+        shouhuoMobileL.font = [UIFont systemFontOfSize:16];
+        shouhuoMobileL.textColor=[UIColor whiteColor];
         shouhuoMobileL.text = @"15000998877";
-        [self.contentView addSubview:shouhuoMobileL];
+        [bgimg addSubview:shouhuoMobileL];
         self.shouhuoMobileL = shouhuoMobileL;
         
-        UILabel *shouhuoAddressL = [[UILabel alloc] initWithFrame:CGRectMake(40, 40, ScreenWidth-80, 40)];
+        UILabel *shouhuoAddressL = [[UILabel alloc] initWithFrame:CGRectMake(40, 15, ScreenWidth-80, 40)];
         shouhuoAddressL.textColor = [UIColor colorWithWhite:140/255.0 alpha:1];
         shouhuoAddressL.numberOfLines = 2;
+        shouhuoAddressL.textColor=[UIColor whiteColor];
         shouhuoAddressL.font = [UIFont systemFontOfSize:14];
         shouhuoAddressL.text = @"北京市朝阳区大墩路11111";
-        [self.contentView addSubview:shouhuoAddressL];
+        [bgimg addSubview:shouhuoAddressL];
         self.shouhuoAddressL = shouhuoAddressL;
         
         UIView * gb = [[UIView alloc] initWithFrame:CGRectMake(0, 80, ScreenWidth, 10)];
         gb.backgroundColor = [UIColor colorWithWhite:245/255.0f alpha:1];
-        [self.contentView addSubview:gb];
+        [bgimg addSubview:gb];
     }
     return self;
 }
