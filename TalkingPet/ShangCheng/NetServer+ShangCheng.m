@@ -113,7 +113,7 @@
                 sellPriceString = @"0_3000";
                 break;
             case YZDogValueRange_3_5k:
-                sellPriceString = @"3000_6000";
+                sellPriceString = @"3000_5000";
                 break;
             case YZDogValueRange_5_10k:
                 sellPriceString = @"5000_10000";
