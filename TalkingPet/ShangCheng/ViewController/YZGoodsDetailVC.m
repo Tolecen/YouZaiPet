@@ -220,6 +220,7 @@
     UIFont *priceFont = [UIFont systemFontOfSize:15];
     height += (ceil(priceFont.lineHeight) + 1);
     height += 15;
+    height += 120;
     return height;
 }
 

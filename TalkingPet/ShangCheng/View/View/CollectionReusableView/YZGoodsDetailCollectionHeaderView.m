@@ -21,6 +21,8 @@
 
 @property (nonatomic, weak) PagedFlowView *flowView;
 
+@property (nonatomic, weak) UIWebView *webView;
+
 @end
 
 @implementation YZGoodsDetailCollectionHeaderView
@@ -122,7 +124,15 @@
         }
         
         
+        UIWebView *webView = [[UIWebView alloc] init];
+        [self addSubview:webView];
+        self.webView = webView;
         
+        [webView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self).mas_offset(0);
+            make.height.mas_equalTo(100);
+            make.top.mas_equalTo(priceLb.mas_bottom).mas_offset(10);
+        }];
     }
     return self;
 }
@@ -141,6 +151,8 @@
     }
     self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:detailModel.sellPrice]];
     [self.flowView reloadData];
+    NSString *htmlString = [detailModel.brand.content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [self.webView loadHTMLString:htmlString baseURL:nil];
     [self setNeedsUpdateConstraints];
 }
 
