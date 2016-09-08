@@ -22,6 +22,9 @@
         
         UIImageView *bgimg =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 90)];
         [bgimg setImage:[UIImage imageNamed:@"bg_order_detail_large"]];
+        bgimg.userInteractionEnabled=YES;
+        
+        
         
         [self.contentView addSubview:bgimg];
         
@@ -44,7 +47,7 @@
         [addBtn addTarget:self action:@selector(inner_Add:) forControlEvents:UIControlEventTouchUpInside];
         addBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [addBtn sizeToFit];
-        [bgimg addSubview:addBtn];
+        [self.contentView addSubview:addBtn];
         addBtn.layer.borderColor = [UIColor whiteColor].CGColor;
         addBtn.layer.borderWidth = 1.f;
         addBtn.layer.cornerRadius = CGRectGetHeight(addBtn.frame) / 2;
@@ -55,7 +58,7 @@
         //        }];
         [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(CGRectGetWidth(addBtn.frame) + 10);
-            make.center.mas_equalTo(bgimg);
+            make.center.mas_equalTo(self.contentView);
         }];
         
         UIView *grayV = [[UIView alloc] init];

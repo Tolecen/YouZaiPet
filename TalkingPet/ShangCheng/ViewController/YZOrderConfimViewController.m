@@ -158,7 +158,19 @@
     [self getJingwaiGoods];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paymentResultReceived:) name:@"PaymentResultReceived" object:nil];
+    
+    if (!self.orderNo) {
+        [self creatOrderNoWithSuccess:^(id result) {
+            if ([result[@"code"] intValue]==200) {
+                self.orderNo = [result[@"data"] objectForKey:@"order_no"];
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }];
+    }
+    
 }
+
+
 
 -(void)paymentResultReceived:(NSNotification *)noti
 {
@@ -215,6 +227,7 @@
         [self creatOrderNoWithSuccess:^(id result) {
             if ([result[@"code"] intValue]==200) {
                 self.orderNo = [result[@"data"] objectForKey:@"order_no"];
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
                 [self makePaymentInfo];
             }
             else {
@@ -412,6 +425,10 @@
         headerView.textLabel.text = @"支付方式";
         return headerView;
     }
+    else if (section==1&&self.orderNo){
+        headerView.textLabel.text = [NSString stringWithFormat:@"订单编号:%@",self.orderNo];
+        return headerView;
+    }
     return nil;
 }
 
@@ -452,6 +469,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 2) {
+        return 30.f;
+    }
+    else if (section==1&&self.orderNo){
         return 30.f;
     }
     return 0.001f;

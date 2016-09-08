@@ -393,6 +393,14 @@
             
             
         }
+        else if([listModel.pay_status isEqualToString:@"0"])
+        {
+            view.btn1.hidden = NO;
+            view.btn2.hidden = NO;
+            [view.btn1 setTitle:@"取消订单" forState:UIControlStateNormal];
+            [view.btn2 setTitle:@"立刻付款" forState:UIControlStateNormal];
+        }
+        
         
     }
     
@@ -401,7 +409,7 @@
         view.btn1.hidden = NO;
         view.btn2.hidden = NO;
         [view.btn1 setTitle:@"取消订单" forState:UIControlStateNormal];
-        [view.btn2 setTitle:@"立刻付款" forState:UIControlStateNormal];
+        [view.btn2 setTitle:@"付款" forState:UIControlStateNormal];
     }
     
     
@@ -677,6 +685,7 @@
     else if ([title isEqualToString:@"立刻付款"]){
         YZOrderConfimViewController *viewC = [[YZOrderConfimViewController alloc] init];
         viewC.orders = order.goods;
+        viewC.pOrderNo = order.order_no;
         viewC.orderCount = [order.total_amount integerValue];
         viewC.totalPrice = [order.total_money integerValue];
         [self.navigationController pushViewController:viewC animated:YES];
