@@ -21,7 +21,7 @@
 #import "RootViewController.h"
 #import "NetServer+Payment.h"
 
-@interface YZGoodsDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YZDetailBottomBarDelegate>
+@interface YZGoodsDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YZDetailBottomBarDelegate, YZGoodsHeaderDelegate>
 
 @property (nonatomic, weak) UICollectionView *collectionView;
 
@@ -37,6 +37,8 @@
 @property (nonatomic, strong) UIView *sanjiaoView;
 
 @property (nonatomic, assign)BOOL isShow;
+@property (nonatomic, assign) BOOL needsReloadCacheHeaderHeight;
+@property (nonatomic, assign) CGFloat headerHeight;
 
 @end
 
@@ -59,6 +61,8 @@
     [self setRightButtonWithName:nil BackgroundImg:@"goods_more" Target:@selector(moreBtnClicked)];
     
     self.cache = [[NSMutableDictionary alloc] init];
+    self.headerHeight = 100;
+    self.needsReloadCacheHeaderHeight = YES;
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 10.f;
@@ -139,7 +143,7 @@
     [NetServer getDogGoodsDetailInfoWithGoodsId:self.goodsId
                                         success:^(YZGoodsDetailModel *detailModel) {
                                             weakSelf.detailModel = detailModel;
-                                            weakSelf.detailModel.content = nil;
+//                                            weakSelf.detailModel.content = nil;
                                             [weakSelf.collectionView reloadData];
                                         }
                                         failure:^(NSError *error, AFHTTPRequestOperation *operation) {
@@ -209,28 +213,22 @@
     
     height += 15;
     
-    if (self.detailModel.content && self.detailModel.content.length > 0) {
-        UIFont *contentFont = [UIFont systemFontOfSize:12];
-        NSAttributedString *content = [[NSAttributedString alloc] initWithString:self.detailModel.content attributes:@{NSFontAttributeName: contentFont}];
-        CGFloat contentHeight = [content boundingRectWithSize:CGSizeMake(ScreenWidth - 20, 1000) options:NSStringDrawingUsesLineFragmentOrigin context:NULL].size.height;
-        height += contentHeight;
-        height += 15;
-    }
+    height += self.headerHeight;
     
     UIFont *priceFont = [UIFont systemFontOfSize:15];
     height += (ceil(priceFont.lineHeight) + 1);
-    height += 15;
-    height += 120;
+    height += 20;
     return height;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         if (self.detailModel) {
-            if ([self.cache objectForKey:kCacheReferenceHeaderSizeHeightKey]) {
+            if ([self.cache objectForKey:kCacheReferenceHeaderSizeHeightKey] && !self.needsReloadCacheHeaderHeight) {
                 CGFloat height = [self.cache[kCacheReferenceHeaderSizeHeightKey] floatValue];
                 return CGSizeMake(ScreenWidth, height);
             } else {
+                self.needsReloadCacheHeaderHeight = NO;
                 CGFloat height = [self inner_CalcuteReferenceSizeForHeaderInSectionZero];
                 [self.cache setObject:@(height) forKey:kCacheReferenceHeaderSizeHeightKey];
                 return CGSizeMake(ScreenWidth, height);
@@ -266,6 +264,7 @@
     if (kind == UICollectionElementKindSectionHeader) {
         if (indexPath.section == 0) {
             YZGoodsDetailCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZGoodsDetailCollectionHeaderView.class) forIndexPath:indexPath];
+            headerView.delegate = self;
             headerView.detailModel = self.detailModel;
             headerView.backgroundColor = [UIColor whiteColor];
             return headerView;
@@ -276,6 +275,12 @@
         }
     }
     return nil;
+}
+
+- (void)reloadHeaderWithWebHeight:(CGFloat)height {
+    self.needsReloadCacheHeaderHeight = YES;
+    self.headerHeight = height;
+    [self.collectionView reloadData];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

@@ -9,8 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "YZShangChengModel.h"
 
+@protocol YZGoodsHeaderDelegate <NSObject>
+
+- (void)reloadHeaderWithWebHeight:(CGFloat)height;
+
+@end
+
 @interface YZGoodsDetailCollectionHeaderView : UICollectionReusableView
 
 @property (nonatomic, strong) YZGoodsDetailModel *detailModel;
+
+@property (nonatomic, weak) id<YZGoodsHeaderDelegate> delegate;
 
 @end
