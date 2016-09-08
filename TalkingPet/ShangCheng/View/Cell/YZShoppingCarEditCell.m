@@ -90,6 +90,16 @@
         [containerView addSubview:priceLb];
         self.priceLb = priceLb;
         
+        UILabel *opriceLb = [[UILabel alloc] initWithFrame:CGRectZero];
+        opriceLb.font = [UIFont systemFontOfSize:13.f];
+        opriceLb.textColor = [UIColor lightGrayColor];
+        //        priceLb.text = @"¥ 180,000.00";
+        [containerView addSubview:opriceLb];
+        
+        self.originpriceLb = opriceLb;
+        
+        
+        
         UILabel *yunfeiLb = [[UILabel alloc] initWithFrame:CGRectZero];
         yunfeiLb.font = [UIFont systemFontOfSize:12.f];
         yunfeiLb.textColor = [UIColor commonGrayColor];
@@ -100,6 +110,11 @@
         
         [priceLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.bottom.mas_equalTo(containerView).mas_offset(-5);
+        }];
+        
+        [opriceLb mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(containerView).mas_offset(-5);
+            make.bottom.mas_equalTo(containerView).mas_offset(-30);
         }];
         
         [self setUpContentViewsWithSuperView:containerView];

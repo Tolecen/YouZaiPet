@@ -154,7 +154,16 @@
                                 pageIndex:1
                                   success:^(NSArray *items, NSInteger nextPageIndex) {
                                       weakSelf.pageIndex = nextPageIndex;
-                                      weakSelf.items = items;
+//                                      weakSelf.items = items;
+                                      NSMutableArray * fg = [NSMutableArray arrayWithArray:items];
+                                      for (int i = 0; i<items.count; i++) {
+                                          YZGoodsModel * good = items[i];
+                                          if ([self.goodsId isEqualToString:good.goodsId]) {
+                                              [fg removeObjectAtIndex:i];
+                                              break;
+                                          }
+                                      }
+                                      weakSelf.items = fg;
 //                                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                           [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
 //                                      });
@@ -169,7 +178,15 @@
                                   success:^(NSArray *items, NSInteger nextPageIndex) {
                                       if (items && items.count > 0) {
                                           weakSelf.pageIndex = nextPageIndex;
-                                          weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
+                                          NSMutableArray * fg = [NSMutableArray arrayWithArray:items];
+                                          for (int i = 0; i<items.count; i++) {
+                                              YZGoodsModel * good = items[i];
+                                              if ([self.goodsId isEqualToString:good.goodsId]) {
+                                                  [fg removeObjectAtIndex:i];
+                                                  break;
+                                              }
+                                          }
+                                          weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:fg];
                                           [weakSelf.collectionView footerEndRefreshing];
                                           [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
                                       } else {

@@ -98,6 +98,20 @@
     self.sexImageV.image = (dogModel.sex == YZDogSex_Female) ? [UIImage imageNamed:@"female_icon"] : [UIImage imageNamed:@"male_icon"];
     self.birthdayLb.text = dogModel.birthdayString;
     self.priceLb.text = [[YZShangChengConst sharedInstance].priceNumberFormatter stringFromNumber:[NSNumber numberWithDouble:dogModel.sellPrice]];
+    
+    if (dogModel.originPrice == dogModel.sellPrice) {
+        self.originpriceLb.hidden = YES;
+    }
+    else
+    {
+        NSString * originPrice = [NSString stringWithFormat:@"%lld",dogModel.originPrice];
+        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:originPrice];
+        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, originPrice.length)];
+        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, originPrice.length)];
+        [self.originpriceLb setAttributedText:attri];
+    }
+
+    
     NSString *daysNumberString = [NSString stringWithFormat:@"降临地球 %ld 天", (unsigned long)dogModel.birtydayDays];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:daysNumberString];
     [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:10.f], NSForegroundColorAttributeName: self.daysNumberLb.textColor} range:NSMakeRange(0, 4)];

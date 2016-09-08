@@ -123,6 +123,17 @@
     } else {
         self.plusBtn.enabled = NO;
     }
+    if (goodsModel.originPrice == goodsModel.sellPrice) {
+        self.originpriceLb.hidden = YES;
+    }
+    else
+    {
+        NSString * originPrice = [NSString stringWithFormat:@"%lld",goodsModel.originPrice];
+        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:originPrice];
+        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, originPrice.length)];
+        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, originPrice.length)];
+        [self.originpriceLb setAttributedText:attri];
+    }
     [self setNeedsUpdateConstraints];
 }
 

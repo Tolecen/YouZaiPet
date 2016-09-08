@@ -17,6 +17,7 @@
 @property (nonatomic, weak) UIImageView *thumbImageV;
 
 @property (nonatomic, weak) UILabel *priceLb;
+@property (nonatomic, weak) UILabel *originpriceLb;
 
 @property (nonatomic, weak) UILabel *yunfeiLb;
 

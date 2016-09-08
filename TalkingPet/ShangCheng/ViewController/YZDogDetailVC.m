@@ -163,10 +163,21 @@
                              success:^(NSArray *items, NSInteger nextPageIndex) {
                                  if (items && items.count > 0) {
                                      weakSelf.pageIndex = nextPageIndex;
+                                     
+                                     NSMutableArray * fg = [NSMutableArray arrayWithArray:items];
+                                     for (int i = 0; i<items.count; i++) {
+                                         YZDogModel * dog = items[i];
+                                         if ([self.dogModel.dogId isEqualToString:dog.dogId]) {
+                                             [fg removeObjectAtIndex:i];
+                                             break;
+                                         }
+                                     }
+
+                                     
                                      if (loadMore) {
-                                         weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:items];
+                                         weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:fg];
                                      } else {
-                                         weakSelf.items = [NSArray arrayWithArray:items];
+                                         weakSelf.items = [NSArray arrayWithArray:fg];
                                      }
                                      [weakSelf.collectionView footerEndRefreshing];
                                      [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];

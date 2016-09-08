@@ -179,6 +179,7 @@
 @property (nonatomic, copy) NSString *dogId;//狗狗ID
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) long long sellPrice;
+@property (nonatomic, assign) long long originPrice;
 @property (nonatomic, copy) NSString *thumb;
 @property (nonatomic, assign) NSInteger birtydayDays;
 @property (nonatomic, copy) NSString *birthdayString;
@@ -196,6 +197,7 @@
 @property (nonatomic, copy) NSString *goodsId;//产品ID
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) long long sellPrice;
+@property (nonatomic, assign) long long originPrice;
 @property (nonatomic, copy) NSString *thumb;
 @property (nonatomic, copy) NSString *brandName;
 

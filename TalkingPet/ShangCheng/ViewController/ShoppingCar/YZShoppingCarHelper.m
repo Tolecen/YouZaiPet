@@ -127,6 +127,7 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
             else if ([saleFlag intValue]==3) {
                 shoppingCarModel.sellPrice = [[dict objectForKey:@"sell_price"] longLongValue]-[[dict objectForKey:@"special_price"] longLongValue];
             }
+            shoppingCarModel.originPrice = [[dict objectForKey:@"sell_price"] longLongValue];
 
 //            shoppingCarModel.sellPrice = [[dict objectForKey:@"sell_price"] longLongValue];
             shoppingCarModel.thumb = [dict objectForKey:@"thumb"];
@@ -202,6 +203,8 @@ NSString *const kShoppingCarCacheContainsIdKey      = @"kShoppingCarCacheContain
             else if ([saleFlag intValue]==3) {
                 shoppingCarModel.sellPrice = [[dict objectForKey:@"sell_price"] longLongValue]-[[dict objectForKey:@"special_price"] longLongValue];
             }
+            shoppingCarModel.originPrice = [[dict objectForKey:@"sell_price"] longLongValue];
+            
             shoppingCarModel.thumb = [dict objectForKey:@"thumb"];
             shoppingCarModel.brandName = [dict objectForKey:@"shop_name"];
             if (clearPrice) {
