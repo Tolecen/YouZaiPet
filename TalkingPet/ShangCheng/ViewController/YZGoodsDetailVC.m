@@ -129,6 +129,7 @@
     [collectionView addFooterWithTarget:self action:@selector(inner_LoadMore:)];
     
     [self inner_GetGoodsDetail];
+    [self inner_GetGoodsList];
 }
 
 - (void)inner_GetGoodsDetail {
@@ -154,9 +155,9 @@
                                   success:^(NSArray *items, NSInteger nextPageIndex) {
                                       weakSelf.pageIndex = nextPageIndex;
                                       weakSelf.items = items;
-                                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                           [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
-                                      });
+//                                      });
                                   } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
                                   }];
 }
@@ -194,7 +195,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return CGSizeZero;
+        return CGSizeMake(ScreenWidth, 1);
     }
     CGFloat width = (ScreenWidth - 30) / 2;
     return CGSizeMake(width,
@@ -282,7 +283,6 @@
     self.needsReloadCacheHeaderHeight = YES;
     self.headerHeight = height;
     [self.collectionView reloadData];
-    [self inner_GetGoodsList];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
