@@ -81,8 +81,8 @@
                                                      alpha:1.f];
     [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass(UICollectionViewCell.class)];
     [collectionView registerClass:[YZShangChengGoodsListCell class] forCellWithReuseIdentifier:NSStringFromClass(YZShangChengGoodsListCell.class)];
-    [collectionView registerClass:[YZGoodsDetailCollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZGoodsDetailCollectionHeaderView.class)];
-    [collectionView registerClass:[YZDetailTextCollectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(YZDetailTextCollectionView.class)];
+    [collectionView registerClass:[YZGoodsDetailCollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([YZGoodsDetailCollectionHeaderView class])];
+    [collectionView registerClass:[YZDetailTextCollectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([YZDetailTextCollectionView class])];
     
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
@@ -118,9 +118,6 @@
     
     
     
-    
-    
-    
     YZDetailBottomBar *bottomBar = [[YZDetailBottomBar alloc] initWithFrame:CGRectZero type:YZShangChengType_Goods];
     bottomBar.delegate = self;
     [self.view addSubview:bottomBar];
@@ -132,7 +129,6 @@
     [collectionView addFooterWithTarget:self action:@selector(inner_LoadMore:)];
     
     [self inner_GetGoodsDetail];
-    [self inner_GetGoodsList];
 }
 
 - (void)inner_GetGoodsDetail {
@@ -144,7 +140,7 @@
                                         success:^(YZGoodsDetailModel *detailModel) {
                                             weakSelf.detailModel = detailModel;
 //                                            weakSelf.detailModel.content = nil;
-                                            [weakSelf.collectionView reloadData];
+                                            [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
                                         }
                                         failure:^(NSError *error, AFHTTPRequestOperation *operation) {
                                             
@@ -158,7 +154,9 @@
                                   success:^(NSArray *items, NSInteger nextPageIndex) {
                                       weakSelf.pageIndex = nextPageIndex;
                                       weakSelf.items = items;
-                                      [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+                                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                          [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+                                      });
                                   } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
                                   }];
 }
@@ -234,9 +232,12 @@
                 return CGSizeMake(ScreenWidth, height);
             }
         }
-        return CGSizeZero;
+    } else if (section == 1) {
+        if (self.items.count > 0) {
+            return CGSizeMake(ScreenWidth, 30);
+        }
     }
-    return CGSizeMake(ScreenWidth, 30);
+    return CGSizeZero;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -281,6 +282,7 @@
     self.needsReloadCacheHeaderHeight = YES;
     self.headerHeight = height;
     [self.collectionView reloadData];
+    [self inner_GetGoodsList];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

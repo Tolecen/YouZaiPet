@@ -163,7 +163,6 @@
     htmlString = [htmlString stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
     htmlString = [htmlString stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
     [self.webView loadHTMLString:htmlString baseURL:nil];
-    [self setNeedsUpdateConstraints];
 }
 
 - (NSInteger)numberOfPagesInFlowView:(PagedFlowView *)flowView {

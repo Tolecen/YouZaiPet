@@ -37,7 +37,7 @@
 }
 
 - (void)setText:(NSString *)text {
-    if (!text) {
+    if (!text || [_text isEqualToString:text]) {
         return;
     }
     _text = text;
