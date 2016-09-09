@@ -74,6 +74,8 @@
 @property (nonatomic, copy) NSString *name;
 
 @property (nonatomic, assign) long long sellPrice;
+@property (nonatomic, assign) long long specialPrice;
+@property (nonatomic, copy) NSString *saleFlag;
 
 @property (nonatomic, copy) NSString *thumb;
 
@@ -154,6 +156,8 @@
 @property (nonatomic, copy) NSString *goodsId;//产品ID
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) long long sellPrice;
+@property (nonatomic, assign) long long specialPrice;
+@property (nonatomic, copy) NSString *saleFlag;
 @property (nonatomic, strong) NSNumber *createTime;
 @property (nonatomic, copy) NSString *thumb;
 @property (nonatomic, copy, readonly) NSString *createString;
@@ -179,15 +183,18 @@
 @property (nonatomic, copy) NSString *dogId;//狗狗ID
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) long long sellPrice;
+@property (nonatomic, assign) long long specialPrice;
 @property (nonatomic, assign) long long originPrice;
 @property (nonatomic, copy) NSString *thumb;
 @property (nonatomic, assign) NSInteger birtydayDays;
 @property (nonatomic, copy) NSString *birthdayString;
+@property (nonatomic, copy) NSString *saleFlag;
 @property (nonatomic, assign) YZDogSex sex;
 
 @property (nonatomic, copy) NSString *shopId;
 @property (nonatomic, copy) NSString *shopThumb;
 @property (nonatomic, copy) NSString *shopName;
+@property (nonatomic, copy) NSString *pay_type;
 @property (nonatomic, assign) long long shopNo;
 
 @end
@@ -198,7 +205,10 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) long long sellPrice;
 @property (nonatomic, assign) long long originPrice;
+@property (nonatomic, assign) long long specialPrice;
 @property (nonatomic, copy) NSString *thumb;
+@property (nonatomic, copy) NSString *pay_type;
+@property (nonatomic, copy) NSString *saleFlag;
 @property (nonatomic, copy) NSString *brandName;
 
 @end

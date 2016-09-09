@@ -22,6 +22,7 @@
 #import "SVProgressHUD.h"
 #import "RootViewController.h"
 #import "NetServer+Payment.h"
+#import "YZOrderConfimViewController.h"
 
 @interface YZDogDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YZDetailBottomBarDelegate>
 
@@ -172,7 +173,7 @@
                                              break;
                                          }
                                      }
-
+                                     
                                      
                                      if (loadMore) {
                                          weakSelf.items = [[NSArray arrayWithArray:weakSelf.items] arrayByAddingObjectsFromArray:fg];
@@ -322,7 +323,7 @@
     YZShoppingCarVC *shoppingCarVC = [[YZShoppingCarVC alloc] init];
     shoppingCarVC.selectedIndex = 0;
     [self.navigationController pushViewController:shoppingCarVC animated:YES];
-
+    
     
 }
 
@@ -331,21 +332,40 @@
     if (![self inner_AlreadyLogin]) {
         return;
     }
-    [SVProgressHUD showWithStatus:@"添加到购物车..."];
+    
     [NetServer addToCartwithId:self.dogModel.dogId Success:^(id result) {
         if ([result[@"code"] intValue]==200) {
-            [SVProgressHUD dismiss];
-            YZShoppingCarVC *shoppingCarVC = [[YZShoppingCarVC alloc] init];
-            shoppingCarVC.selectedIndex = 0;
-            [self.navigationController pushViewController:shoppingCarVC animated:YES];
+            [[YZShoppingCarHelper instanceManager] shoppingCarSelectedAllWithSelectedState:NO];
+            
+            [[YZShoppingCarHelper instanceManager] addShoppingCarWithScene:YZShangChengType_Dog
+                                                                     model:self.detailModel
+                                                                clearPrice:YES];
+            YZOrderConfimViewController *viewC = [[YZOrderConfimViewController alloc] init];
+            [self.navigationController pushViewController:viewC animated:YES];
+            
+            
         }
-        else
+        else if([result[@"code"] intValue]==400)
         {
-            [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
+            [SVProgressHUD showErrorWithStatus:result[@"message"]];
         }
+        
+        if(_isShow)
+        {
+            self.btn.hidden=YES;
+            self.sanjiaoView.hidden=YES;
+        }else
+        {
+            self.btn.hidden=NO;
+            self.sanjiaoView.hidden=NO;
+        }
+        _isShow=!_isShow;
+        
+        
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
     }];
+    
 }
 
 - (void)enterDogHomeAction {
@@ -371,26 +391,27 @@
                                                                 clearPrice:NO];
             [SVProgressHUD showSuccessWithStatus:@"已添加到购物车"];
             
-            if(_isShow)
-            {
-                self.btn.hidden=YES;
-                self.sanjiaoView.hidden=YES;
-            }else
-            {
-                [SVProgressHUD showSuccessWithStatus:@"已添加到购物车"];
-                self.btn.hidden=NO;
-                self.sanjiaoView.hidden=NO;
-            }
-            _isShow=!_isShow;
         }
-        else
+        else if([result[@"code"] intValue]==400)
         {
-            [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
+            [SVProgressHUD showErrorWithStatus:result[@"message"]];
         }
+        
+        if(_isShow)
+        {
+            self.btn.hidden=YES;
+            self.sanjiaoView.hidden=YES;
+        }else
+        {
+            self.btn.hidden=NO;
+            self.sanjiaoView.hidden=NO;
+        }
+        _isShow=!_isShow;
+        
+        
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
     }];
-
     
     
     

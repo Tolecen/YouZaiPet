@@ -22,4 +22,6 @@
 @property (nonatomic,retain)NSString<Optional> *confirmUrl;
 @property (nonatomic,retain)NSString<Optional> *model;
 @property (nonatomic,retain)NSString<Optional> *post_status;
+@property (nonatomic,retain)NSString<Optional> *realpay_price;
+@property (nonatomic,retain)NSString<Optional> *pay_type;
 @end

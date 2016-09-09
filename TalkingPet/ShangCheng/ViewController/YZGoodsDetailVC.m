@@ -20,6 +20,7 @@
 #import "SVProgressHUD.h"
 #import "RootViewController.h"
 #import "NetServer+Payment.h"
+#import "YZOrderConfimViewController.h"
 
 @interface YZGoodsDetailVC()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YZDetailBottomBarDelegate, YZGoodsHeaderDelegate>
 
@@ -140,7 +141,7 @@
     [NetServer getDogGoodsDetailInfoWithGoodsId:self.goodsId
                                         success:^(YZGoodsDetailModel *detailModel) {
                                             weakSelf.detailModel = detailModel;
-//                                            weakSelf.detailModel.content = nil;
+                                            //                                            weakSelf.detailModel.content = nil;
                                             [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
                                         }
                                         failure:^(NSError *error, AFHTTPRequestOperation *operation) {
@@ -154,7 +155,7 @@
                                 pageIndex:1
                                   success:^(NSArray *items, NSInteger nextPageIndex) {
                                       weakSelf.pageIndex = nextPageIndex;
-//                                      weakSelf.items = items;
+                                      //                                      weakSelf.items = items;
                                       NSMutableArray * fg = [NSMutableArray arrayWithArray:items];
                                       for (int i = 0; i<items.count; i++) {
                                           YZGoodsModel * good = items[i];
@@ -164,9 +165,9 @@
                                           }
                                       }
                                       weakSelf.items = fg;
-//                                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                          [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
-//                                      });
+                                      //                                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                      [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+                                      //                                      });
                                   } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
                                   }];
 }
@@ -330,7 +331,7 @@
     if (![self inner_AlreadyLogin]) {
         return;
     }
- 
+    
     YZShoppingCarVC *shoppingCarVC = [[YZShoppingCarVC alloc] init];
     shoppingCarVC.selectedIndex = 1;
     [self.navigationController pushViewController:shoppingCarVC animated:YES];
@@ -350,22 +351,39 @@
     if (![self inner_AlreadyLogin]) {
         return;
     }
-    [SVProgressHUD showWithStatus:@"添加到购物车..."];
+    
     [NetServer addToCartwithId:self.detailModel.goodsId Success:^(id result) {
         if ([result[@"code"] intValue]==200) {
-            [SVProgressHUD dismiss];
-            YZShoppingCarVC *shoppingCarVC = [[YZShoppingCarVC alloc] init];
-            shoppingCarVC.selectedIndex = 1;
-            [self.navigationController pushViewController:shoppingCarVC animated:YES];
-        }
-        else
+            [[YZShoppingCarHelper instanceManager] shoppingCarSelectedAllWithSelectedState:NO];
+            
+            [[YZShoppingCarHelper instanceManager] addShoppingCarWithScene:YZShangChengType_Goods
+                                                                     model:self.detailModel
+                                                                clearPrice:YES];
+            YZOrderConfimViewController *viewC = [[YZOrderConfimViewController alloc] init];
+            [self.navigationController pushViewController:viewC animated:YES];        }
+        else if([result[@"code"] intValue]==400)
         {
-            [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
+            [SVProgressHUD showErrorWithStatus:result[@"message"]];
         }
+        
+        if(_isShow)
+        {
+            self.btn.hidden=YES;
+            self.sanjiaoView.hidden=YES;
+        }else
+        {
+            self.btn.hidden=NO;
+            self.sanjiaoView.hidden=NO;
+        }
+        _isShow=!_isShow;
+        
+        
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
     }];
-
+    
+    
+    
 }
 #pragma  mark -- 放入狗窝
 - (void)addShoppingCarAction {
@@ -382,22 +400,24 @@
                                                                      model:self.detailModel
                                                                 clearPrice:NO];
             [SVProgressHUD showSuccessWithStatus:@"已添加到购物车"];
-            if(_isShow)
-            {
-                self.btn.hidden=YES;
-                self.sanjiaoView.hidden=YES;
-            }else
-            {
-                [SVProgressHUD showSuccessWithStatus:@"已添加到购物车"];
-                self.btn.hidden=NO;
-                self.sanjiaoView.hidden=NO;
-            }
-            _isShow=!_isShow;
         }
-        else
+        else if([result[@"code"] intValue]==400)
         {
-            [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
+            [SVProgressHUD showErrorWithStatus:result[@"message"]];
         }
+        
+        if(_isShow)
+        {
+            self.btn.hidden=YES;
+            self.sanjiaoView.hidden=YES;
+        }else
+        {
+            self.btn.hidden=NO;
+            self.sanjiaoView.hidden=NO;
+        }
+        _isShow=!_isShow;
+        
+        
     } failure:^(NSError *error, AFHTTPRequestOperation *operation) {
         [SVProgressHUD showErrorWithStatus:@"添加到购物车失败，请重试"];
     }];
@@ -405,7 +425,7 @@
     
     
     
-   
+    
     
     
     
